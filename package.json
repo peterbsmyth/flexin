@@ -40,6 +40,7 @@
     "@angular/router": "^9.1.0",
     "@nrwl/angular": "9.3.0",
     "core-js": "^2.5.4",
+    "fuse.js": "^6.0.0",
     "rxjs": "~6.5.4",
     "zone.js": "^0.10.2"
   },

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Exercise } from '@bod/models';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { FormControl } from '@angular/forms';
+import Fuse from 'fuse.js';
 
 @Component({
   selector: 'bod-program-board',
@@ -11,6 +13,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
   styleUrls: ['./program-board.component.css']
 })
 export class ProgramBoardComponent {
+  search = new FormControl('');
   sourceList = [{
     name: 'MAPPU',
     push: true,
@@ -45,5 +48,16 @@ export class ProgramBoardComponent {
   ngOnInit() {
     this.pullList = this.sourceList.filter(e => e.pull);
     this.pushList = this.sourceList.filter(e => e.push);
+    this.search.valueChanges.pipe(
+      tap(term => {
+        if (term === '') {
+          this.pullList = this.sourceList.filter(e => e.pull);
+          this.pushList = this.sourceList.filter(e => e.push);
+        } else {
+          this.pullList = new Fuse(this.pullList, { keys: ['name'] }).search(term).map(result => result.item);
+          this.pushList = new Fuse(this.pushList, { keys: ['name'] }).search(term).map(result => result.item);
+        }
+      })
+    ).subscribe();
   }
 }
