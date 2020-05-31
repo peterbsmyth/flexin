@@ -1,0 +1,30 @@
+<form [formGroup]="form">
+  <label>
+    Exercise
+    <input type="text" [value]="item.exercise.name" disabled>
+  </label>
+  <label>
+    Reps
+    <input type="number" formControlName="reps">
+  </label>
+  <label>
+    AMRAP?
+    <input type="checkbox" formControlName="AMRAP">
+  </label>
+  <label>
+    Sets
+    <input type="number" formControlName="sets">
+  </label>
+  <label>
+    Weight
+    <input type="text" formControlName="weight">
+  </label>
+  <label>
+    Intensity
+    <input type="string" formControlName="intensity">
+  </label>
+  <label>
+    Tempo
+    <input type="text" formControlName="tempo">
+  </label>
+</form>

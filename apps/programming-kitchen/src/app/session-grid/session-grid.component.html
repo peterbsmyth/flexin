@@ -1,0 +1,8 @@
+<bod-nav></bod-nav>
+<div>
+  <button (click)="onClickSave()">Save</button>
+</div>
+<bod-session (update)="onUpdate($event)" [session]="sessionOne"></bod-session>
+<bod-session (update)="onUpdate($event)" [session]="sessionTwo"></bod-session>
+<bod-session (update)="onUpdate($event)" [session]="sessionThree"></bod-session>
+<bod-session (update)="onUpdate($event)" [session]="sessionFour"></bod-session>

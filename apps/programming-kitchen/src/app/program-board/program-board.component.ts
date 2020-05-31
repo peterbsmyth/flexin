@@ -6,6 +6,9 @@ import { FormControl } from '@angular/forms';
 import Fuse from 'fuse.js';
 import { ExerciseService } from '../exercise.service';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { SessionService } from '../session.service';
+import { WeekService } from '../week.service';
 
 @Component({
   selector: 'bod-program-board',
@@ -37,7 +40,10 @@ export class ProgramBoardComponent implements OnInit, OnDestroy {
   dayFourList: Exercise[] = [];
 
   constructor(
-    public exerciseService: ExerciseService
+    private exerciseService: ExerciseService,
+    private sessionService: SessionService,
+    private router: Router,
+    private weekService: WeekService
   ) {}
 
   drop(event: CdkDragDrop<Exercise[]>) {
@@ -48,6 +54,25 @@ export class ProgramBoardComponent implements OnInit, OnDestroy {
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     }
+  }
+
+  onClickSave() {
+    // create SessionItems from Lists
+    const sessionItemsOne = this.sessionService.createItemsFromExericses(this.dayOneList);
+    const sessionItemsTwo = this.sessionService.createItemsFromExericses(this.dayTwoList);
+    const sessionItemsThree = this.sessionService.createItemsFromExericses(this.dayThreeList);
+    const sessionItemsFour = this.sessionService.createItemsFromExericses(this.dayFourList);
+
+    // put them into sessions
+    const sessionOne = this.sessionService.createSession('day one', sessionItemsOne, 1);
+    const sessionTwo = this.sessionService.createSession('day two', sessionItemsTwo, 2);
+    const sessionThree = this.sessionService.createSession('day three', sessionItemsThree, 3);
+    const sessionFour = this.sessionService.createSession('day four', sessionItemsFour, 4);
+    const sessions = [sessionOne, sessionTwo, sessionThree, sessionFour];
+
+    // create a week
+    this.weekService.createWeek(1, sessions);
+    this.router.navigateByUrl('/session');
   }
 
   ngOnInit() {

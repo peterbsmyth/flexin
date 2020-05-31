@@ -7,14 +7,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ExerciseService {
   private _sourceList: Exercise[] = [{
+    id: 1,
     name: 'MAPPU',
     push: true,
   },
   {
+    id: 2,
     name: 'HSPU',
     push: true,
   },
   {
+    id: 3,
     name: 'OAC',
     pull: true
   }];
@@ -27,7 +30,11 @@ export class ExerciseService {
   constructor() { }
 
   save(exercise: Exercise) {
-    this._sourceList.push(exercise);
+    const id = this._sourceList[this._sourceList.length -1].id + 1;
+    this._sourceList.push({
+      id,
+      ...exercise
+    });
     this._sourceList$.next(this._sourceList);
   }
 }

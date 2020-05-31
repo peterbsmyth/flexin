@@ -1,6 +1,10 @@
 <bod-nav></bod-nav>
 <div>
-  <input type="text" [formControl]="search">
+  <label>
+    Filter
+    <input type="text" [formControl]="search">
+  </label>
+  <button (click)="onClickSave()">Save</button>
 </div>
 
 <div class="container">
