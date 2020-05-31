@@ -25,6 +25,9 @@
     "programming-kitchen-e2e": {
       "tags": [],
       "implicitDependencies": ["programming-kitchen"]
+    },
+    "models": {
+      "tags": []
     }
   }
 }

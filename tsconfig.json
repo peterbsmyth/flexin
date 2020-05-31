@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@bod/models": ["libs/models/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

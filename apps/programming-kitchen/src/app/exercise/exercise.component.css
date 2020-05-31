@@ -1,0 +1,7 @@
+div {
+  height: 60px;
+  width: 100%;
+  display: block;
+  background-color: aqua;
+  padding: 10px;
+}
