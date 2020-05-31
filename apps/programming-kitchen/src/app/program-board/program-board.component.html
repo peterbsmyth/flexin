@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="source__panel">
+    <div class="source__heading">
+      <h1>Pulls</h1>
+    </div>
+    <div cdkDropListSortingDisabled id="pulls" class="source__section" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayTwo, dayThree, dayFour]" [cdkDropListData]="pullList" (cdkDropListDropped)="drop($event)">
+      <bod-exercise *ngFor="let exercise of pullList" [exercise]="exercise" cdkDrag>
+      </bod-exercise>
+    </div>
+    <div class="source__heading">
+      <h1>Pushes</h1>
+    </div>
+    <div cdkDropListSortingDisabled id="pushes" class="source__section" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayTwo, dayThree, dayFour]" [cdkDropListData]="pushList" (cdkDropListDropped)="drop($event)">
+      <bod-exercise *ngFor="let exercise of pushList" [exercise]="exercise" cdkDrag>
+      </bod-exercise>
+    </div>
+  </div>
+  
+  <div #dayOne="cdkDropList" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="[dayTwo, dayThree, dayFour]" [cdkDropListData]="dayOneList" (cdkDropListDropped)="drop($event)">
+    <bod-exercise *ngFor="let exercise of dayOneList" [exercise]="exercise" cdkDrag>
+  
+    </bod-exercise>
+  </div>
+  <div #dayTwo="cdkDropList" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayThree, dayFour]" [cdkDropListData]="dayTwoList" (cdkDropListDropped)="drop($event)">
+    <bod-exercise *ngFor="let exercise of dayTwoList" [exercise]="exercise" cdkDrag>
+    </bod-exercise>
+  </div>
+  <div #dayThree="cdkDropList" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayTwo, dayFour]" [cdkDropListData]="dayThreeList" (cdkDropListDropped)="drop($event)">
+    <bod-exercise *ngFor="let exercise of dayThreeList" [exercise]="exercise" cdkDrag>
+    </bod-exercise>
+  </div>
+  <div #dayFour="cdkDropList" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayTwo, dayThree]" [cdkDropListData]="dayFourList" (cdkDropListDropped)="drop($event)">
+    <bod-exercise *ngFor="let exercise of dayFourList" [exercise]="exercise" cdkDrag>
+    </bod-exercise>
+  </div>
+</div>

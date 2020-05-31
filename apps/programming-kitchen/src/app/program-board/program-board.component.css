@@ -1,0 +1,15 @@
+.container {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.source__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise__list {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
