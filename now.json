@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "name": "programming-kitchen",
+  "builds": [
+    {
+      "src": "/dist/apps/programming-kitchen/*",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/dist/apps/programming-kitchen/assets/$1"
+    },
+    {
+      "src": "/(.*).(js|css|ico)",
+      "dest": "/dist/apps/programming-kitchen/$1.$2"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/apps/programming-kitchen/index.html"
+    }
+  ]
+}
