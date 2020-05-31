@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { ProgramBoardComponent } from './program-board/program-board.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavComponent } from './nav/nav.component';
+import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent],
+  declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent],
   imports: [
     BrowserModule,
     DragDropModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

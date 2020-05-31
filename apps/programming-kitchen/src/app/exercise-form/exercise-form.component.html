@@ -1,0 +1,11 @@
+<bod-nav></bod-nav>
+
+<form [formGroup]="form">
+  <label>Name</label>
+  <input type="text" formControlName="name">
+  <label>Push</label>
+  <input type="checkbox" formControlName="push">
+  <label>Pull</label>
+  <input type="checkbox" formControlName="pull">
+  <button (click)="onSubmit(form.value)">Save</button>
+</form>

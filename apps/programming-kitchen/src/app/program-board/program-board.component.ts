@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Exercise } from '@bod/models';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem } from '@angular/cdk/drag-drop';
-import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { tap, withLatestFrom, takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import Fuse from 'fuse.js';
+import { ExerciseService } from '../exercise.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'bod-program-board',
   templateUrl: './program-board.component.html',
   styleUrls: ['./program-board.component.css']
 })
-export class ProgramBoardComponent {
+export class ProgramBoardComponent implements OnInit, OnDestroy {
+  unsubscribe$: Subject<any> = new Subject();
   search = new FormControl('');
   sourceList = [{
     name: 'MAPPU',
@@ -35,6 +36,10 @@ export class ProgramBoardComponent {
   dayThreeList: Exercise[] = [];
   dayFourList: Exercise[] = [];
 
+  constructor(
+    public exerciseService: ExerciseService
+  ) {}
+
   drop(event: CdkDragDrop<Exercise[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex)
@@ -46,18 +51,31 @@ export class ProgramBoardComponent {
   }
 
   ngOnInit() {
-    this.pullList = this.sourceList.filter(e => e.pull);
-    this.pushList = this.sourceList.filter(e => e.push);
+    this.exerciseService.sourceList$.pipe(
+      takeUntil(this.unsubscribe$),
+      tap(list => {
+        this.pullList = list.filter(e => e.pull);
+        this.pushList = list.filter(e => e.push);
+      })
+    )
+    .subscribe();
     this.search.valueChanges.pipe(
-      tap(term => {
+      withLatestFrom(this.exerciseService.sourceList$),
+      takeUntil(this.unsubscribe$),
+      tap(([term, list]) => {
         if (term === '') {
-          this.pullList = this.sourceList.filter(e => e.pull);
-          this.pushList = this.sourceList.filter(e => e.push);
+          this.pullList = list.filter(e => e.pull);
+          this.pushList = list.filter(e => e.push);
         } else {
           this.pullList = new Fuse(this.pullList, { keys: ['name'] }).search(term).map(result => result.item);
           this.pushList = new Fuse(this.pushList, { keys: ['name'] }).search(term).map(result => result.item);
         }
       })
     ).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
