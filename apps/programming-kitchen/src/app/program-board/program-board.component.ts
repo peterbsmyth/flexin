@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Exercise } from '@bod/models';
-import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { tap, withLatestFrom, takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import Fuse from 'fuse.js';
@@ -9,6 +9,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { SessionService } from '../session.service';
 import { WeekService } from '../week.service';
+import { remove } from 'lodash';
 
 @Component({
   selector: 'bod-program-board',
@@ -102,5 +103,21 @@ export class ProgramBoardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  onClose(exericse, list: string) {
+    remove(this[list], { id: exericse.id });
+  }
+
+  uniquePredicate = (item: CdkDrag<Exercise>, list: CdkDropList) => {
+    const arrayName = `${list.id}List`;
+    const array: Exercise[] = this[arrayName];
+    const arrayIncludesExercise = array.find(e => e.id === item.data.id);
+
+    if (arrayIncludesExercise) {
+      return false
+    } else {
+      return true;
+    }
   }
 }

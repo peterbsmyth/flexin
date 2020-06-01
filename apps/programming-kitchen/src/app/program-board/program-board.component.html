@@ -10,36 +10,40 @@
 <div class="container">
   <div class="source__panel">
     <div class="source__heading">
-      <h1>Pulls</h1>
+      <h1 *ngIf="pullList.length">Pulls</h1>
     </div>
-    <div cdkDropListSortingDisabled id="pulls" class="source__section" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayTwo, dayThree, dayFour]" [cdkDropListData]="pullList" (cdkDropListDropped)="drop($event)">
-      <bod-exercise *ngFor="let exercise of pullList" [exercise]="exercise" cdkDrag>
+    <div cdkDropListSortingDisabled id="pulls" class="source__section" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="pullList" (cdkDropListDropped)="drop($event)">
+      <bod-exercise [closeable]="false" *ngFor="let exercise of pullList" [exercise]="exercise" cdkDrag [cdkDragData]="exercise">
       </bod-exercise>
     </div>
     <div class="source__heading">
-      <h1>Pushes</h1>
+      <h1 *ngIf="pushList.length">Pushes</h1>
     </div>
-    <div cdkDropListSortingDisabled id="pushes" class="source__section" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayTwo, dayThree, dayFour]" [cdkDropListData]="pushList" (cdkDropListDropped)="drop($event)">
-      <bod-exercise *ngFor="let exercise of pushList" [exercise]="exercise" cdkDrag>
+    <div cdkDropListSortingDisabled id="pushes" class="source__section" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="pushList" (cdkDropListDropped)="drop($event)">
+      <bod-exercise [closeable]="false" *ngFor="let exercise of pushList" [exercise]="exercise" cdkDrag [cdkDragData]="exercise">
       </bod-exercise>
     </div>
   </div>
   
-  <div #dayOne="cdkDropList" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="[dayTwo, dayThree, dayFour]" [cdkDropListData]="dayOneList" (cdkDropListDropped)="drop($event)">
-    <bod-exercise *ngFor="let exercise of dayOneList" [exercise]="exercise" cdkDrag>
+  <div id="dayOne" [cdkDropListEnterPredicate]="uniquePredicate" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="['dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="dayOneList" (cdkDropListDropped)="drop($event)">
+    <h1>Day One</h1>
+    <bod-exercise (close)="onClose($event, 'dayOneList')" *ngFor="let exercise of dayOneList" [exercise]="exercise" cdkDrag [cdkDragData]="exercise">
   
     </bod-exercise>
   </div>
-  <div #dayTwo="cdkDropList" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayThree, dayFour]" [cdkDropListData]="dayTwoList" (cdkDropListDropped)="drop($event)">
-    <bod-exercise *ngFor="let exercise of dayTwoList" [exercise]="exercise" cdkDrag>
+  <div id="dayTwo" [cdkDropListEnterPredicate]="uniquePredicate" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayThree', 'dayFour']" [cdkDropListData]="dayTwoList" (cdkDropListDropped)="drop($event)">
+    <h1>Day Two</h1>
+    <bod-exercise (close)="onClose($event, 'dayTwoList')" *ngFor="let exercise of dayTwoList" [exercise]="exercise" cdkDrag [cdkDragData]="exercise">
     </bod-exercise>
   </div>
-  <div #dayThree="cdkDropList" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayTwo, dayFour]" [cdkDropListData]="dayThreeList" (cdkDropListDropped)="drop($event)">
-    <bod-exercise *ngFor="let exercise of dayThreeList" [exercise]="exercise" cdkDrag>
+  <div id="dayThree" [cdkDropListEnterPredicate]="uniquePredicate" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayFour']" [cdkDropListData]="dayThreeList" (cdkDropListDropped)="drop($event)">
+    <h1>Day Three</h1>
+    <bod-exercise (close)="onClose($event, 'dayThreeList')" *ngFor="let exercise of dayThreeList" [exercise]="exercise" cdkDrag [cdkDragData]="exercise">
     </bod-exercise>
   </div>
-  <div #dayFour="cdkDropList" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="[dayOne, dayTwo, dayThree]" [cdkDropListData]="dayFourList" (cdkDropListDropped)="drop($event)">
-    <bod-exercise *ngFor="let exercise of dayFourList" [exercise]="exercise" cdkDrag>
+  <div id="dayFour" [cdkDropListEnterPredicate]="uniquePredicate" class="exercise__list" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree']" [cdkDropListData]="dayFourList" (cdkDropListDropped)="drop($event)">
+    <h1>Day Four</h1>
+    <bod-exercise (close)="onClose($event, 'dayFourList')" *ngFor="let exercise of dayFourList" [exercise]="exercise" cdkDrag [cdkDragData]="exercise">
     </bod-exercise>
   </div>
 </div>

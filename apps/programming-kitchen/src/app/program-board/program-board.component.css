@@ -3,9 +3,11 @@
   grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
-.source__list {
+.source__panel {
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  height: 80vh;
 }
 
 .exercise__list {

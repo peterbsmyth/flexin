@@ -1,3 +1,4 @@
 <div>
   {{ exercise.name }}
+  <button *ngIf="closeable" (click)="onClose()">X</button>
 </div>

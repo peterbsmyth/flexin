@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Exercise } from '@bod/models';
 
 @Component({
@@ -8,9 +8,15 @@ import { Exercise } from '@bod/models';
 })
 export class ExerciseComponent implements OnInit {
   @Input() exercise: Exercise;
+  @Input() closeable: boolean = true;
+  @Output() close: EventEmitter<Exercise> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClose() {
+    this.close.emit(this.exercise);
   }
 
 }
