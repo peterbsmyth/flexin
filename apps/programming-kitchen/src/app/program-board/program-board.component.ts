@@ -58,6 +58,15 @@ export class ProgramBoardComponent implements OnInit, OnDestroy {
   }
 
   onClickSave() {
+    /**
+     * new-session-item flow
+     */
+    this.sessionService.configureExercises([this.dayOneList, this.dayTwoList, this.dayThreeList, this.dayFourList]);
+    this.router.navigateByUrl('/configure-session');
+
+    /**
+     * session-item flow
+     */
     // create SessionItems from Lists
     const sessionItemsOne = this.sessionService.createItemsFromExericses(this.dayOneList);
     const sessionItemsTwo = this.sessionService.createItemsFromExericses(this.dayTwoList);
@@ -72,8 +81,8 @@ export class ProgramBoardComponent implements OnInit, OnDestroy {
     const sessions = [sessionOne, sessionTwo, sessionThree, sessionFour];
 
     // create a week
-    this.weekService.createWeek(1, sessions);
-    this.router.navigateByUrl('/session');
+    // this.weekService.createWeek(1, sessions);
+    // this.router.navigateByUrl('/session');
   }
 
   ngOnInit() {

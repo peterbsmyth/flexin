@@ -1,0 +1,7 @@
+<h1>{{ session.name }}</h1>
+<bod-new-session-item
+*ngFor="let item of session.items"
+[editable]="false"
+[item]="item"
+(update)="onUpdate($event)"
+></bod-new-session-item>

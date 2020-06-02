@@ -12,9 +12,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { SessionGridComponent } from './session-grid/session-grid.component';
 import { SessionItemComponent } from './session-item/session-item.component';
 import { SessionComponent } from './session/session.component';
+import { NewSessionItemComponent } from './new-session-item/new-session-item.component';
+import { NewSessionGridComponent } from './new-session-grid/new-session-grid.component';
+import { NewSessionComponent } from './new-session/new-session.component';
+import { SessionConfigurationBoardComponent } from './session-configuration-board/session-configuration-board.component';
 
 @NgModule({
-  declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent],
+  declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent, NewSessionItemComponent, NewSessionGridComponent, NewSessionComponent, SessionConfigurationBoardComponent],
   imports: [
     BrowserModule,
     DragDropModule,

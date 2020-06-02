@@ -4,6 +4,7 @@ export interface Exercise {
   progression?: string; // planche
   push?: boolean; // true
   pull?: boolean; // false
+  intensities: string[];
 }
 
 export interface SessionItem {
@@ -15,6 +16,7 @@ export interface SessionItem {
   weight: string; // '10 kilos', '25 lbs'
   intensity: string; // 'tuck to straddle'
   tempo: string; // '5s eccentric, 2s hold at bottom'
+  localId?: number;
 }
 
 export interface Session {

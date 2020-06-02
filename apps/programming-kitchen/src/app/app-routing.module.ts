@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProgramBoardComponent } from './program-board/program-board.component';
 import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
 import { SessionGridComponent } from './session-grid/session-grid.component';
+import { SessionConfigurationBoardComponent } from './session-configuration-board/session-configuration-board.component';
+import { NewSessionGridComponent } from './new-session-grid/new-session-grid.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,14 @@ const routes: Routes = [
   {
     path: 'session',
     component: SessionGridComponent
+  },
+  {
+    path: 'configure-session',
+    component: SessionConfigurationBoardComponent
+  },
+  {
+    path: 'new-session',
+    component: NewSessionGridComponent
   }
 ];
 

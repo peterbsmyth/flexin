@@ -1,0 +1,6 @@
+<button (click)="onClickNext()">Next</button>
+<bod-new-session-item
+*ngFor="let item of incompleteSessionItems"
+[item]="item"
+(update)="onUpdate($event)"
+></bod-new-session-item>

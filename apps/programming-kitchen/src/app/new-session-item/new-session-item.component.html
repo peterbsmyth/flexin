@@ -1,0 +1,46 @@
+<div *ngIf="editable; else display">
+  <form [formGroup]="form">
+    <label>
+      Exercise
+      <input type="text" [value]="item.exercise.name" disabled>
+    </label>
+    <label>
+      Reps
+      <input type="number" formControlName="reps">
+    </label>
+    <label>
+      AMRAP?
+      <input type="checkbox" formControlName="AMRAP">
+    </label>
+    <label>
+      Sets
+      <input type="number" formControlName="sets">
+    </label>
+    <label>
+      Weight
+      <input type="text" formControlName="weight">
+    </label>
+    <label>
+      Intensity
+      <select formControlName="intensity">
+        <option *ngFor="let itensity of item.exercise.intensities"> {{ itensity }} </option>
+      </select>
+    </label>
+    <label>
+      Tempo
+      <input type="text" formControlName="tempo">
+    </label>
+  </form>
+</div>
+
+<ng-template #display>
+  <div>
+    <p>Exercise: {{ item.exercise.name }}</p>
+    <p>Reps: {{ item.reps }}</p>
+    <p>AMRAP?: {{ item.AMRAP }}</p>
+    <p>Sets: {{ item.sets }}</p>
+    <p>Weight: {{ item.weight }}</p>
+    <p>Intensity: {{ item.intensity }}</p>
+    <p>Tempo: {{ item.tempo }}</p>
+  </div>
+</ng-template>
