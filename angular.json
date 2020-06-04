@@ -26,6 +26,11 @@
               "apps/programming-kitchen/src/assets"
             ],
             "styles": ["apps/programming-kitchen/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "apps/programming-kitchen/src/assets/scss"
+              ]
+            },
             "scripts": []
           },
           "configurations": {

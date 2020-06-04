@@ -14,7 +14,7 @@ import { remove } from 'lodash';
 @Component({
   selector: 'bod-program-board',
   templateUrl: './program-board.component.html',
-  styleUrls: ['./program-board.component.css']
+  styleUrls: ['./program-board.component.scss']
 })
 export class ProgramBoardComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();

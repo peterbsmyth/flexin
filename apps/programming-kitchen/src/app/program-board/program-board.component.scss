@@ -1,0 +1,43 @@
+@import "utils";
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  height: $layout-spacing-vertical;
+
+  &__filter {
+    margin: $space-m;
+    height: $card-spacing-vertical;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+    margin: $space-m;
+    height: $card-spacing-vertical;
+    background-color: $card-color-muted;
+  }
+}
+
+.board {
+  display: grid;
+  grid-template-columns: $layout-template-columns-desktop;
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 80vh;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+
+    &-header {
+      @include subheadline;
+      margin: $space-xs;
+    }
+  }
+}

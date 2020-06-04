@@ -4,7 +4,7 @@ import { Exercise } from '@bod/models';
 @Component({
   selector: 'bod-exercise',
   templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.css']
+  styleUrls: ['./exercise.component.scss']
 })
 export class ExerciseComponent implements OnInit {
   @Input() exercise: Exercise;
