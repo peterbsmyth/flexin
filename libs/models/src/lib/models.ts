@@ -16,7 +16,6 @@ export interface SessionItem {
   weight: string; // '10 kilos', '25 lbs'
   intensity: string; // 'tuck to straddle'
   tempo: string; // '5s eccentric, 2s hold at bottom'
-  localId?: number;
 }
 
 export interface Session {

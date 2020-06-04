@@ -28,7 +28,7 @@ export class SessionConfigurationBoardComponent implements OnInit {
 
   onUpdate(item: SessionItem) {
     this._items.forEach((existingItem, i) => {
-      if (item.localId === existingItem.localId) {
+      if (item.id === existingItem.id) {
         this._items[i] = {
           ...item
         };

@@ -10,7 +10,7 @@ import { uniqBy } from 'lodash';
 export class SessionService {
   private _exercises: Exercise[][];
   private _incompleteSessionItems: SessionItem[];
-  private _lastSessionItemLocalId: number = 0;
+  private _lastSessionItemLocalId: number = 1000;
   private _lastSessionItemId: number = 0;
   private _lastSessionId: number = 0;
   private _sourceList: SessionItem[] = [];
@@ -33,7 +33,7 @@ export class SessionService {
     const flatExercises = exercises.reduce((acc, val) => acc.concat(val), []);
     // remove duplicates
     const filteredExercises = uniqBy(flatExercises, 'id');
-    // create id-less sessions
+    // create sessions with temporary and localId
     const sessions = filteredExercises.map(e => ({
       exercise: e,
       reps: null,
@@ -42,7 +42,7 @@ export class SessionService {
       weight: null,
       intensity: null,
       tempo: null,
-      localId: ++this._lastSessionItemLocalId
+      id: ++this._lastSessionItemLocalId
     }));
 
     // keep reference
