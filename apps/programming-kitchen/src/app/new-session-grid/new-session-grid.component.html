@@ -1,6 +1,11 @@
 <bod-nav></bod-nav>
 <div>
   <button (click)="onClickSave()">Save</button>
+  <label>
+    Program Name
+  </label>
+  <input [formControl]="programName" type="text">
+  <button (click)="onCreateProgram()">Create Program</button>
 </div>
 <bod-new-session (update)="onUpdate($event)" [session]="sessionOne"></bod-new-session>
 <bod-new-session (update)="onUpdate($event)" [session]="sessionTwo"></bod-new-session>

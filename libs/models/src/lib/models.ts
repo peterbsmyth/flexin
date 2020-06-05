@@ -30,3 +30,8 @@ export interface Week {
   number: number; // 6
   sessions: Session[];
 }
+
+export interface Program {
+  name: string; // 'Program 1'
+  weeks: Week[];
+}
