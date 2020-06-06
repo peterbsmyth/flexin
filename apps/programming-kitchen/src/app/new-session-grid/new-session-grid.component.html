@@ -1,10 +1,10 @@
 <div>
-  <button (click)="onClickSave()">Save</button>
+  <bod-button (click)="onClickSave()">Save</bod-button>
   <label>
     Program Name
   </label>
   <input [formControl]="programName" type="text">
-  <button (click)="onCreateProgram()">Create Program</button>
+  <bod-button (click)="onCreateProgram()">Create Program</bod-button>
 </div>
 <bod-new-session (update)="onUpdate($event)" [session]="sessionOne"></bod-new-session>
 <bod-new-session (update)="onUpdate($event)" [session]="sessionTwo"></bod-new-session>

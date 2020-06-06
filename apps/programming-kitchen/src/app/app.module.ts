@@ -16,9 +16,10 @@ import { NewSessionItemComponent } from './new-session-item/new-session-item.com
 import { NewSessionGridComponent } from './new-session-grid/new-session-grid.component';
 import { NewSessionComponent } from './new-session/new-session.component';
 import { SessionConfigurationBoardComponent } from './session-configuration-board/session-configuration-board.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
-  declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent, NewSessionItemComponent, NewSessionGridComponent, NewSessionComponent, SessionConfigurationBoardComponent],
+  declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent, NewSessionItemComponent, NewSessionGridComponent, NewSessionComponent, SessionConfigurationBoardComponent, ButtonComponent],
   imports: [
     BrowserModule,
     DragDropModule,

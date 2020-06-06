@@ -62,3 +62,8 @@ $type-scale: ();
 @function type-scale($step) {
   @return nth($type-scale, $step);
 }
+
+// 8pt Layout Grid
+@function grid-8pt($step) {
+  @return (0.5rem * $step);
+}
