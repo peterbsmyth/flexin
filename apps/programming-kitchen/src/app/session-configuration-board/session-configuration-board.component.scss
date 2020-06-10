@@ -1,0 +1,11 @@
+@import "utils";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__item {
+    margin: $space-m $space-s $space-m;
+  }
+}

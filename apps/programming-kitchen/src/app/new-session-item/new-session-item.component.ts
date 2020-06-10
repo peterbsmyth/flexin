@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { SessionItem } from '@bod/models';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { tap, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
   selector: 'bod-new-session-item',
   templateUrl: './new-session-item.component.html',
-  styleUrls: ['./new-session-item.component.css']
+  styleUrls: ['./new-session-item.component.scss']
 })
 export class NewSessionItemComponent implements OnInit {
   @Input() item: SessionItem;
@@ -19,7 +19,7 @@ export class NewSessionItemComponent implements OnInit {
     AMRAP: false,
     sets: 0,
     weight: '',
-    intensity: '',
+    intensity: new FormControl(''),
     tempo: ''
   });
 

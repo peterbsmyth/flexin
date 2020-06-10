@@ -8,7 +8,7 @@ import { cloneDeep } from 'lodash';
 @Component({
   selector: 'bod-session-configuration-board',
   templateUrl: './session-configuration-board.component.html',
-  styleUrls: ['./session-configuration-board.component.css']
+  styleUrls: ['./session-configuration-board.component.scss']
 })
 export class SessionConfigurationBoardComponent implements OnInit {
   private _items: SessionItem[];

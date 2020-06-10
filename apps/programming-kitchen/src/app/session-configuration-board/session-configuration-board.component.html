@@ -1,6 +1,9 @@
-<bod-button (click)="onClickNext()">Next</bod-button>
-<bod-new-session-item
-*ngFor="let item of incompleteSessionItems"
-[item]="item"
-(update)="onUpdate($event)"
-></bod-new-session-item>
+<button mat-raised-button color="primary" (click)="onClickNext()">Next</button>
+<div class="container">
+  <bod-new-session-item
+  class="container__item"
+  *ngFor="let item of incompleteSessionItems"
+  [item]="item"
+  (update)="onUpdate($event)"
+  ></bod-new-session-item>
+</div>

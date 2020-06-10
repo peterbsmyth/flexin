@@ -17,6 +17,12 @@ import { NewSessionGridComponent } from './new-session-grid/new-session-grid.com
 import { NewSessionComponent } from './new-session/new-session.component';
 import { SessionConfigurationBoardComponent } from './session-configuration-board/session-configuration-board.component';
 import { ButtonComponent } from './button/button.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent, NewSessionItemComponent, NewSessionGridComponent, NewSessionComponent, SessionConfigurationBoardComponent, ButtonComponent],
@@ -25,6 +31,12 @@ import { ButtonComponent } from './button/button.component';
     DragDropModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

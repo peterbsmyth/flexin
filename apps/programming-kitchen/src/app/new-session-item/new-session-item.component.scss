@@ -1,0 +1,16 @@
+@import "utils";
+
+.form {
+  display: flex;
+  justify-content: space-around;
+
+  &__field {
+    margin: $space-m 0 $space-m;
+    padding: $space-s;
+  }
+
+
+  &__check {
+    padding: ($space-m + $space-s) $space-s $space-s;
+  }
+}

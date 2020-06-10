@@ -25,7 +25,10 @@
               "apps/programming-kitchen/src/favicon.ico",
               "apps/programming-kitchen/src/assets"
             ],
-            "styles": ["apps/programming-kitchen/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/programming-kitchen/src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "apps/programming-kitchen/src/assets/scss"
@@ -88,7 +91,10 @@
               "apps/programming-kitchen/tsconfig.app.json",
               "apps/programming-kitchen/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/programming-kitchen/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/programming-kitchen/**"
+            ]
           }
         },
         "test": {
@@ -123,7 +129,9 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/programming-kitchen-e2e/tsconfig.e2e.json"],
+            "tsConfig": [
+              "apps/programming-kitchen-e2e/tsconfig.e2e.json"
+            ],
             "exclude": [
               "**/node_modules/**",
               "!apps/programming-kitchen-e2e/**"
@@ -145,7 +153,10 @@
               "libs/models/tsconfig.lib.json",
               "libs/models/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/models/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/models/**"
+            ]
           }
         },
         "test": {
