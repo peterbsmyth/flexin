@@ -8,8 +8,17 @@
   color: $header-color;
   width: 100%;
 
+  &__header {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__title {
     @include title;
+  }
+
+  &__subtitle {
+    @include subheadline;
   }
 
   &__links {
