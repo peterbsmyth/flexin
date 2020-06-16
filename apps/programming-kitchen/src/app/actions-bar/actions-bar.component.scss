@@ -1,0 +1,7 @@
+@import "utils";
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: $space-m $space-s $space-xs;
+}
