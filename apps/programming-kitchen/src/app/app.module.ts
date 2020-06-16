@@ -24,9 +24,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ActionsBarComponent } from './actions-bar/actions-bar.component';
+import { BoardComponent } from './board/board.component';
 
 @NgModule({
-  declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent, NewSessionItemComponent, NewSessionGridComponent, NewSessionComponent, SessionConfigurationBoardComponent, ButtonComponent, ActionsBarComponent],
+  declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent, NewSessionItemComponent, NewSessionGridComponent, NewSessionComponent, SessionConfigurationBoardComponent, ButtonComponent, ActionsBarComponent, BoardComponent],
   imports: [
     BrowserModule,
     DragDropModule,

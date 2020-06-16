@@ -1,11 +1,11 @@
 <bod-actions-bar>
   <button mat-raised-button color="primary" (click)="onClickNext()">Next</button>
 </bod-actions-bar>
-<div class="container">
+<bod-board>
   <bod-new-session-item
-  class="container__item"
+  class="item"
   *ngFor="let item of incompleteSessionItems"
   [item]="item"
   (update)="onUpdate($event)"
   ></bod-new-session-item>
-</div>
+</bod-board>

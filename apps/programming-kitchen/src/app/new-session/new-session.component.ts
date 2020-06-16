@@ -4,7 +4,7 @@ import { Session, SessionItem } from '@bod/models';
 @Component({
   selector: 'bod-new-session',
   templateUrl: './new-session.component.html',
-  styleUrls: ['./new-session.component.css']
+  styleUrls: ['./new-session.component.scss']
 })
 export class NewSessionComponent implements OnInit {
   @Input() session: Session;

@@ -6,7 +6,10 @@
   <input [formControl]="programName" type="text">
   <bod-button (click)="onCreateProgram()">Create Program</bod-button>
 </bod-actions-bar>
-<bod-new-session (update)="onUpdate($event)" [session]="sessionOne"></bod-new-session>
-<bod-new-session (update)="onUpdate($event)" [session]="sessionTwo"></bod-new-session>
-<bod-new-session (update)="onUpdate($event)" [session]="sessionThree"></bod-new-session>
-<bod-new-session (update)="onUpdate($event)" [session]="sessionFour"></bod-new-session>
+
+<bod-board>
+  <bod-new-session (update)="onUpdate($event)" [session]="sessionOne"></bod-new-session>
+  <bod-new-session (update)="onUpdate($event)" [session]="sessionTwo"></bod-new-session>
+  <bod-new-session (update)="onUpdate($event)" [session]="sessionThree"></bod-new-session>
+  <bod-new-session (update)="onUpdate($event)" [session]="sessionFour"></bod-new-session>
+</bod-board>
