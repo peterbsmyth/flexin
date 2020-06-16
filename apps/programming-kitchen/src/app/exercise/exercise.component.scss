@@ -1,11 +1,9 @@
 @import "utils";
 
 .exercise {
-  color: $card-color;
   display: flex;
   flex-direction: column;
   border-radius: $card-radius;
-  background-color: $green-500;
   padding: $space-xs;
   margin: $space-xs;
 
