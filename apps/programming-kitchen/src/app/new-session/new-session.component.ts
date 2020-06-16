@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { Session, SessionItem } from '@bod/models';
 
 @Component({
@@ -6,7 +6,7 @@ import { Session, SessionItem } from '@bod/models';
   templateUrl: './new-session.component.html',
   styleUrls: ['./new-session.component.scss']
 })
-export class NewSessionComponent implements OnInit {
+export class NewSessionComponent implements OnInit, OnChanges {
   @Input() session: Session;
   @Output() update: EventEmitter<Session> = new EventEmitter();
   private _session: Session;
