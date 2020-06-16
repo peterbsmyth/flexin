@@ -1,8 +1,8 @@
 <bod-actions-bar>
-  <label class="actions__filter">
-    Filter
-    <input type="search" [formControl]="search">
-  </label>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput type="search" [formControl]="search">
+  </mat-form-field>
   <bod-button (click)="onClickSave()">Save</bod-button>
 </bod-actions-bar>
 

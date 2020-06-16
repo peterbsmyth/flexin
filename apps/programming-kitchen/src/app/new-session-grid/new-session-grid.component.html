@@ -1,9 +1,11 @@
 <bod-actions-bar>
   <bod-button (click)="onClickSave()">Save</bod-button>
-  <label>
-    Program Name
-  </label>
-  <input [formControl]="programName" type="text">
+  <mat-form-field>
+    <mat-label>
+      Program Name
+    </mat-label>
+    <input matInput [formControl]="programName" type="text">
+  </mat-form-field>
   <bod-button (click)="onCreateProgram()">Create Program</bod-button>
 </bod-actions-bar>
 
