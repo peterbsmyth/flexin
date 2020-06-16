@@ -9,9 +9,35 @@ import { Subject } from 'rxjs';
   templateUrl: './new-session-item.component.html',
   styleUrls: ['./new-session-item.component.scss']
 })
-export class NewSessionItemComponent implements OnInit {
-  @Input() item: SessionItem;
-  @Input() editable: boolean = true;
+export class NewSessionItemComponent implements OnInit, OnDestroy {
+  private _item: SessionItem;
+  @Input()
+  get item(): SessionItem {
+    return this._item;
+  };
+  set item(item) {
+    this._item = item;
+    this.form.get('reps').setValue(item.reps);
+    this.form.get('AMRAP').setValue(item.AMRAP);
+    this.form.get('sets').setValue(item.sets);
+    this.form.get('weight').setValue(item.weight);
+    this.form.get('intensity').setValue(item.intensity);
+    this.form.get('tempo').setValue(item.tempo);
+  }
+
+  private _editable = true;
+  @Input()
+  get editable() {
+    return this._editable;
+  }
+  set editable(editable) {
+    if (!editable) {
+      this.disableInputs();
+    } else {
+      this.enableInputs();
+    }
+  }
+
   @Output() update: EventEmitter<SessionItem> = new EventEmitter();
   unsubscribe$: Subject<any> = new Subject();
   form: FormGroup = this.fb.group({
@@ -51,6 +77,14 @@ export class NewSessionItemComponent implements OnInit {
         this.update.emit(sessionItem);
       })
     ).subscribe();
+  }
+
+  disableInputs() {
+    this.form.disable();
+  }
+
+  enableInputs() {
+    this.form.enable();
   }
 
   ngOnDestroy() {
