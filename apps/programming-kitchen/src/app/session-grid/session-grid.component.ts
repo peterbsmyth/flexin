@@ -56,10 +56,6 @@ export class SessionGridComponent implements OnInit {
     });
   }
 
-  onClickSave() {
-    console.dir(this._week);
-  }
-
   onCreateProgram() {
     const program: Program = this.programService.createProgramFromOneWeek(this.programName.value, this._week);
     console.dir(program);
