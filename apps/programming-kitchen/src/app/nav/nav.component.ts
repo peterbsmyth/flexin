@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ExerciseFormComponent } from '../exercise-form/exercise-form.component';
 
 @Component({
   selector: 'bod-nav',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  onClickAddExercise() {
+    this.dialog.open(ExerciseFormComponent);
+  }
 }

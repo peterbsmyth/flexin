@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ActionsBarComponent } from './actions-bar/actions-bar.component';
 import { BoardComponent } from './board/board.component';
 
@@ -40,7 +41,8 @@ import { BoardComponent } from './board/board.component';
     MatSelectModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

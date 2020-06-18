@@ -1,9 +1,16 @@
-<form [formGroup]="form">
-  <label>Name</label>
-  <input type="text" formControlName="name">
-  <label>Push</label>
-  <input type="checkbox" formControlName="push">
-  <label>Pull</label>
-  <input type="checkbox" formControlName="pull">
+<h2 mat-dialog-title>Add Exercise</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form">
+    <mat-form-field>
+      <mat-label>
+        Name
+      </mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <mat-checkbox formControlName="push">Push</mat-checkbox>
+    <mat-checkbox formControlName="pull">Pull</mat-checkbox>
+  </form>
+</div>
+<div mat-dialog-actions class="form__actions">
   <bod-button (click)="onSubmit(form.value)">Save</bod-button>
-</form>
+</div>

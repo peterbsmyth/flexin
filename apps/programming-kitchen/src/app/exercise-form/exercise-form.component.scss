@@ -1,0 +1,12 @@
+@import "utils";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 8rem;
+
+  &__actions {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}

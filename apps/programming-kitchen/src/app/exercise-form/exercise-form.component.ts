@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ExerciseService } from '../exercise.service';
-import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'bod-exercise-form',
   templateUrl: './exercise-form.component.html',
-  styleUrls: ['./exercise-form.component.css']
+  styleUrls: ['./exercise-form.component.scss']
 })
 export class ExerciseFormComponent implements OnInit {
   form: FormGroup = this.fb.group({
@@ -18,7 +18,7 @@ export class ExerciseFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private exerciseService: ExerciseService,
-    private router: Router
+    public dialogRef: MatDialogRef<ExerciseFormComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class ExerciseFormComponent implements OnInit {
 
   onSubmit(form) {
     this.exerciseService.save(form);
-    this.router.navigateByUrl('');
+    this.dialogRef.close();
   }
 
 }
