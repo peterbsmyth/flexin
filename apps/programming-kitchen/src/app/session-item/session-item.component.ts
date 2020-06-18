@@ -1,16 +1,43 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { SessionItem } from '@bod/models';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { tap, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
   selector: 'bod-session-item',
   templateUrl: './session-item.component.html',
-  styleUrls: ['./session-item.component.css']
+  styleUrls: ['./session-item.component.scss']
 })
 export class SessionItemComponent implements OnInit, OnDestroy {
-  @Input() item: SessionItem;
+  private _item: SessionItem;
+  @Input()
+  get item(): SessionItem {
+    return this._item;
+  };
+  set item(item) {
+    this._item = item;
+    this.form.get('reps').setValue(item.reps);
+    this.form.get('AMRAP').setValue(item.AMRAP);
+    this.form.get('sets').setValue(item.sets);
+    this.form.get('weight').setValue(item.weight);
+    this.form.get('intensity').setValue(item.intensity);
+    this.form.get('tempo').setValue(item.tempo);
+  }
+
+  private _editable = true;
+  @Input()
+  get editable() {
+    return this._editable;
+  }
+  set editable(editable) {
+    if (!editable) {
+      this.disableInputs();
+    } else {
+      this.enableInputs();
+    }
+  }
+
   @Output() update: EventEmitter<SessionItem> = new EventEmitter();
   unsubscribe$: Subject<any> = new Subject();
   form: FormGroup = this.fb.group({
@@ -18,7 +45,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
     AMRAP: false,
     sets: 0,
     weight: '',
-    intensity: '',
+    intensity: new FormControl(''),
     tempo: ''
   });
 
@@ -50,6 +77,14 @@ export class SessionItemComponent implements OnInit, OnDestroy {
         this.update.emit(sessionItem);
       })
     ).subscribe();
+  }
+
+  disableInputs() {
+    this.form.disable();
+  }
+
+  enableInputs() {
+    this.form.enable();
   }
 
   ngOnDestroy() {

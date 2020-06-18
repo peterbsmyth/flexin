@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { Session, SessionItem } from '@bod/models';
 
 @Component({
   selector: 'bod-session',
   templateUrl: './session.component.html',
-  styleUrls: ['./session.component.css']
+  styleUrls: ['./session.component.scss']
 })
-export class SessionComponent implements OnInit {
+export class SessionComponent implements OnInit, OnChanges {
   @Input() session: Session;
   @Output() update: EventEmitter<Session> = new EventEmitter();
   private _session: Session;

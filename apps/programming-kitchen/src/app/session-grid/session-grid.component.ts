@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { WeekService } from '../week.service';
 import { tap, takeUntil } from 'rxjs/operators';
-import { Session, Week } from '@bod/models';
+import { Session, Week, Program } from '@bod/models';
 import { Subject } from 'rxjs';
+import { ProgramService } from '../program.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'bod-session-grid',
@@ -15,9 +17,11 @@ export class SessionGridComponent implements OnInit {
   sessionTwo: Session;
   sessionThree: Session;
   sessionFour: Session;
+  programName: FormControl = new FormControl('Program 1');
   private _week: Week;
   constructor(
-    private weekSerivce: WeekService
+    private weekSerivce: WeekService,
+    private programService: ProgramService
   ) { }
 
   ngOnInit(): void {
@@ -54,5 +58,10 @@ export class SessionGridComponent implements OnInit {
 
   onClickSave() {
     console.dir(this._week);
+  }
+
+  onCreateProgram() {
+    const program: Program = this.programService.createProgramFromOneWeek(this.programName.value, this._week);
+    console.dir(program);
   }
 }

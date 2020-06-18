@@ -59,7 +59,7 @@ export class ProgramBoardComponent implements OnInit, OnDestroy {
 
   onClickSave() {
     /**
-     * new-session-item flow
+     * session-item flow
      */
     this.sessionService.configureExercises([this.dayOneList, this.dayTwoList, this.dayThreeList, this.dayFourList]);
     this.router.navigateByUrl('/configure-session');

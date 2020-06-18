@@ -1,6 +1,11 @@
 <h1>{{ session.name }}</h1>
-<bod-session-item
-*ngFor="let item of session.items"
-[item]="item"
-(update)="onUpdate($event)"
-></bod-session-item>
+
+<div class="session">
+  <bod-session-item
+  class="item"
+  *ngFor="let item of session.items"
+  [editable]="false"
+  [item]="item"
+  (update)="onUpdate($event)"
+  ></bod-session-item>
+</div>

@@ -1,7 +1,17 @@
-<div>
+<bod-actions-bar>
   <bod-button (click)="onClickSave()">Save</bod-button>
-</div>
-<bod-session (update)="onUpdate($event)" [session]="sessionOne"></bod-session>
-<bod-session (update)="onUpdate($event)" [session]="sessionTwo"></bod-session>
-<bod-session (update)="onUpdate($event)" [session]="sessionThree"></bod-session>
-<bod-session (update)="onUpdate($event)" [session]="sessionFour"></bod-session>
+  <mat-form-field>
+    <mat-label>
+      Program Name
+    </mat-label>
+    <input matInput [formControl]="programName" type="text">
+  </mat-form-field>
+  <bod-button (click)="onCreateProgram()">Create Program</bod-button>
+</bod-actions-bar>
+
+<bod-board>
+  <bod-session (update)="onUpdate($event)" [session]="sessionOne"></bod-session>
+  <bod-session (update)="onUpdate($event)" [session]="sessionTwo"></bod-session>
+  <bod-session (update)="onUpdate($event)" [session]="sessionThree"></bod-session>
+  <bod-session (update)="onUpdate($event)" [session]="sessionFour"></bod-session>
+</bod-board>

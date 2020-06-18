@@ -2,10 +2,10 @@
   <bod-button (click)="onClickNext()">Next</bod-button>
 </bod-actions-bar>
 <bod-board>
-  <bod-new-session-item
+  <bod-session-item
   class="item"
   *ngFor="let item of incompleteSessionItems"
   [item]="item"
   (update)="onUpdate($event)"
-  ></bod-new-session-item>
+  ></bod-session-item>
 </bod-board>
