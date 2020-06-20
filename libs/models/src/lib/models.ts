@@ -5,6 +5,7 @@ export interface Exercise {
   push?: boolean; // true
   pull?: boolean; // false
   intensities: string[];
+  leftRight?: boolean;
 }
 
 export interface SessionItem {
@@ -12,6 +13,7 @@ export interface SessionItem {
   exercise: Exercise;
   reps: number; // 8
   AMRAP: boolean; // true
+  leftRight?: boolean; // false
   sets: number; // 3
   weight: string; // '10 kilos', '25 lbs'
   intensity: string; // 'tuck to straddle'

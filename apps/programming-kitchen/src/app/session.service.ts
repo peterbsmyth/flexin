@@ -71,7 +71,8 @@ export class SessionService {
       sets: null,
       weight: null,
       intensity: null,
-      tempo: null
+      tempo: null,
+      leftRight: false
     }));
   }
   createSession(name: string, items: SessionItem[], order: number): Session {

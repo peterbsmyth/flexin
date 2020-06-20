@@ -23,6 +23,9 @@
           </mat-label>
           <input matInput type="number" formControlName="sets">
         </mat-form-field>
+        <mat-checkbox *ngIf="leftRight" formControlName="leftRight" class="form__field form__check">
+          Left/Right
+        </mat-checkbox>
         <mat-form-field class="form__field">
           <mat-label>
             Weight

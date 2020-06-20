@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./session-item.component.scss']
 })
 export class SessionItemComponent implements OnInit, OnDestroy {
+  public leftRight: boolean;
   private _item: SessionItem;
   @Input()
   get item(): SessionItem {
@@ -20,9 +21,11 @@ export class SessionItemComponent implements OnInit, OnDestroy {
     this.form.get('reps').setValue(item.reps);
     this.form.get('AMRAP').setValue(item.AMRAP);
     this.form.get('sets').setValue(item.sets);
+    this.form.get('leftRight').setValue(item.leftRight);
     this.form.get('weight').setValue(item.weight);
     this.form.get('intensity').setValue(item.intensity);
     this.form.get('tempo').setValue(item.tempo);
+    this.leftRight = item.exercise.leftRight;
   }
 
   private _editable = true;
@@ -46,7 +49,8 @@ export class SessionItemComponent implements OnInit, OnDestroy {
     sets: 0,
     weight: '',
     intensity: new FormControl(''),
-    tempo: ''
+    tempo: '',
+    leftRight: false
   });
 
   constructor(
