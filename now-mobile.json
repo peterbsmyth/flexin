@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "name": "body-factory",
+  "builds": [
+    {
+      "src": "/dist/apps/body-factory/*",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/dist/apps/body-factory/assets/$1"
+    },
+    {
+      "src": "/(.*).(js|css|ico)",
+      "dest": "/dist/apps/body-factory/$1.$2"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/apps/body-factory/index.html"
+    }
+  ]
+}

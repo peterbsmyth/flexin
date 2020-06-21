@@ -26,7 +26,9 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "deploy": "ng build --prod programming-kitchen && now --prod"
+    "prep:desktop": "cp .now/desktop.json ./now/project.json",
+    "deploy:desktop": "cp .now/desktop.json .now/project.json && ng build programming-kitchen --prod  && now --prod --local-config now-desktop.json",
+    "deploy:mobile": "cp .now/mobile.json .now/project.json && ng build body-factory --prod && now --prod --local-config now-mobile.json"
   },
   "private": true,
   "dependencies": {
