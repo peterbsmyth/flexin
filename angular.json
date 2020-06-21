@@ -30,9 +30,7 @@
               "apps/programming-kitchen/src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "apps/programming-kitchen/src/assets/scss"
-              ]
+              "includePaths": ["apps/programming-kitchen/src/assets/scss"]
             },
             "scripts": []
           },
@@ -91,10 +89,7 @@
               "apps/programming-kitchen/tsconfig.app.json",
               "apps/programming-kitchen/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/programming-kitchen/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/programming-kitchen/**"]
           }
         },
         "test": {
@@ -129,9 +124,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/programming-kitchen-e2e/tsconfig.e2e.json"
-            ],
+            "tsConfig": ["apps/programming-kitchen-e2e/tsconfig.e2e.json"],
             "exclude": [
               "**/node_modules/**",
               "!apps/programming-kitchen-e2e/**"
@@ -153,10 +146,7 @@
               "libs/models/tsconfig.lib.json",
               "libs/models/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/models/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/models/**"]
           }
         },
         "test": {
@@ -165,6 +155,112 @@
             "jestConfig": "libs/models/jest.config.js",
             "tsConfig": "libs/models/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "body-factory": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@nrwl/angular:class": {
+          "skipTests": true
+        },
+        "@nrwl/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/angular:directive": {
+          "skipTests": true
+        },
+        "@nrwl/angular:guard": {
+          "skipTests": true
+        },
+        "@nrwl/angular:module": {
+          "skipTests": true
+        },
+        "@nrwl/angular:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "apps/body-factory",
+      "sourceRoot": "apps/body-factory/src",
+      "prefix": "bod",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/body-factory",
+            "index": "apps/body-factory/src/index.html",
+            "main": "apps/body-factory/src/main.ts",
+            "polyfills": "apps/body-factory/src/polyfills.ts",
+            "tsConfig": "apps/body-factory/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/body-factory/src/favicon.ico",
+              "apps/body-factory/src/assets"
+            ],
+            "styles": ["apps/body-factory/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/body-factory/src/environments/environment.ts",
+                  "with": "apps/body-factory/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "body-factory:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "body-factory:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "body-factory:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/body-factory/tsconfig.app.json"],
+            "exclude": ["**/node_modules/**", "!apps/body-factory/**"]
           }
         }
       }
