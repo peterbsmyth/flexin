@@ -205,7 +205,10 @@
               "apps/body-factory/src/favicon.ico",
               "apps/body-factory/src/assets"
             ],
-            "styles": ["apps/body-factory/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/body-factory/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
