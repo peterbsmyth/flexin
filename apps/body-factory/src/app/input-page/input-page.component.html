@@ -1,40 +1,52 @@
-<!-- This form allows a user to input an entire session with no scroll from the iphone screen -->
+<!-- This form allows a user to input an entire session item with no scroll from the iphone screen -->
 <h1>{{ session.name }}</h1>
 
 <!-- <p *ngIf="session.items[0] as item">{{ item | json }}</p> -->
 <mat-card *ngIf="session.items[currentItemIndex] as item">
   <mat-card-header>{{ item.exercise.name }}, tempo: {{ item.tempo }}</mat-card-header>
   <mat-card-content>
-    <main *ngFor="let set of arrayOfCount(item.sets); let i = index;">
-      <!-- Set #? -->
+    <form [formGroup]="form" *ngIf="form">
+      <main formArrayName="sets">
+        <section *ngFor="let set of arrayOfCount(item.sets); let i = index;">
+          <div [formGroupName]= "i">
+            <!-- Set #? -->
+            <label>
+              Set {{ i + 1 }}.
+            </label>
+            <!-- Reps? -->
+            <label>
+              Reps
+              <input min="0" type="number" formControlName="reps" [value]="item.reps">
+              <button (click)="onChangeCount('-', 'reps', i)">-</button>
+              <button (click)="onChangeCount('+', 'reps', i)">+</button>
+            </label>
+            <!-- Weight? -->
+            <label *ngIf="item.weight">
+              Weight
+              <input min="0" step="5" type="number" formControlName="weight" [value]="item.weight">
+              <button (click)="onChangeCount('-', 'weight', i)">-</button>
+              <button (click)="onChangeCount('+', 'weight', i)">+</button>
+            </label>
+          </div>
+        </section>
+      </main>
+      <aside>
+      <!-- RPE -->
       <label>
-        Set {{ i + 1 }}.
-      </label>
-      <!-- Reps? -->
-      <label>
-        Reps
-        <input min="0" type="number" [value]="item.reps">
-      </label>
-      <!-- Weight? -->
-      <label *ngIf="item.weight">
-        Weight
-        <input min="0" step="5" type="number" [value]="item.weight">
-      </label>
-    </main>
-    <!-- RPE -->
-    <mat-form-field>
-      <mat-label>
         RPE
-      </mat-label>
-      <input min="0" max="10" [value]="8" matInput type="number">
-    </mat-form-field>
-    <!-- Notes -->
-    <mat-form-field>
-      <mat-label>
-        Notes
-      </mat-label>
-      <textarea matInput cols="30" rows="1"></textarea>
-    </mat-form-field>
+        <input formControlName="rpe" min="0" max="10" [value]="8" type="number">
+        <button (click)="onChangeCount('-', 'rpe')">-</button>
+        <button (click)="onChangeCount('+', 'rpe')">+</button>
+      </label>
+      <!-- Notes -->
+      <mat-form-field>
+        <mat-label>
+          Notes
+        </mat-label>
+        <textarea formControlName="notes" matInput cols="30" rows="1"></textarea>
+      </mat-form-field>
+      </aside>
+    </form>
   </mat-card-content>
   <mat-card-actions>
     <button mat-button (click)="onGo('previous')">
@@ -43,6 +55,6 @@
     <button mat-button (click)="onGo('next')">
       next
     </button>
-    <button mat-button>save day</button>
+    <button mat-button (click)="onSaveDay(form.value)">save day</button>
   </mat-card-actions>
 </mat-card>
