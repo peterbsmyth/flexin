@@ -1,5 +1,11 @@
+<bod-nav></bod-nav>
+<bod-action-bar>
+  <button mat-button (click)="onGo('previous', 'session')">Previous Session</button>
+  <button mat-button (click)="onGo('next', 'session')">Next Session</button>
+</bod-action-bar>
+
 <!-- This form allows a user to input an entire session item with no scroll from the iphone screen -->
-<h1>{{ session.name }}</h1>
+<h2>{{ session.name }}</h2>
 
 <!-- <p *ngIf="session.items[0] as item">{{ item | json }}</p> -->
 <mat-card *ngIf="session.items[currentItemIndex] as item">
@@ -49,10 +55,10 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="onGo('previous')">
+    <button mat-button (click)="onGo('previous', 'item')">
       previous
     </button>
-    <button mat-button (click)="onGo('next')">
+    <button mat-button (click)="onGo('next', 'item')">
       next
     </button>
     <button mat-button (click)="onSaveDay(form.value)">save day</button>

@@ -9,10 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServicesModule } from '@bod/services';
+import { NavComponent } from './nav/nav.component';
+import { ActionBarComponent } from './action-bar/action-bar.component';
 
 
 @NgModule({
-  declarations: [AppComponent, InputPageComponent],
+  declarations: [AppComponent, InputPageComponent, NavComponent, ActionBarComponent],
   imports: [
     BrowserAnimationsModule,
     ReactiveFormsModule,

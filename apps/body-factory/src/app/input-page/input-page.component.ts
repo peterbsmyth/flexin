@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { mockSession, Session } from '@bod/models';
+import { Week, Session } from '@bod/models';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { SessionService } from '@bod/services';
+import { WeekService } from '@bod/services';
 import { tap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -12,8 +12,10 @@ import { Subject } from 'rxjs';
 })
 export class InputPageComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
+  week: Week;
   session: Session;
   currentItemIndex = 0;
+  currentSessionIndex = 0;
   form: FormGroup = this.fb.group({
     sets: this.fb.array([]),
     rpe: this.fb.control({
@@ -25,15 +27,16 @@ export class InputPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private sessionService: SessionService
+    private weekService: WeekService
   ) { }
 
   ngOnInit(): void {
-    this.sessionService.sourceList$
+    this.weekService.week$
       .pipe(
         takeUntil(this.unsubscribe$),
-        tap(items => {
-          this.session = this.sessionService.createSession('day one', items, 1);
+        tap(week => {
+          this.week = week;
+          this.session = week.sessions[this.currentSessionIndex];
           this.rebuildFormForIndex(this.currentItemIndex);
         })
       )
@@ -54,20 +57,45 @@ export class InputPageComponent implements OnInit, OnDestroy {
 
   /**
    * onGo
-   * @param direction either 'next' or 'previous' to go to the next or previous item
+   * @param direction either 'next' or 'previous'
+   * @param model either 'item' or 'session'
    */
-  onGo(direction: string) {
-    const max = this.session.items.length - 1;
-    const canGoNext = this.currentItemIndex < max;
-    const canGoPrevious = this.currentItemIndex > 0;
+  onGo(direction: string, model: string) {
+    let max;
+    let canGoNext;
+    let canGoPrevious;
+    const goItem = () => {
+      if (direction === 'next' && canGoNext) {
+        this.currentItemIndex++;
+      } else if (direction === 'previous' && canGoPrevious) {
+        this.currentItemIndex--;
+      }
 
-    if (direction === 'next' && canGoNext) {
-      this.currentItemIndex++;
-    } else if (direction === 'previous' && canGoPrevious) {
-      this.currentItemIndex--;
+      this.rebuildFormForIndex(this.currentItemIndex);
+    }
+    const goSession = () => {
+      if (direction === 'next' && canGoNext) {
+        this.currentSessionIndex++;
+      } else if (direction === 'previous' && canGoPrevious) {
+        this.currentSessionIndex--;
+      }
+
+      this.currentItemIndex = 0;
+      this.session = this.week.sessions[this.currentSessionIndex];
+      this.rebuildFormForIndex(this.currentItemIndex);
     }
 
-    this.rebuildFormForIndex(this.currentItemIndex);
+    if (model === 'item') {
+      max = this.session.items.length - 1;
+      canGoNext = this.currentItemIndex < max;
+      canGoPrevious = this.currentItemIndex > 0;
+      goItem();
+    } else if (model === 'session') {
+      max = this.week.sessions.length - 1;
+      canGoNext = this.currentSessionIndex < max;
+      canGoPrevious = this.currentSessionIndex > 0;
+      goSession();
+    }
   }
 
   /**
@@ -127,6 +155,11 @@ export class InputPageComponent implements OnInit, OnDestroy {
       }),
       notes: '',
     });
+  }
+
+  onSwitchSession() {
+    this.session = this.week.sessions[++this.currentSessionIndex];
+    // use the session service to get the next session
   }
 
   ngOnDestroy() {
