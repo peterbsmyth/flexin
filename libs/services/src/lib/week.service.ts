@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Week, Session } from '@bod/models';
+import { Week, Session, mockWeek } from '@bod/models';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -7,11 +7,13 @@ import { Subject, Observable, ReplaySubject } from 'rxjs';
 })
 export class WeekService {
   private _lastWeekId = 0;
-  private _week: Week;
+  private _week: Week = mockWeek;
   private _week$: Subject<Week> = new ReplaySubject(1);
 
   get week$(): Observable<Week> { return this._week$.asObservable(); }
-  constructor() { }
+  constructor() {
+    this._week$.next(this._week);
+  }
 
   createWeek(number: number, sessions: Session[]): Week {
     this._week = {
