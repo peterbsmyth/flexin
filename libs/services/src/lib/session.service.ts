@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SessionItem, Exercise, Session } from '@bod/models';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ExerciseService } from './exercise.service';
 import { uniqBy } from 'lodash';
 
 @Injectable({
@@ -10,9 +9,9 @@ import { uniqBy } from 'lodash';
 export class SessionService {
   private _exercises: Exercise[][];
   private _incompleteSessionItems: SessionItem[];
-  private _lastSessionItemLocalId: number = 1000;
-  private _lastSessionItemId: number = 0;
-  private _lastSessionId: number = 0;
+  private _lastSessionItemLocalId = 1000;
+  private _lastSessionItemId = 0;
+  private _lastSessionId = 0;
   private _sourceList: SessionItem[] = [];
 
   private _sourceList$: BehaviorSubject<SessionItem[]> = new BehaviorSubject(this._sourceList);

@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ActionsBarComponent } from './actions-bar/actions-bar.component';
 import { BoardComponent } from './board/board.component';
+import { ServicesModule } from '@bod/services';
 
 @NgModule({
   declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent, SessionConfigurationBoardComponent, ButtonComponent, ActionsBarComponent, BoardComponent],
@@ -39,7 +40,8 @@ import { BoardComponent } from './board/board.component';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent],

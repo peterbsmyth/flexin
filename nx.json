@@ -31,6 +31,9 @@
     },
     "body-factory": {
       "tags": []
+    },
+    "services": {
+      "tags": []
     }
   }
 }

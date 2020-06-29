@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Exercise, mockExercises } from '@bod/models';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { mockExercises, Exercise } from '@bod/models';
 
 @Injectable({
   providedIn: 'root'

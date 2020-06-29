@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../session.service';
+import { SessionService, WeekService } from '@bod/services';
 import { SessionItem, mockSessionItems } from '@bod/models';
 import { Router } from '@angular/router';
-import { WeekService } from '../week.service';
-import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'bod-session-configuration-board',

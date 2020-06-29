@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Week, Session } from '@bod/models';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeekService {
-  private _lastWeekId: number = 0;
+  private _lastWeekId = 0;
   private _week: Week;
   private _week$: Subject<Week> = new ReplaySubject(1);
 
