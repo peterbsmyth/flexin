@@ -8,6 +8,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ServicesModule } from '@bod/services';
+
 
 @NgModule({
   declarations: [AppComponent, InputPageComponent],
@@ -27,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       ],
       { initialNavigation: 'enabled' }
     ),
+    ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent],

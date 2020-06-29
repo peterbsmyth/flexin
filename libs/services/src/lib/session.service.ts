@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SessionItem, Exercise, Session } from '@bod/models';
+import { SessionItem, Exercise, Session, mockSessionItems } from '@bod/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { uniqBy } from 'lodash';
 
@@ -12,7 +12,7 @@ export class SessionService {
   private _lastSessionItemLocalId = 1000;
   private _lastSessionItemId = 0;
   private _lastSessionId = 0;
-  private _sourceList: SessionItem[] = [];
+  private _sourceList: SessionItem[] = mockSessionItems;
 
   private _sourceList$: BehaviorSubject<SessionItem[]> = new BehaviorSubject(this._sourceList);
   

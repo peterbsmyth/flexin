@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { mockSession, Session } from '@bod/models';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { SessionService } from '@bod/services';
+import { tap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'bod-input-page',
   templateUrl: './input-page.component.html',
   styleUrls: ['./input-page.component.scss'],
 })
-export class InputPageComponent implements OnInit {
-  session: Session = mockSession;
+export class InputPageComponent implements OnInit, OnDestroy {
+  unsubscribe$: Subject<any> = new Subject();
+  session: Session;
   currentItemIndex = 0;
   form: FormGroup = this.fb.group({
     sets: this.fb.array([]),
@@ -19,11 +23,22 @@ export class InputPageComponent implements OnInit {
     notes: '',
   });
 
-  constructor(private fb: FormBuilder) {
-    this.rebuildFormForIndex(this.currentItemIndex);
-  }
+  constructor(
+    private fb: FormBuilder,
+    private sessionService: SessionService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sessionService.sourceList$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap(items => {
+          this.session = this.sessionService.createSession('day one', items, 1);
+          this.rebuildFormForIndex(this.currentItemIndex);
+        })
+      )
+      .subscribe();
+  }
 
   get sets() {
     return <FormArray>this.form.get('sets');
@@ -112,5 +127,9 @@ export class InputPageComponent implements OnInit {
       }),
       notes: '',
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
   }
 }
