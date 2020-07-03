@@ -9,12 +9,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServicesModule } from '@bod/services';
-import { NavComponent } from './nav/nav.component';
 import { ActionBarComponent } from './action-bar/action-bar.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
-  declarations: [AppComponent, InputPageComponent, NavComponent, ActionBarComponent],
+  declarations: [AppComponent, InputPageComponent, ActionBarComponent, SidenavComponent],
   imports: [
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -25,13 +30,22 @@ import { ActionBarComponent } from './action-bar/action-bar.component';
     RouterModule.forRoot(
       [
         {
-          path: '',
+          path: 'session',
           component: InputPageComponent,
         },
+        {
+          path: '',
+          component: InputPageComponent
+        }
       ],
       { initialNavigation: 'enabled' }
     ),
-    ServicesModule
+    ServicesModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],
