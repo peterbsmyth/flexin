@@ -679,6 +679,14 @@ export const mockWeek: Week = {
 };
 
 export const mockProgram: Program = {
+  id: 1,
   name: 'Mock Program',
-  weeks: [mockWeek, mockWeek, mockWeek, mockWeek]
+  weeks: [
+    mockWeek,
+    { ...mockWeek, id: 2, number: 2 },
+    { ...mockWeek, id: 3, number: 3 },
+    { ...mockWeek, id: 4, number: 4 },
+    { ...mockWeek, id: 5, number: 5 },
+    { ...mockWeek, id: 6, number: 6 }
+  ]
 };

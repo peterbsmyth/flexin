@@ -1,0 +1,8 @@
+{{ program.name }}
+
+
+<mat-list *ngFor="let week of program.weeks;">
+  <a mat-list-item [routerLink]="['/weeks', week.id]">
+    Week {{ week.number }}
+  </a>
+</mat-list>

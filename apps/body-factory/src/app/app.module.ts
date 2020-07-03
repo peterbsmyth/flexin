@@ -17,10 +17,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ProgramsPage } from './programs/programs.page';
+import { ProgramPage } from './program/program.page';
 
 
 @NgModule({
-  declarations: [AppComponent, InputPageComponent, ActionBarComponent, SidenavComponent, ProgramsPage],
+  declarations: [AppComponent, InputPageComponent, ActionBarComponent, SidenavComponent, ProgramsPage, ProgramPage],
   imports: [
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -33,6 +34,10 @@ import { ProgramsPage } from './programs/programs.page';
         {
           path: 'programs',
           component: ProgramsPage
+        },
+        {
+          path: 'programs/:id',
+          component: ProgramPage
         },
         {
           path: 'session',

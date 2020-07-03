@@ -33,6 +33,7 @@ export interface Week {
 }
 
 export interface Program {
+  id?: number;
   name: string; // 'Program 1'
   weeks: Week[];
 }

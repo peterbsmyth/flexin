@@ -1,5 +1,3 @@
 <mat-list>
-  <mat-list-item>
-    {{ program?.name }}
-  </mat-list-item>
+  <a mat-list-item [routerLink]="['/programs', program.id]">{{ program?.name }}</a>
 </mat-list>
