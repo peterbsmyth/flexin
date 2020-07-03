@@ -1,4 +1,4 @@
-import { Exercise, Session, SessionItem, Week } from './models';
+import { Exercise, Session, SessionItem, Week, Program } from './models';
 
 export const mockExercises: Exercise[] = [
   {
@@ -676,4 +676,9 @@ export const mockWeek: Week = {
       order: 4,
     },
   ],
+};
+
+export const mockProgram: Program = {
+  name: 'Mock Program',
+  weeks: [mockWeek, mockWeek, mockWeek, mockWeek]
 };

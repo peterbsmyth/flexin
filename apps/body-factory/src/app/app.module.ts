@@ -16,10 +16,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { ProgramsPage } from './programs/programs.page';
 
 
 @NgModule({
-  declarations: [AppComponent, InputPageComponent, ActionBarComponent, SidenavComponent],
+  declarations: [AppComponent, InputPageComponent, ActionBarComponent, SidenavComponent, ProgramsPage],
   imports: [
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -29,6 +30,10 @@ import { MatListModule } from '@angular/material/list';
     BrowserModule,
     RouterModule.forRoot(
       [
+        {
+          path: 'programs',
+          component: ProgramsPage
+        },
         {
           path: 'session',
           component: InputPageComponent,
