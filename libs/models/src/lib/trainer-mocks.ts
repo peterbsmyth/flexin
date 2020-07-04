@@ -1,4 +1,4 @@
-import { Exercise, Session, SessionItem, Week, Program } from './models';
+import { Exercise, Session, SessionItem, Week, Program } from './trainer-models';
 
 export const mockExercises: Exercise[] = [
   {
