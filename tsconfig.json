@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "@bod/models": ["libs/models/src/index.ts"],
-      "@bod/services": ["libs/services/src/index.ts"]
+      "@bod/services": ["libs/services/src/index.ts"],
+      "@bod/state": ["libs/state/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

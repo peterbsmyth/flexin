@@ -18,12 +18,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { ProgramsPage } from './programs/programs.page';
 import { ProgramPage } from './program/program.page';
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StateModule } from '@bod/state';
 
 @NgModule({
-  declarations: [AppComponent, InputPageComponent, ActionBarComponent, SidenavComponent, ProgramsPage, ProgramPage],
+  declarations: [
+    AppComponent,
+    InputPageComponent,
+    ActionBarComponent,
+    SidenavComponent,
+    ProgramsPage,
+    ProgramPage,
+  ],
   imports: [
-    BrowserAnimationsModule,
+  BrowserAnimationsModule,
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
@@ -33,11 +45,11 @@ import { ProgramPage } from './program/program.page';
       [
         {
           path: 'programs',
-          component: ProgramsPage
+          component: ProgramsPage,
         },
         {
           path: 'programs/:id',
-          component: ProgramPage
+          component: ProgramPage,
         },
         {
           path: 'session',
@@ -45,8 +57,8 @@ import { ProgramPage } from './program/program.page';
         },
         {
           path: '',
-          component: InputPageComponent
-        }
+          component: InputPageComponent,
+        },
       ],
       { initialNavigation: 'enabled' }
     ),
@@ -55,7 +67,21 @@ import { ProgramPage } from './program/program.page';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    StoreModule.forRoot(
+      {},
+      {
+        metaReducers: !environment.production ? [] : [],
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictStateImmutability: true,
+        },
+      }
+    ),
+    EffectsModule.forRoot([]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule.forRoot(),
+    StateModule
   ],
   providers: [],
   bootstrap: [AppComponent],
