@@ -4,7 +4,7 @@ import { fetch } from '@nrwl/angular';
 
 import * as fromPrograms from './programs.reducer';
 import * as ProgramsActions from './programs.actions';
-import { mockProgram } from '@bod/models';
+import { mockPrograms } from '@bod/models';
 
 @Injectable()
 export class ProgramsEffects {
@@ -14,7 +14,7 @@ export class ProgramsEffects {
       fetch({
         run: (action) => {
           // Your custom service 'load' logic goes here. For now just return a success action...
-          return ProgramsActions.loadProgramsSuccess({ programs: [mockProgram] });
+          return ProgramsActions.loadProgramsSuccess({ programs: mockPrograms });
         },
 
         onError: (action, error) => {

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramService } from '@bod/services';
 import { Program } from '@bod/models';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { ProgramsActions, ProgramsFeature, ProgramsSelectors } from '@bod/state';
 
 @Component({
   selector: 'bod-programs',
@@ -11,18 +13,19 @@ import { takeUntil, tap } from 'rxjs/operators';
 })
 export class ProgramsPage implements OnInit {
   unsubscribe$: Subject<any> = new Subject();
-  program: Program;
+  programs$: Observable<Program[]>;
   constructor(
-    private programService: ProgramService
-  ) { }
+    private store: Store<ProgramsFeature.ProgramsPartialState>,
+  ) {
+    this.store.dispatch(ProgramsActions.loadPrograms());
+  }
 
   ngOnInit(): void {
-    this.programService.program$
-    .pipe(
-      takeUntil(this.unsubscribe$),
-      tap(program => this.program = program)
-    )
-    .subscribe();
+    this.programs$ = this.store
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        select(ProgramsSelectors.getAllPrograms)
+      );
   }
 
 }

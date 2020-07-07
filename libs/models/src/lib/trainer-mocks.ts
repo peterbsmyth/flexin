@@ -680,7 +680,7 @@ export const mockWeek: Week = {
 
 export const mockProgram: Program = {
   id: 1,
-  name: 'Mock Program',
+  name: 'Program 1',
   weeks: [
     mockWeek,
     { ...mockWeek, id: 2, number: 2 },
@@ -690,3 +690,12 @@ export const mockProgram: Program = {
     { ...mockWeek, id: 6, number: 6 }
   ]
 };
+
+export const mockPrograms: Program[] = [
+  mockProgram,
+  {
+    ...mockProgram,
+    id: 2,
+    name: 'Program 2'
+  }
+]
