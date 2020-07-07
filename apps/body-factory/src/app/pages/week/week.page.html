@@ -1,0 +1,8 @@
+<div *ngIf="(week$ | async) as week">
+  <span>Week {{ week.number }}</span>
+  <mat-list *ngFor="let session of week.sessions;">
+    <a mat-list-item [routerLink]="['/sessions', session.id]">
+      {{ session.name }}
+    </a>
+  </mat-list>
+</div>

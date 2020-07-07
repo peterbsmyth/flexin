@@ -8,6 +8,15 @@ import * as ProgramsFeature from './lib/+state/programs/programs.reducer';
 
 import * as ProgramsSelectors from './lib/+state/programs/programs.selectors';
 
+
+import * as WeeksActions from './lib/+state/weeks/weeks.actions';
+
+import * as WeeksFeature from './lib/+state/weeks/weeks.reducer';
+
+import * as WeeksSelectors from './lib/+state/weeks/weeks.selectors';
+
+export { WeeksActions, WeeksFeature, WeeksSelectors };
+
 export { ProgramsActions, ProgramsFeature, ProgramsSelectors };
 
 export {

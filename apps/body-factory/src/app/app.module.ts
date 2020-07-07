@@ -16,14 +16,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { ProgramsPage } from './programs/programs.page';
-import { ProgramPage } from './program/program.page';
+import { ProgramsPage } from './pages/programs/programs.page';
+import { ProgramPage } from './pages/program/program.page';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StateModule } from '@bod/state';
+import { WeekPage } from './pages/week/week.page';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { StateModule } from '@bod/state';
     SidenavComponent,
     ProgramsPage,
     ProgramPage,
+    WeekPage,
   ],
   imports: [
   BrowserAnimationsModule,
@@ -48,8 +50,12 @@ import { StateModule } from '@bod/state';
           component: ProgramsPage,
         },
         {
-          path: 'programs/:id',
+          path: 'programs/:programId',
           component: ProgramPage,
+        },
+        {
+          path: 'weeks/:weekId',
+          component: WeekPage
         },
         {
           path: 'session',
