@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { WeeksFeature, WeeksSelectors, WeeksActions } from '@bod/state';
-import { Week } from '@bod/models';
+import { WeeksFeature, WeeksSelectors, WeeksActions, PlaylistsFeature, PlaylistsSelectors, PlaylistsActions } from '@bod/state';
+import { Week, Playlist } from '@bod/models';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,19 +11,26 @@ import { Observable } from 'rxjs';
 })
 export class WeekPage implements OnInit {
   week$: Observable<Week>;
+  playlist$: Observable<Playlist>;
 
   constructor(
-    private store: Store<WeeksFeature.WeeksPartialState>
+    private storeWeeks: Store<WeeksFeature.WeeksPartialState>,
+    private storePlaylists: Store<PlaylistsFeature.PlaylistsPartialState>,
   ) {
-    this.week$ = this.store
+    this.week$ = this.storeWeeks
       .pipe(
         select(WeeksSelectors.getSelected)
+      );
+    this.playlist$ = this.storePlaylists
+      .pipe(
+        select(PlaylistsSelectors.getSelected)
       );
   }
 
   ngOnInit(): void {
-    this.store.dispatch(WeeksActions.loadWeeks());
-    this.store.dispatch(WeeksActions.selectWeek({ id: 1}));
+    this.storePlaylists.dispatch(PlaylistsActions.loadPlaylists());
+    this.storeWeeks.dispatch(WeeksActions.loadWeeks());
+    this.storeWeeks.dispatch(WeeksActions.selectWeek({ id: 1 }));
   }
 
 }
