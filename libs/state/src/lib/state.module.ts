@@ -8,6 +8,8 @@ import * as fromPrograms from './+state/programs/programs.reducer';
 import { ProgramsEffects } from './+state/programs/programs.effects';
 import * as fromWeeks from './+state/weeks/weeks.reducer';
 import { WeeksEffects } from './+state/weeks/weeks.effects';
+import * as fromPlaylists from './+state/playlists/playlists.reducer';
+import { PlaylistsEffects } from './+state/playlists/playlists.effects';
 
 @NgModule({
   imports: [
@@ -24,6 +26,11 @@ import { WeeksEffects } from './+state/weeks/weeks.effects';
     EffectsModule.forFeature([ProgramsEffects]),
     StoreModule.forFeature(fromWeeks.WEEKS_FEATURE_KEY, fromWeeks.reducer),
     EffectsModule.forFeature([WeeksEffects]),
+    StoreModule.forFeature(
+      fromPlaylists.PLAYLISTS_FEATURE_KEY,
+      fromPlaylists.reducer
+    ),
+    EffectsModule.forFeature([PlaylistsEffects]),
   ],
 })
 export class StateModule {}
