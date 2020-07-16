@@ -19,23 +19,19 @@
     }
   },
   "projects": {
-    "programming-kitchen": {
-      "tags": []
-    },
-    "programming-kitchen-e2e": {
-      "tags": [],
-      "implicitDependencies": ["programming-kitchen"]
-    },
     "models": {
-      "tags": []
-    },
-    "body-factory": {
       "tags": []
     },
     "services": {
       "tags": []
     },
     "state": {
+      "tags": []
+    },
+    "athlete": {
+      "tags": []
+    },
+    "trainer": {
       "tags": []
     }
   }

@@ -1,138 +1,6 @@
 {
   "version": 1,
   "projects": {
-    "programming-kitchen": {
-      "projectType": "application",
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "apps/programming-kitchen",
-      "sourceRoot": "apps/programming-kitchen/src",
-      "prefix": "bod",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/programming-kitchen",
-            "index": "apps/programming-kitchen/src/index.html",
-            "main": "apps/programming-kitchen/src/main.ts",
-            "polyfills": "apps/programming-kitchen/src/polyfills.ts",
-            "tsConfig": "apps/programming-kitchen/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "apps/programming-kitchen/src/favicon.ico",
-              "apps/programming-kitchen/src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "apps/programming-kitchen/src/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": ["apps/programming-kitchen/src/assets/scss"]
-            },
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/programming-kitchen/src/environments/environment.ts",
-                  "with": "apps/programming-kitchen/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "programming-kitchen:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "programming-kitchen:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "programming-kitchen:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/programming-kitchen/tsconfig.app.json",
-              "apps/programming-kitchen/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/programming-kitchen/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/programming-kitchen/jest.config.js",
-            "tsConfig": "apps/programming-kitchen/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/programming-kitchen/src/test-setup.ts"
-          }
-        }
-      }
-    },
-    "programming-kitchen-e2e": {
-      "root": "apps/programming-kitchen-e2e",
-      "sourceRoot": "apps/programming-kitchen-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/programming-kitchen-e2e/cypress.json",
-            "tsConfig": "apps/programming-kitchen-e2e/tsconfig.e2e.json",
-            "devServerTarget": "programming-kitchen:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "programming-kitchen:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/programming-kitchen-e2e/tsconfig.e2e.json"],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/programming-kitchen-e2e/**"
-            ]
-          }
-        }
-      }
-    },
     "models": {
       "root": "libs/models",
       "sourceRoot": "libs/models/src",
@@ -155,115 +23,6 @@
             "jestConfig": "libs/models/jest.config.js",
             "tsConfig": "libs/models/tsconfig.spec.json",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "body-factory": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@nrwl/angular:class": {
-          "skipTests": true
-        },
-        "@nrwl/angular:component": {
-          "style": "scss",
-          "skipTests": true
-        },
-        "@nrwl/angular:directive": {
-          "skipTests": true
-        },
-        "@nrwl/angular:guard": {
-          "skipTests": true
-        },
-        "@nrwl/angular:module": {
-          "skipTests": true
-        },
-        "@nrwl/angular:pipe": {
-          "skipTests": true
-        },
-        "@nrwl/angular:service": {
-          "skipTests": true
-        }
-      },
-      "root": "apps/body-factory",
-      "sourceRoot": "apps/body-factory/src",
-      "prefix": "bod",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/body-factory",
-            "index": "apps/body-factory/src/index.html",
-            "main": "apps/body-factory/src/main.ts",
-            "polyfills": "apps/body-factory/src/polyfills.ts",
-            "tsConfig": "apps/body-factory/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "apps/body-factory/src/favicon.ico",
-              "apps/body-factory/src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "apps/body-factory/src/styles.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/body-factory/src/environments/environment.ts",
-                  "with": "apps/body-factory/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "body-factory:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "body-factory:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "body-factory:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/body-factory/tsconfig.app.json"],
-            "exclude": ["**/node_modules/**", "!apps/body-factory/**"]
           }
         }
       }
@@ -319,6 +78,217 @@
           "style": "scss"
         }
       }
+    },
+    "athlete": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@nrwl/angular:class": {
+          "skipTests": true
+        },
+        "@nrwl/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/angular:directive": {
+          "skipTests": true
+        },
+        "@nrwl/angular:guard": {
+          "skipTests": true
+        },
+        "@nrwl/angular:module": {
+          "skipTests": true
+        },
+        "@nrwl/angular:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "apps/athlete",
+      "sourceRoot": "apps/athlete/src",
+      "prefix": "bod",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/athlete",
+            "index": "apps/athlete/src/index.html",
+            "main": "apps/athlete/src/main.ts",
+            "polyfills": "apps/athlete/src/polyfills.ts",
+            "tsConfig": "apps/athlete/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/athlete/src/favicon.ico",
+              "apps/athlete/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/athlete/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/athlete/src/environments/environment.ts",
+                  "with": "apps/athlete/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "athlete:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "athlete:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "athlete:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/athlete/tsconfig.app.json"],
+            "exclude": ["**/node_modules/**", "!apps/athlete/**"]
+          }
+        }
+      }
+    },
+    "trainer": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/trainer",
+      "sourceRoot": "apps/trainer/src",
+      "prefix": "bod",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/trainer",
+            "index": "apps/trainer/src/index.html",
+            "main": "apps/trainer/src/main.ts",
+            "polyfills": "apps/trainer/src/polyfills.ts",
+            "tsConfig": "apps/trainer/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/trainer/src/favicon.ico",
+              "apps/trainer/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/trainer/src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["apps/trainer/src/assets/scss"]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/trainer/src/environments/environment.ts",
+                  "with": "apps/trainer/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "trainer:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "trainer:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "trainer:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/trainer/tsconfig.app.json",
+              "apps/trainer/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/trainer/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/trainer/jest.config.js",
+            "tsConfig": "apps/trainer/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/trainer/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -333,5 +303,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "programming-kitchen"
+  "defaultProject": "trainer"
 }
