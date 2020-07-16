@@ -26,9 +26,8 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "prep:desktop": "cp .now/desktop.json ./now/project.json",
-    "deploy:desktop": "cp .now/desktop.json .now/project.json && ng build programming-kitchen --prod  && now --prod --local-config now-desktop.json",
-    "deploy:mobile": "cp .now/mobile.json .now/project.json && ng build body-factory --prod && now --prod --local-config now-mobile.json"
+    "build:trainer": "ng build trainer --prod",
+    "build:athlete": "ng build athlete --prod"
   },
   "private": true,
   "dependencies": {
