@@ -18,7 +18,7 @@ Download and install the VS Code extension [Nx Console from VS Code Extension Ma
 npm install
 ```
 
-### 2. Run The Trainer Application
+### 2. Run the Trainer Application 
 ```sh
 ng serve trainer --open
 ```
