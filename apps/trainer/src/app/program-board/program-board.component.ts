@@ -7,7 +7,7 @@ import Fuse from 'fuse.js';
 import { ExerciseService, SessionService, WeekService } from '@bod/services';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { remove } from 'lodash';
+import { remove } from 'lodash-es';
 
 @Component({
   selector: 'bod-program-board',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SessionItem, Exercise, Session, mockSessionItems } from '@bod/models';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { uniqBy } from 'lodash';
+import { uniqBy } from 'lodash-es';
 
 @Injectable({
   providedIn: 'root'
