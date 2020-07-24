@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StateModule } from '@bod/state';
 import { WeekPage } from './pages/week/week.page';
+import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { WeekPage } from './pages/week/week.page';
     ProgramsPage,
     ProgramPage,
     WeekPage,
+    MaximumAttemptPage,
   ],
   imports: [
   BrowserAnimationsModule,
@@ -45,6 +47,10 @@ import { WeekPage } from './pages/week/week.page';
     BrowserModule,
     RouterModule.forRoot(
       [
+        {
+          path: 'maximum-attempt',
+          component: MaximumAttemptPage,
+        },
         {
           path: 'programs',
           component: ProgramsPage,
