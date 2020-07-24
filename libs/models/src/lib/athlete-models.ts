@@ -37,3 +37,13 @@ export interface Playlist {
   url: string; // https://www.youtube.com/playlist?list=PLu0SKb668nMfYcyc_Mpv1tcywXh2AJapj
   week: number; // Week
 }
+
+export interface MaxAttemptItem {
+  id?: number;
+  exercise: number;
+  reps: number;
+  bestAttempt: boolean; // Percieved potential for better try
+  leftRight?: boolean;
+  weight: number;
+  intensity: string;
+}
