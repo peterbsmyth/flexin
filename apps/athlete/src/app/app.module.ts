@@ -26,6 +26,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StateModule } from '@bod/state';
 import { WeekPage } from './pages/week/week.page';
 import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
+import { MaximumAttemptCardComponent } from './maximum-attempt-card/maximum-attempt-card.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page
     ProgramPage,
     WeekPage,
     MaximumAttemptPage,
+    MaximumAttemptCardComponent,
   ],
   imports: [
   BrowserAnimationsModule,
