@@ -28,6 +28,7 @@ import { ServicesModule } from '@bod/services';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [AppComponent, ExerciseComponent, ProgramBoardComponent, NavComponent, ExerciseFormComponent, SessionGridComponent, SessionItemComponent, SessionComponent, SessionConfigurationBoardComponent, ButtonComponent, ActionsBarComponent, BoardComponent],
@@ -47,7 +48,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ServicesModule,
     MatSidenavModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -27,6 +27,10 @@ import { StateModule } from '@bod/state';
 import { WeekPage } from './pages/week/week.page';
 import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
 import { MaximumAttemptCardComponent } from './maximum-attempt-card/maximum-attempt-card.component';
+import { MaximumAttemptFormComponent } from './maximum-attempt-form/maximum-attempt-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { MaximumAttemptCardComponent } from './maximum-attempt-card/maximum-atte
     WeekPage,
     MaximumAttemptPage,
     MaximumAttemptCardComponent,
+    MaximumAttemptFormComponent,
   ],
   imports: [
   BrowserAnimationsModule,
@@ -95,9 +100,13 @@ import { MaximumAttemptCardComponent } from './maximum-attempt-card/maximum-atte
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
-    StateModule
+    StateModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [MaximumAttemptFormComponent],
 })
 export class AppModule {}
