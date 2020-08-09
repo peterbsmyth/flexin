@@ -4,7 +4,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem, CdkDrag
 import { tap, withLatestFrom, takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import Fuse from 'fuse.js';
-import { ExerciseService, SessionService, WeekService } from '@bod/services';
+import { ExerciseService, SessionService, WeekService } from '@bod/data';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { remove } from 'lodash-es';

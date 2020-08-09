@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Week, Session, mockWeek } from '@bod/models';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class WeekService {
   private _lastWeekId = 0;
   private _week: Week = mockWeek;

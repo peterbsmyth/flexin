@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Week, Session } from '@bod/models';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { WeekService } from '@bod/services';
+import { WeekService } from '@bod/data';
 import { tap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

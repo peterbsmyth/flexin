@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ExerciseService } from '@bod/services';
+import { ExerciseService } from '@bod/data';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({

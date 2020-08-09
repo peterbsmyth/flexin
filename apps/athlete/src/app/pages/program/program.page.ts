@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ProgramService } from '@bod/services';
+import { ProgramService } from '@bod/data';
 import { Program } from '@bod/models';
 import { takeUntil, tap } from 'rxjs/operators';
 

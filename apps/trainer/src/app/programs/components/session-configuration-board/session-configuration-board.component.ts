@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService, WeekService } from '@bod/services';
+import { SessionService, WeekService } from '@bod/data';
 import { SessionItem, mockSessionItems } from '@bod/models';
 import { Router } from '@angular/router';
 

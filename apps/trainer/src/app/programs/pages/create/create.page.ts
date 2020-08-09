@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromPrograms from '../../+state/programs.reducer';
+import { loadPrograms } from '../../+state/programs.actions';
 
 @Component({
-  selector: 'bod-create',
   template: `
     <router-outlet></router-outlet>
   `,
@@ -10,9 +12,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private store$: Store<fromPrograms.State>
+  ) { }
 
   ngOnInit(): void {
+    this.store$.dispatch(loadPrograms());
   }
 
 }

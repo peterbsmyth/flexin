@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ServicesModule } from '@bod/services';
+import { DataModule } from '@bod/data';
 import { ActionBarComponent } from './action-bar/action-bar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -81,7 +81,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       ],
       { initialNavigation: 'enabled' }
     ),
-    ServicesModule,
+    DataModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,

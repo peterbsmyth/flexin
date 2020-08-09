@@ -22,9 +22,6 @@
     "models": {
       "tags": []
     },
-    "services": {
-      "tags": []
-    },
     "state": {
       "tags": []
     },
@@ -35,6 +32,9 @@
       "tags": []
     },
     "components": {
+      "tags": []
+    },
+    "data": {
       "tags": []
     }
   }

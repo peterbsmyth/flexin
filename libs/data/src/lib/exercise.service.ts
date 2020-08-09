@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { mockExercises, Exercise } from '@bod/models';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ExerciseService {
   private _sourceList: Exercise[] = mockExercises;
 

@@ -3,9 +3,7 @@ import { SessionItem, Exercise, Session, mockSessionItems } from '@bod/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { uniqBy } from 'lodash-es';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SessionService {
   private _exercises: Exercise[][];
   private _incompleteSessionItems: SessionItem[];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WeekService, ProgramService } from '@bod/services';
+import { WeekService, ProgramService } from '@bod/data';
 import { tap, takeUntil } from 'rxjs/operators';
 import { Session, Week, Program } from '@bod/models';
 import { Subject } from 'rxjs';

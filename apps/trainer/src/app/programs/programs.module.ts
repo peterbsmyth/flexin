@@ -19,6 +19,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import * as fromPrograms from './+state/programs.reducer';
+import { ProgramsEffects } from './+state/programs.effects';
+import { DataModule } from '@bod/data';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
     SessionComponent,
     SessionConfigurationBoardComponent,
     ExerciseComponent,
-    CreatePage
+    CreatePage,
   ],
   imports: [
     CommonModule,
@@ -43,7 +48,13 @@ import { MatIconModule } from '@angular/material/icon';
     DragDropModule,
     MatButtonModule,
     MatIconModule,
-    BodComponentsModule
-  ]
+    BodComponentsModule,
+    DataModule,
+    StoreModule.forFeature(
+      fromPrograms.PROGRAMS_FEATURE_KEY,
+      fromPrograms.reducer
+    ),
+    EffectsModule.forFeature([ProgramsEffects]),
+  ],
 })
-export class ProgramsModule { }
+export class ProgramsModule {}
