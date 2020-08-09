@@ -1,5 +1,5 @@
-<h2 mat-dialog-title>Add Exercise</h2>
-<div mat-dialog-content>
+<h2>Add Exercise</h2>
+<div>
   <form [formGroup]="form" class="form">
     <mat-form-field>
       <mat-label>
@@ -11,6 +11,6 @@
     <mat-checkbox formControlName="pull">Pull</mat-checkbox>
   </form>
 </div>
-<div mat-dialog-actions class="form__actions">
+<div class="form__actions">
   <bod-button (click)="onSubmit(form.value)">Save</bod-button>
 </div>

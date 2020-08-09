@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ExerciseFormComponent } from '../exercise-form/exercise-form.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -12,7 +10,6 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class NavComponent implements OnInit {
   constructor(
-    public dialog: MatDialog,
     private breakpointObserver: BreakpointObserver
   ) { }
 
@@ -23,9 +20,5 @@ export class NavComponent implements OnInit {
   );
 
   ngOnInit(): void {
-  }
-
-  onClickAddExercise() {
-    this.dialog.open(ExerciseFormComponent);
   }
 }

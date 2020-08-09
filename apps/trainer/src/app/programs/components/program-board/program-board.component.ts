@@ -60,7 +60,7 @@ export class ProgramBoardComponent implements OnInit, OnDestroy {
      * session-item flow
      */
     this.sessionService.configureExercises([this.dayOneList, this.dayTwoList, this.dayThreeList, this.dayFourList]);
-    this.router.navigateByUrl('/configure-session');
+    this.router.navigateByUrl('/programs/create/2');
 
     /**
      * session-item flow
@@ -80,7 +80,7 @@ export class ProgramBoardComponent implements OnInit, OnDestroy {
 
     // create a week
     // this.weekService.createWeek(1, sessions);
-    // this.router.navigateByUrl('/session');
+    // this.router.navigateByUrl('/programs/create/3');
   }
 
   ngOnInit() {

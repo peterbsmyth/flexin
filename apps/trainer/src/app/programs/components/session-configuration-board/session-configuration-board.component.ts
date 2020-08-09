@@ -44,6 +44,6 @@ export class SessionConfigurationBoardComponent implements OnInit {
     const sessionFour = this.sessionService.createSession('day four', allSessionItems[3], 4);
     const sessions = [sessionOne, sessionTwo, sessionThree, sessionFour];
     this.weekService.createWeek(1, sessions);
-    this.router.navigateByUrl('/session');
+    this.router.navigateByUrl('/programs/create/3');
   }
 }

@@ -18,7 +18,7 @@ export class ExerciseFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private exerciseService: ExerciseService,
-    public dialogRef: MatDialogRef<ExerciseFormComponent>,
+    // public dialogRef: MatDialogRef<ExerciseFormComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class ExerciseFormComponent implements OnInit {
 
   onSubmit(form) {
     this.exerciseService.save(form);
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
 }
