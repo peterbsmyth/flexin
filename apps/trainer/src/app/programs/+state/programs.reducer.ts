@@ -27,13 +27,19 @@ export const initialState: State = programsAdapter.getInitialState({
 
 const programsReducer = createReducer(
   initialState,
-  on(ProgramsActions.loadPrograms, (state) => ({
+  on(
+    ProgramsActions.loadPrograms,
+    ProgramsActions.loadProgram,
+    (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
   on(ProgramsActions.loadProgramsSuccess, (state, { programs }) =>
-    programsAdapter.addAll(programs, { ...state, loaded: true })
+    programsAdapter.setAll(programs, { ...state, loaded: true })
+  ),
+  on(ProgramsActions.loadProgramSuccess, (state, { program }) =>
+    programsAdapter.addOne(program, { ...state, loaded: true, selectedId: program.id })
   ),
   on(ProgramsActions.loadProgramsFailure, (state, { error }) => ({
     ...state,

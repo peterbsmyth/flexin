@@ -1,0 +1,17 @@
+
+<bod-actions-bar>
+  <bod-button routerLink="create">Create</bod-button>
+</bod-actions-bar>
+
+<h2>Programs</h2>
+<div *ngIf="(loaded$ | async); else loading;">
+  <mat-list>
+    <a *ngFor="let program of (programs$ | async)" mat-list-item [routerLink]="['/programs', program.id]">{{ program?.name }}</a>
+  </mat-list>
+</div>
+
+<ng-template #loading>
+  <p>
+    Loading...
+  </p>
+</ng-template>

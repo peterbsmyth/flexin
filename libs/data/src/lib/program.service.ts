@@ -27,4 +27,8 @@ export class ProgramService {
   getAll(): Observable<Program[]> {
     return this.http.get<Program[]>(`${this.API_URL}/programs`);
   }
+
+  getOne(id: number): Observable<Program> {
+    return this.http.get<Program>(`${this.API_URL}/programs/${id}`);
+  }
 }

@@ -24,6 +24,9 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromPrograms from './+state/programs.reducer';
 import { ProgramsEffects } from './+state/programs.effects';
 import { DataModule } from '@bod/data';
+import { HomePage } from './pages/home/home.page';
+import { MatListModule } from '@angular/material/list';
+import { ProgramPage } from './pages/program/program.page';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,8 @@ import { DataModule } from '@bod/data';
     SessionConfigurationBoardComponent,
     ExerciseComponent,
     CreatePage,
+    HomePage,
+    ProgramPage,
   ],
   imports: [
     CommonModule,
@@ -48,6 +53,7 @@ import { DataModule } from '@bod/data';
     DragDropModule,
     MatButtonModule,
     MatIconModule,
+    MatListModule,
     BodComponentsModule,
     DataModule,
     StoreModule.forFeature(

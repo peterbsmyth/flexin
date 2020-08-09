@@ -1,0 +1,9 @@
+<div *ngIf="(loaded$ | async); else loading;">
+  <div *ngIf="(program$ | async) as program">
+    <h1>{{ program.name }}</h1>
+  </div>
+</div>
+
+<ng-template #loading>
+  Loading...
+</ng-template>
