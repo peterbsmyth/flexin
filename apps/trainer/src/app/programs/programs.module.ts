@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { BodComponentsModule } from '@bod/components';
 import { ProgramsRoutingModule } from './programs-routing.module';
 import { ProgramBoardComponent } from './components/program-board/program-board.component';
-import { ActionsBarComponent } from './components/actions-bar/actions-bar.component';
 import { BoardComponent } from './components/board/board.component';
 import { SessionGridComponent } from './components/session-grid/session-grid.component';
 import { SessionItemComponent } from './components/session-item/session-item.component';
@@ -32,7 +31,6 @@ import { ProgramPage } from './pages/program/program.page';
   declarations: [
     ProgramBoardComponent,
     BoardComponent,
-    ActionsBarComponent,
     SessionGridComponent,
     SessionItemComponent,
     SessionComponent,

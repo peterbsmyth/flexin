@@ -268,7 +268,11 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/components/tsconfig.lib.json",
-            "project": "libs/components/ng-package.json"
+            "project": "libs/components/ng-package.json",
+            "styles": ["libs/components/src/lib/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/components/src/lib/scss"]
+            }
           },
           "configurations": {
             "production": {
@@ -323,8 +327,13 @@
       "unitTestRunner": "none",
       "style": "scss"
     },
+    "@nrwl/angular:ngrx": {
+      "facade": false,
+      "root": false
+    },
     "@schematics/angular:component": {
-      "style": "scss"
+      "style": "scss",
+      "skipTests": true
     }
   },
   "defaultProject": "trainer"
