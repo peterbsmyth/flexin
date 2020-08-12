@@ -34,4 +34,10 @@ export class MaximumAttemptFormComponent implements OnInit {
       .subscribe()
   }
 
+  onClick(form:FormGroup){
+    console.log(form.value);
+  }
+
 }
+
+
