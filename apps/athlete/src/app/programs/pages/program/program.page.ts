@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { ProgramService } from '@bod/data';
 import { Program } from '@bod/models';
 import { takeUntil, tap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { selectProgram } from '../../+state/programs.actions';
+import { getSelected } from '../../+state/programs.selectors';
+import { ProgramsPartialState } from '../../+state/programs.reducer';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'bod-program',
@@ -11,15 +16,20 @@ import { takeUntil, tap } from 'rxjs/operators';
 })
 export class ProgramPage implements OnInit {
   unsubscribe$: Subject<any> = new Subject();
-  program: Program;
-  constructor(private programService: ProgramService) {}
+  program$: Observable<Program>;
 
-  ngOnInit(): void {
-    this.programService.program$
+  constructor(
+    private store: Store<ProgramsPartialState>,
+    private route: ActivatedRoute
+  ) {
+    this.program$ = this.store
       .pipe(
         takeUntil(this.unsubscribe$),
-        tap((program) => (this.program = program))
-      )
-      .subscribe();
+        select(getSelected)
+      );
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(selectProgram({ id: this.route.snapshot.params['programId'] }));
   }
 }

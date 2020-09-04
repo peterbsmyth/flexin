@@ -5,7 +5,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { ProgramsPartialState } from '../../+state/programs.reducer';
 import { getAllPrograms } from '../../+state/programs.selectors';
-import { loadPrograms } from '../../+state/programs.actions';
 
 @Component({
   selector: 'bod-programs',
@@ -18,7 +17,6 @@ export class ProgramsPage implements OnInit {
   constructor(
     private store: Store<ProgramsPartialState>,
   ) {
-    this.store.dispatch(loadPrograms());
   }
 
   ngOnInit(): void {

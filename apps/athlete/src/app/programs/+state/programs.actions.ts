@@ -12,3 +12,20 @@ export const loadProgramsFailure = createAction(
   '[Programs] Load Programs Failure',
   props<{ error: any }>()
 );
+
+export const loadProgram = createAction('[Programs] Load Program');
+
+export const loadProgramSuccess = createAction(
+  '[Programs] Load Program Success',
+  props<{ program: Program }>()
+);
+
+export const loadProgramFailure = createAction(
+  '[Programs] Load Program Failure',
+  props<{ error: any }>()
+);
+
+export const selectProgram = createAction(
+  '[Programs] Select Program',
+  props<{ id: number }>()
+);

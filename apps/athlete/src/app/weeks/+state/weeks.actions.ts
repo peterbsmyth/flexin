@@ -13,6 +13,18 @@ export const loadWeeksFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadWeek = createAction('[Weeks] Load Week');
+
+export const loadWeekSuccess = createAction(
+  '[Weeks] Load Week Success',
+  props<{ week: Week }>()
+);
+
+export const loadWeekFailure = createAction(
+  '[Weeks] Load Week Failure',
+  props<{ error: any }>()
+);
+
 export const selectWeek = createAction(
   '[Weeks] Select Week',
   props<{ id: number }>()

@@ -38,7 +38,9 @@ const programsReducer = createReducer(
   on(ProgramsActions.loadProgramsFailure, (state, { error }) => ({
     ...state,
     error,
-  }))
+  })),
+  on(ProgramsActions.selectProgram, (state, { id }) => ({ ...state, selectedId: id })),
+  on(ProgramsActions.loadProgramSuccess, (state, { program }) => programsAdapter.setOne(program, { ...state, loaded: true })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

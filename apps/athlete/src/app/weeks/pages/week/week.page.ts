@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { WeeksPartialState } from '../../+state/weeks.reducer';
 import { loadWeeks, selectWeek } from '../../+state/weeks.actions';
 import { getSelected } from '../../../weeks/+state/weeks.selectors';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'bod-week',
@@ -16,6 +17,7 @@ export class WeekPage implements OnInit {
 
   constructor(
     private storeWeeks: Store<WeeksPartialState>,
+    private route: ActivatedRoute
   ) {
     this.week$ = this.storeWeeks
       .pipe(
@@ -24,8 +26,6 @@ export class WeekPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.storeWeeks.dispatch(loadWeeks());
-    this.storeWeeks.dispatch(selectWeek({ id: 1 }));
+    this.storeWeeks.dispatch(selectWeek({ id: this.route.snapshot.params['weekId'] }));
   }
-
 }

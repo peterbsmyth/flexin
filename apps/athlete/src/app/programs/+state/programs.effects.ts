@@ -1,29 +1,64 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
+import { createEffect, Actions } from '@ngrx/effects';
+import { navigation } from '@nrwl/angular';
 
 import * as fromPrograms from './programs.reducer';
 import * as ProgramsActions from './programs.actions';
-import { mockPrograms } from '@bod/models';
+import { mockProgram } from '@bod/models';
+import { ProgramPage } from '../pages/program/program.page';
+import { ActivatedRouteSnapshot } from '@angular/router';
+import { ProgramsPage } from '../pages/programs/programs.page';
+import { ProgramService } from '@bod/data';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ProgramsEffects {
-  loadPrograms$ = createEffect(() =>
+  loadPrograms$ =createEffect(() =>
     this.actions$.pipe(
-      ofType(ProgramsActions.loadPrograms),
-      fetch({
-        run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return ProgramsActions.loadProgramsSuccess({ programs: mockPrograms });
+      // listens for the routerNavigation action from @ngrx/router-store
+      navigation(ProgramsPage, {
+        run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
+          return this.programService.getAll()
+            .pipe(
+              map((programs) => ProgramsActions.loadProgramsSuccess({ programs }))
+            );
         },
-
-        onError: (action, error) => {
-          console.error('Error', error);
-          return ProgramsActions.loadProgramsFailure({ error });
+        onError: (
+          activatedRouteSnapshot: ActivatedRouteSnapshot,
+          error: any
+        ) => {
+          // we can log and error here and return null
+          // we can also navigate back
+          return null;
         },
       })
     )
   );
 
-  constructor(private actions$: Actions) {}
+  loadProgram$ = createEffect(() =>
+    this.actions$.pipe(
+      // listens for the routerNavigation action from @ngrx/router-store
+      navigation(ProgramPage, {
+        run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
+          return this.programService.getOne(activatedRouteSnapshot.params['programId'])
+            .pipe(
+              map((program) => ProgramsActions.loadProgramSuccess({ program }))
+            );
+        },
+        onError: (
+          activatedRouteSnapshot: ActivatedRouteSnapshot,
+          error: any
+        ) => {
+          // we can log and error here and return null
+          // we can also navigate back
+          return null;
+        },
+      })
+    )
+  );
+
+  constructor(
+    private actions$: Actions,
+    private programService: ProgramService
+  ) {}
 }

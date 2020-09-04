@@ -36,7 +36,8 @@ const weeksReducer = createReducer(
     weeksAdapter.setAll(weeks, { ...state, loaded: true })
   ),
   on(WeeksActions.loadWeeksFailure, (state, { error }) => ({ ...state, error })),
-  on(WeeksActions.selectWeek, (state, { id }) => ({ ...state, selectedId: id }))
+  on(WeeksActions.selectWeek, (state, { id }) => ({ ...state, selectedId: id })),
+  on(WeeksActions.loadWeekSuccess, (state, { week }) => weeksAdapter.setOne(week, { ...state, loaded: true })),
 );
 
 export function reducer(state: State | undefined, action: Action) {
