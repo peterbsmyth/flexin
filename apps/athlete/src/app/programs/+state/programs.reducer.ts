@@ -33,7 +33,7 @@ const programsReducer = createReducer(
     error: null,
   })),
   on(ProgramsActions.loadProgramsSuccess, (state, { programs }) =>
-    programsAdapter.addAll(programs, { ...state, loaded: true })
+    programsAdapter.setAll(programs, { ...state, loaded: true })
   ),
   on(ProgramsActions.loadProgramsFailure, (state, { error }) => ({
     ...state,
