@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 import { InputPageComponent } from './input-page/input-page.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -46,41 +46,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MaximumAttemptFormComponent,
   ],
   imports: [
-  BrowserAnimationsModule,
+   BrowserAnimationsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
     MatCardModule,
     MatButtonModule,
     MatInputModule,
     BrowserModule,
-    RouterModule.forRoot(
-      [
-        {
-          path: 'maximum-attempt',
-          component: MaximumAttemptPage,
-        },
-        {
-          path: 'programs',
-          component: ProgramsPage,
-        },
-        {
-          path: 'programs/:programId',
-          component: ProgramPage,
-        },
-        {
-          path: 'weeks/:weekId',
-          component: WeekPage
-        },
-        {
-          path: 'session',
-          component: InputPageComponent,
-        },
-        {
-          path: '',
-          component: InputPageComponent,
-        },
-      ],
-      { initialNavigation: 'enabled' }
-    ),
     DataModule,
     LayoutModule,
     MatToolbarModule,
