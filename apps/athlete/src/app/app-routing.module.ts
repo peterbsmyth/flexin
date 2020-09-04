@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
-import { InputPageComponent } from './input-page/input-page.component';
+import { InputPage } from './pages/input/input.page';
 
 const routes: Routes = [
   {
@@ -10,11 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'session',
-    component: InputPageComponent,
+    component: InputPage,
   },
   {
     path: '',
-    component: InputPageComponent,
+    component: InputPage,
   },
   { path: 'programs', loadChildren: () => import('./programs/programs.module').then(m => m.ProgramsModule) },
   { path: 'weeks', loadChildren: () => import('./weeks/weeks.module').then(m => m.WeeksModule) },

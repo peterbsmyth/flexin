@@ -6,11 +6,10 @@ import { tap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'bod-input-page',
-  templateUrl: './input-page.component.html',
-  styleUrls: ['./input-page.component.scss'],
+  templateUrl: './input.page.html',
+  styleUrls: ['./input.page.scss'],
 })
-export class InputPageComponent implements OnInit, OnDestroy {
+export class InputPage implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   week: Week;
   session: Session;
