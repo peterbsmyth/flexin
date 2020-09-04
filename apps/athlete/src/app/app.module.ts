@@ -21,7 +21,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
-import { StateModule } from '@bod/state';
 import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
 import { MaximumAttemptCardComponent } from './maximum-attempt-card/maximum-attempt-card.component';
 import { MaximumAttemptFormComponent } from './maximum-attempt-form/maximum-attempt-form.component';
@@ -66,7 +65,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
-    StateModule,
     MatSelectModule,
     MatRadioModule,
     MatCheckboxModule

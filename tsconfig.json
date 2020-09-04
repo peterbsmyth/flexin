@@ -17,7 +17,6 @@
     "baseUrl": ".",
     "paths": {
       "@bod/models": ["libs/models/src/index.ts"],
-      "@bod/state": ["libs/state/src/index.ts"],
       "@bod/components": ["libs/components/src/index.ts"],
       "@bod/data": ["libs/data/src/index.ts"]
     }
