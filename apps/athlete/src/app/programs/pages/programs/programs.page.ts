@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Program } from '@bod/models';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { getAllPrograms } from '../../+state/programs.selectors';
   templateUrl: './programs.page.html',
   styleUrls: ['./programs.page.scss']
 })
-export class ProgramsPage implements OnInit {
+export class ProgramsPage implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   programs$: Observable<Program[]>;
   constructor(
@@ -27,4 +27,8 @@ export class ProgramsPage implements OnInit {
       );
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }

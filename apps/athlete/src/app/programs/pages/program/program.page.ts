@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { ProgramService } from '@bod/data';
 import { Program } from '@bod/models';
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './program.page.html',
   styleUrls: ['./program.page.scss'],
 })
-export class ProgramPage implements OnInit {
+export class ProgramPage implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   program$: Observable<Program>;
 
@@ -31,5 +31,10 @@ export class ProgramPage implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(selectProgram({ id: this.route.snapshot.params['programId'] }));
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
