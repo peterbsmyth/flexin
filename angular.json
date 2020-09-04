@@ -14,20 +14,18 @@
               "libs/models/tsconfig.lib.json",
               "libs/models/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/models/**"]
+            "exclude": ["**/node_modules/**", "!libs/models/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/models/jest.config.js",
-            "tsConfig": "libs/models/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
       }
     },
-
     "athlete": {
       "projectType": "application",
       "schematics": {
@@ -132,7 +130,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/athlete/tsconfig.app.json"],
-            "exclude": ["**/node_modules/**", "!apps/athlete/**"]
+            "exclude": ["**/node_modules/**", "!apps/athlete/**/*"]
           }
         }
       }
@@ -225,16 +223,14 @@
               "apps/trainer/tsconfig.app.json",
               "apps/trainer/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/trainer/**"]
+            "exclude": ["**/node_modules/**", "!apps/trainer/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/trainer/jest.config.js",
-            "tsConfig": "apps/trainer/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/trainer/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       }
@@ -265,7 +261,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["libs/components/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/components/**"]
+            "exclude": ["**/node_modules/**", "!libs/components/**/*"]
           }
         }
       },
@@ -285,7 +281,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["libs/data/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/data/**"]
+            "exclude": ["**/node_modules/**", "!libs/data/**/*"]
           }
         }
       },
