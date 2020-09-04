@@ -22,7 +22,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
 import { StateModule } from '@bod/state';
 import { WeekPage } from './pages/week/week.page';
 import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
@@ -99,7 +99,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
     StateModule,
     MatSelectModule,
     MatRadioModule,

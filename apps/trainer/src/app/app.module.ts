@@ -7,7 +7,7 @@ import { DataModule } from '@bod/data';
 import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
@@ -26,7 +26,7 @@ import { environment } from '../environments/environment';
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
     AppRoutingModule,
     BrowserAnimationsModule,
     DataModule,
