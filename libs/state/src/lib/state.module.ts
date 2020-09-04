@@ -4,8 +4,6 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromProgramStatistics from './+state/program-statistics/program-statistics.reducer';
 import { ProgramStatisticsEffects } from './+state/program-statistics/program-statistics.effects';
-import * as fromWeeks from './+state/weeks/weeks.reducer';
-import { WeeksEffects } from './+state/weeks/weeks.effects';
 import * as fromPlaylists from './+state/playlists/playlists.reducer';
 import { PlaylistsEffects } from './+state/playlists/playlists.effects';
 
@@ -17,8 +15,6 @@ import { PlaylistsEffects } from './+state/playlists/playlists.effects';
       fromProgramStatistics.reducer
     ),
     EffectsModule.forFeature([ProgramStatisticsEffects]),
-    StoreModule.forFeature(fromWeeks.WEEKS_FEATURE_KEY, fromWeeks.reducer),
-    EffectsModule.forFeature([WeeksEffects]),
     StoreModule.forFeature(
       fromPlaylists.PLAYLISTS_FEATURE_KEY,
       fromPlaylists.reducer

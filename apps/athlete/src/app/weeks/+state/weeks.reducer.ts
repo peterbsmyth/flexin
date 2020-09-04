@@ -33,7 +33,7 @@ const weeksReducer = createReducer(
     error: null,
   })),
   on(WeeksActions.loadWeeksSuccess, (state, { weeks }) =>
-    weeksAdapter.addAll(weeks, { ...state, loaded: true })
+    weeksAdapter.setAll(weeks, { ...state, loaded: true })
   ),
   on(WeeksActions.loadWeeksFailure, (state, { error }) => ({ ...state, error })),
   on(WeeksActions.selectWeek, (state, { id }) => ({ ...state, selectedId: id }))

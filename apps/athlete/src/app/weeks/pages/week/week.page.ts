@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { WeeksFeature, WeeksSelectors, WeeksActions, PlaylistsFeature, PlaylistsSelectors, PlaylistsActions } from '@bod/state';
+import { PlaylistsFeature, PlaylistsSelectors, PlaylistsActions } from '@bod/state';
 import { Week, Playlist } from '@bod/models';
 import { Observable } from 'rxjs';
+import { WeeksPartialState } from '../../+state/weeks.reducer';
+import { loadWeeks, selectWeek } from '../../+state/weeks.actions';
+import { getSelected } from '../../../weeks/+state/weeks.selectors';
 
 @Component({
   selector: 'bod-week',
@@ -14,12 +17,12 @@ export class WeekPage implements OnInit {
   playlist$: Observable<Playlist>;
 
   constructor(
-    private storeWeeks: Store<WeeksFeature.WeeksPartialState>,
+    private storeWeeks: Store<WeeksPartialState>,
     private storePlaylists: Store<PlaylistsFeature.PlaylistsPartialState>,
   ) {
     this.week$ = this.storeWeeks
       .pipe(
-        select(WeeksSelectors.getSelected)
+        select(getSelected)
       );
     this.playlist$ = this.storePlaylists
       .pipe(
@@ -29,8 +32,8 @@ export class WeekPage implements OnInit {
 
   ngOnInit(): void {
     this.storePlaylists.dispatch(PlaylistsActions.loadPlaylists());
-    this.storeWeeks.dispatch(WeeksActions.loadWeeks());
-    this.storeWeeks.dispatch(WeeksActions.selectWeek({ id: 1 }));
+    this.storeWeeks.dispatch(loadWeeks());
+    this.storeWeeks.dispatch(selectWeek({ id: 1 }));
   }
 
 }
