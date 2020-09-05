@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Week, Program, mockProgram } from '@bod/models';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
+import { environment } from '@bod/shared/environments';
 
 @Injectable()
 export class ProgramService {
-  private API_URL = 'https://9b6ba157-734d-42c3-8d2b-1d6d49f15793.mock.pstmn.io';
+  private API_URL = environment.API_URL;
   private _program: Program = mockProgram;
   private _program$: Subject<Program> = new ReplaySubject(1);
   get program$(): Observable<Program> { return this._program$.asObservable(); }

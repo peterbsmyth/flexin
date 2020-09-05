@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { mockExercises, Exercise } from '@bod/models';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '@bod/shared/environments';
 
 @Injectable()
 export class ExerciseService {
-  private API_URL = 'https://30ef19c6-861b-43d6-8623-59fc434f085a.mock.pstmn.io';
+  private API_URL = environment.API_URL;
   private _sourceList: Exercise[] = mockExercises;
 
   private _sourceList$: BehaviorSubject<Exercise[]> = new BehaviorSubject(this._sourceList);
