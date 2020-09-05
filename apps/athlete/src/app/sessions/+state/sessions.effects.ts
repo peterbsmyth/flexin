@@ -8,43 +8,51 @@ import { SessionsPage } from '../pages/sessions/sessions.page';
 import { map } from 'rxjs/operators';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { SessionService } from '@bod/data';
+import { SessionPage } from '../pages/session/session.page';
 
 @Injectable()
 export class SessionsEffects {
-  loadPrograms$ =createEffect(() =>
-  this.actions$.pipe(
-    // listens for the routerNavigation action from @ngrx/router-store
-    navigation(SessionsPage, {
-      run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
-        return this.sessionService.getAll()
-          .pipe(
-            map((sessions) => SessionsActions.loadSessionsSuccess({ sessions }))
-          );
-      },
-      onError: (
-        activatedRouteSnapshot: ActivatedRouteSnapshot,
-        error: any
-      ) => {
-        // we can log and error here and return null
-        // we can also navigate back
-        return null;
-      },
-    })
-  )
-);
-
   loadSessions$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionsActions.loadSessions),
-      fetch({
-        run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return SessionsActions.loadSessionsSuccess({ sessions: [] });
+      // listens for the routerNavigation action from @ngrx/router-store
+      navigation(SessionsPage, {
+        run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
+          return this.sessionService
+            .getAll()
+            .pipe(
+              map((sessions) =>
+                SessionsActions.loadSessionsSuccess({ sessions })
+              )
+            );
         },
+        onError: (
+          activatedRouteSnapshot: ActivatedRouteSnapshot,
+          error: any
+        ) => {
+          // we can log and error here and return null
+          // we can also navigate back
+          return null;
+        },
+      })
+    )
+  );
 
-        onError: (action, error) => {
-          console.error('Error', error);
-          return SessionsActions.loadSessionsFailure({ error });
+  loadSession$ = createEffect(() =>
+    this.actions$.pipe(
+      // listens for the routerNavigation action from @ngrx/router-store
+      navigation(SessionPage, {
+        run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
+          return this.sessionService
+            .getOne(activatedRouteSnapshot.params['sessionId'])
+            .pipe(map((session) => SessionsActions.loadSessionSuccess({ session })));
+        },
+        onError: (
+          activatedRouteSnapshot: ActivatedRouteSnapshot,
+          error: any
+        ) => {
+          // we can log and error here and return null
+          // we can also navigate back
+          return null;
         },
       })
     )

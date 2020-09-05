@@ -19,6 +19,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromSessions from './+state/sessions.reducer';
 import { SessionsEffects } from './+state/sessions.effects';
+import { SessionPage } from './pages/session/session.page';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SessionsEffects } from './+state/sessions.effects';
     MaximumAttemptCardComponent,
     MaximumAttemptFormComponent,
     SessionsPage,
+    SessionPage,
   ],
   imports: [
     CommonModule,
