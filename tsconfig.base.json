@@ -18,7 +18,8 @@
     "paths": {
       "@bod/models": ["libs/models/src/index.ts"],
       "@bod/components": ["libs/components/src/index.ts"],
-      "@bod/data": ["libs/data/src/index.ts"]
+      "@bod/data": ["libs/data/src/index.ts"],
+      "@bod/shared/environments": ["libs/shared/environments/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

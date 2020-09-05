@@ -82,8 +82,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/athlete/src/environments/environment.ts",
-                  "with": "apps/athlete/src/environments/environment.prod.ts"
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -172,8 +172,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/trainer/src/environments/environment.ts",
-                  "with": "apps/trainer/src/environments/environment.prod.ts"
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -288,6 +288,22 @@
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
+        }
+      }
+    },
+    "shared-environments": {
+      "root": "libs/shared/environments",
+      "sourceRoot": "libs/shared/environments/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/shared/environments/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/environments/**/*"]
+          }
         }
       }
     }
