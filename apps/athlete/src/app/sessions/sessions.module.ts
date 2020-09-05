@@ -13,6 +13,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { SessionsPage } from './pages/sessions/sessions.page';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import * as fromSessions from './+state/sessions.reducer';
+import { SessionsEffects } from './+state/sessions.effects';
 
 @NgModule({
   declarations: [
@@ -21,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     MaximumAttemptPage,
     MaximumAttemptCardComponent,
     MaximumAttemptFormComponent,
+    SessionsPage,
   ],
   imports: [
     CommonModule,
@@ -32,6 +39,12 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatListModule,
+    StoreModule.forFeature(
+      fromSessions.SESSIONS_FEATURE_KEY,
+      fromSessions.reducer
+    ),
+    EffectsModule.forFeature([SessionsEffects]),
   ],
 })
 export class SessionsModule {}

@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { SessionItem, Exercise, Session, mockSessionItems } from '@bod/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { uniqBy } from 'lodash-es';
+import { environment } from '@bod/shared/environments';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class SessionService {
+  private API_URL = environment.API_URL;
   private _exercises: Exercise[][];
   private _incompleteSessionItems: SessionItem[];
   private _lastSessionItemLocalId = 1000;
@@ -21,7 +24,9 @@ export class SessionService {
   get incompleteSessionItems(): SessionItem[] {
     return this._incompleteSessionItems;
   }
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   configureExercises(exercises: Exercise[][]): void {
     // reference exercises so that they may be restored later
@@ -79,5 +84,13 @@ export class SessionService {
       items,
       order
     };
+  }
+
+  getAll(): Observable<Session[]> {
+    return this.http.get<Session[]>(`${this.API_URL}/sessions`);
+  }
+
+  getOne(id: number): Observable<Session> {
+    return this.http.get<Session>(`${this.API_URL}/sessions/${id}`);
   }
 }
