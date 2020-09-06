@@ -31,6 +31,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/ddd": "^1.0.5",
     "@angular/animations": "10.1.0",
     "@angular/cdk": "^10.1.0",
     "@angular/common": "10.1.0",
