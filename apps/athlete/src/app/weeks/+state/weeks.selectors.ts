@@ -5,6 +5,7 @@ import {
   WeeksPartialState,
   weeksAdapter,
 } from './weeks.reducer';
+import { getSessionsEntities } from '@athlete/sessions/+state/sessions.selectors';
 
 // Lookup the 'Weeks' feature state managed by NgRx
 export const getWeeksState = createFeatureSelector<WeeksPartialState, State>(
@@ -41,3 +42,11 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
+
+export const getSessions = createSelector(
+  getSelected,
+  getSessionsEntities,
+  (week, sessionsEntities) => {
+    return week && week.sessions.map(session => sessionsEntities[session])
+  }
+)

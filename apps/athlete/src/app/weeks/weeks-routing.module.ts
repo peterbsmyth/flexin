@@ -4,7 +4,7 @@ import { WeekPage } from './pages/week/week.page';
 
 const routes: Routes = [
   {
-    path: ':weekId',
+    path: 'weeks/:weekId',
     component: WeekPage
   }
 ];

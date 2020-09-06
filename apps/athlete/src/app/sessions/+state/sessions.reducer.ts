@@ -40,7 +40,8 @@ const sessionsReducer = createReducer(
     error,
   })),
   on(SessionsActions.selectSession, (state, { id }) => ({ ...state, selectedId: id })),
-  on(SessionsActions.loadSessionSuccess, (state, { session }) => sessionsAdapter.setOne(session, { ...state, loaded: true, selectedId: session.id })),
+  on(SessionsActions.loadSessionPageSuccess, (state, { session }) => sessionsAdapter.setOne(session, { ...state, loaded: true, selectedId: session.id })),
+  on(SessionsActions.loadSessionSuccess, (state, { session }) => sessionsAdapter.setOne(session, { ...state, loaded: true })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

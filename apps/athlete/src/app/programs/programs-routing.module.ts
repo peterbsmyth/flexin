@@ -5,11 +5,11 @@ import { ProgramPage } from './pages/program/program.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'programs',
     component: ProgramsPage,
   },
   {
-    path: ':programId',
+    path: 'programs/:programId',
     component: ProgramPage,
   },
 ];

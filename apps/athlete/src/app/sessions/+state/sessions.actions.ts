@@ -32,3 +32,8 @@ export const selectSession = createAction(
   '[Sessions] Select Session',
   props<{ id: number }>()
 );
+
+export const loadSessionPageSuccess = createAction(
+  '[Sessions] Load Session Page Success',
+  props<{ session: Session }>()
+);

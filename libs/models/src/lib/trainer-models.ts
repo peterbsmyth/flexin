@@ -29,7 +29,7 @@ export interface Session {
 export interface Week {
   id?: number;
   number: number; // 6
-  sessions: Session[];
+  sessions: number[];
 }
 
 export interface Program {

@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromWeeks from './+state/weeks.reducer';
 import { WeeksEffects } from './+state/weeks.effects';
 import { WeekPage } from './pages/week/week.page';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { WeekPage } from './pages/week/week.page';
     MatListModule,
     StoreModule.forFeature(fromWeeks.WEEKS_FEATURE_KEY, fromWeeks.reducer),
     EffectsModule.forFeature([WeeksEffects]),
+    ReactiveComponentModule,
   ],
 })
 export class WeeksModule {}

@@ -19,6 +19,9 @@ import {
   StoreRouterConnectingModule,
   DefaultRouterStateSerializer,
 } from '@ngrx/router-store';
+import { ProgramsModule } from './programs/programs.module';
+import { WeeksModule } from './weeks/weeks.module';
+import { SessionsModule } from './sessions/sessions.module';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
@@ -48,6 +51,9 @@ import {
     StoreRouterConnectingModule.forRoot({
       serializer: DefaultRouterStateSerializer,
     }),
+    ProgramsModule,
+    WeeksModule,
+    SessionsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

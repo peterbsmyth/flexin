@@ -12,7 +12,7 @@ import { SessionPage } from '../pages/session/session.page';
 
 @Injectable()
 export class SessionsEffects {
-  loadSessions$ = createEffect(() =>
+  loadSessionsPage$ = createEffect(() =>
     this.actions$.pipe(
       // listens for the routerNavigation action from @ngrx/router-store
       navigation(SessionsPage, {
@@ -37,14 +37,16 @@ export class SessionsEffects {
     )
   );
 
-  loadSession$ = createEffect(() =>
+  loadSessionPage$ = createEffect(() =>
     this.actions$.pipe(
       // listens for the routerNavigation action from @ngrx/router-store
       navigation(SessionPage, {
         run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
           return this.sessionService
             .getOne(activatedRouteSnapshot.params['sessionId'])
-            .pipe(map((session) => SessionsActions.loadSessionSuccess({ session })));
+            .pipe(
+              map((session) => SessionsActions.loadSessionPageSuccess({ session }))
+            );
         },
         onError: (
           activatedRouteSnapshot: ActivatedRouteSnapshot,
@@ -53,6 +55,28 @@ export class SessionsEffects {
           // we can log and error here and return null
           // we can also navigate back
           return null;
+        },
+      })
+    )
+  );
+
+  loadSession$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SessionsActions.loadSession),
+      fetch({
+        run: ({ id }) => {
+          return this.sessionService
+            .getOne(id)
+            .pipe(
+              map((session) =>
+                SessionsActions.loadSessionSuccess({ session })
+              )
+            );
+        },
+
+        onError: (action, error) => {
+          console.error('Error', error);
+          return SessionsActions.loadSessionFailure({ error });
         },
       })
     )

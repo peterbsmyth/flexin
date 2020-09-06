@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Week } from '@bod/models';
-import { Observable, Subject } from 'rxjs';
+import { Week, Session } from '@bod/models';
+import { Observable, Subject, combineLatest } from 'rxjs';
 import { WeeksPartialState } from '../../+state/weeks.reducer';
-import { getSelected } from '../../+state/weeks.selectors';
-import { takeUntil } from 'rxjs/operators';
+import { getSelected, getSessions } from '../../+state/weeks.selectors';
+import { takeUntil, map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'bod-week',
@@ -14,6 +14,8 @@ import { takeUntil } from 'rxjs/operators';
 export class WeekPage implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   week$: Observable<Week>;
+  sessions$: Observable<Session[]>;
+  sessionsLoaded$: Observable<boolean>;
 
   constructor(
     private store$: Store<WeeksPartialState>
@@ -21,7 +23,19 @@ export class WeekPage implements OnInit, OnDestroy {
     this.week$ = this.store$
       .pipe(
         takeUntil(this.unsubscribe$),
-        select(getSelected)
+        select(getSelected),
+        filter(w => !!w)
+      );
+    this.sessions$ = this.store$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        select(getSessions),
+        filter(w => !!w)
+      );
+
+    this.sessionsLoaded$ = this.sessions$
+      .pipe(
+        map((sessions) => sessions.every(s => s))
       );
   }
 

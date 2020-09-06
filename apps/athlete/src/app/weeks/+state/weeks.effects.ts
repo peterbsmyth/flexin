@@ -4,10 +4,11 @@ import { fetch, navigation } from '@nrwl/angular';
 
 import * as fromWeeks from './weeks.reducer';
 import * as WeeksActions from './weeks.actions';
+import * as SessionsActions from '@athlete/sessions/+state/sessions.actions';
 import { WeekPage } from '../pages/week/week.page';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { WeekService } from '@bod/data';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class WeeksEffects {
@@ -35,7 +36,19 @@ export class WeeksEffects {
         run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
           return this.weekService
             .getOne(activatedRouteSnapshot.params['weekId'])
-            .pipe(map((week) => WeeksActions.loadWeekSuccess({ week })));
+            .pipe(
+              mergeMap((week) => {
+                return [
+                  WeeksActions.loadWeekSuccess({ week }),
+                  /**
+                   * dispatch actions to load sessions attached to the week
+                   */
+                  ...week.sessions.map((session: any) =>
+                    SessionsActions.loadSession({ id: session })
+                  ),
+                ];
+              })
+            );
         },
         onError: (
           activatedRouteSnapshot: ActivatedRouteSnapshot,

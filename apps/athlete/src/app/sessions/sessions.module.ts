@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputPage } from './pages/input/input.page';
 import { ActionBarComponent } from './components/action-bar/action-bar.component';
 import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
 import { MaximumAttemptCardComponent } from './components/maximum-attempt-card/maximum-attempt-card.component';
@@ -23,7 +22,6 @@ import { SessionPage } from './pages/session/session.page';
 
 @NgModule({
   declarations: [
-    InputPage,
     ActionBarComponent,
     MaximumAttemptPage,
     MaximumAttemptCardComponent,
