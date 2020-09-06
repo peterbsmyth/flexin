@@ -21,7 +21,7 @@
       "@bod/data": ["libs/data/src/index.ts"],
       "@bod/shared/environments": ["libs/shared/environments/src/index.ts"],
       "@athlete/*": ["apps/athlete/src/app/*"],
-      "@trainer/*": ["apps/trainer/src/app/*"],
+      "@trainer/*": ["apps/trainer/src/app/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
