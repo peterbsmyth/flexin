@@ -22,7 +22,7 @@ export interface SessionItem {
 export interface Session {
   id?: number;
   name: string; // 'PULL A'
-  items: SessionItem[];
+  items: number[];
   order: number; // 1 (refers to placement with in a Week)
 }
 

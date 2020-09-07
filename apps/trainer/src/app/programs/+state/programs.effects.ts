@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-import * as ProgramsActions from './programs.actions';
+import * as ProgramsPageActions from './programs.actions';
 import { ProgramService } from '@bod/data';
 import { map, filter } from 'rxjs/operators';
 import { routerNavigationAction } from '@ngrx/router-store';
@@ -10,18 +10,18 @@ import { routerNavigationAction } from '@ngrx/router-store';
 export class ProgramsEffects {
   loadPrograms$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProgramsActions.loadPrograms),
+      ofType(ProgramsPageActions.loadPrograms),
       fetch({
         run: (action) => {
           return this.programs$.getAll()
             .pipe(
-              map(programs => ProgramsActions.loadProgramsSuccess({ programs }))
+              map(programs => ProgramsPageActions.loadProgramsSuccess({ programs }))
             );
         },
 
         onError: (action, error) => {
           console.error('Error', error);
-          return ProgramsActions.loadProgramsFailure({ error });
+          return ProgramsPageActions.loadProgramsFailure({ error });
         },
       })
     )
@@ -36,13 +36,13 @@ export class ProgramsEffects {
         run: (id) => {
           return this.programs$.getOne(id)
             .pipe(
-              map(program => ProgramsActions.loadProgramSuccess({ program }))
+              map(program => ProgramsPageActions.loadProgramSuccess({ program }))
             );
         },
 
         onError: (action, error) => {
           console.error('Error', error);
-          return ProgramsActions.loadProgramFailure({ error });
+          return ProgramsPageActions.loadProgramFailure({ error });
         },
       })
     )

@@ -1,34 +1,34 @@
 import { createAction, props } from '@ngrx/store';
 import { Program } from '@bod/shared/domain';
 
-export const loadPrograms = createAction('[Programs] Load Programs');
+export const loadPrograms = createAction('[Programs Page] Load Programs');
 
 export const loadProgramsSuccess = createAction(
-  '[Programs] Load Programs Success',
+  '[Programs Page] Load Programs Success',
   props<{ programs: Program[] }>()
 );
 
 export const loadProgramsFailure = createAction(
-  '[Programs] Load Programs Failure',
+  '[Programs Page] Load Programs Failure',
   props<{ error: any }>()
 );
 
 export const loadProgram = createAction(
-  '[Programs] Load Program',
+  '[Programs Page] Load Program',
   props<{ id: number }>()
 );
 
 export const loadProgramSuccess = createAction(
-  '[Programs] Load Program Success',
+  '[Programs Page] Load Program Success',
   props<{ program: Program }>()
 );
 
 export const loadProgramFailure = createAction(
-  '[Programs] Load Program Failure',
+  '[Programs Page] Load Program Failure',
   props<{ error: any }>()
 );
 
 export const selectProgram = createAction(
-  '[Programs] Select Program',
+  '[Programs Page] Select Program',
   props<{ id: number }>()
 );

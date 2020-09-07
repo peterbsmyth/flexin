@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  Router,
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { WeeksFacade, WeeksActions } from '@bod/training/domain';
+import { WeeksFacade, WeeksPageActions } from '@bod/training/domain';
 import {
   filter,
   take,
@@ -20,9 +16,7 @@ import {
   providedIn: 'root',
 })
 export class WeekExistsGuard implements CanActivate {
-  canActivate(
-    next: ActivatedRouteSnapshot
-  ): Observable<boolean> {
+  canActivate(next: ActivatedRouteSnapshot): Observable<boolean> {
     return this.hasWeek(next.params['weekId']);
   }
 
@@ -34,7 +28,7 @@ export class WeekExistsGuard implements CanActivate {
     /**
      * if there is a result from selected week, cool
      */
-    this.weeksState.dispatch(WeeksActions.selectWeek({ id: +id }));
+    this.weeksState.dispatch(WeeksPageActions.selectWeek({ id: +id }));
     return this.hasWeekInStore().pipe(
       switchMap((inStore) => {
         if (inStore) {
@@ -43,7 +37,7 @@ export class WeekExistsGuard implements CanActivate {
           /**
            * if not a result then dispatch another action to get it on store
            */
-          this.weeksState.dispatch(WeeksActions.loadWeek({ id: +id }));
+          this.weeksState.dispatch(WeeksPageActions.loadWeek({ id: +id }));
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.weeksState.selectedWeeks$),
             map((week) => !!week),

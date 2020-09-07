@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import * as SessionItemsActions from './session-items.actions';
+import { SessionItemsApiActions } from './actions';
 import { SessionItem } from '@bod/shared/domain';
 
 export const SESSIONITEMS_FEATURE_KEY = 'sessionItems';
@@ -16,22 +16,26 @@ export const sessionItemsAdapter: EntityAdapter<SessionItem> = createEntityAdapt
   SessionItem
 >();
 
-export const initialState: SessionItemsState = sessionItemsAdapter.getInitialState({
-  // set initial required properties
-  loaded: false,
-});
+export const initialState: SessionItemsState = sessionItemsAdapter.getInitialState(
+  {
+    // set initial required properties
+    loaded: false,
+  }
+);
 
 export const sessionItemsReducer = createReducer(
   initialState,
-  on(SessionItemsActions.loadSessionItems, (state) => ({
+  on(SessionItemsApiActions.loadSessionItems, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
-  on(SessionItemsActions.loadSessionItemsSuccess, (state, { sessionItems }) =>
-    sessionItemsAdapter.setAll(sessionItems, { ...state, loaded: true })
+  on(
+    SessionItemsApiActions.loadSessionItemsSuccess,
+    (state, { sessionItems }) =>
+      sessionItemsAdapter.setAll(sessionItems, { ...state, loaded: true })
   ),
-  on(SessionItemsActions.loadSessionItemsFailure, (state, { error }) => ({
+  on(SessionItemsApiActions.loadSessionItemsFailure, (state, { error }) => ({
     ...state,
     error,
   }))

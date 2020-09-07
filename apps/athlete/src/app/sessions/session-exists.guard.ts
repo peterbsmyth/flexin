@@ -5,7 +5,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { SessionsFacade, SessionsActions } from '@bod/training/domain';
+import { SessionsFacade, SessionsPageActions } from '@bod/training/domain';
 import {
   filter,
   take,
@@ -33,7 +33,7 @@ export class SessionExistsGuard implements CanActivate {
     /**
      * if there is a result from selected session, cool
      */
-    this.sessionsState.dispatch(SessionsActions.selectSession({ id: +id }));
+    this.sessionsState.dispatch(SessionsPageActions.selectSession({ id: +id }));
     return this.hasSessionInStore().pipe(
       switchMap((inStore) => {
         if (inStore) {
@@ -42,7 +42,7 @@ export class SessionExistsGuard implements CanActivate {
           /**
            * if not a result then dispatch another action to get it on store
            */
-          this.sessionsState.dispatch(SessionsActions.loadSession({ id: +id }));
+          this.sessionsState.dispatch(SessionsPageActions.loadSession({ id: +id }));
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.sessionsState.selectedSessions$),
             map((session) => !!session),

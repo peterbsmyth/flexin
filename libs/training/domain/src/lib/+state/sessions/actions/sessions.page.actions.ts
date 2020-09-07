@@ -1,39 +1,34 @@
 import { createAction, props } from '@ngrx/store';
 import { Session } from '@bod/shared/domain';
 
-export const loadSessions = createAction('[Sessions] Load Sessions');
+export const loadSessions = createAction('[Sessions Page] Load Sessions');
 
 export const loadSessionsSuccess = createAction(
-  '[Sessions] Load Sessions Success',
+  '[Sessions Page] Load Sessions Success',
   props<{ sessions: Session[] }>()
 );
 
 export const loadSessionsFailure = createAction(
-  '[Sessions] Load Sessions Failure',
+  '[Sessions Page] Load Sessions Failure',
   props<{ error: any }>()
 );
 
 export const loadSession = createAction(
-  '[Sessions] Load Session',
+  '[Sessions Page] Load Session',
   props<{ id: number }>()
 );
 
 export const loadSessionSuccess = createAction(
-  '[Sessions] Load Session Success',
+  '[Sessions Page] Load Session Success',
   props<{ session: Session }>()
 );
 
 export const loadSessionFailure = createAction(
-  '[Sessions] Load Session Failure',
+  '[Sessions Page] Load Session Failure',
   props<{ error: any }>()
 );
 
 export const selectSession = createAction(
-  '[Sessions] Select Session',
+  '[Sessions Page] Select Session',
   props<{ id: number }>()
-);
-
-export const loadSessionPageSuccess = createAction(
-  '[Sessions] Load Session Page Success',
-  props<{ session: Session }>()
 );

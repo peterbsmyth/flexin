@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-
-import * as fromPrograms from './programs.reducer';
-import * as ProgramsActions from './programs.actions';
+import { ProgramsPageActions } from './actions';
 import { ProgramDataService } from '../../infrastructure/program.data.service';
 import { map } from 'rxjs/operators';
 
@@ -11,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class ProgramsEffects {
   loadPrograms$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProgramsActions.loadPrograms),
+      ofType(ProgramsPageActions.loadPrograms),
       fetch({
         // provides an action
         run: () => {
@@ -19,7 +17,7 @@ export class ProgramsEffects {
             .getAll()
             .pipe(
               map((programs) =>
-                ProgramsActions.loadProgramsSuccess({ programs })
+                ProgramsPageActions.loadProgramsSuccess({ programs })
               )
             );
         },
@@ -33,16 +31,14 @@ export class ProgramsEffects {
 
   loadProgram$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProgramsActions.loadProgram),
+      ofType(ProgramsPageActions.loadProgram),
       fetch({
         // provides an action
         run: ({ id }) => {
           return this.programService
             .getOne(id)
             .pipe(
-              map((program) =>
-                ProgramsActions.loadProgramSuccess({ program })
-              )
+              map((program) => ProgramsPageActions.loadProgramSuccess({ program }))
             );
         },
         onError: (action, error: any) => {

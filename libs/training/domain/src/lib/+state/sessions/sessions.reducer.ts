@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import * as SessionsActions from './sessions.actions';
+import { SessionsPageActions, SessionsApiActions } from './actions';
 import { Session } from '@bod/shared/domain';
 
 export const SESSIONS_FEATURE_KEY = 'sessions';
@@ -23,21 +23,35 @@ export const initialState: SessionsState = sessionsAdapter.getInitialState({
 
 export const sessionsReducer = createReducer(
   initialState,
-  on(SessionsActions.loadSessions, (state) => ({
+  on(SessionsPageActions.loadSessions, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
-  on(SessionsActions.loadSessionsSuccess, (state, { sessions }) =>
+  on(SessionsPageActions.loadSessionsSuccess, (state, { sessions }) =>
     sessionsAdapter.setAll(sessions, { ...state, loaded: true })
   ),
-  on(SessionsActions.loadSessionsFailure, (state, { error }) => ({
+  on(SessionsPageActions.loadSessionsFailure, (state, { error }) => ({
     ...state,
     error,
   })),
-  on(SessionsActions.selectSession, (state, { id }) => ({ ...state, selectedId: id })),
-  on(SessionsActions.loadSessionPageSuccess, (state, { session }) => sessionsAdapter.setOne(session, { ...state, loaded: true, selectedId: session.id })),
-  on(SessionsActions.loadSessionSuccess, (state, { session }) => sessionsAdapter.setOne(session, { ...state, loaded: true })),
+  on(SessionsPageActions.selectSession, (state, { id }) => ({
+    ...state,
+    selectedId: id,
+  })),
+  on(
+    SessionsPageActions.loadSessionSuccess,
+    SessionsApiActions.loadSessionSuccess,
+    (state, { session }) =>
+      sessionsAdapter.setOne(session, {
+        ...state,
+        loaded: true,
+        selectedId: session.id,
+      })
+  ),
+  on(SessionsApiActions.loadSessionSuccess, (state, { session }) =>
+    sessionsAdapter.setOne(session, { ...state, loaded: true })
+  )
 );
 
 export function reducer(state: SessionsState | undefined, action: Action) {

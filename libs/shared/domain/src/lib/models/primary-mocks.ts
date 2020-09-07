@@ -299,7 +299,7 @@ export const mockSessionItems: SessionItem[] = [
 export const mockSession: Session = {
   id: 5,
   name: 'day one',
-  items: mockSessionItems,
+  items: [1, 2, 3, 4, 5, 6],
   order: 1,
 };
 

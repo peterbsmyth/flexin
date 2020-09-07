@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionsFacade, SessionsActions } from '@bod/training/domain';
+import { SessionsFacade, SessionsPageActions } from '@bod/training/domain';
 
 @Component({
   selector: 'bod-sessions',
@@ -13,6 +13,6 @@ export class SessionsPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sessionsState.dispatch(SessionsActions.loadSessions());
+    this.sessionsState.dispatch(SessionsPageActions.loadSessions());
   }
 }

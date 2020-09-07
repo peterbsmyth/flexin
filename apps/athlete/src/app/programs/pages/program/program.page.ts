@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProgramsFacade, ProgramsActions } from '@bod/training/domain';
+import { ProgramsFacade, ProgramsPageActions } from '@bod/training/domain';
 
 @Component({
   selector: 'bod-program',
@@ -15,7 +15,7 @@ export class ProgramPage implements OnInit {
 
   ngOnInit(): void {
     this.programsState.dispatch(
-      ProgramsActions.loadProgram({
+      ProgramsPageActions.loadProgram({
         id: this.route.snapshot.params['programId'],
       })
     );

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { SessionsFacade, SessionsActions } from '@bod/training/domain';
+import { SessionsFacade, SessionsPageActions } from '@bod/training/domain';
 
 @Component({
   templateUrl: './session.page.html',
@@ -16,7 +16,7 @@ export class SessionPage implements OnInit {
 
   ngOnInit(): void {
     this.sessionsState.dispatch(
-      SessionsActions.loadSession({
+      SessionsPageActions.loadSession({
         id: this.route.snapshot.params['sessionId'],
       })
     );
