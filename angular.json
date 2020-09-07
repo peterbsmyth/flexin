@@ -1,31 +1,6 @@
 {
   "version": 1,
   "projects": {
-    "models": {
-      "root": "libs/models",
-      "sourceRoot": "libs/models/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/models/tsconfig.lib.json",
-              "libs/models/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/models/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/models/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "athlete": {
       "projectType": "application",
       "schematics": {
@@ -304,6 +279,102 @@
             "tsConfig": ["libs/shared/environments/tsconfig.lib.json"],
             "exclude": ["**/node_modules/**", "!libs/shared/environments/**/*"]
           }
+        }
+      }
+    },
+    "training-domain": {
+      "projectType": "library",
+      "root": "libs/training/domain",
+      "sourceRoot": "libs/training/domain/src",
+      "prefix": "training",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/training/domain/tsconfig.lib.json",
+            "project": "libs/training/domain/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/training/domain/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/training/domain/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/training/domain/**/*"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "coaching-domain": {
+      "projectType": "library",
+      "root": "libs/coaching/domain",
+      "sourceRoot": "libs/coaching/domain/src",
+      "prefix": "coaching",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/coaching/domain/tsconfig.lib.json",
+            "project": "libs/coaching/domain/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/coaching/domain/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/coaching/domain/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/coaching/domain/**/*"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "shared-domain": {
+      "projectType": "library",
+      "root": "libs/shared/domain",
+      "sourceRoot": "libs/shared/domain/src",
+      "prefix": "shared",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/shared/domain/tsconfig.lib.json",
+            "project": "libs/shared/domain/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/shared/domain/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/shared/domain/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/domain/**/*"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }

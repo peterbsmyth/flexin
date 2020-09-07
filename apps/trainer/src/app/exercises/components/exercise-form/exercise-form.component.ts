@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Exercise } from '@bod/models';
+import { Exercise } from '@bod/shared/domain';
 
 @Component({
   selector: 'bod-exercise-form',

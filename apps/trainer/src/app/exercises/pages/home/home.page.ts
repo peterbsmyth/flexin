@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromExercises from '../../+state/exercises.reducer';
 import { loadExercises } from '../../+state/exercises.actions';
 import { Subject, Observable } from 'rxjs';
-import { Exercise } from '@bod/models';
+import { Exercise } from '@bod/shared/domain';
 import { getAllExercises, getExercisesLoaded } from '../../+state/exercises.selectors';
 import { takeUntil } from 'rxjs/operators';
 

@@ -4,7 +4,7 @@ import { navigation } from '@nrwl/angular';
 
 import * as fromPrograms from './programs.reducer';
 import * as ProgramsActions from './programs.actions';
-import { mockProgram } from '@bod/models';
+import { mockProgram } from '@bod/shared/domain';
 import { ProgramPage } from '../pages/program/program.page';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { ProgramsPage } from '../pages/programs/programs.page';

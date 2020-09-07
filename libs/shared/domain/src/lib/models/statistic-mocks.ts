@@ -5,7 +5,7 @@ import {
   WeekStatistic,
   ProgramStatistic,
   Playlist,
-} from './athlete-models';
+} from './statistic-models';
 
 export const sessionItemStatisticMock: SessionItemStatistic = {
   id: 1,

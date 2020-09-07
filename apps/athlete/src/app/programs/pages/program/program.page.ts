@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { ProgramService } from '@bod/data';
-import { Program } from '@bod/models';
+import { Program } from '@bod/shared/domain';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { selectProgram } from '../../+state/programs.actions';

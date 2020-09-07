@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromPrograms from '../../+state/programs.reducer';
 import { loadPrograms } from '../../+state/programs.actions';
 import { Subject, Observable } from 'rxjs';
-import { Program } from '@bod/models';
+import { Program } from '@bod/shared/domain';
 import { getAllPrograms, getProgramsLoaded } from '../../+state/programs.selectors';
 import { takeUntil } from 'rxjs/operators';
 

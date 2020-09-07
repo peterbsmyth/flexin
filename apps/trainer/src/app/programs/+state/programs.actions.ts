@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Program } from '@bod/models';
+import { Program } from '@bod/shared/domain';
 
 export const loadPrograms = createAction('[Programs] Load Programs');
 

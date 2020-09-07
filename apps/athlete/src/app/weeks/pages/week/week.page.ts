@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Week, Session } from '@bod/models';
+import { Week, Session } from '@bod/shared/domain';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { WeeksPartialState } from '../../+state/weeks.reducer';
 import { getSelected, getSessions } from '../../+state/weeks.selectors';

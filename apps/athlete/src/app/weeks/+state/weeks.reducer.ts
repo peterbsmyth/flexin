@@ -3,7 +3,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { SESSIONS_FEATURE_KEY, State as SessionsState } from '@athlete/sessions/+state/sessions.reducer';
 
 import * as WeeksActions from './weeks.actions';
-import { Week } from '@bod/models';
+import { Week } from '@bod/shared/domain';
 
 export const WEEKS_FEATURE_KEY = 'weeks';
 

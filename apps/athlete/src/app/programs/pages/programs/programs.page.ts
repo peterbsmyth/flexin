@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Program } from '@bod/models';
+import { Program } from '@bod/shared/domain';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';

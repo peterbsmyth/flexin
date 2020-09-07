@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SessionItem, Exercise, Session, mockSessionItems } from '@bod/models';
+import { SessionItem, Exercise, Session, mockSessionItems } from '@bod/shared/domain';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { uniqBy } from 'lodash-es';
 import { environment } from '@bod/shared/environments';

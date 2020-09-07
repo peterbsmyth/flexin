@@ -19,14 +19,11 @@
     }
   },
   "projects": {
-    "models": {
-      "tags": []
-    },
     "athlete": {
-      "tags": []
+      "tags": ["domain:training", "type:feature"]
     },
     "trainer": {
-      "tags": []
+      "tags": ["domain:coaching", "type:feature"]
     },
     "components": {
       "tags": []
@@ -35,7 +32,16 @@
       "tags": []
     },
     "shared-environments": {
-      "tags": []
+      "tags": ["domain:shared"]
+    },
+    "training-domain": {
+      "tags": ["domain:training", "type:domain-logic"]
+    },
+    "coaching-domain": {
+      "tags": ["domain:coaching", "type:domain-logic"]
+    },
+    "shared-domain": {
+      "tags": ["domain:shared", "type:domain-logic"]
     }
   },
   "affected": {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { mockExercises, Exercise } from '@bod/models';
+import { mockExercises, Exercise } from '@bod/shared/domain';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@bod/shared/environments';
 

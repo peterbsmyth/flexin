@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Week, Session, mockWeek } from '@bod/models';
+import { Week, Session, mockWeek } from '@bod/shared/domain';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

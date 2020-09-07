@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as ProgramsActions from './programs.actions';
-import { Program } from '@bod/models';
+import { Program } from '@bod/shared/domain';
 
 export const PROGRAMS_FEATURE_KEY = 'programs';
 

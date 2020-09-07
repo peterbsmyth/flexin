@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SessionsActions from './sessions.actions';
-import { Session } from '@bod/models';
+import { Session } from '@bod/shared/domain';
 
 export const SESSIONS_FEATURE_KEY = 'sessions';
 

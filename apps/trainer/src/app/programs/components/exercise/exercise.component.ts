@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Exercise } from '@bod/models';
+import { Exercise } from '@bod/shared/domain';
 
 @Component({
   selector: 'bod-exercise',
