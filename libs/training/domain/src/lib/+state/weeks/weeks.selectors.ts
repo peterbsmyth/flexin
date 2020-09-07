@@ -1,14 +1,14 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   WEEKS_FEATURE_KEY,
-  State,
-  WeeksPartialState,
   weeksAdapter,
+  WeeksState,
 } from './weeks.reducer';
-import { getSessionsEntities } from '@athlete/sessions/+state/sessions.selectors';
+import { PartialState } from '../root.reducer';
+import { getSessionsEntities } from '../sessions/sessions.selectors';
 
 // Lookup the 'Weeks' feature state managed by NgRx
-export const getWeeksState = createFeatureSelector<WeeksPartialState, State>(
+export const getWeeksState = createFeatureSelector<PartialState, WeeksState>(
   WEEKS_FEATURE_KEY
 );
 
@@ -16,25 +16,25 @@ const { selectAll, selectEntities } = weeksAdapter.getSelectors();
 
 export const getWeeksLoaded = createSelector(
   getWeeksState,
-  (state: State) => state.loaded
+  (state: WeeksState) => state.loaded
 );
 
 export const getWeeksError = createSelector(
   getWeeksState,
-  (state: State) => state.error
+  (state: WeeksState) => state.error
 );
 
-export const getAllWeeks = createSelector(getWeeksState, (state: State) =>
+export const getAllWeeks = createSelector(getWeeksState, (state: WeeksState) =>
   selectAll(state)
 );
 
-export const getWeeksEntities = createSelector(getWeeksState, (state: State) =>
+export const getWeeksEntities = createSelector(getWeeksState, (state: WeeksState) =>
   selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getWeeksState,
-  (state: State) => state.selectedId
+  (state: WeeksState) => state.selectedId
 );
 
 export const getSelected = createSelector(

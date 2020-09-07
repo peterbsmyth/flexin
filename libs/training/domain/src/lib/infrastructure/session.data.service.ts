@@ -6,7 +6,7 @@ import { environment } from '@bod/shared/environments';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class SessionService {
+export class SessionDataService {
   private API_URL = environment.API_URL;
   private _exercises: Exercise[][];
   private _incompleteSessionItems: SessionItem[];

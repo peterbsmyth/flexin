@@ -13,7 +13,10 @@ export const loadWeeksFailure = createAction(
   props<{ error: any }>()
 );
 
-export const loadWeek = createAction('[Weeks] Load Week');
+export const loadWeek = createAction(
+  '[Weeks] Load Week',
+  props<{ id: number }>()
+);
 
 export const loadWeekSuccess = createAction(
   '[Weeks] Load Week Success',
@@ -27,5 +30,10 @@ export const loadWeekFailure = createAction(
 
 export const selectWeek = createAction(
   '[Weeks] Select Week',
+  props<{ id: number }>()
+);
+
+export const guardWeek = createAction(
+  '[Weeks Guard] Select Week',
   props<{ id: number }>()
 );

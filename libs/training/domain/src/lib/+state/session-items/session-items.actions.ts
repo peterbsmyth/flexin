@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SessionItemsEntity } from './session-items.models';
+import { SessionItem } from '@bod/shared/domain';
 
 export const loadSessionItems = createAction(
   '[SessionItems] Load SessionItems'
@@ -7,7 +7,7 @@ export const loadSessionItems = createAction(
 
 export const loadSessionItemsSuccess = createAction(
   '[SessionItems] Load SessionItems Success',
-  props<{ sessionItems: SessionItemsEntity[] }>()
+  props<{ sessionItems: SessionItem[] }>()
 );
 
 export const loadSessionItemsFailure = createAction(

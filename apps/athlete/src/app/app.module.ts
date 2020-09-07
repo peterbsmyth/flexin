@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MatButtonModule } from '@angular/material/button';
-import { DataModule } from '@bod/data';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,7 +29,6 @@ import { SessionsModule } from './sessions/sessions.module';
     AppRoutingModule,
     MatButtonModule,
     BrowserModule,
-    DataModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,

@@ -32,7 +32,7 @@
       "tags": []
     },
     "shared-environments": {
-      "tags": ["domain:shared"]
+      "tags": ["domain:shared", "type:util"]
     },
     "training-domain": {
       "tags": ["domain:training", "type:domain-logic"]

@@ -1,4 +1,4 @@
-<div *ngIf="(program$ | async) as program">
+<div *ngIf="(programsState.selectedPrograms$ | async) as program">
   <span>{{ program.name }}</span>
   <mat-list *ngFor="let week of program.weeks;">
     <a mat-list-item [routerLink]="['/weeks', week]">

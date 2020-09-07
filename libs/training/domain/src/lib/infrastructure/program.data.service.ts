@@ -5,7 +5,7 @@ import { Subject, Observable, ReplaySubject } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 
 @Injectable()
-export class ProgramService {
+export class ProgramDataService {
   private API_URL = environment.API_URL;
   private _program: Program = mockProgram;
   private _program$: Subject<Program> = new ReplaySubject(1);

@@ -1,41 +1,41 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   SESSIONS_FEATURE_KEY,
-  State,
-  SessionsPartialState,
+  SessionsState,
   sessionsAdapter,
 } from './sessions.reducer';
+import { PartialState } from '../root.reducer';
 
 // Lookup the 'Sessions' feature state managed by NgRx
 export const getSessionsState = createFeatureSelector<
-  SessionsPartialState,
-  State
+  PartialState,
+  SessionsState
 >(SESSIONS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = sessionsAdapter.getSelectors();
 
 export const getSessionsLoaded = createSelector(
   getSessionsState,
-  (state: State) => state.loaded
+  (state: SessionsState) => state.loaded
 );
 
 export const getSessionsError = createSelector(
   getSessionsState,
-  (state: State) => state.error
+  (state: SessionsState) => state.error
 );
 
-export const getAllSessions = createSelector(getSessionsState, (state: State) =>
+export const getAllSessions = createSelector(getSessionsState, (state: SessionsState) =>
   selectAll(state)
 );
 
 export const getSessionsEntities = createSelector(
   getSessionsState,
-  (state: State) => selectEntities(state)
+  (state: SessionsState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getSessionsState,
-  (state: State) => state.selectedId
+  (state: SessionsState) => state.selectedId
 );
 
 export const getSelected = createSelector(

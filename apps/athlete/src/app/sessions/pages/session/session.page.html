@@ -1,3 +1,3 @@
-<ng-container *ngIf="(session$ | async) as session">
+<ng-container *ngIf="(sessionsState.selectedSessions$ | async) as session">
   {{ session.name }}
 </ng-container>

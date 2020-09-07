@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
 import { SessionsPage } from './pages/sessions/sessions.page';
 import { SessionPage } from './pages/session/session.page';
+import { SessionExistsGuard } from './session-exists.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path: 'sessions/:sessionId',
     component: SessionPage,
+    canActivate: [SessionExistsGuard]
   },
 ];
 

@@ -6,26 +6,22 @@ import { Program } from '@bod/shared/domain';
 
 export const PROGRAMS_FEATURE_KEY = 'programs';
 
-export interface State extends EntityState<Program> {
+export interface ProgramsState extends EntityState<Program> {
   selectedId?: string | number; // which Programs record has been selected
   loaded: boolean; // has the Programs list been loaded
   error?: string | null; // last none error (if any)
-}
-
-export interface ProgramsPartialState {
-  readonly [PROGRAMS_FEATURE_KEY]: State;
 }
 
 export const programsAdapter: EntityAdapter<Program> = createEntityAdapter<
   Program
 >();
 
-export const initialState: State = programsAdapter.getInitialState({
+export const initialState: ProgramsState = programsAdapter.getInitialState({
   // set initial required properties
   loaded: false,
 });
 
-const programsReducer = createReducer(
+export const programsReducer = createReducer(
   initialState,
   on(ProgramsActions.loadPrograms, (state) => ({
     ...state,
@@ -43,6 +39,8 @@ const programsReducer = createReducer(
   on(ProgramsActions.loadProgramSuccess, (state, { program }) => programsAdapter.setOne(program, { ...state, loaded: true })),
 );
 
-export function reducer(state: State | undefined, action: Action) {
+
+export function reducer(state: ProgramsState | undefined, action: Action) {
   return programsReducer(state, action);
 }
+

@@ -13,7 +13,10 @@ export const loadProgramsFailure = createAction(
   props<{ error: any }>()
 );
 
-export const loadProgram = createAction('[Programs] Load Program');
+export const loadProgram = createAction(
+  '[Programs] Load Program',
+  props<{ id: number }>()
+);
 
 export const loadProgramSuccess = createAction(
   '[Programs] Load Program Success',

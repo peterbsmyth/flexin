@@ -1,38 +1,30 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
 import { Week, Session } from '@bod/shared/domain';
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { WeeksPartialState } from '../../+state/weeks.reducer';
-import { getSelected, getSessions } from '../../+state/weeks.selectors';
-import { takeUntil, map, filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+import { WeeksFacade } from '@bod/training/domain';
 
 @Component({
   selector: 'bod-week',
   templateUrl: './week.page.html',
   styleUrls: ['./week.page.scss']
 })
-export class WeekPage implements OnInit, OnDestroy {
-  unsubscribe$: Subject<any> = new Subject();
+export class WeekPage implements OnInit {
   week$: Observable<Week>;
   sessions$: Observable<Session[]>;
   sessionsLoaded$: Observable<boolean>;
 
   constructor(
-    private store$: Store<WeeksPartialState>
+    public weeksState: WeeksFacade
   ) {
-    this.week$ = this.store$
+    this.week$ = this.weeksState.selectedWeeks$
       .pipe(
-        takeUntil(this.unsubscribe$),
-        select(getSelected),
         filter(w => !!w)
       );
-    this.sessions$ = this.store$
+    this.sessions$ = this.weeksState.allSessions$
       .pipe(
-        takeUntil(this.unsubscribe$),
-        select(getSessions),
         filter(w => !!w)
       );
-
     this.sessionsLoaded$ = this.sessions$
       .pipe(
         map((sessions) => sessions.every(s => s))
@@ -40,10 +32,5 @@ export class WeekPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 }

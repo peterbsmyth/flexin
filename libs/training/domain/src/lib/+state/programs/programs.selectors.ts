@@ -1,41 +1,41 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   PROGRAMS_FEATURE_KEY,
-  State,
-  ProgramsPartialState,
+  ProgramsState,
   programsAdapter,
 } from './programs.reducer';
+import { PartialState } from '../root.reducer';
 
 // Lookup the 'Programs' feature state managed by NgRx
 export const getProgramsState = createFeatureSelector<
-  ProgramsPartialState,
-  State
+  PartialState,
+  ProgramsState
 >(PROGRAMS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = programsAdapter.getSelectors();
 
 export const getProgramsLoaded = createSelector(
   getProgramsState,
-  (state: State) => state.loaded
+  (state: ProgramsState) => state.loaded
 );
 
 export const getProgramsError = createSelector(
   getProgramsState,
-  (state: State) => state.error
+  (state: ProgramsState) => state.error
 );
 
-export const getAllPrograms = createSelector(getProgramsState, (state: State) =>
+export const getAllPrograms = createSelector(getProgramsState, (state: ProgramsState) =>
   selectAll(state)
 );
 
 export const getProgramsEntities = createSelector(
   getProgramsState,
-  (state: State) => selectEntities(state)
+  (state: ProgramsState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getProgramsState,
-  (state: State) => state.selectedId
+  (state: ProgramsState) => state.selectedId
 );
 
 export const getSelected = createSelector(

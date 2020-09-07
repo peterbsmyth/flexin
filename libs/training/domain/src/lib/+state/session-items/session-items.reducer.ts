@@ -6,26 +6,22 @@ import { SessionItem } from '@bod/shared/domain';
 
 export const SESSIONITEMS_FEATURE_KEY = 'sessionItems';
 
-export interface State extends EntityState<SessionItem> {
+export interface SessionItemsState extends EntityState<SessionItem> {
   selectedId?: string | number; // which SessionItems record has been selected
   loaded: boolean; // has the SessionItems list been loaded
   error?: string | null; // last known error (if any)
-}
-
-export interface SessionItemsPartialState {
-  readonly [SESSIONITEMS_FEATURE_KEY]: State;
 }
 
 export const sessionItemsAdapter: EntityAdapter<SessionItem> = createEntityAdapter<
   SessionItem
 >();
 
-export const initialState: State = sessionItemsAdapter.getInitialState({
+export const initialState: SessionItemsState = sessionItemsAdapter.getInitialState({
   // set initial required properties
   loaded: false,
 });
 
-const sessionItemsReducer = createReducer(
+export const sessionItemsReducer = createReducer(
   initialState,
   on(SessionItemsActions.loadSessionItems, (state) => ({
     ...state,
@@ -41,6 +37,6 @@ const sessionItemsReducer = createReducer(
   }))
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: SessionItemsState | undefined, action: Action) {
   return sessionItemsReducer(state, action);
 }
