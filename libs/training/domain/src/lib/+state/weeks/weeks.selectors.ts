@@ -5,7 +5,7 @@ import {
   WeeksState,
 } from './weeks.reducer';
 import { PartialState } from '../root.reducer';
-import { getSessionsEntities } from '../sessions/sessions.selectors';
+import { getAllSessions } from '../sessions/sessions.selectors';
 
 // Lookup the 'Weeks' feature state managed by NgRx
 export const getWeeksState = createFeatureSelector<PartialState, WeeksState>(
@@ -45,8 +45,8 @@ export const getSelected = createSelector(
 
 export const getSessions = createSelector(
   getSelected,
-  getSessionsEntities,
-  (week, sessionsEntities) => {
-    return week && week.sessions.map(session => sessionsEntities[session])
+  getAllSessions,
+  (week, sessions) => {
+    return week && sessions.filter(session => session.weekId === week.id)
   }
 )

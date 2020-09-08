@@ -21,18 +21,29 @@ export const initialState: WeeksState = weeksAdapter.getInitialState({
 
 export const weeksReducer = createReducer(
   initialState,
-  on(WeeksPageActions.loadWeek, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
+  on(
+    WeeksPageActions.loadWeek,
+    WeeksPageActions.loadWeeksByProgram,
+    (state) => ({
+      ...state,
+      loaded: false,
+      error: null,
+    })
+  ),
   on(WeeksPageActions.selectWeek, (state, { id }) => ({
     ...state,
     selectedId: id,
   })),
   on(WeeksPageActions.loadWeekSuccess, (state, { week }) =>
     weeksAdapter.setOne(week, { ...state, loaded: true, selectedId: week.id })
-  )
+  ),
+  on(WeeksPageActions.loadWeeksByProgramSuccess, (state, { weeks }) =>
+    weeksAdapter.upsertMany(weeks, { ...state, loaded: true })
+  ),
+  on(WeeksPageActions.loadWeeksByProgramFailure, (state, { error }) => ({
+    ...state,
+    error,
+  }))
 );
 
 export function reducer(state: WeeksState | undefined, action: Action) {

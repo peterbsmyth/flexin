@@ -26,6 +26,7 @@ export const initialState: SessionItemsState = sessionItemsAdapter.getInitialSta
 export const sessionItemsReducer = createReducer(
   initialState,
   on(
+    SessionItemsPageActions.loadSessionItemsBySession,
     SessionItemsApiActions.loadSessionItem,
     SessionItemsPageActions.loadSessionItem,
     (state) => ({
@@ -51,7 +52,19 @@ export const sessionItemsReducer = createReducer(
   on(SessionItemsPageActions.selectSessionItem, (state, { id }) => ({
     ...state,
     selectedId: id,
-  }))
+  })),
+  on(
+    SessionItemsPageActions.loadSessionItemsBySessionSuccess,
+    (state, { sessionItems }) =>
+      sessionItemsAdapter.upsertMany(sessionItems, { ...state, loaded: true })
+  ),
+  on(
+    SessionItemsPageActions.loadSessionItemsBySessionFailure,
+    (state, { error }) => ({
+      ...state,
+      error,
+    })
+  )
 );
 
 export function reducer(state: SessionItemsState | undefined, action: Action) {

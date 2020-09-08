@@ -1,15 +1,18 @@
 import { createAction, props } from '@ngrx/store';
 import { Session } from '@bod/shared/models';
 
-export const loadSessions = createAction('[Sessions Page] Load Sessions');
+export const loadSessionsByWeek = createAction(
+  '[Sessions Page] Load Sessions By Week',
+  props<{ id: number }>()
+);
 
-export const loadSessionsSuccess = createAction(
-  '[Sessions Page] Load Sessions Success',
+export const loadSessionsByWeekSuccess = createAction(
+  '[Sessions Page] Load Sessions By Week Success',
   props<{ sessions: Session[] }>()
 );
 
-export const loadSessionsFailure = createAction(
-  '[Sessions Page] Load Sessions Failure',
+export const loadSessionsByWeekFailure = createAction(
+  '[Sessions Page] Load Sessions By Week Failure',
   props<{ error: any }>()
 );
 

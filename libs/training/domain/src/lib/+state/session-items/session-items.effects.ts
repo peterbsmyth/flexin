@@ -7,6 +7,28 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SessionItemsEffects {
+  loadSessionItemsBySessionPage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SessionItemsPageActions.loadSessionItemsBySession),
+      fetch({
+        run: ({ id }) => {
+          return this.sessionItemService
+            .getAllBySession(id)
+            .pipe(
+              map((sessionItems) =>
+              SessionItemsPageActions.loadSessionItemsBySessionSuccess({ sessionItems })
+              )
+            );
+        },
+
+        onError: (action, error) => {
+          console.error('Error', error);
+          return SessionItemsPageActions.loadSessionItemsBySessionFailure({ error });
+        },
+      })
+    )
+  );
+
   loadSessionItemPage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SessionItemsPageActions.loadSessionItem),

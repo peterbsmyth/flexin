@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { SessionsFacade, SessionItemsFacade } from '@bod/training/domain';
+import {
+  SessionsFacade,
+  SessionItemsFacade,
+  SessionItemsPageActions,
+} from '@bod/training/domain';
 import { SessionItem, Pages } from '@bod/shared/models';
 import { filter, map, tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'bod-session-item',
@@ -26,7 +31,8 @@ export class SessionItemPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private sessionsState: SessionsFacade,
-    private sessionItemsState: SessionItemsFacade
+    private sessionItemsState: SessionItemsFacade,
+    private route: ActivatedRoute
   ) {
     this.sessionItemsLoaded$ = this.sessionsState.allSessionItems$.pipe(
       filter((sessions) => !!sessions),
@@ -34,7 +40,7 @@ export class SessionItemPage implements OnInit {
     );
     this.sessionItem$ = this.sessionItemsState.selectedSessionItems$.pipe(
       filter((s) => !!s),
-      tap(sessionItem => this.buildForm(sessionItem))
+      tap((sessionItem) => this.buildForm(sessionItem))
     );
     this.pages$ = this.sessionItemsState.pages$;
   }
@@ -43,7 +49,13 @@ export class SessionItemPage implements OnInit {
     return <FormArray>this.form.get('sets');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sessionsState.dispatch(
+      SessionItemsPageActions.loadSessionItemsBySession({
+        id: this.route.parent.snapshot.params['sessionId'],
+      })
+    );
+  }
 
   /**
    * arrayOfCount is used to turn the amount of sets into an array

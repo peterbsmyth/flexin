@@ -8,6 +8,10 @@ import { HttpClient } from '@angular/common/http';
 export class SessionItemDataService {
   private API_URL = environment.API_URL;
 
+  getAllBySession(id: number) {
+    return this.http.get<SessionItem[]>(`${this.API_URL}/sessions/${id}/session-items`);
+  }
+
   getAll(): Observable<SessionItem[]> {
     return this.http.get<SessionItem[]>(`${this.API_URL}/session-items`);
   }

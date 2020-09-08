@@ -1,15 +1,4 @@
-<ng-container *ngIf="(week$ | async ) as week">
+<ng-container *ngrxLet="week$ as week">
   <span>Week {{ week.number }}</span>
-  <mat-list *ngIf="(sessionsLoaded$ | async); else loadingSessions">
-    <a
-      *ngFor="let session of (sessions$ | async);"
-      mat-list-item
-      [routerLink]="['/sessions', session.id]"
-    >
-      {{ session.name }}
-    </a>
-  </mat-list>
 </ng-container>
-<ng-template #loadingSessions>
-  Loading Sessions...
-</ng-template>
+<router-outlet></router-outlet>

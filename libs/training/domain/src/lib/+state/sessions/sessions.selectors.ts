@@ -5,7 +5,7 @@ import {
   sessionsAdapter,
 } from './sessions.reducer';
 import { PartialState } from '../root.reducer';
-import { getSessionItemsEntities } from '../session-items/session-items.selectors';
+import { getAllSessionItems } from '../session-items/session-items.selectors';
 import { Pages } from '@bod/shared/models';
 
 // Lookup the 'Sessions' feature state managed by NgRx
@@ -54,11 +54,11 @@ export const getSelected = createSelector(
 
 export const getSessionItems = createSelector(
   getSelected,
-  getSessionItemsEntities,
-  (session, sessionItemsEntities) => {
+  getAllSessionItems,
+  (session, sessionItems) => {
     return (
       session &&
-      session.items.map((sessionItem) => sessionItemsEntities[sessionItem])
+      sessionItems.filter((sessionItem) => sessionItem.sessionId === session.id)
     );
   }
 );

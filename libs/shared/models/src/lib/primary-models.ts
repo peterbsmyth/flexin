@@ -9,7 +9,8 @@ export interface Exercise {
 
 export interface SessionItem {
   id?: number;
-  exercise: Exercise;
+  exerciseId: number;
+  sessionId: number;
   reps: number; // 8
   AMRAP: boolean; // true
   leftRight?: boolean; // false
@@ -21,19 +22,21 @@ export interface SessionItem {
 
 export interface Session {
   id?: number;
+  weekId: number;
   name: string; // 'PULL A'
-  items: number[];
   order: number; // 1 (refers to placement with in a Week)
+  sessionItems?: SessionItem[];
 }
 
 export interface Week {
   id?: number;
+  programId: number;
   number: number; // 6
-  sessions: number[];
+  sessions?: Session[];
 }
 
 export interface Program {
   id?: number;
   name: string; // 'Program 1'
-  weeks: Week[];
+  weeks?: Week[];
 }

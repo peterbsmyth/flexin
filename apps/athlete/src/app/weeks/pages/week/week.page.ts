@@ -11,24 +11,10 @@ import { WeeksFacade } from '@bod/training/domain';
 })
 export class WeekPage implements OnInit {
   week$: Observable<Week>;
-  sessions$: Observable<Session[]>;
-  sessionsLoaded$: Observable<boolean>;
-
   constructor(
-    private weeksState: WeeksFacade
+    private weeksState: WeeksFacade,
   ) {
-    this.week$ = this.weeksState.selectedWeeks$
-      .pipe(
-        filter(w => !!w)
-      );
-    this.sessions$ = this.weeksState.allSessions$
-      .pipe(
-        filter(w => !!w)
-      );
-    this.sessionsLoaded$ = this.sessions$
-      .pipe(
-        map((sessions) => sessions.every(s => s))
-      );
+    this.week$ = this.weeksState.selectedWeeks$;
   }
 
   ngOnInit(): void {

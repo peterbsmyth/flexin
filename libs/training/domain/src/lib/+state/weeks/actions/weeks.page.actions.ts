@@ -16,6 +16,20 @@ export const loadWeekFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadWeeksByProgram = createAction(
+  '[Sessions Page] Load Weeks By Program',
+  props<{ id: number }>()
+);
+
+export const loadWeeksByProgramSuccess = createAction(
+  '[Sessions Page] Load Weeks By Program Success',
+  props<{ weeks: Week[] }>()
+);
+
+export const loadWeeksByProgramFailure = createAction(
+  '[Sessions Page] Load Weeks By Program Failure',
+  props<{ error: any }>()
+);
 
 export const selectWeek = createAction(
   '[Weeks Page] Select Week',

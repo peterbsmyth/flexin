@@ -5,6 +5,7 @@ import {
   programsAdapter,
 } from './programs.reducer';
 import { PartialState } from '../root.reducer';
+import { getAllWeeks } from '../weeks/weeks.selectors';
 
 // Lookup the 'Programs' feature state managed by NgRx
 export const getProgramsState = createFeatureSelector<
@@ -24,8 +25,9 @@ export const getProgramsError = createSelector(
   (state: ProgramsState) => state.error
 );
 
-export const getAllPrograms = createSelector(getProgramsState, (state: ProgramsState) =>
-  selectAll(state)
+export const getAllPrograms = createSelector(
+  getProgramsState,
+  (state: ProgramsState) => selectAll(state)
 );
 
 export const getProgramsEntities = createSelector(
@@ -42,4 +44,12 @@ export const getSelected = createSelector(
   getProgramsEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
+);
+
+export const getWeeks = createSelector(
+  getSelected,
+  getAllWeeks,
+  (program, weeks) => {
+    return program && weeks.filter((week) => week.programId === program.id);
+  }
 );

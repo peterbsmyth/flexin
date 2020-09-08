@@ -25,15 +25,15 @@ export const sessionsReducer = createReducer(
   initialState,
   on(
     SessionsPageActions.loadSession,
-    SessionsPageActions.loadSessions, (state) => ({
+    SessionsPageActions.loadSessionsByWeek, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
-  on(SessionsPageActions.loadSessionsSuccess, (state, { sessions }) =>
-    sessionsAdapter.setAll(sessions, { ...state, loaded: true })
+  on(SessionsPageActions.loadSessionsByWeekSuccess, (state, { sessions }) =>
+    sessionsAdapter.upsertMany(sessions, { ...state, loaded: true })
   ),
-  on(SessionsPageActions.loadSessionsFailure, (state, { error }) => ({
+  on(SessionsPageActions.loadSessionsByWeekFailure, (state, { error }) => ({
     ...state,
     error,
   })),

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://9b6ba157-734d-42c3-8d2b-1d6d49f15793.mock.pstmn.io'
+  API_URL: 'https://bod-api-2.herokuapp.com'
 };
 
 /*

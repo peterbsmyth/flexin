@@ -1,3 +1,0 @@
-<mat-list>
-  <a *ngFor="let session of (sessionsState.allSessions$ | async)" mat-list-item [routerLink]="['/sessions', session.id]">{{ session?.name }}</a>
-</mat-list>

@@ -17,6 +17,9 @@ export class ProgramsFacade {
   selectedPrograms$ = this.store.pipe(
     select(ProgramsSelectors.getSelected)
   );
+  allWeeks$ = this.store.pipe(
+    select(ProgramsSelectors.getWeeks)
+  )
 
   dispatch(action: Action) {
     this.store.dispatch(action);

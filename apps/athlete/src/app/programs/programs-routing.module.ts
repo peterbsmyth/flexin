@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProgramsPage } from './pages/programs/programs.page';
 import { ProgramPage } from './pages/program/program.page';
+import { WeeksPage } from './pages/weeks/weeks.page';
 import { ProgramExistsGuard } from './program-exists.guard';
 
 const routes: Routes = [
@@ -12,7 +13,13 @@ const routes: Routes = [
   {
     path: 'programs/:programId',
     component: ProgramPage,
-    canActivate: [ProgramExistsGuard]
+    canActivate: [ProgramExistsGuard],
+    children: [
+      {
+        path: '',
+        component: WeeksPage
+      }
+    ]
   },
 ];
 

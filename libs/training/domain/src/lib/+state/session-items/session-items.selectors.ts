@@ -5,7 +5,6 @@ import {
   sessionItemsAdapter,
 } from './session-items.reducer';
 import { PartialState } from '../root.reducer';
-import { Observable } from 'rxjs';
 import { Pages } from '@bod/shared/models';
 
 // Lookup the 'SessionItems' feature state managed by NgRx

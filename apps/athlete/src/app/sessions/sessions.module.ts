@@ -13,7 +13,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { SessionsPage } from './pages/sessions/sessions.page';
 import { SessionPage } from './pages/session/session.page';
 import { SessionItemPage } from './pages/session-item/session-item.page';
 import { ReactiveComponentModule } from '@ngrx/component';
@@ -24,7 +23,6 @@ import { ReactiveComponentModule } from '@ngrx/component';
     MaximumAttemptPage,
     MaximumAttemptCardComponent,
     MaximumAttemptFormComponent,
-    SessionsPage,
     SessionPage,
     SessionItemPage,
   ],

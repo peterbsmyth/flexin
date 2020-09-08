@@ -3,29 +3,28 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 
 import { SessionsPageActions, SessionsApiActions } from './actions';
-import { SessionItemsApiActions } from '../session-items/actions';
-import { map, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { SessionDataService } from '../../infrastructure/session.data.service';
 
 @Injectable()
 export class SessionsEffects {
-  loadSessions$ = createEffect(() =>
+  loadSessionsByWeekPage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionsPageActions.loadSessions),
+      ofType(SessionsPageActions.loadSessionsByWeek),
       fetch({
-        run: () => {
+        run: ({ id }) => {
           return this.sessionService
-            .getAll()
+            .getAllByWeek(id)
             .pipe(
               map((sessions) =>
-                SessionsPageActions.loadSessionsSuccess({ sessions })
+                SessionsPageActions.loadSessionsByWeekSuccess({ sessions })
               )
             );
         },
 
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionsPageActions.loadSessionFailure({ error });
+          return SessionsPageActions.loadSessionsByWeekFailure({ error });
         },
       })
     )
@@ -36,16 +35,13 @@ export class SessionsEffects {
       ofType(SessionsPageActions.loadSession),
       fetch({
         run: ({ id }) => {
-          return this.sessionService.getOne(id).pipe(
-            mergeMap((session) => {
-              return [
-                SessionsPageActions.loadSessionSuccess({ session }),
-                ...session.items.map((sessionItem) =>
-                  SessionItemsApiActions.loadSessionItem({ id: sessionItem })
-                ),
-              ];
-            })
-          );
+          return this.sessionService
+            .getOne(id)
+            .pipe(
+              map((session) =>
+                SessionsPageActions.loadSessionSuccess({ session })
+              )
+            );
         },
 
         onError: (action, error) => {

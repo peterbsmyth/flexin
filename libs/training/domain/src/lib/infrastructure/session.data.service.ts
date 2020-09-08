@@ -8,6 +8,10 @@ import { HttpClient } from '@angular/common/http';
 export class SessionDataService {
   private API_URL = environment.API_URL;
 
+  getAllByWeek(id: number) {
+    return this.http.get<Session[]>(`${this.API_URL}/weeks/${id}/sessions`);
+  }
+
   getAll(): Observable<Session[]> {
     return this.http.get<Session[]>(`${this.API_URL}/sessions`);
   }

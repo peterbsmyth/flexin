@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ActivatedRoute } from '@angular/router';
 import { SessionsFacade } from '@bod/training/domain';
 import { Observable } from 'rxjs';
 import { Session, Pages } from '@bod/shared/models';
@@ -15,7 +13,6 @@ export class SessionPage implements OnInit {
   pages$: Observable<Pages>;
 
   constructor(
-    private route: ActivatedRoute,
     private sessionsState: SessionsFacade
   ) {
     this.session$ = this.sessionsState.selectedSessions$.pipe(
