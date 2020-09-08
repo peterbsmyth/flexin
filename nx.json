@@ -14,37 +14,66 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
       }
     }
   },
   "projects": {
     "athlete": {
-      "tags": ["domain:training", "type:feature"]
+      "tags": [
+        "domain:training",
+        "type:feature"
+      ]
     },
     "trainer": {
-      "tags": ["domain:coaching", "type:feature"]
-    },
-    "components": {
-      "tags": []
+      "tags": [
+        "domain:coaching",
+        "type:feature"
+      ]
     },
     "data": {
       "tags": []
     },
     "shared-environments": {
-      "tags": ["domain:shared", "type:util"]
+      "tags": [
+        "domain:shared",
+        "type:util"
+      ]
     },
     "training-domain": {
-      "tags": ["domain:training", "type:domain-logic"]
+      "tags": [
+        "domain:training",
+        "type:domain-logic"
+      ]
     },
     "coaching-domain": {
-      "tags": ["domain:coaching", "type:domain-logic"]
+      "tags": [
+        "domain:coaching",
+        "type:domain-logic"
+      ]
     },
     "shared-domain": {
-      "tags": ["domain:shared", "type:domain-logic"]
+      "tags": [
+        "domain:shared",
+        "type:domain-logic"
+      ]
     },
     "shared-models": {
-      "tags": ["domain:shared", "type:util"]
+      "tags": [
+        "domain:shared",
+        "type:util"
+      ]
+    },
+    "shared-components": {
+      "tags": [
+        "domain:shared",
+        "type:ui"
+      ]
     }
   },
   "affected": {

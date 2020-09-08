@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BodComponentsModule } from '@bod/components';
+import { BodComponentsModule } from '@bod/shared/components';
 import { ExercisesRoutingModule } from './exercises-routing.module';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { CreatePage } from './pages/create/create.page';

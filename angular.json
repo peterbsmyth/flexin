@@ -104,8 +104,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/athlete/tsconfig.app.json"],
-            "exclude": ["**/node_modules/**", "!apps/athlete/**/*"]
+            "tsConfig": [
+              "apps/athlete/tsconfig.app.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/athlete/**/*"
+            ]
           }
         }
       }
@@ -139,7 +144,9 @@
               "apps/trainer/src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["apps/trainer/src/assets/scss"]
+              "includePaths": [
+                "apps/trainer/src/assets/scss"
+              ]
             },
             "scripts": []
           },
@@ -198,7 +205,10 @@
               "apps/trainer/tsconfig.app.json",
               "apps/trainer/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/trainer/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/trainer/**/*"
+            ]
           }
         },
         "test": {
@@ -207,42 +217,6 @@
             "jestConfig": "apps/trainer/jest.config.js",
             "passWithNoTests": true
           }
-        }
-      }
-    },
-    "components": {
-      "projectType": "library",
-      "root": "libs/components",
-      "sourceRoot": "libs/components/src",
-      "prefix": "bod",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/components/tsconfig.lib.json",
-            "project": "libs/components/ng-package.json",
-            "styles": ["libs/components/src/lib/styles.scss"],
-            "stylePreprocessorOptions": {
-              "includePaths": ["libs/components/src/lib/scss"]
-            }
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/components/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/components/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/components/**/*"]
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
         }
       }
     },
@@ -255,8 +229,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/data/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/data/**/*"]
+            "tsConfig": [
+              "libs/data/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/data/**/*"
+            ]
           }
         }
       },
@@ -276,8 +255,13 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "tsConfig": ["libs/shared/environments/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/environments/**/*"]
+            "tsConfig": [
+              "libs/shared/environments/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/environments/**/*"
+            ]
           }
         }
       }
@@ -303,8 +287,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/training/domain/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/training/domain/**/*"]
+            "tsConfig": [
+              "libs/training/domain/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/training/domain/**/*"
+            ]
           }
         }
       },
@@ -335,8 +324,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/coaching/domain/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/coaching/domain/**/*"]
+            "tsConfig": [
+              "libs/coaching/domain/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/coaching/domain/**/*"
+            ]
           }
         }
       },
@@ -367,8 +361,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/shared/domain/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/domain/**/*"]
+            "tsConfig": [
+              "libs/shared/domain/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/domain/**/*"
+            ]
           }
         }
       },
@@ -399,9 +398,59 @@
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
-            "tsConfig": ["libs/shared/models/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/models/**/*"],
+            "tsConfig": [
+              "libs/shared/models/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/models/**/*"
+            ],
             "linter": "eslint"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "shared-components": {
+      "projectType": "library",
+      "root": "libs/shared/components",
+      "sourceRoot": "libs/shared/components/src",
+      "prefix": "bod",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/shared/components/tsconfig.lib.json",
+            "project": "libs/shared/components/ng-package.json",
+            "styles": [
+              "libs/shared/components/src/lib/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/shared/components/src/lib/scss"
+              ]
+            }
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/shared/components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/components/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/components/**/*"
+            ]
           }
         }
       },

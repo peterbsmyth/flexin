@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BodComponentsModule } from '@bod/components';
+import { BodComponentsModule } from '@bod/shared/components';
 import { ProgramsRoutingModule } from './programs-routing.module';
 import { ProgramBoardComponent } from './components/program-board/program-board.component';
 import { BoardComponent } from './components/board/board.component';
