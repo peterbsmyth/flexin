@@ -2,14 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BodComponentsModule } from '@bod/shared/components';
 import { ProgramsRoutingModule } from './programs-routing.module';
-import { ProgramBoardComponent } from './components/program-board/program-board.component';
 import { BoardComponent } from './components/board/board.component';
-import { SessionGridComponent } from './components/session-grid/session-grid.component';
-import { SessionItemComponent } from './components/session-item/session-item.component';
-import { SessionComponent } from './components/session/session.component';
-import { SessionConfigurationBoardComponent } from './components/session-configuration-board/session-configuration-board.component';
 import { CreatePage } from './pages/create/create.page';
 import { ExerciseComponent } from './components/exercise/exercise.component';
+import { SessionComponent } from './components/session/session.component';
+import { SessionItemComponent } from './components/session-item/session-item.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,19 +19,22 @@ import { CoachingDomainModule } from '@bod/coaching/domain';
 import { HomePage } from './pages/home/home.page';
 import { MatListModule } from '@angular/material/list';
 import { ProgramPage } from './pages/program/program.page';
+import { ProgramBoardPage } from './pages/program-board/program-board.page';
+import { SessionConfigurationBoardPage } from './pages/session-configuration-board/session-configuration-board.page';
+import { SessionGridPage } from './pages/session-grid/session-grid.page';
 
 @NgModule({
   declarations: [
-    ProgramBoardComponent,
     BoardComponent,
-    SessionGridComponent,
+    ExerciseComponent,
     SessionItemComponent,
     SessionComponent,
-    SessionConfigurationBoardComponent,
-    ExerciseComponent,
     CreatePage,
     HomePage,
     ProgramPage,
+    ProgramBoardPage,
+    SessionConfigurationBoardPage,
+    SessionGridPage,
   ],
   imports: [
     CommonModule,

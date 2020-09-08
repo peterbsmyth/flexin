@@ -21,15 +21,15 @@ export class SessionComponent implements OnInit, OnChanges {
       const session = changes.session.currentValue;
       this._session = {
         ...session,
-        items: [...session.items]
+        sessionItems: [...session.sessionItems]
       };
     }
   }
 
   onUpdate(item: SessionItem) {
-    this._session.items.forEach((existingItem, i) => {
+    this._session.sessionItems.forEach((existingItem, i) => {
       if (item.id === existingItem.id) {
-        this._session.items[i] = {
+        this._session.sessionItems[i] = {
           ...item
         };
       }

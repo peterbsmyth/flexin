@@ -11,9 +11,14 @@ export class ExercisesEffects {
     this.actions$.pipe(
       ofType(ExercisesApiActions.loadExercises),
       fetch({
-        run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return ExercisesApiActions.loadExercisesSuccess({ exercises: [] });
+        run: () => {
+          return this.exerciseService
+            .getAll()
+            .pipe(
+              map((exercises) =>
+                ExercisesApiActions.loadExercisesSuccess({ exercises })
+              )
+            );
         },
         onError: (action, error) => {
           console.error('Error', error);

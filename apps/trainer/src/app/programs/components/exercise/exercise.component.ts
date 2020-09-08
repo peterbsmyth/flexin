@@ -8,15 +8,15 @@ import { Exercise } from '@bod/shared/models';
 })
 export class ExerciseComponent implements OnInit {
   @Input() exercise: Exercise;
-  @Input() closeable: boolean = true;
-  @Output() close: EventEmitter<Exercise> = new EventEmitter();
+  @Input() closeable = true;
+  @Output() remove: EventEmitter<Exercise> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onClose() {
-    this.close.emit(this.exercise);
+  onRemove() {
+    this.remove.emit(this.exercise);
   }
 
 }

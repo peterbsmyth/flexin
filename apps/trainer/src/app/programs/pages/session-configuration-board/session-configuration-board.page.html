@@ -6,6 +6,7 @@
   class="item"
   *ngFor="let item of incompleteSessionItems"
   [item]="item"
+  [exercise]="exercise"
   (update)="onUpdate($event)"
   ></bod-session-item>
 </bod-board>

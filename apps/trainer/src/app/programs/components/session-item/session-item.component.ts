@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { SessionItem } from '@bod/shared/models';
+import { SessionItem, Exercise, mockExercises } from '@bod/shared/models';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { tap, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 export class SessionItemComponent implements OnInit, OnDestroy {
   public leftRight: boolean;
   private _item: SessionItem;
+  @Input() exercise: Exercise = mockExercises[0];
   @Input()
   get item(): SessionItem {
     return this._item;
@@ -25,7 +26,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
     this.form.get('weight').setValue(item.weight);
     this.form.get('intensity').setValue(item.intensity);
     this.form.get('tempo').setValue(item.tempo);
-    this.leftRight = item.exercise.leftRight;
+    this.leftRight = this.exercise.leftRight;
   }
 
   private _editable = true;

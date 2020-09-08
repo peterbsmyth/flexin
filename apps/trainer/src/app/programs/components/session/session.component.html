@@ -3,7 +3,7 @@
 <div class="session">
   <bod-session-item
   class="item"
-  *ngFor="let item of session.items"
+  *ngFor="let item of session.sessionItems"
   [editable]="false"
   [item]="item"
   (update)="onUpdate($event)"

@@ -2,12 +2,12 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        {{ item.exercise.name }}
+        {{ exercise.name }}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="form" class="form">
-        <input type="hidden" [value]="item.exercise.name" disabled>
+        <input type="hidden" [value]="exercise.name" disabled>
         <mat-form-field class="form__field">
           <mat-label>
             Reps
@@ -37,7 +37,7 @@
             Intensity
           </mat-label>
           <mat-select formControlName="intensity">
-            <mat-option *ngFor="let itensity of item.exercise.intensities" [value]="itensity"> {{ itensity }} </mat-option>
+            <mat-option *ngFor="let itensity of exercise.intensities" [value]="itensity"> {{ itensity }} </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="form__field">

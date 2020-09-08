@@ -10,6 +10,7 @@ import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@bod/shared/environments';
 import { CoachingDomainModule } from '@bod/coaching/domain';
+import { ProgramsModule } from './programs/programs.module';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { CoachingDomainModule } from '@bod/coaching/domain';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoachingDomainModule,
-    CoreModule
+    CoreModule,
+    ProgramsModule
   ],
   providers: [],
   bootstrap: [AppPage],
