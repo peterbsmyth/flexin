@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '@bod/shared/environments';
 
 @Injectable()
-export class ExerciseService {
+export class ExerciseDataService {
   private API_URL = environment.API_URL;
   private _sourceList: Exercise[] = mockExercises;
 

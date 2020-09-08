@@ -22,7 +22,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromPrograms from './+state/programs.reducer';
 import { ProgramsEffects } from './+state/programs.effects';
-import { DataModule } from '@bod/data';
+import { CoachingDomainModule } from '@bod/coaching/domain';
 import { HomePage } from './pages/home/home.page';
 import { MatListModule } from '@angular/material/list';
 import { ProgramPage } from './pages/program/program.page';
@@ -53,7 +53,7 @@ import { ProgramPage } from './pages/program/program.page';
     MatIconModule,
     MatListModule,
     BodComponentsModule,
-    DataModule,
+    CoachingDomainModule,
     StoreModule.forFeature(
       fromPrograms.PROGRAMS_FEATURE_KEY,
       fromPrograms.reducer

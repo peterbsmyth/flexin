@@ -36,9 +36,6 @@
         "type:feature"
       ]
     },
-    "data": {
-      "tags": []
-    },
     "shared-environments": {
       "tags": [
         "domain:shared",

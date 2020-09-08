@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { AppPage } from './core/pages/app/app.page';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DataModule } from '@bod/data';
 import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@bod/shared/environments';
+import { CoachingDomainModule } from '@bod/coaching/domain';
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ import { environment } from '@bod/shared/environments';
     StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
     AppRoutingModule,
     BrowserAnimationsModule,
-    DataModule,
+    CoachingDomainModule,
     CoreModule
   ],
   providers: [],

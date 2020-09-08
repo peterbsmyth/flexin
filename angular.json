@@ -220,31 +220,6 @@
         }
       }
     },
-    "data": {
-      "projectType": "library",
-      "root": "libs/data",
-      "sourceRoot": "libs/data/src",
-      "prefix": "bod",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/data/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/data/**/*"
-            ]
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "shared-environments": {
       "root": "libs/shared/environments",
       "sourceRoot": "libs/shared/environments/src",

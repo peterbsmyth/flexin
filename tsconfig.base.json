@@ -21,9 +21,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@bod/data": [
-        "libs/data/src/index.ts"
-      ],
       "@bod/shared/environments": [
         "libs/shared/environments/src/index.ts"
       ],
