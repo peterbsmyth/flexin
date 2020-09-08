@@ -4,7 +4,6 @@ import { fetch } from '@nrwl/angular';
 
 import {
   WeeksPageActions,
-  WeeksApiActions,
 }from './actions';
 import {
   SessionsApiActions
@@ -14,23 +13,6 @@ import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class WeeksEffects {
-  loadWeeks$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(WeeksApiActions.loadWeeks),
-      fetch({
-        run: () => {
-          return this.weekService
-            .getAll()
-            .pipe(map((weeks) => WeeksApiActions.loadWeeksSuccess({ weeks })));
-        },
-        onError: (action, error) => {
-          console.error('Error', error);
-          return WeeksApiActions.loadWeeksFailure({ error });
-        },
-      })
-    )
-  );
-
   loadWeekPage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeeksPageActions.loadWeek),

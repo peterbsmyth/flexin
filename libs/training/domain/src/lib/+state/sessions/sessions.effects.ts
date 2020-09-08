@@ -72,7 +72,7 @@ export class SessionsEffects {
 
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionsPageActions.loadSessionFailure({ error });
+          return SessionsApiActions.loadSessionFailure({ error });
         },
       })
     )

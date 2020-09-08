@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Week, Program, mockProgram } from '@bod/shared/domain';
+import { Week, Program, mockProgram } from '@bod/shared/models';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 

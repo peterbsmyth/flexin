@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Session } from '@bod/shared/domain';
+import { Session } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 import { HttpClient } from '@angular/common/http';

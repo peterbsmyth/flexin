@@ -1,3 +1,9 @@
-<ng-container *ngIf="(sessionsState.selectedSessions$ | async) as session">
-  {{ session.name }}
+<bod-action-bar *ngrxLet="pages$ as pages">
+  <button mat-button [disabled]="pages.isFirst" [routerLink]="['../', pages.previousId]">Previous Session</button>
+  <button mat-button [disabled]="pages.isLast" [routerLink]="['../', pages.nextId]">Next Session</button>
+</bod-action-bar>
+
+<ng-container *ngrxLet="session$ as session">
+  <h2>{{ session.name }}</h2>
 </ng-container>
+<router-outlet></router-outlet>

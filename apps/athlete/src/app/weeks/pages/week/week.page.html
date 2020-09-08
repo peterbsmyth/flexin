@@ -1,4 +1,4 @@
-<ng-container *ngIf="(week$ | async ) as week; else loadingWeek">
+<ng-container *ngIf="(week$ | async ) as week">
   <span>Week {{ week.number }}</span>
   <mat-list *ngIf="(sessionsLoaded$ | async); else loadingSessions">
     <a
@@ -10,9 +10,6 @@
     </a>
   </mat-list>
 </ng-container>
-<ng-template #loadingWeek>
-  Loading Week...
-</ng-template>
 <ng-template #loadingSessions>
   Loading Sessions...
 </ng-template>

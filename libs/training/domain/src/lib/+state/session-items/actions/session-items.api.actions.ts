@@ -1,19 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SessionItem } from '@bod/shared/domain';
-
-export const loadSessionItems = createAction(
-  '[SessionItems API] Load SessionItems'
-);
-
-export const loadSessionItemsSuccess = createAction(
-  '[SessionItems API] Load SessionItems Success',
-  props<{ sessionItems: SessionItem[] }>()
-);
-
-export const loadSessionItemsFailure = createAction(
-  '[SessionItems API] Load SessionItems Failure',
-  props<{ error: any }>()
-);
+import { SessionItem } from '@bod/shared/models';
 
 export const loadSessionItem = createAction(
   '[SessionItems API] Load SessionItem',

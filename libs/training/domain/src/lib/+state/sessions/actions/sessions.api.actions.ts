@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Session } from '@bod/shared/domain';
+import { Session } from '@bod/shared/models';
 
 export const loadSession = createAction(
   '[Sessions API] Load Session',

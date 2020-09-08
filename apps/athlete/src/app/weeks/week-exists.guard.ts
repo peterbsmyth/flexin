@@ -9,7 +9,6 @@ import {
   switchMapTo,
   map,
   catchError,
-  tap,
 } from 'rxjs/operators';
 
 @Injectable({
@@ -25,9 +24,6 @@ export class WeekExistsGuard implements CanActivate {
   }
 
   hasWeek(id: string): Observable<boolean> {
-    /**
-     * if there is a result from selected week, cool
-     */
     this.weeksState.dispatch(WeeksPageActions.selectWeek({ id: +id }));
     return this.hasWeekInStore().pipe(
       switchMap((inStore) => {
@@ -35,7 +31,7 @@ export class WeekExistsGuard implements CanActivate {
           return of(inStore);
         } else {
           /**
-           * if not a result then dispatch another action to get it on store
+           * if there is a result from selected week, cool
            */
           this.weeksState.dispatch(WeeksPageActions.loadWeek({ id: +id }));
           return this.waitForCollectionToLoad().pipe(

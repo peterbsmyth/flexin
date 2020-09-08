@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  Router,
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { SessionsFacade, SessionsPageActions } from '@bod/training/domain';
 import {
@@ -19,14 +15,14 @@ import {
   providedIn: 'root',
 })
 export class SessionExistsGuard implements CanActivate {
-  canActivate(
-    next: ActivatedRouteSnapshot
-  ): Observable<boolean> {
+  canActivate(next: ActivatedRouteSnapshot): Observable<boolean> {
     return this.hasSession(next.params['sessionId']);
   }
 
   hasSessionInStore(): Observable<boolean> {
-    return this.sessionsState.selectedSessions$.pipe(map((session) => !!session));
+    return this.sessionsState.selectedSessions$.pipe(
+      map((session) => !!session)
+    );
   }
 
   hasSession(id: string): Observable<boolean> {
@@ -36,13 +32,13 @@ export class SessionExistsGuard implements CanActivate {
     this.sessionsState.dispatch(SessionsPageActions.selectSession({ id: +id }));
     return this.hasSessionInStore().pipe(
       switchMap((inStore) => {
+        
         if (inStore) {
           return of(inStore);
         } else {
-          /**
-           * if not a result then dispatch another action to get it on store
-           */
-          this.sessionsState.dispatch(SessionsPageActions.loadSession({ id: +id }));
+          this.sessionsState.dispatch(
+            SessionsPageActions.loadSession({ id: +id })
+          );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.sessionsState.selectedSessions$),
             map((session) => !!session),

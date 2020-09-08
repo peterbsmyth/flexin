@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Exercise } from '@bod/shared/domain';
+import { Exercise } from '@bod/shared/models';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, copyArrayItem, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { tap, withLatestFrom, takeUntil } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';

@@ -15,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { SessionsPage } from './pages/sessions/sessions.page';
 import { SessionPage } from './pages/session/session.page';
+import { SessionItemPage } from './pages/session-item/session-item.page';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { SessionPage } from './pages/session/session.page';
     MaximumAttemptFormComponent,
     SessionsPage,
     SessionPage,
+    SessionItemPage,
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,7 @@ import { SessionPage } from './pages/session/session.page';
     MatButtonModule,
     MatInputModule,
     MatListModule,
+    ReactiveComponentModule
   ],
 })
 export class SessionsModule {}

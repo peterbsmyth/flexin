@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Week } from '@bod/shared/domain';
+import { Week } from '@bod/shared/models';
 
 export const loadWeeks = createAction('[Weeks API] Load Weeks');
 

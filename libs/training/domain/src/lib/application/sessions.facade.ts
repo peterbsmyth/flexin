@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
 import * as fromRoot from '../+state/root.reducer';
-import * as fromSessions from '../+state/sessions/sessions.reducer';
 import * as SessionsSelectors from '../+state/sessions/sessions.selectors';
 
 @Injectable()
@@ -17,6 +16,12 @@ export class SessionsFacade {
   selectedSessions$ = this.store.pipe(
     select(SessionsSelectors.getSelected)
   );
+  allSessionItems$ = this.store.pipe(
+    select(SessionsSelectors.getSessionItems)
+  )
+  pages$ = this.store.pipe(
+    select(SessionsSelectors.getPages)
+  )
 
   dispatch(action: Action) {
     this.store.dispatch(action);

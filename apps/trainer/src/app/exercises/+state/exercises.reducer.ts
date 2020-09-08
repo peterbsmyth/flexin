@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as ExercisesActions from './exercises.actions';
-import { Exercise } from '@bod/shared/domain';
+import { Exercise } from '@bod/shared/models';
 
 export const EXERCISES_FEATURE_KEY = 'exercises';
 

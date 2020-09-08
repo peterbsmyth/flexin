@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { SessionItem } from '@bod/shared/domain';
+import { SessionItem } from '@bod/shared/models';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { tap, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';

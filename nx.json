@@ -42,6 +42,9 @@
     },
     "shared-domain": {
       "tags": ["domain:shared", "type:domain-logic"]
+    },
+    "shared-models": {
+      "tags": ["domain:shared", "type:util"]
     }
   },
   "affected": {

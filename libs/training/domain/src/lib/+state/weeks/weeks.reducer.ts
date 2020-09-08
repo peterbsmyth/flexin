@@ -1,8 +1,8 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { WeeksPageActions, WeeksApiActions } from './actions';
-import { Week } from '@bod/shared/domain';
+import { WeeksPageActions } from './actions';
+import { Week } from '@bod/shared/models';
 
 export const WEEKS_FEATURE_KEY = 'weeks';
 
@@ -21,17 +21,10 @@ export const initialState: WeeksState = weeksAdapter.getInitialState({
 
 export const weeksReducer = createReducer(
   initialState,
-  on(WeeksPageActions.loadWeek, WeeksApiActions.loadWeeks, (state) => ({
+  on(WeeksPageActions.loadWeek, (state) => ({
     ...state,
     loaded: false,
     error: null,
-  })),
-  on(WeeksApiActions.loadWeeksSuccess, (state, { weeks }) =>
-    weeksAdapter.setAll(weeks, { ...state, loaded: true })
-  ),
-  on(WeeksApiActions.loadWeeksFailure, (state, { error }) => ({
-    ...state,
-    error,
   })),
   on(WeeksPageActions.selectWeek, (state, { id }) => ({
     ...state,

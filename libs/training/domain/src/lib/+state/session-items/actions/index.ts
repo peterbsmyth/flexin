@@ -1,2 +1,3 @@
 import * as SessionItemsApiActions from './session-items.api.actions';
-export { SessionItemsApiActions };
+import * as SessionItemsPageActions from './session-items.page.actions';
+export { SessionItemsApiActions, SessionItemsPageActions };

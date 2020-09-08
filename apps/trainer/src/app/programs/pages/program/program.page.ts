@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as fromPrograms from '../../+state/programs.reducer';
 import { Store, select } from '@ngrx/store';
 import { Observable, pipe, Subject } from 'rxjs';
-import { Program } from '@bod/shared/domain';
+import { Program } from '@bod/shared/models';
 import { getSelected, getProgramsLoaded } from '../../+state/programs.selectors';
 import { takeUntil } from 'rxjs/operators';
 import { loadProgram } from '../../+state/programs.actions';

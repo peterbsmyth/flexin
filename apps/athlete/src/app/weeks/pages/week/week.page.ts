@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Week, Session } from '@bod/shared/domain';
+import { Week, Session } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { WeeksFacade } from '@bod/training/domain';
@@ -15,7 +15,7 @@ export class WeekPage implements OnInit {
   sessionsLoaded$: Observable<boolean>;
 
   constructor(
-    public weeksState: WeeksFacade
+    private weeksState: WeeksFacade
   ) {
     this.week$ = this.weeksState.selectedWeeks$
       .pipe(

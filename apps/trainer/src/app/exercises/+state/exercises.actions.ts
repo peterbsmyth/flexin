@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Exercise } from '@bod/shared/domain';
+import { Exercise } from '@bod/shared/models';
 
 export const loadExercises = createAction('[Exercises] Load Exercises');
 

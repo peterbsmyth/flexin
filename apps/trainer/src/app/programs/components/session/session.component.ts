@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
-import { Session, SessionItem } from '@bod/shared/domain';
+import { Session, SessionItem } from '@bod/shared/models';
 
 @Component({
   selector: 'bod-session',

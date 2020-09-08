@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService, WeekService } from '@bod/data';
-import { SessionItem, mockSessionItems } from '@bod/shared/domain';
+import { SessionItem, mockSessionItems } from '@bod/shared/models';
 import { Router } from '@angular/router';
 
 @Component({

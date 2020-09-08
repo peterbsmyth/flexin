@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MaxAttemptItem } from '@bod/shared/domain';
+import { MaxAttemptItem } from '@bod/shared/models';
 
 @Component({
   selector: 'bod-maximum-attempt',
