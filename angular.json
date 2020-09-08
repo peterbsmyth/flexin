@@ -45,7 +45,8 @@
             "aot": true,
             "assets": [
               "apps/athlete/src/favicon.ico",
-              "apps/athlete/src/assets"
+              "apps/athlete/src/assets",
+              "apps/athlete/src/_redirects"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
@@ -137,7 +138,9 @@
             "aot": true,
             "assets": [
               "apps/trainer/src/favicon.ico",
-              "apps/trainer/src/assets"
+              "apps/trainer/src/assets",
+              "apps/trainer/src/_redirects"
+
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
