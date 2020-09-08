@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromPrograms from '../../+state/programs.reducer';
-import { loadPrograms } from '../../+state/programs.actions';
+import { ProgramsFacade, ProgramsPageActions } from '@bod/coaching/domain';
+
 
 @Component({
   template: `
@@ -13,11 +12,11 @@ import { loadPrograms } from '../../+state/programs.actions';
 export class CreatePage implements OnInit {
 
   constructor(
-    private store$: Store<fromPrograms.State>
+    private programsState: ProgramsFacade
   ) { }
 
   ngOnInit(): void {
-    this.store$.dispatch(loadPrograms());
+    this.programsState.dispatch(ProgramsPageActions.loadPrograms());
   }
 
 }

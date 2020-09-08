@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromExercises from '../../+state/exercises.reducer';
-import { saveExercise } from '../../+state/exercises.actions';
+import { ExercisesFacade, ExercisesApiActions } from '@bod/coaching/domain';
 
 @Component({
   templateUrl: './create.page.html',
-  styleUrls: ['./create.page.scss']
+  styleUrls: ['./create.page.scss'],
 })
 export class CreatePage implements OnInit {
+  constructor(private exercisesState: ExercisesFacade) {}
 
-  constructor(
-    private store$: Store<fromExercises.State & fromExercises.ExercisesPartialState>
-  ) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSave(exercise) {
-    this.store$.dispatch(saveExercise({ exercise }));
+    this.exercisesState.dispatch(
+      ExercisesApiActions.saveExercise({ exercise })
+    );
   }
 }

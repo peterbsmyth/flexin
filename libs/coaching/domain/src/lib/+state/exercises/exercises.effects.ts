@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
-import  { ExercisesApiActions } from './actions';
+import { fetch, optimisticUpdate } from '@nrwl/angular';
+import { ExercisesApiActions } from './actions';
+import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ExercisesEffects {
@@ -13,7 +15,6 @@ export class ExercisesEffects {
           // Your custom service 'load' logic goes here. For now just return a success action...
           return ExercisesApiActions.loadExercisesSuccess({ exercises: [] });
         },
-
         onError: (action, error) => {
           console.error('Error', error);
           return ExercisesApiActions.loadExercisesFailure({ error });
@@ -22,5 +23,33 @@ export class ExercisesEffects {
     )
   );
 
-  constructor(private actions$: Actions) {}
+  saveExercise$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExercisesApiActions.saveExercise),
+      optimisticUpdate({
+        // provides an action
+        run: (action) => {
+          return this.exerciseService
+            .saveOne(action.exercise)
+            .pipe(
+              map((exercise) =>
+                ExercisesApiActions.saveExerciseSuccess({ exercise })
+              )
+            );
+        },
+        undoAction: (action, error: any) => {
+          // dispatch an undo action to undo the changes in the client state
+          return {
+            type: 'UNDO_TODO_UPDATE',
+            todo: action.exercise,
+          };
+        },
+      })
+    )
+  );
+
+  constructor(
+    private actions$: Actions,
+    private exerciseService: ExerciseDataService
+  ) {}
 }

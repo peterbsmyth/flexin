@@ -1,39 +1,23 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import * as fromPrograms from '../../+state/programs.reducer';
-import { loadPrograms } from '../../+state/programs.actions';
-import { Subject, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ProgramsFacade, ProgramsPageActions } from '@bod/coaching/domain';
 import { Program } from '@bod/shared/models';
-import { getAllPrograms, getProgramsLoaded } from '../../+state/programs.selectors';
-import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
 })
-export class HomePage implements OnInit, OnDestroy {
-  unsubscribe$: Subject<any> = new Subject();
+export class HomePage implements OnInit {
   programs$: Observable<Program[]>;
   loaded$: Observable<boolean>;
   constructor(
-    private store$: Store<fromPrograms.State & fromPrograms.ProgramsPartialState>,
+    private programsState: ProgramsFacade
   ) {
-    this.store$.dispatch(loadPrograms());
-    this.programs$ = this.store$
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        select(getAllPrograms)
-      );
-    this.loaded$ = this.store$.pipe(
-      takeUntil(this.unsubscribe$),
-      select(getProgramsLoaded)
-    );
+    this.programs$ = this.programsState.allPrograms$;
+    this.loaded$ = this.programsState.loaded$;
   }
 
-  ngOnInit(): void { }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  ngOnInit(): void {
+    this.programsState.dispatch(ProgramsPageActions.loadPrograms());
   }
 }

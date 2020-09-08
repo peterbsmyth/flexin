@@ -18,10 +18,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import * as fromPrograms from './+state/programs.reducer';
-import { ProgramsEffects } from './+state/programs.effects';
 import { CoachingDomainModule } from '@bod/coaching/domain';
 import { HomePage } from './pages/home/home.page';
 import { MatListModule } from '@angular/material/list';
@@ -42,6 +38,7 @@ import { ProgramPage } from './pages/program/program.page';
   ],
   imports: [
     CommonModule,
+    CoachingDomainModule,
     ReactiveFormsModule,
     ProgramsRoutingModule,
     MatInputModule,
@@ -53,12 +50,6 @@ import { ProgramPage } from './pages/program/program.page';
     MatIconModule,
     MatListModule,
     BodComponentsModule,
-    CoachingDomainModule,
-    StoreModule.forFeature(
-      fromPrograms.PROGRAMS_FEATURE_KEY,
-      fromPrograms.reducer
-    ),
-    EffectsModule.forFeature([ProgramsEffects]),
   ],
 })
 export class ProgramsModule {}
