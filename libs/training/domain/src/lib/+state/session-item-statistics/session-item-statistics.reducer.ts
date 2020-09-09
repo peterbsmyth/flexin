@@ -6,7 +6,8 @@ import { SessionItemStatistic } from '@bod/shared/models';
 
 export const SESSIONITEMSTATISTICS_FEATURE_KEY = 'sessionItemStatistics';
 
-export interface SessionItemStatisticsState extends EntityState<SessionItemStatistic> {
+export interface SessionItemStatisticsState
+  extends EntityState<SessionItemStatistic> {
   selectedId?: string | number; // which SessionItemStatistics record has been selected
   loaded: boolean; // has the SessionItemStatistics list been loaded
   error?: string | null; // last known error (if any)
@@ -25,15 +26,29 @@ export const initialState: SessionItemStatisticsState = sessionItemStatisticsAda
 
 const sessionItemStatisticsReducer = createReducer(
   initialState,
-  on(SessionItemStatisticsActions.loadSessionItemStatistics, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
+  on(
+    SessionItemStatisticsActions.loadSessionItemStatistics,
+    SessionItemStatisticsActions.saveSessionItemStatistic,
+    SessionItemStatisticsActions.updateSessionItemStatistic,
+    (state) => ({
+      ...state,
+      loaded: false,
+      error: null,
+    })
+  ),
   on(
     SessionItemStatisticsActions.loadSessionItemStatisticsSuccess,
     (state, { sessionItemStatistics }) =>
       sessionItemStatisticsAdapter.setAll(sessionItemStatistics, {
+        ...state,
+        loaded: true,
+      })
+  ),
+  on(
+    SessionItemStatisticsActions.saveSessionItemStatisticSuccess,
+    SessionItemStatisticsActions.updateSessionItemStatisticSuccess,
+    (state, { sessionItemStatistic }) =>
+      sessionItemStatisticsAdapter.upsertOne(sessionItemStatistic, {
         ...state,
         loaded: true,
       })
@@ -44,6 +59,9 @@ const sessionItemStatisticsReducer = createReducer(
   )
 );
 
-export function reducer(state: SessionItemStatisticsState | undefined, action: Action) {
+export function reducer(
+  state: SessionItemStatisticsState | undefined,
+  action: Action
+) {
   return sessionItemStatisticsReducer(state, action);
 }

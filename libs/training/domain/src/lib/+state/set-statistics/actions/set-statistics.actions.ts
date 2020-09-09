@@ -14,3 +14,33 @@ export const loadSetStatisticsFailure = createAction(
   '[SetStatistics] Load SetStatistics Failure',
   props<{ error: any }>()
 );
+
+export const saveSetStatistic = createAction(
+  '[SetStatistics] Save SetStatistic',
+  props<{ setStatistic: SetStatistic }>()
+);
+
+export const saveSetStatisticSuccess = createAction(
+  '[SetStatistics] Save SetStatistic Success',
+  props<{ setStatistic: SetStatistic }>()
+);
+
+export const saveSetStatisticFailure = createAction(
+  '[SetStatistics] Save SetStatistic Failure',
+  props<{ error: any }>()
+);
+
+export const updateSetStatistic = createAction(
+  '[SetStatistics] Update SetStatistic',
+  props<{ setStatistic: SetStatistic }>()
+);
+
+export const updateSetStatisticSuccess = createAction(
+  '[SetStatistics] Update SetStatistic Success',
+  props<{ setStatistic: SetStatistic }>()
+);
+
+export const updateSetStatisticFailure = createAction(
+  '[SetStatistics] Update SetStatistic Failure',
+  props<{ error: any }>()
+);

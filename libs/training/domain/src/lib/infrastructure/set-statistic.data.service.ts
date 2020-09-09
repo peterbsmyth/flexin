@@ -20,6 +20,14 @@ export class SetStatisticDataService {
     return this.http.get<SetStatistic>(`${this.API_URL}/set-statistics/${id}`);
   }
 
+  postOne(setStatistic: SetStatistic): Observable<SetStatistic> {
+    return this.http.post<SetStatistic>(`${this.API_URL}/set-statistics`, setStatistic);
+  }
+
+  putOne(setStatistic: SetStatistic): Observable<SetStatistic> {
+    return this.http.put<SetStatistic>(`${this.API_URL}/set-statistics`, setStatistic);
+  }
+
   constructor(
     private http: HttpClient
   ) { }

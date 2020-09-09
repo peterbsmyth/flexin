@@ -20,6 +20,14 @@ export class SessionItemStatisticDataService {
     return this.http.get<SessionItemStatistic>(`${this.API_URL}/session-item-statistics/${id}`);
   }
 
+  postOne(sessionItemStatistic: SessionItemStatistic): Observable<SessionItemStatistic> {
+    return this.http.post<SessionItemStatistic>(`${this.API_URL}/session-item-statistics/`, sessionItemStatistic);
+  }
+
+  putOne(sessionItemStatistic: SessionItemStatistic): Observable<SessionItemStatistic> {
+    return this.http.put<SessionItemStatistic>(`${this.API_URL}/session-item-statistics`, sessionItemStatistic);
+  }
+
   constructor(
     private http: HttpClient
   ) { }

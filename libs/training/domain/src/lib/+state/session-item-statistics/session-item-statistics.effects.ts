@@ -33,6 +33,56 @@ export class SessionItemStatisticsEffects {
     )
   );
 
+  saveSessionItemStatistic$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SessionItemStatisticsActions.saveSessionItemStatistic),
+      fetch({
+        run: (action) => {
+          return this.backend
+            .postOne(action.sessionItemStatistic)
+            .pipe(
+              map((sessionItemStatistic) =>
+                SessionItemStatisticsActions.saveSessionItemStatisticSuccess({
+                  sessionItemStatistic,
+                })
+              )
+            );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return SessionItemStatisticsActions.saveSessionItemStatisticFailure({
+            error,
+          });
+        },
+      })
+    )
+  );
+
+  updateSessionItemStatistic$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SessionItemStatisticsActions.updateSessionItemStatistic),
+      fetch({
+        run: (action) => {
+          return this.backend
+            .putOne(action.sessionItemStatistic)
+            .pipe(
+              map((sessionItemStatistic) =>
+                SessionItemStatisticsActions.updateSessionItemStatisticSuccess({
+                  sessionItemStatistic,
+                })
+              )
+            );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return SessionItemStatisticsActions.updateSessionItemStatisticFailure({
+            error,
+          });
+        },
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private backend: SessionItemStatisticDataService

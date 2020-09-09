@@ -39,6 +39,15 @@ const setStatisticsReducer = createReducer(
       })
   ),
   on(
+    SetStatisticsActions.saveSetStatisticSuccess,
+    SetStatisticsActions.updateSetStatisticSuccess,
+    (state, { setStatistic }) =>
+      setStatisticsAdapter.upsertOne(setStatistic, {
+        ...state,
+        loaded: true,
+      })
+  ),
+  on(
     SetStatisticsActions.loadSetStatisticsFailure,
     (state, { error }) => ({ ...state, error })
   )
