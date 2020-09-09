@@ -1,3 +1,5 @@
+export { SetStatisticsActions } from './lib/+state/set-statistics/actions';
+export * from './lib/application/set-statistics.facade';
 export { SessionItemStatisticsActions } from './lib/+state/session-item-statistics/actions';
 export * from './lib/application/session-item-statistics.facade';
 export * from './lib/training-domain.module';

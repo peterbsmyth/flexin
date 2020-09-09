@@ -11,6 +11,10 @@ import {
   SessionItemStatisticsState,
 } from './session-item-statistics/session-item-statistics.reducer';
 import {
+  SETSTATISTICS_FEATURE_KEY,
+  SetStatisticsState,
+} from './set-statistics/set-statistics.reducer';
+import {
   SESSIONS_FEATURE_KEY,
   SessionsState,
 } from './sessions/sessions.reducer';
@@ -21,5 +25,6 @@ export interface PartialState {
   readonly [SESSIONITEMS_FEATURE_KEY]: SessionItemsState;
   readonly [SESSIONITEMSTATISTICS_FEATURE_KEY]: SessionItemStatisticsState;
   readonly [SESSIONS_FEATURE_KEY]: SessionsState;
+  readonly [SETSTATISTICS_FEATURE_KEY]: SetStatisticsState;
   readonly [WEEKS_FEATURE_KEY]: WeeksState;
 }

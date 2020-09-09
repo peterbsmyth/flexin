@@ -23,6 +23,10 @@ import * as fromSessionItemStatistics from './+state/session-item-statistics/ses
 import { SessionItemStatisticsEffects } from './+state/session-item-statistics/session-item-statistics.effects';
 import { SessionItemStatisticsFacade } from './application/session-item-statistics.facade';
 import { SessionItemStatisticDataService } from './infrastructure/session-item-statistic.data.service';
+import * as fromSetStatistics from './+state/set-statistics/set-statistics.reducer';
+import { SetStatisticsEffects } from './+state/set-statistics/set-statistics.effects';
+import { SetStatisticsFacade } from './application/set-statistics.facade';
+import { SetStatisticDataService } from './infrastructure/set-statistic.data.service';
 
 @NgModule({
   imports: [
@@ -45,12 +49,17 @@ import { SessionItemStatisticDataService } from './infrastructure/session-item-s
       fromSessionItemStatistics.SESSIONITEMSTATISTICS_FEATURE_KEY,
       fromSessionItemStatistics.reducer
     ),
+    StoreModule.forFeature(
+      fromSetStatistics.SETSTATISTICS_FEATURE_KEY,
+      fromSetStatistics.reducer
+    ),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
       SessionsEffects,
       WeeksEffects,
       SessionItemStatisticsEffects,
+      SetStatisticsEffects
     ]),
   ],
   providers: [
@@ -58,12 +67,14 @@ import { SessionItemStatisticDataService } from './infrastructure/session-item-s
     SessionItemDataService,
     SessionItemStatisticDataService,
     SessionDataService,
+    SetStatisticDataService,
     WeekDataService,
     ProgramsFacade,
     SessionItemsFacade,
     SessionsFacade,
     WeeksFacade,
     SessionItemStatisticsFacade,
+    SetStatisticsFacade
   ],
 })
 export class TrainingDomainModule {}
