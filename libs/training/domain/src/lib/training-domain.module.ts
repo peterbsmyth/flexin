@@ -19,6 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { SessionDataService } from './infrastructure/session.data.service';
 import { SessionItemDataService } from './infrastructure/session-item.data.service';
 import { WeekDataService } from './infrastructure/week.data.service';
+import * as fromSessionItemStatistics from './+state/session-item-statistics/session-item-statistics.reducer';
+import { SessionItemStatisticsEffects } from './+state/session-item-statistics/session-item-statistics.effects';
+import { SessionItemStatisticsFacade } from './application/session-item-statistics.facade';
+import { SessionItemStatisticDataService } from './infrastructure/session-item-statistic.data.service';
 
 @NgModule({
   imports: [
@@ -36,26 +40,30 @@ import { WeekDataService } from './infrastructure/week.data.service';
       fromSessions.SESSIONS_FEATURE_KEY,
       fromSessions.reducer
     ),
+    StoreModule.forFeature(fromWeeks.WEEKS_FEATURE_KEY, fromWeeks.reducer),
     StoreModule.forFeature(
-      fromWeeks.WEEKS_FEATURE_KEY,
-      fromWeeks.reducer
+      fromSessionItemStatistics.SESSIONITEMSTATISTICS_FEATURE_KEY,
+      fromSessionItemStatistics.reducer
     ),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
       SessionsEffects,
       WeeksEffects,
+      SessionItemStatisticsEffects,
     ]),
   ],
   providers: [
     ProgramDataService,
     SessionItemDataService,
+    SessionItemStatisticDataService,
     SessionDataService,
     WeekDataService,
     ProgramsFacade,
     SessionItemsFacade,
     SessionsFacade,
     WeeksFacade,
+    SessionItemStatisticsFacade,
   ],
 })
 export class TrainingDomainModule {}
