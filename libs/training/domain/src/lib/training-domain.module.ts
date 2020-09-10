@@ -31,6 +31,14 @@ import { ExerciseDataService } from './infrastructure/exercise.data.service';
 import * as fromExercises from './+state/exercises/exercises.reducer';
 import { ExercisesEffects } from './+state/exercises/exercises.effects';
 import { ExercisesFacade } from './application/exercises.facade';
+import { WeekStatisticDataService } from './infrastructure/week-statistic.data.service';
+import * as fromWeekStatistics from './+state/week-statistics/week-statistics.reducer';
+import { WeekStatisticsEffects } from './+state/week-statistics/week-statistics.effects';
+import { WeekStatisticsFacade } from './application/week-statistics.facade';
+import { ProgramStatisticDataService } from './infrastructure/program-statistic.data.service';
+import * as fromProgramStatistics from './+state/program-statistics/program-statistics.reducer';
+import { ProgramStatisticsEffects } from './+state/program-statistics/program-statistics.effects';
+import { ProgramStatisticsFacade } from './application/program-statistics.facade';
 
 @NgModule({
   imports: [
@@ -39,6 +47,10 @@ import { ExercisesFacade } from './application/exercises.facade';
     StoreModule.forFeature(
       fromExercises.EXERCISES_FEATURE_KEY,
       fromExercises.reducer
+    ),
+    StoreModule.forFeature(
+      fromProgramStatistics.PROGRAMSTATISTICS_FEATURE_KEY,
+      fromProgramStatistics.reducer
     ),
     StoreModule.forFeature(
       fromPrograms.PROGRAMS_FEATURE_KEY,
@@ -60,6 +72,10 @@ import { ExercisesFacade } from './application/exercises.facade';
       fromSetStatistics.SETSTATISTICS_FEATURE_KEY,
       fromSetStatistics.reducer
     ),
+    StoreModule.forFeature(
+      fromWeekStatistics.WEEKSTATISTICS_FEATURE_KEY,
+      fromWeekStatistics.reducer
+    ),
     StoreModule.forFeature(fromWeeks.WEEKS_FEATURE_KEY, fromWeeks.reducer),
     EffectsModule.forFeature([
       ProgramsEffects,
@@ -68,7 +84,9 @@ import { ExercisesFacade } from './application/exercises.facade';
       WeeksEffects,
       SessionItemStatisticsEffects,
       SetStatisticsEffects,
-      ExercisesEffects
+      ExercisesEffects,
+      WeekStatisticsEffects,
+      ProgramStatisticsEffects,
     ]),
   ],
   providers: [
@@ -85,7 +103,11 @@ import { ExercisesFacade } from './application/exercises.facade';
     SessionItemStatisticsFacade,
     SetStatisticsFacade,
     ExerciseDataService,
-    ExercisesFacade
+    ExercisesFacade,
+    WeekStatisticDataService,
+    WeekStatisticsFacade,
+    ProgramStatisticDataService,
+    ProgramStatisticsFacade,
   ],
 })
 export class TrainingDomainModule {}
