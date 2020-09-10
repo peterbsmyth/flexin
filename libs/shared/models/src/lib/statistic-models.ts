@@ -11,7 +11,6 @@ export interface SetStatistic {
   set: number; // 1
   reps: number; // 8
   weight: number; // 35
-  weightUnit?: string; // lbs
   sessionItemStatisticId?: number;
 }
 

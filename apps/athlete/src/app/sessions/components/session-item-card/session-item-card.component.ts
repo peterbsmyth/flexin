@@ -97,7 +97,6 @@ export class SessionItemCardComponent implements OnInit {
       set: number;
       reps: number;
       weight: number;
-      weightUnit?: string;
     }[];
   }) {
     const output: SessionItemCardOutput = {
@@ -108,7 +107,6 @@ export class SessionItemCardComponent implements OnInit {
       },
       setStatistics: value.sets.map((s, i) => ({
         id: this.data.setStatistics[i] && this.data.setStatistics[i].id,
-        weightUnit: 'lbs',
         ...s,
       })).filter(s => s.reps)
     };

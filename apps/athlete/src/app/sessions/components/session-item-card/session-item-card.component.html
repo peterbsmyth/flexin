@@ -23,7 +23,7 @@
             </label>
             <!-- Weight? -->
             <label *ngIf="data.sessionItem.weight">
-              Weight ({{ data.sessionItem.weightUnit || 'lbs' }})
+              Weight ({{ data.sessionItem.weightUnit }})
               <input min="0" step="5" type="number" formControlName="weight">
               <!-- <button (click)="onChangeCount('-', 'weight', i)">-</button>
               <button (click)="onChangeCount('+', 'weight', i)">+</button> -->
