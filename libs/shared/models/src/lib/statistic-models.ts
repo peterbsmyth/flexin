@@ -1,7 +1,7 @@
 export interface SessionItemStatistic {
   id?: number;
-  sessionItem: number; // SessionItem
-  setStatistics: number[], // SetStatistic[]
+  sessionItem?: number; // SessionItem
+  setStatistics?: number[], // SetStatistic[]
   rpe: number; // 8
   notes: string; // 'not at my full strength'
 }
@@ -11,14 +11,14 @@ export interface SetStatistic {
   set: number; // 1
   reps: number; // 8
   weight: number; // 35
-  weightUnit: string; // lbs
-  sessionItemStatisticId: number;
+  weightUnit?: string; // lbs
+  sessionItemStatisticId?: number;
 }
 
 export interface SessionStatistic {
   id?: number;
   session: number; // Session
-  sessionItemStatistics: number[]; // SessionItemStatistic[]
+  sessionItemStatistics?: number[]; // SessionItemStatistic[]
 }
 
 export interface WeekStatistic {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {
   SessionItem,
   SessionItemStatistic,
@@ -6,13 +6,7 @@ import {
   Exercise,
 } from '@bod/shared/models';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-
-export interface SessionItemCardData {
-  exercise: Exercise;
-  sessionItem: SessionItem;
-  sessionItemStatistic: SessionItemStatistic;
-  setStatistics: SetStatistic[];
-}
+import { SessionItemCardData, SessionItemCardOutput } from '@bod/training/domain';
 
 @Component({
   selector: 'bod-session-item-card',
@@ -29,6 +23,7 @@ export class SessionItemCardComponent implements OnInit {
     this._data = data;
     this.form = this.buildForm(data);
   }
+  @Output() save: EventEmitter<SessionItemCardOutput> = new EventEmitter();
   form: FormGroup = this.fb.group({});
 
   get sets() {
@@ -94,7 +89,29 @@ export class SessionItemCardComponent implements OnInit {
     });
   }
 
-  onSave(value) {
-    console.dir(value);
+  onSave(value: {
+    rpe: number;
+    notes: string;
+    sets: {
+      id?: number;
+      set: number;
+      reps: number;
+      weight: number;
+      weightUnit?: string;
+    }[];
+  }) {
+    const output: SessionItemCardOutput = {
+      sessionItemStatistic: {
+        id: this.data.sessionItemStatistic.id,
+        rpe: value.rpe,
+        notes: value.notes
+      },
+      setStatistics: value.sets.map((s, i) => ({
+        id: this.data.setStatistics[i] && this.data.setStatistics[i].id,
+        weightUnit: 'lbs',
+        ...s,
+      })).filter(s => s.reps)
+    };
+    this.save.emit(output);
   }
 }

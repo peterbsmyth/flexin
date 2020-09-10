@@ -40,7 +40,7 @@ const setStatisticsReducer = createReducer(
   ),
   on(
     SetStatisticsActions.saveSetStatisticSuccess,
-    SetStatisticsActions.updateSetStatisticSuccess,
+    SetStatisticsActions.updateSetStatistic,
     (state, { setStatistic }) =>
       setStatisticsAdapter.upsertOne(setStatistic, {
         ...state,

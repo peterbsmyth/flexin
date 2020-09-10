@@ -46,7 +46,7 @@ const sessionItemStatisticsReducer = createReducer(
   ),
   on(
     SessionItemStatisticsActions.saveSessionItemStatisticSuccess,
-    SessionItemStatisticsActions.updateSessionItemStatisticSuccess,
+    SessionItemStatisticsActions.updateSessionItemStatistic,
     (state, { sessionItemStatistic }) =>
       sessionItemStatisticsAdapter.upsertOne(sessionItemStatistic, {
         ...state,

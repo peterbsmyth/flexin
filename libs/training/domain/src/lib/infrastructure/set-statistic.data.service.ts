@@ -25,7 +25,7 @@ export class SetStatisticDataService {
   }
 
   putOne(setStatistic: SetStatistic): Observable<SetStatistic> {
-    return this.http.put<SetStatistic>(`${this.API_URL}/set-statistics`, setStatistic);
+    return this.http.put<SetStatistic>(`${this.API_URL}/set-statistics/${setStatistic.id}`, setStatistic);
   }
 
   constructor(

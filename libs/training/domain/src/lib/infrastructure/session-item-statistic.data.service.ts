@@ -9,26 +9,40 @@ export class SessionItemStatisticDataService {
   private API_URL = environment.API_URL;
 
   getAllBySessionItem(id: number) {
-    return this.http.get<SessionItemStatistic[]>(`${this.API_URL}/session-items/${id}/session-item-statistic`);
+    return this.http.get<SessionItemStatistic[]>(
+      `${this.API_URL}/session-items/${id}/session-item-statistic`
+    );
   }
 
   getAll(): Observable<SessionItemStatistic[]> {
-    return this.http.get<SessionItemStatistic[]>(`${this.API_URL}/session-item-statistics`);
+    return this.http.get<SessionItemStatistic[]>(
+      `${this.API_URL}/session-item-statistics`
+    );
   }
 
   getOne(id: number): Observable<SessionItemStatistic> {
-    return this.http.get<SessionItemStatistic>(`${this.API_URL}/session-item-statistics/${id}`);
+    return this.http.get<SessionItemStatistic>(
+      `${this.API_URL}/session-item-statistics/${id}`
+    );
   }
 
-  postOne(sessionItemStatistic: SessionItemStatistic): Observable<SessionItemStatistic> {
-    return this.http.post<SessionItemStatistic>(`${this.API_URL}/session-item-statistics/`, sessionItemStatistic);
+  postOne(
+    sessionItemStatistic: SessionItemStatistic
+  ): Observable<SessionItemStatistic> {
+    return this.http.post<SessionItemStatistic>(
+      `${this.API_URL}/session-item-statistics/`,
+      sessionItemStatistic
+    );
   }
 
-  putOne(sessionItemStatistic: SessionItemStatistic): Observable<SessionItemStatistic> {
-    return this.http.put<SessionItemStatistic>(`${this.API_URL}/session-item-statistics`, sessionItemStatistic);
+  putOne(
+    sessionItemStatistic: SessionItemStatistic
+  ): Observable<SessionItemStatistic> {
+    return this.http.put<SessionItemStatistic>(
+      `${this.API_URL}/session-item-statistics/${sessionItemStatistic.id}`,
+      sessionItemStatistic
+    );
   }
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 }

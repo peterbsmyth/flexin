@@ -10,6 +10,8 @@ import {
   SetStatisticsFacade,
   ExercisesFacade,
   ExercisesApiActions,
+  SessionItemCardData,
+  SessionItemCardOutput,
 } from '@bod/training/domain';
 import {
   SessionItem,
@@ -26,7 +28,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./session-item.page.scss'],
 })
 export class SessionItemPage implements OnInit {
-  data$: Observable<any>;
+  data$: Observable<SessionItemCardData>;
   sessionItem$: Observable<SessionItem>;
   sessionItemStatistic$: Observable<SessionItemStatistic>;
   setStatistics$: Observable<SetStatistic[]>;
@@ -72,5 +74,36 @@ export class SessionItemPage implements OnInit {
     );
     this.sessionsState.dispatch(SetStatisticsActions.loadSetStatistics());
     this.sessionsState.dispatch(ExercisesApiActions.loadExercises());
+  }
+
+  onSave(output: SessionItemCardOutput) {
+    const {
+      sessionItemStatistic,
+      setStatistics
+    } = output;
+    if (sessionItemStatistic.id) {
+      this.sessionsState.dispatch(
+        SessionItemStatisticsActions.updateSessionItemStatistic({
+          sessionItemStatistic
+        })
+      );
+    } else {
+      this.sessionsState.dispatch(
+        SessionItemStatisticsActions.saveSessionItemStatistic({
+          sessionItemStatistic
+        })
+      );
+    }
+    setStatistics.forEach((setStatistic) => {
+      if (setStatistic.id) {
+        this.sessionsState.dispatch(
+          SetStatisticsActions.updateSetStatistic({ setStatistic })
+        );
+      } else {
+        this.sessionsState.dispatch(
+          SetStatisticsActions.saveSetStatistic({ setStatistic })
+        );
+      }
+    });
   }
 }

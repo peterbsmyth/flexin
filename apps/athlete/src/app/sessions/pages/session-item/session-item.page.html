@@ -6,6 +6,7 @@
   <ng-container *ngrxLet="sessionItem$ as sessionItem">
     <bod-session-item-card
       [data]="data$ | async"
+      (save)="onSave($event)"
     >
     </bod-session-item-card>
   </ng-container>

@@ -36,8 +36,7 @@ export const updateSetStatistic = createAction(
 );
 
 export const updateSetStatisticSuccess = createAction(
-  '[SetStatistics] Update SetStatistic Success',
-  props<{ setStatistic: SetStatistic }>()
+  '[SetStatistics] Update SetStatistic Success'
 );
 
 export const updateSetStatisticFailure = createAction(

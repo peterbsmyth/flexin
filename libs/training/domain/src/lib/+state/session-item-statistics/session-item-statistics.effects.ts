@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
+import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { SessionItemStatisticsActions } from './actions';
-import { map } from 'rxjs/operators';
+import { map, mapTo } from 'rxjs/operators';
 import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
 
 @Injectable()
@@ -12,15 +12,13 @@ export class SessionItemStatisticsEffects {
       ofType(SessionItemStatisticsActions.loadSessionItemStatistics),
       fetch({
         run: () => {
-          return this.backend
-            .getAll()
-            .pipe(
-              map((sessionItemStatistics) =>
-                SessionItemStatisticsActions.loadSessionItemStatisticsSuccess({
-                  sessionItemStatistics,
-                })
-              )
-            );
+          return this.backend.getAll().pipe(
+            map((sessionItemStatistics) =>
+              SessionItemStatisticsActions.loadSessionItemStatisticsSuccess({
+                sessionItemStatistics,
+              })
+            )
+          );
         },
 
         onError: (action, error) => {
@@ -38,15 +36,13 @@ export class SessionItemStatisticsEffects {
       ofType(SessionItemStatisticsActions.saveSessionItemStatistic),
       fetch({
         run: (action) => {
-          return this.backend
-            .postOne(action.sessionItemStatistic)
-            .pipe(
-              map((sessionItemStatistic) =>
-                SessionItemStatisticsActions.saveSessionItemStatisticSuccess({
-                  sessionItemStatistic,
-                })
-              )
-            );
+          return this.backend.postOne(action.sessionItemStatistic).pipe(
+            map((sessionItemStatistic) =>
+              SessionItemStatisticsActions.saveSessionItemStatisticSuccess({
+                sessionItemStatistic,
+              })
+            )
+          );
         },
         onError: (action, error) => {
           console.error('Error', error);
@@ -61,23 +57,23 @@ export class SessionItemStatisticsEffects {
   updateSessionItemStatistic$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SessionItemStatisticsActions.updateSessionItemStatistic),
-      fetch({
+      optimisticUpdate({
         run: (action) => {
           return this.backend
             .putOne(action.sessionItemStatistic)
             .pipe(
-              map((sessionItemStatistic) =>
-                SessionItemStatisticsActions.updateSessionItemStatisticSuccess({
-                  sessionItemStatistic,
-                })
+              mapTo(
+                SessionItemStatisticsActions.updateSessionItemStatisticSuccess()
               )
             );
         },
-        onError: (action, error) => {
+        undoAction: (action, error) => {
           console.error('Error', error);
-          return SessionItemStatisticsActions.updateSessionItemStatisticFailure({
-            error,
-          });
+          return SessionItemStatisticsActions.updateSessionItemStatisticFailure(
+            {
+              error,
+            }
+          );
         },
       })
     )

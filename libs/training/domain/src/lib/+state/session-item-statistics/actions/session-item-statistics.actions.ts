@@ -36,8 +36,7 @@ export const updateSessionItemStatistic = createAction(
 );
 
 export const updateSessionItemStatisticSuccess = createAction(
-  '[SessionItemStatistics] Update SessionItemStatistic Success',
-  props<{ sessionItemStatistic: SessionItemStatistic }>()
+  '[SessionItemStatistics] Update SessionItemStatistic Success'
 );
 
 export const updateSessionItemStatisticFailure = createAction(
