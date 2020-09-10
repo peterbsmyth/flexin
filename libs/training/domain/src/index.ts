@@ -17,3 +17,5 @@ export {
   SessionsApiActions,
 } from './lib/+state/sessions/actions';
 export { WeeksPageActions } from './lib/+state/weeks/actions';
+export { ExercisesApiActions } from './lib/+state/exercises/actions';
+export * from './lib/application/exercises.facade';

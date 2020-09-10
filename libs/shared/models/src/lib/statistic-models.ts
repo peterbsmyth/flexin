@@ -12,6 +12,7 @@ export interface SetStatistic {
   reps: number; // 8
   weight: number; // 35
   weightUnit: string; // lbs
+  sessionItemStatisticId: number;
 }
 
 export interface SessionStatistic {

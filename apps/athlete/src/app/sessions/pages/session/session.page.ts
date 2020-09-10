@@ -12,9 +12,7 @@ export class SessionPage implements OnInit {
   session$: Observable<Session>;
   pages$: Observable<Pages>;
 
-  constructor(
-    private sessionsState: SessionsFacade
-  ) {
+  constructor(private sessionsState: SessionsFacade) {
     this.session$ = this.sessionsState.selectedSessions$.pipe(
       filter((s) => !!s)
     );

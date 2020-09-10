@@ -16,6 +16,7 @@ import { MatListModule } from '@angular/material/list';
 import { SessionPage } from './pages/session/session.page';
 import { SessionItemPage } from './pages/session-item/session-item.page';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { SessionItemCardComponent } from './components/session-item-card/session-item-card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
     MaximumAttemptFormComponent,
     SessionPage,
     SessionItemPage,
+    SessionItemCardComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header
+    >
+    {{ data.exercise?.name }},
+    {{ data.sessionItem.id }}, tempo: {{ data.sessionItem.tempo
+    }}</mat-card-header
+  >
+  <mat-card-content>
+    <form [formGroup]="form" *ngIf="form">
+      <main formArrayName="sets">
+        <section *ngFor="let set of arrayOfCount(data.sessionItem.sets); let i = index;">
+          <div [formGroupName]= "i">
+            <!-- Set #? -->
+            <label>
+              Set {{ i + 1 }}.
+            </label>
+            <!-- Reps? -->
+            <label>
+              Reps
+              <input min="0" type="number" formControlName="reps">
+              <!-- <button (click)="onChangeCount('-', 'reps', i)">-</button>
+              <button (click)="onChangeCount('+', 'reps', i)">+</button> -->
+            </label>
+            <!-- Weight? -->
+            <label *ngIf="data.sessionItem.weight">
+              Weight ({{ data.sessionItem.weightUnit || 'lbs' }})
+              <input min="0" step="5" type="number" formControlName="weight">
+              <!-- <button (click)="onChangeCount('-', 'weight', i)">-</button>
+              <button (click)="onChangeCount('+', 'weight', i)">+</button> -->
+            </label>
+          </div>
+        </section>
+      </main>
+      <aside>
+      <!-- RPE -->
+      <label>
+        RPE
+        <input formControlName="rpe" min="0" max="10" placeholder="1-10" type="number">
+        <!-- <button (click)="onChangeCount('-', 'rpe')">-</button>
+        <button (click)="onChangeCount('+', 'rpe')">+</button> -->
+      </label>
+      <!-- Notes -->
+      <mat-form-field>
+        <mat-label>
+          Notes
+        </mat-label>
+        <textarea formControlName="notes" matInput cols="30" rows="1"></textarea>
+      </mat-form-field>
+      </aside>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="onSave(form.value)" mat-button>save</button>
+  </mat-card-actions>
+</mat-card>

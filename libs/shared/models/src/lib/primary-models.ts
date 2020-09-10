@@ -15,7 +15,8 @@ export interface SessionItem {
   AMRAP: boolean; // true
   leftRight?: boolean; // false
   sets: number; // 3
-  weight: string; // '10 kilos', '25 lbs'
+  weight: number; // '10 kilos', '25 lbs'
+  weightUnit: string;
   intensity: string; // 'tuck to straddle'
   tempo: string; // '5s eccentric, 2s hold at bottom'
 }

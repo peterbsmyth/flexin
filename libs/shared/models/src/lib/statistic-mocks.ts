@@ -21,6 +21,7 @@ export const setStatisticMock: SetStatistic = {
   reps: 10,
   weight: 25,
   weightUnit: 'lbs',
+  sessionItemStatisticId: 1
 };
 
 export const sessionStatisticMock: SessionStatistic = {
