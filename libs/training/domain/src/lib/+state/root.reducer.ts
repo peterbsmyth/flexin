@@ -19,8 +19,10 @@ import {
   SessionsState,
 } from './sessions/sessions.reducer';
 import { WEEKS_FEATURE_KEY, WeeksState } from './weeks/weeks.reducer';
+import { EXERCISES_FEATURE_KEY, ExercisesState } from './exercises/exercises.reducer';
 
 export interface PartialState {
+  readonly [EXERCISES_FEATURE_KEY]: ExercisesState;
   readonly [PROGRAMS_FEATURE_KEY]: ProgramsState;
   readonly [SESSIONITEMS_FEATURE_KEY]: SessionItemsState;
   readonly [SESSIONITEMSTATISTICS_FEATURE_KEY]: SessionItemStatisticsState;

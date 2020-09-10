@@ -27,11 +27,19 @@ import * as fromSetStatistics from './+state/set-statistics/set-statistics.reduc
 import { SetStatisticsEffects } from './+state/set-statistics/set-statistics.effects';
 import { SetStatisticsFacade } from './application/set-statistics.facade';
 import { SetStatisticDataService } from './infrastructure/set-statistic.data.service';
+import { ExerciseDataService } from './infrastructure/exercise.data.service';
+import * as fromExercises from './+state/exercises/exercises.reducer';
+import { ExercisesEffects } from './+state/exercises/exercises.effects';
+import { ExercisesFacade } from './application/exercises.facade';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    StoreModule.forFeature(
+      fromExercises.EXERCISES_FEATURE_KEY,
+      fromExercises.reducer
+    ),
     StoreModule.forFeature(
       fromPrograms.PROGRAMS_FEATURE_KEY,
       fromPrograms.reducer
@@ -41,25 +49,26 @@ import { SetStatisticDataService } from './infrastructure/set-statistic.data.ser
       fromSessionItems.reducer
     ),
     StoreModule.forFeature(
-      fromSessions.SESSIONS_FEATURE_KEY,
-      fromSessions.reducer
-    ),
-    StoreModule.forFeature(fromWeeks.WEEKS_FEATURE_KEY, fromWeeks.reducer),
-    StoreModule.forFeature(
       fromSessionItemStatistics.SESSIONITEMSTATISTICS_FEATURE_KEY,
       fromSessionItemStatistics.reducer
+    ),
+    StoreModule.forFeature(
+      fromSessions.SESSIONS_FEATURE_KEY,
+      fromSessions.reducer
     ),
     StoreModule.forFeature(
       fromSetStatistics.SETSTATISTICS_FEATURE_KEY,
       fromSetStatistics.reducer
     ),
+    StoreModule.forFeature(fromWeeks.WEEKS_FEATURE_KEY, fromWeeks.reducer),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
       SessionsEffects,
       WeeksEffects,
       SessionItemStatisticsEffects,
-      SetStatisticsEffects
+      SetStatisticsEffects,
+      ExercisesEffects
     ]),
   ],
   providers: [
@@ -74,7 +83,9 @@ import { SetStatisticDataService } from './infrastructure/set-statistic.data.ser
     SessionsFacade,
     WeeksFacade,
     SessionItemStatisticsFacade,
-    SetStatisticsFacade
+    SetStatisticsFacade,
+    ExerciseDataService,
+    ExercisesFacade
   ],
 })
 export class TrainingDomainModule {}
