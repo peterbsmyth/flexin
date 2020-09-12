@@ -18,9 +18,8 @@ import {
   StoreRouterConnectingModule,
   DefaultRouterStateSerializer,
 } from '@ngrx/router-store';
-import { ProgramsModule } from './programs/programs.module';
-import { WeeksModule } from './weeks/weeks.module';
-import { SessionsModule } from './sessions/sessions.module';
+import { TrainingFeatureInputWorkoutModule } from '@bod/training/feature-input-workout';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
@@ -49,9 +48,8 @@ import { SessionsModule } from './sessions/sessions.module';
     StoreRouterConnectingModule.forRoot({
       serializer: DefaultRouterStateSerializer,
     }),
-    ProgramsModule,
-    WeeksModule,
-    SessionsModule
+    TrainingFeatureInputWorkoutModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

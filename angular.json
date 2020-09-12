@@ -105,13 +105,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/athlete/tsconfig.app.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/athlete/**/*"
-            ]
+            "tsConfig": ["apps/athlete/tsconfig.app.json"],
+            "exclude": ["**/node_modules/**", "!apps/athlete/**/*"]
           }
         }
       }
@@ -140,16 +135,13 @@
               "apps/trainer/src/favicon.ico",
               "apps/trainer/src/assets",
               "apps/trainer/src/_redirects"
-
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "apps/trainer/src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "apps/trainer/src/assets/scss"
-              ]
+              "includePaths": ["apps/trainer/src/assets/scss"]
             },
             "scripts": []
           },
@@ -208,10 +200,7 @@
               "apps/trainer/tsconfig.app.json",
               "apps/trainer/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/trainer/**/*"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/trainer/**/*"]
           }
         },
         "test": {
@@ -233,13 +222,8 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "tsConfig": [
-              "libs/shared/environments/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/environments/**/*"
-            ]
+            "tsConfig": ["libs/shared/environments/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/environments/**/*"]
           }
         }
       }
@@ -265,13 +249,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/training/domain/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/training/domain/**/*"
-            ]
+            "tsConfig": ["libs/training/domain/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/training/domain/**/*"]
           }
         }
       },
@@ -302,13 +281,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/coaching/domain/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/coaching/domain/**/*"
-            ]
+            "tsConfig": ["libs/coaching/domain/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/coaching/domain/**/*"]
           }
         }
       },
@@ -339,13 +313,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/shared/domain/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/domain/**/*"
-            ]
+            "tsConfig": ["libs/shared/domain/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/domain/**/*"]
           }
         }
       },
@@ -376,13 +345,8 @@
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
-            "tsConfig": [
-              "libs/shared/models/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/models/**/*"
-            ],
+            "tsConfig": ["libs/shared/models/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/models/**/*"],
             "linter": "eslint"
           }
         }
@@ -404,13 +368,9 @@
           "options": {
             "tsConfig": "libs/shared/components/tsconfig.lib.json",
             "project": "libs/shared/components/ng-package.json",
-            "styles": [
-              "libs/shared/components/src/lib/styles.scss"
-            ],
+            "styles": ["libs/shared/components/src/lib/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/shared/components/src/lib/scss"
-              ]
+              "includePaths": ["libs/shared/components/src/lib/scss"]
             }
           },
           "configurations": {
@@ -422,12 +382,44 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
+            "tsConfig": ["libs/shared/components/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/components/**/*"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "training-feature-input-workout": {
+      "projectType": "library",
+      "root": "libs/training/feature-input-workout",
+      "sourceRoot": "libs/training/feature-input-workout/src",
+      "prefix": "training",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/training/feature-input-workout/tsconfig.lib.json",
+            "project": "libs/training/feature-input-workout/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/training/feature-input-workout/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
             "tsConfig": [
-              "libs/shared/components/tsconfig.lib.json"
+              "libs/training/feature-input-workout/tsconfig.lib.json"
             ],
             "exclude": [
               "**/node_modules/**",
-              "!libs/shared/components/**/*"
+              "!libs/training/feature-input-workout/**/*"
             ]
           }
         }
