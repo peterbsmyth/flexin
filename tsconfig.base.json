@@ -29,6 +29,10 @@
       ],
       "@bod/coaching/feature-create-program": [
         "libs/coaching/feature-create-program/src/index.ts"
+      ],
+      "@bod/celebrities/domain": ["libs/celebrities/domain/src/index.ts"],
+      "@bod/celebrities/feature-display-top-ten": [
+        "libs/celebrities/feature-display-top-ten/src/index.ts"
       ]
     }
   },

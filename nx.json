@@ -48,6 +48,15 @@
     },
     "coaching-feature-create-program": {
       "tags": ["domain:coaching", "type:feature"]
+    },
+    "celebrities-domain": {
+      "tags": ["domain:celebrities", "type:domain-logic"]
+    },
+    "celebrity": {
+      "tags": ["domain: celebrities", "type:feature"]
+    },
+    "celebrities-feature-display-top-ten": {
+      "tags": ["domain:celebrities", "type:feature"]
     }
   },
   "affected": {

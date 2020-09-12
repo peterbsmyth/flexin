@@ -132,6 +132,13 @@
               "domain:shared",
               "domain:shared"
             ]
+          },
+          {
+            "sourceTag": "domain:celebrities",
+            "onlyDependOnLibsWithTags": [
+              "domain:celebrities",
+              "domain:shared"
+            ]
           }
         ]
       }

@@ -466,6 +466,160 @@
           "style": "scss"
         }
       }
+    },
+    "celebrities-domain": {
+      "projectType": "library",
+      "root": "libs/celebrities/domain",
+      "sourceRoot": "libs/celebrities/domain/src",
+      "prefix": "celebrities",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/celebrities/domain/tsconfig.lib.json",
+            "project": "libs/celebrities/domain/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/celebrities/domain/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/celebrities/domain/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/celebrities/domain/**/*"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "celebrity": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/celebrity",
+      "sourceRoot": "apps/celebrity/src",
+      "prefix": "bod",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/celebrity",
+            "index": "apps/celebrity/src/index.html",
+            "main": "apps/celebrity/src/main.ts",
+            "polyfills": "apps/celebrity/src/polyfills.ts",
+            "tsConfig": "apps/celebrity/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/celebrity/src/favicon.ico",
+              "apps/celebrity/src/assets"
+            ],
+            "styles": ["apps/celebrity/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/celebrity/src/environments/environment.ts",
+                  "with": "apps/celebrity/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "celebrity:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "celebrity:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "celebrity:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "tsConfig": ["apps/celebrity/tsconfig.app.json"],
+            "exclude": ["**/node_modules/**", "!apps/celebrity/**/*"],
+            "linter": "eslint"
+          }
+        }
+      }
+    },
+    "celebrities-feature-display-top-ten": {
+      "projectType": "library",
+      "root": "libs/celebrities/feature-display-top-ten",
+      "sourceRoot": "libs/celebrities/feature-display-top-ten/src",
+      "prefix": "celebrities",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/celebrities/feature-display-top-ten/tsconfig.lib.json",
+            "project": "libs/celebrities/feature-display-top-ten/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/celebrities/feature-display-top-ten/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/celebrities/feature-display-top-ten/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/celebrities/feature-display-top-ten/**/*"
+            ]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
