@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'trainer',
+  name: 'coach',
   preset: '../../jest.config.js',
-  coverageDirectory: '../../coverage/apps/trainer',
+  coverageDirectory: '../../coverage/apps/coach',
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
     'jest-preset-angular/build/AngularSnapshotSerializer.js',

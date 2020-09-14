@@ -111,37 +111,37 @@
         }
       }
     },
-    "trainer": {
+    "coach": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/trainer",
-      "sourceRoot": "apps/trainer/src",
+      "root": "apps/coach",
+      "sourceRoot": "apps/coach/src",
       "prefix": "bod",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/trainer",
-            "index": "apps/trainer/src/index.html",
-            "main": "apps/trainer/src/main.ts",
-            "polyfills": "apps/trainer/src/polyfills.ts",
-            "tsConfig": "apps/trainer/tsconfig.app.json",
+            "outputPath": "dist/apps/coach",
+            "index": "apps/coach/src/index.html",
+            "main": "apps/coach/src/main.ts",
+            "polyfills": "apps/coach/src/polyfills.ts",
+            "tsConfig": "apps/coach/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "apps/trainer/src/favicon.ico",
-              "apps/trainer/src/assets",
-              "apps/trainer/src/_redirects"
+              "apps/coach/src/favicon.ico",
+              "apps/coach/src/assets",
+              "apps/coach/src/_redirects"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "apps/trainer/src/styles.scss"
+              "apps/coach/src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["apps/trainer/src/assets/scss"]
+              "includePaths": ["apps/coach/src/assets/scss"]
             },
             "scripts": []
           },
@@ -179,34 +179,34 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "trainer:build"
+            "browserTarget": "coach:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "trainer:build:production"
+              "browserTarget": "coach:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "trainer:build"
+            "browserTarget": "coach:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/trainer/tsconfig.app.json",
-              "apps/trainer/tsconfig.spec.json"
+              "apps/coach/tsconfig.app.json",
+              "apps/coach/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/trainer/**/*"]
+            "exclude": ["**/node_modules/**", "!apps/coach/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/trainer/jest.config.js",
+            "jestConfig": "apps/coach/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -452,5 +452,5 @@
       "skipTests": true
     }
   },
-  "defaultProject": "trainer"
+  "defaultProject": "coach"
 }

@@ -22,7 +22,7 @@
     "athlete": {
       "tags": ["domain:training", "type:feature"]
     },
-    "trainer": {
+    "coach": {
       "tags": ["domain:coaching", "type:feature"]
     },
     "shared-environments": {
