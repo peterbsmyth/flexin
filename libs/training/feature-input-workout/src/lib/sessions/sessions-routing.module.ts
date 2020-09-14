@@ -18,12 +18,7 @@ const routes: Routes = [
       {
         path: 'items/:sessionItemId',
         component: SessionItemPage,
-        canActivate: [SessionItemExistsGuard]
-      },
-      {
-        path: '',
-        redirectTo: 'items/1',
-        pathMatch: 'full',
+        canActivate: [SessionItemExistsGuard],
       },
     ],
     canActivate: [SessionExistsGuard],

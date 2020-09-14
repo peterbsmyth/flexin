@@ -23,7 +23,7 @@ import { filter, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'bod-session-item',
+  selector: 'training-session-item',
   templateUrl: './session-item.page.html',
   styleUrls: ['./session-item.page.scss'],
 })
@@ -64,11 +64,6 @@ export class SessionItemPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sessionsState.dispatch(
-      SessionItemsPageActions.loadSessionItemsBySession({
-        id: this.route.parent.snapshot.params['sessionId'],
-      })
-    );
     this.sessionsState.dispatch(
       SessionItemStatisticsActions.loadSessionItemStatistics()
     );
