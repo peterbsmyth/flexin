@@ -4,7 +4,7 @@ import { CdkDrag, CdkDropList, CdkDragDrop, moveItemInArray, copyArrayItem, tran
 import { Exercise } from '@bod/shared/models';
 import { remove } from 'lodash-es';
 import { Router } from '@angular/router';
-import { ExercisesFacade, ExercisesApiActions } from '@bod/coaching/domain';
+import { ExercisesFacade, ExercisesApiActions, DraftProgramsFacade } from '@bod/coaching/domain';
 import { Subject } from 'rxjs';
 import { tap, takeUntil, withLatestFrom } from 'rxjs/operators';
 import Fuse from 'fuse.js';
@@ -28,7 +28,8 @@ export class ProgramBoardPage implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private exerciseState: ExercisesFacade
+    private exerciseState: ExercisesFacade,
+    private draftProgramState: DraftProgramsFacade
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +62,7 @@ export class ProgramBoardPage implements OnInit, OnDestroy {
     /**
      * session-item flow
      */
-    // this.sessionService.configureExercises([this.dayOneList, this.dayTwoList, this.dayThreeList, this.dayFourList]);
+    this.draftProgramState.addIncompleteSessionItems([this.dayOneList, this.dayTwoList, this.dayThreeList, this.dayFourList]);
     this.router.navigateByUrl('/programs/create/2');
 
     /**

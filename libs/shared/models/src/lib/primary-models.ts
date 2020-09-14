@@ -9,8 +9,8 @@ export interface Exercise {
 
 export interface SessionItem {
   id?: number;
-  exerciseId: number;
-  sessionId: number;
+  exerciseId?: number;
+  sessionId?: number;
   reps: number; // 8
   AMRAP: boolean; // true
   leftRight?: boolean; // false
@@ -19,18 +19,19 @@ export interface SessionItem {
   weightUnit: string;
   intensity: string; // 'tuck to straddle'
   tempo: string; // '5s eccentric, 2s hold at bottom'
+  order?: number;
 }
 
 export interface Session {
   id?: number;
-  weekId: number;
+  weekId?: number;
   name: string; // 'PULL A'
   order: number; // 1 (refers to placement with in a Week)
 }
 
 export interface Week {
   id?: number;
-  programId: number;
+  programId?: number;
   number: number; // 6
 }
 

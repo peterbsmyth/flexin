@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { SessionItem, Exercise, mockExercises } from '@bod/shared/models';
+import { SessionItem, Exercise } from '@bod/shared/models';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { tap, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { tap, takeUntil, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { SessionItemData } from '@bod/coaching/domain';
+
 
 @Component({
   selector: 'bod-session-item',
@@ -10,23 +12,26 @@ import { Subject } from 'rxjs';
   styleUrls: ['./session-item.component.scss']
 })
 export class SessionItemComponent implements OnInit, OnDestroy {
+  unsubscribe$: Subject<any> = new Subject();
+  form: FormGroup = this.fb.group({
+    reps: 0,
+    AMRAP: false,
+    sets: 0,
+    weight: '',
+    intensity: new FormControl(''),
+    tempo: '',
+    leftRight: false
+  });
   public leftRight: boolean;
-  private _item: SessionItem;
-  @Input() exercise: Exercise = mockExercises[0];
+
+  private _data: SessionItemData;
   @Input()
-  get item(): SessionItem {
-    return this._item;
-  };
-  set item(item) {
-    this._item = item;
-    this.form.get('reps').setValue(item.reps);
-    this.form.get('AMRAP').setValue(item.AMRAP);
-    this.form.get('sets').setValue(item.sets);
-    this.form.get('leftRight').setValue(item.leftRight);
-    this.form.get('weight').setValue(item.weight);
-    this.form.get('intensity').setValue(item.intensity);
-    this.form.get('tempo').setValue(item.tempo);
-    this.leftRight = this.exercise.leftRight;
+  get data(): SessionItemData {
+    return this._data;
+  }
+  set data(data: SessionItemData) {
+    this._data = data;
+    this.buildForm(data);
   }
 
   private _editable = true;
@@ -42,17 +47,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  @Output() update: EventEmitter<SessionItem> = new EventEmitter();
-  unsubscribe$: Subject<any> = new Subject();
-  form: FormGroup = this.fb.group({
-    reps: 0,
-    AMRAP: false,
-    sets: 0,
-    weight: '',
-    intensity: new FormControl(''),
-    tempo: '',
-    leftRight: false
-  });
+  @Output() update: EventEmitter<SessionItemData> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder
@@ -74,14 +69,29 @@ export class SessionItemComponent implements OnInit, OnDestroy {
     this.form.valueChanges.pipe(
       takeUntil(this.unsubscribe$),
       distinctUntilChanged(),
+      debounceTime(300),
       tap(value => {
-        const sessionItem: SessionItem = {
-          ...this.item,
-          ...value
+        const data: SessionItemData = {
+          ...this.data,
+          sessionItem: {
+            ...this.data.sessionItem,
+            ...value
+          }
         };
-        this.update.emit(sessionItem);
+        this.update.emit(data);
       })
     ).subscribe();
+  }
+
+  buildForm(data) {
+    this.form.get('reps').setValue(data.sessionItem.reps);
+    this.form.get('AMRAP').setValue(data.sessionItem.AMRAP);
+    this.form.get('sets').setValue(data.sessionItem.sets);
+    this.form.get('leftRight').setValue(data.sessionItem.leftRight);
+    this.form.get('weight').setValue(data.sessionItem.weight);
+    this.form.get('intensity').setValue(data.sessionItem.intensity);
+    this.form.get('tempo').setValue(data.sessionItem.tempo);
+    this.leftRight = data.exercise.leftRight;
   }
 
   disableInputs() {

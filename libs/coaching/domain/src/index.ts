@@ -1,4 +1,5 @@
 export * from './lib/coaching-domain.module';
+export * from './lib/application/draft-programs.facade';
 export * from './lib/application/exercises.facade';
 export * from './lib/application/programs.facade';
 export * from './lib/application/session-items.facade';
@@ -15,3 +16,4 @@ export {
   SessionsApiActions,
 } from './lib/+state/sessions/actions';
 export { WeeksPageActions } from './lib/+state/weeks/actions';
+export * from './lib/entities/component.models';

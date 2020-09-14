@@ -4,9 +4,8 @@
 <bod-board>
   <bod-session-item
   class="item"
-  *ngFor="let item of incompleteSessionItems"
-  [item]="item"
-  [exercise]="exercise"
+  *ngFor="let data of draftProgramState.incompleteSessionItems$ | async"
+  [data]="data"
   (update)="onUpdate($event)"
   ></bod-session-item>
 </bod-board>

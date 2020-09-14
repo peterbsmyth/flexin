@@ -1,47 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SessionItem, mockSessionItems, mockExercises } from '@bod/shared/models';
+import { DraftProgramsFacade } from '@bod/coaching/domain';
+import { SessionItem } from '@bod/shared/models';
+import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'bod-session-configuration-board',
   templateUrl: './session-configuration-board.page.html',
-  styleUrls: ['./session-configuration-board.page.scss']
+  styleUrls: ['./session-configuration-board.page.scss'],
 })
 export class SessionConfigurationBoardPage implements OnInit {
-  private _items: SessionItem[];
-  incompleteSessionItems: SessionItem[];
-  exercise = mockExercises[0];
+  private _data: any[];
+  incompleteSessionItems$: Observable<any[]>;
 
   constructor(
-    private router: Router
+    private router: Router,
+    public draftProgramState: DraftProgramsFacade
   ) {
-    this._items = mockSessionItems;
-    this.incompleteSessionItems = mockSessionItems;
+    this.draftProgramState.incompleteSessionItems$
+      .pipe(
+        take(1),
+        tap((data) => {
+          this._data = data;
+        })
+      )
+      .subscribe();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  onUpdate(item: SessionItem) {
-    this._items.forEach((existingItem, i) => {
-      if (item.id === existingItem.id) {
-        this._items[i] = {
-          ...item
+  onUpdate(data: any) {
+    const item = data.sessionItem;
+    this._data.forEach((d, i) => {
+      if (item.id === d.sessionItem.id) {
+        this._data[i].sessionItem = {
+          ...item,
         };
       }
     });
   }
 
   onClickNext() {
-    // const allSessionItems = this.sessionService.finalizeItems(this._items);
-
-    // // put them into sessions
-    // const sessionOne = this.sessionService.createSession('day one', allSessionItems[0], 1);
-    // const sessionTwo = this.sessionService.createSession('day two', allSessionItems[1], 2);
-    // const sessionThree = this.sessionService.createSession('day three', allSessionItems[2], 3);
-    // const sessionFour = this.sessionService.createSession('day four', allSessionItems[3], 4);
-    // const sessions = [sessionOne, sessionTwo, sessionThree, sessionFour];
-    // this.weekService.createWeek(1, sessions);
+    this.draftProgramState.everythingExceptCreateProgram(this._data);
     this.router.navigateByUrl('/programs/create/3');
   }
 }

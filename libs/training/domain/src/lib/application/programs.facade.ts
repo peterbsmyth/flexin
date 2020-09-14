@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
 import * as fromRoot from '../+state/root.reducer';
-import * as fromPrograms from '../+state/programs/programs.reducer';
 import * as ProgramsSelectors from '../+state/programs/programs.selectors';
 
 @Injectable()

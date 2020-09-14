@@ -3,9 +3,12 @@
 <div class="session">
   <bod-session-item
   class="item"
-  *ngFor="let item of session.sessionItems"
+  *ngFor="let sessionItem of session.sessionItems"
   [editable]="false"
-  [item]="item"
+  [data]="{
+    sessionItem: sessionItem,
+    exercise: {}
+  }"
   (update)="onUpdate($event)"
   ></bod-session-item>
 </div>

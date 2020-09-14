@@ -9,7 +9,9 @@ export class SessionItemDataService {
   private API_URL = environment.API_URL;
 
   getAllBySession(id: number) {
-    return this.http.get<SessionItem[]>(`${this.API_URL}/sessions/${id}/session-items`);
+    return this.http.get<SessionItem[]>(
+      `${this.API_URL}/sessions/${id}/session-items`
+    );
   }
 
   getAll(): Observable<SessionItem[]> {
@@ -20,7 +22,12 @@ export class SessionItemDataService {
     return this.http.get<SessionItem>(`${this.API_URL}/session-items/${id}`);
   }
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  saveOne(sessionItem: SessionItem) {
+    return this.http.post<SessionItem>(
+      `${this.API_URL}/session-items`,
+      sessionItem
+    );
+  }
+
+  constructor(private http: HttpClient) {}
 }
