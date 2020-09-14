@@ -1,6 +1,6 @@
 export interface SessionItemStatistic {
   id?: number;
-  sessionItem?: number; // SessionItem
+  sessionItemId?: number; // SessionItem
   setStatistics?: number[], // SetStatistic[]
   rpe: number; // 8
   notes: string; // 'not at my full strength'

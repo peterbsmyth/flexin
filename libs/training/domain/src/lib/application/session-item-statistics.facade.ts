@@ -16,6 +16,9 @@ export class SessionItemStatisticsFacade {
   selectedSessionItemStatistics$ = this.store.pipe(
     select(SessionItemStatisticsSelectors.getSelected)
   );
+  setStatistics$ = this.store.pipe(
+    select(SessionItemStatisticsSelectors.getSetStatistics)
+  );
 
   constructor(
     private store: Store<fromRoot.PartialState>

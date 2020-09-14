@@ -6,7 +6,10 @@ import {
   Exercise,
 } from '@bod/shared/models';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { SessionItemCardData, SessionItemCardOutput } from '@bod/training/domain';
+import {
+  SessionItemCardData,
+  SessionItemCardOutput,
+} from '@bod/training/domain';
 
 @Component({
   selector: 'bod-session-item-card',
@@ -99,16 +102,23 @@ export class SessionItemCardComponent implements OnInit {
       weight: number;
     }[];
   }) {
+    const sessionItemStatisticId = !!this.data.sessionItemStatistic
+      ? this.data.sessionItemStatistic.id
+      : undefined;
     const output: SessionItemCardOutput = {
       sessionItemStatistic: {
-        id: this.data.sessionItemStatistic.id,
+        id: sessionItemStatisticId,
         rpe: value.rpe,
-        notes: value.notes
+        notes: value.notes,
+        sessionItemId: this.data.sessionItem.id,
       },
-      setStatistics: value.sets.map((s, i) => ({
-        id: this.data.setStatistics[i] && this.data.setStatistics[i].id,
-        ...s,
-      })).filter(s => s.reps)
+      setStatistics: value.sets
+        .map((s, i) => ({
+          id: this.data.setStatistics[i] && this.data.setStatistics[i].id,
+          sessionItemStatisticId,
+          ...s,
+        }))
+        .filter((s) => s.reps),
     };
     this.save.emit(output);
   }

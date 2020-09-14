@@ -43,3 +43,18 @@ export const updateSetStatisticFailure = createAction(
   '[SetStatistics] Update SetStatistic Failure',
   props<{ error: any }>()
 );
+
+export const loadSetStatisticsBySessionItemStatistic = createAction(
+  '[SetStatistics] Load SetStatistics by SessionItem',
+  props<{ id: number }>()
+);
+
+export const loadSetStatisticsBySessionItemStatisticSuccess = createAction(
+  '[SetStatistics] Load SetStatistics by SessionItem Success',
+  props<{ setStatistics: SetStatistic[] }>()
+);
+
+export const loadSetStatisticsBySessionItemStatisticFailure = createAction(
+  '[SetStatistics] Load SetStatistics by SessionItem Failure',
+  props<{ error: any }>()
+);

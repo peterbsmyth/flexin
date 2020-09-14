@@ -15,6 +15,21 @@ export const loadSessionItemStatisticsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadSessionItemStatisticBySessionItem = createAction(
+  '[SessionItemStatistics] Load SessionItemStatistic by SessionItem',
+  props<{ id: number }>()
+);
+
+export const loadSessionItemStatisticBySessionItemSuccess = createAction(
+  '[SessionItemStatistics] Load SessionItemStatistic by SessionItem Success',
+  props<{ sessionItemStatistic: SessionItemStatistic }>()
+);
+
+export const loadSessionItemStatisticBySessionItemFailure = createAction(
+  '[SessionItemStatistics] Load SessionItemStatistic by SessionItem Failure',
+  props<{ error: any }>()
+);
+
 export const saveSessionItemStatistic = createAction(
   '[SessionItemStatistics] Save SessionItemStatistic',
   props<{ sessionItemStatistic: SessionItemStatistic }>()
@@ -42,4 +57,10 @@ export const updateSessionItemStatisticSuccess = createAction(
 export const updateSessionItemStatisticFailure = createAction(
   '[SessionItemStatistics] Update SessionItemStatistic Failure',
   props<{ error: any }>()
+);
+
+
+export const selectSessionItemStatistic = createAction(
+  '[SessionItemStatistics] Select SessionItemStatistic',
+  props<{ id: number }>()
 );

@@ -9,7 +9,7 @@ export class SessionItemStatisticDataService {
   private API_URL = environment.API_URL;
 
   getAllBySessionItem(id: number) {
-    return this.http.get<SessionItemStatistic[]>(
+    return this.http.get<SessionItemStatistic>(
       `${this.API_URL}/session-items/${id}/session-item-statistic`
     );
   }
@@ -35,10 +35,10 @@ export class SessionItemStatisticDataService {
     );
   }
 
-  putOne(
+  patchOne(
     sessionItemStatistic: SessionItemStatistic
   ): Observable<SessionItemStatistic> {
-    return this.http.put<SessionItemStatistic>(
+    return this.http.patch<SessionItemStatistic>(
       `${this.API_URL}/session-item-statistics/${sessionItemStatistic.id}`,
       sessionItemStatistic
     );

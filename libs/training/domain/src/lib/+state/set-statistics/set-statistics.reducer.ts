@@ -32,6 +32,7 @@ const setStatisticsReducer = createReducer(
   })),
   on(
     SetStatisticsActions.loadSetStatisticsSuccess,
+    SetStatisticsActions.loadSetStatisticsBySessionItemStatisticSuccess,
     (state, { setStatistics }) =>
       setStatisticsAdapter.setAll(setStatistics, {
         ...state,

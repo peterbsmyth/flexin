@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch, pessimisticUpdate, optimisticUpdate } from '@nrwl/angular';
 import { SetStatisticsActions } from './actions';
-import { map, mapTo } from 'rxjs/operators';
+import { catchError, delay, filter, map, mapTo, retry, switchMap, withLatestFrom } from 'rxjs/operators';
 import { SetStatisticDataService } from '../../infrastructure/set-statistic.data.service';
+import { throwError } from 'rxjs';
+import { SessionItemStatisticsFacade } from '../../application/session-item-statistics.facade';
 
 @Injectable()
 export class SetStatisticsEffects {
@@ -23,6 +25,29 @@ export class SetStatisticsEffects {
         onError: (action, error) => {
           console.error('Error', error);
           return SetStatisticsActions.loadSetStatisticsFailure({
+            error,
+          });
+        },
+      })
+    )
+  );
+
+  loadSetStatisticsBySessionItemStatistic$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SetStatisticsActions.loadSetStatisticsBySessionItemStatistic),
+      fetch({
+        run: ({ id }) => {
+          return this.backend.getAllBySessionItemStatistic(id).pipe(
+            map((setStatistics) =>
+              SetStatisticsActions.loadSetStatisticsBySessionItemStatisticSuccess({
+                setStatistics,
+              })
+            )
+          );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return SetStatisticsActions.loadSetStatisticsBySessionItemStatisticFailure({
             error,
           });
         },
@@ -59,7 +84,7 @@ export class SetStatisticsEffects {
       optimisticUpdate({
         run: (action) => {
           return this.backend
-            .putOne(action.setStatistic)
+            .patchOne(action.setStatistic)
             .pipe(mapTo(SetStatisticsActions.updateSetStatisticSuccess()));
         },
         undoAction: (action, error) => {
@@ -74,6 +99,7 @@ export class SetStatisticsEffects {
 
   constructor(
     private actions$: Actions,
-    private backend: SetStatisticDataService
+    private backend: SetStatisticDataService,
+    private sessionItemsStatisticsState: SessionItemStatisticsFacade
   ) {}
 }

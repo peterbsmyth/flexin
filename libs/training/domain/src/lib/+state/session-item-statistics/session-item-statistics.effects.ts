@@ -31,6 +31,36 @@ export class SessionItemStatisticsEffects {
     )
   );
 
+  loadSessionItemStatisticBySessionItem$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        SessionItemStatisticsActions.loadSessionItemStatisticBySessionItem
+      ),
+      fetch({
+        run: ({ id }) => {
+          return this.backend.getAllBySessionItem(id).pipe(
+            map((sessionItemStatistic) =>
+              SessionItemStatisticsActions.loadSessionItemStatisticBySessionItemSuccess(
+                {
+                  sessionItemStatistic,
+                }
+              )
+            )
+          );
+        },
+
+        onError: (action, error) => {
+          console.error('Error', error);
+          return SessionItemStatisticsActions.loadSessionItemStatisticBySessionItemFailure(
+            {
+              error,
+            }
+          );
+        },
+      })
+    )
+  );
+
   saveSessionItemStatistic$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SessionItemStatisticsActions.saveSessionItemStatistic),
@@ -60,7 +90,7 @@ export class SessionItemStatisticsEffects {
       optimisticUpdate({
         run: (action) => {
           return this.backend
-            .putOne(action.sessionItemStatistic)
+            .patchOne(action.sessionItemStatistic)
             .pipe(
               mapTo(
                 SessionItemStatisticsActions.updateSessionItemStatisticSuccess()

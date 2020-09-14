@@ -9,7 +9,7 @@ export class SetStatisticDataService {
   private API_URL = environment.API_URL;
 
   getAllBySessionItemStatistic(id: number) {
-    return this.http.get<SetStatistic[]>(`${this.API_URL}/session-item-statistics/${id}/set-statistic`);
+    return this.http.get<SetStatistic[]>(`${this.API_URL}/session-item-statistics/${id}/set-statistics`);
   }
 
   getAll(): Observable<SetStatistic[]> {
@@ -24,7 +24,7 @@ export class SetStatisticDataService {
     return this.http.post<SetStatistic>(`${this.API_URL}/set-statistics`, setStatistic);
   }
 
-  putOne(setStatistic: SetStatistic): Observable<SetStatistic> {
+  patchOne(setStatistic: SetStatistic): Observable<SetStatistic> {
     return this.http.put<SetStatistic>(`${this.API_URL}/set-statistics/${setStatistic.id}`, setStatistic);
   }
 

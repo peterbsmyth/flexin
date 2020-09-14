@@ -9,20 +9,20 @@ import { map } from 'rxjs/operators';
 export class ExercisesEffects {
   loadExercises$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ExercisesApiActions.loadExercises),
+      ofType(ExercisesApiActions.loadExercise),
       fetch({
-        run: () => {
+        run: ({ id }) => {
           return this.exerciseService
-            .getAll()
+            .getOne(id)
             .pipe(
-              map((exercises) =>
-                ExercisesApiActions.loadExercisesSuccess({ exercises })
+              map((exercise) =>
+                ExercisesApiActions.loadExerciseSuccess({ exercise })
               )
             );
         },
         onError: (action, error) => {
           console.error('Error', error);
-          return ExercisesApiActions.loadExercisesFailure({ error });
+          return ExercisesApiActions.loadExerciseFailure({ error });
         },
       })
     )

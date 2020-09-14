@@ -23,19 +23,23 @@ export const initialState: ExercisesState = exercisesAdapter.getInitialState({
 const exercisesReducer = createReducer(
   initialState,
   on(
-    ExercisesApiActions.loadExercises,
+    ExercisesApiActions.loadExercise,
     (state) => ({
       ...state,
       loaded: false,
       error: null,
     })
   ),
-  on(ExercisesApiActions.loadExercisesSuccess, (state, { exercises }) =>
-    exercisesAdapter.setAll(exercises, { ...state, loaded: true })
+  on(ExercisesApiActions.loadExerciseSuccess, (state, { exercise }) =>
+    exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
   ),
-  on(ExercisesApiActions.loadExercisesFailure, (state, { error }) => ({
+  on(ExercisesApiActions.loadExerciseFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(ExercisesApiActions.selectExercise, (state, { id }) => ({
+    ...state,
+    selectedId: id,
   }))
 );
 

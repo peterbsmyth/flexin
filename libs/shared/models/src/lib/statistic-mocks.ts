@@ -9,7 +9,7 @@ import {
 
 export const sessionItemStatisticMock: SessionItemStatistic = {
   id: 1,
-  sessionItem: 1,
+  sessionItemId: 1,
   setStatistics: [1],
   rpe: 8,
   notes: 'not at my full strength',

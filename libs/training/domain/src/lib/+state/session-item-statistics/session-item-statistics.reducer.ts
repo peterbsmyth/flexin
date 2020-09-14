@@ -47,15 +47,29 @@ const sessionItemStatisticsReducer = createReducer(
   on(
     SessionItemStatisticsActions.saveSessionItemStatisticSuccess,
     SessionItemStatisticsActions.updateSessionItemStatistic,
+    SessionItemStatisticsActions.loadSessionItemStatisticBySessionItemSuccess,
     (state, { sessionItemStatistic }) =>
       sessionItemStatisticsAdapter.upsertOne(sessionItemStatistic, {
         ...state,
         loaded: true,
+        selectedId: sessionItemStatistic.id
       })
+  ),
+  on(
+    SessionItemStatisticsActions.loadSessionItemStatisticBySessionItemFailure,
+    (state) => ({
+      ...state,
+      loaded: true,
+      selectedId: null,
+    })
   ),
   on(
     SessionItemStatisticsActions.loadSessionItemStatisticsFailure,
     (state, { error }) => ({ ...state, error })
+  ),
+  on(
+    SessionItemStatisticsActions.selectSessionItemStatistic,
+    (state, { id }) => ({ ...state, selectedId: id })
   )
 );
 

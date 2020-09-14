@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, combineLatest } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, combineLatest, Subject } from 'rxjs';
 import {
   SessionsFacade,
   SessionItemsFacade,
-  SessionItemsPageActions,
   SessionItemStatisticsActions,
   SetStatisticsActions,
   SessionItemStatisticsFacade,
@@ -19,7 +18,7 @@ import {
   SessionItemStatistic,
   SetStatistic,
 } from '@bod/shared/models';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -27,7 +26,8 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './session-item.page.html',
   styleUrls: ['./session-item.page.scss'],
 })
-export class SessionItemPage implements OnInit {
+export class SessionItemPage implements OnInit, OnDestroy {
+  unsubscribe$: Subject<any> = new Subject();
   data$: Observable<SessionItemCardData>;
   sessionItem$: Observable<SessionItem>;
   sessionItemStatistic$: Observable<SessionItemStatistic>;
@@ -48,15 +48,15 @@ export class SessionItemPage implements OnInit {
       map((sessions) => sessions.every((s) => s))
     );
     this.data$ = combineLatest([
-      this.exercisesState.allExercises$,
+      this.exercisesState.selectedExercises$,
       this.sessionItemsState.selectedSessionItems$,
-      this.sessionItemStatisticsState.allSessionItemStatistics$,
-      this.setStatisticsState.allSetStatistics$,
+      this.sessionItemStatisticsState.selectedSessionItemStatistics$,
+      this.sessionItemStatisticsState.setStatistics$,
     ]).pipe(
-      map(([exercises, sessionItem, sessionItemStatistics, setStatistics]) => ({
-        exercise: exercises[0],
+      map(([exercise, sessionItem, sessionItemStatistic, setStatistics]) => ({
+        exercise,
         sessionItem,
-        sessionItemStatistic: sessionItemStatistics[0],
+        sessionItemStatistic,
         setStatistics,
       }))
     );
@@ -64,28 +64,59 @@ export class SessionItemPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sessionsState.dispatch(
-      SessionItemStatisticsActions.loadSessionItemStatistics()
-    );
-    this.sessionsState.dispatch(SetStatisticsActions.loadSetStatistics());
-    this.sessionsState.dispatch(ExercisesApiActions.loadExercises());
+    this.sessionItemsState.selectedSessionItems$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap((sessionItem) => {
+          this.sessionsState.dispatch(
+            ExercisesApiActions.loadExercise({ id: sessionItem.exerciseId })
+          );
+          this.sessionsState.dispatch(
+            ExercisesApiActions.selectExercise({ id: sessionItem.exerciseId })
+          );
+        })
+      )
+      .subscribe();
+
+    this.sessionItemStatisticsState.selectedSessionItemStatistics$.pipe(
+      takeUntil(this.unsubscribe$),
+      filter((s) => !!s),
+      tap(({ id }) => {
+        this.sessionsState.dispatch(
+          SetStatisticsActions.loadSetStatisticsBySessionItemStatistic({ id })
+        );
+      })
+    ).subscribe();
+    this.route.params
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap((params) => {
+          this.sessionsState.dispatch(
+            SessionItemStatisticsActions.loadSessionItemStatisticBySessionItem({
+              id: +params['sessionItemId'],
+            })
+          );
+        })
+      )
+      .subscribe();
   }
 
   onSave(output: SessionItemCardOutput) {
-    const {
-      sessionItemStatistic,
-      setStatistics
-    } = output;
+    const { sessionItemStatistic, setStatistics } = output;
+    /**
+     * if there is an id, update the session item statistic
+     * else, save a new session item statistic
+     */
     if (sessionItemStatistic.id) {
       this.sessionsState.dispatch(
         SessionItemStatisticsActions.updateSessionItemStatistic({
-          sessionItemStatistic
+          sessionItemStatistic,
         })
       );
     } else {
       this.sessionsState.dispatch(
         SessionItemStatisticsActions.saveSessionItemStatistic({
-          sessionItemStatistic
+          sessionItemStatistic,
         })
       );
     }
@@ -100,5 +131,10 @@ export class SessionItemPage implements OnInit {
         );
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
