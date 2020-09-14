@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Week, Session } from '@bod/shared/models';
+import { Week } from '@bod/shared/models';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 import { WeeksFacade } from '@bod/training/domain';
 
 @Component({

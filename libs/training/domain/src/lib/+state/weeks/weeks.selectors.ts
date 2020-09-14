@@ -1,9 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  WEEKS_FEATURE_KEY,
-  weeksAdapter,
-  WeeksState,
-} from './weeks.reducer';
+import { WEEKS_FEATURE_KEY, weeksAdapter, WeeksState } from './weeks.reducer';
 import { PartialState } from '../root.reducer';
 import { getAllSessions } from '../sessions/sessions.selectors';
 
@@ -28,8 +24,9 @@ export const getAllWeeks = createSelector(getWeeksState, (state: WeeksState) =>
   selectAll(state)
 );
 
-export const getWeeksEntities = createSelector(getWeeksState, (state: WeeksState) =>
-  selectEntities(state)
+export const getWeeksEntities = createSelector(
+  getWeeksState,
+  (state: WeeksState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
@@ -47,6 +44,11 @@ export const getSessions = createSelector(
   getSelected,
   getAllSessions,
   (week, sessions) => {
-    return week && sessions.filter(session => session.weekId === week.id)
+    return (
+      week &&
+      sessions
+        .filter((session) => session.weekId === week.id)
+        .sort((a, b) => a.order - b.order)
+    );
   }
-)
+);
