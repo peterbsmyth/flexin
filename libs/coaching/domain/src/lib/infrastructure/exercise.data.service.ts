@@ -20,6 +20,10 @@ export class ExerciseDataService {
     return this.http.post<Exercise>(`${this.API_URL}/exercises`, exercise);
   }
 
+  patchOne(exercise: Exercise): Observable<Exercise> {
+    return this.http.patch<Exercise>(`${this.API_URL}/exercises/${exercise.id}`, exercise);
+  }
+
   constructor(
     private http: HttpClient
   ) { }

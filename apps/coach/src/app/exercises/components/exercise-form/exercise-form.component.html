@@ -1,4 +1,3 @@
-<h2>Add Exercise</h2>
 <div>
   <form [formGroup]="form" class="form">
     <mat-form-field>
@@ -9,8 +8,25 @@
     </mat-form-field>
     <mat-checkbox formControlName="push">Push</mat-checkbox>
     <mat-checkbox formControlName="pull">Pull</mat-checkbox>
+    <mat-checkbox formControlName="leftRight">LeftRight</mat-checkbox>
+    <main formArrayName="intensities">
+      Intensities
+      <section *ngFor="let intensity of intensities.controls; let i = index;">
+        <div [formGroupName]= "i">
+          <!-- Reps? -->
+          <mat-form-field>
+            <mat-label>
+              Intensity
+            </mat-label>
+            <input matInput type="text" formControlName="name">
+          </mat-form-field>
+          <bod-button (click)="onRemoveIntensity(i)" [icon]="true"></bod-button>
+        </div>
+      </section>
+    </main>
   </form>
 </div>
 <div class="form__actions">
+  <bod-button (click)="addIntensity()">Add Intensity</bod-button>
   <bod-button (click)="onSubmit(form.value)">Save</bod-button>
 </div>

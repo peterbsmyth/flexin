@@ -10,9 +10,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ExercisesPage } from './pages/exercises/exercises.page';
 import { MatListModule } from '@angular/material/list';
 import { CoachingDomainModule } from '@bod/coaching/domain';
+import { ExercisePage } from './pages/exercise/exercise.page';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
-  declarations: [ExerciseFormComponent, CreatePage, ExercisesPage],
+  declarations: [ExerciseFormComponent, CreatePage, ExercisesPage, ExercisePage],
   imports: [
     CommonModule,
     CoachingDomainModule,
@@ -22,6 +24,7 @@ import { CoachingDomainModule } from '@bod/coaching/domain';
     MatCheckboxModule,
     MatInputModule,
     MatListModule,
+    ReactiveComponentModule
   ],
 })
 export class ExercisesModule {}

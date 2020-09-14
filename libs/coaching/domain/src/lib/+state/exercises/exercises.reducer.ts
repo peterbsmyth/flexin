@@ -40,6 +40,16 @@ const exercisesReducer = createReducer(
   on(ExercisesApiActions.loadExercisesFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(
+    ExercisesApiActions.updateExercise,
+    ExercisesApiActions.loadExerciseSuccess,
+    (state, { exercise }) =>
+      exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
+  ),
+  on(ExercisesApiActions.selectExercise, (state, { id }) => ({
+    ...state,
+    selectedId: id,
   }))
 );
 

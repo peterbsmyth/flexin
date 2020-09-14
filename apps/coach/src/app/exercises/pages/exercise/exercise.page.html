@@ -1,0 +1,5 @@
+<ng-container *ngrxLet="exercise$ as exercise">
+  <bod-exercise-form [data]="exercise" (save)="onSave($event)">
+  </bod-exercise-form>
+</ng-container>
+<router-outlet></router-outlet>

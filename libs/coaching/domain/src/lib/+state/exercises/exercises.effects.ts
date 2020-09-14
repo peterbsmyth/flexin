@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { ExercisesApiActions } from './actions';
 import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
-import { map } from 'rxjs/operators';
+import { map, mapTo } from 'rxjs/operators';
 
 @Injectable()
 export class ExercisesEffects {
@@ -23,6 +23,46 @@ export class ExercisesEffects {
         onError: (action, error) => {
           console.error('Error', error);
           return ExercisesApiActions.loadExercisesFailure({ error });
+        },
+      })
+    )
+  );
+
+  loadExercise$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExercisesApiActions.loadExercise),
+      fetch({
+        run: ({ id }) => {
+          return this.exerciseService
+            .getOne(id)
+            .pipe(
+              map((exercise) =>
+                ExercisesApiActions.loadExerciseSuccess({ exercise })
+              )
+            );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return ExercisesApiActions.loadExerciseFailure({ error });
+        },
+      })
+    )
+  );
+
+  updateExercise$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExercisesApiActions.updateExercise),
+      optimisticUpdate({
+        run: (action) => {
+          return this.exerciseService
+            .patchOne(action.exercise)
+            .pipe(mapTo(ExercisesApiActions.updateExerciseSuccess()));
+        },
+        undoAction: (action, error) => {
+          console.error('Error', error);
+          return ExercisesApiActions.updateExerciseFailure({
+            error,
+          });
         },
       })
     )
