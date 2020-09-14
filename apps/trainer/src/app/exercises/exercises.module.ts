@@ -7,12 +7,12 @@ import { CreatePage } from './pages/create/create.page';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomePage } from './pages/home/home.page';
+import { ExercisesPage } from './pages/exercises/exercises.page';
 import { MatListModule } from '@angular/material/list';
 import { CoachingDomainModule } from '@bod/coaching/domain';
 
 @NgModule({
-  declarations: [ExerciseFormComponent, CreatePage, HomePage, ],
+  declarations: [ExerciseFormComponent, CreatePage, ExercisesPage],
   imports: [
     CommonModule,
     CoachingDomainModule,
