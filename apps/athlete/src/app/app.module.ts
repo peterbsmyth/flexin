@@ -19,7 +19,8 @@ import {
   DefaultRouterStateSerializer,
 } from '@ngrx/router-store';
 import { TrainingFeatureInputWorkoutModule } from '@bod/training/feature-input-workout';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BusyHttpInterceptor, BusyService } from '@bod/shared/domain';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
@@ -49,9 +50,12 @@ import { HttpClientModule } from '@angular/common/http';
       serializer: DefaultRouterStateSerializer,
     }),
     TrainingFeatureInputWorkoutModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    BusyService,
+    { provide: HTTP_INTERCEPTORS, useClass: BusyHttpInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   exports: [],
 })

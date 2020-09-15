@@ -6,7 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
+import {
+  StoreRouterConnectingModule,
+  DefaultRouterStateSerializer,
+} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@bod/shared/environments';
 import { CoachingFeatureCreateProgramModule } from '@bod/coaching/feature-create-program';
@@ -27,12 +30,14 @@ import { HttpClientModule } from '@angular/common/http';
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
+    StoreRouterConnectingModule.forRoot({
+      serializer: DefaultRouterStateSerializer,
+    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
     CoachingFeatureCreateProgramModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppPage],

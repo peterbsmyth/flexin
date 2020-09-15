@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AppPage } from './pages/app/app.page'
+import { AppPage } from './pages/app/app.page';
 import { NavComponent } from './components/nav/nav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -9,13 +9,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { BusyHttpInterceptor, BusyService } from '@bod/shared/domain';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppPage,
-    NavComponent
-  ],
+  declarations: [AppPage, NavComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,8 +24,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatIconModule,
   ],
-  exports: [
-    AppPage
-  ]
+  exports: [AppPage],
+  providers: [
+    BusyService,
+    { provide: HTTP_INTERCEPTORS, useClass: BusyHttpInterceptor, multi: true },
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}
