@@ -45,6 +45,9 @@
     },
     "training-feature-input-workout": {
       "tags": ["domain:training", "type:feature"]
+    },
+    "coaching-feature-create-program": {
+      "tags": ["domain:coaching", "type:feature"]
     }
   },
   "affected": {

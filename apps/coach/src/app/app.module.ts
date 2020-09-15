@@ -9,8 +9,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, DefaultRouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@bod/shared/environments';
-import { CoachingDomainModule } from '@bod/coaching/domain';
-import { ProgramsModule } from './programs/programs.module';
+import { CoachingFeatureCreateProgramModule } from '@bod/coaching/feature-create-program';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -30,9 +30,9 @@ import { ProgramsModule } from './programs/programs.module';
     StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer }),
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoachingDomainModule,
     CoreModule,
-    ProgramsModule
+    CoachingFeatureCreateProgramModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppPage],

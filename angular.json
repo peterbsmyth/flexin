@@ -429,6 +429,43 @@
           "style": "scss"
         }
       }
+    },
+    "coaching-feature-create-program": {
+      "projectType": "library",
+      "root": "libs/coaching/feature-create-program",
+      "sourceRoot": "libs/coaching/feature-create-program/src",
+      "prefix": "coaching",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/coaching/feature-create-program/tsconfig.lib.json",
+            "project": "libs/coaching/feature-create-program/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/coaching/feature-create-program/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/coaching/feature-create-program/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/coaching/feature-create-program/**/*"
+            ]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

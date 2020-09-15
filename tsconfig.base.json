@@ -26,6 +26,9 @@
       "@bod/shared/components": ["libs/shared/components/src/index.ts"],
       "@bod/training/feature-input-workout": [
         "libs/training/feature-input-workout/src/index.ts"
+      ],
+      "@bod/coaching/feature-create-program": [
+        "libs/coaching/feature-create-program/src/index.ts"
       ]
     }
   },

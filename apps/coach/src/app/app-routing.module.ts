@@ -7,7 +7,6 @@ const routes: Routes = [
     redirectTo: '/programs',
     pathMatch: 'full'
   },
-  { path: 'exercises', loadChildren: () => import('./exercises/exercises.module').then(m => m.ExercisesModule) }
 ];
 
 @NgModule({
