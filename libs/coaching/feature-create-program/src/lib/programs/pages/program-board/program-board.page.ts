@@ -10,7 +10,6 @@ import { tap, takeUntil, withLatestFrom } from 'rxjs/operators';
 import Fuse from 'fuse.js';
 
 @Component({
-  selector: 'bod-program-board',
   templateUrl: './program-board.page.html',
   styleUrls: ['./program-board.page.scss']
 })
