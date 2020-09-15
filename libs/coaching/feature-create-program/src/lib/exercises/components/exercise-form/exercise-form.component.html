@@ -1,32 +1,42 @@
-<div>
-  <form [formGroup]="form" class="form">
-    <mat-form-field>
-      <mat-label>
-        Name
-      </mat-label>
-      <input matInput type="text" formControlName="name">
-    </mat-form-field>
-    <mat-checkbox formControlName="push">Push</mat-checkbox>
-    <mat-checkbox formControlName="pull">Pull</mat-checkbox>
-    <mat-checkbox formControlName="leftRight">LeftRight</mat-checkbox>
-    <main formArrayName="intensities">
-      Intensities
-      <section *ngFor="let intensity of intensities.controls; let i = index;">
-        <div [formGroupName]= "i">
-          <!-- Reps? -->
-          <mat-form-field>
-            <mat-label>
-              Intensity
-            </mat-label>
-            <input matInput type="text" formControlName="name">
-          </mat-form-field>
-          <bod-button (click)="onRemoveIntensity(i)" [icon]="true"></bod-button>
-        </div>
-      </section>
-    </main>
-  </form>
-</div>
-<div class="form__actions">
-  <bod-button (click)="addIntensity()">Add Intensity</bod-button>
-  <bod-button (click)="onSubmit(form.value)">Save</bod-button>
-</div>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form" class="form">
+      <mat-form-field>
+        <mat-label>
+          Name
+        </mat-label>
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
+      <div class="rows">
+        <aside class="configuration">
+          <h3>Configuration</h3>
+          <mat-checkbox formControlName="push">Push</mat-checkbox>
+          <mat-checkbox formControlName="pull">Pull</mat-checkbox>
+          <mat-checkbox formControlName="leftRight">LeftRight</mat-checkbox>
+        </aside>
+        <aside formArrayName="intensities">
+          <h3>Intensities</h3>
+          <section *ngFor="let intensity of intensities.controls; let i = index">
+            <div [formGroupName]="i">
+              <!-- Reps? -->
+              <mat-form-field>
+                <mat-label>
+                  Intensity
+                </mat-label>
+                <input matInput type="text" formControlName="name" />
+              </mat-form-field>
+              <bod-button
+                (click)="onRemoveIntensity(i)"
+                [icon]="true"
+              ></bod-button>
+            </div>
+          </section>
+          <bod-button (click)="addIntensity()">Add Intensity</bod-button>
+        </aside>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <bod-button (click)="onSubmit(form.value)">Save</bod-button>
+  </mat-card-footer>
+</mat-card>
