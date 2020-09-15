@@ -1,6 +1,13 @@
 # Body Factory
 The application for bodyweight strength training.  
 
+## Terminology
+**Program:** A program is the highest-level of organization for exercising. It organizes a training program of detailed, week-by-week, strength training exercises for a period of 6 weeks.
+**Week:** A week organizes a program further. It is not necessarily a calendar week or a 7-day week. It can be either of those, it is always inclusive of 4 sessions. Athletes may choose to exercise on a cadence of 2 days on, 2 days rest, 2 days on, 2 days rest and that makes an 8-day week.
+**Session:** A session is roughly a single day's workout regime. 
+**SessionItem:** A session item is a prescribed exercise along with expected reps, weight, tempo, and intensity to train at.
+**Exercise:** An exercise is a database entry of an exercise that specifies characteristics such as push, pull, name, and intensities.
+
 ## Developer Tools
 ### 1. Angular Command Line
 Install [@angular/cli from npm](https://cli.angular.io/)
@@ -20,10 +27,10 @@ npm install
 
 ### 2. Run the coach Application 
 ```sh
-ng serve coach --open
+nx serve coach --open
 ```
 
 ### 3. Run the Athlete Application
 ```
-ng serve athlete --open
+nx serve athlete --open
 ```
