@@ -27,15 +27,18 @@ export interface Session {
   weekId?: number;
   name: string; // 'PULL A'
   order: number; // 1 (refers to placement with in a Week)
+  sessionItems?: SessionItem[];
 }
 
 export interface Week {
   id?: number;
   programId?: number;
   number: number; // 6
+  sessions?: Session[];
 }
 
 export interface Program {
   id?: number;
   name: string; // 'Program 1'
+  weeks?: Week[];
 }

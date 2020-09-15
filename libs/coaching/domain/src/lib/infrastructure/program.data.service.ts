@@ -16,15 +16,6 @@ export class ProgramDataService {
     this._program$.next(this._program);
   }
 
-  createProgramFromOneWeek(name: string, week: Week): Program {
-    this._program = {
-      name,
-      weeks: [week, week, week, week, week, week]
-    };
-    this._program$.next(this._program);
-    return this._program;
-  }
-
   getAll(): Observable<Program[]> {
     return this.http.get<Program[]>(`${this.API_URL}/programs`);
   }

@@ -55,7 +55,6 @@ export class SessionGridPage implements OnInit, OnDestroy {
   }
 
   onCreateProgram() {
-    // const program: Program = this.programService.createProgramFromOneWeek(this.programName.value, this._week);
     this.draftProgramState.createProgram(this.programName.value);
   }
 
