@@ -12,9 +12,19 @@ import { MatListModule } from '@angular/material/list';
 import { CoachingDomainModule } from '@bod/coaching/domain';
 import { ExercisePage } from './pages/exercise/exercise.page';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { ExerciseTableComponent } from './components/exercise-table/exercise-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
-  declarations: [ExerciseFormComponent, CreatePage, ExercisesPage, ExercisePage],
+  declarations: [
+    ExerciseFormComponent,
+    ExerciseTableComponent,
+    CreatePage,
+    ExercisesPage,
+    ExercisePage,
+  ],
   imports: [
     CommonModule,
     CoachingDomainModule,
@@ -24,7 +34,10 @@ import { ReactiveComponentModule } from '@ngrx/component';
     MatCheckboxModule,
     MatInputModule,
     MatListModule,
-    ReactiveComponentModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    ReactiveComponentModule,
   ],
 })
 export class ExercisesModule {}

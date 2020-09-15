@@ -10,7 +10,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Exercise } from '@bod/shared/models';
 
 @Component({
-  selector: 'bod-exercise-form',
+  selector: 'coaching-exercise-form',
   templateUrl: './exercise-form.component.html',
   styleUrls: ['./exercise-form.component.scss'],
 })

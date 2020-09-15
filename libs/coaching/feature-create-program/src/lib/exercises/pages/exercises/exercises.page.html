@@ -3,11 +3,12 @@
 </bod-actions-bar>
 
 <h2>Exercises</h2>
-<div *ngIf="(loaded$ | async); else loading;">
-  <mat-list>
-    <a *ngFor="let exercise of (exercises$ | async)" mat-list-item [routerLink]="['/exercises', exercise.id]">{{ exercise.name }}</a>
-  </mat-list>
-</div>
+<main *ngIf="(loaded$ | async); else loading;">
+  <article>
+    <coaching-exercise-table>
+    </coaching-exercise-table>
+  </article>
+</main>
 
 <ng-template #loading>
   <p>
