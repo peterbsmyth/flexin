@@ -4,11 +4,11 @@
 </bod-action-bar>
 <ng-container *ngIf="(sessionItemsLoaded$ | async); else loadingSessionItems">
   <ng-container *ngrxLet="sessionItem$ as sessionItem">
-    <bod-session-item-card
+    <training-session-item-card
       [data]="data$ | async"
       (save)="onSave($event)"
     >
-    </bod-session-item-card>
+    </training-session-item-card>
   </ng-container>
 </ng-container>
 <ng-template #loadingSessionItems>

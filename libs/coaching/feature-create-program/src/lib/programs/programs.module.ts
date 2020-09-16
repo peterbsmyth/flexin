@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CoachingDomainModule } from '@bod/coaching/domain';
-import { HomePage } from './pages/home/home.page';
+import { ProgramsPage } from './pages/programs/programs.page';
 import { MatListModule } from '@angular/material/list';
 import { ProgramPage } from './pages/program/program.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
@@ -27,7 +27,7 @@ import { SessionConfigurationBoardPage } from './pages/session-configuration-boa
     ExerciseComponent,
     SessionItemComponent,
     CreatePage,
-    HomePage,
+    ProgramsPage,
     ProgramPage,
     ProgramBoardPage,
     SessionConfigurationBoardPage,

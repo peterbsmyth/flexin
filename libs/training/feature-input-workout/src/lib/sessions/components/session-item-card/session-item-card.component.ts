@@ -1,10 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {
-  SessionItem,
-  SessionItemStatistic,
-  SetStatistic,
-  Exercise,
-} from '@bod/shared/models';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import {
   SessionItemCardData,
@@ -12,7 +6,7 @@ import {
 } from '@bod/training/domain';
 
 @Component({
-  selector: 'bod-session-item-card',
+  selector: 'training-session-item-card',
   templateUrl: './session-item-card.component.html',
   styleUrls: ['./session-item-card.component.scss'],
 })

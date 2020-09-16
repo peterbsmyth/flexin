@@ -4,10 +4,10 @@ import { Program } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 
 @Component({
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss']
+  templateUrl: './programs.page.html',
+  styleUrls: ['./programs.page.scss']
 })
-export class HomePage implements OnInit {
+export class ProgramsPage implements OnInit {
   programs$: Observable<Program[]>;
   loaded$: Observable<boolean>;
   constructor(

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { SessionItem, Exercise } from '@bod/shared/models';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { tap, takeUntil, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -7,7 +6,7 @@ import { SessionItemData } from '@bod/coaching/domain';
 
 
 @Component({
-  selector: 'bod-session-item',
+  selector: 'coaching-session-item',
   templateUrl: './session-item.component.html',
   styleUrls: ['./session-item.component.scss']
 })

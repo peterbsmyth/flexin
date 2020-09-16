@@ -8,10 +8,10 @@
   <bod-button (click)="onClickCreateProgram()">Create Program</bod-button>
 </bod-actions-bar>
 <bod-board>
-  <bod-session-item
+  <coaching-session-item
   class="item"
   *ngFor="let data of programsState.draftIncompleteSessionItems$ | async"
   [data]="data"
   (update)="onUpdate($event)"
-  ></bod-session-item>
+  ></coaching-session-item>
 </bod-board>

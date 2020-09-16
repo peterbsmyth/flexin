@@ -18,15 +18,11 @@
             <label>
               Reps
               <input min="0" type="number" formControlName="reps">
-              <!-- <button (click)="onChangeCount('-', 'reps', i)">-</button>
-              <button (click)="onChangeCount('+', 'reps', i)">+</button> -->
             </label>
             <!-- Weight? -->
             <label *ngIf="data.sessionItem.weight">
               Weight ({{ data.sessionItem.weightUnit }})
               <input min="0" step="5" type="number" formControlName="weight">
-              <!-- <button (click)="onChangeCount('-', 'weight', i)">-</button>
-              <button (click)="onChangeCount('+', 'weight', i)">+</button> -->
             </label>
           </div>
         </section>
@@ -36,8 +32,6 @@
       <label>
         RPE
         <input formControlName="rpe" min="0" max="10" placeholder="1-10" type="number">
-        <!-- <button (click)="onChangeCount('-', 'rpe')">-</button>
-        <button (click)="onChangeCount('+', 'rpe')">+</button> -->
       </label>
       <!-- Notes -->
       <mat-form-field>
