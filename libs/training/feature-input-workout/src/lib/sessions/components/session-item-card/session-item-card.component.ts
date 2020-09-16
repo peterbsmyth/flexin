@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import {
-  SessionItemCardData,
+  SessionItemBoardCardData,
   SessionItemCardOutput,
 } from '@bod/training/domain';
 
@@ -11,12 +11,12 @@ import {
   styleUrls: ['./session-item-card.component.scss'],
 })
 export class SessionItemCardComponent implements OnInit {
-  private _data: SessionItemCardData;
+  private _data: SessionItemBoardCardData;
   @Input()
-  get data(): SessionItemCardData {
+  get data(): SessionItemBoardCardData {
     return this._data;
   }
-  set data(data: SessionItemCardData) {
+  set data(data: SessionItemBoardCardData) {
     this._data = data;
     this.form = this.buildForm(data);
   }
@@ -62,9 +62,9 @@ export class SessionItemCardComponent implements OnInit {
    * buildForm
    * Each time the session item changes the form needs to be reset according to the dictates of the session item
    * and related statistics
-   * @param data { SessionItemCardData };
+   * @param data { SessionItemBoardCardData };
    */
-  buildForm(data: SessionItemCardData): FormGroup {
+  buildForm(data: SessionItemBoardCardData): FormGroup {
     const rpe = data.sessionItemStatistic && data.sessionItemStatistic.rpe;
     const notes = data.sessionItemStatistic && data.sessionItemStatistic.notes;
     const sets = this.fb.array([]);

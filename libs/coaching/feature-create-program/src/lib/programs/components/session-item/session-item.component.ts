@@ -16,7 +16,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
     reps: 0,
     AMRAP: false,
     sets: 0,
-    weight: '',
+    weight: 0,
     intensity: new FormControl(''),
     tempo: '',
     leftRight: false

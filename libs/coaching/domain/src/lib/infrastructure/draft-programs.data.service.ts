@@ -6,7 +6,7 @@ import { ProgramDataService } from '../infrastructure/program.data.service';
 import { WeekDataService } from '../infrastructure/week.data.service';
 import { SessionDataService } from '../infrastructure/session.data.service';
 import { SessionItemDataService } from '../infrastructure/session-item.data.service';
-import { SessionItemData } from '../entities/component.models';
+import { BoardCardData, SessionItemData } from '../entities/component.models';
 import { DraftProgram } from '../entities/draft';
 import { uniqBy } from 'lodash-es';
 
@@ -35,7 +35,7 @@ export class DraftProgramsDataService {
     private sessionItemService: SessionItemDataService
   ) {}
 
-  addIncompleteSessionItems(inputs: Exercise[][]): void {
+  addIncompleteSessionItems(cardLists: BoardCardData[][]): void {
     const draft: any = {};
     const weeks = [1, 2, 3, 4, 5, 6].map((id) => ({
       id,
@@ -45,7 +45,7 @@ export class DraftProgramsDataService {
     const sessionItems = [];
     const exercises = [];
     weeks.forEach((week) => {
-      inputs.forEach((input, i) => {
+      cardLists.forEach((cardList, i) => {
         const session = {
           id: ++this._lastSessionId,
           order: i + 1,
@@ -54,7 +54,7 @@ export class DraftProgramsDataService {
         };
         sessions.push(session);
 
-        input.forEach((exercise, j) => {
+        cardList.forEach((card, j) => {
           const sessionItem = {
             reps: null,
             AMRAP: false,
@@ -64,14 +64,14 @@ export class DraftProgramsDataService {
             intensity: null,
             tempo: null,
             id: ++this._lastSessionItemLocalId,
-            exerciseId: exercise.id,
+            exerciseId: card.exercise.id,
             sessionId: session.id,
             order: j,
           };
 
           sessionItems.push(sessionItem);
           exercises.push({
-            ...exercise,
+            ...card.exercise,
             sessionItemId: sessionItem.id,
           });
         });

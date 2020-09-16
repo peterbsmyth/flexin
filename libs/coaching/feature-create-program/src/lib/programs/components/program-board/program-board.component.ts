@@ -8,13 +8,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { remove } from 'lodash-es';
-import { Exercise, Session, SessionItem } from '@bod/shared/models';
-
-export interface ProgramBoardData {
-  sessions?: Session[];
-  exercises?: Exercise[];
-  sessionItems?: SessionItem[];
-}
+import { BoardCardData, ProgramBoardData } from '@bod/coaching/domain';
 
 @Component({
   selector: 'coaching-program-board',
@@ -33,19 +27,19 @@ export class ProgramBoardComponent implements OnInit {
     this.buildBoard(data);
   }
   @Output() update: EventEmitter<any> = new EventEmitter();
-  public pullList: Exercise[] = [];
-  public pushList: Exercise[] = [];
+  public pullList: BoardCardData[] = [];
+  public pushList: BoardCardData[] = [];
 
-  public dayOneList: Exercise[] = [];
-  public dayTwoList: Exercise[] = [];
-  public dayThreeList: Exercise[] = [];
-  public dayFourList: Exercise[] = [];
+  public dayOneList: BoardCardData[] = [];
+  public dayTwoList: BoardCardData[] = [];
+  public dayThreeList: BoardCardData[] = [];
+  public dayFourList: BoardCardData[] = [];
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  drop(event: CdkDragDrop<Exercise[]>) {
+  drop(event: CdkDragDrop<BoardCardData[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -79,10 +73,12 @@ export class ProgramBoardComponent implements OnInit {
     ]);
   }
 
-  uniquePredicate = (item: CdkDrag<Exercise>, list: CdkDropList) => {
+  uniquePredicate = (item: CdkDrag<BoardCardData>, list: CdkDropList) => {
     const arrayName = `${list.id}List`;
-    const array: Exercise[] = this[arrayName];
-    const arrayIncludesExercise = array.find((e) => e.id === item.data.id);
+    const array: BoardCardData[] = this[arrayName];
+    const arrayIncludesExercise = array.find(
+      (e) => e.exercise.id === item.data.exercise.id
+    );
 
     if (arrayIncludesExercise) {
       return false;
@@ -91,14 +87,49 @@ export class ProgramBoardComponent implements OnInit {
     }
   };
 
-  onRemove(exercise, list: string) {
-    remove(this[list], { id: exercise.id });
+  onRemove(datum, list: string) {
+    remove(this[list], { exercise: { id: datum.exercise.id } });
   }
 
   buildBoard(data: ProgramBoardData) {
-    if (data && data.exercises) {
-      this.pullList = data.exercises.filter((e) => e.pull);
-      this.pushList = data.exercises.filter((e) => e.push);
+    const hasData = data && data.sessionItems && data.exercises.length;
+    if (hasData && !this.displaySource) {
+      const allBoardCardData = data.sessionItems.map((sessionItem) => {
+        return {
+          sessionItem: {
+            ...sessionItem,
+          },
+          exercise: data.exercises.find(
+            (exercise) => sessionItem.exerciseId === exercise.id
+          ),
+        };
+      });
+
+      const session1 = data.sessions.find((session) => session.order === 1);
+      const session2 = data.sessions.find((session) => session.order === 2);
+      const session3 = data.sessions.find((session) => session.order === 3);
+      const session4 = data.sessions.find((session) => session.order === 4);
+      this.dayOneList = allBoardCardData.filter(
+        (datum) => datum.sessionItem.sessionId === session1.id
+      );
+      this.dayTwoList = allBoardCardData.filter(
+        (datum) => datum.sessionItem.sessionId === session2.id
+      );
+      this.dayThreeList = allBoardCardData.filter(
+        (datum) => datum.sessionItem.sessionId === session3.id
+      );
+      this.dayFourList = allBoardCardData.filter(
+        (datum) => datum.sessionItem.sessionId === session4.id
+      );
+    }
+
+    if (hasData && this.displaySource) {
+      this.pullList = data.exercises
+        .filter((e) => e.pull)
+        .map((exercise) => ({ sessionItem: null, exercise }));
+      this.pushList = data.exercises
+        .filter((e) => e.push)
+        .map((exercise) => ({ sessionItem: null, exercise }));
     }
   }
 }

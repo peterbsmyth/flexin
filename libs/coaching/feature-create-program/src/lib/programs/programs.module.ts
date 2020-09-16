@@ -4,7 +4,7 @@ import { BodComponentsModule } from '@bod/shared/components';
 import { ProgramsRoutingModule } from './programs-routing.module';
 import { BoardComponent } from './components/board/board.component';
 import { CreatePage } from './pages/create/create.page';
-import { ExerciseComponent } from './components/exercise/exercise.component';
+import { BoardCardComponent } from './components/board-card/board-card.component';
 import { SessionItemComponent } from './components/session-item/session-item.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -26,7 +26,7 @@ import { ProgramBoardComponent } from './components/program-board/program-board.
 @NgModule({
   declarations: [
     BoardComponent,
-    ExerciseComponent,
+    BoardCardComponent,
     SessionItemComponent,
     CreatePage,
     ProgramsPage,

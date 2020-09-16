@@ -19,7 +19,15 @@ export class SessionConfigurationBoardPage implements OnInit {
       .pipe(
         take(1),
         tap((data) => {
-          this._data = data;
+          const copiedDeep = data.map(({ exercise, sessionItem }) => ({
+            exercise: {
+              ...exercise
+            },
+            sessionItem: {
+              ...sessionItem
+            }
+          }))
+          this._data = copiedDeep;
         })
       )
       .subscribe();

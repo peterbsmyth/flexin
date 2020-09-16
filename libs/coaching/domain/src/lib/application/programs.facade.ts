@@ -22,6 +22,9 @@ export class ProgramsFacade {
   )
   draftIncompleteSessionItems$ = this.draftProgramService.incompleteSessionItems$;
   draftProgram$ = this.draftProgramService.draftProgram$;
+  selectedProgramsWithDescendants$ = this.store.pipe(
+    select(ProgramsSelectors.getSelectedWithDescendants)
+  );
 
   dispatch(action: Action) {
     this.store.dispatch(action);

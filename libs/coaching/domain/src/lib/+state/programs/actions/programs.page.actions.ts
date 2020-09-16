@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Program, Exercise } from '@bod/shared/models';
+import { BoardCardData } from '../../../entities/component.models';
 
 export const loadPrograms = createAction('[Programs Page] Load Programs');
 
@@ -35,7 +36,7 @@ export const selectProgram = createAction(
 
 export const addIncompleteSessionItems = createAction(
   '[Programs Page] Add Incomplete Session Items',
-  props<{ lists: Exercise[][] }>()
+  props<{ lists: BoardCardData[][] }>()
 );
 
 export const everythingExceptCreateProgram = createAction(
@@ -56,4 +57,18 @@ export const createProgramSuccess = createAction(
 export const createProgramFailure = createAction(
   '[Programs Page] Create Program Failure',
   props<{ name: string }>()
+);
+
+export const loadDescendants = createAction(
+  '[Programs Page] Load Descendants',
+  props<{ id: number }>()
+);
+
+export const loadDescendantsSuccess = createAction(
+  '[Programs Page] Load Descendants Success'
+);
+
+export const loadDescendantsFailure = createAction(
+  '[Programs Page] Load Descendants Failure',
+  props<{ error: any }>()
 );

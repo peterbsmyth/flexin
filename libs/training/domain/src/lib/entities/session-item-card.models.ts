@@ -1,6 +1,6 @@
 import { Exercise, SessionItem, SessionItemStatistic, SetStatistic } from '@bod/shared/models';
 
-export interface SessionItemCardData {
+export interface SessionItemBoardCardData {
   exercise: Exercise;
   sessionItem: SessionItem;
   sessionItemStatistic: SessionItemStatistic;

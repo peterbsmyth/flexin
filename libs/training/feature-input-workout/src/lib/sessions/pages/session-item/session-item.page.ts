@@ -9,7 +9,7 @@ import {
   SetStatisticsFacade,
   ExercisesFacade,
   ExercisesApiActions,
-  SessionItemCardData,
+  SessionItemBoardCardData,
   SessionItemCardOutput,
 } from '@bod/training/domain';
 import {
@@ -28,7 +28,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SessionItemPage implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
-  data$: Observable<SessionItemCardData>;
+  data$: Observable<SessionItemBoardCardData>;
   sessionItem$: Observable<SessionItem>;
   sessionItemStatistic$: Observable<SessionItemStatistic>;
   setStatistics$: Observable<SetStatistic[]>;

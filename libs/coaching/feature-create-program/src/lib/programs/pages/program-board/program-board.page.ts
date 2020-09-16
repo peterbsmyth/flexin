@@ -6,6 +6,7 @@ import {
   ExercisesApiActions,
   ProgramsFacade,
   ProgramsPageActions,
+  ProgramBoardData,
 } from '@bod/coaching/domain';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,7 +18,7 @@ import Fuse from 'fuse.js';
 })
 export class ProgramBoardPage implements OnInit, AfterViewInit {
   search = new FormControl('');
-  data$: Observable<any>;
+  data$: Observable<ProgramBoardData>;
 
   constructor(
     private router: Router,
@@ -30,7 +31,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
     ]).pipe(
       map(([term, exercises]) => {
         if (term === '') {
-          return { exercises };
+          return { exercises, sessionItems: [], sessions: [] };
         } else {
           const filteredExercises = new Fuse(exercises, {
             keys: ['name'],
@@ -40,7 +41,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
             .filter((result) => result.score < 0.4)
             .map((result) => result.item);
 
-          return { exercises: filteredExercises };
+          return { exercises: filteredExercises, sessionItems: [], sessions: [] };
         }
       })
     );
