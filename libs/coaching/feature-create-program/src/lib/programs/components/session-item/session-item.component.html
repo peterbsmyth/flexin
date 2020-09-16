@@ -10,6 +10,12 @@
         <input type="hidden" [value]="data.exercise.name" disabled>
         <mat-form-field class="form__field">
           <mat-label>
+            Sets
+          </mat-label>
+          <input matInput type="number" formControlName="sets">
+        </mat-form-field>
+        <mat-form-field class="form__field">
+          <mat-label>
             Reps
           </mat-label>
           <input matInput type="number" formControlName="reps">
@@ -17,12 +23,6 @@
         <mat-checkbox formControlName="AMRAP" class="form__field form__check">
           AMRAP?
         </mat-checkbox>
-        <mat-form-field class="form__field">
-          <mat-label>
-            Sets
-          </mat-label>
-          <input matInput type="number" formControlName="sets">
-        </mat-form-field>
         <mat-checkbox *ngIf="leftRight" formControlName="leftRight" class="form__field form__check">
           Left/Right
         </mat-checkbox>
