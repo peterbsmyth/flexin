@@ -203,7 +203,6 @@ export class DraftProgramsDataService {
             sessionId: newSessions.find(
               (session) => session.temporaryId === sessionItem.sessionId
             ).id,
-            weight: +sessionItem.weight,
             weightUnit: 'lbs',
           })
         );
