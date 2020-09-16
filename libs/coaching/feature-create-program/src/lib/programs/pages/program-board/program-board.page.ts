@@ -95,26 +95,6 @@ export class ProgramBoardPage implements OnInit, OnDestroy {
       })
     );
     this.router.navigateByUrl('/programs/create/2');
-
-    /**
-     * session-item flow
-     */
-    // create SessionItems from Lists
-    // const sessionItemsOne = this.sessionService.createItemsFromExericses(this.dayOneList);
-    // const sessionItemsTwo = this.sessionService.createItemsFromExericses(this.dayTwoList);
-    // const sessionItemsThree = this.sessionService.createItemsFromExericses(this.dayThreeList);
-    // const sessionItemsFour = this.sessionService.createItemsFromExericses(this.dayFourList);
-
-    // put them into sessions
-    // const sessionOne = this.sessionService.createSession('day one', sessionItemsOne, 1);
-    // const sessionTwo = this.sessionService.createSession('day two', sessionItemsTwo, 2);
-    // const sessionThree = this.sessionService.createSession('day three', sessionItemsThree, 3);
-    // const sessionFour = this.sessionService.createSession('day four', sessionItemsFour, 4);
-    // const sessions = [sessionOne, sessionTwo, sessionThree, sessionFour];
-
-    // // create a week
-    // // this.weekService.createWeek(1, sessions);
-    // // this.router.navigateByUrl('/programs/create/3');
   }
 
   drop(event: CdkDragDrop<Exercise[]>) {

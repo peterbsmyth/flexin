@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProgramsFacade, ProgramsPageActions } from '@bod/coaching/domain';
-import { SessionItem } from '@bod/shared/models';
+import { ProgramsFacade, ProgramsPageActions, SessionItemData } from '@bod/coaching/domain';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
@@ -10,11 +10,12 @@ import { take, tap } from 'rxjs/operators';
   styleUrls: ['./session-configuration-board.page.scss'],
 })
 export class SessionConfigurationBoardPage implements OnInit {
-  private _data: any[];
+  programName: FormControl = new FormControl('Program 1');
+  private _data: SessionItemData[];
   incompleteSessionItems$: Observable<any[]>;
 
-  constructor(private router: Router, public programState: ProgramsFacade) {
-    this.programState.draftIncompleteSessionItems$
+  constructor(private router: Router, public programsState: ProgramsFacade) {
+    this.programsState.draftIncompleteSessionItems$
       .pipe(
         take(1),
         tap((data) => {
@@ -37,10 +38,14 @@ export class SessionConfigurationBoardPage implements OnInit {
     });
   }
 
-  onClickNext() {
-    this.programState.dispatch(
+  onClickCreateProgram() {
+    this.programsState.dispatch(
       ProgramsPageActions.everythingExceptCreateProgram({ data: this._data })
     );
-    this.router.navigateByUrl('/programs/create/3');
+    this.programsState.dispatch(
+      ProgramsPageActions.createProgram({
+        name: this.programName.value,
+      })
+    );
   }
 }

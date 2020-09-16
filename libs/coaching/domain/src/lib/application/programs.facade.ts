@@ -21,6 +21,7 @@ export class ProgramsFacade {
     select(ProgramsSelectors.getWeeks)
   )
   draftIncompleteSessionItems$ = this.draftProgramService.incompleteSessionItems$;
+  draftProgram$ = this.draftProgramService.draftProgram$;
 
   dispatch(action: Action) {
     this.store.dispatch(action);

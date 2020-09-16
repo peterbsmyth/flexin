@@ -1,10 +1,16 @@
 <bod-actions-bar>
-  <bod-button (click)="onClickNext()">Next</bod-button>
+  <mat-form-field>
+    <mat-label>
+      Program Name
+    </mat-label>
+    <input matInput [formControl]="programName" type="text">
+  </mat-form-field>
+  <bod-button (click)="onClickCreateProgram()">Create Program</bod-button>
 </bod-actions-bar>
 <bod-board>
   <bod-session-item
   class="item"
-  *ngFor="let data of programState.draftIncompleteSessionItems$ | async"
+  *ngFor="let data of programsState.draftIncompleteSessionItems$ | async"
   [data]="data"
   (update)="onUpdate($event)"
   ></bod-session-item>

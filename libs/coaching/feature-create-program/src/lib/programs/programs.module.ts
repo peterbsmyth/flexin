@@ -5,7 +5,6 @@ import { ProgramsRoutingModule } from './programs-routing.module';
 import { BoardComponent } from './components/board/board.component';
 import { CreatePage } from './pages/create/create.page';
 import { ExerciseComponent } from './components/exercise/exercise.component';
-import { SessionComponent } from './components/session/session.component';
 import { SessionItemComponent } from './components/session-item/session-item.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -21,20 +20,17 @@ import { MatListModule } from '@angular/material/list';
 import { ProgramPage } from './pages/program/program.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { SessionConfigurationBoardPage } from './pages/session-configuration-board/session-configuration-board.page';
-import { SessionGridPage } from './pages/session-grid/session-grid.page';
 
 @NgModule({
   declarations: [
     BoardComponent,
     ExerciseComponent,
     SessionItemComponent,
-    SessionComponent,
     CreatePage,
     HomePage,
     ProgramPage,
     ProgramBoardPage,
     SessionConfigurationBoardPage,
-    SessionGridPage,
   ],
   imports: [
     CommonModule,
