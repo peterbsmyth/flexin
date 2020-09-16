@@ -42,7 +42,7 @@ export class DraftProgramsFacade {
 
   addIncompleteSessionItems(inputs: Exercise[][]) {
     const draft: any = {};
-    const weeks = [1].map((id) => ({
+    const weeks = [1, 2, 3, 4, 5, 6].map((id) => ({
       id,
       number: id,
     }));
