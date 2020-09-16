@@ -4,6 +4,7 @@ import { select, Store, Action } from '@ngrx/store';
 
 import * as fromRoot from '../+state/root.reducer';
 import * as ProgramsSelectors from '../+state/programs/programs.selectors';
+import { DraftProgramsDataService } from '../infrastructure/draft-programs.data.service';
 
 @Injectable()
 export class ProgramsFacade {
@@ -19,12 +20,14 @@ export class ProgramsFacade {
   allWeeks$ = this.store.pipe(
     select(ProgramsSelectors.getWeeks)
   )
+  draftIncompleteSessionItems$ = this.draftProgramService.incompleteSessionItems$;
 
   dispatch(action: Action) {
     this.store.dispatch(action);
   }
 
   constructor(
-    private store: Store<fromRoot.PartialState>
+    private store: Store<fromRoot.PartialState>,
+    private draftProgramService: DraftProgramsDataService
   ) {}
 }

@@ -38,7 +38,9 @@ export class ProgramsEffects {
           return this.programService
             .getOne(id)
             .pipe(
-              map((program) => ProgramsPageActions.loadProgramSuccess({ program }))
+              map((program) =>
+                ProgramsPageActions.loadProgramSuccess({ program })
+              )
             );
         },
         onError: (action, error: any) => {

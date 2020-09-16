@@ -23,7 +23,7 @@ import { ExerciseDataService } from './infrastructure/exercise.data.service';
 import * as fromExercises from './+state/exercises/exercises.reducer';
 import { ExercisesEffects } from './+state/exercises/exercises.effects';
 import { ExercisesFacade } from './application/exercises.facade';
-import { DraftProgramsFacade } from './application/draft-programs.facade';
+import { DraftProgramsDataService } from './infrastructure/draft-programs.data.service';
 
 @NgModule({
   imports: [
@@ -65,7 +65,7 @@ import { DraftProgramsFacade } from './application/draft-programs.facade';
     SessionItemsFacade,
     SessionsFacade,
     WeeksFacade,
-    DraftProgramsFacade
+    DraftProgramsDataService
   ],
 })
 export class CoachingDomainModule {}

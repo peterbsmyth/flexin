@@ -7,11 +7,14 @@ import {
   mockSession,
   mockSessionItems,
 } from '@bod/shared/models';
-import { DraftProgramsFacade, WeeksFacade } from '@bod/coaching/domain';
+import {
+  ProgramsFacade,
+  WeeksFacade,
+  ProgramsPageActions,
+} from '@bod/coaching/domain';
 import { takeUntil, tap, filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'bod-session-grid',
   templateUrl: './session-grid.page.html',
   styleUrls: ['./session-grid.page.scss'],
 })
@@ -26,7 +29,7 @@ export class SessionGridPage implements OnInit, OnDestroy {
 
   constructor(
     private weeksState: WeeksFacade,
-    private draftProgramState: DraftProgramsFacade
+    private programsState: ProgramsFacade
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +58,11 @@ export class SessionGridPage implements OnInit, OnDestroy {
   }
 
   onCreateProgram() {
-    this.draftProgramState.createProgram(this.programName.value);
+    this.programsState.dispatch(
+      ProgramsPageActions.createProgram({
+        name: this.programName.value,
+      })
+    );
   }
 
   ngOnDestroy() {

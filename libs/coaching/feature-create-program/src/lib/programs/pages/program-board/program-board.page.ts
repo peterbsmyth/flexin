@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
 import {
   ExercisesFacade,
   ExercisesApiActions,
-  DraftProgramsFacade,
+  ProgramsFacade,
+  ProgramsPageActions,
 } from '@bod/coaching/domain';
 import { Subject } from 'rxjs';
 import { tap, takeUntil, withLatestFrom } from 'rxjs/operators';
@@ -39,7 +40,7 @@ export class ProgramBoardPage implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private exerciseState: ExercisesFacade,
-    private draftProgramState: DraftProgramsFacade
+    private programState: ProgramsFacade
   ) {}
 
   ngOnInit(): void {
@@ -83,12 +84,16 @@ export class ProgramBoardPage implements OnInit, OnDestroy {
     /**
      * session-item flow
      */
-    this.draftProgramState.addIncompleteSessionItems([
-      this.dayOneList,
-      this.dayTwoList,
-      this.dayThreeList,
-      this.dayFourList,
-    ]);
+    this.programState.dispatch(
+      ProgramsPageActions.addIncompleteSessionItems({
+        lists: [
+          this.dayOneList,
+          this.dayTwoList,
+          this.dayThreeList,
+          this.dayFourList,
+        ],
+      })
+    );
     this.router.navigateByUrl('/programs/create/2');
 
     /**

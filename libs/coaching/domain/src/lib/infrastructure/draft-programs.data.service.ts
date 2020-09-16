@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject,forkJoin } from 'rxjs';
-import {
-  Exercise,
-} from '@bod/shared/models';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { Exercise } from '@bod/shared/models';
 import { switchMap } from 'rxjs/operators';
 import { ProgramDataService } from '../infrastructure/program.data.service';
 import { WeekDataService } from '../infrastructure/week.data.service';
@@ -13,10 +11,7 @@ import { DraftProgram } from '../entities/draft';
 import { uniqBy } from 'lodash-es';
 
 @Injectable()
-export class DraftProgramsFacade {
-  private _draft: DraftProgram = {
-    name: '',
-  };
+export class DraftProgramsDataService {
   private _draftProgramSubject = new BehaviorSubject<DraftProgram>({
     name: '',
   });
@@ -40,7 +35,7 @@ export class DraftProgramsFacade {
     private sessionItemService: SessionItemDataService
   ) {}
 
-  addIncompleteSessionItems(inputs: Exercise[][]) {
+  addIncompleteSessionItems(inputs: Exercise[][]): void {
     const draft: any = {};
     const weeks = [1, 2, 3, 4, 5, 6].map((id) => ({
       id,
@@ -58,7 +53,7 @@ export class DraftProgramsFacade {
           weekId: week.id,
         };
         sessions.push(session);
-        
+
         input.forEach((exercise, j) => {
           const sessionItem = {
             reps: null,
@@ -73,7 +68,7 @@ export class DraftProgramsFacade {
             sessionId: session.id,
             order: j,
           };
-          
+
           sessionItems.push(sessionItem);
           exercises.push({
             ...exercise,
@@ -130,7 +125,7 @@ export class DraftProgramsFacade {
     });
   }
 
-  createProgram(name: string) {
+  createProgram(name: string): Observable<any> {
     const draft = this._draftProgramSubject.getValue();
     const draftWeeks = Object.keys(draft.weeks).map((id) => draft.weeks[id]);
     const draftSessions = Object.keys(draft.sessions).map(
@@ -139,82 +134,81 @@ export class DraftProgramsFacade {
     const draftSessionItems = Object.keys(draft.sessionItems).map(
       (id) => draft.sessionItems[id]
     );
-    this.programService
-      .saveOne({ name })
-      .pipe(
-        switchMap((program) => {
-          /**
-           * post the weeks without the temporary id and replacing
-           * the tempoary programId with the real programId
-           */
-          return forkJoin([
-            ...draftWeeks.map((week) =>
-              this.weekService.saveOne({
-                id: undefined,
-                number: week.number,
-                programId: program.id,
-              })
-            ),
-          ]);
-        }),
-        switchMap((weeks) => {
-          /**
-           * create an array of weeks that keeps a reference to the
-           * temporary id
-           */
-          const newWeeks = draftWeeks.map((draftWeek) => ({
-            ...weeks.find((week) => week.number === draftWeek.number),
-            temporaryId: draftWeek.id,
-          }));
+    return this.programService.saveOne({ name }).pipe(
+      switchMap((program) => {
+        /**
+         * post the weeks without the temporary id and replacing
+         * the tempoary programId with the real programId
+         */
+        return forkJoin([
+          ...draftWeeks.map((week) =>
+            this.weekService.saveOne({
+              id: undefined,
+              number: week.number,
+              programId: program.id,
+            })
+          ),
+        ]);
+      }),
+      switchMap((weeks) => {
+        /**
+         * create an array of weeks that keeps a reference to the
+         * temporary id
+         */
+        const newWeeks = draftWeeks.map((draftWeek) => ({
+          ...weeks.find((week) => week.number === draftWeek.number),
+          temporaryId: draftWeek.id,
+        }));
 
-          /**
-           * update the draft sessions with the current weekId
-           */
-          const tempSessions = draftSessions.map((session) => ({
+        /**
+         * update the draft sessions with the current weekId
+         */
+        const tempSessions = draftSessions.map((session) => ({
+          ...session,
+          weekId: newWeeks.find((week) => week.temporaryId === session.weekId)
+            .id,
+        }));
+
+        /**
+         * update the draft state
+         */
+        draft.sessions = tempSessions.reduce(this._createDictionary, {});
+
+        const sessions = tempSessions.map((session) =>
+          this.sessionService.saveOne({
             ...session,
-            weekId: newWeeks.find((week) => week.temporaryId === session.weekId)
-              .id,
+            id: undefined,
+          })
+        );
+
+        draft.weeks = newWeeks.reduce(this._createDictionary, {});
+
+        return forkJoin(sessions);
+      }),
+      switchMap((sessions) => {
+        const newSessions = Object.keys(draft.sessions)
+          .map((id) => draft.sessions[id])
+          .map((draftSession) => ({
+            ...sessions.find(
+              (session) =>
+                session.weekId === draftSession.weekId &&
+                session.order === draftSession.order
+            ),
+            temporaryId: draftSession.id,
           }));
-
-          /**
-           * update the draft state
-           */
-          draft.sessions = tempSessions.reduce(this._createDictionary, {});
-
-          const sessions = tempSessions.map((session) =>
-            this.sessionService.saveOne({
-              ...session,
-              id: undefined,
-            })
-          );
-
-          draft.weeks = newWeeks.reduce(this._createDictionary, {});
-
-          return forkJoin(sessions);
-        }),
-        switchMap((sessions) => {
-          const newSessions = Object.keys(draft.sessions)
-            .map((id) => draft.sessions[id])
-            .map((draftSession) => ({
-              ...sessions.find(
-                (session) => (session.weekId === draftSession.weekId) && (session.order === draftSession.order)
-              ),
-              temporaryId: draftSession.id,
-            }));
-          const sessionItems = draftSessionItems.map((sessionItem) =>
-            this.sessionItemService.saveOne({
-              ...sessionItem,
-              id: undefined,
-              sessionId: newSessions.find(
-                (session) => session.temporaryId === sessionItem.sessionId
-              ).id,
-              weight: +sessionItem.weight,
-              weightUnit: 'lbs',
-            })
-          );
-          return forkJoin(sessionItems);
-        })
-      )
-      .subscribe();
+        const sessionItems = draftSessionItems.map((sessionItem) =>
+          this.sessionItemService.saveOne({
+            ...sessionItem,
+            id: undefined,
+            sessionId: newSessions.find(
+              (session) => session.temporaryId === sessionItem.sessionId
+            ).id,
+            weight: +sessionItem.weight,
+            weightUnit: 'lbs',
+          })
+        );
+        return forkJoin(sessionItems);
+      })
+    );
   }
 }

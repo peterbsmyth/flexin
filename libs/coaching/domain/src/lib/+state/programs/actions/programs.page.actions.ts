@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Program } from '@bod/shared/models';
+import { Program, Exercise } from '@bod/shared/models';
 
 export const loadPrograms = createAction('[Programs Page] Load Programs');
 
@@ -31,4 +31,29 @@ export const loadProgramFailure = createAction(
 export const selectProgram = createAction(
   '[Programs Page] Select Program',
   props<{ id: number }>()
+);
+
+export const addIncompleteSessionItems = createAction(
+  '[Programs Page] Add Incomplete Session Items',
+  props<{ lists: Exercise[][] }>()
+);
+
+export const everythingExceptCreateProgram = createAction(
+  '[Programs Page] Everything Except Create Program',
+  props<{ data: any }>()
+)
+
+export const createProgram = createAction(
+  '[Programs Page] Create Program',
+  props<{ name: string }>()
+);
+
+export const createProgramSuccess = createAction(
+  '[Programs Page] Create Program Success',
+  props<{ name: string }>()
+);
+
+export const createProgramFailure = createAction(
+  '[Programs Page] Create Program Failure',
+  props<{ name: string }>()
 );
