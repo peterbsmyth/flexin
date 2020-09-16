@@ -20,6 +20,8 @@ import { MatListModule } from '@angular/material/list';
 import { ProgramPage } from './pages/program/program.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { SessionConfigurationBoardPage } from './pages/session-configuration-board/session-configuration-board.page';
+import { ProgramBoardComponent } from './components/program-board/program-board.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { SessionConfigurationBoardPage } from './pages/session-configuration-boa
     ProgramPage,
     ProgramBoardPage,
     SessionConfigurationBoardPage,
+    ProgramBoardComponent,
   ],
   imports: [
     CommonModule,
