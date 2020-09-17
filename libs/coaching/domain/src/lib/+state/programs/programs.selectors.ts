@@ -8,10 +8,7 @@ import { PartialState } from '../root.reducer';
 import { getAllWeeks } from '../weeks/weeks.selectors';
 import { getAllSessions } from '../sessions/sessions.selectors';
 import { getAllSessionItems } from '../session-items/session-items.selectors';
-import {
-  getAllExercises,
-  getExercisesEntities,
-} from '../exercises/exercises.selectors';
+import { getExercisesEntities } from '../exercises/exercises.selectors';
 import { Session, SessionItem } from '@bod/shared/models';
 
 // Lookup the 'Programs' feature state managed by NgRx
@@ -94,7 +91,9 @@ export const getSessionItems = createSelector(
         ),
       ];
     });
-    return allSessionItems;
+    return allSessionItems
+      .sort((a, b) => a.order - b.order)
+      .sort((a, b) => a.sessionId - b.sessionId);
   }
 );
 

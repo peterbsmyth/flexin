@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
-import { Exercise } from '@bod/shared/models';
 import { switchMap } from 'rxjs/operators';
 import { ProgramDataService } from '../infrastructure/program.data.service';
 import { WeekDataService } from '../infrastructure/week.data.service';
@@ -66,7 +65,7 @@ export class DraftProgramsDataService {
             id: ++this._lastSessionItemLocalId,
             exerciseId: card.exercise.id,
             sessionId: session.id,
-            order: j,
+            order: j + 1,
           };
 
           sessionItems.push(sessionItem);
@@ -113,6 +112,7 @@ export class DraftProgramsDataService {
         ).sessionItem,
         id: oldSessionItem.id,
         sessionId: oldSessionItem.sessionId,
+        order: oldSessionItem.order
       }))
       /**
        * reduce the array to a dictionary again
