@@ -12,9 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { BusyHttpInterceptor, BusyService } from '@bod/shared/domain';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BodComponentsModule } from '@bod/shared/components';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [AppPage, NavComponent],
+  declarations: [AppPage, NavComponent, HomeComponent],
   imports: [
     BodComponentsModule,
     CommonModule,
