@@ -51,3 +51,17 @@ export const selectSessionItem = createAction(
   '[SessionItems Page] Select SessionItem',
   props<{ id: number }>()
 );
+
+export const updateSessionItem = createAction(
+  '[SessionItems Page] Update SessionItem',
+  props<{ sessionItem: SessionItem }>()
+);
+
+export const updateSessionItemSuccess = createAction(
+  '[SessionItems Page] Update SessionItem Success'
+);
+
+export const updateSessionItemFailure = createAction(
+  '[SessionItems Page] Update SessionItem Failure',
+  props<{ error: any }>()
+);

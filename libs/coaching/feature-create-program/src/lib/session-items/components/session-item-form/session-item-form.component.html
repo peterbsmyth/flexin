@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-content>
+    <h3>Exercise: {{ data.exercise.name }}</h3>
+    <form [formGroup]="form" class="form">
+      <mat-form-field>
+        <mat-label>
+          Reps
+        </mat-label>
+        <input matInput type="number" formControlName="reps" />
+      </mat-form-field>
+      <mat-checkbox formControlName="AMRAP">AMRAP</mat-checkbox>
+      <mat-form-field>
+        <mat-label>
+          Sets
+        </mat-label>
+        <input matInput type="number" formControlName="sets" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          Weight
+        </mat-label>
+        <input matInput type="number" formControlName="weight" step="5" min="0"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          Intensity
+        </mat-label>
+        <mat-select formControlName="intensity" [value]="data.sessionItem.intensity">
+          <mat-option *ngFor="let intensity of data.exercise.intensities" [value]="intensity">{{ intensity }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          Tempo
+        </mat-label>
+        <input matInput type="text" formControlName="tempo" />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <bod-button (click)="onSubmit(form.value)">Save</bod-button>
+  </mat-card-footer>
+</mat-card>
+

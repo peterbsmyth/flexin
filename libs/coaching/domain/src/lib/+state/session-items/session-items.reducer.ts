@@ -37,6 +37,7 @@ export const sessionItemsReducer = createReducer(
     })
   ),
   on(
+    SessionItemsPageActions.updateSessionItem,
     SessionItemsApiActions.loadSessionItemSuccess,
     SessionItemsPageActions.loadSessionItemSuccess,
     SessionItemsPageActions.loadSessionItemWithExerciseSuccess,

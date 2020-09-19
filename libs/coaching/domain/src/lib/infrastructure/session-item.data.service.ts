@@ -23,7 +23,6 @@ export class SessionItemDataService {
   }
 
   getOneWithExercise(id: number): Observable<SessionItem> {
-    const params: HttpParams = new HttpParams();
     const filter = JSON.stringify({
       include: [
         {
@@ -31,7 +30,7 @@ export class SessionItemDataService {
         },
       ],
     });
-    params.set('filter', filter);
+    const params: HttpParams = new HttpParams().set('filter', filter);
 
     return this.http.get<SessionItem>(`${this.API_URL}/session-items/${id}`, {
       params,
@@ -41,6 +40,13 @@ export class SessionItemDataService {
   saveOne(sessionItem: SessionItem) {
     return this.http.post<SessionItem>(
       `${this.API_URL}/session-items`,
+      sessionItem
+    );
+  }
+
+  patchOne(sessionItem: SessionItem): Observable<SessionItem> {
+    return this.http.patch<SessionItem>(
+      `${this.API_URL}/session-items/${sessionItem.id}`,
       sessionItem
     );
   }

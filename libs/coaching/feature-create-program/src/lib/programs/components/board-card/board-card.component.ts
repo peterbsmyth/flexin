@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { BoardCardData } from '@bod/coaching/domain';
 
 @Component({
@@ -9,8 +10,11 @@ import { BoardCardData } from '@bod/coaching/domain';
 export class BoardCardComponent implements OnInit {
   @Input() data: BoardCardData;
   @Input() closeable = true;
+  @Input() clickable = true;
   @Output() remove: EventEmitter<BoardCardData> = new EventEmitter();
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {}
 
@@ -18,4 +22,9 @@ export class BoardCardComponent implements OnInit {
     this.remove.emit(this.data);
   }
 
+  onClick(data: BoardCardData) {
+    if (this.clickable) {
+      this.router.navigate(['session-items', data.sessionItem.id]);
+    }
+  }
 }

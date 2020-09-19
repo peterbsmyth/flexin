@@ -16,6 +16,9 @@ export class SessionItemsFacade {
   selectedSessionItems$ = this.store.pipe(
     select(SessionItemsSelectors.getSelected)
   );
+  selectedSessionItemsWithExercise$ = this.store.pipe(
+    select(SessionItemsSelectors.getSelectedWithExercise)
+  );
   pages$ = this.store.pipe(
     select(SessionItemsSelectors.getPages)
   )

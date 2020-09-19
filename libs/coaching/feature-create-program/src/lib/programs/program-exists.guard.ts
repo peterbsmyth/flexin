@@ -32,7 +32,6 @@ export class ProgramExistsGuard implements CanActivate {
     this.programsState.dispatch(ProgramsPageActions.selectProgram({ id: +id }));
     return this.hasProgramInStore().pipe(
       switchMap((inStore) => {
-        
         if (inStore) {
           return of(inStore);
         } else {

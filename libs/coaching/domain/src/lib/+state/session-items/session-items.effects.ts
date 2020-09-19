@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
+import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { SessionItemsApiActions, SessionItemsPageActions } from './actions';
 import { SessionItemDataService } from '../../infrastructure/session-item.data.service';
-import { map, mergeMap } from 'rxjs/operators';
-import { ExercisesApiActions } from '@bod/coaching/domain';
+import { map, mergeMap, mapTo } from 'rxjs/operators';
+import { ExercisesApiActions } from '../exercises/actions';
 
 @Injectable()
 export class SessionItemsEffects {
@@ -74,6 +74,25 @@ export class SessionItemsEffects {
         onError: (action, error) => {
           console.error('Error', error);
           return SessionItemsPageActions.loadSessionItemFailure({ error });
+        },
+      })
+    )
+  );
+
+  updateSessionItem$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SessionItemsPageActions.updateSessionItem),
+      optimisticUpdate({
+        run: (action) => {
+          return this.sessionItemService
+            .patchOne(action.sessionItem)
+            .pipe(mapTo(SessionItemsPageActions.updateSessionItemSuccess()));
+        },
+        undoAction: (action, error) => {
+          console.error('Error', error);
+          return SessionItemsPageActions.updateSessionItemFailure({
+            error,
+          });
         },
       })
     )

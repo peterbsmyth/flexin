@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CoachingDomainModule } from '@bod/coaching/domain';
 import { ProgramsModule } from './programs/programs.module';
 import { ExercisesModule } from './exercises/exercises.module';
+import { SessionItemsModule } from './session-items/session-items.module';
 
 @NgModule({
   imports: [
@@ -10,6 +11,7 @@ import { ExercisesModule } from './exercises/exercises.module';
     CoachingDomainModule,
     ProgramsModule,
     ExercisesModule,
+    SessionItemsModule
   ],
   declarations: [],
   exports: [],

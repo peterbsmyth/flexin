@@ -6,6 +6,7 @@ import {
 } from './session-items.reducer';
 import { PartialState } from '../root.reducer';
 import { Pages } from '@bod/shared/models';
+import { getExercisesEntities } from '../exercises/exercises.selectors';
 
 // Lookup the 'SessionItems' feature state managed by NgRx
 export const getSessionItemsState = createFeatureSelector<
@@ -49,6 +50,15 @@ export const getSelected = createSelector(
   getSessionItemsEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
+);
+
+export const getSelectedWithExercise = createSelector(
+  getSelected,
+  getExercisesEntities,
+  (sessionItem, entities) => ({
+    sessionItem,
+    exercise: entities[sessionItem.exerciseId] ? entities[sessionItem.exerciseId] : null
+  })
 );
 
 export const getPages = createSelector(

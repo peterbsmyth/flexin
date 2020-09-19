@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card class="card" (click)="onClick(data)">
   <mat-card-header class="card__header">
     <bod-button [icon]="true" *ngIf="closeable" (click)="onRemove()"></bod-button>
   </mat-card-header>
