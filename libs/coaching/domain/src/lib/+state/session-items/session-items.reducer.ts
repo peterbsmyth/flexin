@@ -29,6 +29,7 @@ export const sessionItemsReducer = createReducer(
     SessionItemsPageActions.loadSessionItemsBySession,
     SessionItemsApiActions.loadSessionItem,
     SessionItemsPageActions.loadSessionItem,
+    SessionItemsPageActions.loadSessionItemWithExercise,
     (state) => ({
       ...state,
       loaded: false,
@@ -38,12 +39,14 @@ export const sessionItemsReducer = createReducer(
   on(
     SessionItemsApiActions.loadSessionItemSuccess,
     SessionItemsPageActions.loadSessionItemSuccess,
+    SessionItemsPageActions.loadSessionItemWithExerciseSuccess,
     (state, { sessionItem }) =>
       sessionItemsAdapter.upsertOne(sessionItem, { ...state, loaded: true })
   ),
   on(
     SessionItemsApiActions.loadSessionItemFailure,
     SessionItemsPageActions.loadSessionItemFailure,
+    SessionItemsPageActions.loadSessionItemWithExerciseFailure,
     (state, { error }) => ({
       ...state,
       error,

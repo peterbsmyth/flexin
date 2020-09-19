@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SessionItem } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class SessionItemDataService {
@@ -20,6 +20,22 @@ export class SessionItemDataService {
 
   getOne(id: number): Observable<SessionItem> {
     return this.http.get<SessionItem>(`${this.API_URL}/session-items/${id}`);
+  }
+
+  getOneWithExercise(id: number): Observable<SessionItem> {
+    const params: HttpParams = new HttpParams();
+    const filter = JSON.stringify({
+      include: [
+        {
+          relation: 'exercise',
+        },
+      ],
+    });
+    params.set('filter', filter);
+
+    return this.http.get<SessionItem>(`${this.API_URL}/session-items/${id}`, {
+      params,
+    });
   }
 
   saveOne(sessionItem: SessionItem) {

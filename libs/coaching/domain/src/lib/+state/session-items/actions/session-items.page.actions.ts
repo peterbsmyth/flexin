@@ -31,6 +31,22 @@ export const loadSessionItemFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadSessionItemWithExercise = createAction(
+  '[SessionItems Page] Load SessionItem With Exercise',
+  props<{ id: number }>()
+);
+
+export const loadSessionItemWithExerciseSuccess = createAction(
+  '[SessionItems Page] Load SessionItem With Exercise Success',
+  props<{ sessionItem: SessionItem }>()
+);
+
+export const loadSessionItemWithExerciseFailure = createAction(
+  '[SessionItems Page] Load SessionItem With Exercise Failure',
+  props<{ error: any }>()
+);
+
+
 export const selectSessionItem = createAction(
   '[SessionItems Page] Select SessionItem',
   props<{ id: number }>()

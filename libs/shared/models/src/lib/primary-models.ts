@@ -20,6 +20,7 @@ export interface SessionItem {
   intensity: string; // 'tuck to straddle'
   tempo: string; // '5s eccentric, 2s hold at bottom'
   order?: number;
+  exercise?: Exercise;
 }
 
 export interface Session {
