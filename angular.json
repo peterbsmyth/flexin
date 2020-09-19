@@ -52,6 +52,9 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "apps/athlete/src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/shared/components/src/lib/scss"]
+            },
             "scripts": []
           },
           "configurations": {
@@ -141,7 +144,7 @@
               "apps/coach/src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["apps/coach/src/assets/scss"]
+              "includePaths": ["libs/shared/components/src/lib/scss"]
             },
             "scripts": []
           },
@@ -524,6 +527,9 @@
               "apps/celebrity/src/assets"
             ],
             "styles": ["apps/celebrity/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/shared/components/src/lib/scss"]
+            },
             "scripts": []
           },
           "configurations": {

@@ -21,11 +21,13 @@ import {
 import { TrainingFeatureInputWorkoutModule } from '@bod/training/feature-input-workout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BusyHttpInterceptor, BusyService } from '@bod/shared/domain';
+import { BodComponentsModule } from '@bod/shared/components';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
   imports: [
     BrowserAnimationsModule,
+    BodComponentsModule,
     AppRoutingModule,
     MatButtonModule,
     BrowserModule,

@@ -11,10 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BusyHttpInterceptor, BusyService } from '@bod/shared/domain';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BodComponentsModule } from '@bod/shared/components';
 
 @NgModule({
   declarations: [AppPage, NavComponent],
   imports: [
+    BodComponentsModule,
     CommonModule,
     RouterModule,
     MatSidenavModule,
