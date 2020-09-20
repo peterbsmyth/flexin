@@ -1,9 +1,9 @@
-<button *ngIf="!icon; else iconButton" mat-raised-button color="primary">
+<button *ngIf="!icon; else iconButton" mat-raised-button color="primary" [disabled]="disabled">
   <ng-content></ng-content>
 </button>
 
 <ng-template #iconButton>
-  <button mat-icon-button>
+  <button mat-icon-button [disabled]="disabled">
     <mat-icon>close</mat-icon>
   </button>
 </ng-template>

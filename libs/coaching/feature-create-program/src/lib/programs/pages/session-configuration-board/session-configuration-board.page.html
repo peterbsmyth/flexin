@@ -5,13 +5,14 @@
     </mat-label>
     <input matInput [formControl]="programName" type="text">
   </mat-form-field>
-  <bod-button (click)="onClickCreateProgram()">Create Program</bod-button>
+  <bod-button [disabled]="invalid$ | async" (click)="onClickCreateProgram()">Create Program</bod-button>
 </bod-actions-bar>
 <bod-board>
   <coaching-session-item
   class="item"
-  *ngFor="let data of programsState.draftIncompleteSessionItems$ | async"
+  *ngFor="let data of programsState.draftIncompleteSessionItems$ | async; let i = index;"
   [data]="data"
   (update)="onUpdate($event)"
+  (validate)="onValidate($event, i)"
   ></coaching-session-item>
 </bod-board>

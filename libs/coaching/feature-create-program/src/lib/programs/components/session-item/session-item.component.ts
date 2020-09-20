@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { tap, takeUntil, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SessionItemData } from '@bod/coaching/domain';
@@ -13,13 +13,13 @@ import { SessionItemData } from '@bod/coaching/domain';
 export class SessionItemComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   form: FormGroup = this.fb.group({
-    reps: 0,
-    AMRAP: false,
-    sets: 0,
-    weight: 0,
-    intensity: new FormControl(''),
-    tempo: '',
-    leftRight: false
+    reps: this.fb.control(0, [Validators.required]),
+    AMRAP: this.fb.control(false, [Validators.required]),
+    sets: this.fb.control(0, [Validators.required]),
+    weight: this.fb.control(0, [Validators.required]),
+    intensity: this.fb.control('', [Validators.required]),
+    tempo: this.fb.control('', [Validators.required]),
+    leftRight: this.fb.control(false, [Validators.required]),
   });
   public leftRight: boolean;
 
@@ -47,6 +47,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   }
 
   @Output() update: EventEmitter<SessionItemData> = new EventEmitter();
+  @Output() validate: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder
@@ -65,6 +66,24 @@ export class SessionItemComponent implements OnInit, OnDestroy {
       })
     ).subscribe();
 
+    this.form.statusChanges
+    .pipe(
+      takeUntil(this.unsubscribe$),
+      tap(status => {
+        switch (status) {
+          case 'VALID': {
+            this.validate.emit(true);
+            return;
+          }
+          default: {
+            this.validate.emit(false);
+            return;
+          }
+        }
+      })
+    )
+    .subscribe();
+
     this.form.valueChanges.pipe(
       takeUntil(this.unsubscribe$),
       distinctUntilChanged(),
@@ -82,14 +101,14 @@ export class SessionItemComponent implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  buildForm(data) {
-    this.form.get('reps').setValue(data.sessionItem.reps);
-    this.form.get('AMRAP').setValue(data.sessionItem.AMRAP);
-    this.form.get('sets').setValue(data.sessionItem.sets);
-    this.form.get('leftRight').setValue(data.sessionItem.leftRight);
-    this.form.get('weight').setValue(data.sessionItem.weight);
-    this.form.get('intensity').setValue(data.sessionItem.intensity);
-    this.form.get('tempo').setValue(data.sessionItem.tempo);
+  buildForm(data: SessionItemData) {
+    this.form.get('reps').setValue(data.sessionItem.reps || 0);
+    this.form.get('AMRAP').setValue(data.sessionItem.AMRAP || false);
+    this.form.get('sets').setValue(data.sessionItem.sets || 0);
+    this.form.get('leftRight').setValue(data.sessionItem.leftRight || false);
+    this.form.get('weight').setValue(data.sessionItem.weight || 0);
+    this.form.get('intensity').setValue(data.sessionItem.intensity || '');
+    this.form.get('tempo').setValue(data.sessionItem.tempo || '');
     this.leftRight = data.exercise.leftRight;
   }
 

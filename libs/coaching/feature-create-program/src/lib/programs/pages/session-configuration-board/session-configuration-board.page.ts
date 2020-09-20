@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProgramsFacade, ProgramsPageActions, SessionItemData } from '@bod/coaching/domain';
-import { Observable } from 'rxjs';
+import {
+  ProgramsFacade,
+  ProgramsPageActions,
+  SessionItemData,
+} from '@bod/coaching/domain';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
 @Component({
@@ -12,21 +16,25 @@ import { take, tap } from 'rxjs/operators';
 export class SessionConfigurationBoardPage implements OnInit {
   programName: FormControl = new FormControl('Program 1');
   private _data: SessionItemData[];
+  private _validItems: boolean[] = [];
   incompleteSessionItems$: Observable<any[]>;
+  private _invalidSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  invalid$: Observable<boolean> = this._invalidSubject.asObservable();
 
   constructor(private router: Router, public programsState: ProgramsFacade) {
     this.programsState.draftIncompleteSessionItems$
       .pipe(
         take(1),
         tap((data) => {
+          data.forEach(() => this._validItems.push(false));
           const copiedDeep = data.map(({ exercise, sessionItem }) => ({
             exercise: {
-              ...exercise
+              ...exercise,
             },
             sessionItem: {
-              ...sessionItem
-            }
-          }))
+              ...sessionItem,
+            },
+          }));
           this._data = copiedDeep;
         })
       )
@@ -44,6 +52,21 @@ export class SessionConfigurationBoardPage implements OnInit {
         };
       }
     });
+  }
+
+  /**
+   * onValidate will push false to invalidSubject, indicating the form has no errors,
+   * when all the session items have a valid value of true.
+   * @param valid the validity value of the session item
+   * @param index the index of the session item
+   */
+  onValidate(valid: boolean, index: number) {
+    this._validItems[index] = valid;
+    if (this._validItems.every((item) => item)) {
+      this._invalidSubject.next(false);
+    } else {
+      this._invalidSubject.next(true);
+    }
   }
 
   onClickCreateProgram() {
