@@ -10,7 +10,6 @@
   <bod-board-card
     *ngFor="let datum of (boardCardData$ | async);"
     [data]="datum"
-    [clickable]="false"
     [closeable]="false"
     [compact]="true"
     [routerLink]="['items', datum.sessionItem.id]"

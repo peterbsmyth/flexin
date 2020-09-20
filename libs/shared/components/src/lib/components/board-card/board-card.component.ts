@@ -10,7 +10,6 @@ import { BoardCardData } from '@bod/shared/models';
 export class BoardCardComponent implements OnInit {
   @Input() data: BoardCardData;
   @Input() closeable = true;
-  @Input() clickable = true;
   @Input() compact = false;
   @Output() remove: EventEmitter<BoardCardData> = new EventEmitter();
   constructor(
@@ -21,11 +20,5 @@ export class BoardCardComponent implements OnInit {
 
   onRemove() {
     this.remove.emit(this.data);
-  }
-
-  onClick(data: BoardCardData) {
-    if (this.clickable) {
-      this.router.navigate(['session-items', data.sessionItem.id]);
-    }
   }
 }

@@ -18,22 +18,38 @@
 
   <section class="board__column" id="dayOne" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="dayOneList" (cdkDropListDropped)="drop($event)">
     <header class="board__column-header"><h1>Day One</h1></header>
-    <bod-board-card [clickable]="!!data.sessionItem" [closeable]="!!!data.sessionItem"  (remove)="onRemove($event, 'dayOneList')" *ngFor="let data of dayOneList" [data]="data" cdkDrag [cdkDragData]="data">
-    </bod-board-card>
+    <article *ngFor="let data of dayOneList">
+      <bod-board-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem"  (remove)="onRemove($event, 'dayOneList')" [data]="data" cdkDrag [cdkDragData]="data">
+      </bod-board-card>
+      <bod-board-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem"  (remove)="onRemove($event, 'dayOneList')" [data]="data" cdkDrag [cdkDragData]="data">
+      </bod-board-card>
+    </article>
   </section>
   <section class="board__column" id="dayTwo" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayThree', 'dayFour']" [cdkDropListData]="dayTwoList" (cdkDropListDropped)="drop($event)">
     <header class="board__column-header"><h1>Day Two</h1></header>
-    <bod-board-card [clickable]="!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayTwoList')" *ngFor="let data of dayTwoList" [data]="data" cdkDrag [cdkDragData]="data">
-    </bod-board-card>
+    <article *ngFor="let data of dayTwoList">
+      <bod-board-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayTwoList')" [data]="data" cdkDrag [cdkDragData]="data">
+      </bod-board-card>
+      <bod-board-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayTwoList')" [data]="data" cdkDrag [cdkDragData]="data">
+      </bod-board-card>
+    </article>
   </section>
   <section class="board__column" id="dayThree" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayFour']" [cdkDropListData]="dayThreeList" (cdkDropListDropped)="drop($event)">
     <header class="board__column-header"><h1>Day Three</h1></header>
-    <bod-board-card [clickable]="!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayThreeList')" *ngFor="let data of dayThreeList" [data]="data" cdkDrag [cdkDragData]="data">
-    </bod-board-card>
+    <article *ngFor="let data of dayThreeList">
+      <bod-board-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayThreeList')" [data]="data" cdkDrag [cdkDragData]="data">
+      </bod-board-card>
+      <bod-board-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayThreeList')" [data]="data" cdkDrag [cdkDragData]="data">
+      </bod-board-card>
+    </article>
   </section>
   <section class="board__column" id="dayFour" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree']" [cdkDropListData]="dayFourList" (cdkDropListDropped)="drop($event)">
     <header class="board__column-header"><h1>Day Four</h1></header>
-    <bod-board-card [clickable]="!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayFourList')" *ngFor="let data of dayFourList" [data]="data" cdkDrag [cdkDragData]="data">
-    </bod-board-card>
+    <article *ngFor="let data of dayFourList">
+      <bod-board-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayFourList')" [data]="data" cdkDrag [cdkDragData]="data">
+      </bod-board-card>
+      <bod-board-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayFourList')" [data]="data" cdkDrag [cdkDragData]="data">
+      </bod-board-card>
+    </article>
   </section>
 </div>
