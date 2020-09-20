@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { version } from '../../../../../package.json';
 
 @Component({
   selector: 'bod-root',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.page.scss'],
 })
 export class AppPage {
- 
+ version: string = version;
 }
