@@ -13,4 +13,8 @@
     justify-content: flex-end;
     height: $space-l;
   }
+
+  &__compact {
+    height: $space-xs;
+  }
 }

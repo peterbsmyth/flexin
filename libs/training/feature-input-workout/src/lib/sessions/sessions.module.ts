@@ -17,6 +17,7 @@ import { SessionPage } from './pages/session/session.page';
 import { SessionItemPage } from './pages/session-item/session-item.page';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { SessionItemCardComponent } from './components/session-item-card/session-item-card.component';
+import { BodComponentsModule } from '@bod/shared/components';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SessionItemCardComponent } from './components/session-item-card/session
     MatButtonModule,
     MatInputModule,
     MatListModule,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    BodComponentsModule
   ],
 })
 export class SessionsModule {}

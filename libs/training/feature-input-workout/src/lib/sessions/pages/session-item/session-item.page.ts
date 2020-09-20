@@ -40,7 +40,6 @@ export class SessionItemPage implements OnInit, OnDestroy {
     private sessionsState: SessionsFacade,
     private sessionItemsState: SessionItemsFacade,
     private sessionItemStatisticsState: SessionItemStatisticsFacade,
-    private setStatisticsState: SetStatisticsFacade,
     private route: ActivatedRoute
   ) {
     this.sessionItemsLoaded$ = this.sessionsState.allSessionItems$.pipe(
@@ -60,7 +59,6 @@ export class SessionItemPage implements OnInit, OnDestroy {
         setStatistics,
       }))
     );
-    this.pages$ = this.sessionItemsState.pages$;
   }
 
   ngOnInit(): void {

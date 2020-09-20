@@ -11,6 +11,7 @@ export class BoardCardComponent implements OnInit {
   @Input() data: BoardCardData;
   @Input() closeable = true;
   @Input() clickable = true;
+  @Input() compact = false;
   @Output() remove: EventEmitter<BoardCardData> = new EventEmitter();
   constructor(
     private router: Router

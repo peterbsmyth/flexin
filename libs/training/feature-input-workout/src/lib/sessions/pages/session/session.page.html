@@ -7,15 +7,15 @@
   <h2>{{ session.name }}</h2>
 </ng-container>
 <ng-container *ngIf="(sessionItemsLoaded$ | async); else loadingSessionItems">
-  <mat-list>
-    <a
-      *ngFor="let sessionItem of (sessionItems$ | async);"
-      mat-list-item
-      [routerLink]="['items', sessionItem.id]"
-    >
-      {{ sessionItem.id }}
-    </a>
-  </mat-list>
+  <bod-board-card
+    *ngFor="let datum of (boardCardData$ | async);"
+    [data]="datum"
+    [clickable]="false"
+    [closeable]="false"
+    [compact]="true"
+    [routerLink]="['items', datum.sessionItem.id]"
+    routerLinkActive="active"
+  ></bod-board-card>
 </ng-container>
 <ng-template #loadingSessionItems>
   Loading Session Items...

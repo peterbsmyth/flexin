@@ -1,7 +1,3 @@
-<bod-action-bar *ngrxLet="pages$ as pages">
-  <button mat-button [disabled]="pages.isFirst" [routerLink]="['../', pages.previousId]">Previous Exercise</button>
-  <button mat-button [disabled]="pages.isLast" [routerLink]="['../', pages.nextId]">Next Exercise</button>
-</bod-action-bar>
 <ng-container *ngIf="(sessionItemsLoaded$ | async); else loadingSessionItems">
   <ng-container *ngrxLet="sessionItem$ as sessionItem">
     <training-session-item-card

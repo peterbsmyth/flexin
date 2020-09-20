@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionItemsPageActions, SessionsFacade } from '@bod/training/domain';
 import { Observable } from 'rxjs';
-import { Session, Pages, SessionItem } from '@bod/shared/models';
+import { Session, Pages, BoardCardData } from '@bod/shared/models';
 import { filter, map, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SessionPage implements OnInit {
   session$: Observable<Session>;
   pages$: Observable<Pages>;
-  sessionItems$: Observable<SessionItem[]>;
+  boardCardData$: Observable<BoardCardData[]>;
   sessionItemsLoaded$: Observable<boolean>;
 
   constructor(
@@ -23,10 +23,14 @@ export class SessionPage implements OnInit {
       filter((s) => !!s)
     );
     this.pages$ = this.sessionsState.pages$;
-    this.sessionItems$ = this.sessionsState.allSessionItems$.pipe(
-      filter((s) => !!s)
+    this.boardCardData$ = this.sessionsState.allSessionItems$.pipe(
+      filter((s) => !!s),
+      map(sessionItems => sessionItems.map(sessionItem => ({
+        sessionItem,
+        exercise: sessionItem.exercise
+      })))
     );
-    this.sessionItemsLoaded$ = this.sessionItems$.pipe(
+    this.sessionItemsLoaded$ = this.boardCardData$.pipe(
       map((sessionItems) => sessionItems.every((s) => s))
     );
   }

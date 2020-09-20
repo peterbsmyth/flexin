@@ -69,30 +69,3 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
-
-export const getSessionItemsIdsBySession = createSelector(
-  getSelectedSessionId,
-  getAllSessionItems,
-  (sessionId, sessionItems) =>
-    sessionItems
-      .filter((sessionItem) => sessionItem.sessionId === sessionId)
-      .map(({ id }) => id)
-);
-
-export const getPages = createSelector(
-  getSelectedId,
-  getSessionItemsIdsBySession,
-  (id, ids): Pages => {
-    const idIndex = ids.findIndex((currentId) => currentId === id);
-    const isFirst = idIndex === 0;
-    const isLast = idIndex === ids.length - 1;
-    const previousId = isFirst ? null : ids[idIndex - 1];
-    const nextId = isLast ? null : ids[idIndex + 1];
-    return {
-      isFirst,
-      isLast,
-      previousId,
-      nextId,
-    };
-  }
-);
