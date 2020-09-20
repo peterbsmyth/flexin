@@ -1,0 +1,16 @@
+@import "utils";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-radius;
+  padding: $space-xs;
+  margin: $space-xs;
+
+  &__header {
+    padding-bottom: $card-spacing-vertical;
+    display: flex;
+    justify-content: flex-end;
+    height: $space-l;
+  }
+}

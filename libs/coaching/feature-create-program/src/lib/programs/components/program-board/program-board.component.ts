@@ -8,7 +8,8 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { remove } from 'lodash-es';
-import { BoardCardData, ProgramBoardData } from '@bod/coaching/domain';
+import { ProgramBoardData } from '@bod/coaching/domain';
+import { BoardCardData } from '@bod/shared/models';
 
 @Component({
   selector: 'coaching-program-board',
