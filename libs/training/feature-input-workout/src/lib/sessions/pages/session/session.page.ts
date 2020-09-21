@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { SessionItemsPageActions, SessionsFacade } from '@bod/training/domain';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  SessionItemsPageActions,
+  SessionsFacade,
+  SessionsPageActions,
+} from '@bod/training/domain';
+import { Observable, Subject } from 'rxjs';
 import { Session, Pages, BoardCardData } from '@bod/shared/models';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, tap, takeUntil, distinctUntilKeyChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './session.page.html',
   styleUrls: ['./session.page.scss'],
 })
-export class SessionPage implements OnInit {
+export class SessionPage implements OnInit, OnDestroy {
+  unsubscribe$: Subject<any> = new Subject();
   session$: Observable<Session>;
   pages$: Observable<Pages>;
   boardCardData$: Observable<BoardCardData[]>;
@@ -17,10 +22,11 @@ export class SessionPage implements OnInit {
 
   constructor(
     private sessionsState: SessionsFacade,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.session$ = this.sessionsState.selectedSessions$.pipe(
-      filter((s) => !!s)
+      filter((s) => !!s),
+      distinctUntilKeyChanged('id')
     );
     this.pages$ = this.sessionsState.pages$;
     this.boardCardData$ = this.sessionsState.allSessionItems$.pipe(
@@ -38,6 +44,16 @@ export class SessionPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.session$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap((session) => {
+          this.sessionsState.dispatch(
+            SessionsPageActions.loadSessionsByWeek({ id: session.weekId })
+          );
+        })
+      )
+      .subscribe();
     this.route.params
       .pipe(
         tap((params) => {
@@ -49,5 +65,10 @@ export class SessionPage implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
