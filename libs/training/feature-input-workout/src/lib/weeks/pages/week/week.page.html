@@ -1,4 +1,4 @@
-<ng-container *ngrxLet="week$ as week">
-  <span>Week {{ week.number }}</span>
-</ng-container>
+<mat-list class="week" *ngrxLet="week$ as week">
+  <mat-list-item><h2>Week {{ week.number }}</h2></mat-list-item>
+</mat-list>
 <router-outlet></router-outlet>

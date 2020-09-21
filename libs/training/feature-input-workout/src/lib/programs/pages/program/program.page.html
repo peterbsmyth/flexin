@@ -1,4 +1,4 @@
-<div *ngrxLet="programsState.selectedPrograms$ as program">
-  <span>{{ program.name }}</span>
-</div>
+<mat-list class="program" *ngrxLet="programsState.selectedPrograms$ as program">
+  <mat-list-item><h2>{{ program.name }}</h2></mat-list-item>
+</mat-list>
 <router-outlet></router-outlet>

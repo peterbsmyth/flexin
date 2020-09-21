@@ -20,6 +20,6 @@
 }
 
 :host-context(.active) .card {
-  font-weight: 900;
+  font-weight: $weight-bold;
   background-color: $grey-050;
 }

@@ -1,3 +1,4 @@
 <mat-list>
+  <mat-list-item class="list__title">Programs</mat-list-item>
   <a *ngFor="let program of (programsState.allPrograms$ | async)" mat-list-item [routerLink]="['/programs', program.id]">{{ program?.name }}</a>
 </mat-list>
