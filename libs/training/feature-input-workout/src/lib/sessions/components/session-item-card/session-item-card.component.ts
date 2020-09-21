@@ -1,16 +1,26 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import {
   SessionItemBoardCardData,
   SessionItemCardOutput,
 } from '@bod/training/domain';
+import { Subject } from 'rxjs';
+import { debounceTime, tap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'training-session-item-card',
   templateUrl: './session-item-card.component.html',
   styleUrls: ['./session-item-card.component.scss'],
 })
-export class SessionItemCardComponent implements OnInit {
+export class SessionItemCardComponent implements OnInit, OnDestroy {
+  private unsubscribe$: Subject<any> = new Subject();
   private _data: SessionItemBoardCardData;
   @Input()
   get data(): SessionItemBoardCardData {
@@ -74,16 +84,25 @@ export class SessionItemCardComponent implements OnInit {
       const setWeight = hasSetStatistic && data.setStatistics[i].weight;
       const control = this.fb.group({
         set: i + 1,
-        reps: this.fb.control(setReps ? setReps : null),
-        weight: this.fb.control(setWeight ? setWeight : null),
+        reps: this.fb.control(setReps ? setReps : 0),
+        weight: this.fb.control(setWeight ? setWeight : 0),
       });
       sets.push(control);
     });
-    return this.fb.group({
+    const form = this.fb.group({
       sets,
-      rpe: this.fb.control(rpe ? rpe : null),
+      rpe: this.fb.control(rpe ? rpe : 0),
       notes: this.fb.control(notes ? notes : ''),
     });
+
+    form.valueChanges
+      .pipe(
+        debounceTime(1000),
+        takeUntil(this.unsubscribe$),
+        tap((value) => this.onSave(value))
+      )
+      .subscribe();
+    return form;
   }
 
   onSave(value: {
@@ -111,9 +130,13 @@ export class SessionItemCardComponent implements OnInit {
           id: this.data.setStatistics[i] && this.data.setStatistics[i].id,
           sessionItemStatisticId,
           ...s,
-        }))
-        .filter((s) => s.reps),
+        })),
     };
     this.save.emit(output);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

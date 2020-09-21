@@ -18,3 +18,8 @@
     height: $space-xs;
   }
 }
+
+:host-context(.active) .card {
+  font-weight: 900;
+  background-color: $grey-050;
+}

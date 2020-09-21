@@ -17,7 +17,7 @@ export class SessionPage implements OnInit {
 
   constructor(
     private sessionsState: SessionsFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.session$ = this.sessionsState.selectedSessions$.pipe(
       filter((s) => !!s)
@@ -25,10 +25,12 @@ export class SessionPage implements OnInit {
     this.pages$ = this.sessionsState.pages$;
     this.boardCardData$ = this.sessionsState.allSessionItems$.pipe(
       filter((s) => !!s),
-      map(sessionItems => sessionItems.map(sessionItem => ({
-        sessionItem,
-        exercise: sessionItem.exercise
-      })))
+      map((sessionItems) =>
+        sessionItems.map((sessionItem) => ({
+          sessionItem,
+          exercise: sessionItem.exercise,
+        }))
+      )
     );
     this.sessionItemsLoaded$ = this.boardCardData$.pipe(
       map((sessionItems) => sessionItems.every((s) => s))

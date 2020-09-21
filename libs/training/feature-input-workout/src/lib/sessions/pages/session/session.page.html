@@ -1,10 +1,12 @@
-<bod-action-bar *ngrxLet="pages$ as pages">
+<training-action-bar *ngrxLet="pages$ as pages">
   <button mat-button [disabled]="pages.isFirst" [routerLink]="['../', pages.previousId]">Previous Session</button>
   <button mat-button [disabled]="pages.isLast" [routerLink]="['../', pages.nextId]">Next Session</button>
-</bod-action-bar>
+</training-action-bar>
 
 <ng-container *ngrxLet="session$ as session">
-  <h2>{{ session.name }}</h2>
+  <div class="title" >
+    <h2>{{ session.name }}</h2>
+  </div>
 </ng-container>
 <ng-container *ngIf="(sessionItemsLoaded$ | async); else loadingSessionItems">
   <bod-board-card

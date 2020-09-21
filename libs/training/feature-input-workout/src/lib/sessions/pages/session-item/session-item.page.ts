@@ -18,7 +18,7 @@ import {
   SessionItemStatistic,
   SetStatistic,
 } from '@bod/shared/models';
-import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -79,6 +79,7 @@ export class SessionItemPage implements OnInit, OnDestroy {
     this.sessionItemStatisticsState.selectedSessionItemStatistics$.pipe(
       takeUntil(this.unsubscribe$),
       filter((s) => !!s),
+      distinctUntilKeyChanged('id'),
       tap(({ id }) => {
         this.sessionsState.dispatch(
           SetStatisticsActions.loadSetStatisticsBySessionItemStatistic({ id })

@@ -58,7 +58,7 @@ export const getSessionItems = createSelector(
   (session, sessionItems) => {
     return (
       session &&
-      sessionItems.filter((sessionItem) => sessionItem.sessionId === session.id)
+      sessionItems.filter((sessionItem) => sessionItem.sessionId === session.id).sort((a, b) => a.order - b.order)
     );
   }
 );

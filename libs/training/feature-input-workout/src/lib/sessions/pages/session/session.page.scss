@@ -1,3 +1,12 @@
+training-action-bar, .title {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  width: 50%;
+}
+
 mat-card-header {
   height: 10vh;
 }
@@ -9,4 +18,8 @@ mat-card-content {
 main, aside {
   display: flex;
   flex-direction: column;
+}
+
+.active {
+  width: 10%;
 }
