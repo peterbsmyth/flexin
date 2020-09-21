@@ -4,6 +4,11 @@ import {
   SessionsState,
   sessionsAdapter,
 } from './sessions.reducer';
+import {
+  WEEKS_FEATURE_KEY,
+  WeeksState,
+  weeksAdapter,
+} from '../weeks/weeks.reducer';
 import { PartialState } from '../root.reducer';
 import { getAllSessionItems } from '../session-items/session-items.selectors';
 import { Pages, Session } from '@bod/shared/models';
@@ -13,6 +18,15 @@ export const getSessionsState = createFeatureSelector<
   PartialState,
   SessionsState
 >(SESSIONS_FEATURE_KEY);
+
+export const getWeeksState = createFeatureSelector<PartialState, WeeksState>(
+  WEEKS_FEATURE_KEY
+);
+
+export const getSelectedWeekId = createSelector(
+  getWeeksState,
+  (state: WeeksState) => state.selectedId
+);
 
 const { selectAll, selectEntities, selectIds } = sessionsAdapter.getSelectors();
 
@@ -58,16 +72,22 @@ export const getSessionItems = createSelector(
   (session, sessionItems) => {
     return (
       session &&
-      sessionItems.filter((sessionItem) => sessionItem.sessionId === session.id).sort((a, b) => a.order - b.order)
+      sessionItems
+        .filter((sessionItem) => sessionItem.sessionId === session.id)
+        .sort((a, b) => a.order - b.order)
     );
   }
 );
 
 export const getPages = createSelector(
   getSelectedId,
+  getSelectedWeekId,
   getAllSessions,
-  (id, sessions: Session[]): Pages => {
-    const sorted = sessions.sort((a, b) => a.order - b.order).map((s) => s.id);
+  (id, weekId, sessions: Session[]): Pages => {
+    const sorted = sessions
+      .filter((session) => session.weekId === weekId)
+      .sort((a, b) => a.order - b.order)
+      .map((s) => s.id);
     const idIndex = sorted.findIndex((currentId) => currentId === id);
     const isFirst = idIndex === 0;
     const isLast = idIndex === sorted.length - 1;

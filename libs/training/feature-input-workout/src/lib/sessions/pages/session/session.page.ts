@@ -3,10 +3,17 @@ import {
   SessionItemsPageActions,
   SessionsFacade,
   SessionsPageActions,
+  WeeksPageActions,
 } from '@bod/training/domain';
 import { Observable, Subject } from 'rxjs';
 import { Session, Pages, BoardCardData } from '@bod/shared/models';
-import { filter, map, tap, takeUntil, distinctUntilKeyChanged } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  tap,
+  takeUntil,
+  distinctUntilKeyChanged,
+} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -50,6 +57,9 @@ export class SessionPage implements OnInit, OnDestroy {
         tap((session) => {
           this.sessionsState.dispatch(
             SessionsPageActions.loadSessionsByWeek({ id: session.weekId })
+          );
+          this.sessionsState.dispatch(
+            WeeksPageActions.selectWeek({ id: session.weekId })
           );
         })
       )
