@@ -18,6 +18,10 @@ import {
   SESSIONS_FEATURE_KEY,
   SessionsState,
 } from './sessions/sessions.reducer';
+import {
+  SESSIONSTATISTICS_FEATURE_KEY,
+  SessionStatisticsState,
+} from './session-statistics/session-statistics.reducer';
 import { WEEKS_FEATURE_KEY, WeeksState } from './weeks/weeks.reducer';
 import { EXERCISES_FEATURE_KEY, ExercisesState } from './exercises/exercises.reducer';
 import { WeekStatisticsState, WEEKSTATISTICS_FEATURE_KEY } from './week-statistics/week-statistics.reducer';
@@ -29,7 +33,8 @@ export interface PartialState {
   readonly [PROGRAMS_FEATURE_KEY]: ProgramsState;
   readonly [SESSIONITEMS_FEATURE_KEY]: SessionItemsState;
   readonly [SESSIONITEMSTATISTICS_FEATURE_KEY]: SessionItemStatisticsState;
-  readonly [SESSIONS_FEATURE_KEY]: SessionsState;
+  readonly [SESSIONS_FEATURE_KEY]: SessionStatisticsState;
+  readonly [SESSIONSTATISTICS_FEATURE_KEY]: SessionsState;
   readonly [SETSTATISTICS_FEATURE_KEY]: SetStatisticsState;
   readonly [WEEKSTATISTICS_FEATURE_KEY]: WeekStatisticsState;
   readonly [WEEKS_FEATURE_KEY]: WeeksState;

@@ -39,6 +39,10 @@ import { ProgramStatisticDataService } from './infrastructure/program-statistic.
 import * as fromProgramStatistics from './+state/program-statistics/program-statistics.reducer';
 import { ProgramStatisticsEffects } from './+state/program-statistics/program-statistics.effects';
 import { ProgramStatisticsFacade } from './application/program-statistics.facade';
+import * as fromSessionStatistics from './+state/session-statistics/session-statistics.reducer';
+import { SessionStatisticsEffects } from './+state/session-statistics/session-statistics.effects';
+import { SessionStatisticsFacade } from './application/session-statistics.facade';
+import { SessionStatisticDataService } from './infrastructure/session-statistic.data.service';
 
 @NgModule({
   imports: [
@@ -77,6 +81,10 @@ import { ProgramStatisticsFacade } from './application/program-statistics.facade
       fromWeekStatistics.reducer
     ),
     StoreModule.forFeature(fromWeeks.WEEKS_FEATURE_KEY, fromWeeks.reducer),
+    StoreModule.forFeature(
+      fromSessionStatistics.SESSIONSTATISTICS_FEATURE_KEY,
+      fromSessionStatistics.reducer
+    ),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
@@ -87,6 +95,7 @@ import { ProgramStatisticsFacade } from './application/program-statistics.facade
       ExercisesEffects,
       WeekStatisticsEffects,
       ProgramStatisticsEffects,
+      SessionStatisticsEffects
     ]),
   ],
   providers: [
@@ -108,6 +117,8 @@ import { ProgramStatisticsFacade } from './application/program-statistics.facade
     WeekStatisticsFacade,
     ProgramStatisticDataService,
     ProgramStatisticsFacade,
+    SessionStatisticDataService,
+    SessionStatisticsFacade,
   ],
 })
 export class TrainingDomainModule {}

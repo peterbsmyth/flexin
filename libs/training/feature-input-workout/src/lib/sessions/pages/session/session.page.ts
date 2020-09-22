@@ -3,6 +3,7 @@ import {
   SessionItemsPageActions,
   SessionsFacade,
   SessionsPageActions,
+  SessionStatisticsActions,
   WeeksPageActions,
 } from '@bod/training/domain';
 import { Observable, Subject } from 'rxjs';
@@ -67,9 +68,15 @@ export class SessionPage implements OnInit, OnDestroy {
     this.route.params
       .pipe(
         tap((params) => {
+          const id = params['sessionId'];
+
+          this.sessionsState.dispatch(
+            SessionStatisticsActions.loadSessionStatisticBySession({ id })
+          );
+
           this.sessionsState.dispatch(
             SessionItemsPageActions.loadSessionItemsBySession({
-              id: params['sessionId'],
+              id,
             })
           );
         })
