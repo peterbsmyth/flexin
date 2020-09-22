@@ -16,15 +16,12 @@
         </mat-form-field>
         <mat-form-field class="form__field">
           <mat-label>
-            Reps
+            Reps <span *ngIf="leftRight">(left/right)</span>
           </mat-label>
           <input matInput type="number" formControlName="reps">
         </mat-form-field>
         <mat-checkbox formControlName="AMRAP" class="form__field form__check">
-          AMRAP?
-        </mat-checkbox>
-        <mat-checkbox *ngIf="leftRight" formControlName="leftRight" class="form__field form__check">
-          Left/Right
+          AMRAP
         </mat-checkbox>
         <mat-form-field class="form__field">
           <mat-label>
