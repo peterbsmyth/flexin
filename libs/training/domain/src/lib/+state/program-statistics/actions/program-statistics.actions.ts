@@ -15,6 +15,36 @@ export const loadProgramStatisticsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const saveProgramStatisticByProgram = createAction(
+  '[ProgramStatistics] Save ProgramStatistic By Program',
+  props<{ id: any }>()
+);
+
+export const saveProgramStatisticByProgramSuccess = createAction(
+  '[ProgramStatistics] Save ProgramStatistic By Program Success',
+  props<{ programStatistic: ProgramStatistic }>()
+);
+
+export const saveProgramStatisticByProgramFailure = createAction(
+  '[ProgramStatistics] Save ProgramStatistic By Program Failure',
+  props<{ error: any }>()
+);
+
+export const loadProgramStatisticByProgram = createAction(
+  '[ProgramStatistics] Load ProgramStatistic By Program',
+  props<{ id: number }>()
+);
+
+export const loadProgramStatisticByProgramSuccess = createAction(
+  '[ProgramStatistics] Load ProgramStatistic By Program Success',
+  props<{ programStatistic: ProgramStatistic }>()
+);
+
+export const loadProgramStatisticByProgramFailure = createAction(
+  '[ProgramStatistics] Load ProgramStatistic By Program Failure',
+  props<{ error: any }>()
+);
+
 export const saveProgramStatistic = createAction(
   '[ProgramStatistics] Save ProgramStatistic',
   props<{ programStatistic: ProgramStatistic }>()

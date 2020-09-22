@@ -40,7 +40,9 @@ const programStatisticsReducer = createReducer(
   ),
   on(
     ProgramStatisticsActions.saveProgramStatisticSuccess,
+    ProgramStatisticsActions.loadProgramStatisticByProgramSuccess,
     ProgramStatisticsActions.updateProgramStatistic,
+    ProgramStatisticsActions.saveProgramStatisticByProgramSuccess,
     (state, { programStatistic }) =>
       programStatisticsAdapter.upsertOne(programStatistic, {
         ...state,
@@ -53,6 +55,9 @@ const programStatisticsReducer = createReducer(
   )
 );
 
-export function reducer(state: ProgramStatisticsState | undefined, action: Action) {
+export function reducer(
+  state: ProgramStatisticsState | undefined,
+  action: Action
+) {
   return programStatisticsReducer(state, action);
 }

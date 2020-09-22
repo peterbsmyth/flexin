@@ -9,26 +9,49 @@ export class ProgramStatisticDataService {
   private API_URL = environment.API_URL;
 
   getAllBySessionItemStatistic(id: number) {
-    return this.http.get<ProgramStatistic[]>(`${this.API_URL}/session-item-statistics/${id}/program-statistic`);
+    return this.http.get<ProgramStatistic[]>(
+      `${this.API_URL}/session-item-statistics/${id}/program-statistic`
+    );
   }
 
   getAll(): Observable<ProgramStatistic[]> {
-    return this.http.get<ProgramStatistic[]>(`${this.API_URL}/program-statistics`);
+    return this.http.get<ProgramStatistic[]>(
+      `${this.API_URL}/program-statistics`
+    );
   }
 
   getOne(id: number): Observable<ProgramStatistic> {
-    return this.http.get<ProgramStatistic>(`${this.API_URL}/program-statistics/${id}`);
+    return this.http.get<ProgramStatistic>(
+      `${this.API_URL}/program-statistics/${id}`
+    );
+  }
+
+  getOneByProgram(id: number): Observable<ProgramStatistic> {
+    return this.http.get<ProgramStatistic>(
+      `${this.API_URL}/programs/${id}/program-statistic`
+    );
   }
 
   postOne(programStatistic: ProgramStatistic): Observable<ProgramStatistic> {
-    return this.http.post<ProgramStatistic>(`${this.API_URL}/program-statistics`, programStatistic);
+    return this.http.post<ProgramStatistic>(
+      `${this.API_URL}/program-statistics`,
+      programStatistic
+    );
+  }
+
+  postOneByProgram(id: number): Observable<ProgramStatistic> {
+    return this.http.post<ProgramStatistic>(
+      `${this.API_URL}/programs/${id}/program-statistic`,
+      {}
+    );
   }
 
   putOne(programStatistic: ProgramStatistic): Observable<ProgramStatistic> {
-    return this.http.put<ProgramStatistic>(`${this.API_URL}/program-statistics/${programStatistic.id}`, programStatistic);
+    return this.http.put<ProgramStatistic>(
+      `${this.API_URL}/program-statistics/${programStatistic.id}`,
+      programStatistic
+    );
   }
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 }

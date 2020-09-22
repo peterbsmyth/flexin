@@ -30,6 +30,60 @@ export class ProgramStatisticsEffects {
     )
   );
 
+  loadProgramStatisticByProgram$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProgramStatisticsActions.loadProgramStatisticByProgram),
+      fetch({
+        run: (action) => {
+          return this.backend.getOneByProgram(action.id).pipe(
+            map((programStatistic) =>
+              ProgramStatisticsActions.loadProgramStatisticByProgramSuccess({
+                programStatistic,
+              })
+            )
+          );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          if (error.error.error.statusCode === 404) {
+            return ProgramStatisticsActions.saveProgramStatisticByProgram({
+              id: action.id,
+            });
+          } else {
+            return ProgramStatisticsActions.loadProgramStatisticByProgramFailure(
+              {
+                error,
+              }
+            );
+          }
+        },
+      })
+    )
+  );
+
+  saveProgramStatisticByProgram$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProgramStatisticsActions.saveProgramStatisticByProgram),
+      fetch({
+        run: (action) => {
+          return this.backend.postOneByProgram(action.id).pipe(
+            map((programStatistic) =>
+              ProgramStatisticsActions.saveProgramStatisticByProgramSuccess({
+                programStatistic,
+              })
+            )
+          );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return ProgramStatisticsActions.saveProgramStatisticByProgramFailure({
+            error,
+          });
+        },
+      })
+    )
+  );
+
   saveProgramStatistic$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProgramStatisticsActions.saveProgramStatistic),
@@ -60,7 +114,9 @@ export class ProgramStatisticsEffects {
         run: (action) => {
           return this.backend
             .putOne(action.programStatistic)
-            .pipe(mapTo(ProgramStatisticsActions.updateProgramStatisticSuccess()));
+            .pipe(
+              mapTo(ProgramStatisticsActions.updateProgramStatisticSuccess())
+            );
         },
         undoAction: (action, error) => {
           console.error('Error', error);

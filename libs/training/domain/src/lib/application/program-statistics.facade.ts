@@ -17,9 +17,7 @@ export class ProgramStatisticsFacade {
     select(ProgramStatisticsSelectors.getSelected)
   );
 
-  constructor(
-    private store: Store<fromRoot.PartialState>
-  ) {}
+  constructor(private store: Store<fromRoot.PartialState>) {}
 
   dispatch(action: Action) {
     this.store.dispatch(action);
