@@ -90,6 +90,13 @@ export class ProgramBoardComponent implements OnInit {
 
   onRemove(datum, list: string) {
     remove(this[list], { exercise: { id: datum.exercise.id } });
+
+    this.update.emit([
+      [...this.dayOneList],
+      [...this.dayTwoList],
+      [...this.dayThreeList],
+      [...this.dayFourList],
+    ]);
   }
 
   buildBoard(data: ProgramBoardData) {
