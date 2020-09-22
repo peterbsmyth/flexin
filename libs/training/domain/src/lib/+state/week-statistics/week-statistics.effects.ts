@@ -30,6 +30,56 @@ export class WeekStatisticsEffects {
     )
   );
 
+  loadWeekStatisticByWeek$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WeekStatisticsActions.loadWeekStatisticByWeek),
+      fetch({
+        run: (action) => {
+          return this.backend.getOneByWeek(action.id).pipe(
+            map((weekStatistic) =>
+              WeekStatisticsActions.loadWeekStatisticByWeekSuccess({
+                weekStatistic,
+              })
+            )
+          );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          if (error.error.error.statusCode === 404) {
+            return WeekStatisticsActions.saveWeekStatisticByWeek(action);
+          } else {
+            return WeekStatisticsActions.loadWeekStatisticByWeekFailure({
+              error,
+            });
+          }
+        },
+      })
+    )
+  );
+
+  saveWeekStatisticByWeek$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WeekStatisticsActions.saveWeekStatisticByWeek),
+      fetch({
+        run: (action) => {
+          return this.backend.postOneByWeek(action.id).pipe(
+            map((weekStatistic) =>
+              WeekStatisticsActions.saveWeekStatisticByWeekSuccess({
+                weekStatistic,
+              })
+            )
+          );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return WeekStatisticsActions.saveWeekStatisticByWeekFailure({
+            error,
+          });
+        },
+      })
+    )
+  );
+
   saveWeekStatistic$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeekStatisticsActions.saveWeekStatistic),

@@ -39,6 +39,8 @@ const weekStatisticsReducer = createReducer(
       })
   ),
   on(
+    WeekStatisticsActions.loadWeekStatisticByWeekSuccess,
+    WeekStatisticsActions.saveWeekStatisticByWeekSuccess,
     WeekStatisticsActions.saveWeekStatisticSuccess,
     WeekStatisticsActions.updateWeekStatistic,
     (state, { weekStatistic }) =>
@@ -47,12 +49,15 @@ const weekStatisticsReducer = createReducer(
         loaded: true,
       })
   ),
-  on(
-    WeekStatisticsActions.loadWeekStatisticsFailure,
-    (state, { error }) => ({ ...state, error })
-  )
+  on(WeekStatisticsActions.loadWeekStatisticsFailure, (state, { error }) => ({
+    ...state,
+    error,
+  }))
 );
 
-export function reducer(state: WeekStatisticsState | undefined, action: Action) {
+export function reducer(
+  state: WeekStatisticsState | undefined,
+  action: Action
+) {
   return weekStatisticsReducer(state, action);
 }

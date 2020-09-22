@@ -9,7 +9,9 @@ export class WeekStatisticDataService {
   private API_URL = environment.API_URL;
 
   getAllBySessionItemStatistic(id: number) {
-    return this.http.get<WeekStatistic[]>(`${this.API_URL}/session-item-statistics/${id}/week-statistic`);
+    return this.http.get<WeekStatistic[]>(
+      `${this.API_URL}/session-item-statistics/${id}/week-statistic`
+    );
   }
 
   getAll(): Observable<WeekStatistic[]> {
@@ -17,18 +19,37 @@ export class WeekStatisticDataService {
   }
 
   getOne(id: number): Observable<WeekStatistic> {
-    return this.http.get<WeekStatistic>(`${this.API_URL}/week-statistics/${id}`);
+    return this.http.get<WeekStatistic>(
+      `${this.API_URL}/week-statistics/${id}`
+    );
+  }
+
+  getOneByWeek(id: number): Observable<WeekStatistic> {
+    return this.http.get<WeekStatistic>(
+      `${this.API_URL}/weeks/${id}/week-statistic`
+    );
   }
 
   postOne(weekStatistic: WeekStatistic): Observable<WeekStatistic> {
-    return this.http.post<WeekStatistic>(`${this.API_URL}/week-statistics`, weekStatistic);
+    return this.http.post<WeekStatistic>(
+      `${this.API_URL}/week-statistics`,
+      weekStatistic
+    );
+  }
+
+  postOneByWeek(id: number): Observable<WeekStatistic> {
+    return this.http.post<WeekStatistic>(
+      `${this.API_URL}/weeks/${id}/week-statistic`,
+      {}
+    );
   }
 
   putOne(weekStatistic: WeekStatistic): Observable<WeekStatistic> {
-    return this.http.put<WeekStatistic>(`${this.API_URL}/week-statistics/${weekStatistic.id}`, weekStatistic);
+    return this.http.put<WeekStatistic>(
+      `${this.API_URL}/week-statistics/${weekStatistic.id}`,
+      weekStatistic
+    );
   }
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 }

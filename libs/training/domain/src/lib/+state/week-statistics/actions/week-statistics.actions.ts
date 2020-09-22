@@ -15,6 +15,36 @@ export const loadWeekStatisticsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadWeekStatisticByWeek = createAction(
+  '[WeekStatistics] Load WeekStatistic By Week',
+  props<{ id: number }>()
+);
+
+export const loadWeekStatisticByWeekSuccess = createAction(
+  '[WeekStatistics] Load WeekStatistic By Week Success',
+  props<{ weekStatistic: WeekStatistic }>()
+);
+
+export const loadWeekStatisticByWeekFailure = createAction(
+  '[WeekStatistics] Load WeekStatistic By Week Failure',
+  props<{ error: any }>()
+);
+
+export const saveWeekStatisticByWeek = createAction(
+  '[WeekStatistics] Save WeekStatistic By Week',
+  props<{ id: number }>()
+);
+
+export const saveWeekStatisticByWeekSuccess = createAction(
+  '[WeekStatistics] Save WeekStatistic By Week Success',
+  props<{ weekStatistic: WeekStatistic }>()
+);
+
+export const saveWeekStatisticByWeekFailure = createAction(
+  '[WeekStatistics] Save WeekStatistic By Week Failure',
+  props<{ error: any }>()
+);
+
 export const saveWeekStatistic = createAction(
   '[WeekStatistics] Save WeekStatistic',
   props<{ weekStatistic: WeekStatistic }>()
