@@ -127,10 +127,12 @@ export class ProgramBoardComponent implements OnInit {
     if (hasData && this.displaySource) {
       this.pullList = data.exercises
         .filter((e) => e.pull)
-        .map((exercise) => ({ sessionItem: null, exercise }));
+        .map((exercise) => ({ sessionItem: null, exercise }))
+        .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
       this.pushList = data.exercises
         .filter((e) => e.push)
-        .map((exercise) => ({ sessionItem: null, exercise }));
+        .map((exercise) => ({ sessionItem: null, exercise }))
+        .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
     }
   }
 }
