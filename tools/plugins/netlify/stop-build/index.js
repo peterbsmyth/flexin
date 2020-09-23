@@ -25,6 +25,6 @@ function projectChanged(currentProject, fromHash, toHash) {
   if (changedProjects.find(project => project === currentProject)) {
     return true;
   } else {
-    return true;
+    return false;
   }
 }
