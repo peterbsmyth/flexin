@@ -26,8 +26,8 @@
               />
             </label>
             <!-- Weight? -->
-            <label class="sets__label" *ngIf="data.sessionItem.weight">
-              Weight ({{ data.sessionItem.weightUnit }})
+            <label class="sets__weight" *ngIf="data.sessionItem.weight">
+              <span>{{ data.sessionItem.weightUnit }}</span>
               <input
                 min="0"
                 step="5"
@@ -40,8 +40,9 @@
         </section>
         <footer class="sets__footer">
           <h5>
-            <span>Goal: {{ data.sessionItem.reps }} Reps</span>
+            <span>Goal: {{ data.sessionItem.reps }} Reps<span *ngIf="data.sessionItem.leftRight"> (L/R)</span></span>
             <span *ngIf="data.sessionItem.intensity">, {{ data.sessionItem.intensity }}</span>
+            <span *ngIf="data.sessionItem.weight">, {{ data.sessionItem.weight }} {{ data.sessionItem.weightUnit }}</span>
             <span *ngIf="data.sessionItem.tempo">, {{ data.sessionItem.tempo }}</span>
           </h5>
         </footer>

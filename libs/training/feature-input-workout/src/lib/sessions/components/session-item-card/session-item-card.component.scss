@@ -30,6 +30,12 @@
     justify-content: center;
   }
 
+  &__weight {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+  }
+
   &__footer {
     display: flex;
     flex-direction: row;

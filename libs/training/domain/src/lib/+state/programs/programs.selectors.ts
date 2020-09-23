@@ -50,6 +50,11 @@ export const getWeeks = createSelector(
   getSelected,
   getAllWeeks,
   (program, weeks) => {
-    return program && weeks.filter((week) => week.programId === program.id);
+    return (
+      program &&
+      weeks
+        .filter((week) => week.programId === program.id)
+        .sort((a, b) => a.number - b.number)
+    );
   }
 );
