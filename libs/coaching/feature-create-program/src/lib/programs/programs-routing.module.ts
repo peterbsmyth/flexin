@@ -8,9 +8,9 @@ import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { ProgramExistsGuard } from './program-exists.guard';
 
 const routes: Routes = [
-  { 
+  {
     path: 'programs',
-    component: ProgramsPage
+    component: ProgramsPage,
   },
   {
     path: 'programs/create',
@@ -19,27 +19,27 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: '1',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: '1',
-        component: ProgramBoardPage
+        component: ProgramBoardPage,
       },
       {
         path: '2',
-        component: SessionConfigurationBoardPage
+        component: SessionConfigurationBoardPage,
       },
-    ]
+    ],
   },
   {
     path: 'programs/:programId',
     component: ProgramPage,
-    canActivate: [ProgramExistsGuard]
+    canActivate: [ProgramExistsGuard],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProgramsRoutingModule { }
+export class ProgramsRoutingModule {}
