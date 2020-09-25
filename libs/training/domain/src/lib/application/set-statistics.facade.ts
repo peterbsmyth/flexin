@@ -16,6 +16,9 @@ export class SetStatisticsFacade {
   selectedSetStatistics$ = this.store.pipe(
     select(SetStatisticsSelectors.getSelected)
   );
+  ascendantsLoaded$ = this.store.pipe(
+    select(SetStatisticsSelectors.getSetStatisticsAscendantsLoaded)
+  )
 
   constructor(
     private store: Store<fromRoot.PartialState>

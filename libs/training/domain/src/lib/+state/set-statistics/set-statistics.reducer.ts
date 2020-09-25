@@ -10,6 +10,7 @@ export interface SetStatisticsState extends EntityState<SetStatistic> {
   selectedId?: string | number; // which SetStatistics record has been selected
   loaded: boolean; // has the SetStatistics list been loaded
   error?: string | null; // last known error (if any)
+  ascendantsLoaded?: boolean;
 }
 
 export const setStatisticsAdapter: EntityAdapter<SetStatistic> = createEntityAdapter<
@@ -25,6 +26,14 @@ export const initialState: SetStatisticsState = setStatisticsAdapter.getInitialS
 
 const setStatisticsReducer = createReducer(
   initialState,
+  on(SetStatisticsActions.loadSetStatisticsWithAscendants, (state) => ({
+    ...state,
+    ascendantsLoaded: false
+  })),
+  on(SetStatisticsActions.loadSetStatisticsWithAscendantsSuccess, (state) => ({
+    ...state,
+    ascendantsLoaded: true
+  })),
   on(SetStatisticsActions.loadSetStatistics, (state) => ({
     ...state,
     loaded: false,

@@ -12,14 +12,16 @@ export const getSetStatisticsState = createFeatureSelector<
   SetStatisticsState
 >(SETSTATISTICS_FEATURE_KEY);
 
-const {
-  selectAll,
-  selectEntities,
-} = setStatisticsAdapter.getSelectors();
+const { selectAll, selectEntities } = setStatisticsAdapter.getSelectors();
 
 export const getSetStatisticsLoaded = createSelector(
   getSetStatisticsState,
   (state: SetStatisticsState) => state.loaded
+);
+
+export const getSetStatisticsAscendantsLoaded = createSelector(
+  getSetStatisticsState,
+  (state: SetStatisticsState) => state.ascendantsLoaded
 );
 
 export const getSetStatisticsError = createSelector(
