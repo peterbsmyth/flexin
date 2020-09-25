@@ -1,0 +1,25 @@
+<ng-container *ngIf="(exercise$ | async) as exercise">
+  <h1>{{ exercise.name }}</h1>
+</ng-container>
+<h2>All Sets</h2>
+<table>
+  <tr>
+    <th>Set</th>
+    <th>Reps</th>
+    <th>Weight</th>
+  </tr>
+  <ng-container *ngFor="let setStatistic of (setStatistics$ | async)">
+    <tr>
+      <td>{{ setStatistic.set }}</td>
+      <td>{{ setStatistic.reps }}</td>
+      <td>{{ setStatistic.weight }}</td>
+    </tr>
+  </ng-container>
+</table>
+
+<ng-container *ngIf="(maxRepsOfAllTime$ | async) as bestSet">
+  <h2>Most Reps of All Time: {{ bestSet }}</h2>
+</ng-container>
+<ng-container *ngIf="(bestSet$ | async) as bestSet">
+  <h2>Most Reps at {{ bestSet.weight }} lbs, top weight: {{ bestSet.reps }}</h2>
+</ng-container>

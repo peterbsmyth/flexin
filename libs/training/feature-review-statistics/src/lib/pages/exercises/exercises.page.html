@@ -4,5 +4,6 @@
     *ngFor="let cardData of data$ | async"
     [data]="cardData"
     [closeable]="false"
+    [routerLink]="[cardData.exercise.id]"
   ></bod-board-card>
 </mat-list>

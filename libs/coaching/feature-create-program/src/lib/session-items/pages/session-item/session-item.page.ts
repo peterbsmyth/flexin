@@ -22,7 +22,6 @@ export class SessionItemPage implements OnInit {
   }
 
   onSave(sessionItem: SessionItem) {
-    console.dir(sessionItem)
     this.sessionItemsState.dispatch(
       SessionItemsPageActions.updateSessionItem({
         sessionItem,

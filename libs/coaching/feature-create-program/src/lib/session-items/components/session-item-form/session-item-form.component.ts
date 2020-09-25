@@ -81,7 +81,6 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form) {
-    console.dir(form);
     this.save.emit({
       ...form,
       id: this.data.sessionItem.id,

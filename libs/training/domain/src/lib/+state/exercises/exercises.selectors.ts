@@ -5,6 +5,9 @@ import {
   exercisesAdapter,
 } from './exercises.reducer';
 import { PartialState } from '../root.reducer';
+import { SessionItemStatistic, SetStatistic } from '@bod/shared/models';
+import { getAllSessionItemStatistics } from '../session-item-statistics/session-item-statistics.selectors';
+import { getAllSetStatistics } from '../set-statistics/set-statistics.selectors';
 
 // Lookup the 'Exercises' feature state managed by NgRx
 export const getExercisesState = createFeatureSelector<
@@ -43,4 +46,21 @@ export const getSelected = createSelector(
   getExercisesEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
+);
+
+export const getSetStatistics = createSelector(
+  getSelected,
+  getAllSessionItemStatistics,
+  getAllSetStatistics,
+  (exercise, sessionItemStatistics, setStatistics) => {
+    const sessionItemStatisticIds = sessionItemStatistics
+      .filter(
+        (stat) => stat.sessionItem.exerciseId === (exercise && exercise.id)
+      )
+      .map((stat) => stat.id);
+
+    return setStatistics.filter((stat) =>
+      sessionItemStatisticIds.includes(stat.sessionItemStatisticId)
+    );
+  }
 );

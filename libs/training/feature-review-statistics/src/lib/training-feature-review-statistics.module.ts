@@ -6,6 +6,7 @@ import { TrainingFeatureReviewStatisticsRoutingModule } from './training-feature
 import { MatListModule } from '@angular/material/list';
 import { ExercisesPage } from './pages/exercises/exercises.page';
 import { BodComponentsModule } from '@bod/shared/components';
+import { ExercisePage } from './pages/exercise/exercise.page';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { BodComponentsModule } from '@bod/shared/components';
     BodComponentsModule,
     MatListModule
   ],
-  declarations: [StatisticsPage, ExercisesPage],
+  declarations: [StatisticsPage, ExercisesPage, ExercisePage],
   exports: [],
 })
 export class TrainingFeatureReviewStatisticsModule {}
