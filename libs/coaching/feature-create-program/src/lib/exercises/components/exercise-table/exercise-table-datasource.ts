@@ -3,11 +3,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { Exercise, mockExercises } from '@bod/shared/models';
+import { Exercise } from '@bod/shared/models';
 import { ExercisesFacade } from '@bod/coaching/domain';
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: Exercise[] = mockExercises;
+const EXAMPLE_DATA: Exercise[] = [];
 
 /**
  * Data source for the ExerciseTable view. This class should
