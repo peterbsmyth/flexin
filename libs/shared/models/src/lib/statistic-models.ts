@@ -1,7 +1,11 @@
+import { SessionItem } from './primary-models';
+
 export interface SessionItemStatistic {
   id?: number;
   sessionItemId?: number; // SessionItem
-  setStatistics?: number[], // SetStatistic[]
+  sessionItem?: SessionItem;
+  sessionStatisticId?: number;
+  sessionStatistic?: SessionStatistic;
   rpe: number; // 8
   notes: string; // 'not at my full strength'
 }

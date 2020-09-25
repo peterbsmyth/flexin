@@ -15,6 +15,19 @@ export const loadSetStatisticsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadSetStatisticsWithAscendants = createAction(
+  '[SetStatistics] Load SetStatistics with ascendants'
+);
+
+export const loadSetStatisticsWithAscendantsSuccess = createAction(
+  '[SetStatistics] Load SetStatistics with ascendants Success'
+);
+
+export const loadSetStatisticsWithAscendantsFailure = createAction(
+  '[SetStatistics] Load SetStatistics with ascendants Failure',
+  props<{ error: any }>()
+);
+
 export const saveSetStatistic = createAction(
   '[SetStatistics] Save SetStatistic',
   props<{ setStatistic: SetStatistic }>()
@@ -45,16 +58,16 @@ export const updateSetStatisticFailure = createAction(
 );
 
 export const loadSetStatisticsBySessionItemStatistic = createAction(
-  '[SetStatistics] Load SetStatistics by SessionItem',
+  '[SetStatistics] Load SetStatistics by SessionItemStatistic',
   props<{ id: number }>()
 );
 
 export const loadSetStatisticsBySessionItemStatisticSuccess = createAction(
-  '[SetStatistics] Load SetStatistics by SessionItem Success',
+  '[SetStatistics] Load SetStatistics by SessionItemStatistic Success',
   props<{ setStatistics: SetStatistic[] }>()
 );
 
 export const loadSetStatisticsBySessionItemStatisticFailure = createAction(
-  '[SetStatistics] Load SetStatistics by SessionItem Failure',
+  '[SetStatistics] Load SetStatistics by SessionItemStatistic Failure',
   props<{ error: any }>()
 );

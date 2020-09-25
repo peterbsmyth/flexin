@@ -12,7 +12,7 @@ export class SessionItemStatisticsEffects {
       ofType(SessionItemStatisticsActions.loadSessionItemStatistics),
       fetch({
         run: () => {
-          return this.backend.getAll().pipe(
+          return this.backend.getAllWithSessionItem().pipe(
             map((sessionItemStatistics) =>
               SessionItemStatisticsActions.loadSessionItemStatisticsSuccess({
                 sessionItemStatistics,

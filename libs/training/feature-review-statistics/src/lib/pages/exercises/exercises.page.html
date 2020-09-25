@@ -1,0 +1,8 @@
+<mat-list>
+  <mat-list-item class="list__title">Exercises</mat-list-item>
+  <bod-board-card
+    *ngFor="let cardData of data$ | async"
+    [data]="cardData"
+    [closeable]="false"
+  ></bod-board-card>
+</mat-list>

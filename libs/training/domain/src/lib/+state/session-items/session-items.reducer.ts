@@ -55,6 +55,7 @@ export const sessionItemsReducer = createReducer(
   })),
   on(
     SessionItemsPageActions.loadSessionItemsBySessionSuccess,
+    SessionItemsApiActions.loadSessionItemsSuccess,
     (state, { sessionItems }) =>
       sessionItemsAdapter.upsertMany(sessionItems, { ...state, loaded: true })
   ),

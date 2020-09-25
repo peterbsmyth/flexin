@@ -15,3 +15,18 @@ export const loadSessionItemFailure = createAction(
   '[SessionItems API] Load SessionItem Failure',
   props<{ error: any }>()
 );
+
+export const loadSessionItems = createAction(
+  '[SessionItems API] Load SessionItems',
+  props<{ id: number }>()
+);
+
+export const loadSessionItemsSuccess = createAction(
+  '[SessionItems API] Load SessionItems Success',
+  props<{ sessionItems: SessionItem[] }>()
+);
+
+export const loadSessionItemsFailure = createAction(
+  '[SessionItems API] Load SessionItems Failure',
+  props<{ error: any }>()
+);

@@ -16,6 +16,20 @@ export const loadExerciseFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadExercises = createAction(
+  '[Exercises] Load Exercises'
+);
+
+export const loadExercisesSuccess = createAction(
+  '[Exercises] Load Exercises Success',
+  props<{ exercises: Exercise[] }>()
+);
+
+export const loadExercisesFailure = createAction(
+  '[Exercises] Load Exercises Failure',
+  props<{ error: any }>()
+);
+
 export const selectExercise = createAction(
   '[Exercises] Select Exercise',
   props<{ id: number }>()

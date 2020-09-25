@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch, pessimisticUpdate, optimisticUpdate } from '@nrwl/angular';
+import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { SetStatisticsActions } from './actions';
-import { catchError, delay, filter, map, mapTo, retry, switchMap, withLatestFrom } from 'rxjs/operators';
+import { map, mapTo, switchMap, tap } from 'rxjs/operators';
 import { SetStatisticDataService } from '../../infrastructure/set-statistic.data.service';
-import { throwError } from 'rxjs';
-import { SessionItemStatisticsFacade } from '../../application/session-item-statistics.facade';
+import { PartialState } from '../root.reducer';
+import { Store } from '@ngrx/store';
+import { uniqBy } from 'lodash-es';
+import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
+import { forkJoin } from 'rxjs';
+import { SessionItemStatisticsActions } from '../session-item-statistics/actions';
+import { SessionItemsApiActions } from '../session-items/actions';
+import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
+import { ExercisesApiActions } from '../exercises/actions';
 
 @Injectable()
 export class SetStatisticsEffects {
@@ -39,17 +46,21 @@ export class SetStatisticsEffects {
         run: ({ id }) => {
           return this.backend.getAllBySessionItemStatistic(id).pipe(
             map((setStatistics) =>
-              SetStatisticsActions.loadSetStatisticsBySessionItemStatisticSuccess({
-                setStatistics,
-              })
+              SetStatisticsActions.loadSetStatisticsBySessionItemStatisticSuccess(
+                {
+                  setStatistics,
+                }
+              )
             )
           );
         },
         onError: (action, error) => {
           console.error('Error', error);
-          return SetStatisticsActions.loadSetStatisticsBySessionItemStatisticFailure({
-            error,
-          });
+          return SetStatisticsActions.loadSetStatisticsBySessionItemStatisticFailure(
+            {
+              error,
+            }
+          );
         },
       })
     )
@@ -97,9 +108,75 @@ export class SetStatisticsEffects {
     )
   );
 
+  loadWithAscendants$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SetStatisticsActions.loadSetStatisticsWithAscendants),
+      fetch({
+        run: (action) => {
+          return this.backend.getAll().pipe(
+            switchMap((setStatistics) => {
+              this.store.dispatch(
+                SetStatisticsActions.loadSetStatisticsSuccess({
+                  setStatistics,
+                })
+              );
+              const uniqueSessionItemStatisticsIds: number[] = uniqBy(
+                setStatistics,
+                'sessionItemStatisticId'
+              ).map((statistic) => statistic.sessionItemStatisticId);
+              return forkJoin(
+                uniqueSessionItemStatisticsIds.map((id) =>
+                  this.sessionItemsStatisticsService.getOne(id)
+                )
+              );
+            }),
+            switchMap((sessionItemStatistics) => {
+              this.store.dispatch(
+                SessionItemStatisticsActions.loadSessionItemStatisticsSuccess({
+                  sessionItemStatistics,
+                })
+              );
+              const sessionItems = sessionItemStatistics.map(
+                (s) => s.sessionItem
+              );
+              this.store.dispatch(
+                SessionItemsApiActions.loadSessionItemsSuccess({
+                  sessionItems,
+                })
+              );
+
+              const uniqueExerciseIds: number[] = uniqBy(
+                sessionItems,
+                'exerciseId'
+              ).map((s) => s.exerciseId);
+
+              return forkJoin(
+                uniqueExerciseIds.map((id) => this.exercisesService.getOne(id))
+              );
+            }),
+            map((exercises) => {
+              this.store.dispatch(
+                ExercisesApiActions.loadExercisesSuccess({ exercises })
+              );
+              return SetStatisticsActions.loadSetStatisticsWithAscendantsSuccess();
+            })
+          );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return SetStatisticsActions.saveSetStatisticFailure({
+            error,
+          });
+        },
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
+    private store: Store<PartialState>,
     private backend: SetStatisticDataService,
-    private sessionItemsStatisticsState: SessionItemStatisticsFacade
+    private sessionItemsStatisticsService: SessionItemStatisticDataService,
+    private exercisesService: ExerciseDataService
   ) {}
 }

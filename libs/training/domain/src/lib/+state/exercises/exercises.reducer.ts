@@ -33,6 +33,9 @@ const exercisesReducer = createReducer(
   on(ExercisesApiActions.loadExerciseSuccess, (state, { exercise }) =>
     exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
   ),
+  on(ExercisesApiActions.loadExercisesSuccess, (state, { exercises }) =>
+    exercisesAdapter.upsertMany(exercises, { ...state, loaded: true })
+  ),
   on(ExercisesApiActions.loadExerciseFailure, (state, { error }) => ({
     ...state,
     error,

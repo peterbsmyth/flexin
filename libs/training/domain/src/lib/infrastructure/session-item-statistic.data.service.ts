@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SessionItemStatistic } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class SessionItemStatisticDataService {
@@ -20,9 +20,35 @@ export class SessionItemStatisticDataService {
     );
   }
 
+  getAllWithSessionItem(): Observable<SessionItemStatistic[]> {
+    const filter = JSON.stringify({
+      include: [
+        {
+          relation: 'sessionItem',
+        },
+      ],
+    });
+    const params: HttpParams = new HttpParams().set('filter', filter);
+
+    return this.http.get<SessionItemStatistic[]>(
+      `${this.API_URL}/session-item-statistics`,
+      { params }
+    );
+  }
+
   getOne(id: number): Observable<SessionItemStatistic> {
+    const filter = JSON.stringify({
+      include: [
+        {
+          relation: 'sessionItem',
+        },
+      ],
+    });
+    const params: HttpParams = new HttpParams().set('filter', filter);
+
     return this.http.get<SessionItemStatistic>(
-      `${this.API_URL}/session-item-statistics/${id}`
+      `${this.API_URL}/session-item-statistics/${id}`,
+      { params }
     );
   }
 
@@ -40,7 +66,7 @@ export class SessionItemStatisticDataService {
       `${this.API_URL}/session-items/${id}/session-item-statistic`,
       {
         rpe: 0,
-        notes: ''
+        notes: '',
       }
     );
   }

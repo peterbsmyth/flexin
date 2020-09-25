@@ -22,6 +22,7 @@ import { TrainingFeatureInputWorkoutModule } from '@bod/training/feature-input-w
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BusyHttpInterceptor, BusyService } from '@bod/shared/domain';
 import { BodComponentsModule } from '@bod/shared/components';
+import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-review-statistics';
 
 @NgModule({
   declarations: [AppComponent, SidenavComponent],
@@ -53,6 +54,7 @@ import { BodComponentsModule } from '@bod/shared/components';
     }),
     TrainingFeatureInputWorkoutModule,
     HttpClientModule,
+    TrainingFeatureReviewStatisticsModule,
   ],
   providers: [
     BusyService,
