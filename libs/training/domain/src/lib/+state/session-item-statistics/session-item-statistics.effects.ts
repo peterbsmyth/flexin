@@ -48,10 +48,44 @@ export class SessionItemStatisticsEffects {
             )
           );
         },
-
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionItemStatisticsActions.loadSessionItemStatisticBySessionItemFailure(
+          if (error.error.error.statusCode === 404) {
+            return SessionItemStatisticsActions.saveSessionItemStatisticBySessionItem(
+              action
+            );
+          } else {
+            return SessionItemStatisticsActions.loadSessionItemStatisticBySessionItemFailure(
+              {
+                error,
+              }
+            );
+          }
+        },
+      })
+    )
+  );
+
+  saveWeekStatisticByWeek$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        SessionItemStatisticsActions.saveSessionItemStatisticBySessionItem
+      ),
+      fetch({
+        run: (action) => {
+          return this.backend.postOneBySessionItem(action.id).pipe(
+            map((sessionItemStatistic) =>
+              SessionItemStatisticsActions.saveSessionItemStatisticBySessionItemSuccess(
+                {
+                  sessionItemStatistic,
+                }
+              )
+            )
+          );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return SessionItemStatisticsActions.saveSessionItemStatisticBySessionItemFailure(
             {
               error,
             }

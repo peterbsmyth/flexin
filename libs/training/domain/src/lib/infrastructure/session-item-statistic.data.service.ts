@@ -35,6 +35,16 @@ export class SessionItemStatisticDataService {
     );
   }
 
+  postOneBySessionItem(id: number): Observable<SessionItemStatistic> {
+    return this.http.post<SessionItemStatistic>(
+      `${this.API_URL}/session-items/${id}/session-item-statistic`,
+      {
+        rpe: 0,
+        notes: ''
+      }
+    );
+  }
+
   patchOne(
     sessionItemStatistic: SessionItemStatistic
   ): Observable<SessionItemStatistic> {

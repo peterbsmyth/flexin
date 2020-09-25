@@ -30,6 +30,22 @@ export const loadSessionItemStatisticBySessionItemFailure = createAction(
   props<{ error: any }>()
 );
 
+export const saveSessionItemStatisticBySessionItem = createAction(
+  '[SessionItemStatistics] Save SessionItemStatistic By SessionItem',
+  props<{ id: number }>()
+);
+
+export const saveSessionItemStatisticBySessionItemSuccess = createAction(
+  '[SessionItemStatistics] Save SessionItemStatistic By SessionItem Success',
+  props<{ sessionItemStatistic: SessionItemStatistic }>()
+);
+
+export const saveSessionItemStatisticBySessionItemFailure = createAction(
+  '[SessionItemStatistics] Save SessionItemStatistic By SessionItem Failure',
+  props<{ error: any }>()
+);
+
+
 export const saveSessionItemStatistic = createAction(
   '[SessionItemStatistics] Save SessionItemStatistic',
   props<{ sessionItemStatistic: SessionItemStatistic }>()
