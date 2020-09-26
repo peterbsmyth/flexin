@@ -13,7 +13,7 @@ export interface ProgramBoardData {
 
 export interface SessionItemFormData {
   sessionItem: SessionItem;
-  exercise: Exercise;
+  exercises: Exercise[];
 }
 
 export interface BoardCardData {

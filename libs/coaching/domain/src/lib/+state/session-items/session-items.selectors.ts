@@ -56,7 +56,7 @@ export const getSelectedWithExercise = createSelector(
   getSelected,
   getExercisesEntities,
   (sessionItem, entities) => ({
-    sessionItem,
+    ...sessionItem,
     exercise: entities[sessionItem.exerciseId] ? entities[sessionItem.exerciseId] : null
   })
 );

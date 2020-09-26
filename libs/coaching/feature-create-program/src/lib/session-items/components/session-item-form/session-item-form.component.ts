@@ -1,8 +1,17 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { SessionItemFormData } from '@bod/coaching/domain';
-import { FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { SessionItem } from '@bod/shared/models';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'coaching-session-item-form',
@@ -11,7 +20,7 @@ import { Subject } from 'rxjs';
 })
 export class SessionItemFormComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
-
+  editing = false;
   private _data: SessionItemFormData;
   @Input()
   get data(): SessionItemFormData {
@@ -20,8 +29,9 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
   set data(data: SessionItemFormData) {
     this._data = data;
     this.form = this.buildForm(data);
+    this.exerciseForm = this.buildExerciseForm(data);
   }
-  @Output() save: EventEmitter<SessionItemFormData> = new EventEmitter();
+  @Output() save: EventEmitter<Partial<SessionItem>> = new EventEmitter();
   form: FormGroup = this.fb.group({
     reps: 0,
     AMRAP: false,
@@ -29,9 +39,13 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
     sets: false,
     weight: 0,
     weightUnit: 'lbs',
-    intensity: '',
+    intensity: this.fb.control('', Validators.required),
     tempo: '',
-    order: null
+    order: null,
+  });
+
+  exerciseForm: FormGroup = this.fb.group({
+    id: '',
   });
 
   get intensities() {
@@ -41,18 +55,21 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.form.get('AMRAP').valueChanges.pipe(
-      takeUntil(this.unsubscribe$),
-      tap(amrap => {
-        if (amrap) {
-          this.form.get('reps').setValue(0);
-          this.form.get('reps').disable();
-        } else {
-          this.form.get('reps').setValue(this.data.sessionItem.reps);
-          this.form.get('reps').enable();
-        }
-      })
-    ).subscribe();
+    this.form
+      .get('AMRAP')
+      .valueChanges.pipe(
+        takeUntil(this.unsubscribe$),
+        tap((amrap) => {
+          if (amrap) {
+            this.form.get('reps').setValue(0);
+            this.form.get('reps').disable();
+          } else {
+            this.form.get('reps').setValue(this.data.sessionItem.reps);
+            this.form.get('reps').enable();
+          }
+        })
+      )
+      .subscribe();
   }
 
   buildForm(data: SessionItemFormData) {
@@ -63,8 +80,17 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
       sets: this.fb.control(data.sessionItem.sets),
       weight: this.fb.control(data.sessionItem.weight),
       weightUnit: 'lbs',
-      intensity: this.fb.control(data.sessionItem.intensity),
+      intensity: this.fb.control(
+        data.sessionItem.intensity,
+        Validators.required
+      ),
       tempo: this.fb.control(data.sessionItem.tempo),
+    });
+  }
+
+  buildExerciseForm(data: SessionItemFormData) {
+    return this.fb.group({
+      id: this.fb.control(data.sessionItem.exerciseId),
     });
   }
 
@@ -84,8 +110,31 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
     this.save.emit({
       ...form,
       id: this.data.sessionItem.id,
-      order: this.data.sessionItem.order
+      order: this.data.sessionItem.order,
     });
+  }
+
+  onSaveExercise(value) {
+    const defaultIntensity = this.data.exercises.find((e) => e.id === value.id)
+      .intensities[0];
+    this.save.emit({
+      exerciseId: value.id,
+      id: this.data.sessionItem.id,
+      intensity: defaultIntensity,
+    });
+    this.editing = false;
+    this.form.enable();
+  }
+
+  onEditExercise() {
+    this.exerciseForm = this.buildExerciseForm(this.data);
+    this.editing = true;
+    this.form.disable();
+  }
+
+  onCancelExercise() {
+    this.editing = false;
+    this.form.enable();
   }
 
   ngOnDestroy() {

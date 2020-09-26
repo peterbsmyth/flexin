@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-content>
-    <h3>Exercise: {{ data.exercise.name }}</h3>
+    <section class="exercise" *ngIf="!editing; else exerciseFormDisplay">
+      <span class="exercise__header">Exercise: {{ data.sessionItem.exercise.name }}</span><bod-button (click)="onEditExercise()" icon="edit"></bod-button>
+    </section>
     <form [formGroup]="form" class="form">
       <mat-form-field>
         <mat-label>
@@ -26,7 +28,7 @@
           Intensity
         </mat-label>
         <mat-select formControlName="intensity" [value]="data.sessionItem.intensity">
-          <mat-option *ngFor="let intensity of data.exercise.intensities" [value]="intensity">{{ intensity }}</mat-option>
+          <mat-option *ngFor="let intensity of data.sessionItem.exercise.intensities" [value]="intensity">{{ intensity }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
@@ -38,7 +40,25 @@
     </form>
   </mat-card-content>
   <mat-card-footer>
-    <bod-button (click)="onSubmit(form.value)">Save</bod-button>
+    <bod-button [disabled]="!form.valid" (click)="onSubmit(form.value)">Save</bod-button>
   </mat-card-footer>
 </mat-card>
 
+<ng-template #exerciseFormDisplay>
+  <section class="exercise">
+    <form [formGroup]="exerciseForm" class="exercise__form">
+      <mat-form-field class="exercise__field">
+        <mat-label>
+          Exercise
+        </mat-label>
+        <mat-select formControlName="id" [value]="data.sessionItem.exerciseId">
+          <mat-option *ngFor="let exercise of data.exercises" [value]="exercise.id">{{ exercise.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <aside>
+      <bod-button (click)="onCancelExercise()" icon="close"></bod-button>
+      <bod-button (click)="onSaveExercise(exerciseForm.value)" icon="check"></bod-button>
+    </aside>
+  </section>
+</ng-template>

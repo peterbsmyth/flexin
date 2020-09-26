@@ -3,9 +3,12 @@ import {
   SessionItemFormData,
   SessionItemsFacade,
   SessionItemsActions,
+  ExercisesActions,
+  ExercisesFacade,
 } from '@bod/coaching/domain';
 import { SessionItem } from '@bod/shared/models';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   templateUrl: './session-item.page.html',
@@ -17,8 +20,17 @@ export class SessionItemPage implements OnInit {
 
   constructor(
     private sessionItemsState: SessionItemsFacade,
+    private exerciseState: ExercisesFacade
   ) {
-    this.data$ = this.sessionItemsState.selectedSessionItemsWithExercise$;
+    this.data$ = combineLatest([
+      this.sessionItemsState.selectedSessionItemsWithExercise$,
+      this.exerciseState.allExercises$,
+    ]).pipe(
+      map(([sessionItem, exercises]) => ({
+        sessionItem,
+        exercises: exercises.sort((a, b) => a.name.localeCompare(b.name)),
+      }))
+    );
   }
 
   onSave(sessionItem: SessionItem) {
@@ -29,5 +41,7 @@ export class SessionItemPage implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.exerciseState.dispatch(ExercisesActions.loadExercises());
+  }
 }
