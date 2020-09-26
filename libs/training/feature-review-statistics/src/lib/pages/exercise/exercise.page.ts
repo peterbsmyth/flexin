@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExercisesApiActions, ExercisesFacade } from '@bod/training/domain';
+import { ExercisesActions, ExercisesFacade } from '@bod/training/domain';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Exercise, SetStatistic } from '@bod/shared/models';
@@ -41,7 +41,7 @@ export class ExercisePage implements OnInit {
       })
     );
     this.exerciseState.dispatch(
-      ExercisesApiActions.selectExercise({
+      ExercisesActions.selectExercise({
         id: this.route.snapshot.params['exerciseId'],
       })
     );
