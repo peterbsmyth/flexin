@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { ProgramsFacade, ProgramsPageActions } from '@bod/coaching/domain';
+import { ProgramsFacade, ProgramsActions } from '@bod/coaching/domain';
 import {
   filter,
   take,
@@ -29,14 +29,14 @@ export class ProgramExistsGuard implements CanActivate {
     /**
      * if there is a result from selected program, cool
      */
-    this.programsState.dispatch(ProgramsPageActions.selectProgram({ id: +id }));
+    this.programsState.dispatch(ProgramsActions.selectProgram({ id: +id }));
     return this.hasProgramInStore().pipe(
       switchMap((inStore) => {
         if (inStore) {
           return of(inStore);
         } else {
           this.programsState.dispatch(
-            ProgramsPageActions.loadProgram({ id: +id })
+            ProgramsActions.loadProgram({ id: +id })
           );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.programsState.selectedPrograms$),

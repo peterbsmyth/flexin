@@ -3,9 +3,9 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   ExercisesFacade,
-  ExercisesApiActions,
+  ExercisesActions,
   ProgramsFacade,
-  ProgramsPageActions,
+  ProgramsActions,
   ProgramBoardData,
 } from '@bod/coaching/domain';
 import { Observable, combineLatest } from 'rxjs';
@@ -48,7 +48,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.exerciseState.dispatch(ExercisesApiActions.loadExercises());
+    this.exerciseState.dispatch(ExercisesActions.loadExercises());
   }
 
   ngAfterViewInit() {
@@ -60,7 +60,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
 
   onUpdate(lists) {
     this.programState.dispatch(
-      ProgramsPageActions.addIncompleteSessionItems({
+      ProgramsActions.addIncompleteSessionItems({
         lists
       })
     );

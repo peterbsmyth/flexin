@@ -26,6 +26,22 @@ export const loadSessionItemSuccess = createAction(
   props<{ sessionItem: SessionItem }>()
 );
 
+export const loadSessionItemApi = createAction(
+  '[SessionItems API] Load SessionItem',
+  props<{ id: number }>()
+);
+
+export const loadSessionItemApiSuccess = createAction(
+  '[SessionItems API] Load SessionItem Success',
+  props<{ sessionItem: SessionItem }>()
+);
+
+export const loadSessionItemApiFailure = createAction(
+  '[SessionItems API] Load SessionItem Failure',
+  props<{ error: any }>()
+);
+
+
 export const loadSessionItemFailure = createAction(
   '[SessionItems Page] Load SessionItem Failure',
   props<{ error: any }>()

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 
-import { WeeksPageActions } from './actions';
+import { WeeksActions } from './actions';
 import { WeekDataService } from '../../infrastructure/week.data.service';
 import { map } from 'rxjs/operators';
 
@@ -10,21 +10,21 @@ import { map } from 'rxjs/operators';
 export class WeeksEffects {
   loadSessionsByWeekPage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(WeeksPageActions.loadWeeksByProgram),
+      ofType(WeeksActions.loadWeeksByProgram),
       fetch({
         run: ({ id }) => {
           return this.weekService
             .getAllByProgram(id)
             .pipe(
               map((weeks) =>
-                WeeksPageActions.loadWeeksByProgramSuccess({ weeks })
+                WeeksActions.loadWeeksByProgramSuccess({ weeks })
               )
             );
         },
 
         onError: (action, error) => {
           console.error('Error', error);
-          return WeeksPageActions.loadWeeksByProgramFailure({ error });
+          return WeeksActions.loadWeeksByProgramFailure({ error });
         },
       })
     )
@@ -32,16 +32,16 @@ export class WeeksEffects {
 
   loadWeekPage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(WeeksPageActions.loadWeek),
+      ofType(WeeksActions.loadWeek),
       fetch({
         run: ({ id }) => {
           return this.weekService
             .getOne(id)
-            .pipe(map((week) => WeeksPageActions.loadWeekSuccess({ week })));
+            .pipe(map((week) => WeeksActions.loadWeekSuccess({ week })));
         },
         onError: (action, error) => {
           console.error('Error', error);
-          return WeeksPageActions.loadWeekFailure({ error });
+          return WeeksActions.loadWeekFailure({ error });
         },
       })
     )

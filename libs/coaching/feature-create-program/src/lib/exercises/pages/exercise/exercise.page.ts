@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExercisesApiActions, ExercisesFacade } from '@bod/coaching/domain';
+import { ExercisesActions, ExercisesFacade } from '@bod/coaching/domain';
 import { Exercise } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class ExercisePage implements OnInit {
 
   onSave(exercise: Exercise) {
     this.exercisesState.dispatch(
-      ExercisesApiActions.updateExercise({
+      ExercisesActions.updateExercise({
         exercise,
       })
     );

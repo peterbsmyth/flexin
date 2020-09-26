@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Exercise } from '@bod/shared/models';
-import { ExercisesFacade, ExercisesApiActions } from '@bod/coaching/domain';
+import { ExercisesFacade, ExercisesActions } from '@bod/coaching/domain';
 
 @Component({
   templateUrl: './exercises.page.html',
@@ -16,6 +16,6 @@ export class ExercisesPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.exercisesState.dispatch(ExercisesApiActions.loadExercises());
+    this.exercisesState.dispatch(ExercisesActions.loadExercises());
   }
 }

@@ -4,7 +4,7 @@ import {
   ExercisesFacade,
   ProgramBoardData,
   ProgramsFacade,
-  ProgramsPageActions,
+  ProgramsActions,
 } from '@bod/coaching/domain';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -59,7 +59,7 @@ export class ProgramPage implements OnInit {
 
   ngOnInit(): void {
     this.programsState.dispatch(
-      ProgramsPageActions.loadDescendants({
+      ProgramsActions.loadDescendants({
         id: this.route.snapshot.params['programId'],
       })
     );

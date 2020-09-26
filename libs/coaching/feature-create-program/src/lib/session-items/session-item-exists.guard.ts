@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {
   SessionItemsFacade,
-  SessionItemsPageActions,
+  SessionItemsActions,
 } from '@bod/coaching/domain';
 import {
   filter,
@@ -33,7 +33,7 @@ export class SessionItemExistsGuard implements CanActivate {
      * if there is a result from selected sessionItem, cool
      */
     this.sessionItemsState.dispatch(
-      SessionItemsPageActions.selectSessionItem({ id: +id })
+      SessionItemsActions.selectSessionItem({ id: +id })
     );
     return this.hasSessionItemInStore().pipe(
       switchMap((inStore) => {
@@ -41,7 +41,7 @@ export class SessionItemExistsGuard implements CanActivate {
           return of(inStore);
         } else {
           this.sessionItemsState.dispatch(
-            SessionItemsPageActions.loadSessionItemWithExercise({ id: +id })
+            SessionItemsActions.loadSessionItemWithExercise({ id: +id })
           );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.sessionItemsState.selectedSessionItems$),

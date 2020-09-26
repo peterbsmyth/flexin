@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { ProgramsPageActions } from './actions';
+import { ProgramsActions } from './actions';
 import { Program } from '@bod/shared/models';
 
 export const PROGRAMS_FEATURE_KEY = 'programs';
@@ -23,23 +23,23 @@ export const initialState: ProgramsState = programsAdapter.getInitialState({
 
 export const programsReducer = createReducer(
   initialState,
-  on(ProgramsPageActions.loadPrograms, (state) => ({
+  on(ProgramsActions.loadPrograms, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
-  on(ProgramsPageActions.loadProgramsSuccess, (state, { programs }) =>
+  on(ProgramsActions.loadProgramsSuccess, (state, { programs }) =>
     programsAdapter.setAll(programs, { ...state, loaded: true })
   ),
-  on(ProgramsPageActions.loadProgramsFailure, (state, { error }) => ({
+  on(ProgramsActions.loadProgramsFailure, (state, { error }) => ({
     ...state,
     error,
   })),
-  on(ProgramsPageActions.selectProgram, (state, { id }) => ({
+  on(ProgramsActions.selectProgram, (state, { id }) => ({
     ...state,
     selectedId: id,
   })),
-  on(ProgramsPageActions.loadProgramSuccess, (state, { program }) =>
+  on(ProgramsActions.loadProgramSuccess, (state, { program }) =>
     programsAdapter.setOne(program, { ...state, loaded: true })
   )
 );

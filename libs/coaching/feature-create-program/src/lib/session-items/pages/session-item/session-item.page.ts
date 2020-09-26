@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   SessionItemFormData,
   SessionItemsFacade,
-  SessionItemsPageActions,
+  SessionItemsActions,
 } from '@bod/coaching/domain';
 import { SessionItem } from '@bod/shared/models';
 import { Observable } from 'rxjs';
@@ -23,7 +23,7 @@ export class SessionItemPage implements OnInit {
 
   onSave(sessionItem: SessionItem) {
     this.sessionItemsState.dispatch(
-      SessionItemsPageActions.updateSessionItem({
+      SessionItemsActions.updateSessionItem({
         sessionItem,
       })
     );

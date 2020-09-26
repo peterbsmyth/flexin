@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   ProgramsFacade,
-  ProgramsPageActions,
+  ProgramsActions,
   SessionItemData,
 } from '@bod/coaching/domain';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -71,10 +71,10 @@ export class SessionConfigurationBoardPage implements OnInit {
 
   onClickCreateProgram() {
     this.programsState.dispatch(
-      ProgramsPageActions.everythingExceptCreateProgram({ data: this._data })
+      ProgramsActions.everythingExceptCreateProgram({ data: this._data })
     );
     this.programsState.dispatch(
-      ProgramsPageActions.createProgram({
+      ProgramsActions.createProgram({
         name: this.programName.value,
       })
     );

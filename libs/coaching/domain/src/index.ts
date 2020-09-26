@@ -4,15 +4,13 @@ export * from './lib/application/programs.facade';
 export * from './lib/application/session-items.facade';
 export * from './lib/application/sessions.facade';
 export * from './lib/application/weeks.facade';
-export { ExercisesApiActions } from './lib/+state/exercises/actions';
-export { ProgramsPageActions } from './lib/+state/programs/actions';
+export { ExercisesActions } from './lib/+state/exercises/actions';
+export { ProgramsActions } from './lib/+state/programs/actions';
 export {
-  SessionItemsApiActions,
-  SessionItemsPageActions,
+  SessionItemsActions,
 } from './lib/+state/session-items/actions';
 export {
-  SessionsPageActions,
-  SessionsApiActions,
+  SessionsActions,
 } from './lib/+state/sessions/actions';
-export { WeeksPageActions } from './lib/+state/weeks/actions';
+export { WeeksActions } from './lib/+state/weeks/actions';
 export * from './lib/entities/component.models';

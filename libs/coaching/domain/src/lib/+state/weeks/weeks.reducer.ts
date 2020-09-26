@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { WeeksPageActions } from './actions';
+import { WeeksActions } from './actions';
 import { Week } from '@bod/shared/models';
 
 export const WEEKS_FEATURE_KEY = 'weeks';
@@ -22,25 +22,25 @@ export const initialState: WeeksState = weeksAdapter.getInitialState({
 export const weeksReducer = createReducer(
   initialState,
   on(
-    WeeksPageActions.loadWeek,
-    WeeksPageActions.loadWeeksByProgram,
+    WeeksActions.loadWeek,
+    WeeksActions.loadWeeksByProgram,
     (state) => ({
       ...state,
       loaded: false,
       error: null,
     })
   ),
-  on(WeeksPageActions.selectWeek, (state, { id }) => ({
+  on(WeeksActions.selectWeek, (state, { id }) => ({
     ...state,
     selectedId: id,
   })),
-  on(WeeksPageActions.loadWeekSuccess, (state, { week }) =>
+  on(WeeksActions.loadWeekSuccess, (state, { week }) =>
     weeksAdapter.setOne(week, { ...state, loaded: true, selectedId: week.id })
   ),
-  on(WeeksPageActions.loadWeeksByProgramSuccess, (state, { weeks }) =>
+  on(WeeksActions.loadWeeksByProgramSuccess, (state, { weeks }) =>
     weeksAdapter.upsertMany(weeks, { ...state, loaded: true })
   ),
-  on(WeeksPageActions.loadWeeksByProgramFailure, (state, { error }) => ({
+  on(WeeksActions.loadWeeksByProgramFailure, (state, { error }) => ({
     ...state,
     error,
   }))

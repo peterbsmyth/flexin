@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ExercisesFacade, ExercisesApiActions } from '@bod/coaching/domain';
+import { ExercisesFacade, ExercisesActions } from '@bod/coaching/domain';
 
 @Component({
   templateUrl: './create.page.html',
@@ -16,7 +16,7 @@ export class CreatePage implements OnInit {
 
   onSave(exercise) {
     this.exercisesState.dispatch(
-      ExercisesApiActions.saveExercise({ exercise })
+      ExercisesActions.saveExercise({ exercise })
     );
     this.router.navigate(['exercises'])
   }

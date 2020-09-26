@@ -31,6 +31,22 @@ export const loadSessionFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadSessionApi = createAction(
+  '[Sessions API] Load Session',
+  props<{ id: number }>()
+);
+
+export const loadSessionApiSuccess = createAction(
+  '[Sessions API] Load Session Success',
+  props<{ session: Session }>()
+);
+
+export const loadSessionApiFailure = createAction(
+  '[Sessions API] Load Session Failure',
+  props<{ error: any }>()
+);
+
+
 export const selectSession = createAction(
   '[Sessions Page] Select Session',
   props<{ id: number }>()

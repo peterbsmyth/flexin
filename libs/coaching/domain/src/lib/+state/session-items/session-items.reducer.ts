@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { SessionItemsApiActions, SessionItemsPageActions } from './actions';
+import { SessionItemsActions } from './actions';
 import { SessionItem } from '@bod/shared/models';
 
 export const SESSIONITEMS_FEATURE_KEY = 'sessionItems';
@@ -26,10 +26,10 @@ export const initialState: SessionItemsState = sessionItemsAdapter.getInitialSta
 export const sessionItemsReducer = createReducer(
   initialState,
   on(
-    SessionItemsPageActions.loadSessionItemsBySession,
-    SessionItemsApiActions.loadSessionItem,
-    SessionItemsPageActions.loadSessionItem,
-    SessionItemsPageActions.loadSessionItemWithExercise,
+    SessionItemsActions.loadSessionItemsBySession,
+    SessionItemsActions.loadSessionItemApi,
+    SessionItemsActions.loadSessionItem,
+    SessionItemsActions.loadSessionItemWithExercise,
     (state) => ({
       ...state,
       loaded: false,
@@ -37,33 +37,33 @@ export const sessionItemsReducer = createReducer(
     })
   ),
   on(
-    SessionItemsPageActions.updateSessionItem,
-    SessionItemsApiActions.loadSessionItemSuccess,
-    SessionItemsPageActions.loadSessionItemSuccess,
-    SessionItemsPageActions.loadSessionItemWithExerciseSuccess,
+    SessionItemsActions.updateSessionItem,
+    SessionItemsActions.loadSessionItemApiSuccess,
+    SessionItemsActions.loadSessionItemSuccess,
+    SessionItemsActions.loadSessionItemWithExerciseSuccess,
     (state, { sessionItem }) =>
       sessionItemsAdapter.upsertOne(sessionItem, { ...state, loaded: true })
   ),
   on(
-    SessionItemsApiActions.loadSessionItemFailure,
-    SessionItemsPageActions.loadSessionItemFailure,
-    SessionItemsPageActions.loadSessionItemWithExerciseFailure,
+    SessionItemsActions.loadSessionItemApiFailure,
+    SessionItemsActions.loadSessionItemFailure,
+    SessionItemsActions.loadSessionItemWithExerciseFailure,
     (state, { error }) => ({
       ...state,
       error,
     })
   ),
-  on(SessionItemsPageActions.selectSessionItem, (state, { id }) => ({
+  on(SessionItemsActions.selectSessionItem, (state, { id }) => ({
     ...state,
     selectedId: id,
   })),
   on(
-    SessionItemsPageActions.loadSessionItemsBySessionSuccess,
+    SessionItemsActions.loadSessionItemsBySessionSuccess,
     (state, { sessionItems }) =>
       sessionItemsAdapter.upsertMany(sessionItems, { ...state, loaded: true })
   ),
   on(
-    SessionItemsPageActions.loadSessionItemsBySessionFailure,
+    SessionItemsActions.loadSessionItemsBySessionFailure,
     (state, { error }) => ({
       ...state,
       error,

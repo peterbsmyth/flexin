@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgramsFacade, ProgramsPageActions } from '@bod/coaching/domain';
+import { ProgramsFacade, ProgramsActions } from '@bod/coaching/domain';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class CreatePage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.programsState.dispatch(ProgramsPageActions.loadPrograms());
+    this.programsState.dispatch(ProgramsActions.loadPrograms());
   }
 
 }

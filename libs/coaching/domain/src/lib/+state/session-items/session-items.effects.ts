@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch, optimisticUpdate } from '@nrwl/angular';
-import { SessionItemsApiActions, SessionItemsPageActions } from './actions';
+import { SessionItemsActions } from './actions';
 import { SessionItemDataService } from '../../infrastructure/session-item.data.service';
 import { map, mergeMap, mapTo } from 'rxjs/operators';
-import { ExercisesApiActions } from '../exercises/actions';
+import { ExercisesActions } from '../exercises/actions';
 
 @Injectable()
 export class SessionItemsEffects {
   loadSessionItemsBySessionPage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionItemsPageActions.loadSessionItemsBySession),
+      ofType(SessionItemsActions.loadSessionItemsBySession),
       fetch({
         run: ({ id }) => {
           return this.sessionItemService
             .getAllBySession(id)
             .pipe(
               map((sessionItems) =>
-                SessionItemsPageActions.loadSessionItemsBySessionSuccess({
+                SessionItemsActions.loadSessionItemsBySessionSuccess({
                   sessionItems,
                 })
               )
@@ -26,7 +26,7 @@ export class SessionItemsEffects {
 
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionItemsPageActions.loadSessionItemsBySessionFailure({
+          return SessionItemsActions.loadSessionItemsBySessionFailure({
             error,
           });
         },
@@ -36,15 +36,15 @@ export class SessionItemsEffects {
 
   loadSessionItemWithExercise$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionItemsPageActions.loadSessionItemWithExercise),
+      ofType(SessionItemsActions.loadSessionItemWithExercise),
       fetch({
         run: ({ id }) => {
           return this.sessionItemService
             .getOneWithExercise(id)
             .pipe(
               mergeMap((sessionItem) => [
-                SessionItemsPageActions.loadSessionItemWithExerciseSuccess({ sessionItem }),
-                ExercisesApiActions.loadExerciseSuccess({
+                SessionItemsActions.loadSessionItemWithExerciseSuccess({ sessionItem }),
+                ExercisesActions.loadExerciseSuccess({
                   exercise: sessionItem.exercise,
                 }),
               ])
@@ -52,7 +52,7 @@ export class SessionItemsEffects {
         },
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionItemsPageActions.loadSessionItemWithExerciseFailure({ error });
+          return SessionItemsActions.loadSessionItemWithExerciseFailure({ error });
         },
       })
     )
@@ -60,20 +60,20 @@ export class SessionItemsEffects {
 
   loadSessionItemPage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionItemsPageActions.loadSessionItem),
+      ofType(SessionItemsActions.loadSessionItem),
       fetch({
         run: ({ id }) => {
           return this.sessionItemService
             .getOne(id)
             .pipe(
               map((sessionItem) =>
-                SessionItemsPageActions.loadSessionItemSuccess({ sessionItem })
+                SessionItemsActions.loadSessionItemSuccess({ sessionItem })
               )
             );
         },
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionItemsPageActions.loadSessionItemFailure({ error });
+          return SessionItemsActions.loadSessionItemFailure({ error });
         },
       })
     )
@@ -81,16 +81,16 @@ export class SessionItemsEffects {
 
   updateSessionItem$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionItemsPageActions.updateSessionItem),
+      ofType(SessionItemsActions.updateSessionItem),
       optimisticUpdate({
         run: (action) => {
           return this.sessionItemService
             .patchOne(action.sessionItem)
-            .pipe(mapTo(SessionItemsPageActions.updateSessionItemSuccess()));
+            .pipe(mapTo(SessionItemsActions.updateSessionItemSuccess()));
         },
         undoAction: (action, error) => {
           console.error('Error', error);
-          return SessionItemsPageActions.updateSessionItemFailure({
+          return SessionItemsActions.updateSessionItemFailure({
             error,
           });
         },
@@ -100,20 +100,20 @@ export class SessionItemsEffects {
 
   loadSessionItem$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionItemsApiActions.loadSessionItem),
+      ofType(SessionItemsActions.loadSessionItemApi),
       fetch({
         run: ({ id }) => {
           return this.sessionItemService
             .getOne(id)
             .pipe(
               map((sessionItem) =>
-                SessionItemsApiActions.loadSessionItemSuccess({ sessionItem })
+                SessionItemsActions.loadSessionItemApiSuccess({ sessionItem })
               )
             );
         },
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionItemsApiActions.loadSessionItemFailure({ error });
+          return SessionItemsActions.loadSessionItemApiFailure({ error });
         },
       })
     )

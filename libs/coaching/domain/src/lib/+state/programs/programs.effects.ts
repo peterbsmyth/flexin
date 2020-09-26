@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-import { ProgramsPageActions } from './actions';
+import { ProgramsActions } from './actions';
 import { ProgramDataService } from '../../infrastructure/program.data.service';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { DraftProgramsDataService } from '../../infrastructure/draft-programs.data.service';
@@ -9,22 +9,22 @@ import { Router } from '@angular/router';
 import { WeekDataService } from '../../infrastructure/week.data.service';
 import { PartialState } from '../root.reducer';
 import { Store } from '@ngrx/store';
-import { WeeksPageActions } from '../weeks/actions';
+import { WeeksActions } from '../weeks/actions';
 import { SessionDataService } from '../../infrastructure/session.data.service';
 import { forkJoin } from 'rxjs';
 import { flatten, uniqBy } from 'lodash-es';
 import { SessionItemDataService } from '../../infrastructure/session-item.data.service';
-import { SessionsPageActions } from '../sessions/actions';
-import { SessionItemsPageActions } from '../session-items/actions';
+import { SessionsActions } from '../sessions/actions';
+import { SessionItemsActions } from '../session-items/actions';
 import { Exercise, Session, SessionItem } from '@bod/shared/models';
 import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
-import { ExercisesApiActions } from '../exercises/actions';
+import { ExercisesActions } from '../exercises/actions';
 
 @Injectable()
 export class ProgramsEffects {
   loadPrograms$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProgramsPageActions.loadPrograms),
+      ofType(ProgramsActions.loadPrograms),
       fetch({
         // provides an action
         run: () => {
@@ -32,7 +32,7 @@ export class ProgramsEffects {
             .getAll()
             .pipe(
               map((programs) =>
-                ProgramsPageActions.loadProgramsSuccess({ programs })
+                ProgramsActions.loadProgramsSuccess({ programs })
               )
             );
         },
@@ -46,7 +46,7 @@ export class ProgramsEffects {
 
   loadProgram$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProgramsPageActions.loadProgram),
+      ofType(ProgramsActions.loadProgram),
       fetch({
         // provides an action
         run: ({ id }) => {
@@ -54,7 +54,7 @@ export class ProgramsEffects {
             .getOne(id)
             .pipe(
               map((program) =>
-                ProgramsPageActions.loadProgramSuccess({ program })
+                ProgramsActions.loadProgramSuccess({ program })
               )
             );
         },
@@ -69,7 +69,7 @@ export class ProgramsEffects {
   addIncompleteSessionItems$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(ProgramsPageActions.addIncompleteSessionItems),
+        ofType(ProgramsActions.addIncompleteSessionItems),
         tap(({ lists }) => {
           this.draftProgramService.addIncompleteSessionItems(lists);
         })
@@ -80,7 +80,7 @@ export class ProgramsEffects {
   everythingExceptCreateProgram$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(ProgramsPageActions.everythingExceptCreateProgram),
+        ofType(ProgramsActions.everythingExceptCreateProgram),
         tap(({ data }) => {
           return this.draftProgramService.everythingExceptCreateProgram(data);
         })
@@ -91,7 +91,7 @@ export class ProgramsEffects {
   createProgram$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(ProgramsPageActions.createProgram),
+        ofType(ProgramsActions.createProgram),
         fetch({
           // provides an action
           run: ({ name }) => {
@@ -110,14 +110,14 @@ export class ProgramsEffects {
 
   loadDescendants$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProgramsPageActions.loadDescendants),
+      ofType(ProgramsActions.loadDescendants),
       fetch({
         // provides an action
         run: ({ id }) => {
           return this.weekService.getAllByProgram(id).pipe(
             switchMap((weeks) => {
               this.store.dispatch(
-                WeeksPageActions.loadWeeksByProgramSuccess({ weeks })
+                WeeksActions.loadWeeksByProgramSuccess({ weeks })
               );
               return forkJoin(
                 weeks.map((week) => this.sessionsService.getAllByWeek(week.id))
@@ -126,7 +126,7 @@ export class ProgramsEffects {
             switchMap((sessionLists) => {
               sessionLists.forEach((sessions) => {
                 this.store.dispatch(
-                  SessionsPageActions.loadSessionsByWeekSuccess({ sessions })
+                  SessionsActions.loadSessionsByWeekSuccess({ sessions })
                 );
               });
 
@@ -141,7 +141,7 @@ export class ProgramsEffects {
             switchMap((sessionItemsLists) => {
               sessionItemsLists.forEach((sessionItems) =>
                 this.store.dispatch(
-                  SessionItemsPageActions.loadSessionItemsBySessionSuccess({
+                  SessionItemsActions.loadSessionItemsBySessionSuccess({
                     sessionItems,
                   })
                 )
@@ -162,10 +162,10 @@ export class ProgramsEffects {
             map((exercises) => {
               exercises.forEach((exercise) =>
                 this.store.dispatch(
-                  ExercisesApiActions.loadExerciseSuccess({ exercise })
+                  ExercisesActions.loadExerciseSuccess({ exercise })
                 )
               );
-              return ProgramsPageActions.loadDescendantsSuccess();
+              return ProgramsActions.loadDescendantsSuccess();
             })
           );
         },

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { ExercisesFacade, ExercisesApiActions } from '@bod/coaching/domain';
+import { ExercisesFacade, ExercisesActions } from '@bod/coaching/domain';
 import {
   filter,
   take,
@@ -30,7 +30,7 @@ export class ExerciseExistsGuard implements CanActivate {
      * if there is a result from selected exercise, cool
      */
     this.exercisesState.dispatch(
-      ExercisesApiActions.selectExercise({ id: +id })
+      ExercisesActions.selectExercise({ id: +id })
     );
     return this.hasExerciseInStore().pipe(
       switchMap((inStore) => {
@@ -38,7 +38,7 @@ export class ExerciseExistsGuard implements CanActivate {
           return of(inStore);
         } else {
           this.exercisesState.dispatch(
-            ExercisesApiActions.loadExercise({ id: +id })
+            ExercisesActions.loadExercise({ id: +id })
           );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.exercisesState.selectedExercises$),

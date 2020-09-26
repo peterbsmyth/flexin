@@ -1,2 +1,2 @@
-import * as ExercisesApiActions from './exercises.api.actions';
-export { ExercisesApiActions };
+import * as ExercisesActions from './exercises.api.actions';
+export { ExercisesActions };
