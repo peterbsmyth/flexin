@@ -10,9 +10,9 @@ import { uniqBy } from 'lodash-es';
 import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
 import { forkJoin } from 'rxjs';
 import { SessionItemStatisticsActions } from '../session-item-statistics/actions';
-import { SessionItemsApiActions } from '../session-items/actions';
+import { SessionItemsActions } from '../session-items/actions';
 import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
-import { ExercisesApiActions } from '../exercises/actions';
+import { ExercisesActions } from '../exercises/actions';
 
 @Injectable()
 export class SetStatisticsEffects {
@@ -140,7 +140,7 @@ export class SetStatisticsEffects {
                 (s) => s.sessionItem
               );
               this.store.dispatch(
-                SessionItemsApiActions.loadSessionItemsSuccess({
+                SessionItemsActions.loadSessionItemsSuccess({
                   sessionItems,
                 })
               );
@@ -156,7 +156,7 @@ export class SetStatisticsEffects {
             }),
             map((exercises) => {
               this.store.dispatch(
-                ExercisesApiActions.loadExercisesSuccess({ exercises })
+                ExercisesActions.loadExercisesSuccess({ exercises })
               );
               return SetStatisticsActions.loadSetStatisticsWithAscendantsSuccess();
             })

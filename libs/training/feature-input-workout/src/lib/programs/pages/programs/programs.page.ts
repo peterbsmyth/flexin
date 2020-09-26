@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgramsFacade, ProgramsPageActions } from '@bod/training/domain';
+import { ProgramsFacade, ProgramsActions } from '@bod/training/domain';
 
 
 @Component({
@@ -14,6 +14,6 @@ export class ProgramsPage implements OnInit {
   }
   
   ngOnInit() {
-    this.programsState.dispatch(ProgramsPageActions.loadPrograms());
+    this.programsState.dispatch(ProgramsActions.loadPrograms());
   }
 }

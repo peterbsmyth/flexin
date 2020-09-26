@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 
-import { SessionsPageActions, SessionsApiActions } from './actions';
+import { SessionsActions } from './actions';
 import { map } from 'rxjs/operators';
 import { SessionDataService } from '../../infrastructure/session.data.service';
 
@@ -10,21 +10,21 @@ import { SessionDataService } from '../../infrastructure/session.data.service';
 export class SessionsEffects {
   loadSessionsByWeekPage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionsPageActions.loadSessionsByWeek),
+      ofType(SessionsActions.loadSessionsByWeek),
       fetch({
         run: ({ id }) => {
           return this.sessionService
             .getAllByWeek(id)
             .pipe(
               map((sessions) =>
-                SessionsPageActions.loadSessionsByWeekSuccess({ sessions })
+                SessionsActions.loadSessionsByWeekSuccess({ sessions })
               )
             );
         },
 
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionsPageActions.loadSessionsByWeekFailure({ error });
+          return SessionsActions.loadSessionsByWeekFailure({ error });
         },
       })
     )
@@ -32,43 +32,21 @@ export class SessionsEffects {
 
   loadSessionPage$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SessionsPageActions.loadSession),
+      ofType(SessionsActions.loadSession),
       fetch({
         run: ({ id }) => {
           return this.sessionService
             .getOne(id)
             .pipe(
               map((session) =>
-                SessionsPageActions.loadSessionSuccess({ session })
+                SessionsActions.loadSessionSuccess({ session })
               )
             );
         },
 
         onError: (action, error) => {
           console.error('Error', error);
-          return SessionsPageActions.loadSessionFailure({ error });
-        },
-      })
-    )
-  );
-
-  loadSessionApi$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(SessionsApiActions.loadSession),
-      fetch({
-        run: ({ id }) => {
-          return this.sessionService
-            .getOne(id)
-            .pipe(
-              map((session) =>
-                SessionsApiActions.loadSessionSuccess({ session })
-              )
-            );
-        },
-
-        onError: (action, error) => {
-          console.error('Error', error);
-          return SessionsApiActions.loadSessionFailure({ error });
+          return SessionsActions.loadSessionFailure({ error });
         },
       })
     )

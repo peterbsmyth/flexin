@@ -1,6 +1,4 @@
-import * as SessionsPageActions from './sessions.page.actions';
-import * as SessionsApiActions from './sessions.api.actions';
+import * as SessionsActions from './sessions.page.actions';
 export {
-  SessionsPageActions,
-  SessionsApiActions,
+  SessionsActions,
 };

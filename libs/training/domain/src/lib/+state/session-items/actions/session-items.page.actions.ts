@@ -16,6 +16,21 @@ export const loadSessionItemsBySessionFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadSessionItems = createAction(
+  '[SessionItems Page] Load SessionItems',
+  props<{ id: number }>()
+);
+
+export const loadSessionItemsSuccess = createAction(
+  '[SessionItems Page] Load SessionItems Success',
+  props<{ sessionItems: SessionItem[] }>()
+);
+
+export const loadSessionItemsFailure = createAction(
+  '[SessionItems Page] Load SessionItems Failure',
+  props<{ error: any }>()
+);
+
 export const loadSessionItem = createAction(
   '[SessionItems Page] Load SessionItem',
   props<{ id: number }>()

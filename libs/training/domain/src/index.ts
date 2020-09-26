@@ -24,16 +24,14 @@ export * from './lib/entities/session-item-card.models';
  */
 export { ProgramStatisticsActions } from './lib/+state/program-statistics/actions';
 export { WeekStatisticsActions } from './lib/+state/week-statistics/actions';
-export { ExercisesApiActions } from './lib/+state/exercises/actions';
+export { ExercisesActions } from './lib/+state/exercises/actions';
 export { WeeksPageActions } from './lib/+state/weeks/actions';
-export { ProgramsPageActions } from './lib/+state/programs/actions';
+export { ProgramsActions } from './lib/+state/programs/actions';
 export {
-  SessionItemsApiActions,
-  SessionItemsPageActions,
+  SessionItemsActions,
 } from './lib/+state/session-items/actions';
 export {
-  SessionsPageActions,
-  SessionsApiActions,
+  SessionsActions,
 } from './lib/+state/sessions/actions';
 export { SessionItemStatisticsActions } from './lib/+state/session-item-statistics/actions';
 export { SetStatisticsActions } from './lib/+state/set-statistics/actions';

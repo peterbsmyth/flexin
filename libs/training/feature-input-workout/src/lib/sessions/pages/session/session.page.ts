@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  SessionItemsPageActions,
+  SessionItemsActions,
   SessionsFacade,
-  SessionsPageActions,
+  SessionsActions,
   SessionStatisticsActions,
   WeeksPageActions,
 } from '@bod/training/domain';
@@ -57,7 +57,7 @@ export class SessionPage implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$),
         tap((session) => {
           this.sessionsState.dispatch(
-            SessionsPageActions.loadSessionsByWeek({ id: session.weekId })
+            SessionsActions.loadSessionsByWeek({ id: session.weekId })
           );
           this.sessionsState.dispatch(
             WeeksPageActions.selectWeek({ id: session.weekId })
@@ -75,7 +75,7 @@ export class SessionPage implements OnInit, OnDestroy {
           );
 
           this.sessionsState.dispatch(
-            SessionItemsPageActions.loadSessionItemsBySession({
+            SessionItemsActions.loadSessionItemsBySession({
               id,
             })
           );

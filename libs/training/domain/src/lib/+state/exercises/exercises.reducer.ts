@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { ExercisesApiActions } from './actions';
+import { ExercisesActions } from './actions';
 import { Exercise } from '@bod/shared/models';
 
 export const EXERCISES_FEATURE_KEY = 'exercises';
@@ -23,24 +23,24 @@ export const initialState: ExercisesState = exercisesAdapter.getInitialState({
 const exercisesReducer = createReducer(
   initialState,
   on(
-    ExercisesApiActions.loadExercise,
+    ExercisesActions.loadExercise,
     (state) => ({
       ...state,
       loaded: false,
       error: null,
     })
   ),
-  on(ExercisesApiActions.loadExerciseSuccess, (state, { exercise }) =>
+  on(ExercisesActions.loadExerciseSuccess, (state, { exercise }) =>
     exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
   ),
-  on(ExercisesApiActions.loadExercisesSuccess, (state, { exercises }) =>
+  on(ExercisesActions.loadExercisesSuccess, (state, { exercises }) =>
     exercisesAdapter.upsertMany(exercises, { ...state, loaded: true })
   ),
-  on(ExercisesApiActions.loadExerciseFailure, (state, { error }) => ({
+  on(ExercisesActions.loadExerciseFailure, (state, { error }) => ({
     ...state,
     error,
   })),
-  on(ExercisesApiActions.selectExercise, (state, { id }) => ({
+  on(ExercisesActions.selectExercise, (state, { id }) => ({
     ...state,
     selectedId: id,
   }))

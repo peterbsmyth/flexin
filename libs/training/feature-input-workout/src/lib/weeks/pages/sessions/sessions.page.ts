@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WeeksFacade, SessionsPageActions } from '@bod/training/domain';
+import { WeeksFacade, SessionsActions } from '@bod/training/domain';
 import { Observable } from 'rxjs';
 import { Session } from '@bod/shared/models';
 import { filter, map } from 'rxjs/operators';
@@ -29,6 +29,6 @@ export class SessionsPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.weeksState.dispatch(SessionsPageActions.loadSessionsByWeek({ id: this.route.snapshot.params['weekId'] }))
+    this.weeksState.dispatch(SessionsActions.loadSessionsByWeek({ id: this.route.snapshot.params['weekId'] }))
   }
 }

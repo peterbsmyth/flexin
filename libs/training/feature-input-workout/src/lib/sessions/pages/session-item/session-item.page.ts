@@ -8,7 +8,7 @@ import {
   SessionItemStatisticsFacade,
   SetStatisticsFacade,
   ExercisesFacade,
-  ExercisesApiActions,
+  ExercisesActions,
   SessionItemBoardCardData,
   SessionItemCardOutput,
 } from '@bod/training/domain';
@@ -67,10 +67,10 @@ export class SessionItemPage implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$),
         tap((sessionItem) => {
           this.sessionsState.dispatch(
-            ExercisesApiActions.loadExercise({ id: sessionItem.exerciseId })
+            ExercisesActions.loadExercise({ id: sessionItem.exerciseId })
           );
           this.sessionsState.dispatch(
-            ExercisesApiActions.selectExercise({ id: sessionItem.exerciseId })
+            ExercisesActions.selectExercise({ id: sessionItem.exerciseId })
           );
         })
       )

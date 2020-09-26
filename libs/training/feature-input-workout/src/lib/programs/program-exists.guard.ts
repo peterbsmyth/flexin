@@ -5,7 +5,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { ProgramsFacade, ProgramsPageActions } from '@bod/training/domain';
+import { ProgramsFacade, ProgramsActions } from '@bod/training/domain';
 import {
   filter,
   take,
@@ -34,7 +34,7 @@ export class ProgramExistsGuard implements CanActivate {
     /**
      * if there is a result from selected program, cool
      */
-    this.programsState.dispatch(ProgramsPageActions.selectProgram({ id: +id }));
+    this.programsState.dispatch(ProgramsActions.selectProgram({ id: +id }));
     return this.hasProgramInStore().pipe(
       switchMap((inStore) => {
         if (inStore) {
@@ -43,7 +43,7 @@ export class ProgramExistsGuard implements CanActivate {
           /**
            * if not a result then dispatch another action to get it on store
            */
-          this.programsState.dispatch(ProgramsPageActions.loadProgram({ id: +id }));
+          this.programsState.dispatch(ProgramsActions.loadProgram({ id: +id }));
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.programsState.selectedPrograms$),
             map((program) => !!program),

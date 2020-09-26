@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ProgramsFacade,
-  ProgramsPageActions,
+  ProgramsActions,
   ProgramStatisticsActions,
 } from '@bod/training/domain';
 
@@ -19,7 +19,7 @@ export class ProgramPage implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['programId'];
     this.programsState.dispatch(
-      ProgramsPageActions.loadProgram({
+      ProgramsActions.loadProgram({
         id,
       })
     );

@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { SessionsPageActions, SessionsApiActions } from './actions';
+import { SessionsActions } from './actions';
 import { Session } from '@bod/shared/models';
 
 export const SESSIONS_FEATURE_KEY = 'sessions';
@@ -24,34 +24,31 @@ export const initialState: SessionsState = sessionsAdapter.getInitialState({
 export const sessionsReducer = createReducer(
   initialState,
   on(
-    SessionsPageActions.loadSession,
-    SessionsPageActions.loadSessionsByWeek, (state) => ({
+    SessionsActions.loadSession,
+    SessionsActions.loadSessionsByWeek, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
-  on(SessionsPageActions.loadSessionsByWeekSuccess, (state, { sessions }) =>
+  on(SessionsActions.loadSessionsByWeekSuccess, (state, { sessions }) =>
     sessionsAdapter.upsertMany(sessions, { ...state, loaded: true })
   ),
-  on(SessionsPageActions.loadSessionsByWeekFailure, (state, { error }) => ({
+  on(SessionsActions.loadSessionsByWeekFailure, (state, { error }) => ({
     ...state,
     error,
   })),
-  on(SessionsPageActions.selectSession, (state, { id }) => ({
+  on(SessionsActions.selectSession, (state, { id }) => ({
     ...state,
     selectedId: id,
   })),
   on(
-    SessionsPageActions.loadSessionSuccess,
+    SessionsActions.loadSessionSuccess,
     (state, { session }) =>
       sessionsAdapter.setOne(session, {
         ...state,
         loaded: true,
         selectedId: session.id,
       })
-  ),
-  on(SessionsApiActions.loadSessionSuccess, (state, { session }) =>
-    sessionsAdapter.setOne(session, { ...state, loaded: true })
   )
 );
 

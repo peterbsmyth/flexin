@@ -1,2 +1,2 @@
-import * as ProgramsPageActions from './programs.page.actions';
-export { ProgramsPageActions };
+import * as ProgramsActions from './programs.page.actions';
+export { ProgramsActions };
