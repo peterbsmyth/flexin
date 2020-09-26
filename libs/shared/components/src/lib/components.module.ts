@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './components/footer/footer.component';
-import { BoardCardComponent } from './components/board-card/board-card.component';
+import { ExerciseCardComponent } from './components/exercise-card/exercise-card.component';
 
 @NgModule({
   imports: [CommonModule, MatButtonModule, MatIconModule, MatCardModule],
@@ -14,13 +14,13 @@ import { BoardCardComponent } from './components/board-card/board-card.component
     ButtonComponent,
     ActionsBarComponent,
     FooterComponent,
-    BoardCardComponent,
+    ExerciseCardComponent,
   ],
   exports: [
     ButtonComponent,
     ActionsBarComponent,
     FooterComponent,
-    BoardCardComponent,
+    ExerciseCardComponent,
   ],
 })
 export class BodComponentsModule {}

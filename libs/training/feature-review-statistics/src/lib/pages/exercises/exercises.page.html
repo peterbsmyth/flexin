@@ -1,9 +1,9 @@
 <mat-list>
   <mat-list-item class="list__title">Exercises</mat-list-item>
-  <bod-board-card
-    *ngFor="let cardData of data$ | async"
-    [data]="cardData"
+  <bod-exercise-card
+    *ngFor="let exercise of exercises$ | async"
+    [exercise]="exercise"
     [closeable]="false"
-    [routerLink]="[cardData.exercise.id]"
-  ></bod-board-card>
+    [routerLink]="[exercise.id]"
+  ></bod-exercise-card>
 </mat-list>

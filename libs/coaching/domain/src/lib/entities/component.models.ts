@@ -11,8 +11,12 @@ export interface ProgramBoardData {
   sessionItems: SessionItem[];
 }
 
-
 export interface SessionItemFormData {
+  sessionItem: SessionItem;
+  exercise: Exercise;
+}
+
+export interface BoardCardData {
   sessionItem: SessionItem;
   exercise: Exercise;
 }

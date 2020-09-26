@@ -5,10 +5,9 @@ import { ProgramDataService } from '../infrastructure/program.data.service';
 import { WeekDataService } from '../infrastructure/week.data.service';
 import { SessionDataService } from '../infrastructure/session.data.service';
 import { SessionItemDataService } from '../infrastructure/session-item.data.service';
-import { SessionItemData } from '../entities/component.models';
+import { BoardCardData, SessionItemData } from '../entities/component.models';
 import { DraftProgram } from '../entities/draft';
 import { uniqBy } from 'lodash-es';
-import { BoardCardData } from '@bod/shared/models';
 
 @Injectable()
 export class DraftProgramsDataService {

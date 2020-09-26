@@ -7,7 +7,7 @@ import {
   WeeksPageActions,
 } from '@bod/training/domain';
 import { Observable, Subject } from 'rxjs';
-import { Session, Pages, BoardCardData } from '@bod/shared/models';
+import { Session, Pages, SessionItem } from '@bod/shared/models';
 import {
   filter,
   map,
@@ -25,7 +25,7 @@ export class SessionPage implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   session$: Observable<Session>;
   pages$: Observable<Pages>;
-  boardCardData$: Observable<BoardCardData[]>;
+  sessionItems$: Observable<SessionItem[]>;
   sessionItemsLoaded$: Observable<boolean>;
 
   constructor(
@@ -37,16 +37,10 @@ export class SessionPage implements OnInit, OnDestroy {
       distinctUntilKeyChanged('id')
     );
     this.pages$ = this.sessionsState.pages$;
-    this.boardCardData$ = this.sessionsState.allSessionItems$.pipe(
+    this.sessionItems$ = this.sessionsState.allSessionItems$.pipe(
       filter((s) => !!s),
-      map((sessionItems) =>
-        sessionItems.map((sessionItem) => ({
-          sessionItem,
-          exercise: sessionItem.exercise,
-        }))
-      )
     );
-    this.sessionItemsLoaded$ = this.boardCardData$.pipe(
+    this.sessionItemsLoaded$ = this.sessionItems$.pipe(
       map((sessionItems) => sessionItems.every((s) => s))
     );
   }

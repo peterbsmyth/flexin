@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Program, BoardCardData } from '@bod/shared/models';
+import { Program } from '@bod/shared/models';
+import { BoardCardData } from '../../../entities/component.models';
 
 export const loadPrograms = createAction('[Programs Page] Load Programs');
 

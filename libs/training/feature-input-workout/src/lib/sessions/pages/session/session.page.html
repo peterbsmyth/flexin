@@ -9,14 +9,14 @@
   </div>
 </ng-container>
 <ng-container *ngIf="(sessionItemsLoaded$ | async); else loadingSessionItems">
-  <bod-board-card
-    *ngFor="let datum of (boardCardData$ | async);"
-    [data]="datum"
+  <bod-exercise-card
+    *ngFor="let sessionItem of (sessionItems$ | async);"
+    [exercise]="sessionItem.exercise"
     [closeable]="false"
     [compact]="true"
-    [routerLink]="['items', datum.sessionItem.id]"
+    [routerLink]="['items', sessionItem.id]"
     routerLinkActive="active"
-  ></bod-board-card>
+  ></bod-exercise-card>
 </ng-container>
 <ng-template #loadingSessionItems>
   Loading Session Items...

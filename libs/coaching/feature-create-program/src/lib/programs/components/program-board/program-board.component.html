@@ -4,52 +4,52 @@
       <h1>Pulls</h1>
     </div>
     <div cdkDropListSortingDisabled id="pulls" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="pullList" (cdkDropListDropped)="drop($event)">
-      <bod-board-card [closeable]="false" *ngFor="let data of pullList" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
+      <bod-exercise-card [closeable]="false" *ngFor="let data of pullList" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
     </div>
     <header class="board__column-header" *ngIf="pushList.length">
       <h1>Pushes</h1>
     </header>
     <div cdkDropListSortingDisabled id="pushes" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="pushList" (cdkDropListDropped)="drop($event)">
-      <bod-board-card [closeable]="false" *ngFor="let data of pushList" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
+      <bod-exercise-card [closeable]="false" *ngFor="let data of pushList" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
     </div>
   </section>
 
   <section class="board__column" id="dayOne" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="dayOneList" (cdkDropListDropped)="drop($event)">
     <header class="board__column-header"><h1>Day One</h1></header>
     <article *ngFor="let data of dayOneList">
-      <bod-board-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem"  (remove)="onRemove($event, 'dayOneList')" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
-      <bod-board-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem"  (remove)="onRemove($event, 'dayOneList')" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
+      <bod-exercise-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem"  (remove)="onRemove(data, 'dayOneList')" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
+      <bod-exercise-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem"  (remove)="onRemove(data, 'dayOneList')" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
     </article>
   </section>
   <section class="board__column" id="dayTwo" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayThree', 'dayFour']" [cdkDropListData]="dayTwoList" (cdkDropListDropped)="drop($event)">
     <header class="board__column-header"><h1>Day Two</h1></header>
     <article *ngFor="let data of dayTwoList">
-      <bod-board-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayTwoList')" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
-      <bod-board-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayTwoList')" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
+      <bod-exercise-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove(data, 'dayTwoList')" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
+      <bod-exercise-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove(data, 'dayTwoList')" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
     </article>
   </section>
   <section class="board__column" id="dayThree" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayFour']" [cdkDropListData]="dayThreeList" (cdkDropListDropped)="drop($event)">
     <header class="board__column-header"><h1>Day Three</h1></header>
     <article *ngFor="let data of dayThreeList">
-      <bod-board-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayThreeList')" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
-      <bod-board-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayThreeList')" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
+      <bod-exercise-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove(data, 'dayThreeList')" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
+      <bod-exercise-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove(data, 'dayThreeList')" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
     </article>
   </section>
   <section class="board__column" id="dayFour" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree']" [cdkDropListData]="dayFourList" (cdkDropListDropped)="drop($event)">
     <header class="board__column-header"><h1>Day Four</h1></header>
     <article *ngFor="let data of dayFourList">
-      <bod-board-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayFourList')" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
-      <bod-board-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove($event, 'dayFourList')" [data]="data" cdkDrag [cdkDragData]="data">
-      </bod-board-card>
+      <bod-exercise-card *ngIf="!!data.sessionItem" [routerLink]="['/session-items', data.sessionItem.id]" [closeable]="!!!data.sessionItem" (remove)="onRemove(data, 'dayFourList')" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
+      <bod-exercise-card *ngIf="!!!data.sessionItem" [closeable]="!!!data.sessionItem" (remove)="onRemove(data, 'dayFourList')" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
     </article>
   </section>
 </div>
