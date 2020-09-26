@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { ProgramDataService } from '../infrastructure/program.data.service';
 import { WeekDataService } from '../infrastructure/week.data.service';
 import { SessionDataService } from '../infrastructure/session.data.service';
@@ -8,6 +8,7 @@ import { SessionItemDataService } from '../infrastructure/session-item.data.serv
 import { BoardCardData, SessionItemData } from '../entities/component.models';
 import { DraftProgram } from '../entities/draft';
 import { uniqBy } from 'lodash-es';
+import { StorageMap } from '@ngx-pwa/local-storage';
 
 @Injectable()
 export class DraftProgramsDataService {
@@ -27,12 +28,6 @@ export class DraftProgramsDataService {
       [val.id]: val,
     };
   };
-  constructor(
-    private programService: ProgramDataService,
-    private weekService: WeekDataService,
-    private sessionService: SessionDataService,
-    private sessionItemService: SessionItemDataService
-  ) {}
 
   addIncompleteSessionItems(cardLists: BoardCardData[][]): void {
     const draft: any = {};
@@ -87,8 +82,8 @@ export class DraftProgramsDataService {
         exercise,
       })
     );
-    this._incompleteSessionItemsSubject.next(sessionItemData);
-    this._draftProgramSubject.next(draft);
+    this.storage.set('sessionItemData', sessionItemData).subscribe();
+    this.storage.set('draftProgram', draft).subscribe();
   }
 
   everythingExceptCreateProgram(data: any[]) {
@@ -112,17 +107,19 @@ export class DraftProgramsDataService {
         ).sessionItem,
         id: oldSessionItem.id,
         sessionId: oldSessionItem.sessionId,
-        order: oldSessionItem.order
+        order: oldSessionItem.order,
       }))
       /**
        * reduce the array to a dictionary again
        */
       .reduce(this._createDictionary, {});
 
-    this._draftProgramSubject.next({
-      ...oldDraft,
-      sessionItems,
-    });
+    this.storage
+      .set('draftProgram', {
+        ...oldDraft,
+        sessionItems,
+      })
+      .subscribe();
   }
 
   createProgram(name: string): Observable<any> {
@@ -207,7 +204,34 @@ export class DraftProgramsDataService {
           })
         );
         return forkJoin(sessionItems);
-      })
+      }),
+      switchMap(() => this.storage.clear())
     );
+  }
+
+  constructor(
+    private programService: ProgramDataService,
+    private weekService: WeekDataService,
+    private sessionService: SessionDataService,
+    private sessionItemService: SessionItemDataService,
+    private storage: StorageMap
+  ) {
+    this.storage
+      .watch('sessionItemData')
+      .pipe(
+        tap((data: SessionItemData[]) => {
+          this._incompleteSessionItemsSubject.next(data);
+        })
+      )
+      .subscribe();
+
+    this.storage
+      .watch('draftProgram')
+      .pipe(
+        tap((data: DraftProgram) => {
+          this._draftProgramSubject.next(data);
+        })
+      )
+      .subscribe();
   }
 }

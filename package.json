@@ -48,6 +48,7 @@
     "@ngrx/entity": "10.0.0",
     "@ngrx/router-store": "10.0.0",
     "@ngrx/store": "10.0.0",
+    "@ngx-pwa/local-storage": "10.1.0",
     "@nrwl/angular": "10.1.0",
     "commitizen": "4.2.1",
     "core-js": "^2.5.4",
