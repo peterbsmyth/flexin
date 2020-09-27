@@ -54,8 +54,29 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.form
+  ngOnInit(): void {}
+
+  buildForm(data: SessionItemFormData) {
+    const form = this.fb.group({
+      reps: this.fb.control(data.sessionItem.reps),
+      AMRAP: this.fb.control(data.sessionItem.AMRAP),
+      leftRight: this.fb.control(false),
+      sets: this.fb.control(data.sessionItem.sets),
+      weight: this.fb.control(data.sessionItem.weight),
+      weightUnit: 'lbs',
+      intensity: this.fb.control(
+        data.sessionItem.intensity,
+        Validators.required
+      ),
+      tempo: this.fb.control(data.sessionItem.tempo),
+    });
+
+    if (data.sessionItem.AMRAP) {
+      this.form.get('reps').setValue(0);
+      this.form.get('reps').disable();
+    }
+
+    form
       .get('AMRAP')
       .valueChanges.pipe(
         takeUntil(this.unsubscribe$),
@@ -70,22 +91,7 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
-  }
-
-  buildForm(data: SessionItemFormData) {
-    return this.fb.group({
-      reps: this.fb.control(data.sessionItem.reps),
-      AMRAP: this.fb.control(data.sessionItem.AMRAP),
-      leftRight: this.fb.control(false),
-      sets: this.fb.control(data.sessionItem.sets),
-      weight: this.fb.control(data.sessionItem.weight),
-      weightUnit: 'lbs',
-      intensity: this.fb.control(
-        data.sessionItem.intensity,
-        Validators.required
-      ),
-      tempo: this.fb.control(data.sessionItem.tempo),
-    });
+    return form;
   }
 
   buildExerciseForm(data: SessionItemFormData) {
