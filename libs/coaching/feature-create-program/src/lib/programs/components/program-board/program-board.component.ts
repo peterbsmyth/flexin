@@ -9,7 +9,6 @@ import {
 } from '@angular/cdk/drag-drop';
 import { remove } from 'lodash-es';
 import { ProgramBoardData, BoardCardData } from '@bod/coaching/domain';
-import { Exercise } from '@bod/shared/models';
 
 @Component({
   selector: 'coaching-program-board',
@@ -30,6 +29,7 @@ export class ProgramBoardComponent implements OnInit {
   @Output() update: EventEmitter<any> = new EventEmitter();
   public pullList: BoardCardData[] = [];
   public pushList: BoardCardData[] = [];
+  public otherList: BoardCardData[] = [];
 
   public dayOneList: BoardCardData[] = [];
   public dayTwoList: BoardCardData[] = [];
@@ -49,7 +49,8 @@ export class ProgramBoardComponent implements OnInit {
       );
     } else if (
       event.previousContainer.id === 'pushes' ||
-      event.previousContainer.id === 'pulls'
+      event.previousContainer.id === 'pulls' ||
+      event.previousContainer.id === 'other'
     ) {
       copyArrayItem(
         event.previousContainer.data,
@@ -138,6 +139,10 @@ export class ProgramBoardComponent implements OnInit {
         .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
       this.pushList = data.exercises
         .filter((e) => e.push)
+        .map((exercise) => ({ sessionItem: null, exercise }))
+        .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
+      this.otherList = data.exercises
+        .filter((e) => !e.push && !e.pull)
         .map((exercise) => ({ sessionItem: null, exercise }))
         .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
     }

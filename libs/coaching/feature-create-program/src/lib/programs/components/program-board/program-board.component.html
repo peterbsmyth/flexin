@@ -14,6 +14,13 @@
       <bod-exercise-card [closeable]="false" *ngFor="let data of pushList" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
       </bod-exercise-card>
     </div>
+    <header class="board__column-header" *ngIf="otherList.length">
+      <h1>Other</h1>
+    </header>
+    <div cdkDropListSortingDisabled id="other" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="pushList" (cdkDropListDropped)="drop($event)">
+      <bod-exercise-card [closeable]="false" *ngFor="let data of otherList" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
+      </bod-exercise-card>
+    </div>
   </section>
 
   <section class="board__column" id="dayOne" [cdkDropListEnterPredicate]="uniquePredicate" cdkDropList [cdkDropListConnectedTo]="['dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="dayOneList" (cdkDropListDropped)="drop($event)">
