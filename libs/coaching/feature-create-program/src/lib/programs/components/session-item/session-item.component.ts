@@ -111,6 +111,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
             sessionItem: {
               ...this.data.sessionItem,
               ...value,
+              reps: value.reps ? value.reps : 0
             },
           };
           this.update.emit(data);
