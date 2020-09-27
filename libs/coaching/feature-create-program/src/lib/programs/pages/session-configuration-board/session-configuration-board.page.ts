@@ -71,10 +71,8 @@ export class SessionConfigurationBoardPage implements OnInit {
 
   onClickCreateProgram() {
     this.programsState.dispatch(
-      ProgramsActions.everythingExceptCreateProgram({ data: this._data })
-    );
-    this.programsState.dispatch(
       ProgramsActions.createProgram({
+        data: this._data,
         name: this.programName.value,
       })
     );

@@ -77,16 +77,6 @@ export class ProgramsEffects {
     { dispatch: false }
   );
 
-  everythingExceptCreateProgram$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ProgramsActions.everythingExceptCreateProgram),
-        tap(({ data }) => {
-          return this.draftProgramService.everythingExceptCreateProgram(data);
-        })
-      ),
-    { dispatch: false }
-  );
 
   createProgram$ = createEffect(
     () =>
@@ -94,9 +84,9 @@ export class ProgramsEffects {
         ofType(ProgramsActions.createProgram),
         fetch({
           // provides an action
-          run: ({ name }) => {
+          run: ({ data, name }) => {
             return this.draftProgramService
-              .createProgram(name)
+              .createProgram(data, name)
               .pipe(tap(() => this.router.navigateByUrl('/programs')));
           },
           onError: (action, error: any) => {

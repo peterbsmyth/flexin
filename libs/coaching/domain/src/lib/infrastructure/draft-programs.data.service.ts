@@ -86,12 +86,12 @@ export class DraftProgramsDataService {
     this.storage.set('draftProgram', draft).subscribe();
   }
 
-  everythingExceptCreateProgram(data: any[]) {
+  createProgram(data: SessionItemData[], name: string): Observable<any> {
     const oldDraft = this._draftProgramSubject.getValue();
     /**
      * Get the ids from the draft session items dictionary
      */
-    const sessionItems = Object.keys(oldDraft.sessionItems)
+    const newSessionItems = Object.keys(oldDraft.sessionItems)
       /**
        * map the keys to the session items to create an array of all session items
        */
@@ -114,16 +114,11 @@ export class DraftProgramsDataService {
        */
       .reduce(this._createDictionary, {});
 
-    this.storage
-      .set('draftProgram', {
-        ...oldDraft,
-        sessionItems,
-      })
-      .subscribe();
-  }
+    const draft = {
+      ...oldDraft,
+      sessionItems: newSessionItems,
+    };
 
-  createProgram(name: string): Observable<any> {
-    const draft = this._draftProgramSubject.getValue();
     const draftWeeks = Object.keys(draft.weeks).map((id) => draft.weeks[id]);
     const draftSessions = Object.keys(draft.sessions).map(
       (id) => draft.sessions[id]
@@ -131,6 +126,7 @@ export class DraftProgramsDataService {
     const draftSessionItems = Object.keys(draft.sessionItems).map(
       (id) => draft.sessionItems[id]
     );
+
     return this.programService.saveOne({ name }).pipe(
       switchMap((program) => {
         /**
