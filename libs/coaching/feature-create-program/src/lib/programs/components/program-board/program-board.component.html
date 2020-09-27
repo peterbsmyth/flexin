@@ -17,7 +17,7 @@
     <header class="board__column-header" *ngIf="otherList.length">
       <h1>Other</h1>
     </header>
-    <div cdkDropListSortingDisabled id="other" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="pushList" (cdkDropListDropped)="drop($event)">
+    <div cdkDropListSortingDisabled id="other" cdkDropList [cdkDropListConnectedTo]="['dayOne', 'dayTwo', 'dayThree', 'dayFour']" [cdkDropListData]="otherList" (cdkDropListDropped)="drop($event)">
       <bod-exercise-card [closeable]="false" *ngFor="let data of otherList" [exercise]="data.exercise" cdkDrag [cdkDragData]="data">
       </bod-exercise-card>
     </div>
