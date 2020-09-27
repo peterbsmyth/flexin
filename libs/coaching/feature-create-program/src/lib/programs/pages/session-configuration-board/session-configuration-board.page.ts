@@ -5,7 +5,9 @@ import {
   ProgramsFacade,
   ProgramsActions,
   SessionItemData,
+  ExercisesActions,
 } from '@bod/coaching/domain';
+import { Exercise } from '@bod/shared/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
@@ -52,6 +54,10 @@ export class SessionConfigurationBoardPage implements OnInit {
         };
       }
     });
+  }
+
+  onUpdateExercise(exercise: Exercise) {
+    this.programsState.dispatch(ExercisesActions.updateExercise({ exercise }));
   }
 
   /**

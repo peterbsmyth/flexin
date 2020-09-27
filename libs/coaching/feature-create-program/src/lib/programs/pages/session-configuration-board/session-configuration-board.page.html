@@ -13,6 +13,7 @@
   *ngFor="let data of programsState.draftIncompleteSessionItems$ | async; let i = index;"
   [data]="data"
   (update)="onUpdate($event)"
+  (updateExercise)="onUpdateExercise($event)"
   (validate)="onValidate($event, i)"
   ></coaching-session-item>
 </bod-board>

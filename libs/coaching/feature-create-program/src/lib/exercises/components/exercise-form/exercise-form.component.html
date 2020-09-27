@@ -17,9 +17,9 @@
         <aside formArrayName="intensities">
           <h3>Intensities</h3>
           <section *ngFor="let intensity of intensities.controls; let i = index">
-            <div [formGroupName]="i">
+            <div class="intensities__controls" [formGroupName]="i">
               <!-- Reps? -->
-              <mat-form-field>
+              <mat-form-field class="intensities__input">
                 <mat-label>
                   Intensity
                 </mat-label>

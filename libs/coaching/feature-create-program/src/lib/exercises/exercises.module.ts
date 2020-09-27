@@ -17,6 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
+import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { MatCardModule } from '@angular/material/card';
     CreatePage,
     ExercisesPage,
     ExercisePage,
+    ExerciseDialog,
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ import { MatCardModule } from '@angular/material/card';
     MatSortModule,
     MatCardModule,
     ReactiveComponentModule,
+    MatDialogModule
   ],
 })
 export class ExercisesModule {}

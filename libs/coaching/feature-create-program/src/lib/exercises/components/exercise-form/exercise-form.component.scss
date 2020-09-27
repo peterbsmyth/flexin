@@ -25,3 +25,14 @@ mat-card-footer {
 mat-card {
   margin-bottom: 1rem;
 }
+
+.intensities {
+  &__controls {
+    display: flex;
+    width: 100%;
+  }
+
+  &__input {
+    flex: 1;
+  }
+}
