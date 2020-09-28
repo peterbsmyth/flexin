@@ -1,5 +1,6 @@
 @import "utils";
 
+
 .form {
   display: flex;
   justify-content: space-around;
@@ -7,11 +8,13 @@
   &__field {
     margin: $space-m 0 $space-m;
     padding: $space-s;
+    flex: 1;
   }
 
 
   &__check {
     padding: ($space-m + $space-s) $space-s $space-s;
+    flex: 0.3;
   }
 }
 

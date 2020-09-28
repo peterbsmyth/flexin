@@ -36,7 +36,7 @@ export class ExerciseTableComponent implements AfterViewInit, OnInit {
     } else if (exercise.pull) {
       return 'pull';
     } else {
-      return 'error';
+      return 'other';
     }
   }
 
