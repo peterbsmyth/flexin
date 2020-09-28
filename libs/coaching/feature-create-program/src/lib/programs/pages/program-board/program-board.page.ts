@@ -28,10 +28,11 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
     this.data$ = combineLatest([
       this.search.valueChanges,
       this.exerciseState.allExercises$,
+      this.programState.draftProgramBoard$
     ]).pipe(
-      map(([term, exercises]) => {
+      map(([term, exercises, draft]) => {
         if (term === '') {
-          return { exercises, sessionItems: [], sessions: [] };
+          return { exercises, draft, sessionItems: [], sessions: [] };
         } else {
           const filteredExercises = new Fuse(exercises, {
             keys: ['name'],
@@ -41,7 +42,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
             .filter((result) => result.score < 0.4)
             .map((result) => result.item);
 
-          return { exercises: filteredExercises, sessionItems: [], sessions: [] };
+          return { exercises: filteredExercises, draft, sessionItems: [], sessions: [] };
         }
       })
     );

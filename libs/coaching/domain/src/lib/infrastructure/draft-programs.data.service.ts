@@ -12,14 +12,18 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 
 @Injectable()
 export class DraftProgramsDataService {
+  private _draftProgramBoardSubject = new BehaviorSubject<BoardCardData[][]>([
+    [],
+  ]);
+  public draftProgramBoard$ = this._draftProgramBoardSubject.asObservable();
   private _draftProgramSubject = new BehaviorSubject<DraftProgram>({
     name: '',
   });
   public draftProgram$ = this._draftProgramSubject.asObservable();
-  private _incompleteSessionItemsSubject = new BehaviorSubject<
-    SessionItemData[]
-  >([]);
-  public incompleteSessionItems$ = this._incompleteSessionItemsSubject.asObservable();
+  private _sessionConfigurationSubject = new BehaviorSubject<SessionItemData[]>(
+    []
+  );
+  public draftSessionConfiguration$ = this._sessionConfigurationSubject.asObservable();
   private _lastSessionItemLocalId = 1000;
   private _lastSessionId = 0;
   private _createDictionary = (acc, val) => {
@@ -30,6 +34,7 @@ export class DraftProgramsDataService {
   };
 
   addIncompleteSessionItems(cardLists: BoardCardData[][]): void {
+    this.storage.set('boardCardData', cardLists).subscribe();
     const draft: any = {};
     const weeks = [1, 2, 3, 4, 5, 6].map((id) => ({
       id,
@@ -216,7 +221,7 @@ export class DraftProgramsDataService {
       .watch('sessionItemData')
       .pipe(
         tap((data: SessionItemData[]) => {
-          this._incompleteSessionItemsSubject.next(data);
+          this._sessionConfigurationSubject.next(data);
         })
       )
       .subscribe();
@@ -226,6 +231,15 @@ export class DraftProgramsDataService {
       .pipe(
         tap((data: DraftProgram) => {
           this._draftProgramSubject.next(data);
+        })
+      )
+      .subscribe();
+
+    this.storage
+      .watch('boardCardData')
+      .pipe(
+        tap((data: BoardCardData[][]) => {
+          this._draftProgramBoardSubject.next(data);
         })
       )
       .subscribe();

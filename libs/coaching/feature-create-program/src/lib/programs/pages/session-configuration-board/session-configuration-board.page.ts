@@ -24,7 +24,7 @@ export class SessionConfigurationBoardPage implements OnInit {
   invalid$: Observable<boolean> = this._invalidSubject.asObservable();
 
   constructor(private router: Router, public programsState: ProgramsFacade) {
-    this.programsState.draftIncompleteSessionItems$
+    this.programsState.draftSessionConfiguration$
       .pipe(
         take(1),
         tap((data) => {

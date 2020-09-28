@@ -10,7 +10,7 @@
 <bod-board>
   <coaching-session-item
   class="item"
-  *ngFor="let data of programsState.draftIncompleteSessionItems$ | async; let i = index;"
+  *ngFor="let data of programsState.draftSessionConfiguration$ | async; let i = index;"
   [data]="data"
   (update)="onUpdate($event)"
   (updateExercise)="onUpdateExercise($event)"

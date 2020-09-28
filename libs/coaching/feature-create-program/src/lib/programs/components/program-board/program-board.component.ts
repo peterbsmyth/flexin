@@ -146,5 +146,12 @@ export class ProgramBoardComponent implements OnInit {
         .map((exercise) => ({ sessionItem: null, exercise }))
         .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
     }
+
+    if (hasData && data.draft) {
+      this.dayOneList = [...data.draft[0]];
+      this.dayTwoList = [...data.draft[1]];
+      this.dayThreeList = [...data.draft[2]];
+      this.dayFourList = [...data.draft[3]];
+    }
   }
 }

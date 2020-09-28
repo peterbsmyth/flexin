@@ -20,7 +20,8 @@ export class ProgramsFacade {
   allWeeks$ = this.store.pipe(
     select(ProgramsSelectors.getWeeks)
   )
-  draftIncompleteSessionItems$ = this.draftProgramService.incompleteSessionItems$;
+  draftProgramBoard$ = this.draftProgramService.draftProgramBoard$;
+  draftSessionConfiguration$ = this.draftProgramService.draftSessionConfiguration$;
   draftProgram$ = this.draftProgramService.draftProgram$;
   selectedProgramsWithDescendants$ = this.store.pipe(
     select(ProgramsSelectors.getSelectedWithDescendants)

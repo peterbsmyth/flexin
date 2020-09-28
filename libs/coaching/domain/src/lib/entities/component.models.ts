@@ -9,6 +9,7 @@ export interface ProgramBoardData {
   sessions: Session[];
   exercises: Exercise[];
   sessionItems: SessionItem[];
+  draft?: BoardCardData[][];
 }
 
 export interface SessionItemFormData {
