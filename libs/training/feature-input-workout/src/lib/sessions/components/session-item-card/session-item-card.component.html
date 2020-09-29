@@ -40,7 +40,8 @@
         </section>
         <footer class="sets__footer">
           <h5>
-            <span>Goal: {{ data.sessionItem.reps }} Reps</span>
+            <span *ngIf="data.sessionItem.AMRAP; else goalReps">Goal: AMRAP</span>
+            <ng-template #goalReps><span>Goal: {{ data.sessionItem.reps }} Reps</span></ng-template>
             <span *ngIf="data.sessionItem.intensity">, {{ data.sessionItem.intensity }}</span>
             <span *ngIf="data.sessionItem.weight">, {{ data.sessionItem.weight }} {{ data.sessionItem.weightUnit }}</span>
             <span *ngIf="data.sessionItem.tempo">, {{ data.sessionItem.tempo }}</span>
