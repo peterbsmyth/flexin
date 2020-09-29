@@ -39,7 +39,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
             includeScore: true,
           })
             .search(term)
-            .filter((result) => result.score < 0.4)
+            .filter((result) => result.score < 0.45)
             .map((result) => result.item);
 
           return { exercises: filteredExercises, draft, sessionItems: [], sessions: [] };
