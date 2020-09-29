@@ -25,6 +25,7 @@ export const sessionsReducer = createReducer(
   initialState,
   on(
     SessionsActions.loadSession,
+    SessionsActions.loadSessionWithAscendants,
     SessionsActions.loadSessionsByWeek, (state) => ({
     ...state,
     loaded: false,
@@ -49,6 +50,21 @@ export const sessionsReducer = createReducer(
         loaded: true,
         selectedId: session.id,
       })
+  ),
+  on(
+    SessionsActions.loadSessionSync,
+    (state, { session }) =>
+      sessionsAdapter.setOne(session, {
+        ...state,
+        selectedId: session.id,
+      })
+  ),
+  on(
+    SessionsActions.loadSessionWithAscendantsSuccess,
+    (state) => ({
+      ...state,
+      loaded: true
+    })
   )
 );
 

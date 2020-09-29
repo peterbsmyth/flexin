@@ -37,7 +37,7 @@ export class SessionExistsGuard implements CanActivate {
           return of(inStore);
         } else {
           this.sessionsState.dispatch(
-            SessionsActions.loadSession({ id: +id })
+            SessionsActions.loadSessionWithAscendants({ id: +id })
           );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.sessionsState.selectedSessions$),

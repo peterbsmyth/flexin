@@ -16,6 +16,9 @@ export class SessionsFacade {
   selectedSessions$ = this.store.pipe(
     select(SessionsSelectors.getSelected)
   );
+  selectedSessionsWithAscendants$ = this.store.pipe(
+    select(SessionsSelectors.getSelectedWithAscendants)
+  );
   allSessionItems$ = this.store.pipe(
     select(SessionsSelectors.getSessionItems)
   )

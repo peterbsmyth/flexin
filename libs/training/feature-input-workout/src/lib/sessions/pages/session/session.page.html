@@ -1,13 +1,30 @@
-<training-action-bar *ngrxLet="pages$ as pages">
-  <button mat-button [disabled]="pages.isFirst" [routerLink]="['../', pages.previousId]">Previous Session</button>
-  <button mat-button [disabled]="pages.isLast" [routerLink]="['../', pages.nextId]">Next Session</button>
-</training-action-bar>
-
 <ng-container *ngrxLet="session$ as session">
-  <div class="title" >
-    <h2>{{ session.name }}</h2>
-  </div>
+  <mat-list>
+    <mat-list-item>
+      <a [routerLink]="['/programs', session.week.program.id]">{{ session.week.program.name }}</a>
+  <span>&nbsp;>&nbsp;</span>
+  <a [routerLink]="['/weeks', session.week.id]">Week {{ session.week.number }}</a>
+  <span>&nbsp;>&nbsp;</span>
+  {{ session.name }}
+    </mat-list-item>
+  </mat-list>
 </ng-container>
+<training-action-bar *ngrxLet="pages$ as pages">
+  <button
+    mat-button
+    [disabled]="pages.isFirst"
+    [routerLink]="['../', pages.previousId]"
+  >
+    Previous Session
+  </button>
+  <button
+    mat-button
+    [disabled]="pages.isLast"
+    [routerLink]="['../', pages.nextId]"
+  >
+    Next Session
+  </button>
+</training-action-bar>
 <ng-container *ngIf="(sessionItemsLoaded$ | async); else loadingSessionItems">
   <bod-exercise-card
     *ngFor="let sessionItem of (sessionItems$ | async);"

@@ -1,4 +1,14 @@
-training-action-bar, .title {
+@import "utils";
+
+mat-list {
+  font-weight: $weight-bold;
+}
+
+a {
+  color: inherit;
+}
+
+training-action-bar {
   display: flex;
   justify-content: center;
 }

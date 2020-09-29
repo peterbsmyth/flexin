@@ -16,7 +16,7 @@ import { flatten, uniqBy } from 'lodash-es';
 import { SessionItemDataService } from '../../infrastructure/session-item.data.service';
 import { SessionsActions } from '../sessions/actions';
 import { SessionItemsActions } from '../session-items/actions';
-import { Exercise, Session, SessionItem } from '@bod/shared/models';
+import { Session, SessionItem } from '@bod/shared/models';
 import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
 import { ExercisesActions } from '../exercises/actions';
 

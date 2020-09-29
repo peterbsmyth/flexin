@@ -4,11 +4,11 @@ import {
   SessionsState,
   sessionsAdapter,
 } from './sessions.reducer';
+import { WEEKS_FEATURE_KEY, WeeksState } from '../weeks/weeks.reducer';
 import {
-  WEEKS_FEATURE_KEY,
-  WeeksState,
-  weeksAdapter,
-} from '../weeks/weeks.reducer';
+  PROGRAMS_FEATURE_KEY,
+  ProgramsState,
+} from '../programs/programs.reducer';
 import { PartialState } from '../root.reducer';
 import { getAllSessionItems } from '../session-items/session-items.selectors';
 import { Pages, Session } from '@bod/shared/models';
@@ -26,6 +26,21 @@ export const getWeeksState = createFeatureSelector<PartialState, WeeksState>(
 export const getSelectedWeekId = createSelector(
   getWeeksState,
   (state: WeeksState) => state.selectedId
+);
+
+export const getWeeksEntities = createSelector(
+  getWeeksState,
+  (state: WeeksState) => state.entities
+);
+
+export const getProgramsState = createFeatureSelector<
+  PartialState,
+  ProgramsState
+>(PROGRAMS_FEATURE_KEY);
+
+export const getProgramsEntities = createSelector(
+  getProgramsState,
+  (state: ProgramsState) => state.entities
 );
 
 const { selectAll, selectEntities, selectIds } = sessionsAdapter.getSelectors();
@@ -64,6 +79,24 @@ export const getSelected = createSelector(
   getSessionsEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
+);
+
+export const getSelectedWithAscendants = createSelector(
+  getSelected,
+  getWeeksEntities,
+  getProgramsEntities,
+  (session, weeksEntities, programsEntities) => {
+    const week = weeksEntities[session.weekId];
+    const program = week && programsEntities[week.programId];
+
+    return {
+      ...session,
+      week: {
+        ...week,
+        program,
+      },
+    };
+  }
 );
 
 export const getSessionItems = createSelector(

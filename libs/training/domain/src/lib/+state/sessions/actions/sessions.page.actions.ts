@@ -31,6 +31,26 @@ export const loadSessionFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadSessionSync = createAction(
+  '[Sessions Page] Load Session Synchronously',
+  props<{ session: Session }>()
+);
+
+export const loadSessionWithAscendants = createAction(
+  '[Sessions API] Load Session With Ascendants',
+  props<{ id: number }>()
+);
+
+export const loadSessionWithAscendantsSuccess = createAction(
+  '[Sessions API] Load Session With Ascendants Success'
+);
+
+export const loadSessionWithAscendantsFailure = createAction(
+  '[Sessions API] Load Session With Ascendants Failure',
+  props<{ error: any }>()
+);
+
+
 export const selectSession = createAction(
   '[Sessions Page] Select Session',
   props<{ id: number }>()

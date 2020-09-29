@@ -32,13 +32,15 @@ export class SessionPage implements OnInit, OnDestroy {
     private sessionsState: SessionsFacade,
     private route: ActivatedRoute
   ) {
-    this.session$ = this.sessionsState.selectedSessions$.pipe(
-      filter((s) => !!s),
-      distinctUntilKeyChanged('id')
+    this.session$ = this.sessionsState.selectedSessionsWithAscendants$.pipe(
+      filter((s) => {
+        return !!(s && s.week && s.week.program);
+      }),
+      distinctUntilKeyChanged('id'),
     );
     this.pages$ = this.sessionsState.pages$;
     this.sessionItems$ = this.sessionsState.allSessionItems$.pipe(
-      filter((s) => !!s),
+      filter((s) => !!s)
     );
     this.sessionItemsLoaded$ = this.sessionItems$.pipe(
       map((sessionItems) => sessionItems.every((s) => s))
