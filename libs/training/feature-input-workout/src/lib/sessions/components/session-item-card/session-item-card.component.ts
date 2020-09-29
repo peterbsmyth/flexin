@@ -97,7 +97,7 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
 
     form.valueChanges
       .pipe(
-        debounceTime(1000),
+        debounceTime(300),
         takeUntil(this.unsubscribe$),
         tap((value) => this.onSave(value))
       )
