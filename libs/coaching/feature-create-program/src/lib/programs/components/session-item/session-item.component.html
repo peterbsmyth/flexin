@@ -9,13 +9,13 @@
       <form [formGroup]="form" class="form">
         <mat-form-field class="form__field">
           <mat-label>
-            Sets
+            Sets <span *ngIf="leftRight">(left/right)</span>
           </mat-label>
           <input matInput type="number" formControlName="sets" />
         </mat-form-field>
         <mat-form-field class="form__field">
           <mat-label>
-            Reps <span *ngIf="leftRight">(left/right)</span>
+            Reps
           </mat-label>
           <input matInput type="number" formControlName="reps" />
         </mat-form-field>
