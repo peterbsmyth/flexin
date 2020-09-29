@@ -11,7 +11,7 @@
           <mat-label>
             Sets <span *ngIf="leftRight">(left/right)</span>
           </mat-label>
-          <input matInput type="number" inputmode="numeric" formControlName="sets" />
+          <input matInput min="1" type="number" inputmode="numeric" formControlName="sets" />
         </mat-form-field>
         <mat-form-field class="form__field">
           <mat-label>

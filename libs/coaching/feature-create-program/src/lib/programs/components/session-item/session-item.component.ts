@@ -29,7 +29,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   form: FormGroup = this.fb.group({
     reps: this.fb.control(0, [Validators.required]),
     AMRAP: this.fb.control(false, [Validators.required]),
-    sets: this.fb.control(0, [Validators.required]),
+    sets: this.fb.control(1, [Validators.required, Validators.min(1)]),
     weight: this.fb.control(0, [Validators.required]),
     intensity: this.fb.control('', [Validators.required]),
     tempo: this.fb.control('', [Validators.required]),
@@ -123,7 +123,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   buildForm(data: SessionItemData) {
     this.form.get('reps').setValue(data.sessionItem.reps || 0);
     this.form.get('AMRAP').setValue(data.sessionItem.AMRAP || false);
-    this.form.get('sets').setValue(data.sessionItem.sets || 0);
+    this.form.get('sets').setValue(data.sessionItem.sets || 1);
     this.form.get('leftRight').setValue(data.exercise.leftRight || false);
     this.form.get('weight').setValue(data.sessionItem.weight || 0);
     this.form.get('intensity').setValue(data.sessionItem.intensity || '');
