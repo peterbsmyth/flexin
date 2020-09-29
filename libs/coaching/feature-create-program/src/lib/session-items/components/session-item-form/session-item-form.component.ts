@@ -72,8 +72,8 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
     });
 
     if (data.sessionItem.AMRAP) {
-      this.form.get('reps').setValue(0);
-      this.form.get('reps').disable();
+      form.get('reps').setValue(0);
+      form.get('reps').disable();
     }
 
     form
