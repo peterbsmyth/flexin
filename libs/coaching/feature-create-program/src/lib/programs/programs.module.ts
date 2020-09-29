@@ -20,6 +20,7 @@ import { ProgramPage } from './pages/program/program.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { SessionConfigurationBoardPage } from './pages/session-configuration-board/session-configuration-board.page';
 import { ProgramBoardComponent } from './components/program-board/program-board.component';
+import { NumericDirective } from './components/session-item/numeric.directive';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ProgramBoardComponent } from './components/program-board/program-board.
     ProgramBoardPage,
     SessionConfigurationBoardPage,
     ProgramBoardComponent,
+    NumericDirective,
   ],
   imports: [
     CommonModule,
