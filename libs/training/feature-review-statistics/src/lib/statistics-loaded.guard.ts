@@ -15,10 +15,10 @@ export class StatisticsLoadedGuard implements CanActivate {
     this.setStatisticsState.dispatch(
       SetStatisticsActions.loadSetStatisticsWithAscendants()
     );
-    return this.SetStatisticsWithAscendantsLoaded();
+    return this.setStatisticsWithAscendantsLoaded();
   }
 
-  SetStatisticsWithAscendantsLoaded(): Observable<boolean> {
+  setStatisticsWithAscendantsLoaded(): Observable<boolean> {
     return this.setStatisticsState.ascendantsLoaded$.pipe(
       filter((loaded) => loaded),
       take(1)

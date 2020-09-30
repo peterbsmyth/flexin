@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ExercisesActions, ExercisesFacade } from '@bod/training/domain';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Exercise, SetStatistic } from '@bod/shared/models';
-import { map } from 'rxjs/operators';
-import { maxBy } from 'lodash-es';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './exercise.page.html',
@@ -20,32 +18,16 @@ export class ExercisePage implements OnInit {
     private route: ActivatedRoute
   ) {
     this.exercise$ = this.exerciseState.selectedExercises$;
+    this.maxRepsOfAllTime$ = this.exerciseState.maxReps$;
     this.setStatistics$ = this.exerciseState.setStatistics$;
-    this.maxRepsOfAllTime$ = this.setStatistics$.pipe(
-      map((setStatistics) => {
-        return Math.max.apply(
-          null,
-          setStatistics.map((stat) => stat.reps)
-        );
-      })
-    );
-    this.bestSet$ = this.setStatistics$.pipe(
-      map((setStatistics) => {
-        const maxWeight = Math.max.apply(
-          null,
-          setStatistics.map((stat) => stat.weight)
-        );
-        const topWeights = setStatistics.filter((s) => s.weight === maxWeight);
-        const bestSet: SetStatistic = maxBy(topWeights, 'reps');
-        return bestSet;
-      })
-    );
+    this.bestSet$ = this.exerciseState.bestSet$;
+  }
+
+  ngOnInit(): void {
     this.exerciseState.dispatch(
       ExercisesActions.selectExercise({
         id: this.route.snapshot.params['exerciseId'],
       })
     );
   }
-
-  ngOnInit(): void {}
 }

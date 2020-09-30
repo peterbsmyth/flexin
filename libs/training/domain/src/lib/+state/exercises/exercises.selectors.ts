@@ -5,9 +5,11 @@ import {
   exercisesAdapter,
 } from './exercises.reducer';
 import { PartialState } from '../root.reducer';
-import { SessionItemStatistic, SetStatistic } from '@bod/shared/models';
 import { getAllSessionItemStatistics } from '../session-item-statistics/session-item-statistics.selectors';
+import { getSessionItemsEntities } from '../session-items/session-items.selectors';
 import { getAllSetStatistics } from '../set-statistics/set-statistics.selectors';
+import { maxBy } from 'lodash-es';
+import { SetStatistic } from '@bod/shared/models';
 
 // Lookup the 'Exercises' feature state managed by NgRx
 export const getExercisesState = createFeatureSelector<
@@ -51,12 +53,16 @@ export const getSelected = createSelector(
 export const getSetStatistics = createSelector(
   getSelected,
   getAllSessionItemStatistics,
+  getSessionItemsEntities,
   getAllSetStatistics,
-  (exercise, sessionItemStatistics, setStatistics) => {
+  (exercise, sessionItemStatistics, sessionItemEntities, setStatistics) => {
     const sessionItemStatisticIds = sessionItemStatistics
-      .filter(
-        (stat) => stat.sessionItem.exerciseId === (exercise && exercise.id)
-      )
+      .filter((stat) => {
+        return (
+          sessionItemEntities[stat.sessionItemId].exerciseId ===
+          (exercise && exercise.id)
+        );
+      })
       .map((stat) => stat.id);
 
     return setStatistics.filter((stat) =>
@@ -64,3 +70,27 @@ export const getSetStatistics = createSelector(
     );
   }
 );
+
+export const getMaxReps = createSelector(getSetStatistics, (setStatistics) => {
+  return Math.max.apply(
+    null,
+    setStatistics.map((stat) => stat.reps)
+  );
+});
+
+export const getBestSet = createSelector(getSetStatistics, (setStatistics) => {
+  const maxWeight = Math.max.apply(
+    null,
+    setStatistics.map((stat) => stat.weight)
+  );
+  const topWeights = setStatistics.filter((s) => s.weight === maxWeight);
+  const bestSet: SetStatistic = topWeights.length
+    ? maxBy(topWeights, 'reps')
+    : null;
+
+  if (bestSet && (bestSet.weight === 0)) {
+    return null;
+  } else {
+    return bestSet;
+  }
+});

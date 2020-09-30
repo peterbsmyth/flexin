@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="card">
   <mat-card-content>
     <form [formGroup]="form" *ngIf="form">
       <main class="sets" formArrayName="sets">
@@ -62,8 +62,6 @@
           <textarea
             formControlName="notes"
             matInput
-            cols="30"
-            rows="2"
           ></textarea>
         </mat-form-field>
       </aside>

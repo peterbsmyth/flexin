@@ -11,6 +11,8 @@ export class ExercisesFacade {
   allExercises$ = this.store.pipe(select(ExercisesSelectors.getAllExercises));
   selectedExercises$ = this.store.pipe(select(ExercisesSelectors.getSelected));
   setStatistics$ = this.store.pipe(select(ExercisesSelectors.getSetStatistics));
+  maxReps$ = this.store.pipe(select(ExercisesSelectors.getMaxReps));
+  bestSet$ = this.store.pipe(select(ExercisesSelectors.getBestSet));
 
   constructor(private store: Store<fromRoot.PartialState>) {}
 

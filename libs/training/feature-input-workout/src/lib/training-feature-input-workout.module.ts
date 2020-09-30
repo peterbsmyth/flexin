@@ -24,6 +24,7 @@ import { MaximumAttemptFormComponent } from './components/maximum-attempt-form/m
 import { ProgramPage } from './pages/program/program.page';
 import { ProgramsPage } from './pages/programs/programs.page';
 import { WeeksPage } from './pages/weeks/weeks.page';
+import { StatisticsContainer } from './containers/statistics/statistics.container';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { WeeksPage } from './pages/weeks/weeks.page';
     ProgramPage,
     ProgramsPage,
     WeeksPage,
+    StatisticsContainer,
   ],
   exports: [],
 })

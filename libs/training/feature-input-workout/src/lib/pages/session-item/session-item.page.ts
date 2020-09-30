@@ -12,13 +12,14 @@ import {
   SessionItemBoardCardData,
   SessionItemCardOutput,
 } from '@bod/training/domain';
+import { Pages, SessionItemStatistic, SetStatistic } from '@bod/shared/models';
 import {
-  SessionItem,
-  Pages,
-  SessionItemStatistic,
-  SetStatistic,
-} from '@bod/shared/models';
-import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, takeUntil, tap } from 'rxjs/operators';
+  distinctUntilKeyChanged,
+  filter,
+  map,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -29,7 +30,6 @@ import { ActivatedRoute } from '@angular/router';
 export class SessionItemPage implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   data$: Observable<SessionItemBoardCardData>;
-  sessionItem$: Observable<SessionItem>;
   sessionItemStatistic$: Observable<SessionItemStatistic>;
   setStatistics$: Observable<SetStatistic[]>;
   sessionItemsLoaded$: Observable<boolean>;
@@ -76,16 +76,19 @@ export class SessionItemPage implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.sessionItemStatisticsState.selectedSessionItemStatistics$.pipe(
-      takeUntil(this.unsubscribe$),
-      filter((s) => !!s),
-      distinctUntilKeyChanged('id'),
-      tap(({ id }) => {
-        this.sessionsState.dispatch(
-          SetStatisticsActions.loadSetStatisticsBySessionItemStatistic({ id })
-        );
-      })
-    ).subscribe();
+    this.sessionItemStatisticsState.selectedSessionItemStatistics$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter((s) => !!s),
+        distinctUntilKeyChanged('id'),
+        tap(({ id }) => {
+          this.sessionsState.dispatch(
+            SetStatisticsActions.loadSetStatisticsBySessionItemStatistic({ id })
+          );
+        })
+      )
+      .subscribe();
+
     this.route.params
       .pipe(
         takeUntil(this.unsubscribe$),

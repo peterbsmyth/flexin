@@ -17,8 +17,8 @@
   </ng-container>
 </table>
 
-<ng-container *ngIf="(maxRepsOfAllTime$ | async) as bestSet">
-  <h2>Most Reps of All Time: {{ bestSet }}</h2>
+<ng-container *ngIf="(maxRepsOfAllTime$ | async) as maxReps">
+  <h2>Most Reps of All Time: {{ maxReps }}</h2>
 </ng-container>
 <ng-container *ngIf="(bestSet$ | async) as bestSet">
   <h2>Most Reps at {{ bestSet.weight }} lbs, top weight: {{ bestSet.reps }}</h2>
