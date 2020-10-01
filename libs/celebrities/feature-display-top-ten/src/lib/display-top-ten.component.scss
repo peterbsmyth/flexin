@@ -1,4 +1,11 @@
-.table td {
-    border: 1px solid;
-    padding:10px;
+#header {
+    text-align: center;
+    background-color: purple;
+}
+
+li {
+    list-style-type: none;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
 }

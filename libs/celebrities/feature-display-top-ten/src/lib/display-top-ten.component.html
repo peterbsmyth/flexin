@@ -1,1 +1,6 @@
-<h1>celebrities-display-top-ten</h1>
+<h1 id="header">Celebrities Works!</h1>
+<ul class="celebList">
+    <li *ngFor="let celeb of (celebs$ | async)">
+      <span>Name: {{celeb.name}} <br> Followers:{{celeb.followers}}</span>
+    </li>
+  </ul>
