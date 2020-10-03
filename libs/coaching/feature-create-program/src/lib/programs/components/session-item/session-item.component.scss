@@ -1,16 +1,15 @@
-@import "utils";
-
+@import 'utils';
 
 .form {
   display: flex;
   justify-content: space-around;
+  padding: 0 $space-s;
 
   &__field {
     margin: $space-m 0 $space-m;
     padding: $space-s;
     flex: 1;
   }
-
 
   &__check {
     padding: ($space-m + $space-s) $space-s $space-s;
@@ -21,4 +20,8 @@
 mat-card-title {
   display: flex;
   align-items: center;
+}
+
+mat-card {
+  padding: 0;
 }
