@@ -52,6 +52,7 @@
     "@ngrx/store": "10.0.0",
     "@ngx-pwa/local-storage": "10.1.0",
     "@nrwl/angular": "10.1.0",
+    "@swimlane/ngx-charts": "16.0.0",
     "commitizen": "4.2.1",
     "core-js": "^2.5.4",
     "cz-customizable": "6.3.0",
