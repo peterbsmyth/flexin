@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Exercise, SetStatistic } from '@bod/shared/models';
 import {
   ExercisesFacade,
@@ -33,14 +33,16 @@ export class StatisticsContainer implements OnInit {
     /**
      * the purpose of this subscription is to enforce that the action dispatches only once per application load
      */
-    this.loaded$.pipe(
-      tap((loaded) => {
-        if (loaded === undefined) {
-          this.setStatisticsState.dispatch(
-            SetStatisticsActions.loadSetStatisticsWithAscendants()
-          );
-        }
-      })
-    ).subscribe();
+    this.loaded$
+      .pipe(
+        tap((loaded) => {
+          if (loaded === undefined) {
+            this.setStatisticsState.dispatch(
+              SetStatisticsActions.loadSetStatisticsWithAscendants()
+            );
+          }
+        })
+      )
+      .subscribe();
   }
 }

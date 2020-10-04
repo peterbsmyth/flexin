@@ -72,10 +72,14 @@ export const getSetStatistics = createSelector(
 );
 
 export const getMaxReps = createSelector(getSetStatistics, (setStatistics) => {
-  return Math.max.apply(
-    null,
-    setStatistics.map((stat) => stat.reps)
-  );
+  const data = setStatistics
+    .filter((stat) => !!stat.reps)
+    .map((stat) => stat.reps);
+  if (data.length) {
+    return Math.max.apply(null, data);
+  } else {
+    return 0;
+  }
 });
 
 export const getBestSet = createSelector(getSetStatistics, (setStatistics) => {
@@ -88,7 +92,7 @@ export const getBestSet = createSelector(getSetStatistics, (setStatistics) => {
     ? maxBy(topWeights, 'reps')
     : null;
 
-  if (bestSet && (bestSet.weight === 0)) {
+  if (bestSet && bestSet.weight === 0) {
     return null;
   } else {
     return bestSet;
