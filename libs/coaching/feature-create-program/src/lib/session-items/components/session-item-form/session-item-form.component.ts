@@ -33,7 +33,7 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
   }
   @Output() save: EventEmitter<Partial<SessionItem>> = new EventEmitter();
   form: FormGroup = this.fb.group({
-    reps: 0,
+    reps: 1,
     AMRAP: false,
     leftRight: false,
     sets: false,
@@ -72,7 +72,7 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
     });
 
     if (data.sessionItem.AMRAP) {
-      form.get('reps').setValue(0);
+      form.get('reps').setValue(1);
       form.get('reps').disable();
     }
 

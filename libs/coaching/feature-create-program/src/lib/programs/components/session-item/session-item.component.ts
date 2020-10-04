@@ -27,7 +27,7 @@ import { ExerciseDialog } from '../../../exercises/components/exercise-dialog/ex
 export class SessionItemComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   form: FormGroup = this.fb.group({
-    reps: this.fb.control(0, [Validators.required]),
+    reps: this.fb.control(1, [Validators.required]),
     AMRAP: this.fb.control(false, [Validators.required]),
     sets: this.fb.control(1, [Validators.required, Validators.min(1)]),
     weight: this.fb.control(0, [Validators.required]),
@@ -76,6 +76,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
             this.form.get('reps').setValue(0);
             this.form.get('reps').disable();
           } else {
+            this.form.get('reps').setValue(1);
             this.form.get('reps').enable();
           }
         })
@@ -111,7 +112,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
             sessionItem: {
               ...this.data.sessionItem,
               ...value,
-              reps: value.reps ? value.reps : 0
+              reps: value.reps ? value.reps : 0,
             },
           };
           this.update.emit(data);
@@ -121,7 +122,7 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   }
 
   buildForm(data: SessionItemData) {
-    this.form.get('reps').setValue(data.sessionItem.reps || 0);
+    this.form.get('reps').setValue(data.sessionItem.reps || 1);
     this.form.get('AMRAP').setValue(data.sessionItem.AMRAP || false);
     this.form.get('sets').setValue(data.sessionItem.sets || 1);
     this.form.get('leftRight').setValue(data.exercise.leftRight || false);
