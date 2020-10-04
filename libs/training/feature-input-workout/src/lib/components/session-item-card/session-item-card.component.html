@@ -2,7 +2,9 @@
   <mat-card-content>
     <form [formGroup]="form" *ngIf="form">
       <main class="sets" formArrayName="sets">
-        <header class="sets__header"><h4>Sets <span *ngIf="data.sessionItem.leftRight"> (L/R)</span></h4></header>
+        <header class="sets__header">
+          <h4>Sets <span *ngIf="data.sessionItem.leftRight"> (L/R)</span></h4>
+        </header>
         <section class="sets__container">
           <div
             *ngFor="
@@ -19,8 +21,11 @@
             <!-- Reps? -->
             <label class="sets__label">
               <input
+                (focus)="onRepsFocus(i)"
+                (blur)="onRepsBlur(i)"
                 min="0"
-                type="number" inputmode="numeric"
+                type="number"
+                inputmode="numeric"
                 formControlName="reps"
                 class="sets__input"
               />
@@ -31,7 +36,8 @@
               <input
                 min="0"
                 step="5"
-                type="number" inputmode="numeric"
+                type="number"
+                inputmode="numeric"
                 formControlName="weight"
                 class="sets__input"
               />
@@ -40,11 +46,22 @@
         </section>
         <footer class="sets__footer">
           <h5>
-            <span *ngIf="data.sessionItem.AMRAP; else goalReps">Goal: AMRAP</span>
-            <ng-template #goalReps><span>Goal: {{ data.sessionItem.reps }} Reps</span></ng-template>
-            <span *ngIf="data.sessionItem.intensity">, {{ data.sessionItem.intensity }}</span>
-            <span *ngIf="data.sessionItem.weight">, {{ data.sessionItem.weight }} {{ data.sessionItem.weightUnit }}</span>
-            <span *ngIf="data.sessionItem.tempo">, {{ data.sessionItem.tempo }}</span>
+            <span *ngIf="data.sessionItem.AMRAP; else goalReps"
+              >Goal: AMRAP</span
+            >
+            <ng-template #goalReps
+              ><span>Goal: {{ data.sessionItem.reps }} Reps</span></ng-template
+            >
+            <span *ngIf="data.sessionItem.intensity"
+              >, {{ data.sessionItem.intensity }}</span
+            >
+            <span *ngIf="data.sessionItem.weight"
+              >, {{ data.sessionItem.weight }}
+              {{ data.sessionItem.weightUnit }}</span
+            >
+            <span *ngIf="data.sessionItem.tempo"
+              >, {{ data.sessionItem.tempo }}</span
+            >
           </h5>
         </footer>
       </main>
@@ -52,17 +69,20 @@
         <header class="session-item__header"><h4>RPE</h4></header>
         <!-- RPE -->
         <label>
-          <input formControlName="rpe" min="0" max="10" type="number" inputmode="numeric" />
+          <input
+            formControlName="rpe"
+            min="0"
+            max="10"
+            type="number"
+            inputmode="numeric"
+          />
         </label>
         <!-- Notes -->
         <mat-form-field class="session-item__notes">
           <mat-label>
             Notes
           </mat-label>
-          <textarea
-            formControlName="notes"
-            matInput
-          ></textarea>
+          <textarea formControlName="notes" matInput></textarea>
         </mat-form-field>
       </aside>
     </form>

@@ -50,25 +50,6 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * onChangeCount
-   * @param action either '+' or '-' for add or subtract
-   * @param control name of a formcontrol
-   * @param index if there is an index, the control references a property on 'sets' if not it represents a property on 'form'
-   */
-  onChangeCount(action: string, control: string, index?: number) {
-    const formControl: FormControl = Number.isInteger(index)
-      ? <FormControl>this.sets.controls[index].get(control)
-      : <FormControl>this.form.get(control);
-    const { value } = formControl;
-
-    if (action === '-') {
-      formControl.setValue(value - 1);
-    } else if (action === '+') {
-      formControl.setValue(value + 1);
-    }
-  }
-
-  /**
    * buildForm
    * Each time the session item changes the form needs to be reset according to the dictates of the session item
    * and related statistics
@@ -105,6 +86,30 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
     return form;
   }
 
+  /**
+   * onRepsFocus
+   * when a rep is focused then set its value to null so that a user can change the number
+   * without clearing the previous number
+   * @param i { number };
+   */
+  onRepsFocus(i) {
+    this.sets.controls[i].get('reps').setValue(null, { onlySelf: true });
+  }
+
+  /**
+   * onRepsBlur
+   * when a rep is blureed then check if it's still null from the focus handler
+   * if its not null then the user input a number and the form will be saved with the latest value
+   * @param i { number };
+   */
+  onRepsBlur(i) {
+    const control = this.sets.controls[i].get('reps');
+
+    if (control.value === null) {
+      control.setValue(this.data.setStatistics[i].reps, { onlySelf: true });
+    }
+  }
+
   onSave(value: {
     rpe: number;
     notes: string;
@@ -125,12 +130,11 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
         notes: value.notes,
         sessionItemId: this.data.sessionItem.id,
       },
-      setStatistics: value.sets
-        .map((s, i) => ({
-          id: this.data.setStatistics[i] && this.data.setStatistics[i].id,
-          sessionItemStatisticId,
-          ...s,
-        })),
+      setStatistics: value.sets.map((s, i) => ({
+        id: this.data.setStatistics[i] && this.data.setStatistics[i].id,
+        sessionItemStatisticId,
+        ...s,
+      })),
     };
     this.save.emit(output);
   }

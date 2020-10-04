@@ -6,7 +6,6 @@ import {
   SessionItemStatisticsActions,
   SetStatisticsActions,
   SessionItemStatisticsFacade,
-  SetStatisticsFacade,
   ExercisesFacade,
   ExercisesActions,
   SessionItemBoardCardData,
