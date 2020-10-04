@@ -1,7 +1,7 @@
 ---
 name: User Story
 about: for user stories
-title: USER-SCOPE-DESCRIPTION
+title: USER - SCOPE - DESCRIPTION
 labels: ''
 assignees: ''
 
