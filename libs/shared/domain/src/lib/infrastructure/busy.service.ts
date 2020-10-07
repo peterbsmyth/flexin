@@ -23,7 +23,7 @@ export class BusyService {
 
     if (this.count === 0) {
       this.loadingSubject.next(false);
-    };
+    }
   }
-  constructor() { }
+  constructor() {}
 }

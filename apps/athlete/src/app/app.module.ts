@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -20,7 +21,7 @@ import {
 } from '@ngrx/router-store';
 import { TrainingFeatureInputWorkoutModule } from '@bod/training/feature-input-workout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BusyHttpInterceptor, BusyService } from '@bod/shared/domain';
+import { NetworkStatusModule } from '@bod/shared/domain';
 import { BodComponentsModule } from '@bod/shared/components';
 import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-review-statistics';
 
@@ -37,6 +38,8 @@ import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-rev
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatSnackBarModule,
+    NetworkStatusModule.forRoot(),
     StoreModule.forRoot(
       {},
       {
@@ -55,10 +58,6 @@ import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-rev
     TrainingFeatureInputWorkoutModule,
     HttpClientModule,
     TrainingFeatureReviewStatisticsModule,
-  ],
-  providers: [
-    BusyService,
-    { provide: HTTP_INTERCEPTORS, useClass: BusyHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   exports: [],

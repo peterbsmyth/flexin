@@ -27,12 +27,8 @@ export { WeekStatisticsActions } from './lib/+state/week-statistics/actions';
 export { ExercisesActions } from './lib/+state/exercises/actions';
 export { WeeksPageActions } from './lib/+state/weeks/actions';
 export { ProgramsActions } from './lib/+state/programs/actions';
-export {
-  SessionItemsActions,
-} from './lib/+state/session-items/actions';
-export {
-  SessionsActions,
-} from './lib/+state/sessions/actions';
+export { SessionItemsActions } from './lib/+state/session-items/actions';
+export { SessionsActions } from './lib/+state/sessions/actions';
 export { SessionItemStatisticsActions } from './lib/+state/session-item-statistics/actions';
 export { SetStatisticsActions } from './lib/+state/set-statistics/actions';
 export { SessionStatisticsActions } from './lib/+state/session-statistics/actions';

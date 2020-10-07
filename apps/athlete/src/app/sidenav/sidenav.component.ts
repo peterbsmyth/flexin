@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { BusyService } from '@bod/shared/domain';
+import { map, shareReplay, tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NetworkStatusFacade } from '@bod/shared/domain';
 
 @Component({
   selector: 'bod-sidenav',
@@ -19,6 +20,20 @@ export class SidenavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public busyService: BusyService
-  ) {}
+    public networkStatus: NetworkStatusFacade,
+    private snackBar: MatSnackBar
+  ) {
+    this.networkStatus.errors$
+      .pipe(
+        tap((message) => {
+          if (message) {
+            this.snackBar.open(message, '', {
+              panelClass: 'error',
+              duration: 5000,
+            });
+          }
+        })
+      )
+      .subscribe();
+  }
 }

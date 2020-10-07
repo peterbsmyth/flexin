@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { BusyService } from '@bod/shared/domain';
+import { NetworkStatusFacade } from '@bod/shared/domain';
 
 @Component({
   selector: 'bod-nav',
@@ -12,7 +12,7 @@ import { BusyService } from '@bod/shared/domain';
 export class NavComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public busyService: BusyService
+    public networkStatus: NetworkStatusFacade
   ) {}
 
   isHandset$: Observable<boolean> = this.breakpointObserver

@@ -9,7 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BusyHttpInterceptor, BusyService } from '@bod/shared/domain';
+import { NetworkStatusModule } from '@bod/shared/domain';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BodComponentsModule } from '@bod/shared/components';
 import { HomeComponent } from './components/home/home.component';
@@ -19,6 +19,7 @@ import { HomeComponent } from './components/home/home.component';
   imports: [
     BodComponentsModule,
     CommonModule,
+    NetworkStatusModule.forRoot(),
     RouterModule,
     MatSidenavModule,
     MatListModule,
@@ -28,9 +29,5 @@ import { HomeComponent } from './components/home/home.component';
     MatIconModule,
   ],
   exports: [AppPage],
-  providers: [
-    BusyService,
-    { provide: HTTP_INTERCEPTORS, useClass: BusyHttpInterceptor, multi: true },
-  ],
 })
 export class CoreModule {}
