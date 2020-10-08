@@ -39,7 +39,7 @@ const sessionItemStatisticsReducer = createReducer(
   on(
     SessionItemStatisticsActions.loadSessionItemStatisticsSuccess,
     (state, { sessionItemStatistics }) =>
-      sessionItemStatisticsAdapter.setAll(sessionItemStatistics, {
+      sessionItemStatisticsAdapter.upsertMany(sessionItemStatistics, {
         ...state,
         loaded: true,
       })
@@ -53,7 +53,7 @@ const sessionItemStatisticsReducer = createReducer(
       sessionItemStatisticsAdapter.upsertOne(sessionItemStatistic, {
         ...state,
         loaded: true,
-        selectedId: sessionItemStatistic.id
+        selectedId: sessionItemStatistic.id,
       })
   ),
   on(

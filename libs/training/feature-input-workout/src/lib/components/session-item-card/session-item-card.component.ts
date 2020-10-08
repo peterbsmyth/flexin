@@ -12,7 +12,7 @@ import {
   SessionItemCardOutput,
 } from '@bod/training/domain';
 import { Subject } from 'rxjs';
-import { debounceTime, tap, takeUntil } from 'rxjs/operators';
+import { debounceTime, tap, takeUntil, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'training-session-item-card',
@@ -20,6 +20,7 @@ import { debounceTime, tap, takeUntil } from 'rxjs/operators';
   styleUrls: ['./session-item-card.component.scss'],
 })
 export class SessionItemCardComponent implements OnInit, OnDestroy {
+  private _formSaveable = false;
   private unsubscribe$: Subject<any> = new Subject();
   private _data: SessionItemBoardCardData;
   @Input()
@@ -28,7 +29,7 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
   }
   set data(data: SessionItemBoardCardData) {
     this._data = data;
-    this.form = this.buildForm(data);
+    this.buildForm(data);
   }
   @Output() save: EventEmitter<SessionItemCardOutput> = new EventEmitter();
   form: FormGroup = this.fb.group({});
@@ -39,7 +40,16 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form.valueChanges
+      .pipe(
+        filter(() => this._formSaveable),
+        debounceTime(300),
+        takeUntil(this.unsubscribe$),
+        tap((value) => this.onSave(value))
+      )
+      .subscribe();
+  }
 
   /**
    * arrayOfCount is used to turn the amount of sets into an array
@@ -52,10 +62,11 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
   /**
    * buildForm
    * Each time the session item changes the form needs to be reset according to the dictates of the session item
-   * and related statistics
+   * and related statistics. uses _formSaveable to prevent valueChanges subscription from firing after setControl
    * @param data { SessionItemBoardCardData };
    */
-  buildForm(data: SessionItemBoardCardData): FormGroup {
+  buildForm(data: SessionItemBoardCardData): void {
+    this._formSaveable = false;
     const rpe = data.sessionItemStatistic && data.sessionItemStatistic.rpe;
     const notes = data.sessionItemStatistic && data.sessionItemStatistic.notes;
     const sets = this.fb.array([]);
@@ -70,20 +81,17 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
       });
       sets.push(control);
     });
-    const form = this.fb.group({
-      sets,
-      rpe: this.fb.control(rpe ? rpe : 0),
-      notes: this.fb.control(notes ? notes : ''),
-    });
 
-    form.valueChanges
-      .pipe(
-        debounceTime(300),
-        takeUntil(this.unsubscribe$),
-        tap((value) => this.onSave(value))
-      )
-      .subscribe();
-    return form;
+    this.form.setControl('sets', sets);
+    this.form.setControl('rpe', this.fb.control(rpe ? rpe : 0));
+    this.form.setControl('notes', this.fb.control(notes ? notes : ''));
+
+    if (!data.sessionItemStatistic) {
+      this.form.disable({ emitEvent: false });
+    } else {
+      this.form.enable({ emitEvent: false });
+    }
+    this._formSaveable = true;
   }
 
   /**
@@ -104,9 +112,12 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
    */
   onRepsBlur(i) {
     const control = this.sets.controls[i].get('reps');
+    const setStatistic = this.data.setStatistics[i];
 
     if (control.value === null) {
-      control.setValue(this.data.setStatistics[i].reps, { onlySelf: true });
+      control.setValue(setStatistic ? setStatistic.reps : null, {
+        onlySelf: true,
+      });
     }
   }
 

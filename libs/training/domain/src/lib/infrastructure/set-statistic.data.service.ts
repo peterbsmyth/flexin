@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SetStatistic } from '@bod/shared/models';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 import { HttpClient } from '@angular/common/http';
 
