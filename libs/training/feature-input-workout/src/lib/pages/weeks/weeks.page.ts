@@ -6,9 +6,8 @@ import { filter, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'bod-weeks',
   templateUrl: './weeks.page.html',
-  styleUrls: ['./weeks.page.scss']
+  styleUrls: ['./weeks.page.scss'],
 })
 export class WeeksPage implements OnInit {
   weeks$: Observable<Week[]>;
@@ -18,17 +17,15 @@ export class WeeksPage implements OnInit {
     public programsState: ProgramsFacade,
     private route: ActivatedRoute
   ) {
-    this.weeks$ = this.programsState.allWeeks$
-      .pipe(
-        filter(w => !!w)
-      );
-    this.weeksLoaded$ = this.weeks$
-      .pipe(
-        map((weeks) => weeks.every(s => s))
-      );
+    this.weeks$ = this.programsState.allWeeks$.pipe(filter((w) => !!w));
+    this.weeksLoaded$ = this.weeks$.pipe(map((weeks) => weeks.every((s) => s)));
   }
 
   ngOnInit(): void {
-    this.programsState.dispatch(WeeksPageActions.loadWeeksByProgram({ id: this.route.snapshot.params['programId'] }))
+    this.programsState.dispatch(
+      WeeksPageActions.loadWeeksByProgram({
+        id: this.route.snapshot.params['programId'],
+      })
+    );
   }
 }

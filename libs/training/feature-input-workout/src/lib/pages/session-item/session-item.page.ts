@@ -22,7 +22,6 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'training-session-item',
   templateUrl: './session-item.page.html',
   styleUrls: ['./session-item.page.scss'],
 })

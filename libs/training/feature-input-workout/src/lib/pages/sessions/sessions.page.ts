@@ -6,29 +6,25 @@ import { filter, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'bod-sessions',
   templateUrl: './sessions.page.html',
-  styleUrls: ['./sessions.page.scss']
+  styleUrls: ['./sessions.page.scss'],
 })
 export class SessionsPage implements OnInit {
   sessions$: Observable<Session[]>;
   sessionsLoaded$: Observable<boolean>;
 
-  constructor(
-    public weeksState: WeeksFacade,
-    private route: ActivatedRoute
-  ) {
-    this.sessions$ = this.weeksState.allSessions$
-      .pipe(
-        filter(w => !!w)
-      );
-    this.sessionsLoaded$ = this.sessions$
-      .pipe(
-        map((sessions) => sessions.every(s => s))
-      );
+  constructor(public weeksState: WeeksFacade, private route: ActivatedRoute) {
+    this.sessions$ = this.weeksState.allSessions$.pipe(filter((w) => !!w));
+    this.sessionsLoaded$ = this.sessions$.pipe(
+      map((sessions) => sessions.every((s) => s))
+    );
   }
 
   ngOnInit(): void {
-    this.weeksState.dispatch(SessionsActions.loadSessionsByWeek({ id: this.route.snapshot.params['weekId'] }))
+    this.weeksState.dispatch(
+      SessionsActions.loadSessionsByWeek({
+        id: this.route.snapshot.params['weekId'],
+      })
+    );
   }
 }

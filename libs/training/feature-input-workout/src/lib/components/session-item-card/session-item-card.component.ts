@@ -5,6 +5,7 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import {
@@ -18,6 +19,7 @@ import { debounceTime, tap, takeUntil, filter } from 'rxjs/operators';
   selector: 'training-session-item-card',
   templateUrl: './session-item-card.component.html',
   styleUrls: ['./session-item-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SessionItemCardComponent implements OnInit, OnDestroy {
   private _formSaveable = false;

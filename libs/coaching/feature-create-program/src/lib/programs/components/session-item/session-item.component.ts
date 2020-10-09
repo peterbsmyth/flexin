@@ -5,6 +5,7 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
@@ -23,6 +24,7 @@ import { ExerciseDialog } from '../../../exercises/components/exercise-dialog/ex
   selector: 'coaching-session-item',
   templateUrl: './session-item.component.html',
   styleUrls: ['./session-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SessionItemComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();

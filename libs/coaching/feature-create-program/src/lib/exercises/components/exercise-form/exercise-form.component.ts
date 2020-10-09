@@ -5,6 +5,7 @@ import {
   Output,
   EventEmitter,
   Input,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Exercise } from '@bod/shared/models';
@@ -13,6 +14,7 @@ import { Exercise } from '@bod/shared/models';
   selector: 'coaching-exercise-form',
   templateUrl: './exercise-form.component.html',
   styleUrls: ['./exercise-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExerciseFormComponent implements OnInit {
   private _data: Exercise;
@@ -30,7 +32,7 @@ export class ExerciseFormComponent implements OnInit {
     push: false,
     pull: false,
     leftRight: false,
-    intensities: this.fb.array([])
+    intensities: this.fb.array([]),
   });
 
   get intensities() {
@@ -39,8 +41,7 @@ export class ExerciseFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   buildForm(exercise: Exercise) {
     const intensities = this.fb.array([]);

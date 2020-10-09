@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   CdkDrag,
   CdkDropList,
@@ -14,6 +21,7 @@ import { ProgramBoardData, BoardCardData } from '@bod/coaching/domain';
   selector: 'coaching-program-board',
   templateUrl: './program-board.component.html',
   styleUrls: ['./program-board.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgramBoardComponent implements OnInit {
   @Input() displaySource = true;

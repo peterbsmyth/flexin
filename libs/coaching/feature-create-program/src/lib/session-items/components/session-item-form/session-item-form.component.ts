@@ -11,7 +11,6 @@ import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SessionItem } from '@bod/shared/models';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'coaching-session-item-form',

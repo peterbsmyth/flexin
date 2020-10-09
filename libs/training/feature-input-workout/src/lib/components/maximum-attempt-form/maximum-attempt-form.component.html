@@ -1,23 +1,32 @@
 <h3>Maximum Attempt</h3>
 <form [formGroup]="myForm">
-    <mat-form-field>
-        <input matInput placeholder="Excersice ID" formControlName="exerciseId">
-    
-        <mat-error *ngIf="">
-            Need an exercise id number.
-        </mat-error>
+  <mat-form-field>
+    <input matInput placeholder="Excersice ID" formControlName="exerciseId" />
 
-    </mat-form-field>
-        <br>
-    <mat-form-field>
-        <input matInput placeholder="Excersice Name" formControlName="exerciseName">
-    </mat-form-field>
-        <br>
-    <mat-form-field>
-        <input matInput placeholder="Number of Reps" formControlName="numberOfReps">
-    </mat-form-field>
-        <br>
-    <mat-checkbox formControlName="bestAttempt" color="primary">Best Attempt?</mat-checkbox>
-        <br>
-    <button (click)="onClick(myForm)" class="button" type="submit">Save</button> 
+    <mat-error *ngIf="">
+      Need an exercise id number.
+    </mat-error>
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Excersice Name"
+      formControlName="exerciseName"
+    />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Number of Reps"
+      formControlName="numberOfReps"
+    />
+  </mat-form-field>
+  <br />
+  <mat-checkbox formControlName="bestAttempt" color="primary"
+    >Best Attempt?</mat-checkbox
+  >
+  <br />
+  <button (click)="onClick(myForm)" class="button" type="submit">Save</button>
 </form>
