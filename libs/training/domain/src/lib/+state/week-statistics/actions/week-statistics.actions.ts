@@ -1,5 +1,19 @@
 import { createAction, props } from '@ngrx/store';
-import { WeekStatistic } from '@bod/shared/models';
+import { Week, WeekStatistic } from '@bod/shared/models';
+
+export const loadWeekStatistic = createAction(
+  '[WeekStatistics] Load WeekStatistic'
+);
+
+export const loadWeekStatisticSuccess = createAction(
+  '[WeekStatistics] Load WeekStatistic Success',
+  props<{ weekStatistic: WeekStatistic }>()
+);
+
+export const loadWeekStatisticFailure = createAction(
+  '[WeekStatistics] Load WeekStatistic Failure',
+  props<{ error: any }>()
+);
 
 export const loadWeekStatistics = createAction(
   '[WeekStatistics] Load WeekStatistics'
@@ -17,7 +31,7 @@ export const loadWeekStatisticsFailure = createAction(
 
 export const loadWeekStatisticByWeek = createAction(
   '[WeekStatistics] Load WeekStatistic By Week',
-  props<{ id: number }>()
+  props<{ week: Week }>()
 );
 
 export const loadWeekStatisticByWeekSuccess = createAction(
@@ -32,7 +46,7 @@ export const loadWeekStatisticByWeekFailure = createAction(
 
 export const saveWeekStatisticByWeek = createAction(
   '[WeekStatistics] Save WeekStatistic By Week',
-  props<{ id: number }>()
+  props<{ week: Week }>()
 );
 
 export const saveWeekStatisticByWeekSuccess = createAction(
@@ -71,5 +85,19 @@ export const updateWeekStatisticSuccess = createAction(
 
 export const updateWeekStatisticFailure = createAction(
   '[WeekStatistics] Update WeekStatistic Failure',
+  props<{ error: any }>()
+);
+
+export const loadDescendants = createAction(
+  '[WeekStatistics] Load Descendants',
+  props<{ id: number }>()
+);
+
+export const loadDescendantsSuccess = createAction(
+  '[WeekStatistics] Load Descendants Success'
+);
+
+export const loadDescendantsFailure = createAction(
+  '[WeekStatistics] Load Descendants Failure',
   props<{ error: any }>()
 );

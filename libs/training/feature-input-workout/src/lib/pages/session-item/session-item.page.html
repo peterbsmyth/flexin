@@ -1,7 +1,7 @@
 <ng-container *ngIf="(sessionItemsLoaded$ | async); else loadingSessionItems">
   <training-session-item-card [data]="data$ | async" (save)="onSave($event)">
   </training-session-item-card>
-  <training-statistics></training-statistics>
+  <!-- <training-statistics></training-statistics> -->
 </ng-container>
 <ng-template #loadingSessionItems>
   Loading Session Items...

@@ -1,0 +1,65 @@
+<div class="container">
+  <!-- src is set in .ts because youtube considers property binding a possible XSS attack -->
+  <ng-container *ngIf="(weekStatistic$ | async) as weekStatistic">
+    <mat-card>
+      <h2>Week {{ weekStatistic.week.number }} Playlist</h2>
+      <mat-card-content>
+        <iframe
+          #player
+          width="560"
+          height="315"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        ></iframe>
+      </mat-card-content>
+    </mat-card>
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab
+        *ngFor="let sessionStatistic of weekStatistic.sessionStatistics"
+        [label]="sessionStatistic.session.name"
+      >
+        <ng-container
+          *ngFor="let sessionItemStatistic of sessionStatistic.sessionItemStatistics"
+        >
+          <mat-card>
+            <mat-card-header>
+              <span>{{ sessionItemStatistic.sessionItem.exercise?.name }}</span>
+            </mat-card-header>
+            <mat-card-content>
+              <ng-container>
+                <table>
+                  <tr>
+                    <th>RPE</th>
+                    <td>
+                      {{ sessionItemStatistic.rpe }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Set</th>
+                    <td
+                      *ngFor="let setStatistic of sessionItemStatistic.setStatistics"
+                    >
+                      {{ setStatistic.set }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Reps</th>
+                    <td
+                      *ngFor="let setStatistic of sessionItemStatistic.setStatistics"
+                    >
+                      {{ setStatistic.reps }}
+                    </td>
+                  </tr>
+                </table>
+              </ng-container>
+            </mat-card-content>
+            <mat-card-footer *ngIf="sessionItemStatistic.notes">
+              Notes: {{ sessionItemStatistic.notes }}
+            </mat-card-footer>
+          </mat-card>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+</div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SessionStatistic } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class SessionStatisticDataService {
@@ -15,8 +15,21 @@ export class SessionStatisticDataService {
   }
 
   getOne(id: number): Observable<SessionStatistic> {
+    const filter = JSON.stringify({
+      include: [
+        {
+          relation: 'session',
+        },
+        {
+          relation: 'sessionItemStatistics',
+        },
+      ],
+    });
+    const params: HttpParams = new HttpParams().set('filter', filter);
+
     return this.http.get<SessionStatistic>(
-      `${this.API_URL}/session-statistics/${id}`
+      `${this.API_URL}/session-statistics/${id}`,
+      { params }
     );
   }
 

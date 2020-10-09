@@ -1,0 +1,21 @@
+@import 'utils';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+th {
+  text-align: left;
+}
+
+mat-card {
+  margin: $space-s;
+}
+
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

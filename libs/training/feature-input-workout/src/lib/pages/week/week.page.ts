@@ -19,11 +19,9 @@ export class WeekPage implements OnInit {
       .pipe(
         take(1),
         tap((week) => {
-          const id = week.id;
-
           this.weeksState.dispatch(
             WeekStatisticsActions.loadWeekStatisticByWeek({
-              id,
+              week,
             })
           );
         })

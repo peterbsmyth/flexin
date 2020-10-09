@@ -1,52 +1,54 @@
-import { SessionItem } from './primary-models';
+import { Program, Session, SessionItem, Week } from './primary-models';
 
 export interface SessionItemStatistic {
   id?: number;
-  sessionItemId?: number; // SessionItem
+  sessionItemId?: number;
   sessionItem?: SessionItem;
   sessionStatisticId?: number;
   sessionStatistic?: SessionStatistic;
-  rpe: number; // 8
-  notes: string; // 'not at my full strength'
+  setStatistics?: SetStatistic[];
+  rpe: number;
+  notes: string;
 }
 
 export interface SetStatistic {
   id?: number;
-  set: number; // 1
-  reps: number; // 8
-  weight: number; // 35
+  set: number;
+  reps: number;
+  weight: number;
   sessionItemStatisticId?: number;
 }
 
 export interface SessionStatistic {
   id?: number;
-  session: number; // Session
-  sessionItemStatistics?: number[]; // SessionItemStatistic[]
+  sessionId: number;
+  session?: Session;
+  weekStatisticId: number;
+  sessionItemStatistics?: SessionItemStatistic[];
 }
 
 export interface WeekStatistic {
   id?: number;
-  week: number; // Week
-  sessionStatistics: number[]; // SessionStatistic[]
+  weekId: number;
+  programStatisticId?: number;
+  week?: Week;
+  programStatistic?: ProgramStatistic;
+  sessionStatistics?: SessionStatistic[];
+  playlist?: string;
 }
 
 export interface ProgramStatistic {
   id?: number;
-  program: number; // Program
-  weekStatistics: number[]; // WeekStatistic[]
-}
-
-export interface Playlist {
-  id?: number;
-  url: string; // https://www.youtube.com/playlist?list=PLu0SKb668nMfYcyc_Mpv1tcywXh2AJapj
-  week: number; // Week
+  programId: number;
+  program?: Program;
+  weekStatistics?: WeekStatistic[];
 }
 
 export interface MaxAttemptItem {
   id?: number;
   exercise: number;
   reps: number;
-  bestAttempt: boolean; // Percieved potential for better try
+  bestAttempt: boolean;
   leftRight?: boolean;
   weight: number;
   intensity: string;

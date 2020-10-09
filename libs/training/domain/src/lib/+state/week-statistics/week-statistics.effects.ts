@@ -1,12 +1,130 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch, pessimisticUpdate, optimisticUpdate } from '@nrwl/angular';
+import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { WeekStatisticsActions } from './actions';
-import { map, mapTo } from 'rxjs/operators';
+import * as ProgramStatisticsSelectors from '../program-statistics/program-statistics.selectors';
+import {
+  catchError,
+  map,
+  mapTo,
+  mergeMap,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { WeekStatisticDataService } from '../../infrastructure/week-statistic.data.service';
+import { Store } from '@ngrx/store';
+import { PartialState } from '../root.reducer';
+import { forkJoin, of } from 'rxjs';
+import { SessionStatisticDataService } from '../../infrastructure/session-statistic.data.service';
+import { SessionStatisticsActions } from '../session-statistics/actions';
+import { flatten } from 'lodash-es';
+import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
+import { SessionItemStatisticsActions } from '../session-item-statistics/actions';
+import {
+  Exercise,
+  SessionItemStatistic,
+  SetStatistic,
+} from '@bod/shared/models';
+import { SetStatisticsActions } from '../set-statistics/actions';
+import { SetStatisticDataService } from '../../infrastructure/set-statistic.data.service';
+import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
+import { ExercisesActions } from '../exercises/actions';
 
 @Injectable()
 export class WeekStatisticsEffects {
+  loadDescendants$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WeekStatisticsActions.loadDescendants),
+      fetch({
+        run: ({ id }) => {
+          return this.backend.getOne(id).pipe(
+            switchMap((weekStatistic) => {
+              this.store.dispatch(
+                WeekStatisticsActions.loadWeekStatisticSuccess({
+                  weekStatistic,
+                })
+              );
+              return forkJoin(
+                weekStatistic.sessionStatistics.map((sessionStatistic) =>
+                  this.sessionStatisticService.getOne(sessionStatistic.id)
+                )
+              );
+            }),
+            switchMap((sessionStatistics) => {
+              this.store.dispatch(
+                SessionStatisticsActions.loadSessionStatisticsSuccess({
+                  sessionStatistics,
+                })
+              );
+
+              const sessionItemStatisticsLists = sessionStatistics.map(
+                (sessionStatistic) => sessionStatistic.sessionItemStatistics
+              );
+              const sessionItemStatistics: SessionItemStatistic[] = flatten(
+                sessionItemStatisticsLists
+              );
+              return forkJoin(
+                sessionItemStatistics.map((sessionItemStatistic) =>
+                  this.sessionItemStatisticService.getOne(
+                    sessionItemStatistic.id
+                  )
+                )
+              );
+            }),
+            switchMap((sessionItemStatistics) => {
+              this.store.dispatch(
+                SessionItemStatisticsActions.loadSessionItemStatisticsSuccess({
+                  sessionItemStatistics,
+                })
+              );
+
+              const allExerciseIds = sessionItemStatistics.map(
+                (sessionItemStatistic) =>
+                  sessionItemStatistic.sessionItem.exerciseId
+              );
+
+              const unqiueExerciseIds = [...new Set(allExerciseIds)];
+
+              const setStatisticsLists = sessionItemStatistics.map(
+                (sessionItemStatistic) => sessionItemStatistic.setStatistics
+              );
+              const setStatistics: SetStatistic[] = flatten(setStatisticsLists);
+              return forkJoin([
+                ...setStatistics.map((setStatistic) =>
+                  this.setStatisticService.getOne(setStatistic.id)
+                ),
+                ...unqiueExerciseIds.map((exerciseId) =>
+                  this.exerciseService.getOne(exerciseId)
+                ),
+              ]);
+            }),
+            mergeMap((data: any) => {
+              const setStatistics: SetStatistic[] = data.filter(
+                (d: any) => !!d.set
+              );
+              const exercises: Exercise[] = data.filter((d: any) => !!!d.set);
+              return [
+                SetStatisticsActions.loadSetStatisticsSuccess({
+                  setStatistics,
+                }),
+                ExercisesActions.loadExercisesSuccess({
+                  exercises,
+                }),
+                WeekStatisticsActions.loadDescendantsSuccess(),
+              ];
+            })
+          );
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return WeekStatisticsActions.loadWeekStatisticsFailure({
+            error,
+          });
+        },
+      })
+    )
+  );
+
   loadWeekStatistics$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeekStatisticsActions.loadWeekStatistics),
@@ -35,7 +153,7 @@ export class WeekStatisticsEffects {
       ofType(WeekStatisticsActions.loadWeekStatisticByWeek),
       fetch({
         run: (action) => {
-          return this.backend.getOneByWeek(action.id).pipe(
+          return this.backend.getOneByWeek(action.week.id).pipe(
             map((weekStatistic) =>
               WeekStatisticsActions.loadWeekStatisticByWeekSuccess({
                 weekStatistic,
@@ -60,22 +178,25 @@ export class WeekStatisticsEffects {
   saveWeekStatisticByWeek$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WeekStatisticsActions.saveWeekStatisticByWeek),
-      fetch({
-        run: (action) => {
-          return this.backend.postOneByWeek(action.id).pipe(
-            map((weekStatistic) =>
-              WeekStatisticsActions.saveWeekStatisticByWeekSuccess({
-                weekStatistic,
-              })
-            )
-          );
-        },
-        onError: (action, error) => {
-          console.error('Error', error);
-          return WeekStatisticsActions.saveWeekStatisticByWeekFailure({
-            error,
-          });
-        },
+      withLatestFrom(
+        this.store.select(ProgramStatisticsSelectors.getAllProgramStatistics)
+      ),
+      switchMap(([action, programStatistics]) => {
+        const programStatisticId = programStatistics.find(
+          (programStatistic) =>
+            programStatistic.programId === action.week.programId
+        ).id;
+        const draftWeekStatistic = {
+          weekId: action.week.id,
+          programStatisticId,
+        };
+        return this.backend.postOneByWeek(draftWeekStatistic).pipe(
+          map((weekStatistic) =>
+            WeekStatisticsActions.saveWeekStatisticByWeekSuccess({
+              weekStatistic,
+            })
+          )
+        );
       })
     )
   );
@@ -124,6 +245,11 @@ export class WeekStatisticsEffects {
 
   constructor(
     private actions$: Actions,
-    private backend: WeekStatisticDataService
+    private store: Store<PartialState>,
+    private backend: WeekStatisticDataService,
+    private sessionStatisticService: SessionStatisticDataService,
+    private sessionItemStatisticService: SessionItemStatisticDataService,
+    private setStatisticService: SetStatisticDataService,
+    private exerciseService: ExerciseDataService
   ) {}
 }

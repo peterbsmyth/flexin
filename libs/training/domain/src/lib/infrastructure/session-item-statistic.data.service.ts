@@ -42,6 +42,9 @@ export class SessionItemStatisticDataService {
         {
           relation: 'sessionItem',
         },
+        {
+          relation: 'setStatistics',
+        },
       ],
     });
     const params: HttpParams = new HttpParams().set('filter', filter);

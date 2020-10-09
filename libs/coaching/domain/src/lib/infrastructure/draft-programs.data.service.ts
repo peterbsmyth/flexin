@@ -138,15 +138,15 @@ export class DraftProgramsDataService {
          * post the weeks without the temporary id and replacing
          * the tempoary programId with the real programId
          */
-        return forkJoin([
-          ...draftWeeks.map((week) =>
+        return forkJoin(
+          draftWeeks.map((week) =>
             this.weekService.saveOne({
               id: undefined,
               number: week.number,
               programId: program.id,
             })
-          ),
-        ]);
+          )
+        );
       }),
       switchMap((weeks) => {
         /**

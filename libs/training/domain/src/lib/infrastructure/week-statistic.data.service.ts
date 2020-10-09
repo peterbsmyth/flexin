@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { WeekStatistic } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class WeekStatisticDataService {
@@ -19,8 +19,21 @@ export class WeekStatisticDataService {
   }
 
   getOne(id: number): Observable<WeekStatistic> {
+    const filter = JSON.stringify({
+      include: [
+        {
+          relation: 'week',
+        },
+        {
+          relation: 'sessionStatistics',
+        },
+      ],
+    });
+    const params: HttpParams = new HttpParams().set('filter', filter);
+
     return this.http.get<WeekStatistic>(
-      `${this.API_URL}/week-statistics/${id}`
+      `${this.API_URL}/week-statistics/${id}`,
+      { params }
     );
   }
 
@@ -37,10 +50,10 @@ export class WeekStatisticDataService {
     );
   }
 
-  postOneByWeek(id: number): Observable<WeekStatistic> {
+  postOneByWeek(weekStatistic: WeekStatistic): Observable<WeekStatistic> {
     return this.http.post<WeekStatistic>(
-      `${this.API_URL}/weeks/${id}/week-statistic`,
-      {}
+      `${this.API_URL}/weeks/${weekStatistic.weekId}/week-statistic`,
+      weekStatistic
     );
   }
 

@@ -9,6 +9,7 @@ export const WEEKSTATISTICS_FEATURE_KEY = 'weekStatistics';
 export interface WeekStatisticsState extends EntityState<WeekStatistic> {
   selectedId?: string | number; // which WeekStatistics record has been selected
   loaded: boolean; // has the WeekStatistics list been loaded
+  descendantsLoaded?: boolean; // has the WeekStatistics list been loaded
   error?: string | null; // last known error (if any)
 }
 
@@ -39,6 +40,7 @@ const weekStatisticsReducer = createReducer(
       })
   ),
   on(
+    WeekStatisticsActions.loadWeekStatisticSuccess,
     WeekStatisticsActions.loadWeekStatisticByWeekSuccess,
     WeekStatisticsActions.saveWeekStatisticByWeekSuccess,
     WeekStatisticsActions.saveWeekStatisticSuccess,
@@ -52,6 +54,15 @@ const weekStatisticsReducer = createReducer(
   on(WeekStatisticsActions.loadWeekStatisticsFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(WeekStatisticsActions.loadDescendants, (state, { id }) => ({
+    ...state,
+    selectedId: id,
+    descendantsLoaded: false,
+  })),
+  on(WeekStatisticsActions.loadDescendantsSuccess, (state) => ({
+    ...state,
+    descendantsLoaded: true,
   }))
 );
 
