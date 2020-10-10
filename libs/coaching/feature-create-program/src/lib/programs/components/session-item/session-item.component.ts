@@ -124,13 +124,13 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   }
 
   buildForm(data: SessionItemData) {
-    this.form.get('reps').setValue(data.sessionItem.reps || 1);
-    this.form.get('AMRAP').setValue(data.sessionItem.AMRAP || false);
-    this.form.get('sets').setValue(data.sessionItem.sets || 1);
-    this.form.get('leftRight').setValue(data.exercise.leftRight || false);
-    this.form.get('weight').setValue(data.sessionItem.weight || 0);
-    this.form.get('intensity').setValue(data.sessionItem.intensity || '');
-    this.form.get('tempo').setValue(data.sessionItem.tempo || '');
+    this.form.get('reps').setValue(data.sessionItem.reps ?? 1);
+    this.form.get('AMRAP').setValue(data.sessionItem.AMRAP ?? false);
+    this.form.get('sets').setValue(data.sessionItem.sets ?? 1);
+    this.form.get('leftRight').setValue(data.exercise.leftRight ?? false);
+    this.form.get('weight').setValue(data.sessionItem.weight ?? 0);
+    this.form.get('intensity').setValue(data.sessionItem.intensity ?? '');
+    this.form.get('tempo').setValue(data.sessionItem.tempo ?? '');
     this.leftRight = data.exercise.leftRight;
   }
 

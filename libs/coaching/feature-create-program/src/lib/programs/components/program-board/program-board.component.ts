@@ -109,7 +109,7 @@ export class ProgramBoardComponent implements OnInit {
   }
 
   buildBoard(data: ProgramBoardData) {
-    const hasData = data && data.sessionItems && data.exercises.length;
+    const hasData = data?.sessionItems && data?.exercises.length;
     if (hasData && !this.displaySource) {
       const allBoardCardData = data.sessionItems.map((sessionItem) => {
         return {

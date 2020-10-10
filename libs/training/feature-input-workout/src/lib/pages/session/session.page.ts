@@ -34,9 +34,9 @@ export class SessionPage implements OnInit, OnDestroy {
   ) {
     this.session$ = this.sessionsState.selectedSessionsWithAscendants$.pipe(
       filter((s) => {
-        return !!(s && s.week && s.week.program);
+        return !!s?.week?.program;
       }),
-      distinctUntilKeyChanged('id'),
+      distinctUntilKeyChanged('id')
     );
     this.pages$ = this.sessionsState.pages$;
     this.sessionItems$ = this.sessionsState.allSessionItems$.pipe(

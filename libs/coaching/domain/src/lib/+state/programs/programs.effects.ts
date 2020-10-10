@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 import { WeeksActions } from '../weeks/actions';
 import { SessionDataService } from '../../infrastructure/session.data.service';
 import { forkJoin } from 'rxjs';
-import { flatten, uniqBy } from 'lodash-es';
+import { uniqBy } from 'lodash-es';
 import { SessionItemDataService } from '../../infrastructure/session-item.data.service';
 import { SessionsActions } from '../sessions/actions';
 import { SessionItemsActions } from '../session-items/actions';
@@ -53,9 +53,7 @@ export class ProgramsEffects {
           return this.programService
             .getOne(id)
             .pipe(
-              map((program) =>
-                ProgramsActions.loadProgramSuccess({ program })
-              )
+              map((program) => ProgramsActions.loadProgramSuccess({ program }))
             );
         },
         onError: (action, error: any) => {
@@ -76,7 +74,6 @@ export class ProgramsEffects {
       ),
     { dispatch: false }
   );
-
 
   createProgram$ = createEffect(
     () =>
@@ -120,7 +117,7 @@ export class ProgramsEffects {
                 );
               });
 
-              const flatSessions: Session[] = flatten(sessionLists);
+              const flatSessions: Session[] = sessionLists.flat();
 
               return forkJoin(
                 flatSessions.map((session) =>
@@ -136,9 +133,7 @@ export class ProgramsEffects {
                   })
                 )
               );
-              const flatSessionItems: SessionItem[] = flatten(
-                sessionItemsLists
-              );
+              const flatSessionItems: SessionItem[] = sessionItemsLists.flat();
               const uniqueExerciseIds: number[] = uniqBy(
                 flatSessionItems,
                 'exerciseId'

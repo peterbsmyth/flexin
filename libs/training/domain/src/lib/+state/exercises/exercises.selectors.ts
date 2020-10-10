@@ -59,8 +59,7 @@ export const getSetStatistics = createSelector(
     const sessionItemStatisticIds = sessionItemStatistics
       .filter((stat) => {
         return (
-          sessionItemEntities[stat.sessionItemId].exerciseId ===
-          (exercise && exercise.id)
+          sessionItemEntities[stat.sessionItemId].exerciseId === exercise?.id
         );
       })
       .map((stat) => stat.id);
@@ -92,7 +91,7 @@ export const getBestSet = createSelector(getSetStatistics, (setStatistics) => {
     ? maxBy(topWeights, 'reps')
     : null;
 
-  if (bestSet && bestSet.weight === 0) {
+  if (bestSet?.weight === 0) {
     return null;
   } else {
     return bestSet;

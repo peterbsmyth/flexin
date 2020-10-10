@@ -69,24 +69,24 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
    */
   buildForm(data: SessionItemBoardCardData): void {
     this._formSaveable = false;
-    const rpe = data.sessionItemStatistic && data.sessionItemStatistic.rpe;
-    const notes = data.sessionItemStatistic && data.sessionItemStatistic.notes;
+    const rpe = data?.sessionItemStatistic?.rpe ?? 0;
+    const notes = data?.sessionItemStatistic?.notes ?? '';
     const sets = this.fb.array([]);
     this.arrayOfCount(data.sessionItem.sets).forEach((s, i) => {
-      const hasSetStatistic = !!data.setStatistics[i];
-      const setReps = hasSetStatistic && data.setStatistics[i].reps;
-      const setWeight = hasSetStatistic && data.setStatistics[i].weight;
+      const setStatistic = data.setStatistics[i];
+      const setReps = setStatistic?.reps ?? 0;
+      const setWeight = setStatistic?.weight ?? 0;
       const control = this.fb.group({
         set: i + 1,
-        reps: this.fb.control(setReps ? setReps : 0),
-        weight: this.fb.control(setWeight ? setWeight : 0),
+        reps: this.fb.control(setReps),
+        weight: this.fb.control(setWeight),
       });
       sets.push(control);
     });
 
     this.form.setControl('sets', sets);
-    this.form.setControl('rpe', this.fb.control(rpe ? rpe : 0));
-    this.form.setControl('notes', this.fb.control(notes ? notes : ''));
+    this.form.setControl('rpe', this.fb.control(rpe));
+    this.form.setControl('notes', this.fb.control(notes));
 
     if (!data.sessionItemStatistic) {
       this.form.disable({ emitEvent: false });
@@ -114,10 +114,10 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
    */
   onRepsBlur(i) {
     const control = this.sets.controls[i].get('reps');
-    const setStatistic = this.data.setStatistics[i];
+    const reps = this.data.setStatistics[i]?.reps ?? 0;
 
     if (control.value === null) {
-      control.setValue(setStatistic ? setStatistic.reps : null, {
+      control.setValue(reps, {
         onlySelf: true,
       });
     }
@@ -171,7 +171,7 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
         sessionItemId: this.data.sessionItem.id,
       },
       setStatistics: value.sets.map((s, i) => ({
-        id: this.data.setStatistics[i] && this.data.setStatistics[i].id,
+        id: this.data.setStatistics[i]?.id,
         sessionItemStatisticId,
         ...s,
       })),
