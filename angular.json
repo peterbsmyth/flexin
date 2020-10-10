@@ -277,22 +277,6 @@
         }
       }
     },
-    "shared-environments": {
-      "root": "libs/shared/environments",
-      "sourceRoot": "libs/shared/environments/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": ["libs/shared/environments/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/environments/**/*"]
-          }
-        }
-      }
-    },
     "training-domain": {
       "projectType": "library",
       "root": "libs/training/domain",
@@ -725,6 +709,39 @@
           "style": "scss"
         }
       }
+    },
+    "shared-environments": {
+      "projectType": "library",
+      "root": "libs/shared/environments",
+      "sourceRoot": "libs/shared/environments/src",
+      "prefix": "bod",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/shared/environments/tsconfig.lib.json",
+            "project": "libs/shared/environments/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/shared/environments/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "tsConfig": ["libs/shared/environments/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/environments/**/*"],
+            "linter": "eslint"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
@@ -737,7 +754,8 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "none",
-      "style": "scss"
+      "style": "scss",
+      "strict": true
     },
     "@nrwl/angular:ngrx": {
       "facade": false,
