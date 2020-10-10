@@ -20,10 +20,10 @@
   },
   "projects": {
     "athlete": {
-      "tags": ["domain:training", "type:feature"]
+      "tags": ["domain:training", "type:app"]
     },
     "coach": {
-      "tags": ["domain:coaching", "type:feature"]
+      "tags": ["domain:coaching", "type:app"]
     },
     "shared-environments": {
       "tags": ["domain:shared", "type:util"]
@@ -53,7 +53,7 @@
       "tags": ["domain:celebrities", "type:domain-logic"]
     },
     "celebrity": {
-      "tags": ["domain: celebrities", "type:feature"]
+      "tags": ["domain: celebrities", "type:app"]
     },
     "celebrities-feature-display-top-ten": {
       "tags": ["domain:celebrities", "type:feature"]
