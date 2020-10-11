@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Exercise, SetStatistic } from '@bod/shared/models';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { WindowRef } from '../../window-ref.service';
 
 @Component({
   templateUrl: './exercise.page.html',
@@ -39,7 +40,8 @@ export class ExercisePage implements OnInit {
   };
   constructor(
     private exerciseState: ExercisesFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private windowRef: WindowRef
   ) {
     this.exercise$ = this.exerciseState.selectedExercises$;
     this.maxRepsOfAllTime$ = this.exerciseState.maxReps$;
@@ -62,6 +64,11 @@ export class ExercisePage implements OnInit {
         ];
       })
     );
+
+    /**
+     * ngx-charts width calculation
+     */
+    this.chart.view = [this.windowRef.nativeWindow.innerWidth, 300];
   }
 
   ngOnInit(): void {

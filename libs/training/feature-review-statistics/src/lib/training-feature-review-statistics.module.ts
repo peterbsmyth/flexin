@@ -12,6 +12,7 @@ import { ExercisePage } from './pages/exercise/exercise.page';
 import { WeekStatisticsPage } from './pages/week-statistics/week-statistics.page';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { MatCardModule } from '@angular/material/card';
+import { WindowRef } from './window-ref.service';
 
 @NgModule({
   imports: [
@@ -32,5 +33,6 @@ import { MatCardModule } from '@angular/material/card';
     WeekStatisticsPage,
   ],
   exports: [],
+  providers: [WindowRef],
 })
 export class TrainingFeatureReviewStatisticsModule {}
