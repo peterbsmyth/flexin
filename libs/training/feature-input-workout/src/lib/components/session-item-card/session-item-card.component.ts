@@ -123,6 +123,33 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * onRpeFocus
+   * when a rpe is focused then set its value to null so that a user can change the number
+   * without clearing the previous number
+   * @param i { number };
+   */
+  onRpeFocus() {
+    this.form.get('rpe').setValue(null, { onlySelf: true });
+  }
+
+  /**
+   * onRpeBlur
+   * when a rpe is blureed then check if it's still null from the focus handler
+   * if its not null then the user input a number and the form will be saved with the latest value
+   * @param i { number };
+   */
+  onRpeBlur(i) {
+    const control = this.form.get('rpe');
+    const rpe = this.data.sessionItemStatistic?.rpe ?? 0;
+
+    if (control.value === null) {
+      control.setValue(rpe, {
+        onlySelf: true,
+      });
+    }
+  }
+
   onSave(value: {
     rpe: number;
     notes: string;
