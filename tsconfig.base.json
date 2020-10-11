@@ -37,7 +37,8 @@
       ],
       "@bod/training/feature-review-statistics": [
         "libs/training/feature-review-statistics/src/index.ts"
-      ]
+      ],
+      "@bod/shared/scripts": ["libs/shared/scripts/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

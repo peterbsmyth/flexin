@@ -60,6 +60,9 @@
     },
     "training-feature-review-statistics": {
       "tags": ["domain:training", "type:feature"]
+    },
+    "shared-scripts": {
+      "tags": ["domain:shared", "type:util"]
     }
   },
   "affected": {

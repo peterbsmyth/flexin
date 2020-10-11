@@ -1,0 +1,12 @@
+{
+  "web": {
+    "client_id": "57289922924-3f7rjvjaeiuh3opcd0n7u5ujatqp6o1s.apps.googleusercontent.com",
+    "project_id": "training-kitchen",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "v2O5wiYWx92_lBCJkRQWZ9dr",
+    "redirect_uris": ["https://body-factory.vercel.app/redirect", "http://localhost:3000/oauth2callback"],
+    "javascript_origins": ["https://body-factory.vercel.app"]
+  }
+}
