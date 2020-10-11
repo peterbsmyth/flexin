@@ -1,35 +1,44 @@
-@import "utils";
+@import 'utils';
 
 mat-list {
   font-weight: $weight-bold;
 }
 
-a {
+a,
+span {
+  @include subheadline;
   color: inherit;
 }
 
-training-action-bar {
+.navigation {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  margin: $space-s $space-m;
+
+  &__button {
+    width: 48%;
+  }
 }
 
-button {
-  width: 50%;
-}
-
-mat-card-header {
-  height: 10vh;
-}
-
-mat-card-content {
-  height: 60vh;
-}
-
-main, aside {
+.items {
   display: flex;
   flex-direction: column;
+  margin: 0 $space-m;
+
+  &__button {
+    @include caption;
+    text-align: left;
+    width: 100%;
+    margin: 0 0 $space-xs;
+    line-height: baseline-scale(5);
+  }
 }
 
 .active {
-  width: 10%;
+  background-color: $grey-100;
+}
+
+.breadcrumbs {
+  padding: $space-xs $space-m $space-s;
+  border-bottom: $size-border-s dashed $grey-500;
 }

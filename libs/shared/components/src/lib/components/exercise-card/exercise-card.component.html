@@ -1,6 +1,10 @@
 <mat-card class="card">
-  <mat-card-header class="card__header" [class.card__compact]="compact">
-    <bod-button icon="close" *ngIf="closeable" (click)="onRemove()"></bod-button>
+  <mat-card-header class="card__header">
+    <bod-button
+      icon="close"
+      *ngIf="closeable"
+      (click)="onRemove()"
+    ></bod-button>
   </mat-card-header>
   <mat-card-content>
     <p>

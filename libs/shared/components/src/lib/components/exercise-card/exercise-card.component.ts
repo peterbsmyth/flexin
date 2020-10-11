@@ -4,15 +4,13 @@ import { Exercise } from '@bod/shared/models';
 @Component({
   selector: 'bod-exercise-card',
   templateUrl: './exercise-card.component.html',
-  styleUrls: ['./exercise-card.component.scss']
+  styleUrls: ['./exercise-card.component.scss'],
 })
 export class ExerciseCardComponent implements OnInit {
   @Input() exercise: Exercise;
   @Input() closeable = true;
-  @Input() compact = false;
   @Output() remove: EventEmitter<Exercise> = new EventEmitter();
-  constructor(
-  ) { }
+  constructor() {}
 
   ngOnInit(): void {}
 

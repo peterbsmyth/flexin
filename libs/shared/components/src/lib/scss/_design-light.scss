@@ -2,42 +2,39 @@
    Light Theme
    ========================================================================== */
 
-$body-background-color:             $grey-050;      // Shifted to a lighter grey
-$body-text-color:                   $grey-900;      // Shifted to a darker grey
-$body-family:                       $family-sans-serif;  // Changed to a Serif Font Stack
+$body-background-color: $grey-050; // Shifted to a lighter grey
+$body-text-color: $grey-900; // Shifted to a darker grey
+$body-family: $family-sans-serif; // Changed to a Serif Font Stack
 
+$header-background-color: $grey-900; // Changed to grey, adjusted lightness
+$header-color: $grey-050; // Changed to grey, adjusted lightness
+$header-color-muted: $grey-300; // Changed to grey, adjusted lightness
+$header-spacing: $space-m $space-m $space-s $space-m; // Removed extra spacing on top
 
-$header-background-color:           $grey-900;                              // Changed to grey, adjusted lightness
-$header-color:                      $grey-050;                              // Changed to grey, adjusted lightness
-$header-color-muted:                $grey-300;                              // Changed to grey, adjusted lightness
-$header-spacing:                    $space-m $space-m $space-s $space-m;    // Removed extra spacing on top
-
-
-$layout-spacing-horizontal:         $space-m;
-$layout-spacing-vertical:           $space-xl;  // Increased vertical spacing on mobile
-$layout-template-columns:           1fr;        // We made the layout 1col on mobile
+$layout-spacing-horizontal: $space-m;
+$layout-spacing-vertical: $space-xl; // Increased vertical spacing on mobile
+$layout-template-columns: 1fr; // We made the layout 1col on mobile
 $layout-spacing-desktop-horizontal: $space-m;
-$layout-spacing-desktop-vertical:   $space-l;
-$layout-template-columns-desktop:   1fr 1fr 1fr 1fr 1fr;
+$layout-spacing-desktop-vertical: $space-l;
+$layout-template-columns-desktop: 1fr 1fr 1fr 1fr 1fr;
 
-
-$card-spacing-vertical:             $space-m;
-$card-spacing-horizontal:           $space-s;
-$card-color:                        $grey-900;      // Darkened card text
-$card-color-subtle:                 $grey-700;      // Darkened subtle text
-$card-color-muted:                  $grey-400;      // Lightened muted text
-$card-color-brand:                  $green-600;     // Darked brand green
-$card-radius:                       $radius-s;      // Reduced the border radius
-$card-image-height:                 26rem;          // Made the image taller on mobile
-$card-image-height-desktop:         26rem;
-$card-image-shadow:                 $box-shadow-01; // Added Elevation
+$card-spacing-vertical: $space-m;
+$card-spacing-horizontal: $space-s;
+$card-color: $grey-900; // Darkened card text
+$card-color-subtle: $grey-700; // Darkened subtle text
+$card-color-muted: $grey-400; // Lightened muted text
+$card-color-brand: $green-600; // Darked brand green
+$card-radius: $radius-s; // Reduced the border radius
+$card-image-height: 26rem; // Made the image taller on mobile
+$card-image-height-desktop: 26rem;
+$card-image-shadow: $box-shadow-01; // Added Elevation
 
 // Typography Mixins
 @mixin large-title {
   font-size: type-scale(10);
-  line-height: baseline-scale(14);  // Enlarged line-height
-  font-weight: $weight-normal;        // Changed the weight to bold.
-  letter-spacing: -0.04em;          // Added tight letter spacing
+  line-height: baseline-scale(14); // Enlarged line-height
+  font-weight: $weight-normal; // Changed the weight to bold.
+  letter-spacing: -0.04em; // Added tight letter spacing
   font-style: italic;
 }
 
@@ -49,28 +46,27 @@ $card-image-shadow:                 $box-shadow-01; // Added Elevation
 @mixin headline {
   font-size: type-scale(7);
   line-height: baseline-scale(6);
-  font-weight: $weight-normal;    // Lightened weight of font
+  font-weight: $weight-normal; // Lightened weight of font
   font-style: italic;
 }
 
 @mixin subheadline {
-  font-size: px-rem(13px);        // Changed type size to a smaller, out of system size
+  font-size: px-rem(13px); // Changed type size to a smaller, out of system size
   line-height: baseline-scale(6); // Enlarged line-height
   font-weight: $weight-bold;
-  text-transform: uppercase;      // Changed casing to uppercase
-  letter-spacing: 0.15em;          // Added letter spacing
+  text-transform: uppercase; // Changed casing to uppercase
+  letter-spacing: 0.15em; // Added letter spacing
 }
 
 @mixin data-point {
-  font-size: type-scale(9);       // Made data point much larger
-  line-height: baseline-scale(8); // Enlarged line-height
-  font-style: italic;
+  font-size: type-scale(2); // Made data point much larger
+  line-height: baseline-scale(3); // Enlarged line-height
   font-weight: $weight-normal;
 }
 
 @mixin caption {
-  font-size: px-rem(11px);  // Changed type size to a larger, out of system size
+  font-size: px-rem(11px); // Changed type size to a larger, out of system size
   font-weight: $weight-bold;
   text-transform: uppercase;
-  letter-spacing: 0.15em;          // Added letter spacing
+  letter-spacing: 0.15em; // Added letter spacing
 }

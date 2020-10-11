@@ -1,14 +1,25 @@
 <ng-container *ngIf="loaded$ | async; else loading">
   <mat-card class="card">
-    <h5 *ngrxLet="exercise$ as exercise">{{ exercise.name }} Statistics</h5>
-    <ng-container *ngrxLet="maxRepsOfAllTime$ as bestSet">
-      <h6>Most reps in a set: {{ bestSet }}</h6>
-    </ng-container>
-    <ng-container *ngIf="(bestSet$ | async) as bestSet">
-      <h6>Most Reps at maximum weight ({{ bestSet.weight }} lbs): {{ bestSet.reps }}</h6>
-    </ng-container>
+    <header *ngrxLet="exercise$ as exercise" class="card__header">
+      {{ exercise.name }} Statistics
+    </header>
+    <mat-card-content class="card__body">
+      <ng-container *ngrxLet="maxRepsOfAllTime$ as bestSet">
+        <span class="card__text">Most reps in a set: {{ bestSet }}</span>
+      </ng-container>
+      <ng-container *ngIf="(bestSet$ | async) as bestSet">
+        <span class="card__text">
+          Most Reps at maximum weight ({{ bestSet.weight }} lbs): {{
+          bestSet.reps }}
+        </span>
+      </ng-container>
+    </mat-card-content>
   </mat-card>
 </ng-container>
 <ng-template #loading>
-  <mat-card class="card">Loading Statistics</mat-card>
+  <mat-card class="card">
+    <header class="card__header">
+      Loading Statistics
+    </header>
+  </mat-card>
 </ng-template>

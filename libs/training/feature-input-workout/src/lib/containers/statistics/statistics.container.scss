@@ -1,24 +1,29 @@
-@import "utils";
+@import 'utils';
 
 .card {
   display: flex;
   flex-direction: column;
   border-radius: $card-radius;
   padding: $space-xs;
-  margin: $space-xs;
+  margin: $space-xs $space-m $space-s;
 
   &__header {
-    padding-bottom: $card-spacing-vertical;
+    @include subheadline;
     display: flex;
-    justify-content: flex-end;
-    height: $space-l;
+    justify-content: center;
+    margin: $space-s 0 $space-m;
   }
 
-  &__compact {
-    height: $space-xs;
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin: 0 $space-m $space-m;
+    margin: 0 $space-m $space-m !important;
   }
-}
 
-h5, h6 {
-  margin: $space-xs 0;
+  &__text {
+    @include data-point;
+    margin: $space-xs 0 $space-s;
+  }
 }

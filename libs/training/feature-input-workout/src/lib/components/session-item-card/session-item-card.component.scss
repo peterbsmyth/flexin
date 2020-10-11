@@ -1,75 +1,61 @@
-@import "utils";
+@import 'utils';
 
 .card {
   display: flex;
   flex-direction: column;
   border-radius: $card-radius;
-  padding: $space-xs;
-  margin: $space-xs;
+  padding: 0;
+  margin: $space-xs $space-m $space-s;
 
   &__header {
-    padding-bottom: $card-spacing-vertical;
-    display: flex;
-    justify-content: flex-end;
-    height: $space-l;
-  }
-
-  &__compact {
-    height: $space-xs;
-  }
-}
-
-.sets {
-  display: flex;
-  flex-direction: column;
-
-  &__header {
+    @include subheadline;
     display: flex;
     justify-content: center;
+    margin: $space-s 0 $space-m;
   }
 
-  &__container {
+  &__sets {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: center;
+    justify-content: space-between;
   }
 
-  &__individual {
+  &__session {
     display: flex;
-    flex-direction: column;
-    margin: 0 5px;
-    width: 10%;
+    flex-flow: column nowrap;
+    align-items: center;
   }
 
   &__input {
-    width: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 12%;
   }
 
   &__label {
+    @include caption;
+    margin-bottom: $space-xs;
     display: flex;
-    justify-content: center;
   }
 
   &__weight {
     display: flex;
     flex-direction: column;
-    margin-top: 5px;
+    margin-top: $space-xs;
   }
 
   &__footer {
+    @include data-point;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
   }
-}
-
-.session-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 
   &__notes {
     width: 100%;
+  }
+
+  &__body {
+    margin: 0 $space-m $space-m !important;
   }
 }

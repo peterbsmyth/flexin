@@ -97,23 +97,25 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * onRepsFocus
+   * onSetFocus
    * when a rep is focused then set its value to null so that a user can change the number
    * without clearing the previous number
-   * @param i { number };
+   * @param { string } controlName "reps" or "weight"
+   * @param { number } i index
    */
-  onRepsFocus(i) {
-    this.sets.controls[i].get('reps').setValue(null, { onlySelf: true });
+  onSetFocus(controlName, i) {
+    this.sets.controls[i].get(controlName).setValue(null, { onlySelf: true });
   }
 
   /**
-   * onRepsBlur
+   * onSetBlur
    * when a rep is blureed then check if it's still null from the focus handler
    * if its not null then the user input a number and the form will be saved with the latest value
-   * @param i { number };
+   * @param { string } controlName "reps" or "weight"
+   * @param { number } i index
    */
-  onRepsBlur(i) {
-    const control = this.sets.controls[i].get('reps');
+  onSetBlur(controlName, i) {
+    const control = this.sets.controls[i].get(controlName);
     const reps = this.data.setStatistics[i]?.reps ?? 0;
 
     if (control.value === null) {
@@ -127,7 +129,6 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
    * onRpeFocus
    * when a rpe is focused then set its value to null so that a user can change the number
    * without clearing the previous number
-   * @param i { number };
    */
   onRpeFocus() {
     this.form.get('rpe').setValue(null, { onlySelf: true });
@@ -137,9 +138,8 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
    * onRpeBlur
    * when a rpe is blureed then check if it's still null from the focus handler
    * if its not null then the user input a number and the form will be saved with the latest value
-   * @param i { number };
    */
-  onRpeBlur(i) {
+  onRpeBlur() {
     const control = this.form.get('rpe');
     const rpe = this.data.sessionItemStatistic?.rpe ?? 0;
 

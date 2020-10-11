@@ -1,74 +1,77 @@
-<mat-card class="card">
-  <mat-card-content>
-    <form [formGroup]="form" *ngIf="form">
-      <main class="sets" formArrayName="sets">
-        <header class="sets__header">
-          <h4>Sets <span *ngIf="data.sessionItem.leftRight"> (L/R)</span></h4>
-        </header>
-        <section class="sets__container">
-          <div
-            *ngFor="
-              let set of arrayOfCount(data.sessionItem.sets);
-              let i = index
-            "
-            [formGroupName]="i"
-            class="sets__individual"
-          >
-            <!-- Set #? -->
-            <label class="sets__label">
-              {{ i + 1 }}
-            </label>
+<form [formGroup]="form" *ngIf="form">
+  <mat-card class="card">
+    <header class="card__header">
+      <span>Sets <span *ngIf="data.sessionItem.leftRight"> (L/R)</span></span>
+    </header>
+    <mat-card-content class="card__body" formArrayName="sets">
+      <section class="card__sets">
+        <div
+          *ngFor="let set of arrayOfCount(data.sessionItem.sets); let i = index"
+          [formGroupName]="i"
+          class="card__input"
+        >
+          <label class="card__label"> Set {{ i + 1 }} </label>
+          <mat-form-field>
+            <!-- Set # -->
+            <mat-label> reps </mat-label>
             <!-- Reps? -->
-            <label class="sets__label">
-              <input
-                (focus)="onRepsFocus(i)"
-                (blur)="onRepsBlur(i)"
-                min="0"
-                type="number"
-                inputmode="numeric"
-                formControlName="reps"
-                class="sets__input"
-              />
-            </label>
-            <!-- Weight? -->
-            <label class="sets__weight" *ngIf="data.sessionItem.weight">
-              <span>{{ data.sessionItem.weightUnit }}</span>
-              <input
-                min="0"
-                step="5"
-                type="number"
-                inputmode="numeric"
-                formControlName="weight"
-                class="sets__input"
-              />
-            </label>
-          </div>
-        </section>
-        <footer class="sets__footer">
-          <h5>
-            <span *ngIf="data.sessionItem.AMRAP; else goalReps"
-              >Goal: AMRAP</span
-            >
-            <ng-template #goalReps
-              ><span>Goal: {{ data.sessionItem.reps }} Reps</span></ng-template
-            >
-            <span *ngIf="data.sessionItem.intensity"
-              >, {{ data.sessionItem.intensity }}</span
-            >
-            <span *ngIf="data.sessionItem.weight"
-              >, {{ data.sessionItem.weight }}
-              {{ data.sessionItem.weightUnit }}</span
-            >
-            <span *ngIf="data.sessionItem.tempo"
-              >, {{ data.sessionItem.tempo }}</span
-            >
-          </h5>
-        </footer>
-      </main>
-      <aside class="session-item">
-        <header class="session-item__header"><h4>RPE</h4></header>
+            <input
+              formControlName="notes"
+              (focus)="onSetFocus('reps', i)"
+              (blur)="onSetBlur('reps', i)"
+              min="0"
+              type="number"
+              inputmode="numeric"
+              formControlName="reps"
+              matInput
+            />
+          </mat-form-field>
+          <mat-form-field *ngIf="data.sessionItem.weight">
+            <!-- Weight Unit -->
+            <mat-label>{{ data.sessionItem.weightUnit }}</mat-label>
+            <!-- Weight -->
+            <input
+              (focus)="onSetFocus('weight', i)"
+              (blur)="onSetBlur('weight', i)"
+              min="0"
+              step="5"
+              type="number"
+              inputmode="numeric"
+              formControlName="weight"
+              matInput
+            />
+          </mat-form-field>
+        </div>
+      </section>
+      <footer class="card__footer">
+        <span>
+          <span *ngIf="data.sessionItem.AMRAP; else goalReps">Goal: AMRAP</span>
+          <ng-template #goalReps
+            ><span>Goal: {{ data.sessionItem.reps }} Reps</span></ng-template
+          >
+          <span *ngIf="data.sessionItem.intensity"
+            >, {{ data.sessionItem.intensity }}</span
+          >
+          <span *ngIf="data.sessionItem.weight"
+            >, {{ data.sessionItem.weight }}
+            {{ data.sessionItem.weightUnit }}</span
+          >
+          <span *ngIf="data.sessionItem.tempo"
+            >, {{ data.sessionItem.tempo }}</span
+          >
+        </span>
+      </footer>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="card">
+    <header class="card__header"><span>Session</span></header>
+    <mat-card-content class="card__body">
+      <section class="card__session">
         <!-- RPE -->
-        <label>
+        <mat-form-field class="card__input">
+          <mat-label>
+            r.p.e.
+          </mat-label>
           <input
             (blur)="onRpeBlur()"
             (focus)="onRpeFocus()"
@@ -77,16 +80,18 @@
             max="10"
             type="number"
             inputmode="numeric"
+            matInput
           />
-        </label>
+        </mat-form-field>
+
         <!-- Notes -->
-        <mat-form-field class="session-item__notes">
+        <mat-form-field class="card__notes">
           <mat-label>
-            Notes
+            notes
           </mat-label>
           <textarea formControlName="notes" matInput></textarea>
         </mat-form-field>
-      </aside>
-    </form>
-  </mat-card-content>
-</mat-card>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</form>
