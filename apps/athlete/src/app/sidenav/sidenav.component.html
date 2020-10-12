@@ -25,7 +25,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span *ngIf="!(networkStatus.loading$ | async); else loading">💪</span>
-      <span>Body Factory</span>
+      <span class="toolbar__title">Body Factory</span>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
