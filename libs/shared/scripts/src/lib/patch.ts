@@ -1,27 +1,21 @@
 import fetch from 'node-fetch';
+import { includeParam } from './utils/filter.js';
 const API_URL = 'https://bod-api-2.herokuapp.com';
 const [weekId] = process.argv.slice(2);
 
 const storedSessions = [];
 
-const filter = (relations) =>
-  encodeURIComponent(
-    JSON.stringify({
-      include: relations.map((relation) => ({ relation })),
-    })
-  );
-
 /**
  * find all session item statistics connected to a session statistic and connect them
  */
-fetch(`${API_URL}/weeks/${weekId ?? 257}?filter=${filter(['sessions'])}`)
+fetch(`${API_URL}/weeks/${weekId}?filter=${includeParam(['sessions'])}`)
   .then((res) => res.json())
   .then((week) => {
     const promises = [];
     week.sessions.forEach((session) => {
       promises.push(
         fetch(
-          `${API_URL}/sessions/${session.id}?filter=${filter([
+          `${API_URL}/sessions/${session.id}?filter=${includeParam([
             'sessionItems',
             'sessionStatistic',
           ])}`
@@ -38,7 +32,7 @@ fetch(`${API_URL}/weeks/${weekId ?? 257}?filter=${filter(['sessions'])}`)
       session.sessionItems.forEach((sessionItem) => {
         promises.push(
           fetch(
-            `${API_URL}/session-items/${sessionItem.id}?filter=${filter([
+            `${API_URL}/session-items/${sessionItem.id}?filter=${includeParam([
               'sessionItemStatistic',
             ])}`
           ).then((res) => res.json())
