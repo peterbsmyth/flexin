@@ -769,7 +769,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "node --loader ts-node/esm --experimental-specifier-resolution=node ./{args.name}.ts {args.id}",
+            "command": "node --loader ts-node/esm --experimental-specifier-resolution=node ./{args.name}.script.ts {args.id}",
             "cwd": "libs/shared/scripts/src/lib"
           }
         }
