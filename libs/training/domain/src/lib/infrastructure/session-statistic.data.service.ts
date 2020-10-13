@@ -46,10 +46,12 @@ export class SessionStatisticDataService {
     );
   }
 
-  postOneBySession(id: number): Observable<SessionStatistic> {
+  postOneBySession(
+    sessionStatistic: SessionStatistic
+  ): Observable<SessionStatistic> {
     return this.http.post<SessionStatistic>(
-      `${this.API_URL}/sessions/${id}/session-statistic`,
-      {}
+      `${this.API_URL}/sessions/${sessionStatistic.sessionId}/session-statistic`,
+      sessionStatistic
     );
   }
 

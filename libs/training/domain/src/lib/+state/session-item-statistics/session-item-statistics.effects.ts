@@ -2,8 +2,18 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { SessionItemStatisticsActions } from './actions';
-import { map, mapTo } from 'rxjs/operators';
+import {
+  catchError,
+  map,
+  mapTo,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
+import { getAllSessionStatistics } from '../session-statistics/session-statistics.selectors';
+import { of, throwError } from 'rxjs';
+import { PartialState } from '../root.reducer';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class SessionItemStatisticsEffects {
@@ -37,8 +47,8 @@ export class SessionItemStatisticsEffects {
         SessionItemStatisticsActions.loadSessionItemStatisticBySessionItem
       ),
       fetch({
-        run: ({ id }) => {
-          return this.backend.getAllBySessionItem(id).pipe(
+        run: ({ sessionItem }) => {
+          return this.backend.getAllBySessionItem(sessionItem.id).pipe(
             map((sessionItemStatistic) =>
               SessionItemStatisticsActions.loadSessionItemStatisticBySessionItemSuccess(
                 {
@@ -71,26 +81,38 @@ export class SessionItemStatisticsEffects {
       ofType(
         SessionItemStatisticsActions.saveSessionItemStatisticBySessionItem
       ),
-      fetch({
-        run: (action) => {
-          return this.backend.postOneBySessionItem(action.id).pipe(
+      withLatestFrom(this.store.select(getAllSessionStatistics)),
+      switchMap(([action, sessionStatistics]) => {
+        const sessionStatisticId = sessionStatistics.find(
+          (sessionStatistic) =>
+            sessionStatistic.sessionId === action.sessionItem.sessionId
+        ).id;
+        const draftSessionItemStatistic = {
+          sessionItemId: action.sessionItem.id,
+          sessionStatisticId,
+        };
+
+        return this.backend
+          .postOneBySessionItem(draftSessionItemStatistic)
+          .pipe(
             map((sessionItemStatistic) =>
               SessionItemStatisticsActions.saveSessionItemStatisticBySessionItemSuccess(
                 {
                   sessionItemStatistic,
                 }
               )
-            )
+            ),
+            catchError((error) => {
+              console.error('Error', error);
+              return of(
+                SessionItemStatisticsActions.saveSessionItemStatisticBySessionItemFailure(
+                  {
+                    error,
+                  }
+                )
+              );
+            })
           );
-        },
-        onError: (action, error) => {
-          console.error('Error', error);
-          return SessionItemStatisticsActions.saveSessionItemStatisticBySessionItemFailure(
-            {
-              error,
-            }
-          );
-        },
       })
     )
   );
@@ -145,6 +167,7 @@ export class SessionItemStatisticsEffects {
 
   constructor(
     private actions$: Actions,
+    private store: Store<PartialState>,
     private backend: SessionItemStatisticDataService
   ) {}
 }

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SessionItemStatistic } from '@bod/shared/models';
+import { SessionItem, SessionItemStatistic } from '@bod/shared/models';
 
 export const loadSessionItemStatistics = createAction(
   '[SessionItemStatistics] Load SessionItemStatistics'
@@ -17,7 +17,7 @@ export const loadSessionItemStatisticsFailure = createAction(
 
 export const loadSessionItemStatisticBySessionItem = createAction(
   '[SessionItemStatistics] Load SessionItemStatistic by SessionItem',
-  props<{ id: number }>()
+  props<{ sessionItem: SessionItem }>()
 );
 
 export const loadSessionItemStatisticBySessionItemSuccess = createAction(
@@ -32,7 +32,7 @@ export const loadSessionItemStatisticBySessionItemFailure = createAction(
 
 export const saveSessionItemStatisticBySessionItem = createAction(
   '[SessionItemStatistics] Save SessionItemStatistic By SessionItem',
-  props<{ id: number }>()
+  props<{ sessionItem: SessionItem }>()
 );
 
 export const saveSessionItemStatisticBySessionItemSuccess = createAction(
@@ -44,7 +44,6 @@ export const saveSessionItemStatisticBySessionItemFailure = createAction(
   '[SessionItemStatistics] Save SessionItemStatistic By SessionItem Failure',
   props<{ error: any }>()
 );
-
 
 export const saveSessionItemStatistic = createAction(
   '[SessionItemStatistics] Save SessionItemStatistic',
@@ -74,7 +73,6 @@ export const updateSessionItemStatisticFailure = createAction(
   '[SessionItemStatistics] Update SessionItemStatistic Failure',
   props<{ error: any }>()
 );
-
 
 export const selectSessionItemStatistic = createAction(
   '[SessionItemStatistics] Select SessionItemStatistic',

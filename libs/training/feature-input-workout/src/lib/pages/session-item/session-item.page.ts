@@ -87,13 +87,13 @@ export class SessionItemPage implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.route.params
+    this.sessionItemsState.selectedSessionItems$
       .pipe(
         takeUntil(this.unsubscribe$),
-        tap((params) => {
+        tap((sessionItem) => {
           this.sessionsState.dispatch(
             SessionItemStatisticsActions.loadSessionItemStatisticBySessionItem({
-              id: +params['sessionItemId'],
+              sessionItem,
             })
           );
         })

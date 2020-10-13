@@ -64,10 +64,13 @@ export class SessionItemStatisticDataService {
     );
   }
 
-  postOneBySessionItem(id: number): Observable<SessionItemStatistic> {
+  postOneBySessionItem(
+    sessionItemStatistic: Partial<SessionItemStatistic>
+  ): Observable<SessionItemStatistic> {
     return this.http.post<SessionItemStatistic>(
-      `${this.API_URL}/session-items/${id}/session-item-statistic`,
+      `${this.API_URL}/session-items/${sessionItemStatistic.sessionItemId}/session-item-statistic`,
       {
+        ...sessionItemStatistic,
         rpe: 0,
         notes: '',
       }

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SessionStatistic } from '@bod/shared/models';
+import { Session, SessionStatistic } from '@bod/shared/models';
 
 export const loadSessionStatistics = createAction(
   '[SessionStatistics] Load SessionStatistics'
@@ -17,7 +17,7 @@ export const loadSessionStatisticsFailure = createAction(
 
 export const loadSessionStatisticBySession = createAction(
   '[SessionStatistics] Load SessionStatistic By Session',
-  props<{ id: number }>()
+  props<{ session: Session }>()
 );
 
 export const loadSessionStatisticBySessionSuccess = createAction(
@@ -32,7 +32,7 @@ export const loadSessionStatisticBySessionFailure = createAction(
 
 export const saveSessionStatisticBySession = createAction(
   '[SessionStatistics] Save SessionStatistic By Session',
-  props<{ id: number }>()
+  props<{ session: Session }>()
 );
 
 export const saveSessionStatisticBySessionSuccess = createAction(

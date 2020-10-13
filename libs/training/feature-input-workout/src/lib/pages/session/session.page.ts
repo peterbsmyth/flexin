@@ -61,18 +61,17 @@ export class SessionPage implements OnInit, OnDestroy {
         })
       )
       .subscribe();
-    this.route.params
+    this.session$
       .pipe(
-        tap((params) => {
-          const id = params['sessionId'];
-
+        takeUntil(this.unsubscribe$),
+        tap((session) => {
           this.sessionsState.dispatch(
-            SessionStatisticsActions.loadSessionStatisticBySession({ id })
+            SessionStatisticsActions.loadSessionStatisticBySession({ session })
           );
 
           this.sessionsState.dispatch(
             SessionItemsActions.loadSessionItemsBySession({
-              id,
+              id: session.id,
             })
           );
         })
