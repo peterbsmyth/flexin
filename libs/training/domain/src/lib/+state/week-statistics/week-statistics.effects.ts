@@ -4,7 +4,6 @@ import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { WeekStatisticsActions } from './actions';
 import * as ProgramStatisticsSelectors from '../program-statistics/program-statistics.selectors';
 import {
-  catchError,
   map,
   mapTo,
   mergeMap,
@@ -14,7 +13,7 @@ import {
 import { WeekStatisticDataService } from '../../infrastructure/week-statistic.data.service';
 import { Store } from '@ngrx/store';
 import { PartialState } from '../root.reducer';
-import { forkJoin, of } from 'rxjs';
+import { forkJoin, of, throwError } from 'rxjs';
 import { SessionStatisticDataService } from '../../infrastructure/session-statistic.data.service';
 import { SessionStatisticsActions } from '../session-statistics/actions';
 import { flatten } from 'lodash-es';
@@ -39,30 +38,46 @@ export class WeekStatisticsEffects {
         run: ({ id }) => {
           return this.backend.getOne(id).pipe(
             switchMap((weekStatistic) => {
+              const sessionStatistics = weekStatistic?.sessionStatistics;
+
               this.store.dispatch(
                 WeekStatisticsActions.loadWeekStatisticSuccess({
                   weekStatistic,
                 })
               );
+
+              if (!sessionStatistics) {
+                return throwError('no session statistics');
+              }
+
               return forkJoin(
-                weekStatistic.sessionStatistics.map((sessionStatistic) =>
+                sessionStatistics.map((sessionStatistic) =>
                   this.sessionStatisticService.getOne(sessionStatistic.id)
                 )
               );
             }),
             switchMap((sessionStatistics) => {
+              const sessionItemStatistics = sessionStatistics
+                .map(
+                  (sessionStatistic) => sessionStatistic.sessionItemStatistics
+                )
+                .flat();
+
               this.store.dispatch(
                 SessionStatisticsActions.loadSessionStatisticsSuccess({
                   sessionStatistics,
                 })
               );
 
-              const sessionItemStatisticsLists = sessionStatistics.map(
-                (sessionStatistic) => sessionStatistic.sessionItemStatistics
-              );
-              const sessionItemStatistics: SessionItemStatistic[] = flatten(
-                sessionItemStatisticsLists
-              );
+              if (
+                !sessionItemStatistics ||
+                sessionItemStatistics.every(
+                  (sessionItemStatistic) => !sessionItemStatistic
+                )
+              ) {
+                return throwError('no session item statistics');
+              }
+
               return forkJoin(
                 sessionItemStatistics.map((sessionItemStatistic) =>
                   this.sessionItemStatisticService.getOne(
@@ -72,27 +87,29 @@ export class WeekStatisticsEffects {
               );
             }),
             switchMap((sessionItemStatistics) => {
+              const allExerciseIds = sessionItemStatistics.map(
+                (sessionItemStatistic) =>
+                  sessionItemStatistic.sessionItem.exerciseId
+              );
+              const unqiueExerciseIds = [...new Set(allExerciseIds)];
+              const setStatistics = sessionItemStatistics
+                .map(
+                  (sessionItemStatistic) => sessionItemStatistic.setStatistics
+                )
+                .flat();
+
               this.store.dispatch(
                 SessionItemStatisticsActions.loadSessionItemStatisticsSuccess({
                   sessionItemStatistics,
                 })
               );
 
-              const allExerciseIds = sessionItemStatistics.map(
-                (sessionItemStatistic) =>
-                  sessionItemStatistic.sessionItem.exerciseId
-              );
-
-              const unqiueExerciseIds = [...new Set(allExerciseIds)];
-
-              const setStatisticsLists = sessionItemStatistics.map(
-                (sessionItemStatistic) => sessionItemStatistic.setStatistics
-              );
-              const setStatistics: SetStatistic[] = flatten(setStatisticsLists);
               return forkJoin([
-                ...setStatistics.map((setStatistic) =>
-                  this.setStatisticService.getOne(setStatistic.id)
-                ),
+                ...setStatistics
+                  .filter((setStatistic) => !!setStatistic)
+                  .map((setStatistic) =>
+                    this.setStatisticService.getOne(setStatistic.id)
+                  ),
                 ...unqiueExerciseIds.map((exerciseId) =>
                   this.exerciseService.getOne(exerciseId)
                 ),

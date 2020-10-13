@@ -10,7 +10,6 @@ const routes: Routes = [
   {
     path: 'statistics',
     component: StatisticsPage,
-    // canActivate: [StatisticsLoadedGuard],
     children: [
       {
         path: 'week-statistics/:weekStatisticId',
@@ -20,14 +19,16 @@ const routes: Routes = [
       {
         path: 'exercises',
         component: ExercisesPage,
+        canActivate: [StatisticsLoadedGuard],
       },
       {
         path: 'exercises/:exerciseId',
         component: ExercisePage,
+        canActivate: [StatisticsLoadedGuard],
       },
       {
         path: '',
-        redirectTo: 'week-statistics/24',
+        redirectTo: 'exercises',
         pathMatch: 'full',
       },
     ],

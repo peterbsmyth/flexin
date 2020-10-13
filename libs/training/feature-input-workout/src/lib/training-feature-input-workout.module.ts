@@ -7,6 +7,7 @@ import { WeekPage } from './pages/week/week.page';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { SessionsPage } from './pages/sessions/sessions.page';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -41,6 +42,7 @@ import { StatisticsContainer } from './containers/statistics/statistics.containe
     MatButtonModule,
     MatInputModule,
     BodComponentsModule,
+    MatSnackBarModule,
   ],
   declarations: [
     WeekPage,

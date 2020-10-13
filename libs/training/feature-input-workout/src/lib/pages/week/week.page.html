@@ -1,4 +1,15 @@
 <mat-list class="week" *ngrxLet="week$ as week">
-  <mat-list-item><h2>Week {{ week.number }}</h2></mat-list-item>
+  <mat-list-item><h2>Week {{ week.number }}</h2> </mat-list-item>
+  <mat-list-item>
+    <a
+      *ngIf="week.weekStatistic; else noStatistic"
+      mat-stroked-button
+      [routerLink]="['/statistics', 'week-statistics', week.weekStatistic.id]"
+      >View Statistics</a
+    >
+    <ng-template #noStatistic>
+      <button mat-stroked-button disabled>Statistics Unavailable</button>
+    </ng-template>
+  </mat-list-item>
 </mat-list>
 <router-outlet></router-outlet>

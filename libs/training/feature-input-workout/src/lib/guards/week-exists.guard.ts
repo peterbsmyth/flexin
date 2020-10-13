@@ -20,7 +20,9 @@ export class WeekExistsGuard implements CanActivate {
   }
 
   hasWeekInStore(): Observable<boolean> {
-    return this.weeksState.selectedWeeks$.pipe(map((week) => !!week));
+    return this.weeksState.selectedWeeks$.pipe(
+      map((week) => !!week?.weekStatistic)
+    );
   }
 
   hasWeek(id: string): Observable<boolean> {

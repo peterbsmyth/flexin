@@ -1,12 +1,11 @@
 <div class="container">
   <!-- src is set in .ts because youtube considers property binding a possible XSS attack -->
   <ng-container *ngIf="(weekStatistic$ | async) as weekStatistic">
-    <mat-card>
+    <mat-card *ngIf="weekStatistic.playlist">
       <h2>Week {{ weekStatistic.week.number }} Playlist</h2>
       <mat-card-content>
         <iframe
           #player
-          width="560"
           height="315"
           frameborder="0"
           allow="autoplay; encrypted-media"
@@ -26,15 +25,9 @@
             <mat-card-header>
               <span>{{ sessionItemStatistic.sessionItem.exercise?.name }}</span>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content class="sessionItem">
               <ng-container>
-                <table>
-                  <tr>
-                    <th>RPE</th>
-                    <td>
-                      {{ sessionItemStatistic.rpe }}
-                    </td>
-                  </tr>
+                <table class="sessionItem__table">
                   <tr>
                     <th>Set</th>
                     <td
@@ -53,10 +46,15 @@
                   </tr>
                 </table>
               </ng-container>
+              <ng-container>
+                <div class="sessionItem__additional">
+                  <span *ngIf="sessionItemStatistic.notes"
+                    >Notes: {{ sessionItemStatistic.notes }}</span
+                  >
+                  <span> RPE: {{ sessionItemStatistic.rpe }}</span>
+                </div>
+              </ng-container>
             </mat-card-content>
-            <mat-card-footer *ngIf="sessionItemStatistic.notes">
-              Notes: {{ sessionItemStatistic.notes }}
-            </mat-card-footer>
           </mat-card>
         </ng-container>
       </mat-tab>

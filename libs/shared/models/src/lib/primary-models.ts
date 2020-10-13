@@ -1,3 +1,5 @@
+import { WeekStatistic } from './statistic-models';
+
 export interface Exercise {
   id?: number;
   name: string;
@@ -33,6 +35,8 @@ export interface Session {
 export interface Week {
   id?: number;
   programId?: number;
+  weekStatisticId: number;
+  weekStatistic?: WeekStatistic;
   number: number;
 }
 

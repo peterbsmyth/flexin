@@ -9,13 +9,40 @@ export class WeekStatisticDataService {
   private API_URL = environment.API_URL;
 
   getAllBySessionItemStatistic(id: number) {
+    const filter = JSON.stringify({
+      include: [
+        {
+          relation: 'week',
+        },
+        {
+          relation: 'sessionStatistics',
+        },
+      ],
+    });
+    const params: HttpParams = new HttpParams().set('filter', filter);
+
     return this.http.get<WeekStatistic[]>(
-      `${this.API_URL}/session-item-statistics/${id}/week-statistic`
+      `${this.API_URL}/session-item-statistics/${id}/week-statistic`,
+      { params }
     );
   }
 
   getAll(): Observable<WeekStatistic[]> {
-    return this.http.get<WeekStatistic[]>(`${this.API_URL}/week-statistics`);
+    const filter = JSON.stringify({
+      include: [
+        {
+          relation: 'week',
+        },
+        {
+          relation: 'sessionStatistics',
+        },
+      ],
+    });
+    const params: HttpParams = new HttpParams().set('filter', filter);
+
+    return this.http.get<WeekStatistic[]>(`${this.API_URL}/week-statistics`, {
+      params,
+    });
   }
 
   getOne(id: number): Observable<WeekStatistic> {
@@ -38,8 +65,18 @@ export class WeekStatisticDataService {
   }
 
   getOneByWeek(id: number): Observable<WeekStatistic> {
+    const filter = JSON.stringify({
+      include: [
+        {
+          relation: 'sessionStatistics',
+        },
+      ],
+    });
+    const params: HttpParams = new HttpParams().set('filter', filter);
+
     return this.http.get<WeekStatistic>(
-      `${this.API_URL}/weeks/${id}/week-statistic`
+      `${this.API_URL}/weeks/${id}/week-statistic`,
+      { params }
     );
   }
 

@@ -10,6 +10,9 @@ export class WeekStatisticsFacade {
   loaded$ = this.store.pipe(
     select(WeekStatisticsSelectors.getWeekStatisticsLoaded)
   );
+  error$ = this.store.pipe(
+    select(WeekStatisticsSelectors.getWeekStatisticsError)
+  );
   allWeekStatistics$ = this.store.pipe(
     select(WeekStatisticsSelectors.getAllWeekStatistics)
   );

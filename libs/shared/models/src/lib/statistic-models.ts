@@ -1,16 +1,5 @@
 import { Program, Session, SessionItem, Week } from './primary-models';
 
-export interface SessionItemStatistic {
-  id?: number;
-  sessionItemId?: number;
-  sessionItem?: SessionItem;
-  sessionStatisticId?: number;
-  sessionStatistic?: SessionStatistic;
-  setStatistics?: SetStatistic[];
-  rpe: number;
-  notes: string;
-}
-
 export interface SetStatistic {
   id?: number;
   set: number;
@@ -25,6 +14,17 @@ export interface SessionStatistic {
   session?: Session;
   weekStatisticId: number;
   sessionItemStatistics?: SessionItemStatistic[];
+}
+
+export interface SessionItemStatistic {
+  id?: number;
+  sessionItemId?: number;
+  sessionItem?: SessionItem;
+  sessionStatisticId?: number;
+  sessionStatistic?: SessionStatistic;
+  setStatistics?: SetStatistic[];
+  rpe: number;
+  notes: string;
 }
 
 export interface WeekStatistic {
