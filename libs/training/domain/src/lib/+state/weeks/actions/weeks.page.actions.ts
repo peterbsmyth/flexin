@@ -35,3 +35,17 @@ export const selectWeek = createAction(
   '[Weeks Page] Select Week',
   props<{ id: number }>()
 );
+
+export const loadWeekWithAscendants = createAction(
+  '[Weeks Page] Load Week With Ascendants',
+  props<{ id: number }>()
+);
+
+export const loadWeekWithAscendantsSuccess = createAction(
+  '[Weeks Page] Load Week With Ascendants Success'
+);
+
+export const loadWeekSync = createAction(
+  '[Weeks Page] Load Week Syncronously',
+  props<{ week: Week }>()
+);

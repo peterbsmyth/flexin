@@ -4,12 +4,6 @@ mat-list {
   font-weight: $weight-bold;
 }
 
-a,
-span {
-  @include subheadline;
-  color: inherit;
-}
-
 .navigation {
   display: flex;
   justify-content: space-between;
@@ -36,9 +30,4 @@ span {
 
 .active {
   background-color: $grey-100;
-}
-
-.breadcrumbs {
-  padding: $space-xs $space-m $space-s;
-  border-bottom: $size-border-s dashed $grey-500;
 }

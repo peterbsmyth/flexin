@@ -35,7 +35,9 @@ export class WeekExistsGuard implements CanActivate {
           /**
            * if there is a result from selected week, cool
            */
-          this.weeksState.dispatch(WeeksPageActions.loadWeek({ id: +id }));
+          this.weeksState.dispatch(
+            WeeksPageActions.loadWeekWithAscendants({ id: +id })
+          );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.weeksState.selectedWeeks$),
             map((week) => !!week),

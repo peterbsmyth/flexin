@@ -6,7 +6,7 @@ import {
   WeekStatisticsActions,
   WeekStatisticsFacade,
 } from '@bod/training/domain';
-import { take, tap, filter } from 'rxjs/operators';
+import { take, tap, filter, distinctUntilKeyChanged } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -21,7 +21,12 @@ export class WeekPage implements OnInit, OnDestroy {
     private weekStatisticsState: WeekStatisticsFacade,
     private snackbar: MatSnackBar
   ) {
-    this.week$ = this.weeksState.selectedWeeks$;
+    this.week$ = this.weeksState.selectedWeekWithAscendants$.pipe(
+      filter((w) => {
+        return !!w?.program;
+      }),
+      distinctUntilKeyChanged('id')
+    );
 
     this.weekStatisticsState.error$
       .pipe(

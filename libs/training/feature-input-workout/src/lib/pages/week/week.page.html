@@ -1,7 +1,14 @@
+<ng-container *ngrxLet="week$ as week">
+  <bod-breadcrumbs>
+    <a [routerLink]="['/programs', week.program.id]">{{ week.program.name }}</a>
+    <span>&nbsp;>&nbsp;</span>
+    <span>Week {{ week.number }}</span>
+  </bod-breadcrumbs>
+</ng-container>
 <mat-list class="week" *ngrxLet="week$ as week">
-  <mat-list-item><h2>Week {{ week.number }}</h2> </mat-list-item>
   <mat-list-item>
     <a
+      class="statistics"
       *ngIf="week.weekStatistic; else noStatistic"
       mat-stroked-button
       [routerLink]="['/statistics', 'week-statistics', week.weekStatistic.id]"

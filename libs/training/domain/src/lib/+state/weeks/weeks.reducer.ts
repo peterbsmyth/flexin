@@ -37,12 +37,19 @@ export const weeksReducer = createReducer(
   on(WeeksPageActions.loadWeekSuccess, (state, { week }) =>
     weeksAdapter.setOne(week, { ...state, loaded: true, selectedId: week.id })
   ),
+  on(WeeksPageActions.loadWeekSync, (state, { week }) =>
+    weeksAdapter.setOne(week, { ...state, selectedId: week.id })
+  ),
   on(WeeksPageActions.loadWeeksByProgramSuccess, (state, { weeks }) =>
     weeksAdapter.upsertMany(weeks, { ...state, loaded: true })
   ),
   on(WeeksPageActions.loadWeeksByProgramFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(WeeksPageActions.loadWeekWithAscendantsSuccess, (state) => ({
+    ...state,
+    loaded: true,
   }))
 );
 

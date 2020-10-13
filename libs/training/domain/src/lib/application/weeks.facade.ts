@@ -7,24 +7,17 @@ import * as WeeksSelectors from '../+state/weeks/weeks.selectors';
 
 @Injectable()
 export class WeeksFacade {
-  loaded$ = this.store.pipe(
-    select(WeeksSelectors.getWeeksLoaded)
+  loaded$ = this.store.pipe(select(WeeksSelectors.getWeeksLoaded));
+  allWeeks$ = this.store.pipe(select(WeeksSelectors.getAllWeeks));
+  selectedWeeks$ = this.store.pipe(select(WeeksSelectors.getSelected));
+  selectedWeekWithAscendants$ = this.store.pipe(
+    select(WeeksSelectors.getSelectedWithAscendants)
   );
-  allWeeks$ = this.store.pipe(
-    select(WeeksSelectors.getAllWeeks)
-  );
-  selectedWeeks$ = this.store.pipe(
-    select(WeeksSelectors.getSelected)
-  );
-  allSessions$ = this.store.pipe(
-    select(WeeksSelectors.getSessions)
-  )
+  allSessions$ = this.store.pipe(select(WeeksSelectors.getSessions));
 
   dispatch(action: Action) {
     this.store.dispatch(action);
   }
 
-  constructor(
-    private store: Store<fromRoot.PartialState>
-  ) {}
+  constructor(private store: Store<fromRoot.PartialState>) {}
 }

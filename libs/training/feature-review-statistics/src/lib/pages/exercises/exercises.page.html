@@ -1,5 +1,7 @@
+<bod-breadcrumbs>
+  <span>Statistics > Exercises</span>
+</bod-breadcrumbs>
 <mat-list>
-  <mat-list-item class="list__title">Exercises</mat-list-item>
   <bod-exercise-card
     *ngFor="let exercise of exercises$ | async"
     [exercise]="exercise"

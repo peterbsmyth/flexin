@@ -1,0 +1,10 @@
+@import 'utils';
+.breadcrumbs {
+  padding: $space-xs $space-m $space-s;
+  border-bottom: $size-border-s dashed $grey-500;
+}
+
+:host ::ng-deep * {
+  @include subheadline;
+  color: inherit;
+}

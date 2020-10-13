@@ -1,5 +1,5 @@
 <ng-container *ngrxLet="session$ as session">
-  <div class="breadcrumbs">
+  <bod-breadcrumbs>
     <a [routerLink]="['/programs', session.week.program.id]"
       >{{ session.week.program.name }}</a
     >
@@ -9,7 +9,7 @@
     >
     <span>&nbsp;>&nbsp;</span>
     <span>{{ session.name }}</span>
-  </div>
+  </bod-breadcrumbs>
 </ng-container>
 <training-action-bar class="navigation" *ngrxLet="pages$ as pages">
   <button
