@@ -1,42 +1,31 @@
 import fetch from 'node-fetch';
+import { includeParam } from './utils/filter';
 const API_URL = 'https://bod-api-2.herokuapp.com';
 const [programId] = process.argv.slice(2);
 
 const allRemoves = [];
 
-/**
- * delete program
- */
 allRemoves.push(
   fetch(`${API_URL}/programs/${programId}`, {
     method: 'DELETE',
   })
 );
 
-/**
- * delete program statistic
- */
-allRemoves.push(
-  fetch(`${API_URL}/programs/${programId}/program-statistic`)
-    .then((res) => res.json())
-    .then((programStatistic) =>
-      fetch(`${API_URL}/program-statistics/${programStatistic.id}`, {
+fetch(
+  `${API_URL}/programs/${programId}?filter=${includeParam([
+    'weeks',
+    'programStatistic',
+  ])}`
+)
+  .then((res) => res.json())
+  .then((program) => {
+    const promises = [];
+    allRemoves.push(
+      fetch(`${API_URL}/program-statistics/${program.programStatistic?.id}`, {
         method: 'DELETE',
       })
-    )
-);
-
-/**
- * find weeks related to program id
- */
-fetch(`${API_URL}/programs/${programId}/weeks`)
-  .then((res) => res.json())
-  /**
-   * find sessions related to weeks
-   */
-  .then((weeks) => {
-    const promises = [];
-    weeks.forEach((week) => {
+    );
+    program.weeks?.forEach((week) => {
       allRemoves.push(
         fetch(`${API_URL}/weeks/${week.id}`, {
           method: 'DELETE',
@@ -44,43 +33,104 @@ fetch(`${API_URL}/programs/${programId}/weeks`)
       );
 
       promises.push(
-        fetch(`${API_URL}/weeks/${week.id}/sessions`).then((res) => res.json())
+        fetch(
+          `${API_URL}/weeks/${week.id}?filter=${includeParam([
+            'sessions',
+            'weekStatistic',
+          ])}`
+        ).then((res) => res.json())
       );
     });
     return Promise.all(promises);
   })
-  /**
-   * find session items related to sessions
-   */
-  .then((sessionsLists) => {
+  .then((weeks) => {
     const promises = [];
-    const sessions = sessionsLists.flat();
-    sessions.forEach((session) => {
+    weeks.forEach((week) => {
       allRemoves.push(
-        fetch(`${API_URL}/sessions/${session.id}`, {
+        fetch(`${API_URL}/week-statistics/${week.weekStatistic?.id}`, {
           method: 'DELETE',
         })
       );
 
-      promises.push(
-        fetch(`${API_URL}/sessions/${session.id}/session-items`).then((res) =>
-          res.json()
+      week.sessions.forEach((session) => {
+        allRemoves.push(
+          fetch(`${API_URL}/sessions/${session.id}`, {
+            method: 'DELETE',
+          })
+        );
+
+        promises.push(
+          fetch(
+            `${API_URL}/sessions/${session.id}?filter=${includeParam([
+              'sessionStatistic',
+              'sessionItems',
+            ])}`
+          ).then((res) => res.json())
+        );
+      });
+    });
+
+    return Promise.all(promises);
+  })
+  .then((sessions) => {
+    const promises = [];
+    sessions.forEach((session) => {
+      allRemoves.push(
+        fetch(`${API_URL}/session-statistics/${session.sessionStatistic.id}`, {
+          method: 'DELETE',
+        })
+      );
+
+      session.sessionItems.forEach((sessionItem) => {
+        allRemoves.push(
+          fetch(`${API_URL}/session-items/${sessionItem.id}`, {
+            method: 'DELETE',
+          })
+        );
+
+        promises.push(
+          fetch(
+            `${API_URL}/session-items/${sessionItem.id}?filter=${includeParam([
+              'sessionItemStatistic',
+            ])}`
+          ).then((res) => res.json())
+        );
+      });
+    });
+
+    return Promise.all(promises);
+  })
+  .then((sessionItems) => {
+    const promises = [];
+    sessionItems.forEach((sessionItem) => {
+      allRemoves.push(
+        fetch(
+          `${API_URL}/session-item-statistics/${sessionItem.sessionItemStatistic.id}`,
+          {
+            method: 'DELETE',
+          }
         )
+      );
+
+      promises.push(
+        fetch(
+          `${API_URL}/session-item-statistics/${
+            sessionItem.sessionItemStatistic.id
+          }?filter=${includeParam(['setStatistics'])}`
+        ).then((res) => res.json())
       );
     });
     return Promise.all(promises);
   })
-  .then((sessionItemsLists) => {
-    const sessionItems = sessionItemsLists.flat();
-    sessionItems.forEach((sessionItem) => {
+  .then((setStatistics) => {
+    setStatistics.forEach((setStatistic) => {
       allRemoves.push(
-        fetch(`${API_URL}/session-items/${sessionItem.id}`, {
+        fetch(`${API_URL}/set-statistics/${setStatistic.id}`, {
           method: 'DELETE',
         })
       );
     });
+
     return Promise.all(allRemoves);
   })
-  .then(() => {
-    console.dir('ALL DELETED');
-  });
+  .then(() => console.log('ALL DELETED'));
