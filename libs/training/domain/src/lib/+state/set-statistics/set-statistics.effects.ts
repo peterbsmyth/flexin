@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { SetStatisticsActions } from './actions';
-import { map, mapTo, switchMap, tap } from 'rxjs/operators';
+import { map, mapTo, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { SetStatisticDataService } from '../../infrastructure/set-statistic.data.service';
 import { PartialState } from '../root.reducer';
 import { Store } from '@ngrx/store';
@@ -13,6 +13,7 @@ import { SessionItemStatisticsActions } from '../session-item-statistics/actions
 import { SessionItemsActions } from '../session-items/actions';
 import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
 import { ExercisesActions } from '../exercises/actions';
+import { SessionItemDataService } from '../../infrastructure/session-item.data.service';
 
 @Injectable()
 export class SetStatisticsEffects {
@@ -139,26 +140,25 @@ export class SetStatisticsEffects {
               const sessionItems = sessionItemStatistics.map(
                 (s) => s.sessionItem
               );
+
+              return forkJoin(
+                sessionItems.map(({ id }) =>
+                  this.sessionItemsService.getOne(id)
+                )
+              );
+            }),
+            mergeMap((sessionItems) => {
               this.store.dispatch(
                 SessionItemsActions.loadSessionItemsSuccess({
                   sessionItems,
                 })
               );
+              const exercises = sessionItems.map((s) => s.exercise);
 
-              const uniqueExerciseIds: number[] = uniqBy(
-                sessionItems,
-                'exerciseId'
-              ).map((s) => s.exerciseId);
-
-              return forkJoin(
-                uniqueExerciseIds.map((id) => this.exercisesService.getOne(id))
-              );
-            }),
-            map((exercises) => {
-              this.store.dispatch(
-                ExercisesActions.loadExercisesSuccess({ exercises })
-              );
-              return SetStatisticsActions.loadSetStatisticsWithAscendantsSuccess();
+              return [
+                ExercisesActions.loadExercisesSuccess({ exercises }),
+                SetStatisticsActions.loadSetStatisticsWithAscendantsSuccess(),
+              ];
             })
           );
         },
@@ -177,6 +177,7 @@ export class SetStatisticsEffects {
     private store: Store<PartialState>,
     private backend: SetStatisticDataService,
     private sessionItemsStatisticsService: SessionItemStatisticDataService,
+    private sessionItemsService: SessionItemDataService,
     private exercisesService: ExerciseDataService
   ) {}
 }
