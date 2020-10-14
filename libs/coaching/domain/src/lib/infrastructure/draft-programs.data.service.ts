@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, forkJoin, Observable, of, throwError } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ProgramDataService } from '../infrastructure/program.data.service';
 import { WeekDataService } from '../infrastructure/week.data.service';
 import { SessionDataService } from '../infrastructure/session.data.service';
@@ -9,6 +9,7 @@ import { BoardCardData, SessionItemData } from '../entities/component.models';
 import { DraftProgram } from '../entities/draft';
 import { uniqBy } from 'lodash-es';
 import { StorageMap } from '@ngx-pwa/local-storage';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class DraftProgramsDataService {
@@ -144,6 +145,7 @@ export class DraftProgramsDataService {
               id: undefined,
               number: week.number,
               programId: program.id,
+              weekStatisticId: undefined,
             })
           )
         );
@@ -206,7 +208,15 @@ export class DraftProgramsDataService {
         );
         return forkJoin(sessionItems);
       }),
-      switchMap(() => this.storage.clear())
+      switchMap(() => this.storage.clear()),
+      catchError(() => {
+        this.snackbar.open(
+          'could not create program. fix errors and try again.',
+          '',
+          { duration: 5000 }
+        );
+        return of();
+      })
     );
   }
 
@@ -215,7 +225,8 @@ export class DraftProgramsDataService {
     private weekService: WeekDataService,
     private sessionService: SessionDataService,
     private sessionItemService: SessionItemDataService,
-    private storage: StorageMap
+    private storage: StorageMap,
+    private snackbar: MatSnackBar
   ) {
     this.storage
       .watch('sessionItemData')

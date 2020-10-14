@@ -24,6 +24,7 @@ import * as fromExercises from './+state/exercises/exercises.reducer';
 import { ExercisesEffects } from './+state/exercises/exercises.effects';
 import { ExercisesFacade } from './application/exercises.facade';
 import { DraftProgramsDataService } from './infrastructure/draft-programs.data.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { DraftProgramsDataService } from './infrastructure/draft-programs.data.s
       fromExercises.reducer
     ),
     EffectsModule.forFeature([ExercisesEffects]),
+    MatSnackBarModule,
   ],
   providers: [
     ExerciseDataService,
@@ -65,7 +67,7 @@ import { DraftProgramsDataService } from './infrastructure/draft-programs.data.s
     SessionItemsFacade,
     SessionsFacade,
     WeeksFacade,
-    DraftProgramsDataService
+    DraftProgramsDataService,
   ],
 })
 export class CoachingDomainModule {}
