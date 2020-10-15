@@ -13,6 +13,7 @@ import { WeekStatisticsPage } from './pages/week-statistics/week-statistics.page
 import { ReactiveComponentModule } from '@ngrx/component';
 import { MatCardModule } from '@angular/material/card';
 import { WindowRef } from './window-ref.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { WindowRef } from './window-ref.service';
     MatTabsModule,
     MatCardModule,
     NgxChartsModule,
+    MatButtonModule,
     ReactiveComponentModule,
   ],
   declarations: [

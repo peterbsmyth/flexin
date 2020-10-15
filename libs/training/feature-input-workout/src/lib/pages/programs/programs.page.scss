@@ -1,0 +1,15 @@
+@import 'utils';
+
+.items {
+  display: flex;
+  flex-direction: column;
+  margin: $space-s $space-m 0;
+
+  &__button {
+    @include caption;
+    text-align: left;
+    width: 100%;
+    margin: 0 0 $space-xs;
+    line-height: baseline-scale(5);
+  }
+}

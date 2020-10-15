@@ -1,14 +1,15 @@
-<ng-container *ngIf="(sessionsLoaded$ | async); else loadingSessions">
-  <mat-list>
-    <a
-      *ngFor="let session of (sessions$ | async);"
-      mat-list-item
-      [routerLink]="['/sessions', session.id]"
-    >
-      {{ session.name }}
-    </a>
-  </mat-list>
-</ng-container>
+<section class="items" *ngIf="(sessionsLoaded$ | async); else loadingSessions">
+  <button
+    class="items__button"
+    *ngFor="let session of (sessions$ | async);"
+    mat-stroked-button
+    color="link"
+    [routerLink]="['/sessions', session.id]"
+    routerLinkActive="active"
+  >
+  {{ session.name }}
+  </button>
+</section>
 <ng-template #loadingSessions>
   Loading Sessions...
 </ng-template>
