@@ -25,7 +25,7 @@
             <mat-card-header>
               <span>{{ sessionItemStatistic.sessionItem.exercise?.name }}</span>
             </mat-card-header>
-            <mat-card-content class="sessionItem">
+            <mat-card-content class="sessionItem" *ngIf="hasStatistics(sessionItemStatistic.setStatistics); else noStatistics">
               <ng-container>
                 <table class="sessionItem__table">
                   <tr>
@@ -61,3 +61,10 @@
     </mat-tab-group>
   </ng-container>
 </div>
+
+
+<ng-template #noStatistics>
+  <mat-card-content class="sessionItem">
+    <span>No Data</span>
+  </mat-card-content>
+</ng-template>

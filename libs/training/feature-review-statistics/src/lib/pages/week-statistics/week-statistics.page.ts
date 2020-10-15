@@ -5,7 +5,7 @@ import {
   ViewChild,
   AfterViewInit,
 } from '@angular/core';
-import { WeekStatistic } from '@bod/shared/models';
+import { SetStatistic, WeekStatistic } from '@bod/shared/models';
 import { WeekStatisticsFacade } from '@bod/training/domain';
 import { Observable } from 'rxjs';
 import { take, tap, filter } from 'rxjs/operators';
@@ -26,6 +26,10 @@ export class WeekStatisticsPage implements OnInit, AfterViewInit {
 
   ngOnInit(): void {}
 
+  /**
+   * ngAfterViewInit
+   * after the view is initialized then attach the playlist to the player, if it exists
+   */
   ngAfterViewInit() {
     this.weekStatisticsState.selectedWeekStatisticsWithDescendants$
       .pipe(
@@ -40,5 +44,18 @@ export class WeekStatisticsPage implements OnInit, AfterViewInit {
         })
       )
       .subscribe();
+  }
+
+  /**
+   * hasStatistics
+   * returns true if any set has reps, returns false if all sets have no reps
+   * @param setStatistics
+   */
+  hasStatistics(setStatistics: SetStatistic[]) {
+    if (!setStatistics || setStatistics.every(s => s.reps === 0)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
