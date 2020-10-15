@@ -1,0 +1,67 @@
+@import 'utils';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-radius;
+  padding: $space-xs;
+  margin: $space-xs $space-m $space-s;
+
+  &__header {
+    @include subheadline;
+    display: flex;
+    justify-content: center;
+    margin: $space-s 0 $space-m;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin: 0 $space-m $space-m;
+    margin: 0 $space-m $space-m !important;
+  }
+  &__label {
+    @include caption;
+    display: flex;
+  }
+
+  &__text {
+    @include data-point;
+    margin: $space-xs 0 $space-s;
+  }
+
+  &__table {
+    border: none;
+    border-collapse: collapse;
+    margin: $space-s !important;
+
+    th {
+      @include caption;
+      text-align: left;
+      border: 1px solid $grey-300;
+    }
+
+    td {
+      padding: $space-s;
+      border: 1px solid $grey-300;
+    }
+
+    tr:first-child td {
+      border-bottom: 1px solid $grey-300;
+    }
+  }
+  &__additional {
+    display: flex;
+    flex-direction: column;
+    margin: $space-s;
+    justify-content: space-between;
+
+    &__item {
+      margin-bottom: $space-s;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+}

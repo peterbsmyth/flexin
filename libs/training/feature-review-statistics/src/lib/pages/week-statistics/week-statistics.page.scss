@@ -16,49 +16,6 @@ mat-card {
   align-items: center;
 }
 
-.sessionItem {
-  display: flex;
-  flex-direction: row;
-
-  &__table {
-    border: none;
-    border-collapse: collapse;
-    margin: $space-s !important;
-
-    th {
-      padding: $space-s;
-      text-align: left;
-    }
-
-    td {
-      padding: $space-s;
-      border-left: 1px solid $grey-300;
-      border-right: 1px solid $grey-300;
-    }
-
-    tr:first-child td {
-      border-bottom: 1px solid $grey-300;
-    }
-    tr:first-child td:first-child {
-      border-bottom: none;
-    }
-
-    td:first-child {
-      border-left: none;
-    }
-
-    td:last-child {
-      border-right: none;
-    }
-  }
-  &__additional {
-    display: flex;
-    flex-direction: column;
-    margin: $space-s;
-    justify-content: space-between;
-  }
-}
-
 ::ng-deep .mat-tab-body-wrapper {
   max-height: 500px;
 }
@@ -77,11 +34,6 @@ iframe {
   iframe {
     width: 361px;
     height: 203px;
-  }
-
-  .sessionItem {
-    display: flex;
-    flex-direction: column;
   }
 
   ::ng-deep .mat-tab-body-wrapper {

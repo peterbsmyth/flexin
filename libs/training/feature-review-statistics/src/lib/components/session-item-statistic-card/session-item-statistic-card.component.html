@@ -1,0 +1,56 @@
+<mat-card class="card">
+  <header class="card__header">
+    <span>{{ sessionItemStatistic.sessionItem.exercise?.name }}</span>
+  </header>
+  <mat-card-content
+    class="card__body"
+    *ngIf="hasStatistics(sessionItemStatistic.setStatistics); else noStatistics"
+  >
+    <ng-container>
+      <table class="card__table">
+        <tr>
+          <th>
+            <span class="card__label">Set</span>
+          </th>
+          <td
+            *ngFor="let setStatistic of sessionItemStatistic.setStatistics"
+            class="card__text"
+          >
+            {{ setStatistic.set }}
+          </td>
+        </tr>
+        <tr>
+          <th><span class="card__label">Reps</span></th>
+          <td
+            *ngFor="let setStatistic of sessionItemStatistic.setStatistics"
+            class="card__text"
+          >
+            {{ setStatistic.reps }}
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+    <ng-container>
+      <div class="card__additional">
+        <div *ngIf="sessionItemStatistic.notes" class="card__additional__item">
+          <span class="card__label">Notes</span>
+          <span class="card__text">
+            {{ sessionItemStatistic.notes }}
+          </span>
+        </div>
+        <div class="card__additional__item">
+          <span class="card__label">RPE</span>
+          <span class="card__text">
+            {{ sessionItemStatistic.rpe }}
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #noStatistics>
+  <mat-card-content class="card__body">
+    <span>No Data</span>
+  </mat-card-content>
+</ng-template>

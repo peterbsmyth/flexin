@@ -14,6 +14,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
 import { MatCardModule } from '@angular/material/card';
 import { WindowRef } from './window-ref.service';
 import { MatButtonModule } from '@angular/material/button';
+import { SessionItemStatisticCardComponent } from './components/session-item-statistic-card/session-item-statistic-card.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
     ExercisesPage,
     ExercisePage,
     WeekStatisticsPage,
+    SessionItemStatisticCardComponent,
   ],
   exports: [],
   providers: [WindowRef],
