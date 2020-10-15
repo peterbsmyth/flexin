@@ -8,6 +8,7 @@ import {
 } from '@bod/training/domain';
 import { take, tap, filter, distinctUntilKeyChanged } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NetworkStatusFacade } from '@bod/shared/domain';
 
 @Component({
   templateUrl: './week.page.html',
@@ -19,7 +20,8 @@ export class WeekPage implements OnInit, OnDestroy {
   constructor(
     private weeksState: WeeksFacade,
     private weekStatisticsState: WeekStatisticsFacade,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    public networkState: NetworkStatusFacade
   ) {
     this.week$ = this.weeksState.selectedWeekWithAscendants$.pipe(
       filter((w) => {

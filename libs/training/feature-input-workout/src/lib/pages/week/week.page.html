@@ -8,12 +8,13 @@
 
 <mat-list class="week" *ngrxLet="week$ as week">
   <mat-list-item>
-    <a
+    <button
       class="statistics"
       *ngIf="week.weekStatistic; else noStatistic"
       mat-stroked-button
+      [disabled]="networkState.loading$ | async"
       [routerLink]="['/statistics', 'week-statistics', week.weekStatistic.id]"
-      >View Statistics</a
+      >View Statistics</button
     >
     <ng-template #noStatistic>
       <button mat-stroked-button disabled>Statistics Unavailable</button>
