@@ -55,6 +55,10 @@ const weekStatisticsReducer = createReducer(
     ...state,
     error,
   })),
+  on(WeekStatisticsActions.loadWeekStatisticsFailureReset, (state) => ({
+    ...state,
+    error: '',
+  })),
   on(WeekStatisticsActions.loadDescendants, (state, { id }) => ({
     ...state,
     selectedId: id,

@@ -29,6 +29,10 @@ export const loadWeekStatisticsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadWeekStatisticsFailureReset = createAction(
+  '[WeekStatistics] Load WeekStatistics Failure Reset'
+);
+
 export const loadWeekStatisticByWeek = createAction(
   '[WeekStatistics] Load WeekStatistic By Week',
   props<{ week: Week }>()

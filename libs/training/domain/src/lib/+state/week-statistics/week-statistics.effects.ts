@@ -4,6 +4,7 @@ import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { WeekStatisticsActions } from './actions';
 import * as ProgramStatisticsSelectors from '../program-statistics/program-statistics.selectors';
 import {
+  delay,
   map,
   mapTo,
   mergeMap,
@@ -47,7 +48,7 @@ export class WeekStatisticsEffects {
               );
 
               if (!sessionStatistics) {
-                return throwError('no session statistics');
+                return throwError('no exercises recorded');
               }
 
               return forkJoin(
@@ -75,7 +76,7 @@ export class WeekStatisticsEffects {
                   (sessionItemStatistic) => !sessionItemStatistic
                 )
               ) {
-                return throwError('no session item statistics');
+                return throwError('no exercises recorded');
               }
 
               return forkJoin(
@@ -141,6 +142,14 @@ export class WeekStatisticsEffects {
       })
     )
   );
+
+  loadWeekStatisticsFailureReset$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(WeekStatisticsActions.loadWeekStatisticsFailure),
+    delay(1000),
+    map(() => WeekStatisticsActions.loadWeekStatisticsFailureReset())
+  )
+);
 
   loadWeekStatistics$ = createEffect(() =>
     this.actions$.pipe(

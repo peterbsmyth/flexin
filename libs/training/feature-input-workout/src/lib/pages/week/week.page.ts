@@ -6,7 +6,7 @@ import {
   WeekStatisticsActions,
   WeekStatisticsFacade,
 } from '@bod/training/domain';
-import { take, tap, filter, distinctUntilKeyChanged } from 'rxjs/operators';
+import { take, tap, filter, distinctUntilKeyChanged, takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NetworkStatusFacade } from '@bod/shared/domain';
 
@@ -31,6 +31,7 @@ export class WeekPage implements OnInit, OnDestroy {
 
     this.weekStatisticsState.error$
       .pipe(
+        takeUntil(this.unsubscribe$),
         filter((error) => !!error),
         tap((error) => {
           this.snackbar.open(error, '', {
