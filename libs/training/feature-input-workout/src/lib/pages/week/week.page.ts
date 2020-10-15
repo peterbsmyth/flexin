@@ -25,7 +25,6 @@ export class WeekPage implements OnInit, OnDestroy {
       filter((w) => {
         return !!w?.program;
       }),
-      distinctUntilKeyChanged('id')
     );
 
     this.weekStatisticsState.error$
