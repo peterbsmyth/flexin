@@ -16,6 +16,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { remove } from 'lodash-es';
 import { ProgramBoardData, BoardCardData } from '@bod/coaching/domain';
+import { OnChange } from '@bod/shared/utils';
 
 @Component({
   selector: 'coaching-program-board',
@@ -25,15 +26,11 @@ import { ProgramBoardData, BoardCardData } from '@bod/coaching/domain';
 })
 export class ProgramBoardComponent implements OnInit {
   @Input() displaySource = true;
-  private _data: ProgramBoardData;
-  @Input()
-  get data(): ProgramBoardData {
-    return this._data;
-  }
-  set data(data: ProgramBoardData) {
-    this._data = data;
+  @OnChange<ProgramBoardData>(function (data) {
     this.buildBoard(data);
-  }
+  })
+  @Input()
+  data: ProgramBoardData;
   @Output() update: EventEmitter<any> = new EventEmitter();
   public pullList: BoardCardData[] = [];
   public pushList: BoardCardData[] = [];

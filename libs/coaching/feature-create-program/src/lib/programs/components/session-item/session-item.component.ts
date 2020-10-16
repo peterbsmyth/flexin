@@ -19,6 +19,7 @@ import { SessionItemData } from '@bod/coaching/domain';
 import { MatDialog } from '@angular/material/dialog';
 import { Exercise } from '@bod/shared/models';
 import { ExerciseDialog } from '../../../exercises/components/exercise-dialog/exercise.dialog';
+import { OnChange } from '@bod/shared/utils';
 
 @Component({
   selector: 'coaching-session-item',
@@ -39,28 +40,21 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   });
   public leftRight: boolean;
 
-  private _data: SessionItemData;
-  @Input()
-  get data(): SessionItemData {
-    return this._data;
-  }
-  set data(data: SessionItemData) {
-    this._data = data;
+  @OnChange<SessionItemData>(function (data) {
     this.buildForm(data);
-  }
-
-  private _editable = true;
+  })
   @Input()
-  get editable() {
-    return this._editable;
-  }
-  set editable(editable) {
+  data: SessionItemData;
+
+  @OnChange<boolean>(function (editable) {
     if (!editable) {
       this.disableInputs();
     } else {
       this.enableInputs();
     }
-  }
+  })
+  @Input()
+  editable;
 
   @Output() update: EventEmitter<SessionItemData> = new EventEmitter();
   @Output() updateExercise: EventEmitter<Exercise> = new EventEmitter();

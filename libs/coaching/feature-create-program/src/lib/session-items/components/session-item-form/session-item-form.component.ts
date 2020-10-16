@@ -11,6 +11,7 @@ import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { SessionItem } from '@bod/shared/models';
+import { OnChange } from '@bod/shared/utils';
 
 @Component({
   selector: 'coaching-session-item-form',
@@ -20,16 +21,14 @@ import { SessionItem } from '@bod/shared/models';
 export class SessionItemFormComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   editing = false;
-  private _data: SessionItemFormData;
-  @Input()
-  get data(): SessionItemFormData {
-    return this._data;
-  }
-  set data(data: SessionItemFormData) {
-    this._data = data;
+
+  @OnChange<SessionItemFormData>(function (data) {
     this.form = this.buildForm(data);
     this.exerciseForm = this.buildExerciseForm(data);
-  }
+  })
+  @Input()
+  data: SessionItemFormData;
+
   @Output() save: EventEmitter<Partial<SessionItem>> = new EventEmitter();
   form: FormGroup = this.fb.group({
     reps: 1,

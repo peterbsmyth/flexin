@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Exercise } from '@bod/shared/models';
+import { OnChange } from '@bod/shared/utils';
 
 @Component({
   selector: 'coaching-exercise-form',
@@ -17,15 +18,11 @@ import { Exercise } from '@bod/shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExerciseFormComponent implements OnInit {
-  private _data: Exercise;
+  @OnChange<Exercise>(function (data) {
+    this.buildForm(data);
+  })
   @Input()
-  get data(): Exercise {
-    return this._data;
-  }
-  set data(exercise: Exercise) {
-    this._data = exercise;
-    this.form = this.buildForm(exercise);
-  }
+  data: Exercise;
   @Output() save: EventEmitter<Exercise> = new EventEmitter();
   form: FormGroup = this.fb.group({
     name: '',

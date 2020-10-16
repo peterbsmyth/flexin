@@ -63,6 +63,9 @@
     },
     "shared-scripts": {
       "tags": ["domain:shared", "type:util"]
+    },
+    "shared-utils": {
+      "tags": ["type:util", "domain:shared"]
     }
   },
   "affected": {

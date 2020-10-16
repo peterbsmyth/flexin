@@ -14,6 +14,7 @@ import {
 } from '@bod/training/domain';
 import { Subject } from 'rxjs';
 import { debounceTime, tap, takeUntil, filter } from 'rxjs/operators';
+import { OnChange } from '@bod/shared/utils';
 
 @Component({
   selector: 'training-session-item-card',
@@ -24,15 +25,13 @@ import { debounceTime, tap, takeUntil, filter } from 'rxjs/operators';
 export class SessionItemCardComponent implements OnInit, OnDestroy {
   private _formSaveable = false;
   private unsubscribe$: Subject<any> = new Subject();
-  private _data: SessionItemBoardCardData;
-  @Input()
-  get data(): SessionItemBoardCardData {
-    return this._data;
-  }
-  set data(data: SessionItemBoardCardData) {
-    this._data = data;
+
+  @OnChange<SessionItemBoardCardData>(function (data) {
     this.buildForm(data);
-  }
+  })
+  @Input()
+  data: SessionItemBoardCardData;
+
   @Output() save: EventEmitter<SessionItemCardOutput> = new EventEmitter();
   form: FormGroup = this.fb.group({});
 
