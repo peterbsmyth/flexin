@@ -1,4 +1,4 @@
-# Flexn
+# Flexin
 
 The application for bodyweight strength training.
 
