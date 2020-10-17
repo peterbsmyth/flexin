@@ -1,0 +1,23 @@
+@import 'utils';
+
+.card {
+  @include caption;
+  font-weight: $weight-normal;
+  text-transform: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-radius;
+  padding: $space-xs;
+  margin: $space-xs $space-m $space-s;
+
+  &__header {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: $card-spacing-vertical;
+    height: $space-l;
+  }
+}
+
+:host-context(.active) .card {
+  background-color: $grey-100;
+}

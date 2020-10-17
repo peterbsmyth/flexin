@@ -18,8 +18,8 @@ import { Subject } from 'rxjs';
 import { SessionItemData } from '@bod/coaching/domain';
 import { MatDialog } from '@angular/material/dialog';
 import { Exercise } from '@bod/shared/models';
-import { ExerciseDialog } from '../../../exercises/components/exercise-dialog/exercise.dialog';
 import { OnChange } from '@bod/shared/utils';
+import { ExerciseDialog } from '../exercise-dialog/exercise.dialog';
 
 @Component({
   selector: 'coaching-session-item',
