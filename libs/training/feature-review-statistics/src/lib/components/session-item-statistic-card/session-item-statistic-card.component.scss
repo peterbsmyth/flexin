@@ -42,8 +42,8 @@
     }
 
     td {
-      padding: $space-s;
       border: 1px solid $grey-300;
+      padding: 1px $space-s $space-s 1px;
     }
 
     tr:first-child td {
