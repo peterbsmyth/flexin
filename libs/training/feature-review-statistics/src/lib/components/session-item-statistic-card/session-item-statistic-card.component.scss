@@ -33,7 +33,7 @@
   &__table {
     border: none;
     border-collapse: collapse;
-    margin: $space-s !important;
+    margin-bottom: $space-s !important;
 
     th {
       @include caption;
@@ -53,7 +53,7 @@
   &__additional {
     display: flex;
     flex-direction: column;
-    margin: $space-s;
+    text-transform: lowercase;
     justify-content: space-between;
 
     &__item {
