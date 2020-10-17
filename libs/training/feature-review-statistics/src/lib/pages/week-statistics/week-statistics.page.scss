@@ -6,8 +6,27 @@
   justify-content: space-evenly;
 }
 
-mat-card {
-  margin: $space-s;
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-radius;
+  padding: $space-xs;
+  margin: $space-xs $space-m $space-s;
+
+  &__header {
+    @include subheadline;
+    display: flex;
+    justify-content: center;
+    margin: $space-s 0 $space-m;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 $space-m $space-m !important;
+  }
 }
 
 .video {
@@ -28,12 +47,12 @@ iframe {
 @media only screen and (max-width: 600px) {
   .container {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   iframe {
-    width: 361px;
-    height: 203px;
+    width: 340px;
+    height: 191px;
   }
 
   ::ng-deep .mat-tab-body-wrapper {

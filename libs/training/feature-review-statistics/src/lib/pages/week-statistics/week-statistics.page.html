@@ -12,9 +12,9 @@
   </bod-breadcrumbs>
   <!-- src is set in .ts because youtube considers property binding a possible XSS attack -->
   <div class="container">
-    <mat-card *ngIf="weekStatistic.playlist">
-      <h2>Week {{ weekStatistic.week.number }} Playlist</h2>
-      <mat-card-content>
+    <mat-card class="card" *ngIf="weekStatistic.playlist">
+      <span class="card__header">Playlist</span>
+      <mat-card-content class="card__body">
         <iframe
           #player
           height="315"
