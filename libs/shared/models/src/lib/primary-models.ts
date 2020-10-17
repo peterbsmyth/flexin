@@ -35,6 +35,7 @@ export interface Session {
 export interface Week {
   id?: number;
   programId?: number;
+  program?: Program;
   weekStatisticId: number;
   weekStatistic?: WeekStatistic;
   number: number;

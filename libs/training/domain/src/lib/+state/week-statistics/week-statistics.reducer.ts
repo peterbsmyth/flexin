@@ -9,7 +9,7 @@ export const WEEKSTATISTICS_FEATURE_KEY = 'weekStatistics';
 export interface WeekStatisticsState extends EntityState<WeekStatistic> {
   selectedId?: string | number; // which WeekStatistics record has been selected
   loaded: boolean; // has the WeekStatistics list been loaded
-  descendantsLoaded?: boolean; // has the WeekStatistics list been loaded
+  relationsLoaded?: boolean; // has the WeekStatistics list been loaded
   error?: string | null; // last known error (if any)
 }
 
@@ -59,14 +59,14 @@ const weekStatisticsReducer = createReducer(
     ...state,
     error: '',
   })),
-  on(WeekStatisticsActions.loadDescendants, (state, { id }) => ({
+  on(WeekStatisticsActions.loadRelations, (state, { id }) => ({
     ...state,
     selectedId: id,
-    descendantsLoaded: false,
+    relationsLoaded: false,
   })),
-  on(WeekStatisticsActions.loadDescendantsSuccess, (state) => ({
+  on(WeekStatisticsActions.loadRelationsSuccess, (state) => ({
     ...state,
-    descendantsLoaded: true,
+    relationsLoaded: true,
   }))
 );
 

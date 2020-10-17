@@ -29,12 +29,13 @@ import { SetStatisticsActions } from '../set-statistics/actions';
 import { SetStatisticDataService } from '../../infrastructure/set-statistic.data.service';
 import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
 import { ExercisesActions } from '../exercises/actions';
+import { ProgramsActions } from '../programs/actions';
 
 @Injectable()
 export class WeekStatisticsEffects {
   loadDescendants$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(WeekStatisticsActions.loadDescendants),
+      ofType(WeekStatisticsActions.loadRelations),
       fetch({
         run: ({ id }) => {
           return this.backend.getOne(id).pipe(
@@ -44,6 +45,11 @@ export class WeekStatisticsEffects {
               this.store.dispatch(
                 WeekStatisticsActions.loadWeekStatisticSuccess({
                   weekStatistic,
+                })
+              );
+              this.store.dispatch(
+                ProgramsActions.loadProgram({
+                  id: weekStatistic.week.programId,
                 })
               );
 
@@ -128,7 +134,7 @@ export class WeekStatisticsEffects {
                 ExercisesActions.loadExercisesSuccess({
                   exercises,
                 }),
-                WeekStatisticsActions.loadDescendantsSuccess(),
+                WeekStatisticsActions.loadRelationsSuccess(),
               ];
             })
           );
@@ -144,12 +150,12 @@ export class WeekStatisticsEffects {
   );
 
   loadWeekStatisticsFailureReset$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(WeekStatisticsActions.loadWeekStatisticsFailure),
-    delay(1000),
-    map(() => WeekStatisticsActions.loadWeekStatisticsFailureReset())
-  )
-);
+    this.actions$.pipe(
+      ofType(WeekStatisticsActions.loadWeekStatisticsFailure),
+      delay(1000),
+      map(() => WeekStatisticsActions.loadWeekStatisticsFailureReset())
+    )
+  );
 
   loadWeekStatistics$ = createEffect(() =>
     this.actions$.pipe(

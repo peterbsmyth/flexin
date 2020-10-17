@@ -19,7 +19,7 @@ export class WeekStatisticsPage implements OnInit, AfterViewInit {
 
   @ViewChild('player') player: ElementRef;
   constructor(private weekStatisticsState: WeekStatisticsFacade) {
-    this.weekStatistic$ = this.weekStatisticsState.selectedWeekStatisticsWithDescendants$.pipe(
+    this.weekStatistic$ = this.weekStatisticsState.selectedWeekStatisticsWithRelations$.pipe(
       filter((data) => !!data)
     );
   }
@@ -31,7 +31,7 @@ export class WeekStatisticsPage implements OnInit, AfterViewInit {
    * after the view is initialized then attach the playlist to the player, if it exists
    */
   ngAfterViewInit() {
-    this.weekStatisticsState.selectedWeekStatisticsWithDescendants$
+    this.weekStatisticsState.selectedWeekStatisticsWithRelations$
       .pipe(
         filter((data) => !!data),
         take(1),
@@ -52,7 +52,7 @@ export class WeekStatisticsPage implements OnInit, AfterViewInit {
    * @param setStatistics
    */
   hasStatistics(setStatistics: SetStatistic[]) {
-    if (!setStatistics || setStatistics.every(s => s.reps === 0)) {
+    if (!setStatistics || setStatistics.every((s) => s.reps === 0)) {
       return false;
     } else {
       return true;

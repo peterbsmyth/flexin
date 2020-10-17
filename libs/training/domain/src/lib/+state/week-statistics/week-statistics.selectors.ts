@@ -8,6 +8,7 @@ import { PartialState } from '../root.reducer';
 import { getSessionStatisticsEntities } from '../session-statistics/session-statistics.selectors';
 import { getSessionItemStatisticsEntities } from '../session-item-statistics/session-item-statistics.selectors';
 import { getExercisesEntities } from '../exercises/exercises.selectors';
+import { getProgramsEntities } from '../weeks/weeks.selectors';
 
 // Lookup the 'WeekStatistics' feature state managed by NgRx
 export const getWeekStatisticsState = createFeatureSelector<
@@ -22,9 +23,9 @@ export const getWeekStatisticsLoaded = createSelector(
   (state: WeekStatisticsState) => state.loaded
 );
 
-export const getWeekStatisticsDescendantsLoaded = createSelector(
+export const getWeekStatisticsRelationsLoaded = createSelector(
   getWeekStatisticsState,
-  (state: WeekStatisticsState) => state.descendantsLoaded
+  (state: WeekStatisticsState) => state.relationsLoaded
 );
 
 export const getWeekStatisticsError = createSelector(
@@ -53,16 +54,18 @@ export const getSelected = createSelector(
   (entities, selectedId) => selectedId && entities[selectedId]
 );
 
-export const getSelectedWithDescendants = createSelector(
+export const getSelectedWithRelations = createSelector(
   getSelected,
   getSessionStatisticsEntities,
   getSessionItemStatisticsEntities,
   getExercisesEntities,
+  getProgramsEntities,
   (
     weekStatistic,
     sessionStatisticEntities,
     sessionItemStatisticsEntities,
-    exercisesEntities
+    exercisesEntities,
+    programsEntities
   ) => {
     if (
       weekStatistic &&
@@ -71,6 +74,10 @@ export const getSelectedWithDescendants = createSelector(
     ) {
       return {
         ...weekStatistic,
+        week: {
+          ...weekStatistic.week,
+          program: programsEntities[weekStatistic.week.programId],
+        },
         sessionStatistics: weekStatistic.sessionStatistics
           .map(({ id }) => sessionStatisticEntities[id])
           .filter((s) => s)

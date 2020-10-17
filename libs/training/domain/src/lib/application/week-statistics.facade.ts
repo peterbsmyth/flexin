@@ -19,11 +19,11 @@ export class WeekStatisticsFacade {
   selectedWeekStatistics$ = this.store.pipe(
     select(WeekStatisticsSelectors.getSelected)
   );
-  selectedWeekStatisticsWithDescendants$ = this.store.pipe(
-    select(WeekStatisticsSelectors.getSelectedWithDescendants)
+  selectedWeekStatisticsWithRelations$ = this.store.pipe(
+    select(WeekStatisticsSelectors.getSelectedWithRelations)
   );
-  descendantsLoaded$ = this.store.pipe(
-    select(WeekStatisticsSelectors.getWeekStatisticsDescendantsLoaded)
+  relationsLoaded$ = this.store.pipe(
+    select(WeekStatisticsSelectors.getWeekStatisticsRelationsLoaded)
   );
 
   constructor(private store: Store<fromRoot.PartialState>) {}

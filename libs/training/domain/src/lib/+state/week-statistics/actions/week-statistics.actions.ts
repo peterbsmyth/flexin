@@ -92,16 +92,16 @@ export const updateWeekStatisticFailure = createAction(
   props<{ error: any }>()
 );
 
-export const loadDescendants = createAction(
-  '[WeekStatistics] Load Descendants',
+export const loadRelations = createAction(
+  '[WeekStatistics] Load Relations',
   props<{ id: number }>()
 );
 
-export const loadDescendantsSuccess = createAction(
-  '[WeekStatistics] Load Descendants Success'
+export const loadRelationsSuccess = createAction(
+  '[WeekStatistics] Load Relations Success'
 );
 
-export const loadDescendantsFailure = createAction(
-  '[WeekStatistics] Load Descendants Failure',
+export const loadRelationsFailure = createAction(
+  '[WeekStatistics] Load Relations Failure',
   props<{ error: any }>()
 );

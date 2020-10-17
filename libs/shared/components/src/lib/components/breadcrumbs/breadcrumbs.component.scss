@@ -4,7 +4,8 @@
   border-bottom: $size-border-s dashed $grey-500;
 }
 
-:host ::ng-deep * {
+:host ::ng-deep span,
+:host ::ng-deep a {
   @include subheadline;
   color: inherit;
 }

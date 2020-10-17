@@ -1,6 +1,17 @@
-<div class="container">
+<ng-container *ngIf="(weekStatistic$ | async) as weekStatistic">
+  <bod-breadcrumbs>
+    <a [routerLink]="['/programs', weekStatistic.week.program.id]"
+      >{{ weekStatistic.week.program.name }}</a
+    >
+    <span>&nbsp;>&nbsp;</span>
+    <a [routerLink]="['/weeks', weekStatistic.week.id]"
+      >Week {{ weekStatistic.week.number }}</a
+    >
+    <span>&nbsp;>&nbsp;</span>
+    <span>statistics</span>
+  </bod-breadcrumbs>
   <!-- src is set in .ts because youtube considers property binding a possible XSS attack -->
-  <ng-container *ngIf="(weekStatistic$ | async) as weekStatistic">
+  <div class="container">
     <mat-card *ngIf="weekStatistic.playlist">
       <h2>Week {{ weekStatistic.week.number }} Playlist</h2>
       <mat-card-content>
@@ -27,5 +38,5 @@
         </ng-container>
       </mat-tab>
     </mat-tab-group>
-  </ng-container>
-</div>
+  </div>
+</ng-container>
