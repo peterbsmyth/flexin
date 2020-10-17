@@ -5,12 +5,17 @@
     </header>
     <mat-card-content class="card__body">
       <ng-container *ngrxLet="maxRepsOfAllTime$ as bestSet">
-        <span class="card__text">Most reps in a set: {{ bestSet }}</span>
+        <span class="card__label">
+          Most reps in a set
+        </span>
+        <span class="card__text">{{ bestSet }}</span>
       </ng-container>
       <ng-container *ngIf="(bestSet$ | async) as bestSet">
+        <span class="card__label">
+          Most Reps at {{ bestSet.weight }} lbs (max weight)
+        </span>
         <span class="card__text">
-          Most Reps at maximum weight ({{ bestSet.weight }} lbs): {{
-          bestSet.reps }}
+          {{ bestSet.reps }}
         </span>
       </ng-container>
     </mat-card-content>

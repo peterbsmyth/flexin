@@ -58,4 +58,24 @@
   &__body {
     margin: 0 $space-m $space-m !important;
   }
+
+  &__text {
+    @include data-point;
+    margin: $space-xs 0 $space-s;
+  }
+
+  &__additional {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__item {
+      margin-bottom: $space-s;
+    }
+
+    &__label {
+      @include caption;
+      display: flex;
+    }
+  }
 }

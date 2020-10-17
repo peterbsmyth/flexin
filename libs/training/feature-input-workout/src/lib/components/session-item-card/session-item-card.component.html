@@ -43,24 +43,29 @@
           </mat-form-field>
         </div>
       </section>
-      <footer class="card__footer">
-        <span>
-          <span *ngIf="data.sessionItem.AMRAP; else goalReps">Goal: AMRAP</span>
-          <ng-template #goalReps
-            ><span>Goal: {{ data.sessionItem.reps }} Reps</span></ng-template
-          >
-          <span *ngIf="data.sessionItem.intensity"
-            >, {{ data.sessionItem.intensity }}</span
-          >
-          <span *ngIf="data.sessionItem.weight"
-            >, {{ data.sessionItem.weight }}
-            {{ data.sessionItem.weightUnit }}</span
-          >
-          <span *ngIf="data.sessionItem.tempo"
-            >, {{ data.sessionItem.tempo }}</span
-          >
-        </span>
-      </footer>
+      <ng-container>
+        <div class="card__additional">
+          <div class="card__additional__item">
+            <span class="card__additional__label">Goal</span>
+            <span class="card__text">
+              <span *ngIf="data.sessionItem.AMRAP; else goalReps">AMRAP</span>
+              <ng-template #goalReps
+                ><span>{{ data.sessionItem.reps }} reps</span></ng-template
+              >
+              <span *ngIf="data.sessionItem.intensity"
+                >, {{ data.sessionItem.intensity }}</span
+              >
+              <span *ngIf="data.sessionItem.weight"
+                >, {{ data.sessionItem.weight }}
+                {{ data.sessionItem.weightUnit }}</span
+              >
+              <span *ngIf="data.sessionItem.tempo"
+                >, {{ data.sessionItem.tempo }}</span
+              >
+            </span>
+          </div>
+        </div>
+      </ng-container>
     </mat-card-content>
   </mat-card>
   <mat-card class="card">

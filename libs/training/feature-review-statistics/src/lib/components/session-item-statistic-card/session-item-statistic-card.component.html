@@ -44,6 +44,23 @@
             {{ sessionItemStatistic.rpe }}
           </span>
         </div>
+        <div class="card__additional__item">
+          <span class="card__label">Goal</span>
+          <span
+            class="card__text"
+            *ngIf="sessionItemStatistic.sessionItem.AMRAP; else goalReps"
+          >
+            AMRAP, {{ sessionItemStatistic.sessionItem.intensity }},
+            {{ sessionItemStatistic.sessionItem.tempo }}
+          </span>
+          <ng-template #goalReps>
+            <span class="card__text">
+              {{ sessionItemStatistic.sessionItem.reps }} reps,
+              {{ sessionItemStatistic.sessionItem.intensity }},
+              {{ sessionItemStatistic.sessionItem.tempo }}
+            </span>
+          </ng-template>
+        </div>
       </div>
     </ng-container>
   </mat-card-content>

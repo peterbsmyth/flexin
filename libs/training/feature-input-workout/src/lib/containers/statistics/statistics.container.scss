@@ -21,6 +21,11 @@
     margin: 0 $space-m $space-m !important;
   }
 
+  &__label {
+    @include caption;
+    display: flex;
+  }
+
   &__text {
     @include data-point;
     margin: $space-xs 0 $space-s;
