@@ -43,5 +43,19 @@ export class SessionItemDataService {
     });
   }
 
+  saveOne(sessionItem: SessionItem) {
+    return this.http.post<SessionItem>(
+      `${this.API_URL}/session-items`,
+      sessionItem
+    );
+  }
+
+  patchOne(sessionItem: SessionItem): Observable<SessionItem> {
+    return this.http.patch<SessionItem>(
+      `${this.API_URL}/session-items/${sessionItem.id}`,
+      sessionItem
+    );
+  }
+
   constructor(private http: HttpClient) {}
 }

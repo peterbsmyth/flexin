@@ -20,7 +20,9 @@ export class SessionDataService {
     return this.http.get<Session>(`${this.API_URL}/sessions/${id}`);
   }
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  saveOne(session: Session): Observable<Session> {
+    return this.http.post<Session>(`${this.API_URL}/sessions`, session);
+  }
+
+  constructor(private http: HttpClient) {}
 }

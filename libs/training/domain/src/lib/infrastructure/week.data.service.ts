@@ -29,5 +29,9 @@ export class WeekDataService {
     return this.http.get<Week>(`${this.API_URL}/weeks/${id}`, { params });
   }
 
+  saveOne(week: Week): Observable<Week> {
+    return this.http.post<Week>(`${this.API_URL}/weeks`, week);
+  }
+
   constructor(private http: HttpClient) {}
 }

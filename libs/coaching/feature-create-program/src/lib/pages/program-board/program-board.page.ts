@@ -68,9 +68,11 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
 
   onUpdate(lists) {
     this.programState.dispatch(
-      ProgramsActions.addIncompleteSessionItems({
-        lists,
-      })
+      ProgramsActions.addIncompleteSessionItemsFromCreateFeatureProgramBoardPage(
+        {
+          lists,
+        }
+      )
     );
   }
 

@@ -16,4 +16,8 @@ export class ProgramDataService {
   getOne(id: number): Observable<Program> {
     return this.http.get<Program>(`${this.API_URL}/programs/${id}`);
   }
+
+  saveOne(program: Program): Observable<Program> {
+    return this.http.post<Program>(`${this.API_URL}/programs`, program);
+  }
 }

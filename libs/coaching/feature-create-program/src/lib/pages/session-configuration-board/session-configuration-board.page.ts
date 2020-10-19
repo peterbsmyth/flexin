@@ -79,7 +79,7 @@ export class SessionConfigurationBoardPage implements OnInit {
 
   onClickCreateProgram() {
     this.programsState.dispatch(
-      ProgramsActions.createProgram({
+      ProgramsActions.createProgramFromCreateFeatureSessionPage({
         data: this._data,
         name: this.programName.value,
       })

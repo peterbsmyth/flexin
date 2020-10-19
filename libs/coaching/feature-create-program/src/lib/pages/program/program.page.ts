@@ -47,7 +47,7 @@ export class ProgramPage implements OnInit {
           sessionItems,
           exercises,
         };
-      }),
+      })
     );
   }
 
@@ -59,7 +59,7 @@ export class ProgramPage implements OnInit {
 
   ngOnInit(): void {
     this.programsState.dispatch(
-      ProgramsActions.loadDescendants({
+      ProgramsActions.loadDescendantsFromCreateFeatureProgramPage({
         id: this.route.snapshot.params['programId'],
       })
     );

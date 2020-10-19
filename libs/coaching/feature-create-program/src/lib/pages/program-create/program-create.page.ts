@@ -9,6 +9,8 @@ export class ProgramCreatePage implements OnInit {
   constructor(private programsState: ProgramsFacade) {}
 
   ngOnInit(): void {
-    this.programsState.dispatch(ProgramsActions.loadPrograms());
+    this.programsState.dispatch(
+      ProgramsActions.loadProgramsFromCreateFeatureCreatePage()
+    );
   }
 }

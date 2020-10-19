@@ -23,24 +23,33 @@ export const initialState: ProgramsState = programsAdapter.getInitialState({
 
 export const programsReducer = createReducer(
   initialState,
-  on(ProgramsActions.loadPrograms, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
+  on(
+    ProgramsActions.loadPrograms,
+    ProgramsActions.loadProgramsFromCreateFeatureCreatePage,
+    ProgramsActions.loadProgramsFromCreateFeatureProgramsPage,
+    (state) => ({
+      ...state,
+      loaded: false,
+      error: null,
+    })
+  ),
   on(ProgramsActions.loadProgramsSuccess, (state, { programs }) =>
-    programsAdapter.setAll(programs, { ...state, loaded: true })
+    programsAdapter.upsertMany(programs, { ...state, loaded: true })
   ),
   on(ProgramsActions.loadProgramsFailure, (state, { error }) => ({
     ...state,
     error,
   })),
-  on(ProgramsActions.selectProgram, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  })),
+  on(
+    ProgramsActions.selectProgram,
+    ProgramsActions.selectProgramFromGuard,
+    (state, { id }) => ({
+      ...state,
+      selectedId: id,
+    })
+  ),
   on(ProgramsActions.loadProgramSuccess, (state, { program }) =>
-    programsAdapter.setOne(program, { ...state, loaded: true })
+    programsAdapter.upsertOne(program, { ...state, loaded: true })
   )
 );
 

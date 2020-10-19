@@ -29,14 +29,16 @@ export class ProgramExistsGuard implements CanActivate {
     /**
      * if there is a result from selected program, cool
      */
-    this.programsState.dispatch(ProgramsActions.selectProgram({ id: +id }));
+    this.programsState.dispatch(
+      ProgramsActions.selectProgramFromGuard({ id: +id })
+    );
     return this.hasProgramInStore().pipe(
       switchMap((inStore) => {
         if (inStore) {
           return of(inStore);
         } else {
           this.programsState.dispatch(
-            ProgramsActions.loadProgram({ id: +id })
+            ProgramsActions.loadProgramFromGuard({ id: +id })
           );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.programsState.selectedPrograms$),
