@@ -23,7 +23,7 @@ export const initialState: ExercisesState = exercisesAdapter.getInitialState({
 const exercisesReducer = createReducer(
   initialState,
   on(
-    ExercisesActions.loadExercise,
+    ExercisesActions.loadExerciseFromInputFeatureSessionItemPage,
     ExercisesActions.loadExerciseFromGuard,
     ExercisesActions.saveExerciseFromPage,
     ExercisesActions.loadExercisesFromPage,
@@ -55,7 +55,8 @@ const exercisesReducer = createReducer(
   ),
   on(
     ExercisesActions.selectExerciseFromGuard,
-    ExercisesActions.selectExercise,
+    ExercisesActions.selectExerciseFromInputFeatureExercisePage,
+    ExercisesActions.selectExerciseFromInputFeatureSessionItemPage,
     (state, { id }) => ({
       ...state,
       selectedId: id,

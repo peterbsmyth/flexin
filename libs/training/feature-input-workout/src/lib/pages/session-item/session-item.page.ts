@@ -65,10 +65,14 @@ export class SessionItemPage implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$),
         tap((sessionItem) => {
           this.sessionsState.dispatch(
-            ExercisesActions.loadExercise({ id: sessionItem.exerciseId })
+            ExercisesActions.loadExerciseFromInputFeatureSessionItemPage({
+              id: sessionItem.exerciseId,
+            })
           );
           this.sessionsState.dispatch(
-            ExercisesActions.selectExercise({ id: sessionItem.exerciseId })
+            ExercisesActions.selectExerciseFromInputFeatureSessionItemPage({
+              id: sessionItem.exerciseId,
+            })
           );
         })
       )

@@ -10,7 +10,7 @@ export class ExercisesEffects {
   loadExercise$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        ExercisesActions.loadExercise,
+        ExercisesActions.loadExerciseFromInputFeatureSessionItemPage,
         ExercisesActions.loadExerciseFromGuard
       ),
       fetch({

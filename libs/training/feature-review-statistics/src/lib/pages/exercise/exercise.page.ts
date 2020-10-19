@@ -73,7 +73,7 @@ export class ExercisePage implements OnInit {
 
   ngOnInit(): void {
     this.exerciseState.dispatch(
-      ExercisesActions.selectExercise({
+      ExercisesActions.selectExerciseFromInputFeatureExercisePage({
         id: this.route.snapshot.params['exerciseId'],
       })
     );
