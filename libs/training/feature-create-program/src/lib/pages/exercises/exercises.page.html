@@ -1,0 +1,16 @@
+<bod-actions-bar>
+  <bod-button routerLink="create">Create</bod-button>
+</bod-actions-bar>
+
+<h2>Exercises</h2>
+<main *ngIf="(loaded$ | async); else loading;">
+  <article>
+    <training-exercise-table> </training-exercise-table>
+  </article>
+</main>
+
+<ng-template #loading>
+  <p>
+    Loading...
+  </p>
+</ng-template>

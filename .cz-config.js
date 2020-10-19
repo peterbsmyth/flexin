@@ -15,7 +15,6 @@ module.exports = {
   ],
 
   scopes: [
-    { name: 'coaching', description: 'anything Coaching specific' },
     { name: 'training', description: 'anything Training specific' },
     { name: 'celebrity', description: 'anything Celebrity specific' },
     { name: 'docs', description: 'anything related to docs infrastructure' },

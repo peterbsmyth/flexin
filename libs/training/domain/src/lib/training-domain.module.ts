@@ -43,6 +43,8 @@ import * as fromSessionStatistics from './+state/session-statistics/session-stat
 import { SessionStatisticsEffects } from './+state/session-statistics/session-statistics.effects';
 import { SessionStatisticsFacade } from './application/session-statistics.facade';
 import { SessionStatisticDataService } from './infrastructure/session-statistic.data.service';
+import { DraftProgramsDataService } from './infrastructure/draft-programs.data.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -95,8 +97,9 @@ import { SessionStatisticDataService } from './infrastructure/session-statistic.
       ExercisesEffects,
       WeekStatisticsEffects,
       ProgramStatisticsEffects,
-      SessionStatisticsEffects
+      SessionStatisticsEffects,
     ]),
+    MatSnackBarModule,
   ],
   providers: [
     ProgramDataService,
@@ -119,6 +122,7 @@ import { SessionStatisticDataService } from './infrastructure/session-statistic.
     ProgramStatisticsFacade,
     SessionStatisticDataService,
     SessionStatisticsFacade,
+    DraftProgramsDataService,
   ],
 })
 export class TrainingDomainModule {}

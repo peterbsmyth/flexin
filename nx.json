@@ -23,16 +23,13 @@
       "tags": ["domain:training", "type:app"]
     },
     "coach": {
-      "tags": ["domain:coaching", "type:app"]
+      "tags": ["domain:training", "type:app"]
     },
     "shared-environments": {
       "tags": ["domain:shared", "type:util"]
     },
     "training-domain": {
       "tags": ["domain:training", "type:domain-logic"]
-    },
-    "coaching-domain": {
-      "tags": ["domain:coaching", "type:domain-logic"]
     },
     "shared-domain": {
       "tags": ["domain:shared", "type:domain-logic"]
@@ -45,9 +42,6 @@
     },
     "training-feature-input-workout": {
       "tags": ["domain:training", "type:feature"]
-    },
-    "coaching-feature-create-program": {
-      "tags": ["domain:coaching", "type:feature"]
     },
     "celebrities-domain": {
       "tags": ["domain:celebrities", "type:domain-logic"]
@@ -66,6 +60,9 @@
     },
     "shared-utils": {
       "tags": ["type:util", "domain:shared"]
+    },
+    "training-feature-create-program": {
+      "tags": ["domain:training", "type:feature"]
     }
   },
   "affected": {

@@ -309,38 +309,6 @@
         }
       }
     },
-    "coaching-domain": {
-      "projectType": "library",
-      "root": "libs/coaching/domain",
-      "sourceRoot": "libs/coaching/domain/src",
-      "prefix": "coaching",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/coaching/domain/tsconfig.lib.json",
-            "project": "libs/coaching/domain/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/coaching/domain/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/coaching/domain/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/coaching/domain/**/*"]
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "shared-domain": {
       "projectType": "library",
       "root": "libs/shared/domain",
@@ -469,43 +437,6 @@
             "exclude": [
               "**/node_modules/**",
               "!libs/training/feature-input-workout/**/*"
-            ]
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
-    "coaching-feature-create-program": {
-      "projectType": "library",
-      "root": "libs/coaching/feature-create-program",
-      "sourceRoot": "libs/coaching/feature-create-program/src",
-      "prefix": "coaching",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/coaching/feature-create-program/tsconfig.lib.json",
-            "project": "libs/coaching/feature-create-program/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/coaching/feature-create-program/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/coaching/feature-create-program/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/coaching/feature-create-program/**/*"
             ]
           }
         }
@@ -803,6 +734,43 @@
       },
       "schematics": {
         "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "training-feature-create-program": {
+      "projectType": "library",
+      "root": "libs/training/feature-create-program",
+      "sourceRoot": "libs/training/feature-create-program/src",
+      "prefix": "training",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/training/feature-create-program/tsconfig.lib.json",
+            "project": "libs/training/feature-create-program/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/training/feature-create-program/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/training/feature-create-program/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/training/feature-create-program/**/*"
+            ]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
           "style": "scss"
         }
       }

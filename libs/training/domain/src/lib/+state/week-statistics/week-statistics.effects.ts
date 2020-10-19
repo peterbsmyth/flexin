@@ -48,7 +48,7 @@ export class WeekStatisticsEffects {
                 })
               );
               this.store.dispatch(
-                ProgramsActions.loadProgram({
+                ProgramsActions.loadProgramFromWeekStatisticEffect({
                   id: weekStatistic.week.programId,
                 })
               );

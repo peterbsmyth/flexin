@@ -1,0 +1,9 @@
+<bod-actions-bar>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput type="search" [formControl]="search" />
+  </mat-form-field>
+  <bod-button (click)="onClickNext()">Next</bod-button>
+</bod-actions-bar>
+<training-program-board [data]="data$ | async" (update)="onUpdate($event)">
+</training-program-board>

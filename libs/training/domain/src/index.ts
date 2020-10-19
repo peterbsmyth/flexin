@@ -17,7 +17,8 @@ export * from './lib/application/session-statistics.facade';
 /**
  * Entities
  */
-export * from './lib/entities/session-item-card.models';
+export * from './lib/entities/draft.models';
+export * from './lib/entities/component.models';
 
 /**
  * Actions

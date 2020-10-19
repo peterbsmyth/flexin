@@ -6,7 +6,7 @@ import { WeekDataService } from '../infrastructure/week.data.service';
 import { SessionDataService } from '../infrastructure/session.data.service';
 import { SessionItemDataService } from '../infrastructure/session-item.data.service';
 import { BoardCardData, SessionItemData } from '../entities/component.models';
-import { DraftProgram } from '../entities/draft';
+import { DraftProgram } from '../entities/draft.models';
 import { uniqBy } from 'lodash-es';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';

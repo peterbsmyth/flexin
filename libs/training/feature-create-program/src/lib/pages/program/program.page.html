@@ -1,0 +1,22 @@
+<div *ngIf="(loaded$ | async); else loading;">
+  <div *ngIf="(program$ | async) as program">
+    <h1>{{ program.program.name }}</h1>
+    <h2>Current Week {{ (selectedWeek$ | async) + 1 }}</h2>
+    <div class="weeks__bar">
+      <h3>Select Week:&nbsp;</h3>
+      <a
+        *ngFor="let week of program.weeks; let i = index;"
+        (click)="onSelectWeek(i)"
+        ><h3>{{ week.number }} &nbsp;</h3></a
+      >
+    </div>
+  </div>
+</div>
+<training-program-board
+  [displaySource]="false"
+  [data]="data$ | async"
+  (update)="onUpdate($event)"
+></training-program-board>
+<ng-template #loading>
+  Loading...
+</ng-template>

@@ -52,6 +52,7 @@ export class ProgramsEffects {
     this.actions$.pipe(
       ofType(
         ProgramsActions.loadProgramFromInputFeatureProgramPage,
+        ProgramsActions.loadProgramFromWeekStatisticEffect,
         ProgramsActions.loadProgramFromGuard
       ),
       fetch({

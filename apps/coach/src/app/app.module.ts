@@ -12,7 +12,7 @@ import {
 } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@bod/shared/environments';
-import { CoachingFeatureCreateProgramModule } from '@bod/coaching/feature-create-program';
+import { CoachingFeatureCreateProgramModule } from '@bod/training/feature-create-program';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

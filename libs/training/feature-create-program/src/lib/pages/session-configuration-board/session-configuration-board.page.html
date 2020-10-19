@@ -1,0 +1,21 @@
+<bod-actions-bar>
+  <mat-form-field>
+    <mat-label>
+      Program Name
+    </mat-label>
+    <input matInput [formControl]="programName" type="text" />
+  </mat-form-field>
+  <bod-button [disabled]="invalid$ | async" (click)="onClickCreateProgram()"
+    >Create Program</bod-button
+  >
+</bod-actions-bar>
+<training-board>
+  <training-session-item
+    class="item"
+    *ngFor="let data of programsState.draftSessionConfiguration$ | async; let i = index;"
+    [data]="data"
+    (update)="onUpdate($event)"
+    (updateExercise)="onUpdateExercise($event)"
+    (validate)="onValidate($event, i)"
+  ></training-session-item>
+</training-board>

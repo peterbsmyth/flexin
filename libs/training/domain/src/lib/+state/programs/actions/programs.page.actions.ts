@@ -7,31 +7,36 @@ import {
 } from '../../../entities/component.models';
 
 export const loadProgramsFromInputFeatureProgramsPage = createAction(
-  '[Programs Page] Load Programs'
+  '[Programs][Input Workout][Programs Page] Load Programs'
 );
 
 export const loadProgramsSuccess = createAction(
-  '[Programs Page] Load Programs Success',
+  '[Programs] Load Programs Success',
   props<{ programs: Program[] }>()
 );
 
 export const loadProgramsFailure = createAction(
-  '[Programs Page] Load Programs Failure',
+  '[Programs] Load Programs Failure',
   props<{ error: any }>()
 );
 
 export const loadProgramFromInputFeatureProgramPage = createAction(
-  '[Programs Page] Load Program',
+  '[Programs][Input Workout][Program Page] Load Program',
+  props<{ id: number }>()
+);
+
+export const loadProgramFromWeekStatisticEffect = createAction(
+  '[Programs][Week Statistic Effect] Load Program',
   props<{ id: number }>()
 );
 
 export const loadProgramSuccess = createAction(
-  '[Programs Page] Load Program Success',
+  '[Programs] Load Program Success',
   props<{ program: Program }>()
 );
 
 export const loadProgramFailure = createAction(
-  '[Programs Page] Load Program Failure',
+  '[Programs] Load Program Failure',
   props<{ error: any }>()
 );
 

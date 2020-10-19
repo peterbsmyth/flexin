@@ -1,0 +1,6 @@
+<ng-container *ngrxLet="data$ as data">
+  <article>
+    <training-session-item-form [data]="data" (save)="onSave($event)">
+    </training-session-item-form>
+  </article>
+</ng-container>
