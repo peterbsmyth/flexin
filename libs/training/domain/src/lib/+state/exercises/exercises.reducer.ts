@@ -24,26 +24,46 @@ const exercisesReducer = createReducer(
   initialState,
   on(
     ExercisesActions.loadExercise,
+    ExercisesActions.loadExerciseFromGuard,
+    ExercisesActions.saveExerciseFromPage,
+    ExercisesActions.loadExercisesFromPage,
+    ExercisesActions.loadExercisesFromProgramBoardPage,
+    ExercisesActions.loadExercisesFromSessionItemPage,
     (state) => ({
       ...state,
       loaded: false,
       error: null,
     })
   ),
-  on(ExercisesActions.loadExerciseSuccess, (state, { exercise }) =>
-    exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
+  on(
+    ExercisesActions.updateExerciseFromPage,
+    ExercisesActions.updateExerciseFromSessionPage,
+    ExercisesActions.loadExerciseSuccess,
+    (state, { exercise }) =>
+      exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
   ),
   on(ExercisesActions.loadExercisesSuccess, (state, { exercises }) =>
     exercisesAdapter.upsertMany(exercises, { ...state, loaded: true })
   ),
-  on(ExercisesActions.loadExerciseFailure, (state, { error }) => ({
-    ...state,
-    error,
-  })),
-  on(ExercisesActions.selectExercise, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  }))
+  on(
+    ExercisesActions.loadExercisesFailure,
+    ExercisesActions.loadExerciseFailure,
+    (state, { error }) => ({
+      ...state,
+      error,
+    })
+  ),
+  on(
+    ExercisesActions.selectExerciseFromGuard,
+    ExercisesActions.selectExercise,
+    (state, { id }) => ({
+      ...state,
+      selectedId: id,
+    })
+  ),
+  on(ExercisesActions.saveExerciseSuccess, (state, { exercise }) =>
+    exercisesAdapter.addOne(exercise, { ...state, loaded: true })
+  )
 );
 
 export function reducer(state: ExercisesState | undefined, action: Action) {

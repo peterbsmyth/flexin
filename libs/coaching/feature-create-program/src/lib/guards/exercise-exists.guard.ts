@@ -30,7 +30,7 @@ export class ExerciseExistsGuard implements CanActivate {
      * if there is a result from selected exercise, cool
      */
     this.exercisesState.dispatch(
-      ExercisesActions.selectExercise({ id: +id })
+      ExercisesActions.selectExerciseFromGuard({ id: +id })
     );
     return this.hasExerciseInStore().pipe(
       switchMap((inStore) => {
@@ -38,7 +38,7 @@ export class ExerciseExistsGuard implements CanActivate {
           return of(inStore);
         } else {
           this.exercisesState.dispatch(
-            ExercisesActions.loadExercise({ id: +id })
+            ExercisesActions.loadExerciseFromGuard({ id: +id })
           );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.exercisesState.selectedExercises$),

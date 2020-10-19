@@ -16,7 +16,7 @@ export class ExerciseCreatePage implements OnInit {
 
   onSave(exercise) {
     this.exercisesState.dispatch(
-      ExercisesActions.saveExercise({ exercise })
+      ExercisesActions.saveExerciseFromPage({ exercise })
     );
     this.router.navigate(['exercises']);
   }

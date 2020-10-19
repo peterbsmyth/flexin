@@ -42,6 +42,8 @@ export class SessionItemPage implements OnInit {
   }
 
   ngOnInit() {
-    this.exerciseState.dispatch(ExercisesActions.loadExercises());
+    this.exerciseState.dispatch(
+      ExercisesActions.loadExercisesFromSessionItemPage()
+    );
   }
 }

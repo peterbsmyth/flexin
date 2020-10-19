@@ -43,3 +43,7 @@ nx serve coach --open
 ```
 nx serve athlete --open
 ```
+
+### ngrx Follows
+
+[Commands, Documents, Events](https://blog.nrwl.io/ngrx-patterns-and-techniques-f46126e2b1e5)

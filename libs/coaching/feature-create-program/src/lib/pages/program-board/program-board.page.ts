@@ -28,7 +28,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
     this.data$ = combineLatest([
       this.search.valueChanges,
       this.exerciseState.allExercises$,
-      this.programState.draftProgramBoard$
+      this.programState.draftProgramBoard$,
     ]).pipe(
       map(([term, exercises, draft]) => {
         if (term === '') {
@@ -42,14 +42,21 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
             .filter((result) => result.score < 0.45)
             .map((result) => result.item);
 
-          return { exercises: filteredExercises, draft, sessionItems: [], sessions: [] };
+          return {
+            exercises: filteredExercises,
+            draft,
+            sessionItems: [],
+            sessions: [],
+          };
         }
       })
     );
   }
 
   ngOnInit(): void {
-    this.exerciseState.dispatch(ExercisesActions.loadExercises());
+    this.exerciseState.dispatch(
+      ExercisesActions.loadExercisesProgramBoardPage()
+    );
   }
 
   ngAfterViewInit() {
@@ -62,7 +69,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   onUpdate(lists) {
     this.programState.dispatch(
       ProgramsActions.addIncompleteSessionItems({
-        lists
+        lists,
       })
     );
   }

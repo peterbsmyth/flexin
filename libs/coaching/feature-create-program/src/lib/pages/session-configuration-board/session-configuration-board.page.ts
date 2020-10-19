@@ -57,7 +57,9 @@ export class SessionConfigurationBoardPage implements OnInit {
   }
 
   onUpdateExercise(exercise: Exercise) {
-    this.programsState.dispatch(ExercisesActions.updateExercise({ exercise }));
+    this.programsState.dispatch(
+      ExercisesActions.updateExerciseFromSessionPage({ exercise })
+    );
   }
 
   /**

@@ -5,7 +5,7 @@ import { ExercisesFacade, ExercisesActions } from '@bod/coaching/domain';
 
 @Component({
   templateUrl: './exercises.page.html',
-  styleUrls: ['./exercises.page.scss']
+  styleUrls: ['./exercises.page.scss'],
 })
 export class ExercisesPage implements OnInit {
   exercises$: Observable<Exercise[]>;
@@ -16,6 +16,6 @@ export class ExercisesPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.exercisesState.dispatch(ExercisesActions.loadExercises());
+    this.exercisesState.dispatch(ExercisesActions.loadExercisesFromPage());
   }
 }
