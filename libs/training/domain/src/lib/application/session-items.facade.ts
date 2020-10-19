@@ -16,12 +16,13 @@ export class SessionItemsFacade {
   selectedSessionItems$ = this.store.pipe(
     select(SessionItemsSelectors.getSelected)
   );
+  selectedSessionItemsWithExercise$ = this.store.pipe(
+    select(SessionItemsSelectors.getSelectedWithExercise)
+  );
+  pages$ = this.store.pipe(select(SessionItemsSelectors.getPages));
 
   dispatch(action: Action) {
     this.store.dispatch(action);
   }
-
-  constructor(
-    private store: Store<fromRoot.PartialState>
-  ) {}
+  constructor(private store: Store<fromRoot.PartialState>) {}
 }

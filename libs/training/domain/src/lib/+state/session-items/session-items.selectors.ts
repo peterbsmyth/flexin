@@ -11,6 +11,7 @@ import {
   SessionsState,
   SESSIONS_FEATURE_KEY,
 } from '../sessions/sessions.reducer';
+import { getExercisesEntities } from '../exercises/exercises.selectors';
 
 // Lookup the 'SessionItems' feature state managed by NgRx
 export const getSessionItemsState = createFeatureSelector<
@@ -68,4 +69,33 @@ export const getSelected = createSelector(
   getSessionItemsEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
+);
+
+export const getSelectedWithExercise = createSelector(
+  getSelected,
+  getExercisesEntities,
+  (sessionItem, entities) => ({
+    ...sessionItem,
+    exercise: entities[sessionItem.exerciseId]
+      ? entities[sessionItem.exerciseId]
+      : null,
+  })
+);
+
+export const getPages = createSelector(
+  getSelectedId,
+  getSessionItemsIds,
+  (id, ids): Pages => {
+    const idIndex = ids.findIndex((currentId) => currentId === id);
+    const isFirst = idIndex === 0;
+    const isLast = idIndex === ids.length - 1;
+    const previousId = isFirst ? null : ids[idIndex - 1];
+    const nextId = isLast ? null : ids[idIndex + 1];
+    return {
+      isFirst,
+      isLast,
+      previousId,
+      nextId,
+    };
+  }
 );

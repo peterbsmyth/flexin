@@ -35,7 +35,7 @@ export class SessionItemPage implements OnInit {
 
   onSave(sessionItem: SessionItem) {
     this.sessionItemsState.dispatch(
-      SessionItemsActions.updateSessionItem({
+      SessionItemsActions.updateSessionItemFromCreateProgramSessionItemPage({
         sessionItem,
       })
     );

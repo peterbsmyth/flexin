@@ -36,32 +36,32 @@ export const sessionItemsReducer = createReducer(
   ),
   on(
     SessionItemsActions.loadSessionItemSuccess,
+    SessionItemsActions.updateSessionItemFromCreateProgramSessionItemPage,
     (state, { sessionItem }) =>
       sessionItemsAdapter.upsertOne(sessionItem, { ...state, loaded: true })
   ),
   on(
+    SessionItemsActions.loadSessionItemsBySessionFailure,
     SessionItemsActions.loadSessionItemFailure,
+
     (state, { error }) => ({
       ...state,
       error,
     })
   ),
-  on(SessionItemsActions.selectSessionItem, (state, { id }) => ({
-    ...state,
-    selectedId: id,
-  })),
+  on(
+    SessionItemsActions.selectSessionItem,
+    SessionItemsActions.selectSessionItemFromGuard,
+    (state, { id }) => ({
+      ...state,
+      selectedId: id,
+    })
+  ),
   on(
     SessionItemsActions.loadSessionItemsSuccess,
     SessionItemsActions.loadSessionItemsBySessionSuccess,
     (state, { sessionItems }) =>
       sessionItemsAdapter.upsertMany(sessionItems, { ...state, loaded: true })
-  ),
-  on(
-    SessionItemsActions.loadSessionItemsBySessionFailure,
-    (state, { error }) => ({
-      ...state,
-      error,
-    })
   )
 );
 

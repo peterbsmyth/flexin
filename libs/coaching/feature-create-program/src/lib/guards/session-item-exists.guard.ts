@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import {
-  SessionItemsFacade,
-  SessionItemsActions,
-} from '@bod/coaching/domain';
+import { SessionItemsFacade, SessionItemsActions } from '@bod/coaching/domain';
 import {
   filter,
   take,
@@ -33,7 +30,7 @@ export class SessionItemExistsGuard implements CanActivate {
      * if there is a result from selected sessionItem, cool
      */
     this.sessionItemsState.dispatch(
-      SessionItemsActions.selectSessionItem({ id: +id })
+      SessionItemsActions.selectSessionItemFromGuard({ id: +id })
     );
     return this.hasSessionItemInStore().pipe(
       switchMap((inStore) => {
@@ -41,7 +38,7 @@ export class SessionItemExistsGuard implements CanActivate {
           return of(inStore);
         } else {
           this.sessionItemsState.dispatch(
-            SessionItemsActions.loadSessionItemWithExercise({ id: +id })
+            SessionItemsActions.loadSessionItemFromGuard({ id: +id })
           );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.sessionItemsState.selectedSessionItems$),
