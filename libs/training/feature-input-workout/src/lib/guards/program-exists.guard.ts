@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  Router,
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ProgramsFacade, ProgramsActions } from '@bod/training/domain';
+
 import {
   filter,
   take,
@@ -13,37 +10,37 @@ import {
   switchMapTo,
   map,
   catchError,
-  tap,
 } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProgramExistsGuard implements CanActivate {
-  canActivate(
-    next: ActivatedRouteSnapshot
-  ): Observable<boolean> {
+  canActivate(next: ActivatedRouteSnapshot): Observable<boolean> {
     return this.hasProgram(next.params['programId']);
   }
 
   hasProgramInStore(): Observable<boolean> {
-    return this.programsState.selectedPrograms$.pipe(map((program) => !!program));
+    return this.programsState.selectedPrograms$.pipe(
+      map((program) => !!program)
+    );
   }
 
   hasProgram(id: string): Observable<boolean> {
     /**
      * if there is a result from selected program, cool
      */
-    this.programsState.dispatch(ProgramsActions.selectProgram({ id: +id }));
+    this.programsState.dispatch(
+      ProgramsActions.selectProgramFromGuard({ id: +id })
+    );
     return this.hasProgramInStore().pipe(
       switchMap((inStore) => {
         if (inStore) {
           return of(inStore);
         } else {
-          /**
-           * if not a result then dispatch another action to get it on store
-           */
-          this.programsState.dispatch(ProgramsActions.loadProgram({ id: +id }));
+          this.programsState.dispatch(
+            ProgramsActions.loadProgramFromGuard({ id: +id })
+          );
           return this.waitForCollectionToLoad().pipe(
             switchMapTo(this.programsState.selectedPrograms$),
             map((program) => !!program),

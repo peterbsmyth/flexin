@@ -24,7 +24,7 @@ export const initialState: ProgramsState = programsAdapter.getInitialState({
 export const programsReducer = createReducer(
   initialState,
   on(
-    ProgramsActions.loadPrograms,
+    ProgramsActions.loadProgramsFromInputFeatureProgramsPage,
     ProgramsActions.loadProgramsFromCreateFeatureCreatePage,
     ProgramsActions.loadProgramsFromCreateFeatureProgramsPage,
     (state) => ({
@@ -40,14 +40,10 @@ export const programsReducer = createReducer(
     ...state,
     error,
   })),
-  on(
-    ProgramsActions.selectProgram,
-    ProgramsActions.selectProgramFromGuard,
-    (state, { id }) => ({
-      ...state,
-      selectedId: id,
-    })
-  ),
+  on(ProgramsActions.selectProgramFromGuard, (state, { id }) => ({
+    ...state,
+    selectedId: id,
+  })),
   on(ProgramsActions.loadProgramSuccess, (state, { program }) =>
     programsAdapter.upsertOne(program, { ...state, loaded: true })
   )

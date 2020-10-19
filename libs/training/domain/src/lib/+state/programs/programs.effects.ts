@@ -25,7 +25,7 @@ export class ProgramsEffects {
   loadPrograms$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        ProgramsActions.loadPrograms,
+        ProgramsActions.loadProgramsFromInputFeatureProgramsPage,
         ProgramsActions.loadProgramsFromCreateFeatureCreatePage,
         ProgramsActions.loadProgramsFromCreateFeatureProgramsPage
       ),
@@ -50,7 +50,10 @@ export class ProgramsEffects {
 
   loadProgram$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ProgramsActions.loadProgram, ProgramsActions.loadProgramFromGuard),
+      ofType(
+        ProgramsActions.loadProgramFromInputFeatureProgramPage,
+        ProgramsActions.loadProgramFromGuard
+      ),
       fetch({
         // provides an action
         run: ({ id }) => {

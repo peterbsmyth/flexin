@@ -19,7 +19,7 @@ export class ProgramPage implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['programId'];
     this.programsState.dispatch(
-      ProgramsActions.loadProgram({
+      ProgramsActions.loadProgramFromInputFeatureProgramPage({
         id,
       })
     );

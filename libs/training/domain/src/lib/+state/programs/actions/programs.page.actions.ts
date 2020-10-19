@@ -6,7 +6,9 @@ import {
   SessionItemData,
 } from '../../../entities/component.models';
 
-export const loadPrograms = createAction('[Programs Page] Load Programs');
+export const loadProgramsFromInputFeatureProgramsPage = createAction(
+  '[Programs Page] Load Programs'
+);
 
 export const loadProgramsSuccess = createAction(
   '[Programs Page] Load Programs Success',
@@ -18,7 +20,7 @@ export const loadProgramsFailure = createAction(
   props<{ error: any }>()
 );
 
-export const loadProgram = createAction(
+export const loadProgramFromInputFeatureProgramPage = createAction(
   '[Programs Page] Load Program',
   props<{ id: number }>()
 );
@@ -31,11 +33,6 @@ export const loadProgramSuccess = createAction(
 export const loadProgramFailure = createAction(
   '[Programs Page] Load Program Failure',
   props<{ error: any }>()
-);
-
-export const selectProgram = createAction(
-  '[Programs Page] Select Program',
-  props<{ id: number }>()
 );
 
 export const loadProgramsFromCreateFeatureProgramsPage = createAction(
