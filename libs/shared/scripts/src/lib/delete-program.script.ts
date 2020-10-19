@@ -52,7 +52,7 @@ fetch(
         })
       );
 
-      week.sessions.forEach((session) => {
+      week.sessions?.forEach((session) => {
         allRemoves.push(
           fetch(`${API_URL}/sessions/${session.id}`, {
             method: 'DELETE',
