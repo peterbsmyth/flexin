@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DisplayTopTenFacade } from '@bod/celebrities/domain';
 import { Observable } from 'rxjs';
-import { Celebrity } from './celebrity';
+import { Celebrity } from '@bod/celebrities/domain';
 import { GetCelebritiesService } from './get-celebrities.service';
 import { HttpClientModule } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';

@@ -700,7 +700,8 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "node --loader ts-node/esm --experimental-specifier-resolution=node ./{args.name}.script.ts {args.id}",
+            "tsConfig": "libs/shared/scripts/tsconfig.lib.json",
+            "command": "TS_NODE_COMPILER_OPTIONS='{\"allowSyntheticDefaultImports\": true }' node --loader ts-node/esm --experimental-specifier-resolution=node ./{args.name}.script.ts {args.id}",
             "cwd": "libs/shared/scripts/src/lib"
           }
         }
