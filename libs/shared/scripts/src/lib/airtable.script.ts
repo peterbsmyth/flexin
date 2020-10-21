@@ -3,6 +3,7 @@ import Airtable from 'airtable';
 import { Celebrity, InstagramStatistic } from '@bod/celebrities/domain';
 import { Scraper, Root, CollectContent } from 'nodejs-web-scraper';
 import { format } from 'date-fns';
+import Record from 'airtable/lib/record';
 
 dotenv.config();
 const { AIRTABLE_API_KEY: apiKey } = process.env;
@@ -13,6 +14,22 @@ export interface AirtableRecord<T> {
   id: string;
   fields: T;
 }
+
+/**
+ * chunk
+ * break an array into an 2D array of fixed size
+ * @param array any array
+ * @param size length of chunks
+ */
+const chunk = (array, size: number) =>
+  Array(Math.ceil(array.length / size))
+    .fill(null)
+    .map((_, i) => array.slice(i * size, i * size + size));
+
+/**
+ * getCelebrities
+ * gets all of the celebrities in the airtable
+ */
 const getCelebrities = () =>
   new Promise<AirtableRecord<Celebrity>[]>((resolve, reject) => {
     const allRecords = [];
@@ -35,6 +52,12 @@ const getCelebrities = () =>
       );
   });
 
+/**
+ * getInstagramStatistics
+ * for each celebrity, go to their ninjalitics page and extract the
+ * followers and engagement rate
+ * @param records Airtable Records of Celebrities
+ */
 const getInstagramStatistics = (
   records: AirtableRecord<Celebrity>[]
 ): Promise<InstagramStatistic[]> => {
@@ -42,6 +65,11 @@ const getInstagramStatistics = (
   const getPageObject = (pageObject) => {
     const celebrityIndex = instagramStatistics.length;
     const celebrity = records[celebrityIndex];
+
+    /**
+     * engagementRate: ['Engagement rate 2.17 %'] => 2.17
+     * followers: ['1,234,567'] => 1234567
+     */
     const instagramStatistic = {
       celebrityId: [celebrity.id],
       date: format(new Date(), 'yyyy-MM-dd'),
@@ -82,32 +110,29 @@ const getInstagramStatistics = (
     return scraper.scrape(root);
   });
 
-  return Promise.all(scraperPromises)
-    .then(() => {
-      console.log(instagramStatistics);
-      return instagramStatistics;
-    })
-    .catch((err) => {
-      throw err;
-    });
+  return Promise.all(scraperPromises).then(() => instagramStatistics);
 };
 
-const createInstagramStatistics = (instagramStatistics: InstagramStatistic[]) =>
-  new Promise<InstagramStatistic[]>((resolve, reject) => {
-    const recordsData = instagramStatistics.map((statistic) => ({
-      fields: statistic,
-    }));
+/**
+ * createInstagramStatistics
+ * create new instagram statistics in airbase
+ * @param instagramStatistics an array of instagram statistics
+ */
+const createInstagramStatistics = (
+  instagramStatistics: InstagramStatistic[]
+): Promise<Record[]> => {
+  const recordsData = instagramStatistics.map((statistic) => ({
+    fields: statistic,
+  }));
 
-    base('instagram_statistics').create(recordsData, (err, records) => {
-      if (err) {
-        console.log(err);
-        console.dir(err);
-        reject(err);
-      } else {
-        resolve(records);
-      }
-    });
-  });
+  const chunked = chunk(recordsData, 10);
+
+  const promises = chunked.map((chunk) =>
+    base('instagram_statistics').create(chunk)
+  );
+
+  return Promise.all(promises);
+};
 
 /**
  * get all celebrities
