@@ -1,0 +1,8 @@
++ @types/node@8.9.4
+updated 1 package and audited 2612 packages in 12s
+
+92 packages are looking for funding
+  run `npm fund` for details
+
+found 6 vulnerabilities (3 low, 3 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
