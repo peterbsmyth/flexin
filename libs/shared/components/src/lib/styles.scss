@@ -4,12 +4,9 @@
 ========================================================================== */
 @import './scss/_destyle';
 
-
 /* Utilities: Design Tokens, Functions and Mixins
   ========================================================================== */
 @import './scss/_utils';
-
-
 
 /* Base Styles
   Settings for basic design globals
@@ -25,6 +22,5 @@ body {
   font-family: $body-family;
   height: 100%;
   font-size: 1rem;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

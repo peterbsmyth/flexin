@@ -35,6 +35,7 @@ import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SessionItemPage } from './pages/session-item/session-item.page';
 import { SessionItemFormComponent } from './components/session-item-form/session-item-form.component';
+import { ExerciseCardComponent } from './components/exercise-card/exercise-card.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { SessionItemFormComponent } from './components/session-item-form/session
     ExerciseDialog,
     SessionItemPage,
     SessionItemFormComponent,
+    ExerciseCardComponent,
   ],
   imports: [
     CommonModule,

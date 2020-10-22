@@ -12,8 +12,8 @@
   </bod-breadcrumbs>
   <!-- src is set in .ts because youtube considers property binding a possible XSS attack -->
   <div class="container">
-    <mat-card class="card" *ngIf="weekStatistic.playlist">
-      <span class="card__header">Playlist</span>
+    <bod-card *ngIf="weekStatistic.playlist">
+      <bod-card-header><span>Playlist</span></bod-card-header>
       <mat-card-content class="card__body">
         <iframe
           #player
@@ -23,7 +23,7 @@
           allowfullscreen
         ></iframe>
       </mat-card-content>
-    </mat-card>
+    </bod-card>
     <mat-tab-group mat-align-tabs="start">
       <mat-tab
         *ngFor="let sessionStatistic of weekStatistic.sessionStatistics"

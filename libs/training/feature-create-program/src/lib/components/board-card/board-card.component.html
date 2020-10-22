@@ -1,10 +1,29 @@
-<mat-card class="card">
-  <mat-card-header class="card__header">
-    <bod-button [icon]="true" *ngIf="closeable" (click)="onRemove()"></bod-button>
-  </mat-card-header>
+<bod-card>
+  <bod-card-header>
+    <button mat-icon-button *ngIf="closeable" (click)="onRemove()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </bod-card-header>
   <mat-card-content>
     <p>
-      <span *ngIf="data.exercise" class="data__name">{{ data.exercise.name }}</span>
+      <span *ngIf="data.exercise" class="data__name">
+        {{ data.exercise.name }}
+      </span>
     </p>
   </mat-card-content>
-</mat-card>
+</bod-card>
+
+<bod-card>
+  <bod-card-header>
+    <button mat-icon-button *ngIf="closeable" (click)="onRemove()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </bod-card-header>
+  <mat-card-content>
+    <p>
+      <span *ngIf="data.exercise" class="data__name">
+        {{ data.exercise.name }}
+      </span>
+    </p>
+  </mat-card-content>
+</bod-card>

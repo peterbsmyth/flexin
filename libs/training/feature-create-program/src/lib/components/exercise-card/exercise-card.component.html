@@ -1,0 +1,10 @@
+<bod-card>
+  <bod-card-header>
+    <button mat-icon-button *ngIf="closeable" (click)="onRemove()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </bod-card-header>
+  <bod-card-content>
+    <span *ngIf="exercise">{{ exercise.name }}</span>
+  </bod-card-content>
+</bod-card>

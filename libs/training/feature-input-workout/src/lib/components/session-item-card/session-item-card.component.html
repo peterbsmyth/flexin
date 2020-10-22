@@ -1,6 +1,6 @@
 <form [formGroup]="form" *ngIf="form">
-  <mat-card class="card">
-    <header class="card__header">
+  <bod-card>
+    <header bod-card-header>
       <span>Sets <span *ngIf="data.sessionItem.leftRight"> (L/R)</span></span>
     </header>
     <mat-card-content class="card__body" formArrayName="sets">
@@ -67,9 +67,9 @@
         </div>
       </ng-container>
     </mat-card-content>
-  </mat-card>
-  <mat-card class="card">
-    <header class="card__header"><span>Session</span></header>
+  </bod-card>
+  <bod-card>
+    <header bod-card-header><span>Session</span></header>
     <mat-card-content class="card__body">
       <section class="card__session">
         <!-- RPE -->
@@ -98,5 +98,5 @@
         </mat-form-field>
       </section>
     </mat-card-content>
-  </mat-card>
+  </bod-card>
 </form>

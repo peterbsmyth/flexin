@@ -1,9 +1,0 @@
-<button *ngIf="!icon; else iconButton" mat-raised-button color="primary" [disabled]="disabled">
-  <ng-content></ng-content>
-</button>
-
-<ng-template #iconButton>
-  <button mat-icon-button [disabled]="disabled">
-    <mat-icon>{{ icon }}</mat-icon>
-  </button>
-</ng-template>

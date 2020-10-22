@@ -5,9 +5,14 @@
     </mat-label>
     <input matInput [formControl]="programName" type="text" />
   </mat-form-field>
-  <bod-button [disabled]="invalid$ | async" (click)="onClickCreateProgram()"
-    >Create Program</bod-button
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="invalid$ | async"
+    (click)="onClickCreateProgram()"
   >
+    Create Program
+  </button>
 </bod-actions-bar>
 <training-board>
   <training-session-item

@@ -1,0 +1,36 @@
+@import 'utils';
+
+$bod-card-padding: $space-xs !default;
+$bod-card-border-radius: 0.25rem !default;
+$bod-card-margin: $space-xs $space-m $space-s;
+$bod-card-header-size: 2rem !default;
+
+.bod-card {
+  @include caption;
+  font-weight: $weight-normal;
+  text-transform: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-radius;
+  padding: $bod-card-padding;
+  margin: $bod-card-margin;
+  box-shadow: $box-shadow-02;
+  background: hsl(100, 100, 100);
+}
+
+.bod-card-header {
+  @include subheadline;
+  display: flex;
+  justify-content: center;
+  margin: $space-s 0 $space-m;
+}
+
+.bod-card-content {
+  display: block;
+  font-size: 1rem;
+}
+
+.bod-card > :last-child:not(.bod-card-footer),
+.bod-card-content > :last-child:not(.bod-card-footer) {
+  margin-bottom: 0;
+}

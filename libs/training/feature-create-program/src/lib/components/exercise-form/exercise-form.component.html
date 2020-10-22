@@ -16,7 +16,9 @@
         </aside>
         <aside formArrayName="intensities">
           <h3>Intensities</h3>
-          <section *ngFor="let intensity of intensities.controls; let i = index">
+          <section
+            *ngFor="let intensity of intensities.controls; let i = index"
+          >
             <div class="intensities__controls" [formGroupName]="i">
               <!-- Reps? -->
               <mat-form-field class="intensities__input">
@@ -25,18 +27,21 @@
                 </mat-label>
                 <input matInput type="text" formControlName="name" />
               </mat-form-field>
-              <bod-button
-                (click)="onRemoveIntensity(i)"
-                icon="close"
-              ></bod-button>
+              <button mat-icon-button (click)="onRemoveIntensity(i)">
+                <mat-icon>close</mat-icon>
+              </button>
             </div>
           </section>
-          <bod-button (click)="addIntensity()">Add Intensity</bod-button>
+          <button mat-icon-button (click)="addIntensity()">
+            Add Intensity
+          </button>
         </aside>
       </div>
     </form>
   </mat-card-content>
   <mat-card-footer>
-    <bod-button (click)="onSubmit(form.value)">Save</bod-button>
+    <button mat-raised-button color="primary" (click)="onSubmit(form.value)">
+      Save
+    </button>
   </mat-card-footer>
 </mat-card>

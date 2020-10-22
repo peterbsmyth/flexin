@@ -1,29 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from './components/button/button.component';
 import { ActionsBarComponent } from './components/actions-bar/actions-bar.component';
-import { MatButtonModule } from '@angular/material/button';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './components/footer/footer.component';
-import { ExerciseCardComponent } from './components/exercise-card/exercise-card.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import {
+  CardComponent,
+  CardHeader,
+  CardContent,
+} from './components/card/card.component';
 
 @NgModule({
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatCardModule],
+  imports: [CommonModule, MatIconModule, MatCardModule],
   declarations: [
-    ButtonComponent,
     ActionsBarComponent,
     FooterComponent,
-    ExerciseCardComponent,
     BreadcrumbsComponent,
+    CardComponent,
+    CardHeader,
+    CardContent,
   ],
   exports: [
-    ButtonComponent,
     ActionsBarComponent,
     FooterComponent,
-    ExerciseCardComponent,
     BreadcrumbsComponent,
+    CardComponent,
+    CardHeader,
+    CardContent,
   ],
 })
 export class BodComponentsModule {}

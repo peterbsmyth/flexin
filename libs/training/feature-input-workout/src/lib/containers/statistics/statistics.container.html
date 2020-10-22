@@ -1,6 +1,6 @@
 <ng-container *ngIf="loaded$ | async; else loading">
-  <mat-card class="card">
-    <header *ngrxLet="exercise$ as exercise" class="card__header">
+  <bod-card>
+    <header *ngrxLet="exercise$ as exercise" bod-card-header>
       {{ exercise.name }} Statistics
     </header>
     <mat-card-content class="card__body">
@@ -19,12 +19,12 @@
         </span>
       </ng-container>
     </mat-card-content>
-  </mat-card>
+  </bod-card>
 </ng-container>
 <ng-template #loading>
-  <mat-card class="card">
-    <header class="card__header">
+  <bod-card>
+    <header bod-card-header>
       Loading Statistics
     </header>
-  </mat-card>
+  </bod-card>
 </ng-template>

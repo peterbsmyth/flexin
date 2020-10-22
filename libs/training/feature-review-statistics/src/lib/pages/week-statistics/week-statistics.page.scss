@@ -7,19 +7,6 @@
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  border-radius: $card-radius;
-  padding: $space-xs;
-  margin: $space-xs $space-m $space-s;
-
-  &__header {
-    @include subheadline;
-    display: flex;
-    justify-content: center;
-    margin: $space-s 0 $space-m;
-  }
-
   &__body {
     display: flex;
     flex-direction: column;
