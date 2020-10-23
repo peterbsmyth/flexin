@@ -24,27 +24,24 @@ import { OnChange } from '@bod/shared/utils';
   styleUrls: ['./program-board.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProgramBoardComponent implements OnInit {
-  @Input() displaySource = true;
+export class ProgramBoardComponent {
   @OnChange<ProgramBoardData>(function (data) {
     this.buildBoard(data);
   })
   @Input()
   data: ProgramBoardData;
+  @Input() displaySource = true;
   @Output() update: EventEmitter<any> = new EventEmitter();
   public pullList: BoardCardData[] = [];
   public pushList: BoardCardData[] = [];
   public otherList: BoardCardData[] = [];
+  public allDayNumbers = [1, 2, 3, 4];
+  public daysLists: BoardCardData[][] = [];
 
-  public dayOneList: BoardCardData[] = [];
-  public dayTwoList: BoardCardData[] = [];
-  public dayThreeList: BoardCardData[] = [];
-  public dayFourList: BoardCardData[] = [];
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
+  /**
+   * drop
+   * @param event a drag drop event
+   */
   drop(event: CdkDragDrop<BoardCardData[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -72,41 +69,45 @@ export class ProgramBoardComponent implements OnInit {
       );
     }
 
-    this.update.emit([
-      [...this.dayOneList],
-      [...this.dayTwoList],
-      [...this.dayThreeList],
-      [...this.dayFourList],
-    ]);
+    this.update.emit(this.daysLists);
   }
 
-  uniquePredicate = (item: CdkDrag<BoardCardData>, list: CdkDropList) => {
-    const arrayName = `${list.id}List`;
-    const array: BoardCardData[] = this[arrayName];
+  /**
+   * uniquePredicate
+   * enforces that only one exercise-of-a-kind may be in a day list
+   * @param drag a drag event that has card data
+   * @param list the list the card is being dropped to
+   */
+  uniquePredicate = (drag: CdkDrag<BoardCardData>, list: CdkDropList) => {
+    const array = this.daysLists[+list.id - 1];
     const arrayIncludesExercise = array.find(
-      (e) => e.exercise.id === item.data.exercise.id
+      (e) => e.exercise.id === drag.data.exercise.id
     );
 
-    if (arrayIncludesExercise) {
-      return false;
-    } else {
-      return true;
-    }
+    return !arrayIncludesExercise;
   };
 
-  onRemove(datum, list: string) {
-    remove(this[list], { exercise: { id: datum.exercise.id } });
+  /**
+   * onRemove
+   * removes a card from the board
+   * @param card the card being removed
+   * @param dayNumber the day number that it's being removed from
+   */
+  onRemove(card, dayNumber: number) {
+    remove(this.daysLists[dayNumber - 1], {
+      exercise: { id: card.exercise.id },
+    });
 
-    this.update.emit([
-      [...this.dayOneList],
-      [...this.dayTwoList],
-      [...this.dayThreeList],
-      [...this.dayFourList],
-    ]);
+    this.update.emit(this.daysLists);
   }
 
+  /**
+   * buildBoard
+   * @param data all of the days of workouts
+   */
   buildBoard(data: ProgramBoardData) {
     const hasData = data?.sessionItems && data?.exercises.length;
+
     if (hasData && !this.displaySource) {
       const allBoardCardData = data.sessionItems.map((sessionItem) => {
         return {
@@ -119,22 +120,14 @@ export class ProgramBoardComponent implements OnInit {
         };
       });
 
-      const session1 = data.sessions.find((session) => session.order === 1);
-      const session2 = data.sessions.find((session) => session.order === 2);
-      const session3 = data.sessions.find((session) => session.order === 3);
-      const session4 = data.sessions.find((session) => session.order === 4);
-      this.dayOneList = allBoardCardData.filter(
-        (datum) => datum.sessionItem.sessionId === session1.id
-      );
-      this.dayTwoList = allBoardCardData.filter(
-        (datum) => datum.sessionItem.sessionId === session2.id
-      );
-      this.dayThreeList = allBoardCardData.filter(
-        (datum) => datum.sessionItem.sessionId === session3.id
-      );
-      this.dayFourList = allBoardCardData.filter(
-        (datum) => datum.sessionItem.sessionId === session4.id
-      );
+      this.allDayNumbers.forEach((dayNumber) => {
+        const day = data.sessions.find(
+          (session) => session.order === dayNumber
+        );
+        this.daysLists[dayNumber - 1] = allBoardCardData.filter(
+          (datum) => datum.sessionItem.sessionId === day.id
+        );
+      });
     }
 
     if (hasData && this.displaySource) {
@@ -153,10 +146,28 @@ export class ProgramBoardComponent implements OnInit {
     }
 
     if (hasData && data.draft) {
-      this.dayOneList = [...data.draft[0]];
-      this.dayTwoList = [...data.draft[1]];
-      this.dayThreeList = [...data.draft[2]];
-      this.dayFourList = [...data.draft[3]];
+      this.daysLists = new Array(data.draft.length).fill(null);
+      data.draft.forEach((list, i) => {
+        this.daysLists[i] = [...list];
+      });
+    }
+  }
+
+  /**
+   * connectedTo
+   * @param dayNumber the number day which is being evaluated. if none, returns all connections
+   * @returns the connections to this drop list.
+   */
+  connectedTo(dayNumber?: number): string[] {
+    const allDayNumberStrings = this.allDayNumbers.map((currentDayNumber) =>
+      currentDayNumber.toString()
+    );
+    if (!dayNumber) {
+      return allDayNumberStrings;
+    } else {
+      return allDayNumberStrings.filter(
+        (currentDayNumber) => +currentDayNumber !== dayNumber
+      );
     }
   }
 }
