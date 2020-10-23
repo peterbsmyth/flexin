@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   Input,
   Output,
   EventEmitter,
@@ -32,9 +31,10 @@ export class ProgramBoardComponent {
   data: ProgramBoardData;
   @Input() displaySource = true;
   @Output() update: EventEmitter<any> = new EventEmitter();
-  public pullList: BoardCardData[] = [];
-  public pushList: BoardCardData[] = [];
-  public otherList: BoardCardData[] = [];
+  public allCategories = ['pull', 'push', 'other'];
+  public categoriesLists: BoardCardData[][] = new Array(
+    this.allCategories.length
+  ).fill([]);
   public allDayNumbers = [1, 2, 3, 4];
   public daysLists: BoardCardData[][] = [];
 
@@ -49,11 +49,7 @@ export class ProgramBoardComponent {
         event.previousIndex,
         event.currentIndex
       );
-    } else if (
-      event.previousContainer.id === 'pushes' ||
-      event.previousContainer.id === 'pulls' ||
-      event.previousContainer.id === 'other'
-    ) {
+    } else if (this.allCategories.includes(event.previousContainer.id)) {
       copyArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -91,10 +87,10 @@ export class ProgramBoardComponent {
    * onRemove
    * removes a card from the board
    * @param card the card being removed
-   * @param dayNumber the day number that it's being removed from
+   * @param index the index of the list it's being removed from
    */
-  onRemove(card, dayNumber: number) {
-    remove(this.daysLists[dayNumber - 1], {
+  onRemove(card, index: number) {
+    remove(this.daysLists[index], {
       exercise: { id: card.exercise.id },
     });
 
@@ -131,18 +127,18 @@ export class ProgramBoardComponent {
     }
 
     if (hasData && this.displaySource) {
-      this.pullList = data.exercises
-        .filter((e) => e.pull)
-        .map((exercise) => ({ sessionItem: null, exercise }))
-        .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
-      this.pushList = data.exercises
-        .filter((e) => e.push)
-        .map((exercise) => ({ sessionItem: null, exercise }))
-        .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
-      this.otherList = data.exercises
-        .filter((e) => !e.push && !e.pull)
-        .map((exercise) => ({ sessionItem: null, exercise }))
-        .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
+      this.allCategories.forEach((category, i) => {
+        /**
+         * the hard-coded categories results in 'other' in index 2 being a different filter
+         * than the 'push' and the 'pull' categories
+         */
+        const filter = i === 2 ? (e) => !e.push && !e.pull : (e) => e[category];
+
+        this.categoriesLists[i] = data.exercises
+          .filter(filter)
+          .map((exercise) => ({ sessionItem: null, exercise }))
+          .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
+      });
     }
 
     if (hasData && data.draft) {
@@ -162,6 +158,7 @@ export class ProgramBoardComponent {
     const allDayNumberStrings = this.allDayNumbers.map((currentDayNumber) =>
       currentDayNumber.toString()
     );
+
     if (!dayNumber) {
       return allDayNumberStrings;
     } else {

@@ -1,86 +1,48 @@
 <div class="board">
   <section class="board__panel" *ngIf="displaySource">
-    <div class="board__column-header" *ngIf="pullList.length">
-      <h1>Pulls</h1>
-    </div>
-    <div
-      cdkDropListSortingDisabled
-      id="pulls"
-      cdkDropList
-      [cdkDropListConnectedTo]="connectedTo()"
-      [cdkDropListData]="pullList"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <bod-exercise-card
-        [closeable]="false"
-        *ngFor="let data of pullList"
-        [exercise]="data.exercise"
-        cdkDrag
-        [cdkDragData]="data"
+    <ng-container *ngFor="let category of allCategories; let i = index">
+      <div class="board__column-header" *ngIf="categoriesLists[i].length">
+        <h1>{{ category | titlecase }}</h1>
+      </div>
+      <div
+        cdkDropListSortingDisabled
+        [id]="category"
+        cdkDropList
+        [cdkDropListConnectedTo]="connectedTo()"
+        [cdkDropListData]="categoriesLists[i]"
+        (cdkDropListDropped)="drop($event)"
       >
-      </bod-exercise-card>
-    </div>
-    <header class="board__column-header" *ngIf="pushList.length">
-      <h1>Pushes</h1>
-    </header>
-    <div
-      cdkDropListSortingDisabled
-      id="pushes"
-      cdkDropList
-      [cdkDropListConnectedTo]="connectedTo()"
-      [cdkDropListData]="pushList"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <bod-exercise-card
-        [closeable]="false"
-        *ngFor="let data of pushList"
-        [exercise]="data.exercise"
-        cdkDrag
-        [cdkDragData]="data"
-      >
-      </bod-exercise-card>
-    </div>
-    <header class="board__column-header" *ngIf="otherList.length">
-      <h1>Other</h1>
-    </header>
-    <div
-      cdkDropListSortingDisabled
-      id="other"
-      cdkDropList
-      [cdkDropListConnectedTo]="connectedTo(0)"
-      [cdkDropListData]="otherList"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <bod-exercise-card
-        [closeable]="false"
-        *ngFor="let data of otherList"
-        [exercise]="data.exercise"
-        cdkDrag
-        [cdkDragData]="data"
-      >
-      </bod-exercise-card>
-    </div>
+        <bod-exercise-card
+          [closeable]="false"
+          *ngFor="let data of categoriesLists[i]"
+          [exercise]="data.exercise"
+          cdkDrag
+          [cdkDragData]="data"
+        >
+        </bod-exercise-card>
+      </div>
+    </ng-container>
   </section>
 
-  <ng-container *ngFor="let dayNumber of allDayNumbers">
+  <ng-container *ngFor="let dayNumber of allDayNumbers; let i = index">
     <section
       class="board__column"
       [id]="dayNumber.toString()"
       [cdkDropListEnterPredicate]="uniquePredicate"
       cdkDropList
       [cdkDropListConnectedTo]="connectedTo(dayNumber)"
-      [cdkDropListData]="daysLists[dayNumber - 1]"
+      [cdkDropListData]="daysLists[i]"
       (cdkDropListDropped)="drop($event)"
     >
       <header class="board__column-header">
         <h1>Day {{ dayNumber }}</h1>
       </header>
-      <article *ngFor="let data of daysLists[dayNumber - 1]">
+      <article *ngFor="let data of daysLists[i]">
         <bod-exercise-card
           *ngIf="!!data.sessionItem"
           [routerLink]="['/session-items', data.sessionItem.id]"
           [closeable]="!!!data.sessionItem"
-          (remove)="onRemove(data, dayNumber)"
+          (remove)="onRemove(data, i)"
           [exercise]="data.exercise"
           cdkDrag
           [cdkDragData]="data"
@@ -89,7 +51,7 @@
         <bod-exercise-card
           *ngIf="!!!data.sessionItem"
           [closeable]="!!!data.sessionItem"
-          (remove)="onRemove(data, dayNumber)"
+          (remove)="onRemove(data, i)"
           [exercise]="data.exercise"
           cdkDrag
           [cdkDragData]="data"
