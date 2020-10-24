@@ -16,6 +16,19 @@ export interface AirtableRecord<T> {
 }
 
 /**
+ * getUsernameFromUrl
+ * get the username from the url and strip the tailing
+ * forward slash if it exists
+ * @param instagramUrl
+ */
+const getUsernameFromUrl = (instagramUrl: string): string => {
+  const path = instagramUrl.split('https://www.instagram.com/')[1];
+
+  const username = path.endsWith('/') ? path.slice(0, -1) : path;
+  return username;
+};
+
+/**
  * chunk
  * break an array into an 2D array of fixed size
  * @param array any array
@@ -63,36 +76,39 @@ const getInstagramStatistics = (
 ): Promise<InstagramStatistic[]> => {
   const instagramStatistics: InstagramStatistic[] = [];
   const getPageObject = (pageObject) => {
-    const celebrityIndex = instagramStatistics.length;
-    const celebrity = records[celebrityIndex];
+    const username = pageObject.username[0].slice(1);
+    const celebrity = records.find(
+      (record) => getUsernameFromUrl(record.fields.instagramUrl) === username
+    );
 
     /**
-     * engagementRate: ['Engagement rate 2.17 %'] => 2.17
+     * engagementRate: ['Engagement rate 2.17 %'] => 0.0217
      * followers: ['1,234,567'] => 1234567
      */
     const instagramStatistic = {
       celebrityId: [celebrity.id],
       date: format(new Date(), 'yyyy-MM-dd'),
-      engagementRate: +pageObject.engagementRate[0].slice(16, -2),
+      engagementRate: +pageObject.engagementRate[0].slice(16, -2) / 100,
       followers: +pageObject.followers[0].replace(/,/g, ''),
     };
     instagramStatistics.push(instagramStatistic);
   };
 
   const scraperPromises = records.map((record) => {
-    const username = record.fields.instagramUrl.split(
-      'https://www.instagram.com/'
-    )[1];
+    const username = getUsernameFromUrl(record.fields.instagramUrl);
 
-    const path = username.endsWith('/') ? username.slice(0, -1) : username;
     const config = {
       usePuppeteer: true,
       baseSiteUrl: `https://www.ninjalitics.com`,
-      startUrl: `https://www.ninjalitics.com/${path}.html`,
+      startUrl: `https://www.ninjalitics.com/${username}.html`,
     };
 
     const root = new Root({
       getPageObject,
+    });
+
+    const pageUsername = new CollectContent('#label_username', {
+      name: 'username',
     });
 
     const followers = new CollectContent('#num_followers', {
@@ -103,6 +119,7 @@ const getInstagramStatistics = (
       name: 'engagementRate',
     });
 
+    root.addOperation(pageUsername);
     root.addOperation(followers);
     root.addOperation(engagementRate);
     const scraper = new Scraper(config);
