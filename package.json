@@ -79,6 +79,7 @@
     "@nrwl/workspace": "10.3.0",
     "@types/jest": "26.0.8",
     "@types/lodash": "4.14.154",
+    "@types/lodash-es": "^4.17.3",
     "@types/node": "10.17.42",
     "@typescript-eslint/eslint-plugin": "4.5.0",
     "@typescript-eslint/parser": "4.5.0",

@@ -174,6 +174,31 @@ export class ProgramsEffects {
     )
   );
 
+  popDraft$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ProgramsActions.popDraft),
+        tap(() => this.draftProgramService.popDraftDay())
+      ),
+    { dispatch: false }
+  );
+
+  pushDraft$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ProgramsActions.pushDraft),
+        tap(() => this.draftProgramService.pushDraftDay())
+      ),
+    { dispatch: false }
+  );
+  resetDraft$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ProgramsActions.resetDraft),
+        tap(() => this.draftProgramService.resetDraft())
+      ),
+    { dispatch: false }
+  );
   constructor(
     private actions$: Actions,
     private store: Store<PartialState>,

@@ -6,11 +6,10 @@ import {
   ExercisesActions,
   ProgramsFacade,
   ProgramsActions,
-  ProgramBoardData,
   BoardCardData,
 } from '@bod/training/domain';
-import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import Fuse from 'fuse.js';
 import { Exercise } from '@bod/shared/models';
 
@@ -19,10 +18,15 @@ import { Exercise } from '@bod/shared/models';
   styleUrls: ['./program-board.page.scss'],
 })
 export class ProgramBoardPage implements OnInit, AfterViewInit {
+  private _maximumDays = 8;
+  private _minimumDays = 1;
+  public addDisabled = false;
+  public removeDisabled = false;
+  private _daysSubject: BehaviorSubject<number> = new BehaviorSubject(4);
+  days$: Observable<number> = this._daysSubject.asObservable();
   search = new FormControl('');
-  data$: Observable<ProgramBoardData>;
   sourceColumn$: Observable<BoardCardData[]>;
-  boardColumns$: Observable<BoardCardData[][]>;
+  board$: Observable<BoardCardData[][]>;
 
   setCategory(exercise: Exercise): string {
     if (exercise.pull) {
@@ -67,30 +71,15 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
       })
     );
 
-    this.boardColumns$ = this.programState.draftProgramBoard$;
-    this.data$ = combineLatest([
-      this.search.valueChanges,
-      this.exerciseState.allExercises$,
-      this.programState.draftProgramBoard$,
-    ]).pipe(
-      map(([term, exercises, draft]) => {
-        if (term === '') {
-          return { exercises, draft, sessionItems: [], sessions: [] };
-        } else {
-          const filteredExercises = new Fuse(exercises, {
-            keys: ['name'],
-            includeScore: true,
-          })
-            .search(term)
-            .filter((result) => result.score < 0.45)
-            .map((result) => result.item);
+    this.board$ = this.programState.draftProgramBoard$.pipe(
+      tap((draft) => {
+        const days = draft.length;
+        this._daysSubject.next(days);
 
-          return {
-            exercises: filteredExercises,
-            draft,
-            sessionItems: [],
-            sessions: [],
-          };
+        if (days === this._maximumDays) {
+          this.addDisabled = true;
+        } else if (days === this._minimumDays) {
+          this.removeDisabled = true;
         }
       })
     );
@@ -121,5 +110,35 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
 
   onClickNext() {
     this.router.navigateByUrl('/programs/create/2');
+  }
+
+  onClickReset() {
+    this.programState.dispatch(ProgramsActions.resetDraft());
+  }
+
+  onClickAddDay() {
+    this.removeDisabled = false;
+    const days = this._daysSubject.getValue() + 1;
+    if (days <= this._maximumDays) {
+      this._daysSubject.next(days);
+      this.programState.dispatch(ProgramsActions.pushDraft());
+    }
+
+    if (days === this._maximumDays) {
+      this.addDisabled = true;
+    }
+  }
+
+  onClickRemoveDay() {
+    this.addDisabled = false;
+    const days = this._daysSubject.getValue() - 1;
+    if (days >= this._minimumDays) {
+      this._daysSubject.next(days);
+      this.programState.dispatch(ProgramsActions.popDraft());
+    }
+
+    if (days === this._minimumDays) {
+      this.removeDisabled = true;
+    }
   }
 }

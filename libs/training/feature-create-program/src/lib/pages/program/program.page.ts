@@ -21,7 +21,7 @@ export class ProgramPage implements OnInit {
   selectedWeek$: Observable<number> = this._selectedWeekSubject.asObservable();
   program$: Observable<ProgramWithDescendants>;
   loaded$: Observable<boolean>;
-  data$: Observable<BoardCardData[][]>;
+  board$: Observable<BoardCardData[][]>;
 
   constructor(
     private programsState: ProgramsFacade,
@@ -30,7 +30,7 @@ export class ProgramPage implements OnInit {
   ) {
     this.loaded$ = this.programsState.loaded$;
     this.program$ = this.programsState.selectedProgramsWithDescendants$;
-    this.data$ = combineLatest([
+    this.board$ = combineLatest([
       this.program$,
       this.exerciseState.allExercises$,
       this.selectedWeek$,

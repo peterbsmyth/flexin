@@ -17,10 +17,11 @@ import { isBoardEmpty } from '@bod/shared/utils';
 export class DraftProgramsDataService {
   private _draftProgramBoardSubject = new BehaviorSubject<BoardCardData[][]>([
     [],
+    [],
+    [],
+    [],
   ]);
-  public draftProgramBoard$ = this._draftProgramBoardSubject
-    .asObservable()
-    .pipe(filter((board) => !isBoardEmpty(board)));
+  public draftProgramBoard$ = this._draftProgramBoardSubject.asObservable();
   private _draftProgramSubject = new BehaviorSubject<DraftProgram>({
     name: '',
   });
@@ -37,6 +38,18 @@ export class DraftProgramsDataService {
       [val.id]: val,
     };
   };
+  public popDraftDay() {
+    const board = [...this._draftProgramBoardSubject.getValue()].slice(0, -1);
+    this.storage.set('boardCardData', board).subscribe();
+  }
+  public pushDraftDay() {
+    const board = [...this._draftProgramBoardSubject.getValue(), []];
+    this.storage.set('boardCardData', board).subscribe();
+  }
+  public resetDraft() {
+    const board = [[], [], [], []];
+    this.storage.set('boardCardData', board).subscribe();
+  }
 
   addIncompleteSessionItems(
     board: BoardCardData[][],
@@ -261,8 +274,9 @@ export class DraftProgramsDataService {
     this.storage
       .watch('boardCardData')
       .pipe(
-        tap((data: BoardCardData[][]) => {
-          this._draftProgramBoardSubject.next(data);
+        filter((board) => !!board),
+        tap((board: BoardCardData[][]) => {
+          this._draftProgramBoardSubject.next(board);
         })
       )
       .subscribe();

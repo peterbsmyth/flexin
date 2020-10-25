@@ -13,13 +13,6 @@ export interface SessionItemData {
   exercise: Exercise;
 }
 
-export interface ProgramBoardData {
-  sessions: Session[];
-  exercises: Exercise[];
-  sessionItems: SessionItem[];
-  draft?: BoardCardData[][];
-}
-
 export interface SessionItemFormData {
   sessionItem: SessionItem;
   exercises: Exercise[];

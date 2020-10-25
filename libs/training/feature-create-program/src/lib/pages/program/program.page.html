@@ -12,10 +12,7 @@
     </div>
   </div>
 </div>
-<training-program-board
-  [displaySource]="false"
-  [data]="data$ | async"
-></training-program-board>
+<training-program-board [data]="board$ | async"></training-program-board>
 <ng-template #loading>
   Loading...
 </ng-template>

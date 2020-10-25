@@ -91,3 +91,9 @@ export const loadDescendantsFailure = createAction(
   '[Programs][Create] Load Descendants Failure',
   props<{ error: any }>()
 );
+
+export const popDraft = createAction('[Programs][Create] Pop Draft');
+
+export const pushDraft = createAction('[Programs][Create] Push Draft');
+
+export const resetDraft = createAction('[Programs][Create] Resest Draft');

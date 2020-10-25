@@ -13,7 +13,7 @@ import {
   copyArrayItem,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { remove } from 'lodash-es';
+import { remove, cloneDeep } from 'lodash-es';
 import { BoardCardData } from '@bod/training/domain';
 import { OnChange, isBoardEmpty } from '@bod/shared/utils';
 
@@ -31,26 +31,23 @@ export class ProgramBoardComponent {
   })
   @Input()
   sourceColumn: BoardCardData[];
-  @OnChange<any>(function (data) {
-    if (data) {
-      this.buildBoard(data);
+  @OnChange<BoardCardData[][]>(function (board) {
+    if (board) {
+      this.setBoard(board);
     }
   })
   @Input()
-  data: any;
-  @Input() displaySource = true;
+  data: BoardCardData[][] = [[]];
   @Output() update: EventEmitter<BoardCardData[][]> = new EventEmitter();
   public allCategories = ['pull', 'push', 'other'];
   public categoriesLists: BoardCardData[][] = new Array(
     this.allCategories.length
   ).fill([]);
-  public days = 4;
-  public board: BoardCardData[][];
+  public board: BoardCardData[][] = [[]];
 
-  setBoard = () => [...new Array(this.days)].map(() => []);
-
-  constructor() {
-    this.board = this.setBoard();
+  setBoard(board: BoardCardData[][]): void {
+    const clone = cloneDeep(board);
+    this.board = clone;
   }
 
   /**
@@ -87,7 +84,7 @@ export class ProgramBoardComponent {
 
   /**
    * uniquePredicate
-   * enforces that only one exercise-of-a-kind may be in a day list
+   * enforces that only one exercise-of-a-kind may be in a column
    * @param drag a drag event that has card data
    * @param list the list the card is being dropped to
    */
@@ -99,17 +96,18 @@ export class ProgramBoardComponent {
 
   /**
    * onRemove
-   * removes a dcard from the board
-   * @param i index of the dayList
-   * @param j index of the card in the dayList
+   * removes a card from the board
+   * @param i index of the column in the board
+   * @param j index of the card in the column
    */
   onRemove(i: number, j: number) {
-    remove(this.board[i], (card, index) => index === j);
+    const column = this.board[i];
+    remove(column, (card, index) => index === j);
 
     this.update.emit(this.board);
 
     if (isBoardEmpty(this.board)) {
-      this.board = this.setBoard();
+      this.setBoard([[]]);
     }
   }
 
@@ -120,21 +118,14 @@ export class ProgramBoardComponent {
         .sort((a, b) => a.name.localeCompare(b.name));
     });
   }
-  /**
-   * buildBoard
-   * @param data all of the days of workouts
-   */
-  buildBoard(data: BoardCardData[][]) {
-    this.board = data.map((list) => list.map((obj) => obj));
-  }
 
   /**
    * connectedTo
-   * @param index the index of the day which is being evaluated. if none, returns all connections
+   * @param index the index of the column which is being evaluated. if none, returns all connections
    * @returns the connections to this drop list.
    */
   connectedTo(index?: number): string[] {
-    const allDayIndexStrings = [...Array(this.days)].map((item, i) =>
+    const allDayIndexStrings = [...Array(this.board.length)].map((item, i) =>
       i.toString()
     );
 
