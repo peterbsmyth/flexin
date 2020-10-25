@@ -1,23 +1,25 @@
-@import "utils";
+@import 'utils';
 
 .board {
-  display: grid;
-  grid-template-columns: $layout-template-columns-desktop;
+  display: flex;
+  flex-direction: row;
 
-  &__panel {
+  &__source {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     height: 80vh;
   }
 
-  &__column {
-    display: flex;
-    flex-direction: column;
+  &__columns {
+    display: grid;
+    grid-template-columns: $layout-template-columns-desktop;
+    width: 100%;
+    height: 40vh;
+  }
 
-    &-header {
-      @include subheadline;
-      margin: $space-xs;
-    }
+  &__header {
+    @include subheadline;
+    margin: $space-xs;
   }
 }

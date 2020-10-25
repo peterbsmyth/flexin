@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { catchError, switchMap, tap, filter } from 'rxjs/operators';
 import { ProgramDataService } from '../infrastructure/program.data.service';
 import { WeekDataService } from '../infrastructure/week.data.service';
@@ -11,7 +11,6 @@ import { uniqBy } from 'lodash-es';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Exercise } from '@bod/shared/models';
-import { isBoardEmpty } from '@bod/shared/utils';
 
 @Injectable()
 export class DraftProgramsDataService {
@@ -55,11 +54,7 @@ export class DraftProgramsDataService {
     board: BoardCardData[][],
     exercises: Exercise[]
   ): void {
-    if (isBoardEmpty(board)) {
-      this.storage.delete('boardCardData').subscribe();
-    } else {
-      this.storage.set('boardCardData', board).subscribe();
-    }
+    this.storage.set('boardCardData', board).subscribe();
     const draft: any = {};
     const weeks = [1, 2, 3, 4, 5, 6].map((id) => ({
       id,

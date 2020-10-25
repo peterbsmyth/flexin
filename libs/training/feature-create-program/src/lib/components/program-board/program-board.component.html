@@ -1,7 +1,7 @@
 <div class="board">
-  <section class="board__panel" *ngIf="!!sourceColumn">
+  <section class="board__source" *ngIf="!!sourceColumn">
     <ng-container *ngFor="let category of allCategories; let i = index">
-      <div class="board__column-header" *ngIf="categoriesLists[i].length">
+      <div class="board__header" *ngIf="categoriesLists[i].length">
         <h1>{{ category | titlecase }}</h1>
       </div>
       <div
@@ -24,41 +24,44 @@
     </ng-container>
   </section>
 
-  <ng-container *ngFor="let column of board; let i = index">
-    <section
-      class="board__column"
-      [id]="i.toString()"
-      [cdkDropListEnterPredicate]="uniquePredicate"
-      cdkDropList
-      [cdkDropListConnectedTo]="connectedTo(i)"
-      [cdkDropListData]="column"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <header class="board__column-header">
-        <h1>Day {{ i + 1 }}</h1>
-      </header>
-      <article *ngFor="let card of column; let j = index">
-        <training-board-card
-          *ngIf="!!card.routerLink; else noRouterLink"
-          [routerLink]="[card.routerLink]"
-          (remove)="onRemove(i, j)"
-          [closeable]="!!sourceColumn"
-          [name]="card.name"
-          cdkDrag
-          [cdkDragData]="card"
-        >
-        </training-board-card>
-        <ng-template #noRouterLink>
+  <div class="board__columns">
+    <ng-container *ngFor="let column of board; let i = index">
+      <section
+        [id]="i.toString()"
+        [cdkDropListEnterPredicate]="uniquePredicate"
+        cdkDropList
+        [cdkDropListConnectedTo]="connectedTo(i)"
+        [cdkDropListData]="column"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <header class="board__header">
+          <h1>Day {{ i + 1 }}</h1>
+        </header>
+        <article *ngFor="let card of column; let j = index">
           <training-board-card
+            class="board__card"
+            *ngIf="!!card.routerLink; else noRouterLink"
+            [routerLink]="[card.routerLink]"
             (remove)="onRemove(i, j)"
+            [closeable]="!!sourceColumn"
             [name]="card.name"
             cdkDrag
-            [closeable]="!!sourceColumn"
             [cdkDragData]="card"
           >
           </training-board-card>
-        </ng-template>
-      </article>
-    </section>
-  </ng-container>
+          <ng-template #noRouterLink>
+            <training-board-card
+              class="board__card"
+              (remove)="onRemove(i, j)"
+              [name]="card.name"
+              cdkDrag
+              [closeable]="!!sourceColumn"
+              [cdkDragData]="card"
+            >
+            </training-board-card>
+          </ng-template>
+        </article>
+      </section>
+    </ng-container>
+  </div>
 </div>

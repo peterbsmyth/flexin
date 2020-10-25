@@ -76,11 +76,8 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
         const days = draft.length;
         this._daysSubject.next(days);
 
-        if (days === this._maximumDays) {
-          this.addDisabled = true;
-        } else if (days === this._minimumDays) {
-          this.removeDisabled = true;
-        }
+        this.addDisabled = days === this._maximumDays;
+        this.removeDisabled = days === this._minimumDays;
       })
     );
   }

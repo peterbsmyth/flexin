@@ -104,11 +104,13 @@ export class ProgramBoardComponent {
     const column = this.board[i];
     remove(column, (card, index) => index === j);
 
-    this.update.emit(this.board);
-
     if (isBoardEmpty(this.board)) {
-      this.setBoard([[]]);
+      const board = [...Array(this.board.length)].map(() => []);
+      console.log(board);
+      this.setBoard(board);
     }
+
+    this.update.emit(this.board);
   }
 
   buildSource(data: BoardCardData[]) {
