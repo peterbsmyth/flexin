@@ -24,20 +24,20 @@
     </ng-container>
   </section>
 
-  <ng-container *ngFor="let dayList of daysLists; let i = index">
+  <ng-container *ngFor="let column of board; let i = index">
     <section
       class="board__column"
       [id]="i.toString()"
       [cdkDropListEnterPredicate]="uniquePredicate"
       cdkDropList
       [cdkDropListConnectedTo]="connectedTo(i)"
-      [cdkDropListData]="dayList"
+      [cdkDropListData]="column"
       (cdkDropListDropped)="drop($event)"
     >
       <header class="board__column-header">
         <h1>Day {{ i + 1 }}</h1>
       </header>
-      <article *ngFor="let card of daysLists[i]; let j = index">
+      <article *ngFor="let card of column; let j = index">
         <training-board-card
           *ngIf="!!card.routerLink; else noRouterLink"
           [routerLink]="[card.routerLink]"

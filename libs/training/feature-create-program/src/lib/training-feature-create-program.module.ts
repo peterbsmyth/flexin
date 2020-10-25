@@ -17,7 +17,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { TrainingFeatureCreateProgramRoutingModule } from './training-feature-create-program-routing.module';
-import { BoardComponent } from './components/board/board.component';
 import { ProgramCreatePage } from './pages/program-create/program-create.page';
 import { BoardCardComponent } from './components/board-card/board-card.component';
 import { SessionItemComponent } from './components/session-item/session-item.component';
@@ -43,7 +42,6 @@ import { SessionItemFormComponent } from './components/session-item-form/session
     ExerciseCreatePage,
     ExercisesPage,
     ExercisePage,
-    BoardComponent,
     BoardCardComponent,
     SessionItemComponent,
     ProgramCreatePage,

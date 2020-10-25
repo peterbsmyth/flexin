@@ -14,13 +14,13 @@
     Create Program
   </button>
 </bod-actions-bar>
-<training-board>
+<div class="board">
   <training-session-item
-    class="item"
     *ngFor="let data of programsState.draftSessionConfiguration$ | async; let i = index;"
+    class="item"
     [data]="data"
     (update)="onUpdate($event)"
     (updateExercise)="onUpdateExercise($event)"
     (validate)="onValidate($event, i)"
   ></training-session-item>
-</training-board>
+</div>

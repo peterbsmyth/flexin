@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, Observable, of, throwError } from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs/operators';
+import { catchError, switchMap, tap, filter } from 'rxjs/operators';
 import { ProgramDataService } from '../infrastructure/program.data.service';
 import { WeekDataService } from '../infrastructure/week.data.service';
 import { SessionDataService } from '../infrastructure/session.data.service';
@@ -11,13 +11,16 @@ import { uniqBy } from 'lodash-es';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Exercise } from '@bod/shared/models';
+import { isBoardEmpty } from '@bod/shared/utils';
 
 @Injectable()
 export class DraftProgramsDataService {
   private _draftProgramBoardSubject = new BehaviorSubject<BoardCardData[][]>([
     [],
   ]);
-  public draftProgramBoard$ = this._draftProgramBoardSubject.asObservable();
+  public draftProgramBoard$ = this._draftProgramBoardSubject
+    .asObservable()
+    .pipe(filter((board) => !isBoardEmpty(board)));
   private _draftProgramSubject = new BehaviorSubject<DraftProgram>({
     name: '',
   });
@@ -36,10 +39,14 @@ export class DraftProgramsDataService {
   };
 
   addIncompleteSessionItems(
-    cardLists: BoardCardData[][],
+    board: BoardCardData[][],
     exercises: Exercise[]
   ): void {
-    this.storage.set('boardCardData', cardLists).subscribe();
+    if (isBoardEmpty(board)) {
+      this.storage.delete('boardCardData').subscribe();
+    } else {
+      this.storage.set('boardCardData', board).subscribe();
+    }
     const draft: any = {};
     const weeks = [1, 2, 3, 4, 5, 6].map((id) => ({
       id,
@@ -49,7 +56,7 @@ export class DraftProgramsDataService {
     const sessionItems = [];
     const relevantExercises = [];
     weeks.forEach((week) => {
-      cardLists.forEach((cardList, i) => {
+      board.forEach((column, i) => {
         const session = {
           id: ++this._lastSessionId,
           order: i + 1,
@@ -58,7 +65,7 @@ export class DraftProgramsDataService {
         };
         sessions.push(session);
 
-        cardList.forEach((card, j) => {
+        column.forEach((card, j) => {
           const sessionItem = {
             reps: null,
             AMRAP: false,
@@ -255,9 +262,7 @@ export class DraftProgramsDataService {
       .watch('boardCardData')
       .pipe(
         tap((data: BoardCardData[][]) => {
-          if (data?.length) {
-            this._draftProgramBoardSubject.next(data);
-          }
+          this._draftProgramBoardSubject.next(data);
         })
       )
       .subscribe();

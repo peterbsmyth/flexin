@@ -15,7 +15,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { remove } from 'lodash-es';
 import { BoardCardData } from '@bod/training/domain';
-import { OnChange } from '@bod/shared/utils';
+import { OnChange, isBoardEmpty } from '@bod/shared/utils';
 
 @Component({
   selector: 'training-program-board',
@@ -32,7 +32,9 @@ export class ProgramBoardComponent {
   @Input()
   sourceColumn: BoardCardData[];
   @OnChange<any>(function (data) {
-    this.buildBoard(data);
+    if (data) {
+      this.buildBoard(data);
+    }
   })
   @Input()
   data: any;
@@ -43,10 +45,19 @@ export class ProgramBoardComponent {
     this.allCategories.length
   ).fill([]);
   public days = 4;
-  public daysLists: BoardCardData[][] = [...new Array(this.days)].map(() => []);
+  public board: BoardCardData[][];
+
+  setBoard = () => [...new Array(this.days)].map(() => []);
+
+  constructor() {
+    this.board = this.setBoard();
+  }
 
   /**
    * drop
+   * move an item up and down the source column
+   * move from source to board column
+   * move from board column to board column
    * @param event a drag drop event
    */
   drop(event: CdkDragDrop<BoardCardData[]>) {
@@ -71,7 +82,7 @@ export class ProgramBoardComponent {
         event.currentIndex
       );
     }
-    this.update.emit(this.daysLists);
+    this.update.emit(this.board);
   }
 
   /**
@@ -81,7 +92,7 @@ export class ProgramBoardComponent {
    * @param list the list the card is being dropped to
    */
   uniquePredicate = (drag: CdkDrag<BoardCardData>, list: CdkDropList) => {
-    const array = this.daysLists[+list.id];
+    const array = this.board[+list.id];
     const arrayIncludesExercise = array.find((e) => e.id === drag.data.id);
     return !arrayIncludesExercise;
   };
@@ -93,9 +104,13 @@ export class ProgramBoardComponent {
    * @param j index of the card in the dayList
    */
   onRemove(i: number, j: number) {
-    remove(this.daysLists[i], (card, index) => index === j);
+    remove(this.board[i], (card, index) => index === j);
 
-    this.update.emit(this.daysLists);
+    this.update.emit(this.board);
+
+    if (isBoardEmpty(this.board)) {
+      this.board = this.setBoard();
+    }
   }
 
   buildSource(data: BoardCardData[]) {
@@ -110,7 +125,7 @@ export class ProgramBoardComponent {
    * @param data all of the days of workouts
    */
   buildBoard(data: BoardCardData[][]) {
-    this.daysLists = data.map((list) => list.map((obj) => obj));
+    this.board = data.map((list) => list.map((obj) => obj));
   }
 
   /**
