@@ -1,20 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BoardCardData } from '@bod/training/domain';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'training-board-card',
   templateUrl: './board-card.component.html',
   styleUrls: ['./board-card.component.scss'],
 })
-export class BoardCardComponent implements OnInit {
-  @Input() data: BoardCardData;
+export class BoardCardComponent {
+  @Input()
+  name: string;
   @Input() closeable = true;
-  @Output() remove: EventEmitter<BoardCardData> = new EventEmitter();
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Output() remove: EventEmitter<any> = new EventEmitter();
 
   onRemove() {
-    this.remove.emit(this.data);
+    this.remove.emit();
   }
 }

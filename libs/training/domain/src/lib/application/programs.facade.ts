@@ -5,6 +5,8 @@ import { select, Store, Action } from '@ngrx/store';
 import * as fromRoot from '../+state/root.reducer';
 import * as ProgramsSelectors from '../+state/programs/programs.selectors';
 import { DraftProgramsDataService } from '../infrastructure/draft-programs.data.service';
+import { Observable } from 'rxjs';
+import { ProgramWithDescendants } from '../entities/component.models';
 
 @Injectable()
 export class ProgramsFacade {
@@ -16,9 +18,9 @@ export class ProgramsFacade {
   draftSessionConfiguration$ = this.draftProgramService
     .draftSessionConfiguration$;
   draftProgram$ = this.draftProgramService.draftProgram$;
-  selectedProgramsWithDescendants$ = this.store.pipe(
-    select(ProgramsSelectors.getSelectedWithDescendants)
-  );
+  selectedProgramsWithDescendants$: Observable<
+    ProgramWithDescendants
+  > = this.store.pipe(select(ProgramsSelectors.getSelectedWithDescendants));
 
   dispatch(action: Action) {
     this.store.dispatch(action);

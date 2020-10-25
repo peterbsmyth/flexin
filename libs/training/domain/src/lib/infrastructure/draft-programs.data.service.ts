@@ -10,6 +10,7 @@ import { DraftProgram } from '../entities/draft.models';
 import { uniqBy } from 'lodash-es';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Exercise } from '@bod/shared/models';
 
 @Injectable()
 export class DraftProgramsDataService {
@@ -34,7 +35,10 @@ export class DraftProgramsDataService {
     };
   };
 
-  addIncompleteSessionItems(cardLists: BoardCardData[][]): void {
+  addIncompleteSessionItems(
+    cardLists: BoardCardData[][],
+    exercises: Exercise[]
+  ): void {
     this.storage.set('boardCardData', cardLists).subscribe();
     const draft: any = {};
     const weeks = [1, 2, 3, 4, 5, 6].map((id) => ({
@@ -43,7 +47,7 @@ export class DraftProgramsDataService {
     }));
     const sessions = [];
     const sessionItems = [];
-    const exercises = [];
+    const relevantExercises = [];
     weeks.forEach((week) => {
       cardLists.forEach((cardList, i) => {
         const session = {
@@ -64,30 +68,31 @@ export class DraftProgramsDataService {
             intensity: null,
             tempo: null,
             id: ++this._lastSessionItemLocalId,
-            exerciseId: card.exercise.id,
+            exerciseId: card.id,
             sessionId: session.id,
             order: j + 1,
           };
 
           sessionItems.push(sessionItem);
-          exercises.push({
-            ...card.exercise,
+          relevantExercises.push({
+            ...exercises.find((e) => e.id === card.id),
             sessionItemId: sessionItem.id,
           });
         });
       });
     });
 
-    draft.exercises = exercises.reduce(this._createDictionary, {});
+    draft.exercises = relevantExercises.reduce(this._createDictionary, {});
     draft.sessions = sessions.reduce(this._createDictionary, {});
     draft.sessionItems = sessionItems.reduce(this._createDictionary, {});
     draft.weeks = weeks.reduce(this._createDictionary, {});
-    const sessionItemData: SessionItemData[] = uniqBy(exercises, 'id').map(
-      (exercise) => ({
-        sessionItem: draft.sessionItems[exercise.sessionItemId],
-        exercise,
-      })
-    );
+    const sessionItemData: SessionItemData[] = uniqBy(
+      relevantExercises,
+      'id'
+    ).map((exercise) => ({
+      sessionItem: draft.sessionItems[exercise.sessionItemId],
+      exercise,
+    }));
     this.storage.set('sessionItemData', sessionItemData).subscribe();
     this.storage.set('draftProgram', draft).subscribe();
   }
@@ -250,7 +255,9 @@ export class DraftProgramsDataService {
       .watch('boardCardData')
       .pipe(
         tap((data: BoardCardData[][]) => {
-          this._draftProgramBoardSubject.next(data);
+          if (data?.length) {
+            this._draftProgramBoardSubject.next(data);
+          }
         })
       )
       .subscribe();

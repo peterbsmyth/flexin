@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { ProgramsActions } from './actions';
 import { ProgramDataService } from '../../infrastructure/program.data.service';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { Session, SessionItem } from '@bod/shared/models';
 import { uniqBy } from 'lodash-es';
@@ -19,6 +19,7 @@ import { ExercisesActions } from '../exercises/actions';
 import { SessionItemsActions } from '../session-items/actions';
 import { SessionsActions } from '../sessions/actions';
 import { WeeksPageActions } from '../weeks/actions';
+import { getAllExercises } from '../exercises/exercises.selectors';
 
 @Injectable()
 export class ProgramsEffects {
@@ -78,8 +79,9 @@ export class ProgramsEffects {
         ofType(
           ProgramsActions.addIncompleteSessionItemsFromCreateFeatureProgramBoardPage
         ),
-        tap(({ lists }) => {
-          this.draftProgramService.addIncompleteSessionItems(lists);
+        withLatestFrom(this.store.select(getAllExercises)),
+        tap(([{ lists }, exercises]) => {
+          this.draftProgramService.addIncompleteSessionItems(lists, exercises);
         })
       ),
     { dispatch: false }

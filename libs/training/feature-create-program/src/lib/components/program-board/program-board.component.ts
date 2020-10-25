@@ -14,7 +14,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { remove } from 'lodash-es';
-import { ProgramBoardData, BoardCardData } from '@bod/training/domain';
+import { BoardCardData } from '@bod/training/domain';
 import { OnChange } from '@bod/shared/utils';
 
 @Component({
@@ -24,19 +24,26 @@ import { OnChange } from '@bod/shared/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgramBoardComponent {
-  @OnChange<ProgramBoardData>(function (data) {
+  @OnChange<BoardCardData[]>(function (data) {
+    if (data) {
+      this.buildSource(data);
+    }
+  })
+  @Input()
+  sourceColumn: BoardCardData[];
+  @OnChange<any>(function (data) {
     this.buildBoard(data);
   })
   @Input()
-  data: ProgramBoardData;
+  data: any;
   @Input() displaySource = true;
-  @Output() update: EventEmitter<any> = new EventEmitter();
+  @Output() update: EventEmitter<BoardCardData[][]> = new EventEmitter();
   public allCategories = ['pull', 'push', 'other'];
   public categoriesLists: BoardCardData[][] = new Array(
     this.allCategories.length
   ).fill([]);
-  public allDayNumbers = [1, 2, 3, 4];
-  public daysLists: BoardCardData[][] = [];
+  public days = 4;
+  public daysLists: BoardCardData[][] = [...new Array(this.days)].map(() => []);
 
   /**
    * drop
@@ -64,7 +71,6 @@ export class ProgramBoardComponent {
         event.currentIndex
       );
     }
-
     this.update.emit(this.daysLists);
   }
 
@@ -75,95 +81,53 @@ export class ProgramBoardComponent {
    * @param list the list the card is being dropped to
    */
   uniquePredicate = (drag: CdkDrag<BoardCardData>, list: CdkDropList) => {
-    const array = this.daysLists[+list.id - 1];
-    const arrayIncludesExercise = array.find(
-      (e) => e.exercise.id === drag.data.exercise.id
-    );
-
+    const array = this.daysLists[+list.id];
+    const arrayIncludesExercise = array.find((e) => e.id === drag.data.id);
     return !arrayIncludesExercise;
   };
 
   /**
    * onRemove
-   * removes a card from the board
-   * @param card the card being removed
-   * @param index the index of the list it's being removed from
+   * removes a dcard from the board
+   * @param i index of the dayList
+   * @param j index of the card in the dayList
    */
-  onRemove(card, index: number) {
-    remove(this.daysLists[index], {
-      exercise: { id: card.exercise.id },
-    });
+  onRemove(i: number, j: number) {
+    remove(this.daysLists[i], (card, index) => index === j);
 
     this.update.emit(this.daysLists);
   }
 
+  buildSource(data: BoardCardData[]) {
+    this.allCategories.forEach((category, i) => {
+      this.categoriesLists[i] = data
+        .filter((item) => item.category === category)
+        .sort((a, b) => a.name.localeCompare(b.name));
+    });
+  }
   /**
    * buildBoard
    * @param data all of the days of workouts
    */
-  buildBoard(data: ProgramBoardData) {
-    const hasData = data?.sessionItems && data?.exercises.length;
-
-    if (hasData && !this.displaySource) {
-      const allBoardCardData = data.sessionItems.map((sessionItem) => {
-        return {
-          sessionItem: {
-            ...sessionItem,
-          },
-          exercise: data.exercises.find(
-            (exercise) => sessionItem.exerciseId === exercise.id
-          ),
-        };
-      });
-
-      this.allDayNumbers.forEach((dayNumber) => {
-        const day = data.sessions.find(
-          (session) => session.order === dayNumber
-        );
-        this.daysLists[dayNumber - 1] = allBoardCardData.filter(
-          (datum) => datum.sessionItem.sessionId === day.id
-        );
-      });
-    }
-
-    if (hasData && this.displaySource) {
-      this.allCategories.forEach((category, i) => {
-        /**
-         * the hard-coded categories results in 'other' in index 2 being a different filter
-         * than the 'push' and the 'pull' categories
-         */
-        const filter = i === 2 ? (e) => !e.push && !e.pull : (e) => e[category];
-
-        this.categoriesLists[i] = data.exercises
-          .filter(filter)
-          .map((exercise) => ({ sessionItem: null, exercise }))
-          .sort((a, b) => a.exercise.name.localeCompare(b.exercise.name));
-      });
-    }
-
-    if (hasData && data.draft) {
-      this.daysLists = new Array(data.draft.length).fill(null);
-      data.draft.forEach((list, i) => {
-        this.daysLists[i] = [...list];
-      });
-    }
+  buildBoard(data: BoardCardData[][]) {
+    this.daysLists = data.map((list) => list.map((obj) => obj));
   }
 
   /**
    * connectedTo
-   * @param dayNumber the number day which is being evaluated. if none, returns all connections
+   * @param index the index of the day which is being evaluated. if none, returns all connections
    * @returns the connections to this drop list.
    */
-  connectedTo(dayNumber?: number): string[] {
-    const allDayNumberStrings = this.allDayNumbers.map((currentDayNumber) =>
-      currentDayNumber.toString()
+  connectedTo(index?: number): string[] {
+    const allDayIndexStrings = [...Array(this.days)].map((item, i) =>
+      i.toString()
     );
 
-    if (!dayNumber) {
-      return allDayNumberStrings;
+    if (!index) {
+      return allDayIndexStrings;
     } else {
-      return allDayNumberStrings.filter(
-        (currentDayNumber) => +currentDayNumber !== dayNumber
+      return allDayIndexStrings.filter(
+        (currentDayIndex) => +currentDayIndex !== index
       );
     }
   }

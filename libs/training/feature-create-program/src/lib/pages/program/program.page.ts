@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   ExercisesFacade,
-  ProgramBoardData,
   ProgramsFacade,
   ProgramsActions,
+  BoardCardData,
+  ProgramWithDescendants,
 } from '@bod/training/domain';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,17 +19,17 @@ export class ProgramPage implements OnInit {
     0
   );
   selectedWeek$: Observable<number> = this._selectedWeekSubject.asObservable();
-  program$: Observable<any>;
+  program$: Observable<ProgramWithDescendants>;
   loaded$: Observable<boolean>;
-  data$: Observable<ProgramBoardData>;
+  data$: Observable<BoardCardData[][]>;
 
   constructor(
     private programsState: ProgramsFacade,
     private exerciseState: ExercisesFacade,
     private route: ActivatedRoute
   ) {
-    this.program$ = this.programsState.selectedProgramsWithDescendants$;
     this.loaded$ = this.programsState.loaded$;
+    this.program$ = this.programsState.selectedProgramsWithDescendants$;
     this.data$ = combineLatest([
       this.program$,
       this.exerciseState.allExercises$,
@@ -42,11 +43,27 @@ export class ProgramPage implements OnInit {
         const sessionItems = program.sessionItems.filter((sessionItem) =>
           sessions.find((session) => session.id === sessionItem.sessionId)
         );
-        return {
-          sessions,
-          sessionItems,
-          exercises,
-        };
+
+        const allDays = sessions.map((session) => session.order);
+        const sortedDays = [...new Set(allDays)].sort();
+
+        const boardCardData = sortedDays.map((dayNumber) => {
+          const currentSession = sessions.find(
+            (session) => session.order === dayNumber
+          );
+
+          return sessionItems
+            .filter(
+              (sessionItem) => sessionItem.sessionId === currentSession.id
+            )
+            .map((sessionItem) => ({
+              routerLink: `/session-items/${sessionItem.id}`,
+              name: exercises.find(
+                (exercise) => sessionItem.exerciseId === exercise.id
+              )?.name,
+            }));
+        });
+        return boardCardData;
       })
     );
   }
@@ -54,8 +71,6 @@ export class ProgramPage implements OnInit {
   onSelectWeek(index) {
     this._selectedWeekSubject.next(index);
   }
-
-  onUpdate(lists) {}
 
   ngOnInit(): void {
     this.programsState.dispatch(

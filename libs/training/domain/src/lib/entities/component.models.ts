@@ -1,9 +1,11 @@
 import {
   Exercise,
+  Program,
   Session,
   SessionItem,
   SessionItemStatistic,
   SetStatistic,
+  Week,
 } from '@bod/shared/models';
 
 export interface SessionItemData {
@@ -24,8 +26,10 @@ export interface SessionItemFormData {
 }
 
 export interface BoardCardData {
-  sessionItem: SessionItem;
-  exercise: Exercise;
+  id?: number;
+  name: string;
+  category?: string;
+  routerLink?: string;
 }
 
 export interface SessionItemBoardCardData {
@@ -38,4 +42,12 @@ export interface SessionItemBoardCardData {
 export interface SessionItemCardOutput {
   sessionItemStatistic: SessionItemStatistic;
   setStatistics: SetStatistic[];
+}
+
+export interface ProgramWithDescendants {
+  program: Program;
+  weeks: Week[];
+  sessions: Session[];
+  sessionItems: SessionItem[];
+  exercises: Exercise[];
 }

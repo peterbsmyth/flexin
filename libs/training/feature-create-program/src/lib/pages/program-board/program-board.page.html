@@ -8,5 +8,9 @@
   </button>
 </bod-actions-bar>
 
-<training-program-board [data]="data$ | async" (update)="onUpdate($event)">
+<training-program-board
+  [sourceColumn]="sourceColumn$ | async"
+  [data]="boardColumns$ | async"
+  (update)="onUpdate($event)"
+>
 </training-program-board>
