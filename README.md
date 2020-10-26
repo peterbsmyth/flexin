@@ -32,10 +32,10 @@ Download and install the VS Code extension [Nx Console from VS Code Extension Ma
 npm install
 ```
 
-### 2. Run the coach Application
+### 2. Run the Celebrity Application
 
 ```sh
-nx serve coach --open
+nx serve celebrity --open
 ```
 
 ### 3. Run the Athlete Application

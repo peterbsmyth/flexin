@@ -57,7 +57,7 @@ export class ProgramPage implements OnInit {
               (sessionItem) => sessionItem.sessionId === currentSession.id
             )
             .map((sessionItem) => ({
-              routerLink: `/session-items/${sessionItem.id}`,
+              routerLink: `/coaching/session-items/${sessionItem.id}`,
               name: exercises.find(
                 (exercise) => sessionItem.exerciseId === exercise.id
               )?.name,

@@ -7,16 +7,19 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar *ngIf="!(networkStatus.loading$ | async); else loading"
-      >💪</mat-toolbar
-    >
+    <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
+      <mat-list-item disabled>Training</mat-list-item>
       <a mat-list-item routerLink="/programs">Programs</a>
-      <a mat-list-item routerLink="/exercises">Exercises</a>
+      <a mat-list-item routerLink="/statistics">Review</a>
+      <mat-divider></mat-divider>
+      <mat-list-item disabled>Coaching</mat-list-item>
+      <a mat-list-item routerLink="/coaching/programs">Programs</a>
+      <a mat-list-item routerLink="/coaching/exercises">Exercises</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="nav">
+    <mat-toolbar color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -26,17 +29,13 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <div class="nav__header">
-        <h1 class="nav__title"><a routerLink="/">Flexin</a></h1>
-      </div>
-      <ul class="nav__links">
-        <!-- <li class="nav__link"><a href="#">About</a></li> -->
-      </ul>
+      <span *ngIf="!(networkStatus.loading$ | async); else loading">💪</span>
+      <span class="toolbar__title">Flexin</span>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
 <ng-template #loading>
-  <mat-toolbar>⌛</mat-toolbar>
+  <span>⌛</span>
 </ng-template>

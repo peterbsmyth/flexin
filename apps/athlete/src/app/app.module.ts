@@ -1,16 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MatButtonModule } from '@angular/material/button';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -20,25 +12,20 @@ import {
   DefaultRouterStateSerializer,
 } from '@ngrx/router-store';
 import { TrainingFeatureInputWorkoutModule } from '@bod/training/feature-input-workout';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NetworkStatusModule } from '@bod/shared/domain';
-import { BodComponentsModule } from '@bod/shared/components';
 import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-review-statistics';
+import { AppPage } from './core/pages/app/app.page';
+import { CoachingFeatureCreateProgramModule } from '@bod/training/feature-create-program';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [AppComponent, SidenavComponent],
   imports: [
     BrowserAnimationsModule,
-    BodComponentsModule,
+    CoreModule,
     AppRoutingModule,
-    MatButtonModule,
     BrowserModule,
     LayoutModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatSnackBarModule,
     NetworkStatusModule.forRoot(),
     StoreModule.forRoot(
       {},
@@ -58,8 +45,9 @@ import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-rev
     TrainingFeatureInputWorkoutModule,
     HttpClientModule,
     TrainingFeatureReviewStatisticsModule,
+    CoachingFeatureCreateProgramModule,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppPage],
   exports: [],
 })
 export class AppModule {}

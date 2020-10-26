@@ -14,19 +14,19 @@ import { SessionItemPage } from './pages/session-item/session-item.page';
 import { SessionItemExistsGuard } from './guards/session-item-exists.guard';
 
 const routes: Routes = [
-  { path: 'exercises', component: ExercisesPage },
-  { path: 'exercises/create', component: ExerciseCreatePage },
+  { path: 'coaching/exercises', component: ExercisesPage },
+  { path: 'coaching/exercises/create', component: ExerciseCreatePage },
   {
-    path: 'exercises/:exerciseId',
+    path: 'coaching/exercises/:exerciseId',
     component: ExercisePage,
     canActivate: [ExerciseExistsGuard],
   },
   {
-    path: 'programs',
+    path: 'coaching/programs',
     component: ProgramsPage,
   },
   {
-    path: 'programs/create',
+    path: 'coaching/programs/create',
     component: ProgramCreatePage,
     children: [
       {
@@ -45,12 +45,12 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'programs/:programId',
+    path: 'coaching/programs/:programId',
     component: ProgramPage,
     canActivate: [ProgramExistsGuard],
   },
   {
-    path: 'session-items/:sessionItemId',
+    path: 'coaching/session-items/:sessionItemId',
     component: SessionItemPage,
     canActivate: [SessionItemExistsGuard],
   },

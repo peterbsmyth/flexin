@@ -1,21 +1,22 @@
+<bod-breadcrumbs>
+  <span>Programs</span>
+</bod-breadcrumbs>
 <bod-actions-bar>
   <button mat-raised-button color="primary" routerLink="create">
     Create
   </button>
 </bod-actions-bar>
-
-<h2>Programs</h2>
-<div *ngIf="(loaded$ | async); else loading;">
-  <mat-list>
-    <a
-      *ngFor="let program of (programs$ | async)"
-      mat-list-item
-      [routerLink]="['/programs', program.id]"
-    >
-      {{ program?.name }}
-    </a>
-  </mat-list>
-</div>
+<section class="items" *ngIf="(loaded$ | async); else loading;">
+  <button
+    class="items__button"
+    *ngFor="let program of (programs$ | async)"
+    mat-stroked-button
+    color="link"
+    [routerLink]="['/coaching/programs', program.id]"
+  >
+    {{ program?.name }}
+  </button>
+</section>
 
 <ng-template #loading>
   <p>Loading...</p>

@@ -13,11 +13,13 @@ import { NetworkStatusModule } from '@bod/shared/domain';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BodComponentsModule } from '@bod/shared/components';
 import { HomeComponent } from './components/home/home.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppPage, NavComponent, HomeComponent],
   imports: [
     BodComponentsModule,
+    MatSnackBarModule,
     CommonModule,
     NetworkStatusModule.forRoot(),
     RouterModule,

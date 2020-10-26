@@ -27,10 +27,8 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js",
-    "build:coach": "ng build coach --prod",
     "build:athlete": "ng build athlete --prod",
-    "build:athlete:bb": "ng build athlete --configuration=bb",
-    "build:coach:bb": "ng build coach --configuration=bb"
+    "build:athlete:bb": "ng build athlete --configuration=bb"
   },
   "private": true,
   "dependencies": {

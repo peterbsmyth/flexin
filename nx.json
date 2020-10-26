@@ -22,9 +22,6 @@
     "athlete": {
       "tags": ["domain:training", "type:app"]
     },
-    "coach": {
-      "tags": ["domain:training", "type:app"]
-    },
     "shared-environments": {
       "tags": ["domain:shared", "type:util"]
     },
