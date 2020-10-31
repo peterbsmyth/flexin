@@ -1,5 +1,14 @@
 <bod-actions-bar>
   <mat-form-field>
+    <mat-label>Week Count</mat-label>
+    <input
+      matInput
+      type="number"
+      inputmode="numeric"
+      [formControl]="weekCount"
+    />
+  </mat-form-field>
+  <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput type="search" [formControl]="search" />
   </mat-form-field>

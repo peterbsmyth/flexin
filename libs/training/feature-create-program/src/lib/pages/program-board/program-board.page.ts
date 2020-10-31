@@ -25,6 +25,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   private _daysSubject: BehaviorSubject<number> = new BehaviorSubject(4);
   days$: Observable<number> = this._daysSubject.asObservable();
   search = new FormControl('');
+  weekCount: FormControl = new FormControl(6);
   sourceColumn$: Observable<BoardCardData[]>;
   board$: Observable<BoardCardData[][]>;
 
@@ -100,13 +101,14 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
       ProgramsActions.addIncompleteSessionItemsFromCreateFeatureProgramBoardPage(
         {
           lists,
+          weekCount: this.weekCount.value,
         }
       )
     );
   }
 
   onClickNext() {
-    this.router.navigateByUrl('/programs/create/2');
+    this.router.navigateByUrl('/coaching/programs/create/2');
   }
 
   onClickReset() {

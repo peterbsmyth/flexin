@@ -80,8 +80,12 @@ export class ProgramsEffects {
           ProgramsActions.addIncompleteSessionItemsFromCreateFeatureProgramBoardPage
         ),
         withLatestFrom(this.store.select(getAllExercises)),
-        tap(([{ lists }, exercises]) => {
-          this.draftProgramService.addIncompleteSessionItems(lists, exercises);
+        tap(([{ lists, weekCount }, exercises]) => {
+          this.draftProgramService.addIncompleteSessionItems(
+            lists,
+            exercises,
+            weekCount
+          );
         })
       ),
     { dispatch: false }

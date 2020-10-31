@@ -60,7 +60,7 @@ export const selectProgramFromGuard = createAction(
 
 export const addIncompleteSessionItemsFromCreateFeatureProgramBoardPage = createAction(
   '[Programs][Create][Program Board Page] Add Incomplete Session Items',
-  props<{ lists: BoardCardData[][] }>()
+  props<{ lists: BoardCardData[][]; weekCount: number }>()
 );
 
 export const createProgramFromCreateFeatureSessionPage = createAction(

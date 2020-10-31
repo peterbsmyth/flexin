@@ -52,13 +52,14 @@ export class DraftProgramsDataService {
 
   addIncompleteSessionItems(
     board: BoardCardData[][],
-    exercises: Exercise[]
+    exercises: Exercise[],
+    weekCount: number
   ): void {
     this.storage.set('boardCardData', board).subscribe();
     const draft: any = {};
-    const weeks = [1, 2, 3, 4, 5, 6].map((id) => ({
-      id,
-      number: id,
+    const weeks = [...Array(weekCount)].map((week, i) => ({
+      id: i + 1,
+      number: i + 1,
     }));
     const sessions = [];
     const sessionItems = [];
