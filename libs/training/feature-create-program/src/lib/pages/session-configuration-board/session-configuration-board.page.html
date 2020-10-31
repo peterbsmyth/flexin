@@ -6,7 +6,7 @@
     <input matInput [formControl]="programName" type="text" />
   </mat-form-field>
   <button
-    mat-raised-button
+    mat-stroked-button
     color="primary"
     [disabled]="invalid$ | async"
     (click)="onClickCreateProgram()"

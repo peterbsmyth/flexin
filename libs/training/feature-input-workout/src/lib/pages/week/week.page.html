@@ -5,20 +5,18 @@
     <span>Week {{ week.number }}</span>
   </bod-breadcrumbs>
 </ng-container>
-
-<mat-list class="week" *ngrxLet="week$ as week">
-  <mat-list-item>
-    <button
-      class="statistics"
-      *ngIf="week.weekStatistic; else noStatistic"
-      mat-stroked-button
-      [disabled]="networkState.loading$ | async"
-      [routerLink]="['/statistics', 'week-statistics', week.weekStatistic.id]"
-      >View Statistics</button
-    >
-    <ng-template #noStatistic>
-      <button mat-stroked-button disabled>Statistics Unavailable</button>
-    </ng-template>
-  </mat-list-item>
-</mat-list>
+<bod-actions-bar *ngrxLet="week$ as week">
+  <button
+    *ngIf="week.weekStatistic; else noStatistic"
+    mat-stroked-button
+    color="primary"
+    [disabled]="networkState.loading$ | async"
+    [routerLink]="['/statistics', 'week-statistics', week.weekStatistic.id]"
+  >
+    View Statistics
+  </button>
+  <ng-template #noStatistic>
+    <button mat-stroked-button disabled>Statistics Unavailable</button>
+  </ng-template>
+</bod-actions-bar>
 <router-outlet></router-outlet>

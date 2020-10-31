@@ -18,7 +18,6 @@ import { SessionPage } from './pages/session/session.page';
 import { SessionItemPage } from './pages/session-item/session-item.page';
 import { SessionItemCardComponent } from './components/session-item-card/session-item-card.component';
 import { BodComponentsModule } from '@bod/shared/components';
-import { ActionBarComponent } from './components/action-bar/action-bar.component';
 import { MaximumAttemptPage } from './pages/maximum-attempt/maximum-attempt.page';
 import { MaximumAttemptCardComponent } from './components/maximum-attempt-card/maximum-attempt-card.component';
 import { MaximumAttemptFormComponent } from './components/maximum-attempt-form/maximum-attempt-form.component';
@@ -47,7 +46,6 @@ import { StatisticsContainer } from './containers/statistics/statistics.containe
   declarations: [
     WeekPage,
     SessionsPage,
-    ActionBarComponent,
     MaximumAttemptPage,
     MaximumAttemptCardComponent,
     MaximumAttemptFormComponent,

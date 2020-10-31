@@ -11,24 +11,24 @@
     <span>{{ session.name }}</span>
   </bod-breadcrumbs>
 </ng-container>
-<training-action-bar class="navigation" *ngrxLet="pages$ as pages">
+<bod-actions-bar *ngrxLet="pages$ as pages">
   <button
     mat-stroked-button
+    color="primary"
     [disabled]="pages.isFirst"
     [routerLink]="['../', pages.previousId]"
-    class="navigation__button"
   >
     Previous Day
   </button>
   <button
     mat-stroked-button
+    color="primary"
     [disabled]="pages.isLast"
     [routerLink]="['../', pages.nextId]"
-    class="navigation__button"
   >
     Next Day
   </button>
-</training-action-bar>
+</bod-actions-bar>
 <section
   class="items"
   *ngIf="(sessionItemsLoaded$ | async); else loadingSessionItems"

@@ -4,16 +4,6 @@ mat-list {
   font-weight: $weight-bold;
 }
 
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  margin: $space-s $space-m;
-
-  &__button {
-    width: 48%;
-  }
-}
-
 .items {
   display: flex;
   flex-direction: column;
@@ -30,4 +20,13 @@ mat-list {
 
 .active {
   background-color: $grey-100;
+}
+
+button {
+  width: 30%;
+  margin-bottom: $space-xs;
+}
+
+button:first-of-type {
+  margin-right: $space-xs;
 }
