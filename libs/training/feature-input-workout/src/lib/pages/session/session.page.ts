@@ -15,7 +15,6 @@ import {
   takeUntil,
   distinctUntilKeyChanged,
 } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './session.page.html',
@@ -28,10 +27,7 @@ export class SessionPage implements OnInit, OnDestroy {
   sessionItems$: Observable<SessionItem[]>;
   sessionItemsLoaded$: Observable<boolean>;
 
-  constructor(
-    private sessionsState: SessionsFacade,
-    private route: ActivatedRoute
-  ) {
+  constructor(private sessionsState: SessionsFacade) {
     this.session$ = this.sessionsState.selectedSessionsWithAscendants$.pipe(
       filter((s) => {
         return !!s?.week?.program;
