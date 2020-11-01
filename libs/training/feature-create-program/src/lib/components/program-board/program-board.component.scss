@@ -18,8 +18,12 @@
     height: 40vh;
   }
 
+  &__column {
+    border-right: 1px dashed black;
+  }
+
   &__header {
     @include subheadline;
-    margin: $space-xs;
+    margin-left: $space-m;
   }
 }
