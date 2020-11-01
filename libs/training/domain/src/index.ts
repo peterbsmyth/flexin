@@ -33,3 +33,5 @@ export { SessionsActions } from './lib/+state/sessions/actions';
 export { SessionItemStatisticsActions } from './lib/+state/session-item-statistics/actions';
 export { SetStatisticsActions } from './lib/+state/set-statistics/actions';
 export { SessionStatisticsActions } from './lib/+state/session-statistics/actions';
+
+export * from './lib/application/auth.facade';

@@ -18,6 +18,7 @@ import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-rev
 import { AppPage } from './core/pages/app/app.page';
 import { CoachingFeatureCreateProgramModule } from '@bod/training/feature-create-program';
 import { CoreModule } from './core/core.module';
+import { TrainingFeatureAuthModule } from '@bod/training/feature-auth';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { CoreModule } from './core/core.module';
     HttpClientModule,
     TrainingFeatureReviewStatisticsModule,
     CoachingFeatureCreateProgramModule,
+    TrainingFeatureAuthModule,
   ],
   bootstrap: [AppPage],
   exports: [],

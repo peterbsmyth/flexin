@@ -37,7 +37,8 @@
       "@bod/shared/utils": ["libs/shared/utils/src/index.ts"],
       "@bod/training/feature-create-program": [
         "libs/training/feature-create-program/src/index.ts"
-      ]
+      ],
+      "@bod/training/feature-auth": ["libs/training/feature-auth/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
