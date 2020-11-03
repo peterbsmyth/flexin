@@ -55,6 +55,15 @@ import { CategoriesFacade } from './application/categories.facade';
 import * as fromWorkoutStatistics from './+state/workout-statistics/workout-statistics.reducer';
 import { WorkoutStatisticsEffects } from './+state/workout-statistics/workout-statistics.effects';
 import { WorkoutStatisticsFacade } from './application/workout-statistics.facade';
+import * as fromV2Programs from './+state/v2-programs/v2-programs.reducer';
+import { V2ProgramsEffects } from './+state/v2-programs/v2-programs.effects';
+import { V2ProgramsFacade } from './application/v2-programs.facade';
+import * as fromV2Exercises from './+state/v2-exercises/v2-exercises.reducer';
+import { V2ExercisesEffects } from './+state/v2-exercises/v2-exercises.effects';
+import { V2ExercisesFacade } from './application/v2-exercises.facade';
+import * as fromV2SetStatistics from './+state/v2-set-statistics/v2-set-statistics.reducer';
+import { V2SetStatisticsEffects } from './+state/v2-set-statistics/v2-set-statistics.effects';
+import { V2SetStatisticsFacade } from './application/v2-set-statistics.facade';
 
 @NgModule({
   imports: [
@@ -109,6 +118,18 @@ import { WorkoutStatisticsFacade } from './application/workout-statistics.facade
       fromWorkoutStatistics.WORKOUTSTATISTICS_FEATURE_KEY,
       fromWorkoutStatistics.reducer
     ),
+    StoreModule.forFeature(
+      fromV2Programs.V2PROGRAMS_FEATURE_KEY,
+      fromV2Programs.reducer
+    ),
+    StoreModule.forFeature(
+      fromV2Exercises.V2EXERCISES_FEATURE_KEY,
+      fromV2Exercises.reducer
+    ),
+    StoreModule.forFeature(
+      fromV2SetStatistics.V2SETSTATISTICS_FEATURE_KEY,
+      fromV2SetStatistics.reducer
+    ),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
@@ -123,6 +144,9 @@ import { WorkoutStatisticsFacade } from './application/workout-statistics.facade
       WorkoutsEffects,
       WorkoutStatisticsEffects,
       CategoriesEffects,
+      V2ExercisesEffects,
+      V2SetStatisticsEffects,
+      V2ProgramsEffects,
     ]),
     MatSnackBarModule,
   ],
@@ -152,6 +176,9 @@ import { WorkoutStatisticsFacade } from './application/workout-statistics.facade
     WorkoutsFacade,
     CategoriesFacade,
     WorkoutStatisticsFacade,
+    V2ProgramsFacade,
+    V2ExercisesFacade,
+    V2SetStatisticsFacade,
   ],
 })
 export class TrainingDomainModule {}

@@ -47,6 +47,18 @@ import {
   CategoriesState,
   CATEGORIES_FEATURE_KEY,
 } from './categories/categories.reducer';
+import {
+  V2EXERCISES_FEATURE_KEY,
+  V2ExercisesState,
+} from './v2-exercises/v2-exercises.reducer';
+import {
+  V2PROGRAMS_FEATURE_KEY,
+  V2ProgramsState,
+} from './v2-programs/v2-programs.reducer';
+import {
+  V2SETSTATISTICS_FEATURE_KEY,
+  V2SetStatisticsState,
+} from './v2-set-statistics/v2-set-statistics.reducer';
 
 export interface PartialState {
   readonly [EXERCISES_FEATURE_KEY]: ExercisesState;
@@ -62,4 +74,7 @@ export interface PartialState {
   readonly [WORKOUTS_FEATURE_KEY]: WorkoutsState;
   readonly [WORKOUTSTATISTICS_FEATURE_KEY]: WorkoutStatisticsState;
   readonly [CATEGORIES_FEATURE_KEY]: CategoriesState;
+  readonly [V2EXERCISES_FEATURE_KEY]: V2ExercisesState;
+  readonly [V2PROGRAMS_FEATURE_KEY]: V2ProgramsState;
+  readonly [V2SETSTATISTICS_FEATURE_KEY]: V2SetStatisticsState;
 }
