@@ -49,6 +49,12 @@ import { UserDataService } from './infrastructure/user.data.service';
 import * as fromWorkouts from './+state/workouts/workouts.reducer';
 import { WorkoutsEffects } from './+state/workouts/workouts.effects';
 import { WorkoutsFacade } from './application/workouts.facade';
+import * as fromCategories from './+state/categories/categories.reducer';
+import { CategoriesEffects } from './+state/categories/categories.effects';
+import { CategoriesFacade } from './application/categories.facade';
+import * as fromWorkoutStatistics from './+state/workout-statistics/workout-statistics.reducer';
+import { WorkoutStatisticsEffects } from './+state/workout-statistics/workout-statistics.effects';
+import { WorkoutStatisticsFacade } from './application/workout-statistics.facade';
 
 @NgModule({
   imports: [
@@ -95,6 +101,14 @@ import { WorkoutsFacade } from './application/workouts.facade';
       fromWorkouts.WORKOUTS_FEATURE_KEY,
       fromWorkouts.reducer
     ),
+    StoreModule.forFeature(
+      fromCategories.CATEGORIES_FEATURE_KEY,
+      fromCategories.reducer
+    ),
+    StoreModule.forFeature(
+      fromWorkoutStatistics.WORKOUTSTATISTICS_FEATURE_KEY,
+      fromWorkoutStatistics.reducer
+    ),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
@@ -107,6 +121,8 @@ import { WorkoutsFacade } from './application/workouts.facade';
       ProgramStatisticsEffects,
       SessionStatisticsEffects,
       WorkoutsEffects,
+      WorkoutStatisticsEffects,
+      CategoriesEffects,
     ]),
     MatSnackBarModule,
   ],
@@ -134,6 +150,8 @@ import { WorkoutsFacade } from './application/workouts.facade';
     DraftProgramsDataService,
     UserDataService,
     WorkoutsFacade,
+    CategoriesFacade,
+    WorkoutStatisticsFacade,
   ],
 })
 export class TrainingDomainModule {}
