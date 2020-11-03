@@ -13,7 +13,7 @@ export * from './lib/application/weeks.facade';
 export * from './lib/application/session-item-statistics.facade';
 export * from './lib/application/set-statistics.facade';
 export * from './lib/application/session-statistics.facade';
-
+export * from './lib/application/workouts.facade';
 /**
  * Entities
  */
@@ -33,6 +33,7 @@ export { SessionsActions } from './lib/+state/sessions/actions';
 export { SessionItemStatisticsActions } from './lib/+state/session-item-statistics/actions';
 export { SetStatisticsActions } from './lib/+state/set-statistics/actions';
 export { SessionStatisticsActions } from './lib/+state/session-statistics/actions';
+export * from './lib/+state/workouts/workouts.actions';
 
 export * from './lib/application/auth.facade';
 

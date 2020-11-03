@@ -46,6 +46,9 @@ import { SessionStatisticDataService } from './infrastructure/session-statistic.
 import { DraftProgramsDataService } from './infrastructure/draft-programs.data.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserDataService } from './infrastructure/user.data.service';
+import * as fromWorkouts from './+state/workouts/workouts.reducer';
+import { WorkoutsEffects } from './+state/workouts/workouts.effects';
+import { WorkoutsFacade } from './application/workouts.facade';
 
 @NgModule({
   imports: [
@@ -88,6 +91,10 @@ import { UserDataService } from './infrastructure/user.data.service';
       fromSessionStatistics.SESSIONSTATISTICS_FEATURE_KEY,
       fromSessionStatistics.reducer
     ),
+    StoreModule.forFeature(
+      fromWorkouts.WORKOUTS_FEATURE_KEY,
+      fromWorkouts.reducer
+    ),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
@@ -99,6 +106,7 @@ import { UserDataService } from './infrastructure/user.data.service';
       WeekStatisticsEffects,
       ProgramStatisticsEffects,
       SessionStatisticsEffects,
+      WorkoutsEffects,
     ]),
     MatSnackBarModule,
   ],
@@ -125,6 +133,7 @@ import { UserDataService } from './infrastructure/user.data.service';
     SessionStatisticsFacade,
     DraftProgramsDataService,
     UserDataService,
+    WorkoutsFacade,
   ],
 })
 export class TrainingDomainModule {}

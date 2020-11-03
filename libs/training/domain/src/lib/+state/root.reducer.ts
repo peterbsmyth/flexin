@@ -23,9 +23,22 @@ import {
   SessionStatisticsState,
 } from './session-statistics/session-statistics.reducer';
 import { WEEKS_FEATURE_KEY, WeeksState } from './weeks/weeks.reducer';
-import { EXERCISES_FEATURE_KEY, ExercisesState } from './exercises/exercises.reducer';
-import { WeekStatisticsState, WEEKSTATISTICS_FEATURE_KEY } from './week-statistics/week-statistics.reducer';
-import { ProgramStatisticsState, PROGRAMSTATISTICS_FEATURE_KEY } from './program-statistics/program-statistics.reducer';
+import {
+  EXERCISES_FEATURE_KEY,
+  ExercisesState,
+} from './exercises/exercises.reducer';
+import {
+  WeekStatisticsState,
+  WEEKSTATISTICS_FEATURE_KEY,
+} from './week-statistics/week-statistics.reducer';
+import {
+  ProgramStatisticsState,
+  PROGRAMSTATISTICS_FEATURE_KEY,
+} from './program-statistics/program-statistics.reducer';
+import {
+  WorkoutsState,
+  WORKOUTS_FEATURE_KEY,
+} from './workouts/workouts.reducer';
 
 export interface PartialState {
   readonly [EXERCISES_FEATURE_KEY]: ExercisesState;
@@ -38,4 +51,5 @@ export interface PartialState {
   readonly [SETSTATISTICS_FEATURE_KEY]: SetStatisticsState;
   readonly [WEEKSTATISTICS_FEATURE_KEY]: WeekStatisticsState;
   readonly [WEEKS_FEATURE_KEY]: WeeksState;
+  readonly [WORKOUTS_FEATURE_KEY]: WorkoutsState;
 }
