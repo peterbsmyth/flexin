@@ -688,6 +688,141 @@
           "style": "scss"
         }
       }
+    },
+    "training-feature-manage-programs": {
+      "projectType": "library",
+      "root": "libs/training/feature-manage-programs",
+      "sourceRoot": "libs/training/feature-manage-programs/src",
+      "prefix": "training",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/training/feature-manage-programs/tsconfig.lib.json",
+            "project": "libs/training/feature-manage-programs/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/training/feature-manage-programs/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/training/feature-manage-programs/tsconfig.lib.json",
+              "libs/training/feature-manage-programs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/training/feature-manage-programs/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/training/feature-manage-programs/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "training-feature-manage-exercises": {
+      "projectType": "library",
+      "root": "libs/training/feature-manage-exercises",
+      "sourceRoot": "libs/training/feature-manage-exercises/src",
+      "prefix": "training",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/training/feature-manage-exercises/tsconfig.lib.json",
+            "project": "libs/training/feature-manage-exercises/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/training/feature-manage-exercises/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/training/feature-manage-exercises/tsconfig.lib.json",
+              "libs/training/feature-manage-exercises/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/training/feature-manage-exercises/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/training/feature-manage-exercises/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "training-feature-manage-workouts": {
+      "projectType": "library",
+      "root": "libs/training/feature-manage-workouts",
+      "sourceRoot": "libs/training/feature-manage-workouts/src",
+      "prefix": "training",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/training/feature-manage-workouts/tsconfig.lib.json",
+            "project": "libs/training/feature-manage-workouts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/training/feature-manage-workouts/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/training/feature-manage-workouts/tsconfig.lib.json",
+              "libs/training/feature-manage-workouts/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/training/feature-manage-workouts/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/training/feature-manage-workouts/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

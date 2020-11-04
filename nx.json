@@ -63,6 +63,15 @@
     },
     "training-feature-auth": {
       "tags": ["domain:training", "type:feature"]
+    },
+    "training-feature-manage-programs": {
+      "tags": ["domain:training", "type:feature"]
+    },
+    "training-feature-manage-exercises": {
+      "tags": ["domain:training", "type:feature"]
+    },
+    "training-feature-manage-workouts": {
+      "tags": ["domain:training", "type:feature"]
     }
   },
   "affected": {

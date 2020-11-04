@@ -1,0 +1,41 @@
+@import 'utils';
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.configuration {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-footer {
+  padding: 1rem;
+}
+
+mat-card {
+  margin-bottom: 1rem;
+}
+
+.exercise {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px dotted black;
+  border-radius: $radius-l;
+  margin-bottom: $space-l;
+  padding: $space-s;
+
+  &__header {
+    font-weight: $weight-bold;
+  }
+
+  &__form {
+    flex: 1;
+  }
+
+  &__field {
+    width: 100%;
+  }
+}

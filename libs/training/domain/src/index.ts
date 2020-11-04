@@ -35,3 +35,9 @@ export { SetStatisticsActions } from './lib/+state/set-statistics/actions';
 export { SessionStatisticsActions } from './lib/+state/session-statistics/actions';
 
 export * from './lib/application/auth.facade';
+
+export * from './lib/application/manage-programs.facade';
+
+export * from './lib/application/manage-exercises.facade';
+
+export * from './lib/application/manage-workouts.facade';

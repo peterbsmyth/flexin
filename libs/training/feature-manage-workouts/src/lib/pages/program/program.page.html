@@ -1,0 +1,9 @@
+<ng-container
+  class="program"
+  *ngrxLet="programsState.selectedPrograms$ as program"
+>
+  <bod-breadcrumbs>
+    <span>{{ program.name }}</span>
+  </bod-breadcrumbs>
+</ng-container>
+<router-outlet></router-outlet>

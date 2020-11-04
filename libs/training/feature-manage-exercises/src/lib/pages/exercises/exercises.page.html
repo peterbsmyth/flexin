@@ -1,0 +1,19 @@
+<bod-breadcrumbs>
+  <span>Exercises</span>
+</bod-breadcrumbs>
+<bod-actions-bar>
+  <button mat-raised-button color="primary" routerLink="create">
+    Create
+  </button>
+</bod-actions-bar>
+<main *ngIf="(loaded$ | async); else loading;">
+  <article>
+    <training-exercise-table> </training-exercise-table>
+  </article>
+</main>
+
+<ng-template #loading>
+  <p>
+    Loading...
+  </p>
+</ng-template>

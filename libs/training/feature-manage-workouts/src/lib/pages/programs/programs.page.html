@@ -1,0 +1,15 @@
+<bod-breadcrumbs>
+  <span>Programs</span>
+</bod-breadcrumbs>
+<section class="items">
+  <button
+    class="items__button"
+    *ngFor="let program of (programsState.allPrograms$ | async)"
+    mat-stroked-button
+    color="link"
+    [routerLink]="['/programs', program.id]"
+    routerLinkActive="active"
+  >
+  {{ program?.name }}
+  </button>
+</section>

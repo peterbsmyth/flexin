@@ -1,0 +1,10 @@
+@import 'utils';
+
+article {
+  display: flex;
+}
+
+training-exercise-table {
+  width: 100%;
+  margin: $space-m;
+}

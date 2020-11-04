@@ -1,0 +1,12 @@
+@import 'utils';
+bod-card-header {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: $card-spacing-vertical;
+  height: $space-l;
+  margin: 0;
+}
+
+:host-context(.active) .card {
+  background-color: $grey-100;
+}

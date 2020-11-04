@@ -38,7 +38,16 @@
       "@bod/training/feature-create-program": [
         "libs/training/feature-create-program/src/index.ts"
       ],
-      "@bod/training/feature-auth": ["libs/training/feature-auth/src/index.ts"]
+      "@bod/training/feature-auth": ["libs/training/feature-auth/src/index.ts"],
+      "@bod/training/feature-manage-programs": [
+        "libs/training/feature-manage-programs/src/index.ts"
+      ],
+      "@bod/training/feature-manage-exercises": [
+        "libs/training/feature-manage-exercises/src/index.ts"
+      ],
+      "@bod/training/feature-manage-workouts": [
+        "libs/training/feature-manage-workouts/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

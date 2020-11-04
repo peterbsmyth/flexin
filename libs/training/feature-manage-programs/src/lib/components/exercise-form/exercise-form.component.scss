@@ -1,0 +1,38 @@
+@import "utils";
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.rows {
+  display: flex;
+}
+
+.configuration {
+  display: flex;
+  flex-direction: column;
+}
+
+aside {
+  width: 50%;
+}
+
+mat-card-footer {
+  padding: 1rem;
+}
+
+mat-card {
+  margin-bottom: 1rem;
+}
+
+.intensities {
+  &__controls {
+    display: flex;
+    width: 100%;
+  }
+
+  &__input {
+    flex: 1;
+  }
+}

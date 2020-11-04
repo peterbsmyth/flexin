@@ -1,0 +1,6 @@
+<ng-container *ngrxLet="exercise$ as exercise">
+  <article>
+    <training-exercise-form [data]="exercise" (save)="onSave($event)">
+    </training-exercise-form>
+  </article>
+</ng-container>

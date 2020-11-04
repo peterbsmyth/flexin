@@ -19,6 +19,9 @@ import { AppPage } from './core/pages/app/app.page';
 import { CoachingFeatureCreateProgramModule } from '@bod/training/feature-create-program';
 import { CoreModule } from './core/core.module';
 import { TrainingFeatureAuthModule } from '@bod/training/feature-auth';
+import { TrainingFeatureManageProgramsModule } from '@bod/training/feature-manage-programs';
+import { TrainingFeatureManageExercisesModule } from '@bod/training/feature-manage-exercises';
+import { TrainingFeatureManageWorkoutsModule } from '@bod/training/feature-manage-workouts';
 
 @NgModule({
   imports: [
@@ -48,6 +51,9 @@ import { TrainingFeatureAuthModule } from '@bod/training/feature-auth';
     TrainingFeatureReviewStatisticsModule,
     CoachingFeatureCreateProgramModule,
     TrainingFeatureAuthModule,
+    TrainingFeatureManageProgramsModule,
+    TrainingFeatureManageExercisesModule,
+    TrainingFeatureManageWorkoutsModule,
   ],
   bootstrap: [AppPage],
   exports: [],
