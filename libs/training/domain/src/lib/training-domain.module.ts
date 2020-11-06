@@ -64,6 +64,18 @@ import { V2ExercisesFacade } from './application/v2-exercises.facade';
 import * as fromV2SetStatistics from './+state/v2-set-statistics/v2-set-statistics.reducer';
 import { V2SetStatisticsEffects } from './+state/v2-set-statistics/v2-set-statistics.effects';
 import { V2SetStatisticsFacade } from './application/v2-set-statistics.facade';
+import * as fromFoods from './+state/foods/foods.reducer';
+import { FoodsEffects } from './+state/foods/foods.effects';
+import { FoodsFacade } from './application/foods.facade';
+import * as fromMeals from './+state/meals/meals.reducer';
+import { MealsEffects } from './+state/meals/meals.effects';
+import { MealsFacade } from './application/meals.facade';
+import * as fromMealPlans from './+state/meal-plans/meal-plans.reducer';
+import { MealPlansEffects } from './+state/meal-plans/meal-plans.effects';
+import { MealPlansFacade } from './application/meal-plans.facade';
+import * as fromMealStatistics from './+state/meal-statistics/meal-statistics.reducer';
+import { MealStatisticsEffects } from './+state/meal-statistics/meal-statistics.effects';
+import { MealStatisticsFacade } from './application/meal-statistics.facade';
 
 @NgModule({
   imports: [
@@ -130,6 +142,16 @@ import { V2SetStatisticsFacade } from './application/v2-set-statistics.facade';
       fromV2SetStatistics.V2SETSTATISTICS_FEATURE_KEY,
       fromV2SetStatistics.reducer
     ),
+    StoreModule.forFeature(fromFoods.FOODS_FEATURE_KEY, fromFoods.reducer),
+    StoreModule.forFeature(fromMeals.MEALS_FEATURE_KEY, fromMeals.reducer),
+    StoreModule.forFeature(
+      fromMealPlans.MEALPLANS_FEATURE_KEY,
+      fromMealPlans.reducer
+    ),
+    StoreModule.forFeature(
+      fromMealStatistics.MEALSTATISTICS_FEATURE_KEY,
+      fromMealStatistics.reducer
+    ),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
@@ -147,6 +169,10 @@ import { V2SetStatisticsFacade } from './application/v2-set-statistics.facade';
       V2ExercisesEffects,
       V2SetStatisticsEffects,
       V2ProgramsEffects,
+      MealStatisticsEffects,
+      MealPlansEffects,
+      MealsEffects,
+      FoodsEffects,
     ]),
     MatSnackBarModule,
   ],
@@ -179,6 +205,10 @@ import { V2SetStatisticsFacade } from './application/v2-set-statistics.facade';
     V2ProgramsFacade,
     V2ExercisesFacade,
     V2SetStatisticsFacade,
+    FoodsFacade,
+    MealsFacade,
+    MealPlansFacade,
+    MealStatisticsFacade,
   ],
 })
 export class TrainingDomainModule {}

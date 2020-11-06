@@ -59,6 +59,16 @@ import {
   V2SETSTATISTICS_FEATURE_KEY,
   V2SetStatisticsState,
 } from './v2-set-statistics/v2-set-statistics.reducer';
+import { FoodsState, FOODS_FEATURE_KEY } from './foods/foods.reducer';
+import { MealsState, MEALS_FEATURE_KEY } from './meals/meals.reducer';
+import {
+  MealPlansState,
+  MEALPLANS_FEATURE_KEY,
+} from './meal-plans/meal-plans.reducer';
+import {
+  MealStatisticsState,
+  MEALSTATISTICS_FEATURE_KEY,
+} from './meal-statistics/meal-statistics.reducer';
 
 export interface PartialState {
   readonly [EXERCISES_FEATURE_KEY]: ExercisesState;
@@ -77,4 +87,8 @@ export interface PartialState {
   readonly [V2EXERCISES_FEATURE_KEY]: V2ExercisesState;
   readonly [V2PROGRAMS_FEATURE_KEY]: V2ProgramsState;
   readonly [V2SETSTATISTICS_FEATURE_KEY]: V2SetStatisticsState;
+  readonly [FOODS_FEATURE_KEY]: FoodsState;
+  readonly [MEALS_FEATURE_KEY]: MealsState;
+  readonly [MEALPLANS_FEATURE_KEY]: MealPlansState;
+  readonly [MEALSTATISTICS_FEATURE_KEY]: MealStatisticsState;
 }
