@@ -57,7 +57,7 @@ export interface Workout {
 export interface WorkoutStatistic {
   id: number;
   program: ProgramV2;
-  Workout: Workout;
+  workout: Workout;
   setStatistics: SetStatisticV2[];
   rpe: number; // 8
   notes: string; // 'not at my full strength'
