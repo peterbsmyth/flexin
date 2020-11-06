@@ -22,6 +22,7 @@ import { TrainingFeatureAuthModule } from '@bod/training/feature-auth';
 import { TrainingFeatureManageProgramsModule } from '@bod/training/feature-manage-programs';
 import { TrainingFeatureManageExercisesModule } from '@bod/training/feature-manage-exercises';
 import { TrainingFeatureManageWorkoutsModule } from '@bod/training/feature-manage-workouts';
+import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-manage-meal-plans';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { TrainingFeatureManageWorkoutsModule } from '@bod/training/feature-manag
     TrainingFeatureManageProgramsModule,
     TrainingFeatureManageExercisesModule,
     TrainingFeatureManageWorkoutsModule,
+    TrainingFeatureManageMealPlansModule,
   ],
   bootstrap: [AppPage],
   exports: [],

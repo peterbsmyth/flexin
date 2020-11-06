@@ -53,3 +53,8 @@ export * from './lib/application/manage-programs.facade';
 export * from './lib/application/manage-exercises.facade';
 
 export * from './lib/application/manage-workouts.facade';
+
+export * from './lib/entities/meal-plan';
+export * from './lib/infrastructure/meal-plan.data.service';
+
+export * from './lib/application/manage-meal-plans.facade';

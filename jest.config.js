@@ -6,5 +6,5 @@ module.exports = {
   resolver: '@nrwl/jest/plugins/resolver',
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageReporters: ['html'],
-  projects: '<rootDir>/libs/training/feature-manage-workouts',
+  projects: '<rootDir>/libs/training/feature-manage-meal-plans',
 };

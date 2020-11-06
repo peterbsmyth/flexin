@@ -47,6 +47,9 @@
       ],
       "@bod/training/feature-manage-workouts": [
         "libs/training/feature-manage-workouts/src/index.ts"
+      ],
+      "@bod/training/feature-manage-meal-plans": [
+        "libs/training/feature-manage-meal-plans/src/index.ts"
       ]
     }
   },
