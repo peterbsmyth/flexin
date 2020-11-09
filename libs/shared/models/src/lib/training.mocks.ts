@@ -3,7 +3,19 @@ import { ExerciseV2, ProgramV2, Workout } from './training.models';
 export const mockExercise: ExerciseV2 = {
   id: 1,
   name: 'Chin Up',
-  intensities: [],
+  intensities: [
+    {
+      id: 1,
+      name: 'Full',
+      order: 2,
+      createdBy: {
+        id: 1,
+        name: 'calisthenics',
+        role: 'coach',
+        instagramUsername: 'calisthenics',
+      },
+    },
+  ],
   categories: [],
   leftRight: false,
   measuredBy: 'reps',
@@ -21,6 +33,7 @@ export const mockWorkouts: Workout[] = [
     id: 1,
     programId: 1,
     exerciseId: 1,
+    exercise: mockExercise,
     workoutStatistic: {
       id: 1,
       programId: 1,
@@ -37,7 +50,7 @@ export const mockWorkouts: Workout[] = [
     setCount: 3,
     weight: 10,
     weightUnit: 'lbs',
-    intensity: 'weighted',
+    intensityId: 1,
     tempo: '2012',
     notes: 'go hard',
   },
@@ -61,7 +74,7 @@ export const mockWorkouts: Workout[] = [
     setCount: 3,
     weight: 10,
     weightUnit: 'lbs',
-    intensity: 'weighted',
+    intensityId: 1,
     tempo: '2012',
     notes: 'go hard',
   },

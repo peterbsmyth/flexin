@@ -2,7 +2,7 @@
   <mat-card-content>
     <section class="exercise" *ngIf="!editing; else exerciseFormDisplay">
       <span class="exercise__header">
-        Exercise: {{ data.sessionItem.exercise.name }}
+        Exercise: {{ data.workout.exercise.name }}
       </span>
       <button mat-icon-button (click)="onEditExercise()">
         <mat-icon>edit</mat-icon>
@@ -20,7 +20,7 @@
           formControlName="reps"
         />
       </mat-form-field>
-      <mat-checkbox formControlName="AMRAP">AMRAP</mat-checkbox>
+      <mat-checkbox formControlName="amrap">AMRAP</mat-checkbox>
       <mat-form-field>
         <mat-label>
           Sets
@@ -51,12 +51,12 @@
         </mat-label>
         <mat-select
           formControlName="intensity"
-          [value]="data.sessionItem.intensity"
+          [value]="data.workout.intensityId"
         >
           <mat-option
-            *ngFor="let intensity of data.sessionItem.exercise.intensities"
-            [value]="intensity"
-            >{{ intensity }}</mat-option
+            *ngFor="let intensity of data.workout.exercise.intensities"
+            [value]="intensity.id"
+            >{{ intensity.name }}</mat-option
           >
         </mat-select>
       </mat-form-field>
@@ -87,7 +87,7 @@
         <mat-label>
           Exercise
         </mat-label>
-        <mat-select formControlName="id" [value]="data.sessionItem.exerciseId">
+        <mat-select formControlName="id" [value]="data.workout.exerciseId">
           <mat-option
             *ngFor="let exercise of data.exercises"
             [value]="exercise.id"

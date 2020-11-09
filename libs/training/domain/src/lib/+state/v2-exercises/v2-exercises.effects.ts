@@ -4,6 +4,7 @@ import { fetch } from '@nrwl/angular';
 
 import * as fromV2Exercises from './v2-exercises.reducer';
 import * as V2ExercisesActions from './v2-exercises.actions';
+import { mockExercise } from '@bod/shared/models';
 
 @Injectable()
 export class V2ExercisesEffects {
@@ -13,7 +14,9 @@ export class V2ExercisesEffects {
       fetch({
         run: (action) => {
           // Your custom service 'load' logic goes here. For now just return a success action...
-          return V2ExercisesActions.loadV2ExercisesSuccess({ v2Exercises: [] });
+          return V2ExercisesActions.loadV2ExercisesSuccess({
+            v2Exercises: [mockExercise],
+          });
         },
 
         onError: (action, error) => {

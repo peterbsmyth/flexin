@@ -6,8 +6,8 @@ import { ProgramPage } from './pages/program/program.page';
 import { SessionConfigurationBoardPage } from './pages/session-configuration-board/session-configuration-board.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { ProgramExistsGuard } from './guards/program-exists.guard';
-import { SessionItemPage } from './pages/session-item/session-item.page';
-import { SessionItemExistsGuard } from './guards/session-item-exists.guard';
+import { WorkoutPage } from './pages/workout/workout.page';
+import { WorkoutExistsGuard } from './guards/workout-exists.guard';
 
 const routes: Routes = [
   {
@@ -39,9 +39,9 @@ const routes: Routes = [
     canActivate: [ProgramExistsGuard],
   },
   {
-    path: 'v2/session-items/:sessionItemId',
-    component: SessionItemPage,
-    canActivate: [SessionItemExistsGuard],
+    path: 'v2/coaching/workouts/:workoutId',
+    component: WorkoutPage,
+    canActivate: [WorkoutExistsGuard],
   },
 ];
 

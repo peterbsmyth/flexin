@@ -48,7 +48,7 @@ export class ProgramPage implements OnInit {
           return workouts
             .filter((workout) => workout.day === dayNumber)
             .map((workout) => ({
-              routerLink: `/coaching/workouts/${workout.id}`,
+              routerLink: `/v2/coaching/workouts/${workout.id}`,
               name: exercises.find(
                 (exercise) => workout.exerciseId === exercise.id
               )?.name,

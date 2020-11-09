@@ -6,33 +6,33 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { SessionItemFormData } from '@bod/training/domain';
+import { WorkoutFormData } from '@bod/training/domain';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { SessionItem } from '@bod/shared/models';
+import { Workout } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
 
 @Component({
-  selector: 'training-session-item-form',
-  templateUrl: './session-item-form.component.html',
-  styleUrls: ['./session-item-form.component.scss'],
+  selector: 'training-workout-form',
+  templateUrl: './workout-form.component.html',
+  styleUrls: ['./workout-form.component.scss'],
 })
-export class SessionItemFormComponent implements OnInit, OnDestroy {
+export class WorkoutFormComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   editing = false;
 
-  @OnChange<SessionItemFormData>(function (data) {
+  @OnChange<WorkoutFormData>(function (data) {
     this.form = this.buildForm(data);
     this.exerciseForm = this.buildExerciseForm(data);
   })
   @Input()
-  data: SessionItemFormData;
+  data: WorkoutFormData;
 
-  @Output() save: EventEmitter<Partial<SessionItem>> = new EventEmitter();
+  @Output() save: EventEmitter<Partial<Workout>> = new EventEmitter();
   form: FormGroup = this.fb.group({
     reps: 1,
-    AMRAP: false,
+    amrap: false,
     leftRight: false,
     sets: false,
     weight: 0,
@@ -54,28 +54,25 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  buildForm(data: SessionItemFormData) {
+  buildForm(data: WorkoutFormData) {
     const form = this.fb.group({
-      reps: this.fb.control(data.sessionItem.reps),
-      AMRAP: this.fb.control(data.sessionItem.AMRAP),
+      reps: this.fb.control(data.workout.reps),
+      amrap: this.fb.control(data.workout.amrap),
       leftRight: this.fb.control(false),
-      sets: this.fb.control(data.sessionItem.sets),
-      weight: this.fb.control(data.sessionItem.weight),
+      sets: this.fb.control(data.workout.sets),
+      weight: this.fb.control(data.workout.weight),
       weightUnit: 'lbs',
-      intensity: this.fb.control(
-        data.sessionItem.intensity,
-        Validators.required
-      ),
-      tempo: this.fb.control(data.sessionItem.tempo),
+      intensity: this.fb.control(data.workout.intensityId, Validators.required),
+      tempo: this.fb.control(data.workout.tempo),
     });
 
-    if (data.sessionItem.AMRAP) {
+    if (data.workout.amrap) {
       form.get('reps').setValue(1);
       form.get('reps').disable();
     }
 
     form
-      .get('AMRAP')
+      .get('amrap')
       .valueChanges.pipe(
         takeUntil(this.unsubscribe$),
         tap((amrap) => {
@@ -83,7 +80,7 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
             this.form.get('reps').setValue(0);
             this.form.get('reps').disable();
           } else {
-            this.form.get('reps').setValue(this.data.sessionItem.reps);
+            this.form.get('reps').setValue(this.data.workout.reps);
             this.form.get('reps').enable();
           }
         })
@@ -92,9 +89,9 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
     return form;
   }
 
-  buildExerciseForm(data: SessionItemFormData) {
+  buildExerciseForm(data: WorkoutFormData) {
     return this.fb.group({
-      id: this.fb.control(data.sessionItem.exerciseId),
+      id: this.fb.control(data.workout.exerciseId),
     });
   }
 
@@ -113,8 +110,8 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
   onSubmit(form) {
     this.save.emit({
       ...form,
-      id: this.data.sessionItem.id,
-      order: this.data.sessionItem.order,
+      id: this.data.workout.id,
+      order: this.data.workout.order,
     });
   }
 
@@ -123,8 +120,8 @@ export class SessionItemFormComponent implements OnInit, OnDestroy {
       .intensities[0];
     this.save.emit({
       exerciseId: value.id,
-      id: this.data.sessionItem.id,
-      intensity: defaultIntensity,
+      id: this.data.workout.id,
+      // intensity: defaultIntensity,
     });
     this.editing = false;
     this.form.enable();

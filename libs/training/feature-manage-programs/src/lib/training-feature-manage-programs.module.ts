@@ -25,8 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NumericDirective } from './components/session-item/numeric.directive';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SessionItemPage } from './pages/session-item/session-item.page';
-import { SessionItemFormComponent } from './components/session-item-form/session-item-form.component';
+import { WorkoutPage } from './pages/workout/workout.page';
+import { WorkoutFormComponent } from './components/workout-form/workout-form.component';
 import { TrainingFeatureManageProgramsRoutingModule } from './training-feature-manage-programs-routing.module';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
@@ -44,8 +44,8 @@ import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
     SessionConfigurationBoardPage,
     ProgramBoardComponent,
     NumericDirective,
-    SessionItemPage,
-    SessionItemFormComponent,
+    WorkoutPage,
+    WorkoutFormComponent,
   ],
   imports: [
     CommonModule,

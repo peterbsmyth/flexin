@@ -1,11 +1,13 @@
 import {
   Exercise,
+  ExerciseV2,
   Program,
   Session,
   SessionItem,
   SessionItemStatistic,
   SetStatistic,
   Week,
+  Workout,
 } from '@bod/shared/models';
 
 export interface SessionItemData {
@@ -16,6 +18,11 @@ export interface SessionItemData {
 export interface SessionItemFormData {
   sessionItem: SessionItem;
   exercises: Exercise[];
+}
+
+export interface WorkoutFormData {
+  workout: Workout;
+  exercises: ExerciseV2[];
 }
 
 export interface BoardCardData {

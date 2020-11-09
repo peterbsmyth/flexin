@@ -13,7 +13,8 @@ export interface ExerciseV2 {
 
 export interface Intensity {
   id: number;
-  exercise: ExerciseV2;
+  exerciseId?: number;
+  exercise?: ExerciseV2;
   order: number;
   name: string;
   createdBy: User;
@@ -50,7 +51,7 @@ export interface Workout {
   sets?: Set[];
   weight: number; // 10
   weightUnit: string; // 'lbs' or 'kg'
-  intensity: string; // 'tuck to straddle'
+  intensityId: number;
   tempo: string; // '5s eccentric, 2s hold at bottom'
   notes: string; // 'squeeze at top'
   playlistUrl?: string;
