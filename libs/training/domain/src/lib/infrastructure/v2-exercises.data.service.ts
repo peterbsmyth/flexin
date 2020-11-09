@@ -4,8 +4,10 @@ import { ExerciseV2 } from '@bod/shared/models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@bod/shared/environments';
 
-@Injectable()
-export class ExercisesDataService {
+@Injectable({
+  providedIn: 'root',
+})
+export class ExerciseV2sDataService {
   private API_URL = environment.API_URL;
 
   getAll(): Observable<ExerciseV2[]> {

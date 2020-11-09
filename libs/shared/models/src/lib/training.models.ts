@@ -36,8 +36,10 @@ export interface ProgramV2 {
 
 export interface Workout {
   id: number;
-  program: ProgramV2;
-  exercise: ExerciseV2;
+  programId: number;
+  program?: ProgramV2;
+  exerciseId: number;
+  exercise?: ExerciseV2;
   workoutStatistic: WorkoutStatistic;
   week: number;
   day: number;
@@ -51,13 +53,15 @@ export interface Workout {
   intensity: string; // 'tuck to straddle'
   tempo: string; // '5s eccentric, 2s hold at bottom'
   notes: string; // 'squeeze at top'
-  playlistUrl: string;
+  playlistUrl?: string;
 }
 
 export interface WorkoutStatistic {
   id: number;
-  program: ProgramV2;
-  workout: Workout;
+  programId: number;
+  workoutId: number;
+  program?: ProgramV2;
+  workout?: Workout;
   setStatistics: SetStatisticV2[];
   rpe: number; // 8
   notes: string; // 'not at my full strength'

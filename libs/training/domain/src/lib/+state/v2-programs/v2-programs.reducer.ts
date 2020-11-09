@@ -29,11 +29,18 @@ const v2ProgramsReducer = createReducer(
     error: null,
   })),
   on(V2ProgramsActions.loadV2ProgramsSuccess, (state, { v2Programs }) =>
-    v2ProgramsAdapter.setAll(v2Programs, { ...state, loaded: true })
+    v2ProgramsAdapter.upsertMany(v2Programs, { ...state, loaded: true })
+  ),
+  on(V2ProgramsActions.loadProgramSuccess, (state, { program }) =>
+    v2ProgramsAdapter.upsertOne(program, { ...state, loaded: true })
   ),
   on(V2ProgramsActions.loadV2ProgramsFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(V2ProgramsActions.selectProgramFromGuard, (state, { id }) => ({
+    ...state,
+    selectedId: id,
   }))
 );
 

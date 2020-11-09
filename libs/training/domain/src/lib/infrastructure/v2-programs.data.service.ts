@@ -4,8 +4,10 @@ import { ProgramV2 } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 
-@Injectable()
-export class ProgramsDataService {
+@Injectable({
+  providedIn: 'root',
+})
+export class ProgramV2sDataService {
   private API_URL = environment.API_URL;
   constructor(private http: HttpClient) {}
 

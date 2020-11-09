@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { ProgramsFacade, ProgramsActions } from '@bod/training/domain';
+import { ProgramsActions, V2ProgramsFacade } from '@bod/training/domain';
 
 import {
   filter,
@@ -11,6 +11,10 @@ import {
   map,
   catchError,
 } from 'rxjs/operators';
+import {
+  selectProgramFromGuard,
+  loadProgramFromGuard,
+} from '@bod/training/domain';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +25,7 @@ export class ProgramExistsGuard implements CanActivate {
   }
 
   hasProgramInStore(): Observable<boolean> {
-    return this.programsState.selectedPrograms$.pipe(
+    return this.programsState.selectedV2Programs$.pipe(
       map((program) => !!program)
     );
   }
@@ -30,19 +34,15 @@ export class ProgramExistsGuard implements CanActivate {
     /**
      * if there is a result from selected program, cool
      */
-    this.programsState.dispatch(
-      ProgramsActions.selectProgramFromGuard({ id: +id })
-    );
+    this.programsState.dispatch(selectProgramFromGuard({ id: +id }));
     return this.hasProgramInStore().pipe(
       switchMap((inStore) => {
         if (inStore) {
           return of(inStore);
         } else {
-          this.programsState.dispatch(
-            ProgramsActions.loadProgramFromGuard({ id: +id })
-          );
+          this.programsState.dispatch(loadProgramFromGuard({ id: +id }));
           return this.waitForCollectionToLoad().pipe(
-            switchMapTo(this.programsState.selectedPrograms$),
+            switchMapTo(this.programsState.selectedV2Programs$),
             map((program) => !!program),
             catchError(() => {
               this.router.navigate(['/404']);
@@ -61,5 +61,8 @@ export class ProgramExistsGuard implements CanActivate {
     );
   }
 
-  constructor(private programsState: ProgramsFacade, private router: Router) {}
+  constructor(
+    private programsState: V2ProgramsFacade,
+    private router: Router
+  ) {}
 }

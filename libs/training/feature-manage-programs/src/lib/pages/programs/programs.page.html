@@ -12,9 +12,9 @@
     *ngFor="let program of (programs$ | async)"
     mat-stroked-button
     color="link"
-    [routerLink]="['/coaching/programs', program.id]"
+    [routerLink]="['/v2/programs', program.id]"
   >
-    {{ program?.name }}
+    Program {{ program?.number }}
   </button>
 </section>
 

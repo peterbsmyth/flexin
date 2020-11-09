@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ProgramV2 } from '@bod/shared/models';
 import {
-  ExercisesFacade,
-  ProgramsFacade,
-  ProgramsActions,
   BoardCardData,
-  ProgramWithDescendants,
+  V2ProgramsFacade,
+  V2ExercisesFacade,
+  loadDescendantsFromProgramPage,
 } from '@bod/training/domain';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,68 +15,78 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./program.page.scss'],
 })
 export class ProgramPage implements OnInit {
-  private _selectedWeekSubject: BehaviorSubject<number> = new BehaviorSubject(
-    0
+  selectedWeek$: Observable<number> = this.route.queryParams.pipe(
+    map((params) => +params['week'])
   );
-  selectedWeek$: Observable<number> = this._selectedWeekSubject.asObservable();
-  program$: Observable<ProgramWithDescendants>;
+  program$: Observable<ProgramV2>;
+  weeks$: Observable<any[]>;
   loaded$: Observable<boolean>;
   board$: Observable<BoardCardData[][]>;
 
   constructor(
-    private programsState: ProgramsFacade,
-    private exerciseState: ExercisesFacade,
-    private route: ActivatedRoute
+    private programsState: V2ProgramsFacade,
+    private exerciseState: V2ExercisesFacade,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.loaded$ = this.programsState.loaded$;
-    this.program$ = this.programsState.selectedProgramsWithDescendants$;
+    this.program$ = this.programsState.selectedV2Programs$;
     this.board$ = combineLatest([
       this.program$,
-      this.exerciseState.allExercises$,
+      this.exerciseState.allV2Exercises$,
       this.selectedWeek$,
     ]).pipe(
-      map(([program, exercises, weekIndex]) => {
-        const week = program.weeks[weekIndex];
-        const sessions = program.sessions.filter(
-          (session) => session.weekId === week.id
-        );
-        const sessionItems = program.sessionItems.filter((sessionItem) =>
-          sessions.find((session) => session.id === sessionItem.sessionId)
+      map(([program, exercises, week]) => {
+        const workouts = program.workouts.filter(
+          (workout) => workout.week === week
         );
 
-        const allDays = sessions.map((session) => session.order);
+        const allDays = program.workouts.map((workout) => workout.day);
         const sortedDays = [...new Set(allDays)].sort();
 
         const boardCardData = sortedDays.map((dayNumber) => {
-          const currentSession = sessions.find(
-            (session) => session.order === dayNumber
-          );
-
-          return sessionItems
-            .filter(
-              (sessionItem) => sessionItem.sessionId === currentSession.id
-            )
-            .map((sessionItem) => ({
-              routerLink: `/coaching/session-items/${sessionItem.id}`,
+          return workouts
+            .filter((workout) => workout.day === dayNumber)
+            .map((workout) => ({
+              routerLink: `/coaching/workouts/${workout.id}`,
               name: exercises.find(
-                (exercise) => sessionItem.exerciseId === exercise.id
+                (exercise) => workout.exerciseId === exercise.id
               )?.name,
             }));
         });
         return boardCardData;
       })
     );
+    this.weeks$ = this.program$.pipe(
+      map((program) => {
+        const weeks = program.workouts.map((workout) => workout.week);
+        const max = Math.max(...weeks);
+        return Array(max).fill(null);
+      })
+    );
   }
 
-  onSelectWeek(index) {
-    this._selectedWeekSubject.next(index);
+  navigateToWeek(week) {
+    const queryParams: Params = { week };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+      queryParamsHandling: 'merge',
+    });
   }
 
   ngOnInit(): void {
     this.programsState.dispatch(
-      ProgramsActions.loadDescendantsFromCreateFeatureProgramPage({
+      loadDescendantsFromProgramPage({
         id: this.route.snapshot.params['programId'],
       })
     );
+
+    const week = this.route.snapshot.queryParams['week'];
+
+    if (!week) {
+      this.navigateToWeek(1);
+    }
   }
 }
