@@ -29,6 +29,9 @@ const v2ExercisesReducer = createReducer(
     loaded: false,
     error: null,
   })),
+  on(V2ExercisesActions.updateExercise, (state, { exercise }) =>
+    v2ExercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
+  ),
   on(V2ExercisesActions.loadV2ExercisesSuccess, (state, { v2Exercises }) =>
     v2ExercisesAdapter.setAll(v2Exercises, { ...state, loaded: true })
   ),

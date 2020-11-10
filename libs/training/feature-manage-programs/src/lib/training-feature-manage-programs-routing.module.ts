@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProgramCreatePage } from './pages/program-create/program-create.page';
 import { ProgramsPage } from './pages/programs/programs.page';
 import { ProgramPage } from './pages/program/program.page';
-import { SessionConfigurationBoardPage } from './pages/session-configuration-board/session-configuration-board.page';
+import { ProgramConfigurationBoardPage } from './pages/program-configuration-board/program-configuration-board.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { ProgramExistsGuard } from './guards/program-exists.guard';
 import { WorkoutPage } from './pages/workout/workout.page';
@@ -29,7 +29,7 @@ const routes: Routes = [
       },
       {
         path: '2',
-        component: SessionConfigurationBoardPage,
+        component: ProgramConfigurationBoardPage,
       },
     ],
   },

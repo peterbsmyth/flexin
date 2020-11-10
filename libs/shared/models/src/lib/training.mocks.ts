@@ -16,7 +16,18 @@ export const mockExercise: ExerciseV2 = {
       },
     },
   ],
-  categories: [],
+  categories: [
+    {
+      id: 1,
+      name: 'Pull',
+      createdBy: {
+        id: 1,
+        name: 'calisthenics',
+        role: 'coach',
+        instagramUsername: 'calisthenics',
+      },
+    },
+  ],
   leftRight: false,
   measuredBy: 'reps',
   demonstrationVideos: [],
@@ -27,6 +38,48 @@ export const mockExercise: ExerciseV2 = {
     instagramUsername: 'calisthenics',
   },
 };
+
+export const mockExercises: ExerciseV2[] = [
+  mockExercise,
+  {
+    id: 2,
+    name: 'Pull Up',
+    intensities: [
+      {
+        id: 1,
+        name: 'Full',
+        order: 2,
+        createdBy: {
+          id: 1,
+          name: 'calisthenics',
+          role: 'coach',
+          instagramUsername: 'calisthenics',
+        },
+      },
+    ],
+    categories: [
+      {
+        id: 1,
+        name: 'Pull',
+        createdBy: {
+          id: 1,
+          name: 'calisthenics',
+          role: 'coach',
+          instagramUsername: 'calisthenics',
+        },
+      },
+    ],
+    leftRight: false,
+    measuredBy: 'reps',
+    demonstrationVideos: [],
+    createdBy: {
+      id: 1,
+      name: 'calisthenics',
+      role: 'coach',
+      instagramUsername: 'calisthenics',
+    },
+  },
+];
 
 export const mockWorkouts: Workout[] = [
   {
@@ -51,6 +104,7 @@ export const mockWorkouts: Workout[] = [
     weight: 10,
     weightUnit: 'lbs',
     intensityId: 1,
+    intensity: mockExercise.intensities[0],
     tempo: '2012',
     notes: 'go hard',
   },

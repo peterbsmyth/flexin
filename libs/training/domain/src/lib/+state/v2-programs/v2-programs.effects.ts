@@ -6,11 +6,16 @@ import * as fromV2Programs from './v2-programs.reducer';
 import * as V2ProgramsActions from './v2-programs.actions';
 import * as V2ExercisesActions from '../v2-exercises/v2-exercises.actions';
 import { ProgramV2sDataService } from '../../infrastructure/v2-programs.data.service';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
-import { mockExercise, mockPrograms } from '@bod/shared/models';
+import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { mockExercises, mockPrograms } from '@bod/shared/models';
 import { forkJoin } from 'rxjs';
 import { ExerciseV2sDataService } from '../../infrastructure/v2-exercises.data.service';
 import { uniqBy } from 'lodash-es';
+import { PartialState } from '../root.reducer';
+import { Store } from '@ngrx/store';
+import { V2DraftProgramsDataService } from '../../infrastructure/v2-draft-programs.data.service';
+import { Router } from '@angular/router';
+import { getAllV2Exercises } from '../v2-exercises/v2-exercises.selectors';
 
 @Injectable()
 export class V2ProgramsEffects {
@@ -61,7 +66,7 @@ export class V2ProgramsEffects {
       ofType(V2ProgramsActions.loadDescendantsFromProgramPage),
       map(() =>
         V2ExercisesActions.loadV2ExercisesSuccess({
-          v2Exercises: [mockExercise],
+          v2Exercises: mockExercises,
         })
       )
       // fetch({
@@ -97,9 +102,74 @@ export class V2ProgramsEffects {
     )
   );
 
+  addIncompleteSessionItems$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(V2ProgramsActions.addIncompleteWorkouts),
+        withLatestFrom(this.store.select(getAllV2Exercises)),
+        tap(([{ board, weekCount }, exercises]) => {
+          this.draftProgramService.addIncompleteWorkouts(
+            board,
+            exercises,
+            weekCount
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  createProgram$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(V2ProgramsActions.createProgram),
+        fetch({
+          // provides an action
+          run: ({ data, number }) => {
+            return this.draftProgramService
+              .createProgram(data, number)
+              .pipe(tap(() => this.router.navigateByUrl('/programs')));
+          },
+          onError: (action, error: any) => {
+            // dispatch an undo action to undo the changes in the client state
+            return null;
+          },
+        })
+      ),
+    { dispatch: false }
+  );
+
+  popDraft$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(V2ProgramsActions.popDraft),
+        tap(() => this.draftProgramService.popDraftDay())
+      ),
+    { dispatch: false }
+  );
+
+  pushDraft$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(V2ProgramsActions.pushDraft),
+        tap(() => this.draftProgramService.pushDraftDay())
+      ),
+    { dispatch: false }
+  );
+  resetDraft$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(V2ProgramsActions.resetDraft),
+        tap(() => this.draftProgramService.resetDraft())
+      ),
+    { dispatch: false }
+  );
+
   constructor(
+    private store: Store<PartialState>,
     private actions$: Actions,
     private backend: ProgramV2sDataService,
+    private draftProgramService: V2DraftProgramsDataService,
+    private router: Router,
     private exercisesService: ExerciseV2sDataService
   ) {}
 }

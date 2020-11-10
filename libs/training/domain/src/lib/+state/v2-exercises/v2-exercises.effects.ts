@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
+import { fetch, optimisticUpdate } from '@nrwl/angular';
 
 import * as fromV2Exercises from './v2-exercises.reducer';
 import * as V2ExercisesActions from './v2-exercises.actions';
-import { mockExercise } from '@bod/shared/models';
+import { mockExercises } from '@bod/shared/models';
+import { ExerciseV2sDataService } from '../../infrastructure/v2-exercises.data.service';
+import { mapTo } from 'rxjs/operators';
 
 @Injectable()
 export class V2ExercisesEffects {
@@ -15,7 +17,7 @@ export class V2ExercisesEffects {
         run: (action) => {
           // Your custom service 'load' logic goes here. For now just return a success action...
           return V2ExercisesActions.loadV2ExercisesSuccess({
-            v2Exercises: [mockExercise],
+            v2Exercises: mockExercises,
           });
         },
 
@@ -27,5 +29,27 @@ export class V2ExercisesEffects {
     )
   );
 
-  constructor(private actions$: Actions) {}
+  updateExercise$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(V2ExercisesActions.updateExercise),
+      optimisticUpdate({
+        run: (action) => {
+          return this.backend
+            .patchOne(action.exercise)
+            .pipe(mapTo(V2ExercisesActions.updateExerciseSuccess()));
+        },
+        undoAction: (action, error) => {
+          console.error('Error', error);
+          return V2ExercisesActions.updateExerciseFailure({
+            error,
+          });
+        },
+      })
+    )
+  );
+
+  constructor(
+    private actions$: Actions,
+    private backend: ExerciseV2sDataService
+  ) {}
 }

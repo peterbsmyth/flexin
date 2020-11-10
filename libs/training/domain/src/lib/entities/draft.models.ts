@@ -1,4 +1,11 @@
-import { Exercise, SessionItem, Session, Week } from '@bod/shared/models';
+import {
+  Exercise,
+  SessionItem,
+  Session,
+  Week,
+  ExerciseV2,
+  Workout,
+} from '@bod/shared/models';
 import { Dictionary } from '@ngrx/entity';
 
 export interface DraftProgram {

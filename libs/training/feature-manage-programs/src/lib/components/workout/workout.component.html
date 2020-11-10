@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>
         <span>
-          {{ data.exercise.name }}
+          {{ workout.exercise.name }}
         </span>
         <button mat-icon-button (click)="openExerciseDialog()">
           <mat-icon>
@@ -38,7 +38,7 @@
             formControlName="reps"
           />
         </mat-form-field>
-        <mat-checkbox formControlName="AMRAP" class="form__field form__check">
+        <mat-checkbox formControlName="amrap" class="form__field form__check">
           AMRAP
         </mat-checkbox>
         <mat-form-field class="form__field">
@@ -60,10 +60,10 @@
           </mat-label>
           <mat-select formControlName="intensity">
             <mat-option
-              *ngFor="let itensity of data.exercise.intensities"
-              [value]="itensity"
+              *ngFor="let itensity of workout.exercise.intensities"
+              [value]="itensity.id"
             >
-              {{ itensity }}
+              {{ itensity.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>

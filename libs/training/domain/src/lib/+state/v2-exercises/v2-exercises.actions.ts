@@ -12,3 +12,17 @@ export const loadV2ExercisesFailure = createAction(
   '[V2Exercises] Load V2Exercises Failure',
   props<{ error: any }>()
 );
+
+export const updateExercise = createAction(
+  '[Exercises] Update Exercise',
+  props<{ exercise: ExerciseV2 }>()
+);
+
+export const updateExerciseSuccess = createAction(
+  '[Exercises] Update Exercise Success'
+);
+
+export const updateExerciseFailure = createAction(
+  '[Exercises] Update Exercise Failure',
+  props<{ error: any }>()
+);

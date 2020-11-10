@@ -13,17 +13,17 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { ProgramCreatePage } from './pages/program-create/program-create.page';
 import { BoardCardComponent } from './components/board-card/board-card.component';
-import { SessionItemComponent } from './components/session-item/session-item.component';
+import { WorkoutComponent } from './components/workout/workout.component';
 import { ProgramPage } from './pages/program/program.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
-import { SessionConfigurationBoardPage } from './pages/session-configuration-board/session-configuration-board.page';
+import { ProgramConfigurationBoardPage } from './pages/program-configuration-board/program-configuration-board.page';
 import { ProgramBoardComponent } from './components/program-board/program-board.component';
 import { ProgramsPage } from './pages/programs/programs.page';
 import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { NumericDirective } from './components/session-item/numeric.directive';
+import { NumericDirective } from './components/workout/numeric.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { WorkoutPage } from './pages/workout/workout.page';
 import { WorkoutFormComponent } from './components/workout-form/workout-form.component';
@@ -36,12 +36,12 @@ import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
     ExerciseDialog,
     ExerciseFormComponent,
     BoardCardComponent,
-    SessionItemComponent,
+    WorkoutComponent,
     ProgramCreatePage,
     ProgramsPage,
     ProgramPage,
     ProgramBoardPage,
-    SessionConfigurationBoardPage,
+    ProgramConfigurationBoardPage,
     ProgramBoardComponent,
     NumericDirective,
     WorkoutPage,

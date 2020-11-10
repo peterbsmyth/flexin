@@ -15,23 +15,22 @@ import {
   debounceTime,
 } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { SessionItemData } from '@bod/training/domain';
 import { MatDialog } from '@angular/material/dialog';
-import { Exercise } from '@bod/shared/models';
+import { ExerciseV2, Workout } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
 import { ExerciseDialog } from '../exercise-dialog/exercise.dialog';
 
 @Component({
-  selector: 'training-session-item',
-  templateUrl: './session-item.component.html',
-  styleUrls: ['./session-item.component.scss'],
+  selector: 'training-workout',
+  templateUrl: './workout.component.html',
+  styleUrls: ['./workout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SessionItemComponent implements OnInit, OnDestroy {
+export class WorkoutComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
   form: FormGroup = this.fb.group({
     reps: this.fb.control(1, [Validators.required]),
-    AMRAP: this.fb.control(false, [Validators.required]),
+    amrap: this.fb.control(false, [Validators.required]),
     sets: this.fb.control(1, [Validators.required, Validators.min(1)]),
     weight: this.fb.control(0, [Validators.required]),
     intensity: this.fb.control('', [Validators.required]),
@@ -40,11 +39,11 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   });
   public leftRight: boolean;
 
-  @OnChange<SessionItemData>(function (data) {
+  @OnChange<Workout>(function (data) {
     this.buildForm(data);
   })
   @Input()
-  data: SessionItemData;
+  workout: Workout;
 
   @OnChange<boolean>(function (editable) {
     if (!editable) {
@@ -56,15 +55,15 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   @Input()
   editable;
 
-  @Output() update: EventEmitter<SessionItemData> = new EventEmitter();
-  @Output() updateExercise: EventEmitter<Exercise> = new EventEmitter();
+  @Output() update: EventEmitter<Workout> = new EventEmitter();
+  @Output() updateExercise: EventEmitter<ExerciseV2> = new EventEmitter();
   @Output() validate: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.form
-      .get('AMRAP')
+      .get('amrap')
       .valueChanges.pipe(
         takeUntil(this.unsubscribe$),
         tap((amrap) => {
@@ -103,13 +102,10 @@ export class SessionItemComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         debounceTime(300),
         tap((value) => {
-          const data: SessionItemData = {
-            ...this.data,
-            sessionItem: {
-              ...this.data.sessionItem,
-              ...value,
-              reps: value.reps ? value.reps : 0,
-            },
+          const data: Workout = {
+            ...this.workout,
+            ...value,
+            reps: value.reps ? value.reps : 0,
           };
           this.update.emit(data);
         })
@@ -117,15 +113,15 @@ export class SessionItemComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  buildForm(data: SessionItemData) {
-    this.form.get('reps').setValue(data.sessionItem.reps ?? 1);
-    this.form.get('AMRAP').setValue(data.sessionItem.AMRAP ?? false);
-    this.form.get('sets').setValue(data.sessionItem.sets ?? 1);
-    this.form.get('leftRight').setValue(data.exercise.leftRight ?? false);
-    this.form.get('weight').setValue(data.sessionItem.weight ?? 0);
-    this.form.get('intensity').setValue(data.sessionItem.intensity ?? '');
-    this.form.get('tempo').setValue(data.sessionItem.tempo ?? '');
-    this.leftRight = data.exercise.leftRight;
+  buildForm(workout: Workout) {
+    this.form.get('reps').setValue(workout.reps ?? 1);
+    this.form.get('amrap').setValue(workout.amrap ?? false);
+    this.form.get('sets').setValue(workout.sets ?? 1);
+    this.form.get('leftRight').setValue(workout.exercise.leftRight ?? false);
+    this.form.get('weight').setValue(workout.weight ?? 0);
+    this.form.get('intensity').setValue(workout.intensity ?? '');
+    this.form.get('tempo').setValue(workout.tempo ?? '');
+    this.leftRight = workout.exercise.leftRight;
   }
 
   disableInputs() {
@@ -139,14 +135,14 @@ export class SessionItemComponent implements OnInit, OnDestroy {
   openExerciseDialog() {
     const dialogRef = this.dialog.open(ExerciseDialog, {
       width: '500px',
-      data: this.data.exercise,
+      data: this.workout.exercise,
     });
 
-    dialogRef.afterClosed().subscribe((result?: Exercise) => {
+    dialogRef.afterClosed().subscribe((result?: ExerciseV2) => {
       if (result) {
         this.updateExercise.emit(result);
-        this.data = {
-          ...this.data,
+        this.workout = {
+          ...this.workout,
           exercise: {
             ...result,
           },

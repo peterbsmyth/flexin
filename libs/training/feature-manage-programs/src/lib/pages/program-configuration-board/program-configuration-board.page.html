@@ -1,9 +1,14 @@
 <bod-actions-bar>
   <mat-form-field>
     <mat-label>
-      Program Name
+      Program Number
     </mat-label>
-    <input matInput [formControl]="programName" type="text" />
+    <input
+      matInput
+      [formControl]="programNumber"
+      type="number"
+      inputmode="numeric"
+    />
   </mat-form-field>
   <button
     mat-stroked-button
@@ -15,12 +20,12 @@
   </button>
 </bod-actions-bar>
 <div class="board">
-  <training-session-item
-    *ngFor="let data of programsState.draftSessionConfiguration$ | async; let i = index;"
+  <training-workout
+    *ngFor="let workout of programsState.draftProgramConfiguration$| async; let i = index;"
     class="item"
-    [data]="data"
+    [workout]="workout"
     (update)="onUpdate($event)"
     (updateExercise)="onUpdateExercise($event)"
     (validate)="onValidate($event, i)"
-  ></training-session-item>
+  ></training-workout>
 </div>

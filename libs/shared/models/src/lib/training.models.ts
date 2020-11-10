@@ -29,10 +29,10 @@ export interface DemonstrationVideo {
 export interface ProgramV2 {
   id?: number;
   number: number;
-  workouts: Workout[];
-  workoutStatistics: WorkoutStatistic[];
-  createdBy: User;
-  assignedTo: User;
+  workouts?: Workout[];
+  workoutStatistics?: WorkoutStatistic[];
+  createdBy?: User;
+  assignedTo?: User;
 }
 
 export interface Workout {
@@ -52,6 +52,7 @@ export interface Workout {
   weight: number; // 10
   weightUnit: string; // 'lbs' or 'kg'
   intensityId: number;
+  intensity?: Intensity;
   tempo: string; // '5s eccentric, 2s hold at bottom'
   notes: string; // 'squeeze at top'
   playlistUrl?: string;

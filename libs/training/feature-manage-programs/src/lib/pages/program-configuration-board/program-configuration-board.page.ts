@@ -2,40 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  ProgramsFacade,
-  ProgramsActions,
-  SessionItemData,
-  ExercisesActions,
+  updateExercise,
+  createProgram,
+  V2ProgramsFacade,
 } from '@bod/training/domain';
-import { Exercise } from '@bod/shared/models';
+import { ExerciseV2, Workout } from '@bod/shared/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
 @Component({
-  templateUrl: './session-configuration-board.page.html',
-  styleUrls: ['./session-configuration-board.page.scss'],
+  templateUrl: './program-configuration-board.page.html',
+  styleUrls: ['./program-configuration-board.page.scss'],
 })
-export class SessionConfigurationBoardPage implements OnInit {
-  programName: FormControl = new FormControl('Program 1');
-  private _data: SessionItemData[];
+export class ProgramConfigurationBoardPage implements OnInit {
+  programNumber: FormControl = new FormControl(1);
+  private _data: Workout[];
   private _validItems: boolean[] = [];
-  incompleteSessionItems$: Observable<any[]>;
   private _invalidSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   invalid$: Observable<boolean> = this._invalidSubject.asObservable();
 
-  constructor(private router: Router, public programsState: ProgramsFacade) {
-    this.programsState.draftSessionConfiguration$
+  constructor(private router: Router, public programsState: V2ProgramsFacade) {
+    this.programsState.draftProgramConfiguration$
       .pipe(
         take(1),
         tap((data) => {
           data.forEach(() => this._validItems.push(false));
-          const copiedDeep = data.map(({ exercise, sessionItem }) => ({
-            exercise: {
-              ...exercise,
-            },
-            sessionItem: {
-              ...sessionItem,
-            },
+          const copiedDeep = data.map((workout) => ({
+            ...workout,
           }));
           this._data = copiedDeep;
         })
@@ -46,20 +39,18 @@ export class SessionConfigurationBoardPage implements OnInit {
   ngOnInit(): void {}
 
   onUpdate(data: any) {
-    const item = data.sessionItem;
+    const item = data.workout;
     this._data.forEach((d, i) => {
-      if (item.id === d.sessionItem.id) {
-        this._data[i].sessionItem = {
+      if (item.id === d.id) {
+        this._data[i] = {
           ...item,
         };
       }
     });
   }
 
-  onUpdateExercise(exercise: Exercise) {
-    this.programsState.dispatch(
-      ExercisesActions.updateExerciseFromSessionPage({ exercise })
-    );
+  onUpdateExercise(exercise: ExerciseV2) {
+    this.programsState.dispatch(updateExercise({ exercise }));
   }
 
   /**
@@ -79,9 +70,9 @@ export class SessionConfigurationBoardPage implements OnInit {
 
   onClickCreateProgram() {
     this.programsState.dispatch(
-      ProgramsActions.createProgramFromCreateFeatureSessionPage({
+      createProgram({
         data: this._data,
-        name: this.programName.value,
+        number: this.programNumber.value,
       })
     );
   }

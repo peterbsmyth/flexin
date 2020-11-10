@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Exercise } from '@bod/shared/models';
+import { ExerciseV2 } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
 
 @Component({
@@ -18,16 +18,16 @@ import { OnChange } from '@bod/shared/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExerciseFormComponent implements OnInit {
-  @OnChange<Exercise>(function (data) {
+  @OnChange<ExerciseV2>(function (data) {
     this.buildForm(data);
   })
   @Input()
-  data: Exercise;
-  @Output() save: EventEmitter<Exercise> = new EventEmitter();
+  data: ExerciseV2;
+  @Output() save: EventEmitter<ExerciseV2> = new EventEmitter();
   form: FormGroup = this.fb.group({
     name: '',
-    push: false,
-    pull: false,
+    // push: false,
+    // pull: false,
     leftRight: false,
     intensities: this.fb.array([]),
   });
@@ -40,7 +40,7 @@ export class ExerciseFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  buildForm(exercise: Exercise): void {
+  buildForm(exercise: ExerciseV2): void {
     const intensities = this.fb.array([]);
     exercise.intensities.forEach((intensity) => {
       const control = this.fb.group({
@@ -49,8 +49,8 @@ export class ExerciseFormComponent implements OnInit {
       intensities.push(control);
     });
     this.form.setControl('name', this.fb.control(exercise.name));
-    this.form.setControl('push', this.fb.control(exercise.push));
-    this.form.setControl('pull', this.fb.control(exercise.pull));
+    // this.form.setControl('push', this.fb.control(exercise.push));
+    // this.form.setControl('pull', this.fb.control(exercise.pull));
     this.form.setControl('leftRight', this.fb.control(exercise.leftRight));
     this.form.setControl('intensities', intensities);
   }

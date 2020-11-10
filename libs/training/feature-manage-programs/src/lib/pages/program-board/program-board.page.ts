@@ -2,16 +2,19 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  ExercisesFacade,
-  ExercisesActions,
-  ProgramsFacade,
-  ProgramsActions,
+  V2ExercisesFacade,
+  V2ProgramsFacade,
   BoardCardData,
+  loadV2Exercises,
+  pushDraft,
+  popDraft,
+  resetDraft,
+  addIncompleteWorkouts,
 } from '@bod/training/domain';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import Fuse from 'fuse.js';
-import { Exercise } from '@bod/shared/models';
+import { ExerciseV2 } from '@bod/shared/models';
 
 @Component({
   templateUrl: './program-board.page.html',
@@ -29,23 +32,17 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   sourceColumn$: Observable<BoardCardData[]>;
   board$: Observable<BoardCardData[][]>;
 
-  setCategory(exercise: Exercise): string {
-    if (exercise.pull) {
-      return 'pull';
-    } else if (exercise.push) {
-      return 'push';
-    } else {
-      return 'other';
-    }
+  setCategory(exercise: ExerciseV2): string {
+    return exercise.categories[0].name.toLowerCase();
   }
   constructor(
     private router: Router,
-    private exerciseState: ExercisesFacade,
-    private programState: ProgramsFacade
+    private exerciseState: V2ExercisesFacade,
+    private programState: V2ProgramsFacade
   ) {
     this.sourceColumn$ = combineLatest([
       this.search.valueChanges,
-      this.exerciseState.allExercises$,
+      this.exerciseState.allV2Exercises$,
     ]).pipe(
       map(([term, exercises]) => {
         if (term === '') {
@@ -84,9 +81,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.exerciseState.dispatch(
-      ExercisesActions.loadExercisesFromProgramBoardPage()
-    );
+    this.exerciseState.dispatch(loadV2Exercises());
   }
 
   ngAfterViewInit() {
@@ -96,23 +91,21 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
     setTimeout(() => this.search.setValue(''), 0);
   }
 
-  onUpdate(lists: BoardCardData[][]) {
+  onUpdate(board: BoardCardData[][]) {
     this.programState.dispatch(
-      ProgramsActions.addIncompleteSessionItemsFromCreateFeatureProgramBoardPage(
-        {
-          lists,
-          weekCount: this.weekCount.value,
-        }
-      )
+      addIncompleteWorkouts({
+        board,
+        weekCount: this.weekCount.value,
+      })
     );
   }
 
   onClickNext() {
-    this.router.navigateByUrl('/coaching/programs/create/2');
+    this.router.navigateByUrl('/v2/programs/create/2');
   }
 
   onClickReset() {
-    this.programState.dispatch(ProgramsActions.resetDraft());
+    this.programState.dispatch(resetDraft());
   }
 
   onClickAddDay() {
@@ -120,7 +113,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
     const days = this._daysSubject.getValue() + 1;
     if (days <= this._maximumDays) {
       this._daysSubject.next(days);
-      this.programState.dispatch(ProgramsActions.pushDraft());
+      this.programState.dispatch(pushDraft());
     }
 
     if (days === this._maximumDays) {
@@ -133,7 +126,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
     const days = this._daysSubject.getValue() - 1;
     if (days >= this._minimumDays) {
       this._daysSubject.next(days);
-      this.programState.dispatch(ProgramsActions.popDraft());
+      this.programState.dispatch(popDraft());
     }
 
     if (days === this._minimumDays) {
