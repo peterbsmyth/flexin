@@ -1,15 +1,17 @@
 <bod-breadcrumbs>
   <span>Statistics > Exercises</span>
 </bod-breadcrumbs>
-<section class="items">
-  <button
-    class="items__button"
-    *ngFor="let exercise of exercises$ | async"
-    mat-stroked-button
-    color="link"
-    [routerLink]="[exercise.id]"
-    routerLinkActive="active"
-  >
-    {{ exercise.name }}
-  </button>
-</section>
+<bod-page-layout>
+  <section class="items">
+    <button
+      class="items__button"
+      *ngFor="let exercise of exercises$ | async"
+      mat-stroked-button
+      color="link"
+      [routerLink]="[exercise.id]"
+      routerLinkActive="active"
+    >
+      {{ exercise.name }}
+    </button>
+  </section>
+</bod-page-layout>

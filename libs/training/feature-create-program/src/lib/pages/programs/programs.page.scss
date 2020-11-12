@@ -3,7 +3,6 @@
 .items {
   display: flex;
   flex-direction: column;
-  margin: $space-s $space-m 0;
 
   &__button {
     @include caption;

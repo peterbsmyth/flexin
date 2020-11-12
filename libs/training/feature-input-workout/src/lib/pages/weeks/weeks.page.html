@@ -1,15 +1,17 @@
-<section class="items"  *ngIf="(weeksLoaded$ | async); else loadingWeeks">
-  <button
-    class="items__button"
-    *ngFor="let week of (weeks$ | async);"
-    mat-stroked-button
-    color="link"
-    [routerLink]="['/weeks', week.id]"
-    routerLinkActive="active"
-  >
-  Week {{ week.number }}
-  </button>
-</section>
-<ng-template #loadingWeeks>
-  Loading Weeks...
-</ng-template>
+<bod-page-layout>
+  <section class="items" *ngIf="(weeksLoaded$ | async); else loadingWeeks">
+    <button
+      class="items__button"
+      *ngFor="let week of (weeks$ | async);"
+      mat-stroked-button
+      color="link"
+      [routerLink]="['/weeks', week.id]"
+      routerLinkActive="active"
+    >
+      Week {{ week.number }}
+    </button>
+  </section>
+  <ng-template #loadingWeeks>
+    Loading Weeks...
+  </ng-template>
+</bod-page-layout>

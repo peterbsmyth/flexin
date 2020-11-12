@@ -1,5 +1,9 @@
 @import 'utils';
 
+bod-card {
+  margin-top: $space-s;
+}
+
 .card {
   &__body {
     display: flex;

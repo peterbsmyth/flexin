@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardContent,
 } from './components/card/card.component';
+import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 
 @NgModule({
   imports: [CommonModule, MatIconModule, MatCardModule],
@@ -21,6 +22,7 @@ import {
     CardComponent,
     CardHeader,
     CardContent,
+    PageLayoutComponent,
   ],
   exports: [
     ActionsBarComponent,
@@ -29,6 +31,7 @@ import {
     CardComponent,
     CardHeader,
     CardContent,
+    PageLayoutComponent,
   ],
 })
 export class BodComponentsModule {}
