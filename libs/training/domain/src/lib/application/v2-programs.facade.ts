@@ -4,7 +4,6 @@ import { select, Store, Action } from '@ngrx/store';
 
 import * as fromRoot from '../+state/root.reducer';
 import * as V2ProgramsSelectors from '../+state/v2-programs/v2-programs.selectors';
-import { DraftProgramsDataService } from '../infrastructure/draft-programs.data.service';
 import { V2DraftProgramsDataService } from '../infrastructure/v2-draft-programs.data.service';
 
 @Injectable()
@@ -16,6 +15,12 @@ export class V2ProgramsFacade {
   selectedV2Programs$ = this.store.pipe(
     select(V2ProgramsSelectors.getSelected)
   );
+  weeks$ = this.store.pipe(select(V2ProgramsSelectors.getWeeks));
+  days$ = this.store.pipe(select(V2ProgramsSelectors.getDays));
+  selectedWorkout$ = this.store.pipe(
+    select(V2ProgramsSelectors.selectedWorkout)
+  );
+  workouts$ = this.store.pipe(select(V2ProgramsSelectors.getWorkouts));
   draftProgramBoard$ = this.draftProgramService.draftProgramBoard$;
   draftProgramConfiguration$ = this.draftProgramService
     .draftProgramConfiguration$;

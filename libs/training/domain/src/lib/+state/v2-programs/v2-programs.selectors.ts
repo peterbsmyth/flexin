@@ -39,8 +39,56 @@ export const getSelectedId = createSelector(
   (state: V2ProgramsState) => state.selectedId
 );
 
+export const getSelectedWeek = createSelector(
+  getV2ProgramsState,
+  (state: V2ProgramsState) => state.selectedWeek
+);
+
+export const getSelectedDay = createSelector(
+  getV2ProgramsState,
+  (state: V2ProgramsState) => state.selectedDay
+);
+
+export const getSelectedWorkoutId = createSelector(
+  getV2ProgramsState,
+  (state: V2ProgramsState) => state.selectedWorkoutId
+);
+
 export const getSelected = createSelector(
   getV2ProgramsEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
+);
+
+export const getWeeks = createSelector(getSelected, (program) => {
+  const weeks = program.workouts.map((workout) => workout.week);
+  return [...new Set(weeks)];
+});
+
+export const getDays = createSelector(
+  getSelected,
+  getSelectedWeek,
+  (program, week) => {
+    const days = program.workouts
+      .filter((w) => w.week === week)
+      .map((workout) => workout.day);
+    return [...new Set(days)];
+  }
+);
+
+export const getWorkouts = createSelector(
+  getSelected,
+  getSelectedWeek,
+  getSelectedDay,
+  (program, week, day) =>
+    program.workouts.filter(
+      (workout) => workout.week === week && workout.day === day
+    )
+);
+
+export const selectedWorkout = createSelector(
+  getSelected,
+  getSelectedWorkoutId,
+  (program, workoutId) =>
+    program.workouts.find((workout) => workout.id === workoutId)
 );

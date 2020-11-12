@@ -41,7 +41,6 @@ export interface Workout {
   program?: ProgramV2;
   exerciseId: number;
   exercise?: ExerciseV2;
-  workoutStatistic: WorkoutStatistic;
   week: number;
   day: number;
   order: number;
@@ -56,6 +55,9 @@ export interface Workout {
   tempo: string; // '5s eccentric, 2s hold at bottom'
   notes: string; // 'squeeze at top'
   playlistUrl?: string;
+  rpe?: number; // 8
+  athleteNotes?: string; // 'not at my full strength'
+  setStatistics: SetStatisticV2[];
 }
 
 export interface WorkoutStatistic {
@@ -73,8 +75,10 @@ export interface SetStatisticV2 {
   id: number;
   set: number; // 1
   reps: number; // 8
-  weight: number; // 35
-  workoutStatistic: WorkoutStatistic;
+  weight?: number; // 35
+  workoutId?: number;
+  workout?: Workout;
+  workoutStatistic?: WorkoutStatistic;
 }
 
 export interface Set {

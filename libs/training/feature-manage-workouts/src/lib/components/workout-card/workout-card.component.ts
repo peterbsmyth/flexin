@@ -8,31 +8,28 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import {
-  SessionItemBoardCardData,
-  SessionItemCardOutput,
-} from '@bod/training/domain';
 import { Subject } from 'rxjs';
 import { debounceTime, tap, takeUntil, filter } from 'rxjs/operators';
 import { OnChange } from '@bod/shared/utils';
+import { Workout } from '@bod/shared/models';
 
 @Component({
-  selector: 'training-session-item-card',
-  templateUrl: './session-item-card.component.html',
-  styleUrls: ['./session-item-card.component.scss'],
+  selector: 'training-workout-card',
+  templateUrl: './workout-card.component.html',
+  styleUrls: ['./workout-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SessionItemCardComponent implements OnInit, OnDestroy {
+export class WorkoutCardComponent implements OnInit, OnDestroy {
   private _formSaveable = false;
   private unsubscribe$: Subject<any> = new Subject();
 
-  @OnChange<SessionItemBoardCardData>(function (data) {
-    this.buildForm(data);
+  @OnChange<Workout>(function (workout) {
+    this.buildForm(workout ?? {});
   })
   @Input()
-  data: SessionItemBoardCardData;
+  workout: Workout;
 
-  @Output() save: EventEmitter<SessionItemCardOutput> = new EventEmitter();
+  @Output() save: EventEmitter<Partial<Workout>> = new EventEmitter();
   form: FormGroup = this.fb.group({});
 
   get sets() {
@@ -62,17 +59,17 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
 
   /**
    * buildForm
-   * Each time the session item changes the form needs to be reset according to the dictates of the session item
+   * Each time the workout changes the form needs to be reset according to the dictates of the workout
    * and related statistics. uses _formSaveable to prevent valueChanges subscription from firing after setControl
-   * @param data { SessionItemBoardCardData };
+   * @param workout { Workout };
    */
-  buildForm(data: SessionItemBoardCardData): void {
+  buildForm(workout: Workout): void {
     this._formSaveable = false;
-    const rpe = data?.sessionItemStatistic?.rpe ?? 0;
-    const notes = data?.sessionItemStatistic?.notes ?? '';
+    const rpe = workout?.rpe ?? 0;
+    const notes = workout?.athleteNotes ?? '';
     const sets = this.fb.array([]);
-    this.arrayOfCount(data.sessionItem.sets).forEach((s, i) => {
-      const setStatistic = data.setStatistics[i];
+    this.arrayOfCount(workout.setCount).forEach((s, i) => {
+      const setStatistic = workout.setStatistics[i];
       const setReps = setStatistic?.reps ?? 0;
       const setWeight = setStatistic?.weight ?? 0;
       const control = this.fb.group({
@@ -87,11 +84,6 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
     this.form.setControl('rpe', this.fb.control(rpe));
     this.form.setControl('notes', this.fb.control(notes));
 
-    if (!data.sessionItemStatistic) {
-      this.form.disable({ emitEvent: false });
-    } else {
-      this.form.enable({ emitEvent: false });
-    }
     this._formSaveable = true;
   }
 
@@ -115,7 +107,7 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
    */
   onSetBlur(controlName, i) {
     const control = this.sets.controls[i].get(controlName);
-    const reps = this.data.setStatistics[i]?.reps ?? 0;
+    const reps = this.workout.setStatistics[i]?.reps ?? 0;
 
     if (control.value === null) {
       control.setValue(reps, {
@@ -140,7 +132,7 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
    */
   onRpeBlur() {
     const control = this.form.get('rpe');
-    const rpe = this.data.sessionItemStatistic?.rpe ?? 0;
+    const rpe = this.workout.rpe ?? 0;
 
     if (control.value === null) {
       control.setValue(rpe, {
@@ -151,7 +143,7 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
 
   onSave(value: {
     rpe: number;
-    notes: string;
+    athleteNotes: string;
     sets: {
       id?: number;
       set: number;
@@ -159,19 +151,14 @@ export class SessionItemCardComponent implements OnInit, OnDestroy {
       weight: number;
     }[];
   }) {
-    const sessionItemStatisticId = !!this.data.sessionItemStatistic
-      ? this.data.sessionItemStatistic.id
-      : undefined;
-    const output: SessionItemCardOutput = {
-      sessionItemStatistic: {
-        id: sessionItemStatisticId,
-        rpe: value.rpe,
-        notes: value.notes,
-        sessionItemId: this.data.sessionItem.id,
-      },
+    const workoutId = this.workout.id;
+    const output: Partial<Workout> = {
+      id: this.workout.id,
+      rpe: value.rpe,
+      athleteNotes: value.athleteNotes,
       setStatistics: value.sets.map((s, i) => ({
-        id: this.data.setStatistics[i]?.id,
-        sessionItemStatisticId,
+        id: this.workout.setStatistics[i]?.id,
+        workoutId,
         ...s,
       })),
     };

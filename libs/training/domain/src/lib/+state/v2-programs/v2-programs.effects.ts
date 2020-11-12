@@ -21,7 +21,10 @@ import { getAllV2Exercises } from '../v2-exercises/v2-exercises.selectors';
 export class V2ProgramsEffects {
   loadV2Programs$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(V2ProgramsActions.loadV2Programs),
+      ofType(
+        V2ProgramsActions.loadV2Programs,
+        V2ProgramsActions.loadProgramsFromPage
+      ),
       fetch({
         run: (action) => {
           return V2ProgramsActions.loadV2ProgramsSuccess({

@@ -1,12 +1,34 @@
-<form [formGroup]="form" *ngIf="form">
+<form [formGroup]="form" *ngIf="form && workout">
   <bod-card>
     <header bod-card-header>
-      <span>Sets <span *ngIf="data.sessionItem.leftRight"> (L/R)</span></span>
+      <span
+        >{{ workout.exercise.name }}
+        <span *ngIf="workout?.exercise.leftRight"> (L/R)</span></span
+      >
     </header>
-    <mat-card-content class="card__body" formArrayName="sets">
-      <section class="card__sets">
+    <mat-card-content class="card__body">
+      <section class="card__goal">
+        <span class="card__goal__label">Goal</span>
+        <div class="card__goal__item">
+          <span class="card__text">
+            <span *ngIf="workout?.amrap; else goalReps">AMRAP</span>
+            <ng-template #goalReps>
+              <span>{{ workout?.reps }} reps</span>
+            </ng-template>
+            <span *ngIf="workout?.intensity"
+              >, {{ workout?.intensity.name }}
+            </span>
+            <span *ngIf="workout?.weight"
+              >, {{ workout?.weight }} {{ workout?.weightUnit }}
+            </span>
+            <span *ngIf="workout?.tempo">, {{ workout?.tempo }}</span>
+          </span>
+        </div>
+      </section>
+
+      <section class="card__sets" formArrayName="sets">
         <div
-          *ngFor="let set of arrayOfCount(data.sessionItem.sets); let i = index"
+          *ngFor="let set of arrayOfCount(workout?.setCount); let i = index"
           [formGroupName]="i"
           class="card__input"
         >
@@ -26,9 +48,9 @@
               matInput
             />
           </mat-form-field>
-          <mat-form-field *ngIf="data.sessionItem.weight">
+          <mat-form-field *ngIf="workout?.weight">
             <!-- Weight Unit -->
-            <mat-label>{{ data.sessionItem.weightUnit }}</mat-label>
+            <mat-label>{{ workout?.weightUnit }}</mat-label>
             <!-- Weight -->
             <input
               (focus)="onSetFocus('weight', i)"
@@ -43,35 +65,9 @@
           </mat-form-field>
         </div>
       </section>
-      <ng-container>
-        <div class="card__additional">
-          <div class="card__additional__item">
-            <span class="card__additional__label">Goal</span>
-            <span class="card__text">
-              <span *ngIf="data.sessionItem.AMRAP; else goalReps">AMRAP</span>
-              <ng-template #goalReps
-                ><span>{{ data.sessionItem.reps }} reps</span></ng-template
-              >
-              <span *ngIf="data.sessionItem.intensity"
-                >, {{ data.sessionItem.intensity }}</span
-              >
-              <span *ngIf="data.sessionItem.weight"
-                >, {{ data.sessionItem.weight }}
-                {{ data.sessionItem.weightUnit }}</span
-              >
-              <span *ngIf="data.sessionItem.tempo"
-                >, {{ data.sessionItem.tempo }}</span
-              >
-            </span>
-          </div>
-        </div>
-      </ng-container>
-    </mat-card-content>
-  </bod-card>
-  <bod-card>
-    <header bod-card-header><span>Session</span></header>
-    <mat-card-content class="card__body">
-      <section class="card__session">
+
+      <section class="card__workout">
+        <span class="card__label">workout</span>
         <!-- RPE -->
         <mat-form-field class="card__input">
           <mat-label>

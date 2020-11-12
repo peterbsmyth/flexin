@@ -1,10 +1,10 @@
-<ng-container *ngIf="loaded$ | async; else loading">
+<ng-container>
   <bod-card>
-    <header *ngrxLet="exercise$ as exercise" bod-card-header>
+    <header *ngIf="(exercise$ | async) as exercise" bod-card-header>
       {{ exercise.name }} Statistics
     </header>
     <mat-card-content class="card__body">
-      <ng-container *ngrxLet="maxRepsOfAllTime$ as bestSet">
+      <ng-container *ngIf="(maxRepsOfAllTime$ | async) as bestSet">
         <span class="card__label">
           Most reps in a set
         </span>
@@ -18,6 +18,14 @@
           {{ bestSet.reps }}
         </span>
       </ng-container>
+      <span class="card__label">
+        More
+      </span>
+      <span class="card__text">
+        <button disabled mat-stroked-button [routerLink]="['statistics']">
+          View All Statsitcs
+        </button>
+      </span>
     </mat-card-content>
   </bod-card>
 </ng-container>

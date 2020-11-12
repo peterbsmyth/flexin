@@ -1,0 +1,60 @@
+<ng-container *ngIf="(programsState.selectedV2Programs$ | async) as program">
+  <div class="controls">
+    <mat-form-field>
+      <mat-label>Program</mat-label>
+      <mat-select [formControl]="programSelect">
+        <mat-option
+          *ngFor="let program of programsState.allV2Programs$ | async"
+          [value]="program.id"
+        >
+          {{ program.number }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Week</mat-label>
+      <mat-select [formControl]="weekSelect">
+        <mat-option
+          *ngFor="let week of programsState.weeks$  | async;"
+          [value]="week"
+        >
+          {{ week }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Day</mat-label>
+      <mat-select [formControl]="daySelect">
+        <mat-option
+          *ngFor="let day of programsState.days$  | async;"
+          [value]="day"
+        >
+          {{ day }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <bod-page-layout>
+    <section class="items">
+      <button
+        class="items__button"
+        *ngFor="let workout of (programsState.workouts$ | async);"
+        mat-stroked-button
+        [routerLink]="['/workouts']"
+        [queryParams]="{workoutId: workout.id}"
+        queryParamsHandling="merge"
+        [class.active]="isWorkoutActive(workout.id)"
+        [disabled]="isWorkoutActive(workout.id)"
+      >
+        {{ workout.exercise.name }}
+      </button>
+    </section>
+    <training-workout-card
+      *ngIf="programsState.selectedWorkout$ | async as workout"
+      [workout]="workout"
+      (save)="onSave($event)"
+    >
+    </training-workout-card>
+    <training-statistics></training-statistics>
+  </bod-page-layout>
+</ng-container>

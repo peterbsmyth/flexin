@@ -4,6 +4,10 @@ import { BoardCardData } from '../../entities/component.models';
 
 export const loadV2Programs = createAction('[V2Programs] Load V2Programs');
 
+export const loadProgramsFromPage = createAction(
+  '[V2Programs][Page] Load Programs'
+);
+
 export const loadV2ProgramsSuccess = createAction(
   '[V2Programs] Load V2Programs Success',
   props<{ v2Programs: ProgramV2[] }>()
@@ -19,8 +23,33 @@ export const loadProgramFromGuard = createAction(
   props<{ id: number }>()
 );
 
+export const loadProgramFromPage = createAction(
+  '[V2Programs][Page] Load Program',
+  props<{ id: number }>()
+);
+
 export const selectProgramFromGuard = createAction(
   '[V2Programs][Guard] Select Program',
+  props<{ id: number }>()
+);
+
+export const selectProgramFromPage = createAction(
+  '[V2Programs][Page] Select Program',
+  props<{ id: number }>()
+);
+
+export const selectWeek = createAction(
+  '[V2Programs] Select Week',
+  props<{ week: number }>()
+);
+
+export const selectDay = createAction(
+  '[V2Programs] Select Day',
+  props<{ day: number }>()
+);
+
+export const selectWorkout = createAction(
+  '[V2Programs] Select Workout',
   props<{ id: number }>()
 );
 

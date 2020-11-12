@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Exercise, SetStatistic } from '@bod/shared/models';
 import {
-  ExercisesFacade,
-  SetStatisticsActions,
-  SetStatisticsFacade,
-} from '@bod/training/domain';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+  Exercise,
+  SetStatistic,
+  mockWorkouts,
+  SetStatisticV2,
+} from '@bod/shared/models';
+
+import { Observable, of, combineLatest } from 'rxjs';
+import { filter, map, withLatestFrom } from 'rxjs/operators';
+import { maxBy } from 'lodash-es';
+import { V2ProgramsFacade } from '@bod/training/domain';
 
 @Component({
   selector: 'training-statistics',
@@ -18,31 +21,56 @@ export class StatisticsContainer implements OnInit {
   exercise$: Observable<Exercise>;
   setStatistics$: Observable<SetStatistic[]>;
   maxRepsOfAllTime$: Observable<number>;
-  bestSet$: Observable<SetStatistic>;
-  constructor(
-    private setStatisticsState: SetStatisticsFacade,
-    private exerciseState: ExercisesFacade
-  ) {
-    this.loaded$ = this.setStatisticsState.ascendantsLoaded$;
-    this.exercise$ = this.exerciseState.selectedExercises$;
-    this.maxRepsOfAllTime$ = this.exerciseState.maxReps$;
-    this.bestSet$ = this.exerciseState.bestSet$;
+  bestSet$: Observable<SetStatisticV2>;
+  constructor(private programState: V2ProgramsFacade) {
+    const workoutsO = of(mockWorkouts);
+    // this.loaded$ = this.setStatisticsState.ascendantsLoaded$;
+    // this.exercise$ = this.exerciseState.selectedExercises$;
+    this.maxRepsOfAllTime$ = combineLatest([
+      workoutsO,
+      this.programState.selectedWorkout$,
+    ]).pipe(
+      map(([workouts, workout]) =>
+        workouts.find((w) => w.exerciseId === workout?.exerciseId)
+      ),
+      filter((w) => !!w),
+      map(({ setStatistics }) => {
+        const data = setStatistics
+          .filter((stat) => !!stat.reps)
+          .map((stat) => stat.reps);
+        if (data.length) {
+          return Math.max.apply(null, data);
+        } else {
+          return 0;
+        }
+      })
+    );
+    this.bestSet$ = combineLatest([
+      workoutsO,
+      this.programState.selectedWorkout$,
+    ]).pipe(
+      map(([workouts, workout]) =>
+        workouts.find((w) => w.exerciseId === workout?.exerciseId)
+      ),
+      filter((w) => !!w),
+      map(({ setStatistics }) => {
+        const maxWeight = Math.max.apply(
+          null,
+          setStatistics.map((stat) => stat.weight)
+        );
+        const topWeights = setStatistics.filter((s) => s.weight === maxWeight);
+        const bestSet: SetStatisticV2 = topWeights.length
+          ? maxBy(topWeights, 'reps')
+          : null;
+
+        if (bestSet?.weight === 0) {
+          return null;
+        } else {
+          return bestSet;
+        }
+      })
+    );
   }
 
-  ngOnInit(): void {
-    /**
-     * the purpose of this subscription is to enforce that the action dispatches only once per application load
-     */
-    this.loaded$
-      .pipe(
-        tap((loaded) => {
-          if (loaded === undefined) {
-            this.setStatisticsState.dispatch(
-              SetStatisticsActions.loadSetStatisticsWithAscendants()
-            );
-          }
-        })
-      )
-      .subscribe();
-  }
+  ngOnInit(): void {}
 }

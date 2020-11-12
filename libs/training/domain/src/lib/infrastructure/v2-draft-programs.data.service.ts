@@ -66,7 +66,7 @@ export class V2DraftProgramsDataService {
             tempo: null,
             notes: null,
             programId: null,
-            workoutStatistic: null,
+            setStatistics: [],
           };
 
           workouts.push(workout);

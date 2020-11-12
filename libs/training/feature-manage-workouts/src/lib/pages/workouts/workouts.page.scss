@@ -1,13 +1,8 @@
 @import 'utils';
 
-mat-list {
-  font-weight: $weight-bold;
-}
-
 .items {
   display: flex;
   flex-direction: column;
-  margin: 0 $space-m;
 
   &__button {
     @include caption;
@@ -22,11 +17,15 @@ mat-list {
   background-color: $grey-100;
 }
 
-button {
-  width: 50%;
-  margin-bottom: $space-xs;
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: $space-s $space-m 0;
+  border-bottom: $size-border-s dashed $grey-500;
 }
 
-button:first-of-type {
-  margin-right: $space-xs;
+mat-form-field {
+  width: 3rem;
+  margin-left: $space-l;
 }

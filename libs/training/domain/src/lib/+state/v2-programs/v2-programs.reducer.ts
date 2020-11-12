@@ -8,6 +8,9 @@ export const V2PROGRAMS_FEATURE_KEY = 'v2Programs';
 
 export interface V2ProgramsState extends EntityState<ProgramV2> {
   selectedId?: string | number; // which V2Programs record has been selected
+  selectedWeek?: string | number;
+  selectedDay?: string | number;
+  selectedWorkoutId?: string | number;
   loaded: boolean; // has the V2Programs list been loaded
   error?: string | null; // last known error (if any)
 }
@@ -38,9 +41,25 @@ const v2ProgramsReducer = createReducer(
     ...state,
     error,
   })),
-  on(V2ProgramsActions.selectProgramFromGuard, (state, { id }) => ({
+  on(
+    V2ProgramsActions.selectProgramFromPage,
+    V2ProgramsActions.selectProgramFromGuard,
+    (state, { id }) => ({
+      ...state,
+      selectedId: id,
+    })
+  ),
+  on(V2ProgramsActions.selectWeek, (state, { week }) => ({
     ...state,
-    selectedId: id,
+    selectedWeek: week,
+  })),
+  on(V2ProgramsActions.selectDay, (state, { day }) => ({
+    ...state,
+    selectedDay: day,
+  })),
+  on(V2ProgramsActions.selectWorkout, (state, { id }) => ({
+    ...state,
+    selectedWorkoutId: id,
   }))
 );
 

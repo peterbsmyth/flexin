@@ -57,13 +57,7 @@ export class ProgramPage implements OnInit {
         return boardCardData;
       })
     );
-    this.weeks$ = this.program$.pipe(
-      map((program) => {
-        const weeks = program.workouts.map((workout) => workout.week);
-        const max = Math.max(...weeks);
-        return Array(max).fill(null);
-      })
-    );
+    this.weeks$ = this.programsState.weeks$;
   }
 
   navigateToWeek(week) {
