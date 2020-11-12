@@ -1,4 +1,4 @@
-<div *ngIf="(loaded$ | async); else loading;">
+<ng-container *ngIf="(loaded$ | async); else loading;">
   <div *ngIf="(program$ | async) as program">
     <bod-breadcrumbs>
       <span>Program {{ program.number }}</span>
@@ -14,8 +14,10 @@
       >
     </bod-actions-bar>
   </div>
-</div>
-<training-program-board [data]="board$ | async"></training-program-board>
+</ng-container>
+<bod-page-layout>
+  <training-program-board [data]="board$ | async"></training-program-board>
+</bod-page-layout>
 <ng-template #loading>
   Loading...
 </ng-template>

@@ -35,9 +35,11 @@
     Reset
   </button>
 </bod-actions-bar>
-<training-program-board
-  [sourceColumn]="sourceColumn$ | async"
-  [data]="board$ | async"
-  (update)="onUpdate($event)"
->
-</training-program-board>
+<bod-page-layout>
+  <training-program-board
+    [sourceColumn]="sourceColumn$ | async"
+    [data]="board$ | async"
+    (update)="onUpdate($event)"
+  >
+  </training-program-board>
+</bod-page-layout>

@@ -6,28 +6,30 @@
     Create
   </button>
 </bod-actions-bar>
-<section class="items" *ngIf="(loaded$ | async); else loading;">
-  <button
-    class="items__button"
-    *ngFor="let program of (programs$ | async)"
-    mat-stroked-button
-    color="link"
-    [routerLink]="['/v2/programs', program.id]"
-  >
-    Program {{ program?.number }}
-  </button>
-</section>
-
-<ng-template #loading>
-  <section class="items">
-    <button class="items__button" disabled mat-stroked-button>
-      ...
-    </button>
-    <button class="items__button" disabled mat-stroked-button>
-      ...
-    </button>
-    <button class="items__button" disabled mat-stroked-button>
-      ...
+<bod-page-layout>
+  <section class="items" *ngIf="(loaded$ | async); else loading;">
+    <button
+      class="items__button"
+      *ngFor="let program of (programs$ | async)"
+      mat-stroked-button
+      color="link"
+      [routerLink]="['/v2/programs', program.id]"
+    >
+      Program {{ program?.number }}
     </button>
   </section>
-</ng-template>
+
+  <ng-template #loading>
+    <section class="items">
+      <button class="items__button" disabled mat-stroked-button>
+        ...
+      </button>
+      <button class="items__button" disabled mat-stroked-button>
+        ...
+      </button>
+      <button class="items__button" disabled mat-stroked-button>
+        ...
+      </button>
+    </section>
+  </ng-template>
+</bod-page-layout>

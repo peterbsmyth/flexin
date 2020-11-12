@@ -19,13 +19,15 @@
     Create Program
   </button>
 </bod-actions-bar>
-<div class="board">
-  <training-workout
-    *ngFor="let workout of programsState.draftProgramConfiguration$| async; let i = index;"
-    class="item"
-    [workout]="workout"
-    (update)="onUpdate($event)"
-    (updateExercise)="onUpdateExercise($event)"
-    (validate)="onValidate($event, i)"
-  ></training-workout>
-</div>
+<bod-page-layout>
+  <div class="board">
+    <training-workout
+      *ngFor="let workout of programsState.draftProgramConfiguration$| async; let i = index;"
+      class="item"
+      [workout]="workout"
+      (update)="onUpdate($event)"
+      (updateExercise)="onUpdateExercise($event)"
+      (validate)="onValidate($event, i)"
+    ></training-workout>
+  </div>
+</bod-page-layout>
