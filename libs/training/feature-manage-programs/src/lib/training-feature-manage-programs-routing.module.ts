@@ -20,21 +20,21 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '1',
+        redirectTo: 'start',
         pathMatch: 'full',
       },
       {
-        path: '1',
+        path: 'start',
         component: ProgramBoardPage,
       },
       {
-        path: '2',
+        path: 'finish',
         component: ProgramConfigurationBoardPage,
       },
     ],
   },
   {
-    path: 'v2/coaching/workouts/:workoutId',
+    path: 'v2/workouts/:workoutId',
     component: WorkoutPage,
     canActivate: [WorkoutExistsGuard],
   },

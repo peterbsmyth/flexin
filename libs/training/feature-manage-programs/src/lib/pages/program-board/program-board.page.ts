@@ -101,7 +101,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   }
 
   onClickNext() {
-    this.router.navigateByUrl('/v2/programs/create/2');
+    this.router.navigateByUrl('/v2/programs/create/finish');
   }
 
   onClickReset() {
