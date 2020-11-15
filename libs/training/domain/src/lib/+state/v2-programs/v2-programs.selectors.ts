@@ -76,7 +76,7 @@ export const getDays = createSelector(
   }
 );
 
-export const getWorkouts = createSelector(
+export const getDaysWorkouts = createSelector(
   getSelected,
   getSelectedWeek,
   getSelectedDay,

@@ -21,7 +21,7 @@ export class V2ProgramsFacade {
   selectedWorkout$ = this.store.pipe(
     select(V2ProgramsSelectors.selectedWorkout)
   );
-  workouts$ = this.store.pipe(select(V2ProgramsSelectors.getWorkouts));
+  daysWorkouts$ = this.store.pipe(select(V2ProgramsSelectors.getDaysWorkouts));
   draftProgramBoard$ = this.draftProgramService.draftProgramBoard$;
   draftProgramConfiguration$ = this.draftProgramService
     .draftProgramConfiguration$;

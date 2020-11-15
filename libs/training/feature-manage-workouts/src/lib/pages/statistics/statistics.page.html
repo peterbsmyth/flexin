@@ -1,4 +1,4 @@
-<ng-container *ngIf="(programsState.selectedV2Programs$ | async) as program">
+<ng-container>
   <div class="controls">
     <mat-form-field>
       <mat-label>Program</mat-label>
@@ -35,26 +35,33 @@
     </mat-form-field>
   </div>
   <bod-page-layout>
-    <section class="items">
-      <button
-        class="items__button"
-        *ngFor="let workout of (programsState.daysWorkouts$ | async);"
-        mat-stroked-button
-        [routerLink]="['/workouts']"
-        [queryParams]="{workoutId: workout.id}"
-        queryParamsHandling="merge"
-        [class.active]="isWorkoutActive(workout.id)"
-        [disabled]="isWorkoutActive(workout.id)"
+    <!-- src is set in .ts because youtube considers property binding a possible XSS attack -->
+    <div class="container">
+      <ng-container
+        *ngIf="(programsState.selectedV2Programs$ | async) as program"
       >
-        {{ workout.exercise.name }}
-      </button>
-    </section>
-    <training-workout-card
-      *ngIf="programsState.selectedWorkout$ | async as workout"
-      [workout]="workout"
-      (save)="onSave($event)"
-    >
-    </training-workout-card>
-    <training-statistics></training-statistics>
+        <bod-card *ngIf="program.playlist">
+          <bod-card-header><span>Playlist</span></bod-card-header>
+          <mat-card-content class="card__body">
+            <iframe
+              #player
+              height="315"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+            ></iframe>
+          </mat-card-content>
+        </bod-card>
+      </ng-container>
+      <div class="cards">
+        <ng-container
+          *ngFor="let workout of programsState.daysWorkouts$ | async"
+        >
+          <training-workout-statistic-card
+            [workout]="workout"
+          ></training-workout-statistic-card>
+        </ng-container>
+      </div>
+    </div>
   </bod-page-layout>
 </ng-container>

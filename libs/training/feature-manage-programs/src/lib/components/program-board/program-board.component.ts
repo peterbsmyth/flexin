@@ -106,7 +106,6 @@ export class ProgramBoardComponent {
 
     if (isBoardEmpty(this.board)) {
       const board = [...Array(this.board.length)].map(() => []);
-      console.log(board);
       this.setBoard(board);
     }
 

@@ -30,6 +30,8 @@ export interface ProgramV2 {
   id?: number;
   number: number;
   workouts?: Workout[];
+  setStatistics?: SetStatisticV2[];
+  playlist?: Playlist;
   createdBy?: User;
   assignedTo?: User;
 }
@@ -66,6 +68,8 @@ export interface SetStatisticV2 {
   weight?: number; // 35
   workoutId?: number;
   workout?: Workout;
+  programId?: number;
+  program?: ProgramV2;
 }
 
 export interface Set {
@@ -80,4 +84,9 @@ export interface Category {
   id: number;
   name: string;
   createdBy: User;
+}
+
+export interface Playlist {
+  id: number;
+  url: string;
 }

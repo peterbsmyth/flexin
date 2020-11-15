@@ -1,0 +1,69 @@
+<bod-card>
+  <header bod-card-header>
+    <span>{{ workout.exercise?.name }}</span>
+  </header>
+  <mat-card-content
+    class="card__body"
+    *ngIf="hasStatistics(workout.setStatistics); else noStatistics"
+  >
+    <ng-container>
+      <table class="card__table">
+        <tr>
+          <th>
+            <span class="card__label">Set</span>
+          </th>
+          <td
+            *ngFor="let setStatistic of workout.setStatistics"
+            class="card__text"
+          >
+            {{ setStatistic.set }}
+          </td>
+        </tr>
+        <tr>
+          <th><span class="card__label">Reps</span></th>
+          <td
+            *ngFor="let setStatistic of workout.setStatistics"
+            class="card__text"
+          >
+            {{ setStatistic.reps }}
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+    <ng-container>
+      <div class="card__additional">
+        <div *ngIf="workout.notes" class="card__additional__item">
+          <span class="card__label">Notes</span>
+          <span class="card__text">
+            {{ workout.notes }}
+          </span>
+        </div>
+        <div class="card__additional__item">
+          <span class="card__label">RPE</span>
+          <span class="card__text">
+            {{ workout.rpe }}
+          </span>
+        </div>
+        <div class="card__additional__item">
+          <span class="card__label">Goal</span>
+          <span class="card__text" *ngIf="workout.amrap; else goalReps">
+            AMRAP, {{ workout.intensity.name }},
+            {{ workout.tempo }}
+          </span>
+          <ng-template #goalReps>
+            <span class="card__text">
+              {{ workout.reps }} reps, {{ workout.intensity.name }},
+              {{ workout.tempo }}
+            </span>
+          </ng-template>
+        </div>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</bod-card>
+
+<ng-template #noStatistics>
+  <mat-card-content class="card__body">
+    <span>No Exercises Recorded</span>
+  </mat-card-content>
+</ng-template>

@@ -81,6 +81,42 @@ export const mockExercises: ExerciseV2[] = [
   },
 ];
 
+export const setStatisticsForWorkoutOne = [
+  {
+    id: 1,
+    set: 1,
+    reps: 8,
+    weight: 25,
+    workoutId: 1,
+    programId: 1,
+  },
+  {
+    id: 2,
+    set: 2,
+    reps: 8,
+    weight: 25,
+    workoutId: 1,
+    programId: 1,
+  },
+];
+
+export const setStatisticsForWorkoutTwo = [
+  {
+    id: 3,
+    set: 1,
+    reps: 15,
+    workoutId: 1,
+    programId: 1,
+  },
+  {
+    id: 4,
+    set: 2,
+    reps: 8,
+    workoutId: 1,
+    programId: 1,
+  },
+];
+
 export const mockWorkouts: Workout[] = [
   {
     id: 1,
@@ -101,22 +137,7 @@ export const mockWorkouts: Workout[] = [
     notes: 'go hard',
     rpe: 1,
     athleteNotes: '',
-    setStatistics: [
-      {
-        id: 1,
-        set: 1,
-        reps: 8,
-        weight: 25,
-        workoutId: 1,
-      },
-      {
-        id: 2,
-        set: 2,
-        reps: 8,
-        weight: 25,
-        workoutId: 1,
-      },
-    ],
+    setStatistics: setStatisticsForWorkoutOne,
   },
   {
     id: 2,
@@ -132,22 +153,10 @@ export const mockWorkouts: Workout[] = [
     weight: null,
     weightUnit: 'lbs',
     intensityId: 1,
+    intensity: mockExercise.intensities[0],
     tempo: '2012',
     notes: 'go hard',
-    setStatistics: [
-      {
-        id: 3,
-        set: 1,
-        reps: 15,
-        workoutId: 1,
-      },
-      {
-        id: 4,
-        set: 2,
-        reps: 8,
-        workoutId: 1,
-      },
-    ],
+    setStatistics: setStatisticsForWorkoutTwo,
   },
   {
     id: 3,
@@ -163,6 +172,7 @@ export const mockWorkouts: Workout[] = [
     weight: 10,
     weightUnit: 'lbs',
     intensityId: 1,
+    intensity: mockExercise.intensities[0],
     tempo: '2012',
     notes: 'go hard',
     setStatistics: [],
@@ -181,6 +191,7 @@ export const mockWorkouts: Workout[] = [
     weight: 10,
     weightUnit: 'lbs',
     intensityId: 1,
+    intensity: mockExercise.intensities[0],
     tempo: '2012',
     notes: 'go hard',
     setStatistics: [],
@@ -192,6 +203,10 @@ export const mockPrograms: ProgramV2[] = [
     id: 1,
     number: 1,
     workouts: mockWorkouts,
+    setStatistics: [
+      ...setStatisticsForWorkoutOne,
+      ...setStatisticsForWorkoutTwo,
+    ],
     createdBy: {
       id: 1,
       name: 'calisthenics',
@@ -203,12 +218,17 @@ export const mockPrograms: ProgramV2[] = [
       name: 'peter b smith',
       role: 'athlete',
       instagramUsername: 'peterbsmyth',
+    },
+    playlist: {
+      id: 1,
+      url: 'PLu0SKb668nMemkZ7wQWhtbBauKbNJ9cD-',
     },
   },
   {
     id: 2,
     number: 2,
     workouts: mockWorkouts.slice(-1),
+    setStatistics: [],
     createdBy: {
       id: 1,
       name: 'calisthenics',
@@ -220,6 +240,10 @@ export const mockPrograms: ProgramV2[] = [
       name: 'peter b smith',
       role: 'athlete',
       instagramUsername: 'peterbsmyth',
+    },
+    playlist: {
+      id: 1,
+      url: 'PLu0SKb668nMemkZ7wQWhtbBauKbNJ9cD-',
     },
   },
 ];

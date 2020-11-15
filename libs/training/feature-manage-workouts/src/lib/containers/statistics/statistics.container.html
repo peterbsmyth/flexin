@@ -23,7 +23,14 @@
       </span>
       <span class="card__text">
         <button disabled mat-stroked-button [routerLink]="['statistics']">
-          View All Statsitcs
+          View All Statistics for Exercise
+        </button>
+        <button
+          mat-stroked-button
+          [routerLink]="['/v2/statistics']"
+          queryParamsHandling="preserve"
+        >
+          View All Statistics for Program
         </button>
       </span>
     </mat-card-content>
