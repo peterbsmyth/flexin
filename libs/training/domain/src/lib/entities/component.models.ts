@@ -9,7 +9,6 @@ import {
   SetStatisticV2,
   Week,
   Workout,
-  WorkoutStatistic,
 } from '@bod/shared/models';
 
 export interface SessionItemData {

@@ -192,7 +192,6 @@ export const mockPrograms: ProgramV2[] = [
     id: 1,
     number: 1,
     workouts: mockWorkouts,
-    workoutStatistics: [],
     createdBy: {
       id: 1,
       name: 'calisthenics',
@@ -210,7 +209,6 @@ export const mockPrograms: ProgramV2[] = [
     id: 2,
     number: 2,
     workouts: mockWorkouts,
-    workoutStatistics: [],
     createdBy: {
       id: 1,
       name: 'calisthenics',

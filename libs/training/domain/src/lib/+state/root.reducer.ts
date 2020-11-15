@@ -40,10 +40,6 @@ import {
   WORKOUTS_FEATURE_KEY,
 } from './workouts/workouts.reducer';
 import {
-  WorkoutStatisticsState,
-  WORKOUTSTATISTICS_FEATURE_KEY,
-} from './workout-statistics/workout-statistics.reducer';
-import {
   CategoriesState,
   CATEGORIES_FEATURE_KEY,
 } from './categories/categories.reducer';
@@ -82,7 +78,6 @@ export interface PartialState {
   readonly [WEEKSTATISTICS_FEATURE_KEY]: WeekStatisticsState;
   readonly [WEEKS_FEATURE_KEY]: WeeksState;
   readonly [WORKOUTS_FEATURE_KEY]: WorkoutsState;
-  readonly [WORKOUTSTATISTICS_FEATURE_KEY]: WorkoutStatisticsState;
   readonly [CATEGORIES_FEATURE_KEY]: CategoriesState;
   readonly [V2EXERCISES_FEATURE_KEY]: V2ExercisesState;
   readonly [V2PROGRAMS_FEATURE_KEY]: V2ProgramsState;

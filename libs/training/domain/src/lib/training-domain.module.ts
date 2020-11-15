@@ -52,9 +52,6 @@ import { WorkoutsFacade } from './application/workouts.facade';
 import * as fromCategories from './+state/categories/categories.reducer';
 import { CategoriesEffects } from './+state/categories/categories.effects';
 import { CategoriesFacade } from './application/categories.facade';
-import * as fromWorkoutStatistics from './+state/workout-statistics/workout-statistics.reducer';
-import { WorkoutStatisticsEffects } from './+state/workout-statistics/workout-statistics.effects';
-import { WorkoutStatisticsFacade } from './application/workout-statistics.facade';
 import * as fromV2Programs from './+state/v2-programs/v2-programs.reducer';
 import { V2ProgramsEffects } from './+state/v2-programs/v2-programs.effects';
 import { V2ProgramsFacade } from './application/v2-programs.facade';
@@ -127,10 +124,6 @@ import { MealStatisticsFacade } from './application/meal-statistics.facade';
       fromCategories.reducer
     ),
     StoreModule.forFeature(
-      fromWorkoutStatistics.WORKOUTSTATISTICS_FEATURE_KEY,
-      fromWorkoutStatistics.reducer
-    ),
-    StoreModule.forFeature(
       fromV2Programs.V2PROGRAMS_FEATURE_KEY,
       fromV2Programs.reducer
     ),
@@ -164,7 +157,6 @@ import { MealStatisticsFacade } from './application/meal-statistics.facade';
       ProgramStatisticsEffects,
       SessionStatisticsEffects,
       WorkoutsEffects,
-      WorkoutStatisticsEffects,
       CategoriesEffects,
       V2ExercisesEffects,
       V2SetStatisticsEffects,
@@ -201,7 +193,6 @@ import { MealStatisticsFacade } from './application/meal-statistics.facade';
     UserDataService,
     WorkoutsFacade,
     CategoriesFacade,
-    WorkoutStatisticsFacade,
     V2ProgramsFacade,
     V2ExercisesFacade,
     V2SetStatisticsFacade,

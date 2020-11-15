@@ -30,7 +30,6 @@ export interface ProgramV2 {
   id?: number;
   number: number;
   workouts?: Workout[];
-  workoutStatistics?: WorkoutStatistic[];
   createdBy?: User;
   assignedTo?: User;
 }
@@ -60,17 +59,6 @@ export interface Workout {
   setStatistics: SetStatisticV2[];
 }
 
-export interface WorkoutStatistic {
-  id: number;
-  programId: number;
-  workoutId: number;
-  program?: ProgramV2;
-  workout?: Workout;
-  setStatistics: SetStatisticV2[];
-  rpe: number; // 8
-  notes: string; // 'not at my full strength'
-}
-
 export interface SetStatisticV2 {
   id: number;
   set: number; // 1
@@ -78,7 +66,6 @@ export interface SetStatisticV2 {
   weight?: number; // 35
   workoutId?: number;
   workout?: Workout;
-  workoutStatistic?: WorkoutStatistic;
 }
 
 export interface Set {

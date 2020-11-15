@@ -14,7 +14,6 @@ export * from './lib/application/session-item-statistics.facade';
 export * from './lib/application/set-statistics.facade';
 export * from './lib/application/session-statistics.facade';
 export * from './lib/application/workouts.facade';
-export * from './lib/application/workout-statistics.facade';
 export * from './lib/application/categories.facade';
 export * from './lib/application/v2-set-statistics.facade';
 export * from './lib/application/v2-programs.facade';
@@ -49,7 +48,6 @@ export { SessionItemStatisticsActions } from './lib/+state/session-item-statisti
 export { SetStatisticsActions } from './lib/+state/set-statistics/actions';
 export { SessionStatisticsActions } from './lib/+state/session-statistics/actions';
 export * from './lib/+state/workouts/workouts.actions';
-export * from './lib/+state/workout-statistics/workout-statistics.actions';
 export * from './lib/+state/categories/categories.actions';
 export * from './lib/+state/v2-set-statistics/v2-set-statistics.actions';
 export * from './lib/+state/v2-exercises/v2-exercises.actions';
