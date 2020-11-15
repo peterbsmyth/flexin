@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProgramCreatePage } from './pages/program-create/program-create.page';
-import { ProgramsPage } from './pages/programs/programs.page';
 import { ProgramPage } from './pages/program/program.page';
 import { ProgramConfigurationBoardPage } from './pages/program-configuration-board/program-configuration-board.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
-import { ProgramExistsGuard } from './guards/program-exists.guard';
 import { WorkoutPage } from './pages/workout/workout.page';
 import { WorkoutExistsGuard } from './guards/workout-exists.guard';
+import { ProgramsLoadedGuard } from './guards/programs-loaded.guard';
 
 const routes: Routes = [
   {
     path: 'v2/programs',
-    component: ProgramsPage,
+    component: ProgramPage,
+    canActivate: [ProgramsLoadedGuard],
   },
   {
     path: 'v2/programs/create',
@@ -32,11 +32,6 @@ const routes: Routes = [
         component: ProgramConfigurationBoardPage,
       },
     ],
-  },
-  {
-    path: 'v2/programs/:programId',
-    component: ProgramPage,
-    canActivate: [ProgramExistsGuard],
   },
   {
     path: 'v2/coaching/workouts/:workoutId',

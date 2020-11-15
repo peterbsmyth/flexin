@@ -16,6 +16,7 @@ export class V2ProgramsFacade {
     select(V2ProgramsSelectors.getSelected)
   );
   weeks$ = this.store.pipe(select(V2ProgramsSelectors.getWeeks));
+  selectedWeek$ = this.store.pipe(select(V2ProgramsSelectors.getSelectedWeek));
   days$ = this.store.pipe(select(V2ProgramsSelectors.getDays));
   selectedWorkout$ = this.store.pipe(
     select(V2ProgramsSelectors.selectedWorkout)

@@ -70,7 +70,10 @@ export class WorkoutsPage implements OnInit, OnDestroy {
     this.programSelect.valueChanges
       .pipe(
         takeUntil(this.unsubscribe$),
-        tap((programId) => this.setParams(programId, 1, 1, null))
+        tap((programId) => {
+          this.weekSelect.setValue(1);
+          this.setParams(programId, 1, 1, null);
+        })
       )
       .subscribe();
 

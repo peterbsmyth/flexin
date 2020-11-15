@@ -18,7 +18,6 @@ import { ProgramPage } from './pages/program/program.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { ProgramConfigurationBoardPage } from './pages/program-configuration-board/program-configuration-board.page';
 import { ProgramBoardComponent } from './components/program-board/program-board.component';
-import { ProgramsPage } from './pages/programs/programs.page';
 import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,7 +37,6 @@ import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
     BoardCardComponent,
     WorkoutComponent,
     ProgramCreatePage,
-    ProgramsPage,
     ProgramPage,
     ProgramBoardPage,
     ProgramConfigurationBoardPage,

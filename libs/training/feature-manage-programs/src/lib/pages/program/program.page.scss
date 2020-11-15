@@ -1,0 +1,14 @@
+@import 'utils';
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: $space-s $space-m 0;
+  border-bottom: $size-border-s dashed $grey-500;
+}
+
+mat-form-field {
+  width: 3rem;
+  margin-left: $space-l;
+}

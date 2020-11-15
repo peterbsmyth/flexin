@@ -1,16 +1,34 @@
-<ng-container *ngIf="(loaded$ | async); else loading;">
-  <div *ngIf="(program$ | async) as program">
-    <bod-breadcrumbs>
-      <span>Program {{ program.number }}</span>
-      <span>&nbsp;>&nbsp;</span>
-      <span>Week {{ (selectedWeek$ | async) }}</span>
-    </bod-breadcrumbs>
+<ng-container *ngIf="(programsState.loaded$ | async); else loading;">
+  <div *ngIf="(programsState.selectedV2Programs$ | async) as program">
     <bod-actions-bar>
-      <h3>Select Week:&nbsp;</h3>
-      <a *ngFor="let week of weeks$ | async;" (click)="navigateToWeek(week)"
-        ><h3>{{ week }} &nbsp;</h3></a
-      >
+      <button mat-raised-button color="primary" routerLink="create">
+        Create
+      </button>
     </bod-actions-bar>
+    <div class="controls">
+      <mat-form-field>
+        <mat-label>Program</mat-label>
+        <mat-select [formControl]="programSelect">
+          <mat-option
+            *ngFor="let program of programsState.allV2Programs$ | async"
+            [value]="program.id"
+          >
+            {{ program.number }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Week</mat-label>
+        <mat-select [formControl]="weekSelect">
+          <mat-option
+            *ngFor="let week of programsState.weeks$  | async;"
+            [value]="week"
+          >
+            {{ week }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 </ng-container>
 <bod-page-layout>

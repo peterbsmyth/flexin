@@ -208,7 +208,7 @@ export const mockPrograms: ProgramV2[] = [
   {
     id: 2,
     number: 2,
-    workouts: mockWorkouts,
+    workouts: mockWorkouts.slice(-1),
     createdBy: {
       id: 1,
       name: 'calisthenics',

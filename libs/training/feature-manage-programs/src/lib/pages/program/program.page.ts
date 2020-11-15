@@ -1,49 +1,91 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProgramV2 } from '@bod/shared/models';
 import {
   BoardCardData,
   V2ProgramsFacade,
   V2ExercisesFacade,
   loadDescendantsFromProgramPage,
+  selectWeek,
+  selectProgramFromPage,
 } from '@bod/training/domain';
-import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, combineLatest, Subject } from 'rxjs';
+import {
+  filter,
+  map,
+  takeUntil,
+  tap,
+  withLatestFrom,
+  take,
+} from 'rxjs/operators';
 
 @Component({
   templateUrl: './program.page.html',
   styleUrls: ['./program.page.scss'],
 })
-export class ProgramPage implements OnInit {
+export class ProgramPage implements OnInit, OnDestroy {
+  programSelect = new FormControl(null);
+  weekSelect = new FormControl(null);
+  unsubscribe$: Subject<any> = new Subject();
   selectedWeek$: Observable<number> = this.route.queryParams.pipe(
     map((params) => +params['week'])
   );
-  program$: Observable<ProgramV2>;
-  weeks$: Observable<any[]>;
-  loaded$: Observable<boolean>;
   board$: Observable<BoardCardData[][]>;
 
   constructor(
-    private programsState: V2ProgramsFacade,
+    public programsState: V2ProgramsFacade,
     private exerciseState: V2ExercisesFacade,
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.loaded$ = this.programsState.loaded$;
-    this.program$ = this.programsState.selectedV2Programs$;
+    route.queryParams
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map((params) => +params['programId']),
+        filter((id) => Number.isInteger(id)),
+        tap((id) => {
+          this.programsState.dispatch(selectProgramFromPage({ id }));
+        })
+      )
+      .subscribe();
+    route.queryParams
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map((params) => +params['week']),
+        tap((week) => this.programsState.dispatch(selectWeek({ week })))
+      )
+      .subscribe();
+
+    this.programSelect.valueChanges
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap((id) => {
+          this.weekSelect.setValue(1);
+          this.setParams(id, 1);
+        })
+      )
+      .subscribe();
+
+    this.weekSelect.valueChanges
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        withLatestFrom(this.programsState.selectedV2Programs$),
+        tap(([week, program]) => this.setParams(program.id, week))
+      )
+      .subscribe();
+
     this.board$ = combineLatest([
-      this.program$,
+      this.programsState.selectedV2Programs$,
       this.exerciseState.allV2Exercises$,
-      this.selectedWeek$,
+      this.programsState.selectedWeek$,
     ]).pipe(
       map(([program, exercises, week]) => {
         const workouts = program.workouts.filter(
           (workout) => workout.week === week
         );
-
         const allDays = program.workouts.map((workout) => workout.day);
         const sortedDays = [...new Set(allDays)].sort();
-
         const boardCardData = sortedDays.map((dayNumber) => {
           return workouts
             .filter((workout) => workout.day === dayNumber)
@@ -57,30 +99,40 @@ export class ProgramPage implements OnInit {
         return boardCardData;
       })
     );
-    this.weeks$ = this.programsState.weeks$;
-  }
-
-  navigateToWeek(week) {
-    const queryParams: Params = { week };
-
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: queryParams,
-      queryParamsHandling: 'merge',
-    });
   }
 
   ngOnInit(): void {
     this.programsState.dispatch(
       loadDescendantsFromProgramPage({
-        id: this.route.snapshot.params['programId'],
+        id: this.route.snapshot.queryParams['programId'],
       })
     );
 
-    const week = this.route.snapshot.queryParams['week'];
+    this.programsState.selectedV2Programs$
+      .pipe(
+        take(1),
+        tap((program) => {
+          const week = this.route.snapshot.queryParams['week'] ?? 1;
+          this.programSelect.setValue(program.id, { emitEvent: false });
+          this.weekSelect.setValue(+week);
+          this.setParams(program.id, week);
+        })
+      )
+      .subscribe();
+  }
 
-    if (!week) {
-      this.navigateToWeek(1);
-    }
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  setParams(programId: number, week: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        programId,
+        week,
+      },
+    });
   }
 }
