@@ -18,6 +18,7 @@ import { WorkoutsPage } from './pages/workouts/workouts.page';
 import { StatisticsContainer } from './containers/statistics/statistics.container';
 import { StatisticsPage } from './pages/statistics/statistics.page';
 import { WorkoutStatisticCardComponent } from './components/workout-statistic-card/workout-statistic-card.component';
+import { FiltersContainer } from './containers/filters/filters.container';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { WorkoutStatisticCardComponent } from './components/workout-statistic-ca
     WorkoutStatisticCardComponent,
     StatisticsContainer,
     StatisticsPage,
+    FiltersContainer,
   ],
   exports: [],
 })

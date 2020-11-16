@@ -27,6 +27,12 @@ iframe {
   height: 315px;
 }
 
+.cards {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     display: flex;
@@ -37,23 +43,4 @@ iframe {
     width: 340px;
     height: 191px;
   }
-}
-
-.controls {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin: $space-s $space-m 0;
-  border-bottom: $size-border-s dashed $grey-500;
-}
-
-mat-form-field {
-  width: 3rem;
-  margin-left: $space-l;
-}
-
-.cards {
-  display: flex;
-  flex-direction: column;
-  max-height: 500px;
 }
