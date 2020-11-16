@@ -32,6 +32,12 @@
     </ng-container>
     <ng-container>
       <div class="card__additional">
+        <div *ngIf="workout.athleteNotes" class="card__additional__item">
+          <span class="card__label">Athlete's Notes</span>
+          <span class="card__text">
+            {{ workout.athleteNotes }}
+          </span>
+        </div>
         <div *ngIf="workout.notes" class="card__additional__item">
           <span class="card__label">Notes</span>
           <span class="card__text">

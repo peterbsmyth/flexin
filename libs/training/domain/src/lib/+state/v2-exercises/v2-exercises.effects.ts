@@ -10,6 +10,23 @@ import { mapTo } from 'rxjs/operators';
 
 @Injectable()
 export class V2ExercisesEffects {
+  loadV2Exercise$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(V2ExercisesActions.loadExerciseFromGuard),
+      fetch({
+        run: ({ id }) => {
+          return V2ExercisesActions.loadExerciseSuccess({
+            exercise: mockExercises.find((e) => e.id === id),
+          });
+        },
+        onError: (action, error) => {
+          console.error('Error', error);
+          return V2ExercisesActions.loadExerciseFailure({ error });
+        },
+      })
+    )
+  );
+
   loadV2Exercises$ = createEffect(() =>
     this.actions$.pipe(
       ofType(V2ExercisesActions.loadV2Exercises),

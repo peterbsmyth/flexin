@@ -10,9 +10,27 @@
       <div class="rows">
         <aside class="configuration">
           <h3>Configuration</h3>
-          <mat-checkbox formControlName="push">Push</mat-checkbox>
-          <mat-checkbox formControlName="pull">Pull</mat-checkbox>
           <mat-checkbox formControlName="leftRight">LeftRight</mat-checkbox>
+        </aside>
+        <aside formArrayName="categories">
+          <h3>Categories</h3>
+          <section *ngFor="let category of categories.controls; let i = index">
+            <div class="intensities__controls" [formGroupName]="i">
+              <!-- Reps? -->
+              <mat-form-field class="intensities__input">
+                <mat-label>
+                  Category
+                </mat-label>
+                <input matInput type="text" formControlName="name" />
+              </mat-form-field>
+              <button mat-icon-button (click)="onRemoveCategory(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </section>
+          <button mat-stroked-button (click)="addCategory()">
+            Add Category
+          </button>
         </aside>
         <aside formArrayName="intensities">
           <h3>Intensities</h3>
@@ -32,7 +50,7 @@
               </button>
             </div>
           </section>
-          <button mat-icon-button (click)="addIntensity()">
+          <button mat-stroked-button (click)="addIntensity()">
             Add Intensity
           </button>
         </aside>

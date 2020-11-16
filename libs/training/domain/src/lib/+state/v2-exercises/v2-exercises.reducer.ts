@@ -38,7 +38,14 @@ const v2ExercisesReducer = createReducer(
   on(V2ExercisesActions.loadV2ExercisesFailure, (state, { error }) => ({
     ...state,
     error,
-  }))
+  })),
+  on(V2ExercisesActions.selectExerciseFromGuard, (state, { id }) => ({
+    ...state,
+    selectedId: id,
+  })),
+  on(V2ExercisesActions.loadExerciseSuccess, (state, { exercise }) =>
+    v2ExercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
+  )
 );
 
 export function reducer(state: V2ExercisesState | undefined, action: Action) {

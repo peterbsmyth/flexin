@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TrainingDomainModule } from '@bod/training/domain';
 import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
-import { ExerciseTableComponent } from './components/exercise-table/exercise-table.component';
+import { ExerciseTableComponent } from './containers/exercise-table/exercise-table.component';
 import { ExercisePage } from './pages/exercise/exercise.page';
 import { ExerciseCreatePage } from './pages/exercise-create/exercise-create.page';
 import { ExercisesPage } from './pages/exercises/exercises.page';

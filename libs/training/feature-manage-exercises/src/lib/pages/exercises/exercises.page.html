@@ -6,9 +6,9 @@
     Create
   </button>
 </bod-actions-bar>
-<main *ngIf="(loaded$ | async); else loading;">
+<main *ngIf="(exercisesState.loaded$ | async); else loading;">
   <article>
-    <training-exercise-table> </training-exercise-table>
+    <training-exercise-table></training-exercise-table>
   </article>
 </main>
 

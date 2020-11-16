@@ -1,4 +1,8 @@
-@import "utils";
+@import 'utils';
+
+h3 {
+  @include subheadline;
+}
 
 .form {
   display: flex;

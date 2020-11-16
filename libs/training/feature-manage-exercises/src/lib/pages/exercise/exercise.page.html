@@ -1,6 +1,6 @@
-<ng-container *ngrxLet="exercise$ as exercise">
+<ng-container *ngIf="(exercisesState.selectedV2Exercises$ | async) as exercise">
   <article>
-    <training-exercise-form [data]="exercise" (save)="onSave($event)">
+    <training-exercise-form [exercise]="exercise" (save)="onSave($event)">
     </training-exercise-form>
   </article>
 </ng-container>

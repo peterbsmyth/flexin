@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Exercise } from '@bod/shared/models';
+import { ExerciseV2 } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
 
 @Component({
@@ -18,41 +18,52 @@ import { OnChange } from '@bod/shared/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExerciseFormComponent implements OnInit {
-  @OnChange<Exercise>(function (data) {
-    this.buildForm(data);
+  @OnChange<ExerciseV2>(function (exercise) {
+    this.buildForm(exercise);
   })
   @Input()
-  data: Exercise;
-  @Output() save: EventEmitter<Exercise> = new EventEmitter();
+  exercise: ExerciseV2;
+  @Output() save: EventEmitter<ExerciseV2> = new EventEmitter();
   form: FormGroup = this.fb.group({
     name: '',
     push: false,
     pull: false,
     leftRight: false,
     intensities: this.fb.array([]),
+    categories: this.fb.array([]),
   });
 
   get intensities() {
     return <FormArray>this.form.get('intensities');
   }
 
+  get categories() {
+    return <FormArray>this.form.get('categories');
+  }
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
-  buildForm(exercise: Exercise): void {
+  buildForm(exercise: ExerciseV2): void {
     const intensities = this.fb.array([]);
+    const categories = this.fb.array([]);
     exercise.intensities.forEach((intensity) => {
       const control = this.fb.group({
-        name: this.fb.control(intensity ? intensity : ''),
+        name: this.fb.control(intensity ? intensity.name : ''),
       });
       intensities.push(control);
     });
+    exercise.categories.forEach((category) => {
+      const control = this.fb.group({
+        name: this.fb.control(category ? category.name : ''),
+      });
+      categories.push(control);
+    });
     this.form.setControl('name', this.fb.control(exercise.name));
-    this.form.setControl('push', this.fb.control(exercise.push));
-    this.form.setControl('pull', this.fb.control(exercise.pull));
     this.form.setControl('leftRight', this.fb.control(exercise.leftRight));
     this.form.setControl('intensities', intensities);
+    this.form.setControl('categories', categories);
   }
 
   addIntensity() {
@@ -67,11 +78,24 @@ export class ExerciseFormComponent implements OnInit {
     this.intensities.removeAt(index);
   }
 
+  addCategory() {
+    this.categories.push(
+      this.fb.group({
+        name: this.fb.control(''),
+      })
+    );
+  }
+
+  onRemoveCategory(index: number) {
+    this.categories.removeAt(index);
+  }
+
   onSubmit(form) {
     this.save.emit({
       ...form,
       intensities: form.intensities.map((i) => i.name),
-      id: this.data ? this.data.id : undefined,
+      categroies: form.categroies.map((i) => i.name),
+      id: this.exercise ? this.exercise.id : undefined,
     });
   }
 }

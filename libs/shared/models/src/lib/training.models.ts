@@ -89,4 +89,7 @@ export interface Category {
 export interface Playlist {
   id: number;
   url: string;
+  week?: number;
+  programId?: number;
+  program?: ProgramV2;
 }
