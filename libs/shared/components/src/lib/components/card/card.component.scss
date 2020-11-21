@@ -28,6 +28,7 @@ $bod-card-header-size: 2rem !default;
 .bod-card-content {
   display: block;
   font-size: 1rem;
+  margin: 0 $space-m $space-m;
 }
 
 .bod-card > :last-child:not(.bod-card-footer),

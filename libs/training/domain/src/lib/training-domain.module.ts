@@ -45,6 +45,7 @@ import { SessionStatisticsFacade } from './application/session-statistics.facade
 import { SessionStatisticDataService } from './infrastructure/session-statistic.data.service';
 import { DraftProgramsDataService } from './infrastructure/draft-programs.data.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserDataService } from './infrastructure/user.data.service';
 
 @NgModule({
   imports: [
@@ -123,6 +124,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     SessionStatisticDataService,
     SessionStatisticsFacade,
     DraftProgramsDataService,
+    UserDataService,
   ],
 })
 export class TrainingDomainModule {}

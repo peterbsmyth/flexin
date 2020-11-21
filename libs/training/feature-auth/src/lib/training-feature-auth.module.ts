@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrainingDomainModule } from '@bod/training/domain';
-import { AuthComponent } from './auth.component';
+import { BodComponentsModule } from '@bod/shared/components';
+import { AuthPage } from './pages/auth.page';
 import { TrainingFeatureAuthRoutingModule } from './training-feature-auth-routing.module';
 
 @NgModule({
@@ -9,8 +10,8 @@ import { TrainingFeatureAuthRoutingModule } from './training-feature-auth-routin
     CommonModule,
     TrainingDomainModule,
     TrainingFeatureAuthRoutingModule,
+    BodComponentsModule,
   ],
-  declarations: [AuthComponent],
-  exports: [AuthComponent],
+  declarations: [AuthPage],
 })
 export class TrainingFeatureAuthModule {}

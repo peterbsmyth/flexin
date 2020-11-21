@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NetworkStatusFacade } from '@bod/shared/domain';
+import { AuthFacade } from '@bod/training/domain';
 
 @Component({
   selector: 'bod-nav',
@@ -21,7 +22,8 @@ export class NavComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public networkStatus: NetworkStatusFacade,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public auth: AuthFacade
   ) {
     this.networkStatus.errors$
       .pipe(

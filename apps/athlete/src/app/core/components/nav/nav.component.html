@@ -20,17 +20,36 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span *ngIf="!(networkStatus.loading$ | async); else loading">💪</span>
-      <span class="toolbar__title">Flexin</span>
+      <div>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span *ngIf="!(networkStatus.loading$ | async); else loading">💪</span>
+        <span class="toolbar__title">Flexin</span>
+      </div>
+      <ng-container *ngIf="auth.user$ | async as user; else login">
+        <div>
+          <button mat-stroked-button [matMenuTriggerFor]="menu">
+            {{ user.name }}
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/auth', 'account']">
+              <mat-icon>account_box</mat-icon>
+              <span>Account</span>
+            </button>
+            <button mat-menu-item (click)="auth.logout()">
+              <mat-icon>directions_run</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </div>
+      </ng-container>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
@@ -38,4 +57,15 @@
 
 <ng-template #loading>
   <span>⌛</span>
+</ng-template>
+
+<ng-template #login>
+  <div>
+    <a
+      mat-stroked-button
+      href="https://bod-api-2.herokuapp.com/auth/thirdparty/google"
+    >
+      Login
+    </a>
+  </div>
 </ng-template>

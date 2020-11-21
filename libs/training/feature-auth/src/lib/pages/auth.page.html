@@ -1,0 +1,31 @@
+<bod-page-layout>
+  <ng-container *ngIf="auth.user$ | async as user">
+    <bod-card>
+      <bod-card-header>Profile</bod-card-header>
+      <bod-card-content>
+        <ng-container>
+          <div class="card__additional">
+            <div class="card__additional__item">
+              <span class="card__additional__label">Name</span>
+              <span class="card__text">
+                <h1>{{ user.name }}</h1>
+              </span>
+            </div>
+            <div class="card__additional__item">
+              <span class="card__additional__label">email</span>
+              <span class="card__text">
+                <h1>{{ user.username }}</h1>
+              </span>
+            </div>
+            <div class="card__additional__item">
+              <span class="card__additional__label">Verified</span>
+              <span class="card__text">
+                <h1>{{ user.emailVerified ? 'verified' : 'unverified' }}</h1>
+              </span>
+            </div>
+          </div>
+        </ng-container>
+      </bod-card-content>
+    </bod-card>
+  </ng-container>
+</bod-page-layout>
