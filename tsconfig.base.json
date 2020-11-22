@@ -26,9 +26,6 @@
       "@bod/celebrities/feature-display-top-ten": [
         "libs/celebrities/feature-display-top-ten/src/index.ts"
       ],
-      "@bod/training/feature-review-statistics": [
-        "libs/training/feature-review-statistics/src/index.ts"
-      ],
       "@bod/shared/scripts": ["libs/shared/scripts/src/index.ts"],
       "@bod/shared/utils": ["libs/shared/utils/src/index.ts"],
       "@bod/training/feature-auth": ["libs/training/feature-auth/src/index.ts"],

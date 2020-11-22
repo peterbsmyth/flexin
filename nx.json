@@ -43,9 +43,6 @@
     "celebrities-feature-display-top-ten": {
       "tags": ["domain:celebrities", "type:feature"]
     },
-    "training-feature-review-statistics": {
-      "tags": ["domain:training", "type:feature"]
-    },
     "shared-scripts": {
       "tags": ["domain:shared", "type:util"]
     },

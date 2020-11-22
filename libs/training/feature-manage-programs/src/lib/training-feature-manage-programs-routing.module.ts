@@ -8,6 +8,7 @@ import { WorkoutPage } from './pages/workout/workout.page';
 import { StatisticsPage } from './pages/statistics/statistics.page';
 import { WorkoutExistsGuard } from './guards/workout-exists.guard';
 import { ProgramsLoadedGuard } from './guards/programs-loaded.guard';
+import { ExercisePage } from './pages/exercise/exercise.page';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
     path: 'v2/statistics/programs',
     component: StatisticsPage,
     canActivate: [ProgramsLoadedGuard],
+  },
+  {
+    path: 'v2/statistics/exercises',
+    component: ExercisePage,
   },
 ];
 

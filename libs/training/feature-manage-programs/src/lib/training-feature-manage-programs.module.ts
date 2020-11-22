@@ -32,6 +32,8 @@ import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
 import { TrainingUiComponentsModule } from '@bod/training/ui-components';
 import { StatisticsPage } from './pages/statistics/statistics.page';
 import { WorkoutStatisticCardComponent } from './components/workout-statistic-card/workout-statistic-card.component';
+import { ExercisePage } from './pages/exercise/exercise.page';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { WorkoutStatisticCardComponent } from './components/workout-statistic-ca
     WorkoutFormComponent,
     StatisticsPage,
     WorkoutStatisticCardComponent,
+    ExercisePage,
   ],
   imports: [
     CommonModule,
@@ -61,6 +64,7 @@ import { WorkoutStatisticCardComponent } from './components/workout-statistic-ca
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
+    NgxChartsModule,
     MatSortModule,
     MatCardModule,
     ReactiveComponentModule,

@@ -291,43 +291,6 @@
         }
       }
     },
-    "training-feature-review-statistics": {
-      "projectType": "library",
-      "root": "libs/training/feature-review-statistics",
-      "sourceRoot": "libs/training/feature-review-statistics/src",
-      "prefix": "training",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/training/feature-review-statistics/tsconfig.lib.json",
-            "project": "libs/training/feature-review-statistics/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/training/feature-review-statistics/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/training/feature-review-statistics/tsconfig.lib.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/training/feature-review-statistics/**/*"
-            ]
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "style": "scss"
-        }
-      }
-    },
     "shared-environments": {
       "projectType": "library",
       "root": "libs/shared/environments",

@@ -17,6 +17,7 @@ import { BodComponentsModule } from '@bod/shared/components';
 import { WorkoutsPage } from './pages/workouts/workouts.page';
 import { StatisticsContainer } from './containers/statistics/statistics.container';
 import { TrainingUiComponentsModule } from '@bod/training/ui-components';
+import { WindowRef } from '@bod/shared/utils';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { TrainingUiComponentsModule } from '@bod/training/ui-components';
     MatSnackBarModule,
   ],
   declarations: [WorkoutCardComponent, WorkoutsPage, StatisticsContainer],
+  providers: [WindowRef],
   exports: [],
 })
 export class TrainingFeatureManageWorkoutsModule {}

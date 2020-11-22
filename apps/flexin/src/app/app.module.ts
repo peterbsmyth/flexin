@@ -13,7 +13,6 @@ import {
 } from '@ngrx/router-store';
 import { HttpClientModule } from '@angular/common/http';
 import { NetworkStatusModule } from '@bod/shared/domain';
-import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-review-statistics';
 import { AppPage } from './core/pages/app/app.page';
 import { CoreModule } from './core/core.module';
 import { TrainingFeatureAuthModule } from '@bod/training/feature-auth';
@@ -48,7 +47,6 @@ import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-mana
       serializer: DefaultRouterStateSerializer,
     }),
     HttpClientModule,
-    TrainingFeatureReviewStatisticsModule,
     TrainingFeatureAuthModule,
     TrainingFeatureManageProgramsModule,
     TrainingFeatureManageExercisesModule,

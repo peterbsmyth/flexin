@@ -1,0 +1,62 @@
+<div *ngIf="(exerciseState.selectedV2Exercises$ | async) as exercise">
+  <bod-actions-bar>
+    <mat-form-field>
+      <mat-label>Exercise</mat-label>
+      <mat-select [formControl]="exerciseSelect">
+        <mat-option
+          *ngFor="let exercise of exerciseState.allV2Exercises$ | async"
+          [value]="exercise.id"
+        >
+          {{ exercise.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </bod-actions-bar>
+</div>
+<bod-page-layout>
+  <bod-card>
+    <span bod-card-header>All Sets</span>
+    <bod-card-content>
+      <table class="card__table">
+        <tr>
+          <th>Id</th>
+          <th>Set</th>
+          <th>Reps</th>
+          <th>Weight</th>
+        </tr>
+        <ng-container *ngFor="let setStatistic of (setStatistics$ | async)">
+          <tr>
+            <td>{{ setStatistic.id }}</td>
+            <td>{{ setStatistic.set }}</td>
+            <td>{{ setStatistic.reps }}</td>
+            <td>{{ setStatistic.weight ? setStatistic.weight : 0 }}</td>
+          </tr>
+        </ng-container>
+      </table>
+
+      <ng-container *ngIf="(maxRepsOfAllTime$ | async) as maxReps">
+        <div class="card__label">Most Reps of All Time</div>
+        <div class="card__text">{{ maxReps }}</div>
+      </ng-container>
+      <ng-container *ngIf="(bestSet$ | async) as bestSet">
+        <div class="card__label">
+          Most Reps at {{ bestSet.weight }} lbs, top weight
+        </div>
+        <div class="card__text">{{ bestSet.reps }}</div>
+      </ng-container>
+
+      <span class="card__label">Reps from First Set, over Time</span>
+      <ngx-charts-line-chart
+        [view]="chart.view"
+        [scheme]="chart.colorScheme"
+        [showXAxisLabel]="chart.showXAxisLabel"
+        [showYAxisLabel]="chart.showYAxisLabel"
+        [xAxis]="chart.xAxis"
+        [yAxis]="chart.yAxis"
+        [xAxisLabel]="chart.xAxisLabel"
+        [yAxisLabel]="chart.yAxisLabel"
+        [results]="chartData$ | async"
+      ></ngx-charts-line-chart>
+    </bod-card-content>
+  </bod-card>
+</bod-page-layout>
