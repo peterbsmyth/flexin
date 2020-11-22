@@ -8,7 +8,7 @@ import { DraftProgramsDataService } from '../infrastructure/draft-programs.data.
 import { Observable } from 'rxjs';
 import { ProgramWithDescendants } from '../entities/component.models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProgramsFacade {
   loaded$ = this.store.pipe(select(ProgramsSelectors.getProgramsLoaded));
   allPrograms$ = this.store.pipe(select(ProgramsSelectors.getAllPrograms));

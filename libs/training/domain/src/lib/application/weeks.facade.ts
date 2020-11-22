@@ -5,7 +5,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as fromRoot from '../+state/state';
 import * as WeeksSelectors from '../+state/weeks/weeks.selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WeeksFacade {
   loaded$ = this.store.pipe(select(WeeksSelectors.getWeeksLoaded));
   allWeeks$ = this.store.pipe(select(WeeksSelectors.getAllWeeks));

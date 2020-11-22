@@ -5,7 +5,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as fromRoot from '../+state/state';
 import * as SetStatisticsSelectors from '../+state/set-statistics/set-statistics.selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SetStatisticsFacade {
   loaded$ = this.store.pipe(
     select(SetStatisticsSelectors.getSetStatisticsLoaded)

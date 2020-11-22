@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SetStatisticV2sDataService {
   private API_URL = environment.API_URL;
 

@@ -5,7 +5,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as fromRoot from '../+state/state';
 import * as SessionItemsSelectors from '../+state/session-items/session-items.selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SessionItemsFacade {
   loaded$ = this.store.pipe(
     select(SessionItemsSelectors.getSessionItemsLoaded)

@@ -4,7 +4,7 @@ import { Program } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProgramDataService {
   private API_URL = environment.API_URL;
   constructor(private http: HttpClient) {}

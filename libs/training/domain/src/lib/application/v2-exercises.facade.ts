@@ -5,7 +5,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as fromRoot from '../+state/state';
 import * as V2ExercisesSelectors from '../+state/v2-exercises/v2-exercises.selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class V2ExercisesFacade {
   loaded$ = this.store.pipe(select(V2ExercisesSelectors.getV2ExercisesLoaded));
   allV2Exercises$ = this.store.pipe(

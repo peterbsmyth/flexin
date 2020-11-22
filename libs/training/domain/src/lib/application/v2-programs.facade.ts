@@ -6,7 +6,7 @@ import * as fromRoot from '../+state/state';
 import * as V2ProgramsSelectors from '../+state/v2-programs/v2-programs.selectors';
 import { V2DraftProgramsDataService } from '../infrastructure/v2-draft-programs.data.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class V2ProgramsFacade {
   loaded$ = this.store.pipe(select(V2ProgramsSelectors.getV2ProgramsLoaded));
   allV2Programs$ = this.store.pipe(

@@ -5,7 +5,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as fromRoot from '../+state/state';
 import * as WeekStatisticsSelectors from '../+state/week-statistics/week-statistics.selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WeekStatisticsFacade {
   loaded$ = this.store.pipe(
     select(WeekStatisticsSelectors.getWeekStatisticsLoaded)

@@ -7,7 +7,7 @@ import { User } from '@bod/shared/models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@bod/shared/environments';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserDataService {
   private API_URL = environment.API_URL;
   private userSubject: ReplaySubject<User> = new ReplaySubject();

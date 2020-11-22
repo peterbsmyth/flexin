@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SessionItemDataService {
   private API_URL = environment.API_URL;
 

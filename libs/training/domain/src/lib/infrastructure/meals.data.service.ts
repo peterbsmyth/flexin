@@ -4,7 +4,7 @@ import { Meal } from '@bod/shared/models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@bod/shared/environments';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MealsDataService {
   private API_URL = environment.API_URL;
 

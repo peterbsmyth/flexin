@@ -12,7 +12,7 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Exercise } from '@bod/shared/models';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DraftProgramsDataService {
   private _draftProgramBoardSubject = new BehaviorSubject<BoardCardData[][]>([
     [],

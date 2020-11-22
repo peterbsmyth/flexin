@@ -5,7 +5,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as fromRoot from '../+state/state';
 import * as MealsSelectors from '../+state/meals/meals.selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MealsFacade {
   loaded$ = this.store.pipe(select(MealsSelectors.getMealsLoaded));
   allMeals$ = this.store.pipe(select(MealsSelectors.getAllMeals));
