@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { select, Store, Action } from '@ngrx/store';
 
-import * as fromRoot from '../+state/state';
+import { State } from '../+state/state';
 import * as V2ExercisesSelectors from '../+state/v2-exercises/v2-exercises.selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -15,7 +15,7 @@ export class V2ExercisesFacade {
     select(V2ExercisesSelectors.getSelected)
   );
 
-  constructor(private store: Store<fromRoot.State>) {}
+  constructor(private store: Store<State>) {}
 
   dispatch(action: Action) {
     this.store.dispatch(action);
