@@ -1,16 +1,13 @@
-<bod-breadcrumbs>
-  <span>Exercises</span>
-</bod-breadcrumbs>
 <bod-actions-bar>
   <button mat-raised-button color="primary" routerLink="create">
     Create
   </button>
 </bod-actions-bar>
-<main *ngIf="(exercisesState.loaded$ | async); else loading;">
-  <article>
+<ng-container *ngIf="(exercisesState.loaded$ | async); else loading;">
+  <bod-page-layout>
     <training-exercise-table></training-exercise-table>
-  </article>
-</main>
+  </bod-page-layout>
+</ng-container>
 
 <ng-template #loading>
   <p>

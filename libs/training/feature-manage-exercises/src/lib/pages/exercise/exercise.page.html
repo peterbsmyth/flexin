@@ -1,6 +1,6 @@
 <ng-container *ngIf="(exercisesState.selectedV2Exercises$ | async) as exercise">
-  <article>
+  <bod-page-layout>
     <training-exercise-form [exercise]="exercise" (save)="onSave($event)">
     </training-exercise-form>
-  </article>
+  </bod-page-layout>
 </ng-container>

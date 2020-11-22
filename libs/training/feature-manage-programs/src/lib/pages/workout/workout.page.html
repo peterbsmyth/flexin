@@ -1,9 +1,4 @@
 <ng-container *ngrxLet="data$ as data">
-  <bod-breadcrumbs>
-    <span>Workouts</span>
-    <span>&nbsp;>&nbsp;</span>
-    <span>{{ data.workout.exercise.name }}</span>
-  </bod-breadcrumbs>
   <bod-page-layout>
     <training-workout-form [data]="data" (save)="onSave($event)">
     </training-workout-form>

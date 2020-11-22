@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { V2ProgramsFacade, selectWorkout } from '@bod/training/domain';
-import { Subject } from 'rxjs';
 
 @Component({
   templateUrl: './workouts.page.html',
