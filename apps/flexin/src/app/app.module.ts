@@ -11,12 +11,10 @@ import {
   StoreRouterConnectingModule,
   DefaultRouterStateSerializer,
 } from '@ngrx/router-store';
-import { TrainingFeatureInputWorkoutModule } from '@bod/training/feature-input-workout';
 import { HttpClientModule } from '@angular/common/http';
 import { NetworkStatusModule } from '@bod/shared/domain';
 import { TrainingFeatureReviewStatisticsModule } from '@bod/training/feature-review-statistics';
 import { AppPage } from './core/pages/app/app.page';
-import { CoachingFeatureCreateProgramModule } from '@bod/training/feature-create-program';
 import { CoreModule } from './core/core.module';
 import { TrainingFeatureAuthModule } from '@bod/training/feature-auth';
 import { TrainingFeatureManageProgramsModule } from '@bod/training/feature-manage-programs';
@@ -49,10 +47,8 @@ import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-mana
     StoreRouterConnectingModule.forRoot({
       serializer: DefaultRouterStateSerializer,
     }),
-    TrainingFeatureInputWorkoutModule,
     HttpClientModule,
     TrainingFeatureReviewStatisticsModule,
-    CoachingFeatureCreateProgramModule,
     TrainingFeatureAuthModule,
     TrainingFeatureManageProgramsModule,
     TrainingFeatureManageExercisesModule,
