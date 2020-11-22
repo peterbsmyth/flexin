@@ -34,7 +34,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'v2/workouts/:workoutId',
+    path: 'v2/programs/workouts/:workoutId',
     component: WorkoutPage,
     canActivate: [WorkoutExistsGuard],
   },

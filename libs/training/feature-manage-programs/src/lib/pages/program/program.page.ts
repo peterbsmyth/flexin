@@ -90,7 +90,7 @@ export class ProgramPage implements OnInit, OnDestroy {
           return workouts
             .filter((workout) => workout.day === dayNumber)
             .map((workout) => ({
-              routerLink: `/v2/workouts/${workout.id}`,
+              routerLink: `/v2/programs/workouts/${workout.id}`,
               name: exercises.find(
                 (exercise) => workout.exerciseId === exercise.id
               )?.name,
