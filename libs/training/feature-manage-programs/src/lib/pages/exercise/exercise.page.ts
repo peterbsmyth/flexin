@@ -7,12 +7,12 @@ import {
   V2ProgramsFacade,
 } from '@bod/training/domain';
 import { combineLatest, Observable, of, Subject } from 'rxjs';
-import { Exercise, mockWorkouts, SetStatisticV2 } from '@bod/shared/models';
+import { mockWorkouts, SetStatisticV2 } from '@bod/shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
 import { WindowRef } from '@bod/shared/utils';
 import { FormControl } from '@angular/forms';
-import { maxBy } from 'lodash';
+import { maxBy } from 'lodash-es';
 
 @Component({
   templateUrl: './exercise.page.html',

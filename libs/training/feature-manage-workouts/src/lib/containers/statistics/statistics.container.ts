@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Exercise,
-  SetStatistic,
-  mockWorkouts,
-  SetStatisticV2,
-} from '@bod/shared/models';
+import { mockWorkouts, SetStatisticV2 } from '@bod/shared/models';
 
 import { Observable, of, combineLatest } from 'rxjs';
 import { filter, map, withLatestFrom } from 'rxjs/operators';
@@ -18,8 +13,7 @@ import { V2ProgramsFacade } from '@bod/training/domain';
 })
 export class StatisticsContainer implements OnInit {
   loaded$: Observable<boolean>;
-  exercise$: Observable<Exercise>;
-  setStatistics$: Observable<SetStatistic[]>;
+  setStatistics$: Observable<SetStatisticV2[]>;
   maxRepsOfAllTime$: Observable<number>;
   bestSet$: Observable<SetStatisticV2>;
   constructor(private programState: V2ProgramsFacade) {

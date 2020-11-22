@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Exercise } from '@bod/shared/models';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@bod/shared/environments';
 
 @Injectable()
 export class AirtableDataService {
