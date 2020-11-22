@@ -4,11 +4,11 @@ import {
   SetStatisticsState,
   setStatisticsAdapter,
 } from './set-statistics.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 
 // Lookup the 'SetStatistics' feature state managed by NgRx
 export const getSetStatisticsState = createFeatureSelector<
-  PartialState,
+  State,
   SetStatisticsState
 >(SETSTATISTICS_FEATURE_KEY);
 

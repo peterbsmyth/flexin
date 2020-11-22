@@ -62,7 +62,7 @@ import {
   MEALPLANS_FEATURE_KEY,
 } from './meal-plans/meal-plans.reducer';
 
-export interface PartialState {
+export interface State {
   readonly [EXERCISES_FEATURE_KEY]: ExercisesState;
   readonly [PROGRAMSTATISTICS_FEATURE_KEY]: ProgramStatisticsState;
   readonly [PROGRAMS_FEATURE_KEY]: ProgramsState;

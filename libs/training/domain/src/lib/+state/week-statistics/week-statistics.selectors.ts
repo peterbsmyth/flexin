@@ -4,7 +4,7 @@ import {
   WeekStatisticsState,
   weekStatisticsAdapter,
 } from './week-statistics.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { getSessionStatisticsEntities } from '../session-statistics/session-statistics.selectors';
 import { getSessionItemStatisticsEntities } from '../session-item-statistics/session-item-statistics.selectors';
 import { getExercisesEntities } from '../exercises/exercises.selectors';
@@ -12,7 +12,7 @@ import { getProgramsEntities } from '../weeks/weeks.selectors';
 
 // Lookup the 'WeekStatistics' feature state managed by NgRx
 export const getWeekStatisticsState = createFeatureSelector<
-  PartialState,
+  State,
   WeekStatisticsState
 >(WEEKSTATISTICS_FEATURE_KEY);
 

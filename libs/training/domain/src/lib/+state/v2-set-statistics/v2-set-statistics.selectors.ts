@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import {
   V2SETSTATISTICS_FEATURE_KEY,
   V2SetStatisticsState,
@@ -8,7 +8,7 @@ import {
 
 // Lookup the 'V2SetStatistics' feature state managed by NgRx
 export const getV2SetStatisticsState = createFeatureSelector<
-  PartialState,
+  State,
   V2SetStatisticsState
 >(V2SETSTATISTICS_FEATURE_KEY);
 

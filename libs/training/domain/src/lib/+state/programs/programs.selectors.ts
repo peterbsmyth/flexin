@@ -4,7 +4,7 @@ import {
   ProgramsState,
   programsAdapter,
 } from './programs.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { getAllWeeks } from '../weeks/weeks.selectors';
 import { getAllSessions } from '../sessions/sessions.selectors';
 import { getAllSessionItems } from '../session-items/session-items.selectors';
@@ -12,10 +12,9 @@ import { getExercisesEntities } from '../exercises/exercises.selectors';
 import { Session, SessionItem } from '@bod/shared/models';
 
 // Lookup the 'Programs' feature state managed by NgRx
-export const getProgramsState = createFeatureSelector<
-  PartialState,
-  ProgramsState
->(PROGRAMS_FEATURE_KEY);
+export const getProgramsState = createFeatureSelector<State, ProgramsState>(
+  PROGRAMS_FEATURE_KEY
+);
 
 const { selectAll, selectEntities } = programsAdapter.getSelectors();
 

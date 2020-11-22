@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { MEALS_FEATURE_KEY, MealsState, mealsAdapter } from './meals.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 
 // Lookup the 'Meals' feature state managed by NgRx
-export const getMealsState = createFeatureSelector<PartialState, MealsState>(
+export const getMealsState = createFeatureSelector<State, MealsState>(
   MEALS_FEATURE_KEY
 );
 

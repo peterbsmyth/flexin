@@ -4,7 +4,7 @@ import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { SetStatisticsActions } from './actions';
 import { map, mapTo, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { SetStatisticDataService } from '../../infrastructure/set-statistic.data.service';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { Store } from '@ngrx/store';
 import { uniqBy } from 'lodash-es';
 import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
@@ -174,7 +174,7 @@ export class SetStatisticsEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<PartialState>,
+    private store: Store<State>,
     private backend: SetStatisticDataService,
     private sessionItemsStatisticsService: SessionItemStatisticDataService,
     private sessionItemsService: SessionItemDataService,

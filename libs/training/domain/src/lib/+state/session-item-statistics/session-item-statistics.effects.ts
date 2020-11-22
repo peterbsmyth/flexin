@@ -12,7 +12,7 @@ import {
 import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
 import { getAllSessionStatistics } from '../session-statistics/session-statistics.selectors';
 import { of, throwError } from 'rxjs';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -167,7 +167,7 @@ export class SessionItemStatisticsEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<PartialState>,
+    private store: Store<State>,
     private backend: SessionItemStatisticDataService
   ) {}
 }

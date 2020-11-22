@@ -4,18 +4,15 @@ import {
   ProgramStatisticsState,
   programStatisticsAdapter,
 } from './program-statistics.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 
 // Lookup the 'ProgramStatistics' feature state managed by NgRx
 export const getProgramStatisticsState = createFeatureSelector<
-  PartialState,
+  State,
   ProgramStatisticsState
 >(PROGRAMSTATISTICS_FEATURE_KEY);
 
-const {
-  selectAll,
-  selectEntities,
-} = programStatisticsAdapter.getSelectors();
+const { selectAll, selectEntities } = programStatisticsAdapter.getSelectors();
 
 export const getProgramStatisticsLoaded = createSelector(
   getProgramStatisticsState,

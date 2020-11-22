@@ -13,7 +13,7 @@ import {
 } from 'rxjs/operators';
 import { WeekStatisticDataService } from '../../infrastructure/week-statistic.data.service';
 import { Store } from '@ngrx/store';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { forkJoin, of, throwError } from 'rxjs';
 import { SessionStatisticDataService } from '../../infrastructure/session-statistic.data.service';
 import { SessionStatisticsActions } from '../session-statistics/actions';
@@ -277,7 +277,7 @@ export class WeekStatisticsEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<PartialState>,
+    private store: Store<State>,
     private backend: WeekStatisticDataService,
     private sessionStatisticService: SessionStatisticDataService,
     private sessionItemStatisticService: SessionItemStatisticDataService,

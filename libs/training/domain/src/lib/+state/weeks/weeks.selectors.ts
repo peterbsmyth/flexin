@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { WEEKS_FEATURE_KEY, weeksAdapter, WeeksState } from './weeks.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { getAllSessions } from '../sessions/sessions.selectors';
 import {
   ProgramsState,
@@ -8,14 +8,13 @@ import {
 } from '../programs/programs.reducer';
 
 // Lookup the 'Weeks' feature state managed by NgRx
-export const getWeeksState = createFeatureSelector<PartialState, WeeksState>(
+export const getWeeksState = createFeatureSelector<State, WeeksState>(
   WEEKS_FEATURE_KEY
 );
 
-export const getProgramsState = createFeatureSelector<
-  PartialState,
-  ProgramsState
->(PROGRAMS_FEATURE_KEY);
+export const getProgramsState = createFeatureSelector<State, ProgramsState>(
+  PROGRAMS_FEATURE_KEY
+);
 
 export const getProgramsEntities = createSelector(
   getProgramsState,

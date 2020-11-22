@@ -4,7 +4,7 @@ import {
   ExercisesState,
   exercisesAdapter,
 } from './exercises.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { getAllSessionItemStatistics } from '../session-item-statistics/session-item-statistics.selectors';
 import { getAllSetStatistics } from '../set-statistics/set-statistics.selectors';
 import { maxBy } from 'lodash-es';
@@ -16,7 +16,7 @@ import {
 
 // Lookup the 'Session Items' feature state managed by NgRx
 export const getSessionItemsState = createFeatureSelector<
-  PartialState,
+  State,
   SessionItemsState
 >(SESSIONITEMS_FEATURE_KEY);
 
@@ -26,10 +26,9 @@ export const getSessionItemsEntities = createSelector(
 );
 
 // Lookup the 'Exercises' feature state managed by NgRx
-export const getExercisesState = createFeatureSelector<
-  PartialState,
-  ExercisesState
->(EXERCISES_FEATURE_KEY);
+export const getExercisesState = createFeatureSelector<State, ExercisesState>(
+  EXERCISES_FEATURE_KEY
+);
 
 const { selectAll, selectEntities } = exercisesAdapter.getSelectors();
 

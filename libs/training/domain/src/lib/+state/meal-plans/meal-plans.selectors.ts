@@ -4,13 +4,12 @@ import {
   MealPlansState,
   mealPlansAdapter,
 } from './meal-plans.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 
 // Lookup the 'MealPlans' feature state managed by NgRx
-export const getMealPlansState = createFeatureSelector<
-  PartialState,
-  MealPlansState
->(MEALPLANS_FEATURE_KEY);
+export const getMealPlansState = createFeatureSelector<State, MealPlansState>(
+  MEALPLANS_FEATURE_KEY
+);
 
 const { selectAll, selectEntities } = mealPlansAdapter.getSelectors();
 

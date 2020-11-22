@@ -4,13 +4,13 @@ import {
   SessionItemStatisticsState,
   sessionItemStatisticsAdapter,
 } from './session-item-statistics.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 
 import { getAllSetStatistics } from '../set-statistics/set-statistics.selectors';
 
 // Lookup the 'SessionItemStatistics' feature state managed by NgRx
 export const getSessionItemStatisticsState = createFeatureSelector<
-  PartialState,
+  State,
   SessionItemStatisticsState
 >(SESSIONITEMSTATISTICS_FEATURE_KEY);
 
@@ -53,5 +53,8 @@ export const getSelected = createSelector(
 export const getSetStatistics = createSelector(
   getAllSetStatistics,
   getSelectedId,
-  (setStatistics, sessionItemStatisticId) => setStatistics.filter(s => s.sessionItemStatisticId === sessionItemStatisticId)
+  (setStatistics, sessionItemStatisticId) =>
+    setStatistics.filter(
+      (s) => s.sessionItemStatisticId === sessionItemStatisticId
+    )
 );

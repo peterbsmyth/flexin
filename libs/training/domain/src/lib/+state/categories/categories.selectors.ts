@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import {
   CATEGORIES_FEATURE_KEY,
   CategoriesState,
@@ -7,10 +7,9 @@ import {
 } from './categories.reducer';
 
 // Lookup the 'Categories' feature state managed by NgRx
-export const getCategoriesState = createFeatureSelector<
-  PartialState,
-  CategoriesState
->(CATEGORIES_FEATURE_KEY);
+export const getCategoriesState = createFeatureSelector<State, CategoriesState>(
+  CATEGORIES_FEATURE_KEY
+);
 
 const { selectAll, selectEntities } = categoriesAdapter.getSelectors();
 

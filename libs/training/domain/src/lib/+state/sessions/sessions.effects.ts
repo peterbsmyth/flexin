@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { Store } from '@ngrx/store';
 import { SessionsActions } from './actions';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
@@ -88,7 +88,7 @@ export class SessionsEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<PartialState>,
+    private store: Store<State>,
     private sessionService: SessionDataService,
     private weekService: WeekDataService,
     private programService: ProgramDataService

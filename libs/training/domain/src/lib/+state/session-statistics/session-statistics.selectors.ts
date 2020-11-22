@@ -4,10 +4,10 @@ import {
   SessionStatisticsState,
   sessionStatisticsAdapter,
 } from './session-statistics.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 // Lookup the 'SessionStatistics' feature state managed by NgRx
 export const getSessionStatisticsState = createFeatureSelector<
-  PartialState,
+  State,
   SessionStatisticsState
 >(SESSIONSTATISTICS_FEATURE_KEY);
 

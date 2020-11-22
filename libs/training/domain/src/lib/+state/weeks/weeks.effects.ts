@@ -7,7 +7,7 @@ import { WeekDataService } from '../../infrastructure/week.data.service';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { ProgramsActions } from '../programs/actions';
 import { Store } from '@ngrx/store';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { ProgramDataService } from '../../infrastructure/program.data.service';
 
 @Injectable()
@@ -77,7 +77,7 @@ export class WeeksEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<PartialState>,
+    private store: Store<State>,
     private weekService: WeekDataService,
     private programService: ProgramDataService
   ) {}

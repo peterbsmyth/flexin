@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { select, Store, Action } from '@ngrx/store';
 
-import * as fromRoot from '../+state/root.reducer';
+import * as fromRoot from '../+state/state';
 import * as SessionItemStatisticsSelectors from '../+state/session-item-statistics/session-item-statistics.selectors';
 
 @Injectable()
@@ -20,9 +20,7 @@ export class SessionItemStatisticsFacade {
     select(SessionItemStatisticsSelectors.getSetStatistics)
   );
 
-  constructor(
-    private store: Store<fromRoot.PartialState>
-  ) {}
+  constructor(private store: Store<fromRoot.State>) {}
 
   dispatch(action: Action) {
     this.store.dispatch(action);

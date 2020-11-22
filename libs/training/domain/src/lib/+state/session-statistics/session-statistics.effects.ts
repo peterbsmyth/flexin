@@ -5,7 +5,7 @@ import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { SessionStatisticDataService } from '../../infrastructure/session-statistic.data.service';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import { getAllWeekStatistics } from '../week-statistics/week-statistics.selectors';
 import { SessionStatisticsActions } from './actions';
 
@@ -96,7 +96,7 @@ export class SessionStatisticsEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<PartialState>,
+    private store: Store<State>,
     private backend: SessionStatisticDataService
   ) {}
 }

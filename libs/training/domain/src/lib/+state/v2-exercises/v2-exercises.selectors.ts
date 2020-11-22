@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 import {
   V2EXERCISES_FEATURE_KEY,
   v2ExercisesAdapter,
@@ -8,7 +8,7 @@ import {
 
 // Lookup the 'V2Exercises' feature state managed by NgRx
 export const getV2ExercisesState = createFeatureSelector<
-  PartialState,
+  State,
   V2ExercisesState
 >(V2EXERCISES_FEATURE_KEY);
 

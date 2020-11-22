@@ -4,13 +4,12 @@ import {
   WorkoutsState,
   workoutsAdapter,
 } from './workouts.reducer';
-import { PartialState } from '../root.reducer';
+import { State } from '../state';
 
 // Lookup the 'Workouts' feature state managed by NgRx
-export const getWorkoutsState = createFeatureSelector<
-  PartialState,
-  WorkoutsState
->(WORKOUTS_FEATURE_KEY);
+export const getWorkoutsState = createFeatureSelector<State, WorkoutsState>(
+  WORKOUTS_FEATURE_KEY
+);
 
 const { selectAll, selectEntities } = workoutsAdapter.getSelectors();
 
