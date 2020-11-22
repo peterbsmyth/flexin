@@ -794,6 +794,51 @@
           }
         }
       }
+    },
+    "training-ui-components": {
+      "projectType": "library",
+      "root": "libs/training/ui-components",
+      "sourceRoot": "libs/training/ui-components/src",
+      "prefix": "components",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/training/ui-components/tsconfig.lib.json",
+            "project": "libs/training/ui-components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/training/ui-components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/training/ui-components/tsconfig.lib.json",
+              "libs/training/ui-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/training/ui-components/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/training/ui-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

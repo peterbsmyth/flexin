@@ -29,6 +29,9 @@ import { WorkoutFormComponent } from './components/workout-form/workout-form.com
 import { TrainingFeatureManageProgramsRoutingModule } from './training-feature-manage-programs-routing.module';
 import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
+import { TrainingUiComponentsModule } from '@bod/training/ui-components';
+import { StatisticsPage } from './pages/statistics/statistics.page';
+import { WorkoutStatisticCardComponent } from './components/workout-statistic-card/workout-statistic-card.component';
 
 @NgModule({
   declarations: [
@@ -44,10 +47,13 @@ import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
     NumericDirective,
     WorkoutPage,
     WorkoutFormComponent,
+    StatisticsPage,
+    WorkoutStatisticCardComponent,
   ],
   imports: [
     CommonModule,
     TrainingDomainModule,
+    TrainingUiComponentsModule,
     ReactiveFormsModule,
     BodComponentsModule,
     MatCheckboxModule,

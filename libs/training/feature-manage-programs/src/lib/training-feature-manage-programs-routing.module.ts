@@ -5,6 +5,7 @@ import { ProgramPage } from './pages/program/program.page';
 import { ProgramConfigurationBoardPage } from './pages/program-configuration-board/program-configuration-board.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { WorkoutPage } from './pages/workout/workout.page';
+import { StatisticsPage } from './pages/statistics/statistics.page';
 import { WorkoutExistsGuard } from './guards/workout-exists.guard';
 import { ProgramsLoadedGuard } from './guards/programs-loaded.guard';
 
@@ -37,6 +38,11 @@ const routes: Routes = [
     path: 'v2/programs/workouts/:workoutId',
     component: WorkoutPage,
     canActivate: [WorkoutExistsGuard],
+  },
+  {
+    path: 'v2/statistics/programs',
+    component: StatisticsPage,
+    canActivate: [ProgramsLoadedGuard],
   },
 ];
 

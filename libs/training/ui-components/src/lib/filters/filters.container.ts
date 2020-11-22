@@ -20,7 +20,7 @@ import {
 } from 'rxjs/operators';
 
 @Component({
-  selector: 'training-filters',
+  selector: 'components-filters',
   templateUrl: './filters.container.html',
   styleUrls: ['./filters.container.scss'],
 })

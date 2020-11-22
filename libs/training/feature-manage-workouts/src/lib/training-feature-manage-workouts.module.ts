@@ -16,15 +16,14 @@ import { WorkoutCardComponent } from './components/workout-card/workout-card.com
 import { BodComponentsModule } from '@bod/shared/components';
 import { WorkoutsPage } from './pages/workouts/workouts.page';
 import { StatisticsContainer } from './containers/statistics/statistics.container';
-import { StatisticsPage } from './pages/statistics/statistics.page';
-import { WorkoutStatisticCardComponent } from './components/workout-statistic-card/workout-statistic-card.component';
-import { FiltersContainer } from './containers/filters/filters.container';
+import { TrainingUiComponentsModule } from '@bod/training/ui-components';
 
 @NgModule({
   imports: [
     CommonModule,
     TrainingDomainModule,
     TrainingFeatureManageWorkoutsRoutingModule,
+    TrainingUiComponentsModule,
     MatListModule,
     ReactiveComponentModule,
     MatSelectModule,
@@ -37,14 +36,7 @@ import { FiltersContainer } from './containers/filters/filters.container';
     BodComponentsModule,
     MatSnackBarModule,
   ],
-  declarations: [
-    WorkoutCardComponent,
-    WorkoutsPage,
-    WorkoutStatisticCardComponent,
-    StatisticsContainer,
-    StatisticsPage,
-    FiltersContainer,
-  ],
+  declarations: [WorkoutCardComponent, WorkoutsPage, StatisticsContainer],
   exports: [],
 })
 export class TrainingFeatureManageWorkoutsModule {}

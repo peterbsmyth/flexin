@@ -69,6 +69,9 @@
     },
     "flexin": {
       "tags": ["domain:training", "type:app"]
+    },
+    "training-ui-components": {
+      "tags": ["domain:training", "type:ui"]
     }
   },
   "affected": {
