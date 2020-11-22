@@ -22,10 +22,6 @@ export * from './lib/application/foods.facade';
 export * from './lib/application/meals.facade';
 export * from './lib/application/meal-plans.facade';
 export * from './lib/application/auth.facade';
-export * from './lib/application/manage-programs.facade';
-export * from './lib/application/manage-exercises.facade';
-export * from './lib/application/manage-workouts.facade';
-export * from './lib/application/manage-meal-plans.facade';
 
 /**
  * Entities
