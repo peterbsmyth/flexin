@@ -13,20 +13,14 @@ export interface Meal {
   id: number;
   program: ProgramV2;
   food: Food;
-  mealStatistic: MealStatistic;
   week: number;
   day: number;
   order: number;
+  chosenFood: Food;
 }
 
 export interface MealPlan {
   id: number;
   name: string;
   description: string;
-}
-
-export interface MealStatistic {
-  id: number;
-  meal: Meal;
-  chosenFood: Food;
 }

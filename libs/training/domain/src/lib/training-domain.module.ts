@@ -70,9 +70,6 @@ import { MealsFacade } from './application/meals.facade';
 import * as fromMealPlans from './+state/meal-plans/meal-plans.reducer';
 import { MealPlansEffects } from './+state/meal-plans/meal-plans.effects';
 import { MealPlansFacade } from './application/meal-plans.facade';
-import * as fromMealStatistics from './+state/meal-statistics/meal-statistics.reducer';
-import { MealStatisticsEffects } from './+state/meal-statistics/meal-statistics.effects';
-import { MealStatisticsFacade } from './application/meal-statistics.facade';
 
 @NgModule({
   imports: [
@@ -141,10 +138,6 @@ import { MealStatisticsFacade } from './application/meal-statistics.facade';
       fromMealPlans.MEALPLANS_FEATURE_KEY,
       fromMealPlans.reducer
     ),
-    StoreModule.forFeature(
-      fromMealStatistics.MEALSTATISTICS_FEATURE_KEY,
-      fromMealStatistics.reducer
-    ),
     EffectsModule.forFeature([
       ProgramsEffects,
       SessionItemsEffects,
@@ -161,7 +154,6 @@ import { MealStatisticsFacade } from './application/meal-statistics.facade';
       V2ExercisesEffects,
       V2SetStatisticsEffects,
       V2ProgramsEffects,
-      MealStatisticsEffects,
       MealPlansEffects,
       MealsEffects,
       FoodsEffects,
@@ -199,7 +191,6 @@ import { MealStatisticsFacade } from './application/meal-statistics.facade';
     FoodsFacade,
     MealsFacade,
     MealPlansFacade,
-    MealStatisticsFacade,
   ],
 })
 export class TrainingDomainModule {}

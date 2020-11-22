@@ -61,10 +61,6 @@ import {
   MealPlansState,
   MEALPLANS_FEATURE_KEY,
 } from './meal-plans/meal-plans.reducer';
-import {
-  MealStatisticsState,
-  MEALSTATISTICS_FEATURE_KEY,
-} from './meal-statistics/meal-statistics.reducer';
 
 export interface PartialState {
   readonly [EXERCISES_FEATURE_KEY]: ExercisesState;
@@ -85,5 +81,4 @@ export interface PartialState {
   readonly [FOODS_FEATURE_KEY]: FoodsState;
   readonly [MEALS_FEATURE_KEY]: MealsState;
   readonly [MEALPLANS_FEATURE_KEY]: MealPlansState;
-  readonly [MEALSTATISTICS_FEATURE_KEY]: MealStatisticsState;
 }
