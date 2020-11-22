@@ -14,3 +14,8 @@ export const loadV2SetStatisticsFailure = createAction(
   '[V2SetStatistics] Load V2SetStatistics Failure',
   props<{ error: any }>()
 );
+
+export const updateV2SetStatistic = createAction(
+  '[V2SetStatistics] Update V2SetStatistic',
+  props<{ v2SetStatistic: Partial<SetStatisticV2> }>()
+);

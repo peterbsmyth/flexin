@@ -39,6 +39,8 @@ import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-mana
         runtimeChecks: {
           strictActionImmutability: true,
           strictStateImmutability: true,
+          strictActionSerializability: true,
+          strictActionTypeUniqueness: true,
         },
       }
     ),

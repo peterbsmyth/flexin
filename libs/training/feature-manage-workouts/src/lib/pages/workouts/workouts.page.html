@@ -18,7 +18,8 @@
     <training-workout-card
       *ngIf="programsState.selectedWorkout$ | async as workout"
       [workout]="workout"
-      (save)="onSave($event)"
+      (saveWorkout)="onSaveWorkout($event)"
+      (saveSet)="onSaveSet($event)"
     >
     </training-workout-card>
     <training-statistics></training-statistics>

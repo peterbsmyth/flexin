@@ -8,14 +8,13 @@ import * as V2ExercisesActions from '../v2-exercises/v2-exercises.actions';
 import { ProgramV2sDataService } from '../../infrastructure/v2-programs.data.service';
 import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { mockExercises, mockPrograms } from '@bod/shared/models';
-import { forkJoin } from 'rxjs';
 import { ExerciseV2sDataService } from '../../infrastructure/v2-exercises.data.service';
-import { uniqBy } from 'lodash-es';
 import { TrainingState } from '../state';
 import { Store } from '@ngrx/store';
 import { V2DraftProgramsDataService } from '../../infrastructure/v2-draft-programs.data.service';
 import { Router } from '@angular/router';
 import { getAllV2Exercises } from '../v2-exercises/v2-exercises.selectors';
+import { loadWorkoutsSuccess } from '../workouts/workouts.actions';
 
 @Injectable()
 export class V2ProgramsEffects {

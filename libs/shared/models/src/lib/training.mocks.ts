@@ -122,6 +122,14 @@ export const setStatisticsForWorkoutOne = [
     workoutId: 1,
     programId: 1,
   },
+  {
+    id: 5,
+    set: 3,
+    reps: 8,
+    weight: 25,
+    workoutId: 1,
+    programId: 1,
+  },
 ];
 
 export const setStatisticsForWorkoutTwo = [
@@ -134,6 +142,26 @@ export const setStatisticsForWorkoutTwo = [
   },
   {
     id: 4,
+    set: 2,
+    reps: 8,
+    workoutId: 1,
+    programId: 1,
+  },
+];
+
+export const setStatisticsForWorkoutThree = [
+  {
+    id: 6,
+    set: 1,
+    reps: 15,
+    workoutId: 1,
+    programId: 1,
+  },
+];
+
+export const setStatisticsForWorkoutFour = [
+  {
+    id: 7,
     set: 2,
     reps: 8,
     workoutId: 1,
@@ -173,7 +201,7 @@ export const mockWorkouts: Workout[] = [
     order: 1,
     reps: 10,
     amrap: false,
-    setCount: 3,
+    setCount: 2,
     weight: null,
     weightUnit: 'lbs',
     intensityId: 1,
@@ -192,14 +220,14 @@ export const mockWorkouts: Workout[] = [
     order: 1,
     reps: 10,
     amrap: false,
-    setCount: 3,
+    setCount: 1,
     weight: 10,
     weightUnit: 'lbs',
     intensityId: 1,
     intensity: mockExercise.intensities[0],
     tempo: '2012',
     notes: 'go hard',
-    setStatistics: [],
+    setStatistics: setStatisticsForWorkoutThree,
   },
   {
     id: 4,
@@ -211,14 +239,14 @@ export const mockWorkouts: Workout[] = [
     order: 2,
     reps: 10,
     amrap: false,
-    setCount: 3,
+    setCount: 1,
     weight: 10,
     weightUnit: 'lbs',
     intensityId: 1,
     intensity: mockExercise.intensities[0],
     tempo: '2012',
     notes: 'go hard',
-    setStatistics: [],
+    setStatistics: setStatisticsForWorkoutFour,
   },
 ];
 
@@ -230,6 +258,8 @@ export const mockPrograms: ProgramV2[] = [
     setStatistics: [
       ...setStatisticsForWorkoutOne,
       ...setStatisticsForWorkoutTwo,
+      ...setStatisticsForWorkoutThree,
+      ...setStatisticsForWorkoutFour,
     ],
     createdBy: {
       id: 1,

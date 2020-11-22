@@ -2,15 +2,17 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as V2ProgramsActions from './v2-programs.actions';
+import * as WorkoutsActions from '../workouts/workouts.actions';
+import * as V2SetStatisticsActions from '../v2-set-statistics/v2-set-statistics.actions';
 import { ProgramV2 } from '@bod/shared/models';
 
 export const V2PROGRAMS_FEATURE_KEY = 'v2Programs';
 
 export interface V2ProgramsState extends EntityState<ProgramV2> {
-  selectedId?: string | number; // which V2Programs record has been selected
-  selectedWeek?: string | number;
-  selectedDay?: string | number;
-  selectedWorkoutId?: string | number;
+  selectedId?: number; // which V2Programs record has been selected
+  selectedWeek?: number;
+  selectedDay?: number;
+  selectedWorkoutId?: number;
   loaded: boolean; // has the V2Programs list been loaded
   error?: string | null; // last known error (if any)
 }
@@ -60,7 +62,65 @@ const v2ProgramsReducer = createReducer(
   on(V2ProgramsActions.selectWorkout, (state, { id }) => ({
     ...state,
     selectedWorkoutId: id,
-  }))
+  })),
+  /**
+   * update the workout for the selected program and when
+   * iterating through the workouts if the id of the workout
+   * in the action matches the id of the iterated workout
+   * update that workout, else use the iterated workout
+   */
+  on(WorkoutsActions.updateWorkout, (state, { workout }) =>
+    v2ProgramsAdapter.updateOne(
+      {
+        id: state.selectedId,
+        changes: {
+          workouts: state.entities[state.selectedId].workouts.map((w) =>
+            w.id === workout.id
+              ? {
+                  ...w,
+                  ...workout,
+                }
+              : w
+          ),
+        },
+      },
+      { ...state, loaded: true }
+    )
+  ),
+  on(V2SetStatisticsActions.updateV2SetStatistic, (state, { v2SetStatistic }) =>
+    v2ProgramsAdapter.updateOne(
+      {
+        id: state.selectedId,
+        changes: {
+          setStatistics: state.entities[state.selectedId].setStatistics.map(
+            (s) =>
+              s.id === v2SetStatistic.id
+                ? {
+                    ...s,
+                    ...v2SetStatistic,
+                  }
+                : s
+          ),
+          workouts: state.entities[state.selectedId].workouts.map((w) =>
+            w.id === state.selectedWorkoutId
+              ? {
+                  ...w,
+                  setStatistics: w.setStatistics.map((s) =>
+                    s.id === v2SetStatistic.id
+                      ? {
+                          ...s,
+                          ...v2SetStatistic,
+                        }
+                      : s
+                  ),
+                }
+              : w
+          ),
+        },
+      },
+      { ...state, loaded: true }
+    )
+  )
 );
 
 export function reducer(state: V2ProgramsState | undefined, action: Action) {

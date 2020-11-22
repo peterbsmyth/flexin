@@ -7,11 +7,11 @@ import {
   OnDestroy,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { merge, Subject } from 'rxjs';
 import { debounceTime, tap, takeUntil, filter } from 'rxjs/operators';
 import { OnChange } from '@bod/shared/utils';
-import { Workout } from '@bod/shared/models';
+import { SetStatisticV2, Workout } from '@bod/shared/models';
 
 @Component({
   selector: 'training-workout-card',
@@ -29,7 +29,8 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
   @Input()
   workout: Workout;
 
-  @Output() save: EventEmitter<Partial<Workout>> = new EventEmitter();
+  @Output() saveWorkout: EventEmitter<Partial<Workout>> = new EventEmitter();
+  @Output() saveSet: EventEmitter<Partial<SetStatisticV2>> = new EventEmitter();
   form: FormGroup = this.fb.group({});
 
   get sets() {
@@ -38,24 +39,7 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.form.valueChanges
-      .pipe(
-        filter(() => this._formSaveable),
-        debounceTime(300),
-        takeUntil(this.unsubscribe$),
-        tap((value) => this.onSave(value))
-      )
-      .subscribe();
-  }
-
-  /**
-   * arrayOfCount is used to turn the amount of sets into an array
-   * @param n length of the Array
-   */
-  arrayOfCount(n: number): any[] {
-    return Array(n).fill(null);
-  }
+  ngOnInit(): void {}
 
   /**
    * buildForm
@@ -68,12 +52,12 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
     const rpe = workout?.rpe ?? 0;
     const notes = workout?.athleteNotes ?? '';
     const sets = this.fb.array([]);
-    this.arrayOfCount(workout.setCount).forEach((s, i) => {
-      const setStatistic = workout.setStatistics[i];
-      const setReps = setStatistic?.reps ?? 0;
-      const setWeight = setStatistic?.weight ?? 0;
+    workout.setStatistics.forEach((setStatistic) => {
+      const setReps = setStatistic.reps ?? 0;
+      const setWeight = setStatistic.weight ?? 0;
       const control = this.fb.group({
-        set: i + 1,
+        id: setStatistic.id,
+        set: setStatistic.set,
         reps: this.fb.control(setReps),
         weight: this.fb.control(setWeight),
       });
@@ -85,6 +69,53 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
     this.form.setControl('notes', this.fb.control(notes));
 
     this._formSaveable = true;
+
+    /**
+     * save for the Workout related properties
+     */
+    this.form
+      .get('notes')
+      .valueChanges.pipe(
+        filter(() => this._formSaveable),
+        debounceTime(300),
+        takeUntil(this.unsubscribe$),
+        tap((value) => {
+          const output: Partial<Workout> = {
+            id: this.workout.id,
+            athleteNotes: value,
+          };
+          this.saveWorkout.emit(output);
+        })
+      )
+      .subscribe();
+
+    this.form
+      .get('rpe')
+      .valueChanges.pipe(
+        filter(() => this._formSaveable),
+        debounceTime(300),
+        takeUntil(this.unsubscribe$),
+        tap((value) => {
+          const output: Partial<Workout> = {
+            id: this.workout.id,
+            rpe: value,
+          };
+          this.saveWorkout.emit(output);
+        })
+      )
+      .subscribe();
+
+    /**
+     * save for individual SetStatistics
+     */
+    merge(...this.sets.controls.map((c) => c.valueChanges))
+      .pipe(
+        filter(() => this._formSaveable),
+        debounceTime(300),
+        takeUntil(this.unsubscribe$),
+        tap((value) => this.saveSet.emit(value))
+      )
+      .subscribe();
   }
 
   /**
@@ -139,30 +170,6 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
         onlySelf: true,
       });
     }
-  }
-
-  onSave(value: {
-    rpe: number;
-    athleteNotes: string;
-    sets: {
-      id?: number;
-      set: number;
-      reps: number;
-      weight: number;
-    }[];
-  }) {
-    const workoutId = this.workout.id;
-    const output: Partial<Workout> = {
-      id: this.workout.id,
-      rpe: value.rpe,
-      athleteNotes: value.athleteNotes,
-      setStatistics: value.sets.map((s, i) => ({
-        id: this.workout.setStatistics[i]?.id,
-        workoutId,
-        ...s,
-      })),
-    };
-    this.save.emit(output);
   }
 
   ngOnDestroy() {

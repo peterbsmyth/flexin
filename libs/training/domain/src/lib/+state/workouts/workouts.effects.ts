@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
+import { fetch, optimisticUpdate } from '@nrwl/angular';
 
 import * as fromWorkouts from './workouts.reducer';
 import * as WorkoutsActions from './workouts.actions';
 import { mockWorkouts } from '@bod/shared/models';
-import { map } from 'rxjs/operators';
+import { map, mapTo } from 'rxjs/operators';
 import { WorkoutsDataService } from '../../infrastructure/workouts.data.service';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class WorkoutsEffects {
     )
   );
 
-  loadProgram$ = createEffect(() =>
+  loadWorkout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WorkoutsActions.loadWorkoutFromGuard),
       map(() =>

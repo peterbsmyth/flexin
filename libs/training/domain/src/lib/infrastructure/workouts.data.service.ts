@@ -3,6 +3,7 @@ import { Workout } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 import { environment } from '@bod/shared/environments';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { tap } from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,13 @@ export class WorkoutsDataService {
 
   saveOne(workout: Workout): Observable<Workout> {
     return this.http.post<Workout>(`${this.API_URL}/workouts`, workout);
+  }
+
+  patchOne(workout: Partial<Workout>): Observable<undefined> {
+    return this.http.patch<undefined>(
+      `${this.API_URL}/workouts/${workout.id}`,
+      workout
+    );
   }
 
   constructor(private http: HttpClient) {}

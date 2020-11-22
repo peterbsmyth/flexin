@@ -34,6 +34,20 @@ export const loadWorkoutFailure = createAction(
 );
 
 export const updateWorkoutFromWorkoutPage = createAction(
-  '[Workouts][Workout Page] Load Workout Failure',
+  '[Workouts][Workout Page] Update Workout',
   props<{ workout: Workout }>()
+);
+
+export const updateWorkout = createAction(
+  '[Workouts] Update Workout',
+  props<{ workout: Partial<Workout> }>()
+);
+
+export const updateWorkoutSuccess = createAction(
+  '[Workouts] Update Workout Success'
+);
+
+export const updateWorkoutFailure = createAction(
+  '[Workouts] Update Workout Failure',
+  props<{ error: any }>()
 );

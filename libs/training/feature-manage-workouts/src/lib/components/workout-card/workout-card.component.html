@@ -28,11 +28,11 @@
 
       <section class="card__sets" formArrayName="sets">
         <div
-          *ngFor="let set of arrayOfCount(workout?.setCount); let i = index"
+          *ngFor="let set of workout.setStatistics; let i = index"
           [formGroupName]="i"
           class="card__input"
         >
-          <label class="card__label"> Set {{ i + 1 }} </label>
+          <label class="card__label"> Set {{ set.set }} </label>
           <mat-form-field>
             <!-- Set # -->
             <mat-label> reps </mat-label>

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { V2ProgramsFacade, selectWorkout } from '@bod/training/domain';
+import { SetStatisticV2, Workout } from '@bod/shared/models';
+import {
+  V2ProgramsFacade,
+  selectWorkout,
+  updateWorkout,
+  updateV2SetStatistic,
+} from '@bod/training/domain';
 
 @Component({
   templateUrl: './workouts.page.html',
@@ -14,36 +20,17 @@ export class WorkoutsPage implements OnInit {
 
   ngOnInit(): void {}
 
-  onSave(/*output: SessionItemCardOutput*/ output) {
-    // const { sessionItemStatistic, setStatistics } = output;
-    // /**
-    //  * if there is an id, update the session item statistic
-    //  * else, save a new session item statistic
-    //  */
-    // if (sessionItemStatistic.id) {
-    //   this.sessionsState.dispatch(
-    //     SessionItemStatisticsActions.updateSessionItemStatistic({
-    //       sessionItemStatistic,
-    //     })
-    //   );
-    // } else {
-    //   this.sessionsState.dispatch(
-    //     SessionItemStatisticsActions.saveSessionItemStatistic({
-    //       sessionItemStatistic,
-    //     })
-    //   );
-    // }
-    // setStatistics.forEach((setStatistic) => {
-    //   if (setStatistic.id) {
-    //     this.sessionsState.dispatch(
-    //       SetStatisticsActions.updateSetStatistic({ setStatistic })
-    //     );
-    //   } else {
-    //     this.sessionsState.dispatch(
-    //       SetStatisticsActions.saveSetStatistic({ setStatistic })
-    //     );
-    //   }
-    // });
+  onSaveSet(v2SetStatistic: Partial<SetStatisticV2>) {
+    this.programsState.dispatch(updateV2SetStatistic({ v2SetStatistic }));
+  }
+
+  onSaveWorkout(workout: Partial<Workout>) {
+    console.log(workout);
+    this.programsState.dispatch(
+      updateWorkout({
+        workout,
+      })
+    );
   }
 
   isWorkoutActive(id): boolean {

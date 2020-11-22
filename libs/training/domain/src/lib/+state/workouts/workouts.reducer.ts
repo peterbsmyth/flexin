@@ -28,8 +28,11 @@ const workoutsReducer = createReducer(
     loaded: false,
     error: null,
   })),
-  on(WorkoutsActions.loadWorkoutSuccess, (state, { workout }) =>
-    workoutsAdapter.upsertOne(workout, { ...state, loaded: true })
+  on(
+    WorkoutsActions.updateWorkoutFromWorkoutPage,
+    WorkoutsActions.loadWorkoutSuccess,
+    (state, { workout }) =>
+      workoutsAdapter.upsertOne(workout, { ...state, loaded: true })
   ),
   on(WorkoutsActions.loadWorkoutsSuccess, (state, { workouts }) =>
     workoutsAdapter.setAll(workouts, { ...state, loaded: true })
