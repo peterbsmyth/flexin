@@ -1,8 +1,8 @@
-import { Workout, ExerciseV2 } from '@bod/shared/models';
+import { Workout, Exercise } from '@bod/shared/models';
 
 export interface WorkoutFormData {
   workout: Workout;
-  exercises: ExerciseV2[];
+  exercises: Exercise[];
 }
 
 export interface BoardCardData {

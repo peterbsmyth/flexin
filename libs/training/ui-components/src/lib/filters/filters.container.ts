@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ProgramV2 } from '@bod/shared/models';
+import { Program } from '@bod/shared/models';
 import {
-  V2ProgramsFacade,
+  ProgramsFacade,
   selectWeek,
   selectDay,
   selectWorkout,
@@ -30,7 +30,7 @@ export class FiltersContainer implements OnInit, OnDestroy {
   daySelect = new FormControl(null);
   unsubscribe$: Subject<any> = new Subject();
   constructor(
-    public programsState: V2ProgramsFacade,
+    public programsState: ProgramsFacade,
     public route: ActivatedRoute,
     private router: Router
   ) {
@@ -81,7 +81,7 @@ export class FiltersContainer implements OnInit, OnDestroy {
     this.weekSelect.valueChanges
       .pipe(
         takeUntil(this.unsubscribe$),
-        withLatestFrom(this.programsState.selectedV2Programs$),
+        withLatestFrom(this.programsState.selectedPrograms$),
         tap(([week, program]) => {
           const day = 1;
           const workoutId = program.workouts.find(
@@ -96,7 +96,7 @@ export class FiltersContainer implements OnInit, OnDestroy {
     this.daySelect.valueChanges
       .pipe(
         takeUntil(this.unsubscribe$),
-        withLatestFrom(this.programsState.selectedV2Programs$),
+        withLatestFrom(this.programsState.selectedPrograms$),
         tap(([day, program]) => {
           const week = this.route.snapshot.queryParams['week'] ?? 1;
           const workoutId = program.workouts.find(
@@ -108,7 +108,7 @@ export class FiltersContainer implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.programsState.selectedV2Programs$
+    this.programsState.selectedPrograms$
       .pipe(
         take(1),
         tap((program) => {

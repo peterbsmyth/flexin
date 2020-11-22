@@ -3,8 +3,8 @@ import {
   WorkoutFormData,
   WorkoutsFacade,
   updateWorkoutFromWorkoutPage,
-  loadV2Exercises,
-  V2ExercisesFacade,
+  loadExercises,
+  ExercisesFacade,
 } from '@bod/training/domain';
 import { Workout } from '@bod/shared/models';
 import { Observable, combineLatest } from 'rxjs';
@@ -20,11 +20,11 @@ export class WorkoutPage implements OnInit {
 
   constructor(
     private workoutsState: WorkoutsFacade,
-    private exerciseState: V2ExercisesFacade
+    private exerciseState: ExercisesFacade
   ) {
     this.data$ = combineLatest([
       this.workoutsState.selectedWorkouts$,
-      this.exerciseState.allV2Exercises$,
+      this.exerciseState.allExercises$,
     ]).pipe(
       map(([workout, exercises]) => ({
         workout,
@@ -42,6 +42,6 @@ export class WorkoutPage implements OnInit {
   }
 
   ngOnInit() {
-    this.exerciseState.dispatch(loadV2Exercises());
+    this.exerciseState.dispatch(loadExercises());
   }
 }

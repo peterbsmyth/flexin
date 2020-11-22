@@ -1,104 +1,104 @@
-import { ProgramV2, Workout } from '@bod/shared/models';
+import { Program, Workout } from '@bod/shared/models';
 import { createAction, props } from '@ngrx/store';
 import { BoardCardData } from '../../entities/component.models';
 
-export const loadV2Programs = createAction('[V2Programs] Load V2Programs');
+export const loadPrograms = createAction('[Programs] Load Programs');
 
 export const loadProgramsFromPage = createAction(
-  '[V2Programs][Page] Load Programs'
+  '[Programs][Page] Load Programs'
 );
 
-export const loadV2ProgramsSuccess = createAction(
-  '[V2Programs] Load V2Programs Success',
-  props<{ v2Programs: ProgramV2[] }>()
+export const loadProgramsSuccess = createAction(
+  '[Programs] Load Programs Success',
+  props<{ programs: Program[] }>()
 );
 
-export const loadV2ProgramsFailure = createAction(
-  '[V2Programs] Load V2Programs Failure',
+export const loadProgramsFailure = createAction(
+  '[Programs] Load Programs Failure',
   props<{ error: any }>()
 );
 
 export const loadProgramFromGuard = createAction(
-  '[V2Programs][Guard] Load Program',
+  '[Programs][Guard] Load Program',
   props<{ id: number }>()
 );
 
 export const loadProgramFromPage = createAction(
-  '[V2Programs][Page] Load Program',
+  '[Programs][Page] Load Program',
   props<{ id: number }>()
 );
 
 export const selectProgramFromGuard = createAction(
-  '[V2Programs][Guard] Select Program',
+  '[Programs][Guard] Select Program',
   props<{ id: number }>()
 );
 
 export const selectProgramFromPage = createAction(
-  '[V2Programs][Page] Select Program',
+  '[Programs][Page] Select Program',
   props<{ id: number }>()
 );
 
 export const selectWeek = createAction(
-  '[V2Programs] Select Week',
+  '[Programs] Select Week',
   props<{ week: number }>()
 );
 
 export const selectDay = createAction(
-  '[V2Programs] Select Day',
+  '[Programs] Select Day',
   props<{ day: number }>()
 );
 
 export const selectWorkout = createAction(
-  '[V2Programs] Select Workout',
+  '[Programs] Select Workout',
   props<{ id: number }>()
 );
 
 export const loadProgramSuccess = createAction(
-  '[V2Programs] Load Program Success',
-  props<{ program: ProgramV2 }>()
+  '[Programs] Load Program Success',
+  props<{ program: Program }>()
 );
 
 export const loadProgramFailure = createAction(
-  '[V2Programs] Load Program Failure',
+  '[Programs] Load Program Failure',
   props<{ error: any }>()
 );
 
 export const createProgram = createAction(
-  '[V2Programs] Create Program',
+  '[Programs] Create Program',
   props<{ data: Workout[]; number: number }>()
 );
 
 export const createProgramSuccess = createAction(
-  '[V2Programs] Create Program Success',
+  '[Programs] Create Program Success',
   props<{ name: string }>()
 );
 
 export const createProgramFailure = createAction(
-  '[V2Programs] Create Program Failure',
+  '[Programs] Create Program Failure',
   props<{ name: string }>()
 );
 
 export const loadDescendantsFromProgramPage = createAction(
-  '[V2Programs][Program Page] Load Descendants',
+  '[Programs][Program Page] Load Descendants',
   props<{ id: number }>()
 );
 
 export const loadDescendantsSuccess = createAction(
-  '[V2Programs] Load Descendants Success'
+  '[Programs] Load Descendants Success'
 );
 
 export const loadDescendantsFailure = createAction(
-  '[V2Programs] Load Descendants Failure',
+  '[Programs] Load Descendants Failure',
   props<{ error: any }>()
 );
 
-export const popDraft = createAction('[V2Programs] Pop Draft');
+export const popDraft = createAction('[Programs] Pop Draft');
 
-export const pushDraft = createAction('[V2Programs] Push Draft');
+export const pushDraft = createAction('[Programs] Push Draft');
 
-export const resetDraft = createAction('[V2Programs] Resest Draft');
+export const resetDraft = createAction('[Programs] Resest Draft');
 
 export const addIncompleteWorkouts = createAction(
-  '[V2Programs] Add IncompleteWorkouts',
+  '[Programs] Add IncompleteWorkouts',
   props<{ board: BoardCardData[][]; weekCount: number }>()
 );

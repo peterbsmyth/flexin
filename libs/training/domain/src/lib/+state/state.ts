@@ -7,17 +7,17 @@ import {
   CATEGORIES_FEATURE_KEY,
 } from './categories/categories.reducer';
 import {
-  V2EXERCISES_FEATURE_KEY,
-  V2ExercisesState,
-} from './v2-exercises/v2-exercises.reducer';
+  EXERCISES_FEATURE_KEY,
+  ExercisesState,
+} from './exercises/exercises.reducer';
 import {
-  V2PROGRAMS_FEATURE_KEY,
-  V2ProgramsState,
-} from './v2-programs/v2-programs.reducer';
+  PROGRAMS_FEATURE_KEY,
+  ProgramsState,
+} from './programs/programs.reducer';
 import {
-  V2SETSTATISTICS_FEATURE_KEY,
-  V2SetStatisticsState,
-} from './v2-set-statistics/v2-set-statistics.reducer';
+  SETSTATISTICS_FEATURE_KEY,
+  SetStatisticsState,
+} from './set-statistics/set-statistics.reducer';
 import { FoodsState, FOODS_FEATURE_KEY } from './foods/foods.reducer';
 import { MealsState, MEALS_FEATURE_KEY } from './meals/meals.reducer';
 import {
@@ -28,9 +28,9 @@ import {
 export interface State {
   readonly [WORKOUTS_FEATURE_KEY]: WorkoutsState;
   readonly [CATEGORIES_FEATURE_KEY]: CategoriesState;
-  readonly [V2EXERCISES_FEATURE_KEY]: V2ExercisesState;
-  readonly [V2PROGRAMS_FEATURE_KEY]: V2ProgramsState;
-  readonly [V2SETSTATISTICS_FEATURE_KEY]: V2SetStatisticsState;
+  readonly [EXERCISES_FEATURE_KEY]: ExercisesState;
+  readonly [PROGRAMS_FEATURE_KEY]: ProgramsState;
+  readonly [SETSTATISTICS_FEATURE_KEY]: SetStatisticsState;
   readonly [FOODS_FEATURE_KEY]: FoodsState;
   readonly [MEALS_FEATURE_KEY]: MealsState;
   readonly [MEALPLANS_FEATURE_KEY]: MealPlansState;

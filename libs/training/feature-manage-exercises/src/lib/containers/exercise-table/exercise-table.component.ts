@@ -3,8 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { ExerciseTableDataSource } from './exercise-table-datasource';
-import { ExerciseV2 } from '@bod/shared/models';
-import { V2ExercisesFacade } from '@bod/training/domain';
+import { Exercise } from '@bod/shared/models';
+import { ExercisesFacade } from '@bod/training/domain';
 
 @Component({
   selector: 'training-exercise-table',
@@ -14,10 +14,10 @@ import { V2ExercisesFacade } from '@bod/training/domain';
 export class ExerciseTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<ExerciseV2>;
+  @ViewChild(MatTable) table: MatTable<Exercise>;
   dataSource: ExerciseTableDataSource;
 
-  constructor(private exerciseState: V2ExercisesFacade) {}
+  constructor(private exerciseState: ExercisesFacade) {}
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['name', 'push/pull', 'intensities'];
@@ -26,7 +26,7 @@ export class ExerciseTableComponent implements AfterViewInit, OnInit {
     this.dataSource = new ExerciseTableDataSource(this.exerciseState);
   }
 
-  displayPushPull(exercise: ExerciseV2) {
+  displayPushPull(exercise: Exercise) {
     return exercise.categories[0].name;
   }
 

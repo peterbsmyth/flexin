@@ -16,7 +16,7 @@ import {
 } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ExerciseV2, Workout } from '@bod/shared/models';
+import { Exercise, Workout } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
 import { ExerciseDialog } from '../exercise-dialog/exercise.dialog';
 
@@ -56,7 +56,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
   editable;
 
   @Output() update: EventEmitter<Workout> = new EventEmitter();
-  @Output() updateExercise: EventEmitter<ExerciseV2> = new EventEmitter();
+  @Output() updateExercise: EventEmitter<Exercise> = new EventEmitter();
   @Output() validate: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
@@ -138,7 +138,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
       data: this.workout.exercise,
     });
 
-    dialogRef.afterClosed().subscribe((result?: ExerciseV2) => {
+    dialogRef.afterClosed().subscribe((result?: Exercise) => {
       if (result) {
         this.updateExercise.emit(result);
         this.workout = {

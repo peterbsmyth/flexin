@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { V2ExercisesFacade, updateExercise } from '@bod/training/domain';
-import { ExerciseV2 } from '@bod/shared/models';
+import { ExercisesFacade, updateExercise } from '@bod/training/domain';
+import { Exercise } from '@bod/shared/models';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./exercise.page.scss'],
 })
 export class ExercisePage implements OnInit {
-  exercise$: Observable<ExerciseV2>;
+  exercise$: Observable<Exercise>;
 
-  constructor(public exercisesState: V2ExercisesFacade) {}
+  constructor(public exercisesState: ExercisesFacade) {}
 
-  onSave(exercise: ExerciseV2) {
+  onSave(exercise: Exercise) {
     this.exercisesState.dispatch(
       updateExercise({
         exercise,

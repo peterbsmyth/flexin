@@ -1,56 +1,56 @@
 import { createSelector } from '@ngrx/store';
 import { trainingSelector } from '../selector';
-import { V2ProgramsState, v2ProgramsAdapter } from './v2-programs.reducer';
+import { ProgramsState, programsAdapter } from './programs.reducer';
 
-export const getV2ProgramsState = createSelector(
+export const getProgramsState = createSelector(
   trainingSelector,
-  (state) => state.v2Programs
+  (state) => state.programs
 );
 
-const { selectAll, selectEntities } = v2ProgramsAdapter.getSelectors();
+const { selectAll, selectEntities } = programsAdapter.getSelectors();
 
-export const getV2ProgramsLoaded = createSelector(
-  getV2ProgramsState,
-  (state: V2ProgramsState) => state.loaded
+export const getProgramsLoaded = createSelector(
+  getProgramsState,
+  (state: ProgramsState) => state.loaded
 );
 
-export const getV2ProgramsError = createSelector(
-  getV2ProgramsState,
-  (state: V2ProgramsState) => state.error
+export const getProgramsError = createSelector(
+  getProgramsState,
+  (state: ProgramsState) => state.error
 );
 
-export const getAllV2Programs = createSelector(
-  getV2ProgramsState,
-  (state: V2ProgramsState) => selectAll(state)
+export const getAllPrograms = createSelector(
+  getProgramsState,
+  (state: ProgramsState) => selectAll(state)
 );
 
-export const getV2ProgramsEntities = createSelector(
-  getV2ProgramsState,
-  (state: V2ProgramsState) => selectEntities(state)
+export const getProgramsEntities = createSelector(
+  getProgramsState,
+  (state: ProgramsState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
-  getV2ProgramsState,
-  (state: V2ProgramsState) => state.selectedId
+  getProgramsState,
+  (state: ProgramsState) => state.selectedId
 );
 
 export const getSelectedWeek = createSelector(
-  getV2ProgramsState,
-  (state: V2ProgramsState) => state.selectedWeek
+  getProgramsState,
+  (state: ProgramsState) => state.selectedWeek
 );
 
 export const getSelectedDay = createSelector(
-  getV2ProgramsState,
-  (state: V2ProgramsState) => state.selectedDay
+  getProgramsState,
+  (state: ProgramsState) => state.selectedDay
 );
 
 export const getSelectedWorkoutId = createSelector(
-  getV2ProgramsState,
-  (state: V2ProgramsState) => state.selectedWorkoutId
+  getProgramsState,
+  (state: ProgramsState) => state.selectedWorkoutId
 );
 
 export const getSelected = createSelector(
-  getV2ProgramsEntities,
+  getProgramsEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );

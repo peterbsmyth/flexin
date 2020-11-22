@@ -4,7 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { SetStatisticV2, Workout } from '@bod/shared/models';
+import { SetStatistic, Workout } from '@bod/shared/models';
 
 @Component({
   selector: 'training-workout-statistic-card',
@@ -24,7 +24,7 @@ export class WorkoutStatisticCardComponent implements OnInit {
    * returns true if any set has reps, returns false if all sets have no reps
    * @param setStatistics
    */
-  hasStatistics(setStatistics: SetStatisticV2[]) {
+  hasStatistics(setStatistics: SetStatistic[]) {
     if (!setStatistics || setStatistics.every((s) => s.reps === 0)) {
       return false;
     } else {

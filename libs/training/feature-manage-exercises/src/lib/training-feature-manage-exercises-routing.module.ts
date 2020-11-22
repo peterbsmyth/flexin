@@ -6,10 +6,10 @@ import { ExercisePage } from './pages/exercise/exercise.page';
 import { ExercisesPage } from './pages/exercises/exercises.page';
 
 const routes: Routes = [
-  { path: 'v2/exercises', component: ExercisesPage },
-  { path: 'v2/exercises/create', component: ExerciseCreatePage },
+  { path: 'exercises', component: ExercisesPage },
+  { path: 'exercises/create', component: ExerciseCreatePage },
   {
-    path: 'v2/exercises/:exerciseId',
+    path: 'exercises/:exerciseId',
     component: ExercisePage,
     canActivate: [ExerciseExistsGuard],
   },

@@ -1,4 +1,4 @@
-import { Category, ProgramV2 } from './training.models';
+import { Category, Program } from './training.models';
 import { User } from './user.models';
 
 export interface Food {
@@ -11,7 +11,7 @@ export interface Food {
 
 export interface Meal {
   id: number;
-  program: ProgramV2;
+  program: Program;
   food: Food;
   week: number;
   day: number;

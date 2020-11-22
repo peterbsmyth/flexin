@@ -3,25 +3,25 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { ExerciseV2 } from '@bod/shared/models';
-import { V2ExercisesFacade } from '@bod/training/domain';
+import { Exercise } from '@bod/shared/models';
+import { ExercisesFacade } from '@bod/training/domain';
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: ExerciseV2[] = [];
+const EXAMPLE_DATA: Exercise[] = [];
 
 /**
  * Data source for the ExerciseTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class ExerciseTableDataSource extends DataSource<ExerciseV2> {
-  data: Observable<ExerciseV2[]>;
+export class ExerciseTableDataSource extends DataSource<Exercise> {
+  data: Observable<Exercise[]>;
   paginator: MatPaginator;
   sort: MatSort;
 
-  constructor(private exerciseState: V2ExercisesFacade) {
+  constructor(private exerciseState: ExercisesFacade) {
     super();
-    this.data = this.exerciseState.allV2Exercises$;
+    this.data = this.exerciseState.allExercises$;
   }
 
   /**
@@ -29,7 +29,7 @@ export class ExerciseTableDataSource extends DataSource<ExerciseV2> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<ExerciseV2[]> {
+  connect(): Observable<Exercise[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -56,7 +56,7 @@ export class ExerciseTableDataSource extends DataSource<ExerciseV2> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: ExerciseV2[]) {
+  private getPagedData(data: Exercise[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -65,7 +65,7 @@ export class ExerciseTableDataSource extends DataSource<ExerciseV2> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: ExerciseV2[]) {
+  private getSortedData(data: Exercise[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }

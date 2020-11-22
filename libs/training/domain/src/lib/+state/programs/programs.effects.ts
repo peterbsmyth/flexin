@@ -2,37 +2,37 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 
-import * as fromV2Programs from './v2-programs.reducer';
-import * as V2ProgramsActions from './v2-programs.actions';
-import * as V2ExercisesActions from '../v2-exercises/v2-exercises.actions';
-import { ProgramV2sDataService } from '../../infrastructure/v2-programs.data.service';
+import * as fromPrograms from './programs.reducer';
+import * as ProgramsActions from './programs.actions';
+import * as ExercisesActions from '../exercises/exercises.actions';
+import { ProgramsDataService } from '../../infrastructure/programs.data.service';
 import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { mockExercises, mockPrograms } from '@bod/shared/models';
-import { ExerciseV2sDataService } from '../../infrastructure/v2-exercises.data.service';
+import { ExercisesDataService } from '../../infrastructure/exercises.data.service';
 import { TrainingState } from '../state';
 import { Store } from '@ngrx/store';
-import { V2DraftProgramsDataService } from '../../infrastructure/v2-draft-programs.data.service';
+import { DraftProgramsDataService } from '../../infrastructure/draft-programs.data.service';
 import { Router } from '@angular/router';
-import { getAllV2Exercises } from '../v2-exercises/v2-exercises.selectors';
+import { getAllExercises } from '../exercises/exercises.selectors';
 import { loadWorkoutsSuccess } from '../workouts/workouts.actions';
 
 @Injectable()
-export class V2ProgramsEffects {
-  loadV2Programs$ = createEffect(() =>
+export class ProgramsEffects {
+  loadPrograms$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        V2ProgramsActions.loadV2Programs,
-        V2ProgramsActions.loadProgramsFromPage
+        ProgramsActions.loadPrograms,
+        ProgramsActions.loadProgramsFromPage
       ),
       fetch({
         run: (action) => {
-          return V2ProgramsActions.loadV2ProgramsSuccess({
-            v2Programs: mockPrograms,
+          return ProgramsActions.loadProgramsSuccess({
+            programs: mockPrograms,
           });
         },
         onError: (action, error) => {
           console.error('Error', error);
-          return V2ProgramsActions.loadV2ProgramsFailure({ error });
+          return ProgramsActions.loadProgramsFailure({ error });
         },
       })
     )
@@ -40,9 +40,9 @@ export class V2ProgramsEffects {
 
   loadProgram$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(V2ProgramsActions.loadProgramFromGuard),
+      ofType(ProgramsActions.loadProgramFromGuard),
       map(() =>
-        V2ProgramsActions.loadProgramSuccess({ program: mockPrograms[0] })
+        ProgramsActions.loadProgramSuccess({ program: mockPrograms[0] })
       )
       // fetch({
       //   // provides an action
@@ -51,7 +51,7 @@ export class V2ProgramsEffects {
       //       .getOne(id)
       //       .pipe(
       //         map((program) =>
-      //           V2ProgramsActions.loadProgramSuccess({ program })
+      //           ProgramsActions.loadProgramSuccess({ program })
       //         )
       //       );
       //   },
@@ -65,10 +65,10 @@ export class V2ProgramsEffects {
 
   loadDescendants$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(V2ProgramsActions.loadDescendantsFromProgramPage),
+      ofType(ProgramsActions.loadDescendantsFromProgramPage),
       map(() =>
-        V2ExercisesActions.loadV2ExercisesSuccess({
-          v2Exercises: mockExercises,
+        ExercisesActions.loadExercisesSuccess({
+          exercises: mockExercises,
         })
       )
       // fetch({
@@ -88,10 +88,10 @@ export class V2ProgramsEffects {
       //       }),
       //       mergeMap((exercises) => {
       //         return [
-      //           V2ExercisesActions.loadV2ExercisesSuccess({
-      //             v2Exercises: exercises,
+      //           ExercisesActions.loadExercisesSuccess({
+      //             exercises: exercises,
       //           }),
-      //           V2ProgramsActions.loadDescendantsSuccess(),
+      //           ProgramsActions.loadDescendantsSuccess(),
       //         ];
       //       })
       //     );
@@ -107,8 +107,8 @@ export class V2ProgramsEffects {
   addIncompleteSessionItems$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(V2ProgramsActions.addIncompleteWorkouts),
-        withLatestFrom(this.store.select(getAllV2Exercises)),
+        ofType(ProgramsActions.addIncompleteWorkouts),
+        withLatestFrom(this.store.select(getAllExercises)),
         tap(([{ board, weekCount }, exercises]) => {
           this.draftProgramService.addIncompleteWorkouts(
             board,
@@ -123,7 +123,7 @@ export class V2ProgramsEffects {
   createProgram$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(V2ProgramsActions.createProgram),
+        ofType(ProgramsActions.createProgram),
         fetch({
           // provides an action
           run: ({ data, number }) => {
@@ -143,7 +143,7 @@ export class V2ProgramsEffects {
   popDraft$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(V2ProgramsActions.popDraft),
+        ofType(ProgramsActions.popDraft),
         tap(() => this.draftProgramService.popDraftDay())
       ),
     { dispatch: false }
@@ -152,7 +152,7 @@ export class V2ProgramsEffects {
   pushDraft$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(V2ProgramsActions.pushDraft),
+        ofType(ProgramsActions.pushDraft),
         tap(() => this.draftProgramService.pushDraftDay())
       ),
     { dispatch: false }
@@ -160,7 +160,7 @@ export class V2ProgramsEffects {
   resetDraft$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(V2ProgramsActions.resetDraft),
+        ofType(ProgramsActions.resetDraft),
         tap(() => this.draftProgramService.resetDraft())
       ),
     { dispatch: false }
@@ -169,9 +169,9 @@ export class V2ProgramsEffects {
   constructor(
     private store: Store<TrainingState>,
     private actions$: Actions,
-    private backend: ProgramV2sDataService,
-    private draftProgramService: V2DraftProgramsDataService,
+    private backend: ProgramsDataService,
+    private draftProgramService: DraftProgramsDataService,
     private router: Router,
-    private exercisesService: ExerciseV2sDataService
+    private exercisesService: ExercisesDataService
   ) {}
 }

@@ -5,14 +5,14 @@ import { BoardCardData } from '../entities/component.models';
 import { uniqBy } from 'lodash-es';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ExerciseV2, Workout } from '@bod/shared/models';
+import { Exercise, Workout } from '@bod/shared/models';
 import { WorkoutsDataService } from './workouts.data.service';
-import { ProgramV2sDataService } from './v2-programs.data.service';
+import { ProgramsDataService } from './programs.data.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class V2DraftProgramsDataService {
+export class DraftProgramsDataService {
   private _draftProgramBoardSubject = new BehaviorSubject<BoardCardData[][]>([
     [],
     [],
@@ -38,7 +38,7 @@ export class V2DraftProgramsDataService {
 
   addIncompleteWorkouts(
     board: BoardCardData[][],
-    exercises: ExerciseV2[],
+    exercises: Exercise[],
     weekCount: number
   ) {
     this.storage.set('boardCardData', board).subscribe();
@@ -120,7 +120,7 @@ export class V2DraftProgramsDataService {
   }
 
   constructor(
-    private programService: ProgramV2sDataService,
+    private programService: ProgramsDataService,
     private workoutService: WorkoutsDataService,
     private storage: StorageMap,
     private snackbar: MatSnackBar

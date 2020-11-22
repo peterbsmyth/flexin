@@ -2,10 +2,10 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  V2ExercisesFacade,
-  V2ProgramsFacade,
+  ExercisesFacade,
+  ProgramsFacade,
   BoardCardData,
-  loadV2Exercises,
+  loadExercises,
   pushDraft,
   popDraft,
   resetDraft,
@@ -14,7 +14,7 @@ import {
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import Fuse from 'fuse.js';
-import { ExerciseV2 } from '@bod/shared/models';
+import { Exercise } from '@bod/shared/models';
 
 @Component({
   templateUrl: './program-board.page.html',
@@ -32,17 +32,17 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   sourceColumn$: Observable<BoardCardData[]>;
   board$: Observable<BoardCardData[][]>;
 
-  setCategory(exercise: ExerciseV2): string {
+  setCategory(exercise: Exercise): string {
     return exercise.categories[0].name.toLowerCase();
   }
   constructor(
     private router: Router,
-    private exerciseState: V2ExercisesFacade,
-    private programState: V2ProgramsFacade
+    private exerciseState: ExercisesFacade,
+    private programState: ProgramsFacade
   ) {
     this.sourceColumn$ = combineLatest([
       this.search.valueChanges,
-      this.exerciseState.allV2Exercises$,
+      this.exerciseState.allExercises$,
     ]).pipe(
       map(([term, exercises]) => {
         if (term === '') {
@@ -81,7 +81,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.exerciseState.dispatch(loadV2Exercises());
+    this.exerciseState.dispatch(loadExercises());
   }
 
   ngAfterViewInit() {
@@ -101,7 +101,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   }
 
   onClickNext() {
-    this.router.navigateByUrl('/v2/programs/create/finish');
+    this.router.navigateByUrl('/programs/create/finish');
   }
 
   onClickReset() {

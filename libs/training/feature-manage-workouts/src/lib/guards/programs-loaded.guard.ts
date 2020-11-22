@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { V2ProgramsFacade } from '@bod/training/domain';
+import { ProgramsFacade } from '@bod/training/domain';
 import {
   filter,
   take,
@@ -22,7 +22,7 @@ export class ProgramsLoadedGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot): Observable<boolean> {
     this.programsState.dispatch(loadProgramsFromPage());
     return this.waitForCollectionToLoad().pipe(
-      switchMapTo(this.programsState.allV2Programs$),
+      switchMapTo(this.programsState.allPrograms$),
       tap((programs) => {
         const id = next.queryParams['programId'] ?? programs[0].id;
         this.programsState.dispatch(selectProgramFromGuard({ id }));
@@ -43,8 +43,5 @@ export class ProgramsLoadedGuard implements CanActivate {
     );
   }
 
-  constructor(
-    private programsState: V2ProgramsFacade,
-    private router: Router
-  ) {}
+  constructor(private programsState: ProgramsFacade, private router: Router) {}
 }

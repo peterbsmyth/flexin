@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { merge, Subject } from 'rxjs';
 import { debounceTime, tap, takeUntil, filter } from 'rxjs/operators';
 import { OnChange } from '@bod/shared/utils';
-import { SetStatisticV2, Workout } from '@bod/shared/models';
+import { SetStatistic, Workout } from '@bod/shared/models';
 
 @Component({
   selector: 'training-workout-card',
@@ -30,7 +30,7 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
   workout: Workout;
 
   @Output() saveWorkout: EventEmitter<Partial<Workout>> = new EventEmitter();
-  @Output() saveSet: EventEmitter<Partial<SetStatisticV2>> = new EventEmitter();
+  @Output() saveSet: EventEmitter<Partial<SetStatistic>> = new EventEmitter();
   form: FormGroup = this.fb.group({});
 
   get sets() {

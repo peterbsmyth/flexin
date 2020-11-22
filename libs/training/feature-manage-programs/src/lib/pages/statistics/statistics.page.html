@@ -2,9 +2,7 @@
 <bod-page-layout>
   <!-- src is set in .ts because youtube considers property binding a possible XSS attack -->
   <div class="container">
-    <ng-container
-      *ngIf="(programsState.selectedV2Programs$ | async) as program"
-    >
+    <ng-container *ngIf="(programsState.selectedPrograms$ | async) as program">
       <bod-card *ngIf="program.playlist">
         <bod-card-header><span>Playlist</span></bod-card-header>
         <mat-card-content class="card__body">

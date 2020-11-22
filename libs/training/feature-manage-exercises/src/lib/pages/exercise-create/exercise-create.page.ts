@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { V2ExercisesFacade } from '@bod/training/domain';
+import { ExercisesFacade } from '@bod/training/domain';
 
 @Component({
   templateUrl: './exercise-create.page.html',
@@ -8,7 +8,7 @@ import { V2ExercisesFacade } from '@bod/training/domain';
 })
 export class ExerciseCreatePage implements OnInit {
   constructor(
-    private exercisesState: V2ExercisesFacade,
+    private exercisesState: ExercisesFacade,
     private router: Router
   ) {}
 

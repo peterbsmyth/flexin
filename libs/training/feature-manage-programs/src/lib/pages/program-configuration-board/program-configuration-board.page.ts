@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import {
   updateExercise,
   createProgram,
-  V2ProgramsFacade,
+  ProgramsFacade,
 } from '@bod/training/domain';
-import { ExerciseV2, Workout } from '@bod/shared/models';
+import { Exercise, Workout } from '@bod/shared/models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
@@ -21,7 +21,7 @@ export class ProgramConfigurationBoardPage implements OnInit {
   private _invalidSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   invalid$: Observable<boolean> = this._invalidSubject.asObservable();
 
-  constructor(private router: Router, public programsState: V2ProgramsFacade) {
+  constructor(private router: Router, public programsState: ProgramsFacade) {
     this.programsState.draftProgramConfiguration$
       .pipe(
         take(1),
@@ -49,7 +49,7 @@ export class ProgramConfigurationBoardPage implements OnInit {
     });
   }
 
-  onUpdateExercise(exercise: ExerciseV2) {
+  onUpdateExercise(exercise: Exercise) {
     this.programsState.dispatch(updateExercise({ exercise }));
   }
 

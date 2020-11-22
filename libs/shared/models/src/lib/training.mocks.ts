@@ -1,6 +1,6 @@
-import { ExerciseV2, ProgramV2, Workout } from './training.models';
+import { Exercise, Program, Workout } from './training.models';
 
-export const mockExercise: ExerciseV2 = {
+export const mockExercise: Exercise = {
   id: 1,
   name: 'Chin Up',
   intensities: [
@@ -51,7 +51,7 @@ export const mockExercise: ExerciseV2 = {
   },
 };
 
-export const mockExercises: ExerciseV2[] = [
+export const mockExercises: Exercise[] = [
   mockExercise,
   {
     id: 2,
@@ -250,7 +250,7 @@ export const mockWorkouts: Workout[] = [
   },
 ];
 
-export const mockPrograms: ProgramV2[] = [
+export const mockPrograms: Program[] = [
   {
     id: 1,
     number: 1,

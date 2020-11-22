@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {
-  V2ExercisesFacade,
+  ExercisesFacade,
   loadExerciseFromGuard,
   selectExerciseFromGuard,
 } from '@bod/training/domain';
@@ -24,7 +24,7 @@ export class ExerciseExistsGuard implements CanActivate {
   }
 
   hasExerciseInStore(): Observable<boolean> {
-    return this.exercisesState.selectedV2Exercises$.pipe(
+    return this.exercisesState.selectedExercises$.pipe(
       map((exercise) => !!exercise)
     );
   }
@@ -41,7 +41,7 @@ export class ExerciseExistsGuard implements CanActivate {
         } else {
           this.exercisesState.dispatch(loadExerciseFromGuard({ id: +id }));
           return this.waitForCollectionToLoad().pipe(
-            switchMapTo(this.exercisesState.selectedV2Exercises$),
+            switchMapTo(this.exercisesState.selectedExercises$),
             map((exercise) => !!exercise),
             catchError(() => {
               this.router.navigate(['/404']);
@@ -61,7 +61,7 @@ export class ExerciseExistsGuard implements CanActivate {
   }
 
   constructor(
-    private exercisesState: V2ExercisesFacade,
+    private exercisesState: ExercisesFacade,
     private router: Router
   ) {}
 }

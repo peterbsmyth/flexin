@@ -1,6 +1,6 @@
 import { User } from './user.models';
 
-export interface ExerciseV2 {
+export interface Exercise {
   id?: number;
   name: string; // tuck planche hold
   categories: Category[];
@@ -14,7 +14,7 @@ export interface ExerciseV2 {
 export interface Intensity {
   id: number;
   exerciseId?: number;
-  exercise?: ExerciseV2;
+  exercise?: Exercise;
   order: number;
   name: string;
   createdBy: User;
@@ -26,11 +26,11 @@ export interface DemonstrationVideo {
   url: string;
 }
 
-export interface ProgramV2 {
+export interface Program {
   id?: number;
   number: number;
   workouts?: Workout[];
-  setStatistics?: SetStatisticV2[];
+  setStatistics?: SetStatistic[];
   playlist?: Playlist;
   createdBy?: User;
   assignedTo?: User;
@@ -39,9 +39,9 @@ export interface ProgramV2 {
 export interface Workout {
   id: number;
   programId: number;
-  program?: ProgramV2;
+  program?: Program;
   exerciseId: number;
-  exercise?: ExerciseV2;
+  exercise?: Exercise;
   week: number;
   day: number;
   order: number;
@@ -58,10 +58,10 @@ export interface Workout {
   playlistUrl?: string;
   rpe?: number; // 8
   athleteNotes?: string; // 'not at my full strength'
-  setStatistics: SetStatisticV2[];
+  setStatistics: SetStatistic[];
 }
 
-export interface SetStatisticV2 {
+export interface SetStatistic {
   id: number;
   set: number; // 1
   reps: number; // 8
@@ -69,7 +69,7 @@ export interface SetStatisticV2 {
   workoutId?: number;
   workout?: Workout;
   programId?: number;
-  program?: ProgramV2;
+  program?: Program;
 }
 
 export interface Set {
@@ -91,5 +91,5 @@ export interface Playlist {
   url: string;
   week?: number;
   programId?: number;
-  program?: ProgramV2;
+  program?: Program;
 }

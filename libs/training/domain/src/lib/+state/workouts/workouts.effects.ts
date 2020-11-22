@@ -42,7 +42,7 @@ export class WorkoutsEffects {
       //       .getOne(id)
       //       .pipe(
       //         map((workout) =>
-      //           V2ProgramsActions.loadWorkoutSuccess({ workout })
+      //           ProgramsActions.loadWorkoutSuccess({ workout })
       //         )
       //       );
       //   },

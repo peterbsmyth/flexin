@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  loadV2Exercises,
-  loadV2Programs,
+  loadExercises,
+  loadPrograms,
   selectExerciseFromGuard,
-  V2ExercisesFacade,
-  V2ProgramsFacade,
+  ExercisesFacade,
+  ProgramsFacade,
 } from '@bod/training/domain';
 import { combineLatest, Observable, of, Subject } from 'rxjs';
-import { mockWorkouts, SetStatisticV2 } from '@bod/shared/models';
+import { mockWorkouts, SetStatistic } from '@bod/shared/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
 import { WindowRef } from '@bod/shared/utils';
@@ -21,9 +21,9 @@ import { maxBy } from 'lodash-es';
 export class ExercisePage implements OnInit, OnDestroy {
   unsubscribe: Subject<any> = new Subject();
   exerciseSelect = new FormControl(null);
-  setStatistics$: Observable<SetStatisticV2[]>;
+  setStatistics$: Observable<SetStatistic[]>;
   maxRepsOfAllTime$: Observable<number>;
-  bestSet$: Observable<SetStatisticV2>;
+  bestSet$: Observable<SetStatistic>;
   chartData$: Observable<any>;
   chart = {
     view: [500, 300],
@@ -48,8 +48,8 @@ export class ExercisePage implements OnInit, OnDestroy {
     },
   };
   constructor(
-    public exerciseState: V2ExercisesFacade,
-    private programsState: V2ProgramsFacade,
+    public exerciseState: ExercisesFacade,
+    private programsState: ProgramsFacade,
     private route: ActivatedRoute,
     private router: Router,
     private windowRef: WindowRef
@@ -77,7 +77,7 @@ export class ExercisePage implements OnInit, OnDestroy {
 
     this.maxRepsOfAllTime$ = combineLatest([
       workoutsO,
-      this.exerciseState.selectedV2Exercises$,
+      this.exerciseState.selectedExercises$,
     ]).pipe(
       map(([workouts, exercise]) =>
         workouts.find((w) => w.exerciseId === exercise?.id)
@@ -96,7 +96,7 @@ export class ExercisePage implements OnInit, OnDestroy {
     );
     this.bestSet$ = combineLatest([
       workoutsO,
-      this.exerciseState.selectedV2Exercises$,
+      this.exerciseState.selectedExercises$,
     ]).pipe(
       map(([workouts, exercise]) =>
         workouts.find((w) => w.exerciseId === exercise?.id)
@@ -108,7 +108,7 @@ export class ExercisePage implements OnInit, OnDestroy {
           setStatistics.map((stat) => stat.weight)
         );
         const topWeights = setStatistics.filter((s) => s.weight === maxWeight);
-        const bestSet: SetStatisticV2 = topWeights.length
+        const bestSet: SetStatistic = topWeights.length
           ? maxBy(topWeights, 'reps')
           : null;
 
@@ -120,13 +120,13 @@ export class ExercisePage implements OnInit, OnDestroy {
       })
     );
     this.setStatistics$ = combineLatest([
-      this.exerciseState.selectedV2Exercises$,
-      this.programsState.allV2Programs$,
+      this.exerciseState.selectedExercises$,
+      this.programsState.allPrograms$,
     ]).pipe(
       map(([exercise, programs]) => {
         const setStatistics = programs.reduce(
           (acc, program) => [...acc, ...program.setStatistics],
-          [] as SetStatisticV2[]
+          [] as SetStatistic[]
         );
         return setStatistics;
       })
@@ -156,10 +156,10 @@ export class ExercisePage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.exerciseState.dispatch(loadV2Exercises());
-    this.exerciseState.dispatch(loadV2Programs());
+    this.exerciseState.dispatch(loadExercises());
+    this.exerciseState.dispatch(loadPrograms());
 
-    this.exerciseState.selectedV2Exercises$
+    this.exerciseState.selectedExercises$
       .pipe(
         take(1),
         tap((exercise) => {

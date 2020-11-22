@@ -3,7 +3,7 @@
     <mat-label>Program</mat-label>
     <mat-select [formControl]="programSelect">
       <mat-option
-        *ngFor="let program of programsState.allV2Programs$ | async"
+        *ngFor="let program of programsState.allPrograms$ | async"
         [value]="program.id"
       >
         {{ program.number }}

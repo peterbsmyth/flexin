@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ExerciseV2 } from '@bod/shared/models';
+import { Exercise } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
 
 @Component({
@@ -18,12 +18,12 @@ import { OnChange } from '@bod/shared/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExerciseFormComponent implements OnInit {
-  @OnChange<ExerciseV2>(function (exercise) {
+  @OnChange<Exercise>(function (exercise) {
     this.buildForm(exercise);
   })
   @Input()
-  exercise: ExerciseV2;
-  @Output() save: EventEmitter<ExerciseV2> = new EventEmitter();
+  exercise: Exercise;
+  @Output() save: EventEmitter<Exercise> = new EventEmitter();
   form: FormGroup = this.fb.group({
     name: '',
     push: false,
@@ -45,7 +45,7 @@ export class ExerciseFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  buildForm(exercise: ExerciseV2): void {
+  buildForm(exercise: Exercise): void {
     const intensities = this.fb.array([]);
     const categories = this.fb.array([]);
     exercise.intensities.forEach((intensity) => {

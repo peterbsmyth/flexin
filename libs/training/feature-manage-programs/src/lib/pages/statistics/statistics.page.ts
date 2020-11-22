@@ -6,7 +6,7 @@ import {
   AfterViewInit,
   OnDestroy,
 } from '@angular/core';
-import { V2ProgramsFacade } from '@bod/training/domain';
+import { ProgramsFacade } from '@bod/training/domain';
 import { Subject } from 'rxjs';
 import { take, tap, filter } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ export class StatisticsPage implements OnInit, AfterViewInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
 
   @ViewChild('player') player: ElementRef;
-  constructor(public programsState: V2ProgramsFacade) {}
+  constructor(public programsState: ProgramsFacade) {}
 
   ngOnInit(): void {}
 
@@ -27,7 +27,7 @@ export class StatisticsPage implements OnInit, AfterViewInit, OnDestroy {
    * after the view is initialized then attach the playlist to the player, if it exists
    */
   ngAfterViewInit() {
-    this.programsState.selectedV2Programs$
+    this.programsState.selectedPrograms$
       .pipe(
         filter((data) => !!data),
         take(1),

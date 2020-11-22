@@ -12,12 +12,12 @@ import { ExercisePage } from './pages/exercise/exercise.page';
 
 const routes: Routes = [
   {
-    path: 'v2/programs',
+    path: 'programs',
     component: ProgramPage,
     canActivate: [ProgramsLoadedGuard],
   },
   {
-    path: 'v2/programs/create',
+    path: 'programs/create',
     component: ProgramCreatePage,
     children: [
       {
@@ -36,17 +36,17 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'v2/programs/workouts/:workoutId',
+    path: 'programs/workouts/:workoutId',
     component: WorkoutPage,
     canActivate: [WorkoutExistsGuard],
   },
   {
-    path: 'v2/statistics/programs',
+    path: 'statistics/programs',
     component: StatisticsPage,
     canActivate: [ProgramsLoadedGuard],
   },
   {
-    path: 'v2/statistics/exercises',
+    path: 'statistics/exercises',
     component: ExercisePage,
   },
 ];

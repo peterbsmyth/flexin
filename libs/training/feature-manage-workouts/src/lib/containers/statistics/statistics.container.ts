@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { mockWorkouts, SetStatisticV2 } from '@bod/shared/models';
+import { mockWorkouts, SetStatistic } from '@bod/shared/models';
 
 import { Observable, of, combineLatest } from 'rxjs';
 import { filter, map, withLatestFrom } from 'rxjs/operators';
 import { maxBy } from 'lodash-es';
-import { V2ProgramsFacade } from '@bod/training/domain';
+import { ProgramsFacade } from '@bod/training/domain';
 
 @Component({
   selector: 'training-statistics',
@@ -13,10 +13,10 @@ import { V2ProgramsFacade } from '@bod/training/domain';
 })
 export class StatisticsContainer implements OnInit {
   loaded$: Observable<boolean>;
-  setStatistics$: Observable<SetStatisticV2[]>;
+  setStatistics$: Observable<SetStatistic[]>;
   maxRepsOfAllTime$: Observable<number>;
-  bestSet$: Observable<SetStatisticV2>;
-  constructor(private programState: V2ProgramsFacade) {
+  bestSet$: Observable<SetStatistic>;
+  constructor(private programState: ProgramsFacade) {
     const workoutsO = of(mockWorkouts);
     // this.loaded$ = this.setStatisticsState.ascendantsLoaded$;
     // this.exercise$ = this.exerciseState.selectedExercises$;
@@ -53,7 +53,7 @@ export class StatisticsContainer implements OnInit {
           setStatistics.map((stat) => stat.weight)
         );
         const topWeights = setStatistics.filter((s) => s.weight === maxWeight);
-        const bestSet: SetStatisticV2 = topWeights.length
+        const bestSet: SetStatistic = topWeights.length
           ? maxBy(topWeights, 'reps')
           : null;
 

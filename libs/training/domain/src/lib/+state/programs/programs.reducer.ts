@@ -1,65 +1,65 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import * as V2ProgramsActions from './v2-programs.actions';
+import * as ProgramsActions from './programs.actions';
 import * as WorkoutsActions from '../workouts/workouts.actions';
-import * as V2SetStatisticsActions from '../v2-set-statistics/v2-set-statistics.actions';
-import { ProgramV2 } from '@bod/shared/models';
+import * as SetStatisticsActions from '../set-statistics/set-statistics.actions';
+import { Program } from '@bod/shared/models';
 
-export const V2PROGRAMS_FEATURE_KEY = 'v2Programs';
+export const PROGRAMS_FEATURE_KEY = 'programs';
 
-export interface V2ProgramsState extends EntityState<ProgramV2> {
-  selectedId?: number; // which V2Programs record has been selected
+export interface ProgramsState extends EntityState<Program> {
+  selectedId?: number; // which Programs record has been selected
   selectedWeek?: number;
   selectedDay?: number;
   selectedWorkoutId?: number;
-  loaded: boolean; // has the V2Programs list been loaded
+  loaded: boolean; // has the Programs list been loaded
   error?: string | null; // last known error (if any)
 }
 
-export const v2ProgramsAdapter: EntityAdapter<ProgramV2> = createEntityAdapter<
-  ProgramV2
+export const programsAdapter: EntityAdapter<Program> = createEntityAdapter<
+  Program
 >();
 
-export const initialState: V2ProgramsState = v2ProgramsAdapter.getInitialState({
+export const initialState: ProgramsState = programsAdapter.getInitialState({
   // set initial required properties
   loaded: false,
 });
 
-const v2ProgramsReducer = createReducer(
+const programsReducer = createReducer(
   initialState,
-  on(V2ProgramsActions.loadV2Programs, (state) => ({
+  on(ProgramsActions.loadPrograms, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
-  on(V2ProgramsActions.loadV2ProgramsSuccess, (state, { v2Programs }) =>
-    v2ProgramsAdapter.upsertMany(v2Programs, { ...state, loaded: true })
+  on(ProgramsActions.loadProgramsSuccess, (state, { programs }) =>
+    programsAdapter.upsertMany(programs, { ...state, loaded: true })
   ),
-  on(V2ProgramsActions.loadProgramSuccess, (state, { program }) =>
-    v2ProgramsAdapter.upsertOne(program, { ...state, loaded: true })
+  on(ProgramsActions.loadProgramSuccess, (state, { program }) =>
+    programsAdapter.upsertOne(program, { ...state, loaded: true })
   ),
-  on(V2ProgramsActions.loadV2ProgramsFailure, (state, { error }) => ({
+  on(ProgramsActions.loadProgramsFailure, (state, { error }) => ({
     ...state,
     error,
   })),
   on(
-    V2ProgramsActions.selectProgramFromPage,
-    V2ProgramsActions.selectProgramFromGuard,
+    ProgramsActions.selectProgramFromPage,
+    ProgramsActions.selectProgramFromGuard,
     (state, { id }) => ({
       ...state,
       selectedId: id,
     })
   ),
-  on(V2ProgramsActions.selectWeek, (state, { week }) => ({
+  on(ProgramsActions.selectWeek, (state, { week }) => ({
     ...state,
     selectedWeek: week,
   })),
-  on(V2ProgramsActions.selectDay, (state, { day }) => ({
+  on(ProgramsActions.selectDay, (state, { day }) => ({
     ...state,
     selectedDay: day,
   })),
-  on(V2ProgramsActions.selectWorkout, (state, { id }) => ({
+  on(ProgramsActions.selectWorkout, (state, { id }) => ({
     ...state,
     selectedWorkoutId: id,
   })),
@@ -70,7 +70,7 @@ const v2ProgramsReducer = createReducer(
    * update that workout, else use the iterated workout
    */
   on(WorkoutsActions.updateWorkout, (state, { workout }) =>
-    v2ProgramsAdapter.updateOne(
+    programsAdapter.updateOne(
       {
         id: state.selectedId,
         changes: {
@@ -87,17 +87,17 @@ const v2ProgramsReducer = createReducer(
       { ...state, loaded: true }
     )
   ),
-  on(V2SetStatisticsActions.updateV2SetStatistic, (state, { v2SetStatistic }) =>
-    v2ProgramsAdapter.updateOne(
+  on(SetStatisticsActions.updateSetStatistic, (state, { setStatistic }) =>
+    programsAdapter.updateOne(
       {
         id: state.selectedId,
         changes: {
           setStatistics: state.entities[state.selectedId].setStatistics.map(
             (s) =>
-              s.id === v2SetStatistic.id
+              s.id === setStatistic.id
                 ? {
                     ...s,
-                    ...v2SetStatistic,
+                    ...setStatistic,
                   }
                 : s
           ),
@@ -106,10 +106,10 @@ const v2ProgramsReducer = createReducer(
               ? {
                   ...w,
                   setStatistics: w.setStatistics.map((s) =>
-                    s.id === v2SetStatistic.id
+                    s.id === setStatistic.id
                       ? {
                           ...s,
-                          ...v2SetStatistic,
+                          ...setStatistic,
                         }
                       : s
                   ),
@@ -123,6 +123,6 @@ const v2ProgramsReducer = createReducer(
   )
 );
 
-export function reducer(state: V2ProgramsState | undefined, action: Action) {
-  return v2ProgramsReducer(state, action);
+export function reducer(state: ProgramsState | undefined, action: Action) {
+  return programsReducer(state, action);
 }

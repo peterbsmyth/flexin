@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProgramV2 } from '@bod/shared/models';
+import { Program } from '@bod/shared/models';
 import {
   BoardCardData,
-  V2ProgramsFacade,
-  V2ExercisesFacade,
+  ProgramsFacade,
+  ExercisesFacade,
   loadDescendantsFromProgramPage,
   selectWeek,
   selectProgramFromPage,
@@ -34,8 +34,8 @@ export class ProgramPage implements OnInit, OnDestroy {
   board$: Observable<BoardCardData[][]>;
 
   constructor(
-    public programsState: V2ProgramsFacade,
-    private exerciseState: V2ExercisesFacade,
+    public programsState: ProgramsFacade,
+    private exerciseState: ExercisesFacade,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -70,14 +70,14 @@ export class ProgramPage implements OnInit, OnDestroy {
     this.weekSelect.valueChanges
       .pipe(
         takeUntil(this.unsubscribe$),
-        withLatestFrom(this.programsState.selectedV2Programs$),
+        withLatestFrom(this.programsState.selectedPrograms$),
         tap(([week, program]) => this.setParams(program.id, week))
       )
       .subscribe();
 
     this.board$ = combineLatest([
-      this.programsState.selectedV2Programs$,
-      this.exerciseState.allV2Exercises$,
+      this.programsState.selectedPrograms$,
+      this.exerciseState.allExercises$,
       this.programsState.selectedWeek$,
     ]).pipe(
       map(([program, exercises, week]) => {
@@ -90,7 +90,7 @@ export class ProgramPage implements OnInit, OnDestroy {
           return workouts
             .filter((workout) => workout.day === dayNumber)
             .map((workout) => ({
-              routerLink: `/v2/programs/workouts/${workout.id}`,
+              routerLink: `/programs/workouts/${workout.id}`,
               name: exercises.find(
                 (exercise) => workout.exerciseId === exercise.id
               )?.name,
@@ -108,7 +108,7 @@ export class ProgramPage implements OnInit, OnDestroy {
       })
     );
 
-    this.programsState.selectedV2Programs$
+    this.programsState.selectedPrograms$
       .pipe(
         take(1),
         tap((program) => {
