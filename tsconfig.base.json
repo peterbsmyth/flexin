@@ -18,7 +18,6 @@
     "baseUrl": ".",
     "paths": {
       "@bod/shared/environments": ["libs/shared/environments/src/index.ts"],
-      "@athlete/*": ["apps/athlete/src/app/*"],
       "@bod/training/domain": ["libs/training/domain/src/index.ts"],
       "@bod/shared/domain": ["libs/shared/domain/src/index.ts"],
       "@bod/shared/models": ["libs/shared/models/src/index.ts"],

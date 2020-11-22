@@ -1,150 +1,6 @@
 {
   "version": 1,
   "projects": {
-    "athlete": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@nrwl/angular:class": {
-          "skipTests": true
-        },
-        "@nrwl/angular:component": {
-          "style": "scss",
-          "skipTests": true
-        },
-        "@nrwl/angular:directive": {
-          "skipTests": true
-        },
-        "@nrwl/angular:guard": {
-          "skipTests": true
-        },
-        "@nrwl/angular:module": {
-          "skipTests": true
-        },
-        "@nrwl/angular:pipe": {
-          "skipTests": true
-        },
-        "@nrwl/angular:service": {
-          "skipTests": true
-        }
-      },
-      "root": "apps/athlete",
-      "sourceRoot": "apps/athlete/src",
-      "prefix": "bod",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/athlete",
-            "index": "apps/athlete/src/index.html",
-            "main": "apps/athlete/src/main.ts",
-            "polyfills": "apps/athlete/src/polyfills.ts",
-            "tsConfig": "apps/athlete/tsconfig.app.json",
-            "aot": true,
-            "assets": [
-              "apps/athlete/src/favicon.ico",
-              "apps/athlete/src/assets",
-              "apps/athlete/src/_redirects"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "libs/shared/components/src/lib/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": ["libs/shared/components/src/lib/scss"]
-            },
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "libs/shared/environments/src/lib/environment.ts",
-                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            },
-            "bb": {
-              "fileReplacements": [
-                {
-                  "replace": "libs/shared/environments/src/lib/environment.ts",
-                  "with": "libs/shared/environments/src/lib/environment.bb.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "athlete:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "athlete:build:production"
-            },
-            "bb": {
-              "browserTarget": "athlete:build:bb"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "athlete:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["apps/athlete/tsconfig.app.json"],
-            "exclude": ["**/node_modules/**", "!apps/athlete/**/*"]
-          }
-        }
-      }
-    },
     "training-domain": {
       "projectType": "library",
       "root": "libs/training/domain",
@@ -166,8 +22,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/training/domain/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/training/domain/**/*"]
+            "tsConfig": [
+              "libs/training/domain/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/training/domain/**/*"
+            ]
           }
         }
       },
@@ -198,8 +59,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/shared/domain/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/domain/**/*"]
+            "tsConfig": [
+              "libs/shared/domain/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/domain/**/*"
+            ]
           }
         }
       },
@@ -230,8 +96,13 @@
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
-            "tsConfig": ["libs/shared/models/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/models/**/*"],
+            "tsConfig": [
+              "libs/shared/models/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/models/**/*"
+            ],
             "linter": "eslint"
           }
         }
@@ -253,9 +124,13 @@
           "options": {
             "tsConfig": "libs/shared/components/tsconfig.lib.json",
             "project": "libs/shared/components/ng-package.json",
-            "styles": ["libs/shared/components/src/lib/styles.scss"],
+            "styles": [
+              "libs/shared/components/src/lib/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["libs/shared/components/src/lib/scss"]
+              "includePaths": [
+                "libs/shared/components/src/lib/scss"
+              ]
             }
           },
           "configurations": {
@@ -267,8 +142,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/shared/components/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/components/**/*"]
+            "tsConfig": [
+              "libs/shared/components/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/components/**/*"
+            ]
           }
         }
       },
@@ -336,8 +216,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/celebrities/domain/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/celebrities/domain/**/*"]
+            "tsConfig": [
+              "libs/celebrities/domain/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/celebrities/domain/**/*"
+            ]
           }
         }
       },
@@ -371,9 +256,13 @@
               "apps/celebrity/src/favicon.ico",
               "apps/celebrity/src/assets"
             ],
-            "styles": ["libs/shared/components/src/lib/styles.scss"],
+            "styles": [
+              "libs/shared/components/src/lib/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["libs/shared/components/src/lib/scss"]
+              "includePaths": [
+                "libs/shared/components/src/lib/scss"
+              ]
             },
             "scripts": []
           },
@@ -428,8 +317,13 @@
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
-            "tsConfig": ["apps/celebrity/tsconfig.app.json"],
-            "exclude": ["**/node_modules/**", "!apps/celebrity/**/*"],
+            "tsConfig": [
+              "apps/celebrity/tsconfig.app.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/celebrity/**/*"
+            ],
             "linter": "eslint"
           }
         }
@@ -530,8 +424,13 @@
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
-            "tsConfig": ["libs/shared/environments/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/environments/**/*"],
+            "tsConfig": [
+              "libs/shared/environments/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/environments/**/*"
+            ],
             "linter": "eslint"
           }
         }
@@ -551,7 +450,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/shared/scripts/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/shared/scripts/**/*.ts"
+            ]
           }
         },
         "build": {
@@ -561,7 +462,9 @@
             "tsConfig": "libs/shared/scripts/tsconfig.lib.json",
             "packageJson": "libs/shared/scripts/package.json",
             "main": "libs/shared/scripts/src/index.ts",
-            "assets": ["libs/shared/scripts/*.md"]
+            "assets": [
+              "libs/shared/scripts/*.md"
+            ]
           }
         },
         "execute": {
@@ -596,8 +499,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/shared/utils/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/utils/**/*"]
+            "tsConfig": [
+              "libs/shared/utils/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/utils/**/*"
+            ]
           }
         }
       },
@@ -868,6 +776,157 @@
           "style": "scss"
         }
       }
+    },
+    "flexin": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@nrwl/angular:class": {
+          "skipTests": true
+        },
+        "@nrwl/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@nrwl/angular:directive": {
+          "skipTests": true
+        },
+        "@nrwl/angular:guard": {
+          "skipTests": true
+        },
+        "@nrwl/angular:module": {
+          "skipTests": true
+        },
+        "@nrwl/angular:pipe": {
+          "skipTests": true
+        },
+        "@nrwl/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "apps/flexin",
+      "sourceRoot": "apps/flexin/src",
+      "prefix": "bod",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/flexin",
+            "index": "apps/flexin/src/index.html",
+            "main": "apps/flexin/src/main.ts",
+            "polyfills": "apps/flexin/src/polyfills.ts",
+            "tsConfig": "apps/flexin/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/flexin/src/favicon.ico",
+              "apps/flexin/src/assets",
+              "apps/flexin/src/_redirects"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "libs/shared/components/src/lib/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/shared/components/src/lib/scss"
+              ]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "bb": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.bb.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "flexin:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "flexin:build:production"
+            },
+            "bb": {
+              "browserTarget": "flexin:build:bb"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "flexin:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/flexin/tsconfig.app.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/flexin/**/*"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -892,5 +951,5 @@
       "skipTests": true
     }
   },
-  "defaultProject": "athlete"
+  "defaultProject": "flexin"
 }

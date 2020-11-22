@@ -38,10 +38,10 @@ npm install
 nx serve celebrity --open
 ```
 
-### 3. Run the Athlete Application
+### 3. Run the Flexin Application
 
 ```
-nx serve athlete --open
+nx serve flexin --open
 ```
 
 ### ngrx Follows
