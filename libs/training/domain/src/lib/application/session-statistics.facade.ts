@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { select, Store, Action } from '@ngrx/store';
 
-import { State } from '../+state/state';
+import { TrainingState } from '../+state/state';
 import * as SessionStatisticsSelectors from '../+state/session-statistics/session-statistics.selectors';
 
 @Injectable({ providedIn: 'root' })
@@ -17,7 +17,7 @@ export class SessionStatisticsFacade {
     select(SessionStatisticsSelectors.getSelected)
   );
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<TrainingState>) {}
 
   dispatch(action: Action) {
     this.store.dispatch(action);

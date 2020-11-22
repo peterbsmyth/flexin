@@ -1,25 +1,19 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  SESSIONS_FEATURE_KEY,
-  SessionsState,
-  sessionsAdapter,
-} from './sessions.reducer';
-import { WEEKS_FEATURE_KEY, WeeksState } from '../weeks/weeks.reducer';
-import {
-  PROGRAMS_FEATURE_KEY,
-  ProgramsState,
-} from '../programs/programs.reducer';
-import { State } from '../state';
+import { createSelector } from '@ngrx/store';
+import { SessionsState, sessionsAdapter } from './sessions.reducer';
+import { WeeksState } from '../weeks/weeks.reducer';
+import { ProgramsState } from '../programs/programs.reducer';
 import { getAllSessionItems } from '../session-items/session-items.selectors';
 import { Pages, Session } from '@bod/shared/models';
+import { trainingSelector } from '../selector';
 
-// Lookup the 'Sessions' feature state managed by NgRx
-export const getSessionsState = createFeatureSelector<State, SessionsState>(
-  SESSIONS_FEATURE_KEY
+export const getWeeksState = createSelector(
+  trainingSelector,
+  (state) => state.weeks
 );
 
-export const getWeeksState = createFeatureSelector<State, WeeksState>(
-  WEEKS_FEATURE_KEY
+export const getSessionsState = createSelector(
+  trainingSelector,
+  (state) => state.sessions
 );
 
 export const getSelectedWeekId = createSelector(
@@ -32,8 +26,9 @@ export const getWeeksEntities = createSelector(
   (state: WeeksState) => state.entities
 );
 
-export const getProgramsState = createFeatureSelector<State, ProgramsState>(
-  PROGRAMS_FEATURE_KEY
+export const getProgramsState = createSelector(
+  trainingSelector,
+  (state) => state.programs
 );
 
 export const getProgramsEntities = createSelector(

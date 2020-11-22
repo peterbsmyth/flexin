@@ -1,16 +1,14 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import {
-  SETSTATISTICS_FEATURE_KEY,
   SetStatisticsState,
   setStatisticsAdapter,
 } from './set-statistics.reducer';
-import { State } from '../state';
+import { trainingSelector } from '../selector';
 
-// Lookup the 'SetStatistics' feature state managed by NgRx
-export const getSetStatisticsState = createFeatureSelector<
-  State,
-  SetStatisticsState
->(SETSTATISTICS_FEATURE_KEY);
+export const getSetStatisticsState = createSelector(
+  trainingSelector,
+  (state) => state.setStatistics
+);
 
 const { selectAll, selectEntities } = setStatisticsAdapter.getSelectors();
 

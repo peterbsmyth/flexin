@@ -1,33 +1,25 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  EXERCISES_FEATURE_KEY,
-  ExercisesState,
-  exercisesAdapter,
-} from './exercises.reducer';
-import { State } from '../state';
+import { createSelector } from '@ngrx/store';
+import { ExercisesState, exercisesAdapter } from './exercises.reducer';
 import { getAllSessionItemStatistics } from '../session-item-statistics/session-item-statistics.selectors';
 import { getAllSetStatistics } from '../set-statistics/set-statistics.selectors';
 import { maxBy } from 'lodash-es';
 import { SetStatistic } from '@bod/shared/models';
-import {
-  SessionItemsState,
-  SESSIONITEMS_FEATURE_KEY,
-} from '../session-items/session-items.reducer';
+import { SessionItemsState } from '../session-items/session-items.reducer';
+import { trainingSelector } from '../selector';
 
-// Lookup the 'Session Items' feature state managed by NgRx
-export const getSessionItemsState = createFeatureSelector<
-  State,
-  SessionItemsState
->(SESSIONITEMS_FEATURE_KEY);
+export const getSessionItemsState = createSelector(
+  trainingSelector,
+  (state) => state.sessionItems
+);
 
 export const getSessionItemsEntities = createSelector(
   getSessionItemsState,
   (state: SessionItemsState) => state.entities
 );
 
-// Lookup the 'Exercises' feature state managed by NgRx
-export const getExercisesState = createFeatureSelector<State, ExercisesState>(
-  EXERCISES_FEATURE_KEY
+export const getExercisesState = createSelector(
+  trainingSelector,
+  (state) => state.exercises
 );
 
 const { selectAll, selectEntities } = exercisesAdapter.getSelectors();

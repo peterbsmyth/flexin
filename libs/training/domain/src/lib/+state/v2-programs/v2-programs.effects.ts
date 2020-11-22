@@ -11,7 +11,7 @@ import { mockExercises, mockPrograms } from '@bod/shared/models';
 import { forkJoin } from 'rxjs';
 import { ExerciseV2sDataService } from '../../infrastructure/v2-exercises.data.service';
 import { uniqBy } from 'lodash-es';
-import { State } from '../state';
+import { TrainingState } from '../state';
 import { Store } from '@ngrx/store';
 import { V2DraftProgramsDataService } from '../../infrastructure/v2-draft-programs.data.service';
 import { Router } from '@angular/router';
@@ -168,7 +168,7 @@ export class V2ProgramsEffects {
   );
 
   constructor(
-    private store: Store<State>,
+    private store: Store<TrainingState>,
     private actions$: Actions,
     private backend: ProgramV2sDataService,
     private draftProgramService: V2DraftProgramsDataService,

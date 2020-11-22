@@ -1,10 +1,10 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { MEALS_FEATURE_KEY, MealsState, mealsAdapter } from './meals.reducer';
-import { State } from '../state';
+import { createSelector } from '@ngrx/store';
+import { MealsState, mealsAdapter } from './meals.reducer';
+import { trainingSelector } from '../selector';
 
-// Lookup the 'Meals' feature state managed by NgRx
-export const getMealsState = createFeatureSelector<State, MealsState>(
-  MEALS_FEATURE_KEY
+export const getMealsState = createSelector(
+  trainingSelector,
+  (state) => state.meals
 );
 
 const { selectAll, selectEntities } = mealsAdapter.getSelectors();

@@ -1,14 +1,10 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { State } from '../state';
-import {
-  V2PROGRAMS_FEATURE_KEY,
-  V2ProgramsState,
-  v2ProgramsAdapter,
-} from './v2-programs.reducer';
+import { createSelector } from '@ngrx/store';
+import { trainingSelector } from '../selector';
+import { V2ProgramsState, v2ProgramsAdapter } from './v2-programs.reducer';
 
-// Lookup the 'V2Programs' feature state managed by NgRx
-export const getV2ProgramsState = createFeatureSelector<State, V2ProgramsState>(
-  V2PROGRAMS_FEATURE_KEY
+export const getV2ProgramsState = createSelector(
+  trainingSelector,
+  (state) => state.v2Programs
 );
 
 const { selectAll, selectEntities } = v2ProgramsAdapter.getSelectors();

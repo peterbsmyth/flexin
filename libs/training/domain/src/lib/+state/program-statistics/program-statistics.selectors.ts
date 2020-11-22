@@ -1,16 +1,14 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
-  PROGRAMSTATISTICS_FEATURE_KEY,
   ProgramStatisticsState,
   programStatisticsAdapter,
 } from './program-statistics.reducer';
-import { State } from '../state';
+import { trainingSelector } from '../selector';
 
-// Lookup the 'ProgramStatistics' feature state managed by NgRx
-export const getProgramStatisticsState = createFeatureSelector<
-  State,
-  ProgramStatisticsState
->(PROGRAMSTATISTICS_FEATURE_KEY);
+export const getProgramStatisticsState = createSelector(
+  trainingSelector,
+  (state) => state.programStatistics
+);
 
 const { selectAll, selectEntities } = programStatisticsAdapter.getSelectors();
 

@@ -13,18 +13,13 @@ import {
 } from 'rxjs/operators';
 import { WeekStatisticDataService } from '../../infrastructure/week-statistic.data.service';
 import { Store } from '@ngrx/store';
-import { State } from '../state';
+import { TrainingState } from '../state';
 import { forkJoin, of, throwError } from 'rxjs';
 import { SessionStatisticDataService } from '../../infrastructure/session-statistic.data.service';
 import { SessionStatisticsActions } from '../session-statistics/actions';
-import { flatten } from 'lodash-es';
 import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
 import { SessionItemStatisticsActions } from '../session-item-statistics/actions';
-import {
-  Exercise,
-  SessionItemStatistic,
-  SetStatistic,
-} from '@bod/shared/models';
+import { Exercise, SetStatistic } from '@bod/shared/models';
 import { SetStatisticsActions } from '../set-statistics/actions';
 import { SetStatisticDataService } from '../../infrastructure/set-statistic.data.service';
 import { ExerciseDataService } from '../../infrastructure/exercise.data.service';
@@ -277,7 +272,7 @@ export class WeekStatisticsEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<State>,
+    private store: Store<TrainingState>,
     private backend: WeekStatisticDataService,
     private sessionStatisticService: SessionStatisticDataService,
     private sessionItemStatisticService: SessionItemStatisticDataService,

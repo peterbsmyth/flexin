@@ -5,10 +5,12 @@ import {
   workoutsAdapter,
 } from './workouts.reducer';
 import { State } from '../state';
+import { trainingSelector } from '../selector';
 
 // Lookup the 'Workouts' feature state managed by NgRx
-export const getWorkoutsState = createFeatureSelector<State, WorkoutsState>(
-  WORKOUTS_FEATURE_KEY
+export const getWorkoutsState = createSelector(
+  trainingSelector,
+  (state) => state.workouts
 );
 
 const { selectAll, selectEntities } = workoutsAdapter.getSelectors();

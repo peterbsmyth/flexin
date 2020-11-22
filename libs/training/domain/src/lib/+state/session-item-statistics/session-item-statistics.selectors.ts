@@ -1,18 +1,15 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import {
-  SESSIONITEMSTATISTICS_FEATURE_KEY,
   SessionItemStatisticsState,
   sessionItemStatisticsAdapter,
 } from './session-item-statistics.reducer';
-import { State } from '../state';
-
 import { getAllSetStatistics } from '../set-statistics/set-statistics.selectors';
+import { trainingSelector } from '../selector';
 
-// Lookup the 'SessionItemStatistics' feature state managed by NgRx
-export const getSessionItemStatisticsState = createFeatureSelector<
-  State,
-  SessionItemStatisticsState
->(SESSIONITEMSTATISTICS_FEATURE_KEY);
+export const getSessionItemStatisticsState = createSelector(
+  trainingSelector,
+  (state) => state.sessionItemStatistics
+);
 
 const {
   selectAll,

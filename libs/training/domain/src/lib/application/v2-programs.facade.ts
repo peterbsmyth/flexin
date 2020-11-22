@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-
 import { select, Store, Action } from '@ngrx/store';
-
-import { State } from '../+state/state';
+import { TrainingState } from '../+state/state';
 import * as V2ProgramsSelectors from '../+state/v2-programs/v2-programs.selectors';
 import { V2DraftProgramsDataService } from '../infrastructure/v2-draft-programs.data.service';
 
@@ -31,7 +29,7 @@ export class V2ProgramsFacade {
   }
 
   constructor(
-    private store: Store<State>,
+    private store: Store<TrainingState>,
     private draftProgramService: V2DraftProgramsDataService
   ) {}
 }

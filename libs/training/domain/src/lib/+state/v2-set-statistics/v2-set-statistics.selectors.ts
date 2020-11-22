@@ -1,16 +1,14 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { State } from '../state';
+import { createSelector } from '@ngrx/store';
+import { trainingSelector } from '../selector';
 import {
-  V2SETSTATISTICS_FEATURE_KEY,
   V2SetStatisticsState,
   v2SetStatisticsAdapter,
 } from './v2-set-statistics.reducer';
 
-// Lookup the 'V2SetStatistics' feature state managed by NgRx
-export const getV2SetStatisticsState = createFeatureSelector<
-  State,
-  V2SetStatisticsState
->(V2SETSTATISTICS_FEATURE_KEY);
+export const getV2SetStatisticsState = createSelector(
+  trainingSelector,
+  (state) => state.v2SetStatistics
+);
 
 const { selectAll, selectEntities } = v2SetStatisticsAdapter.getSelectors();
 

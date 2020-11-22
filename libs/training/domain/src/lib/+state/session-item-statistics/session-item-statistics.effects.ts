@@ -11,8 +11,8 @@ import {
 } from 'rxjs/operators';
 import { SessionItemStatisticDataService } from '../../infrastructure/session-item-statistic.data.service';
 import { getAllSessionStatistics } from '../session-statistics/session-statistics.selectors';
-import { of, throwError } from 'rxjs';
-import { State } from '../state';
+import { of } from 'rxjs';
+import { TrainingState } from '../state';
 import { Store } from '@ngrx/store';
 
 @Injectable()
@@ -167,7 +167,7 @@ export class SessionItemStatisticsEffects {
 
   constructor(
     private actions$: Actions,
-    private store: Store<State>,
+    private store: Store<TrainingState>,
     private backend: SessionItemStatisticDataService
   ) {}
 }

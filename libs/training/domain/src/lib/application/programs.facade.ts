@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-
 import { select, Store, Action } from '@ngrx/store';
-
-import { State } from '../+state/state';
+import { TrainingState } from '../+state/state';
 import * as ProgramsSelectors from '../+state/programs/programs.selectors';
 import { DraftProgramsDataService } from '../infrastructure/draft-programs.data.service';
 import { Observable } from 'rxjs';
@@ -27,7 +25,7 @@ export class ProgramsFacade {
   }
 
   constructor(
-    private store: Store<State>,
+    private store: Store<TrainingState>,
     private draftProgramService: DraftProgramsDataService
   ) {}
 }

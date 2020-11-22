@@ -12,7 +12,7 @@ import { ExerciseDataService } from '../../infrastructure/exercise.data.service'
 import { SessionItemDataService } from '../../infrastructure/session-item.data.service';
 import { SessionDataService } from '../../infrastructure/session.data.service';
 import { WeekDataService } from '../../infrastructure/week.data.service';
-import { State } from '../state';
+import { TrainingState } from '../state';
 import { Store } from '@ngrx/store';
 import { DraftProgramsDataService } from '../../infrastructure/draft-programs.data.service';
 import { ExercisesActions } from '../exercises/actions';
@@ -205,7 +205,7 @@ export class ProgramsEffects {
   );
   constructor(
     private actions$: Actions,
-    private store: Store<State>,
+    private store: Store<TrainingState>,
     private programService: ProgramDataService,
     private draftProgramService: DraftProgramsDataService,
     private weekService: WeekDataService,

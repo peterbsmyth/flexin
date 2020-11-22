@@ -68,8 +68,8 @@ export interface State {
   readonly [PROGRAMS_FEATURE_KEY]: ProgramsState;
   readonly [SESSIONITEMS_FEATURE_KEY]: SessionItemsState;
   readonly [SESSIONITEMSTATISTICS_FEATURE_KEY]: SessionItemStatisticsState;
-  readonly [SESSIONS_FEATURE_KEY]: SessionStatisticsState;
-  readonly [SESSIONSTATISTICS_FEATURE_KEY]: SessionsState;
+  readonly [SESSIONS_FEATURE_KEY]: SessionsState;
+  readonly [SESSIONSTATISTICS_FEATURE_KEY]: SessionStatisticsState;
   readonly [SETSTATISTICS_FEATURE_KEY]: SetStatisticsState;
   readonly [WEEKSTATISTICS_FEATURE_KEY]: WeekStatisticsState;
   readonly [WEEKS_FEATURE_KEY]: WeeksState;
@@ -81,4 +81,8 @@ export interface State {
   readonly [FOODS_FEATURE_KEY]: FoodsState;
   readonly [MEALS_FEATURE_KEY]: MealsState;
   readonly [MEALPLANS_FEATURE_KEY]: MealPlansState;
+}
+
+export interface TrainingState {
+  training: State;
 }

@@ -1,26 +1,22 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import {
-  SESSIONITEMS_FEATURE_KEY,
   SessionItemsState,
   sessionItemsAdapter,
 } from './session-items.reducer';
-import { State } from '../state';
 import { Pages } from '@bod/shared/models';
 
-import {
-  SessionsState,
-  SESSIONS_FEATURE_KEY,
-} from '../sessions/sessions.reducer';
+import { SessionsState } from '../sessions/sessions.reducer';
 import { getExercisesEntities } from '../exercises/exercises.selectors';
+import { trainingSelector } from '../selector';
 
-// Lookup the 'SessionItems' feature state managed by NgRx
-export const getSessionItemsState = createFeatureSelector<
-  State,
-  SessionItemsState
->(SESSIONITEMS_FEATURE_KEY);
+export const getSessionItemsState = createSelector(
+  trainingSelector,
+  (state) => state.sessionItems
+);
 
-export const getSessionsState = createFeatureSelector<State, SessionsState>(
-  SESSIONS_FEATURE_KEY
+export const getSessionsState = createSelector(
+  trainingSelector,
+  (state) => state.sessions
 );
 
 export const getSelectedSessionId = createSelector(

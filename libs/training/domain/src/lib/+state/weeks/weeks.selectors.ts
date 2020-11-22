@@ -1,19 +1,17 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { WEEKS_FEATURE_KEY, weeksAdapter, WeeksState } from './weeks.reducer';
-import { State } from '../state';
+import { createSelector } from '@ngrx/store';
+import { weeksAdapter, WeeksState } from './weeks.reducer';
 import { getAllSessions } from '../sessions/sessions.selectors';
-import {
-  ProgramsState,
-  PROGRAMS_FEATURE_KEY,
-} from '../programs/programs.reducer';
+import { ProgramsState } from '../programs/programs.reducer';
+import { trainingSelector } from '../selector';
 
-// Lookup the 'Weeks' feature state managed by NgRx
-export const getWeeksState = createFeatureSelector<State, WeeksState>(
-  WEEKS_FEATURE_KEY
+export const getWeeksState = createSelector(
+  trainingSelector,
+  (state) => state.weeks
 );
 
-export const getProgramsState = createFeatureSelector<State, ProgramsState>(
-  PROGRAMS_FEATURE_KEY
+export const getProgramsState = createSelector(
+  trainingSelector,
+  (state) => state.programs
 );
 
 export const getProgramsEntities = createSelector(
