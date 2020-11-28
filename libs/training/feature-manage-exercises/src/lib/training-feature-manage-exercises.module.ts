@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrainingDomainModule } from '@bod/training/domain';
-import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
-import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
 import { ExerciseTableComponent } from './containers/exercise-table/exercise-table.component';
 import { ExercisePage } from './pages/exercise/exercise.page';
 import { ExerciseCreatePage } from './pages/exercise-create/exercise-create.page';
 import { ExercisesPage } from './pages/exercises/exercises.page';
 import { BodComponentsModule } from '@bod/shared/components';
-import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +17,7 @@ import { TrainingFeatureManageExercisesRoutingModule } from './training-feature-
 import { MatSortModule } from '@angular/material/sort';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { MatButtonModule } from '@angular/material/button';
+import { TrainingUiComponentsModule } from '@bod/training/ui-components';
 
 @NgModule({
   imports: [
@@ -28,7 +26,6 @@ import { MatButtonModule } from '@angular/material/button';
     TrainingFeatureManageExercisesRoutingModule,
     ReactiveComponentModule,
     BodComponentsModule,
-    MatDialogModule,
     ReactiveFormsModule,
     MatCheckboxModule,
     MatInputModule,
@@ -38,10 +35,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatSortModule,
     MatTableModule,
     MatButtonModule,
+    TrainingUiComponentsModule,
   ],
   declarations: [
-    ExerciseDialog,
-    ExerciseFormComponent,
     ExerciseTableComponent,
     ExercisePage,
     ExercisesPage,

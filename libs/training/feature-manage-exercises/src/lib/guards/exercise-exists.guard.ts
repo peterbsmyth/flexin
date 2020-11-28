@@ -35,6 +35,7 @@ export class ExerciseExistsGuard implements CanActivate {
      */
     this.exercisesState.dispatch(selectExerciseFromGuard({ id: +id }));
     return this.hasExerciseInStore().pipe(
+      take(1),
       switchMap((inStore) => {
         if (inStore) {
           return of(inStore);

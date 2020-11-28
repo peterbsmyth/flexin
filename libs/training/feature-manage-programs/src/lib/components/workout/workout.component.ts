@@ -18,7 +18,7 @@ import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Exercise, Workout } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
-import { ExerciseDialog } from '../exercise-dialog/exercise.dialog';
+import { ExerciseDialog } from '@bod/training/ui-components';
 
 @Component({
   selector: 'training-workout',
@@ -134,7 +134,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
 
   openExerciseDialog() {
     const dialogRef = this.dialog.open(ExerciseDialog, {
-      width: '500px',
+      width: '700px',
       data: this.workout.exercise,
     });
 

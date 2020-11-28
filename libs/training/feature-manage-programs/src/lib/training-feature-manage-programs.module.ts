@@ -23,12 +23,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NumericDirective } from './components/workout/numeric.directive';
-import { MatDialogModule } from '@angular/material/dialog';
 import { WorkoutPage } from './pages/workout/workout.page';
 import { WorkoutFormComponent } from './components/workout-form/workout-form.component';
 import { TrainingFeatureManageProgramsRoutingModule } from './training-feature-manage-programs-routing.module';
-import { ExerciseFormComponent } from './components/exercise-form/exercise-form.component';
-import { ExerciseDialog } from './components/exercise-dialog/exercise.dialog';
 import { TrainingUiComponentsModule } from '@bod/training/ui-components';
 import { StatisticsPage } from './pages/statistics/statistics.page';
 import { WorkoutStatisticCardComponent } from './components/workout-statistic-card/workout-statistic-card.component';
@@ -37,8 +34,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
-    ExerciseDialog,
-    ExerciseFormComponent,
     BoardCardComponent,
     WorkoutComponent,
     ProgramCreatePage,
@@ -73,7 +68,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatButtonModule,
     DragDropModule,
     MatSelectModule,
-    MatDialogModule,
   ],
 })
 export class TrainingFeatureManageProgramsModule {}
