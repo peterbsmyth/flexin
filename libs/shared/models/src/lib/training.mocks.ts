@@ -19,6 +19,21 @@ export const mockExercise: Exercise = {
         instagramUsername: 'calisthenics',
       },
     },
+    {
+      id: 2,
+      name: 'Single Leg',
+      order: 3,
+      createdBy: {
+        id: 1,
+        name: 'calisthenics',
+        username: 'calisthenics@peterbsmyth.com',
+        emailVerified: true,
+        realm: null,
+        verificationToken: null,
+        role: 'coach',
+        instagramUsername: 'calisthenics',
+      },
+    },
   ],
   categories: [
     {

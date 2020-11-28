@@ -102,12 +102,12 @@ export class WorkoutComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         debounceTime(300),
         tap((value) => {
-          const data: Workout = {
+          const workout: Workout = {
             ...this.workout,
             ...value,
             reps: value.reps ? value.reps : 0,
           };
-          this.update.emit(data);
+          this.update.emit(workout);
         })
       )
       .subscribe();

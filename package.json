@@ -32,6 +32,8 @@
   },
   "private": true,
   "dependencies": {
+    "@ag-grid-community/angular": "^24.1.0",
+    "@ag-grid-community/core": "^24.1.0",
     "@angular-architects/ddd": "1.1.0",
     "@angular/animations": "10.1.0",
     "@angular/cdk": "10.1.0",
@@ -50,6 +52,8 @@
     "@ngrx/store": "10.0.0",
     "@ngx-pwa/local-storage": "10.1.0",
     "@swimlane/ngx-charts": "16.0.0",
+    "ag-grid-angular": "^24.1.0",
+    "ag-grid-community": "24.1.0",
     "commitizen": "4.2.1",
     "core-js": "2.5.4",
     "cz-customizable": "6.3.0",

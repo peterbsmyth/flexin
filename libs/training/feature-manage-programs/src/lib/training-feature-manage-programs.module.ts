@@ -16,7 +16,7 @@ import { BoardCardComponent } from './components/board-card/board-card.component
 import { WorkoutComponent } from './components/workout/workout.component';
 import { ProgramPage } from './pages/program/program.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
-import { ProgramConfigurationBoardPage } from './pages/program-configuration-board/program-configuration-board.page';
+import { WorkoutConfigurationBoardPage } from './pages/workout-configuration-board/workout-configuration-board.page';
 import { ProgramBoardComponent } from './components/program-board/program-board.component';
 import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -31,6 +31,10 @@ import { StatisticsPage } from './pages/statistics/statistics.page';
 import { WorkoutStatisticCardComponent } from './components/workout-statistic-card/workout-statistic-card.component';
 import { ExercisePage } from './pages/exercise/exercise.page';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AgGridModule } from 'ag-grid-angular';
+import { WorkoutConfigurationGridComponent } from './components/workout-configuration-grid/workout-configuration-grid.component';
+import { CheckboxRenderer } from './components/workout-configuration-grid/checkbox-renderer/checkbox.renderer';
+import { SelectEditor } from './components/workout-configuration-grid/select-editor/select.editor';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ProgramCreatePage,
     ProgramPage,
     ProgramBoardPage,
-    ProgramConfigurationBoardPage,
+    WorkoutConfigurationBoardPage,
     ProgramBoardComponent,
     NumericDirective,
     WorkoutPage,
@@ -47,6 +51,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     StatisticsPage,
     WorkoutStatisticCardComponent,
     ExercisePage,
+    WorkoutConfigurationGridComponent,
+    CheckboxRenderer,
+    SelectEditor,
   ],
   imports: [
     CommonModule,
@@ -68,6 +75,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatButtonModule,
     DragDropModule,
     MatSelectModule,
+    AgGridModule.withComponents([]),
   ],
 })
 export class TrainingFeatureManageProgramsModule {}

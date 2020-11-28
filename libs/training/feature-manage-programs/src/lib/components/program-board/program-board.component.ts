@@ -83,18 +83,6 @@ export class ProgramBoardComponent {
   }
 
   /**
-   * uniquePredicate
-   * enforces that only one exercise-of-a-kind may be in a column
-   * @param drag a drag event that has card data
-   * @param list the list the card is being dropped to
-   */
-  uniquePredicate = (drag: CdkDrag<BoardCardData>, list: CdkDropList) => {
-    const array = this.board[+list.id];
-    const arrayIncludesExercise = array.find((e) => e.id === drag.data.id);
-    return !arrayIncludesExercise;
-  };
-
-  /**
    * onRemove
    * removes a card from the board
    * @param i index of the column in the board

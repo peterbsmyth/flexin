@@ -20,14 +20,9 @@
   </button>
 </bod-actions-bar>
 <bod-page-layout>
-  <div class="board">
-    <training-workout
-      *ngFor="let workout of programsState.draftProgramConfiguration$| async; let i = index;"
-      class="item"
-      [workout]="workout"
-      (update)="onUpdate($event)"
-      (updateExercise)="onUpdateExercise($event)"
-      (validate)="onValidate($event, i)"
-    ></training-workout>
-  </div>
+  <training-workout-configuration-grid
+    [workouts]="programsState.draftProgramConfiguration$ | async"
+    (update)="onUpdate($event)"
+    (updateExercise)="onUpdateExercise($event)"
+  ></training-workout-configuration-grid>
 </bod-page-layout>

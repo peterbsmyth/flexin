@@ -94,7 +94,7 @@ export class ExerciseFormComponent implements OnInit {
     this.save.emit({
       ...form,
       intensities: form.intensities.map((i) => i.name),
-      categroies: form.categroies.map((i) => i.name),
+      categories: form.categories.map((i) => i.name),
       id: this.exercise ? this.exercise.id : undefined,
     });
   }

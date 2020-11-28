@@ -1,0 +1,9 @@
+<ag-grid-angular
+  class="ag-theme-alpine style"
+  [rowData]="workouts"
+  [columnDefs]="columnDefs$ | async"
+  [defaultColDef]="defaultColDef"
+  (cellValueChanged)="onCellValueChanged($event)"
+  [frameworkComponents]="frameworkComponents"
+>
+</ag-grid-angular>

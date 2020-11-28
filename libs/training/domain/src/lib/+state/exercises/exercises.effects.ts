@@ -51,9 +51,10 @@ export class ExercisesEffects {
       ofType(ExercisesActions.updateExercise),
       optimisticUpdate({
         run: (action) => {
-          return this.backend
-            .patchOne(action.exercise)
-            .pipe(mapTo(ExercisesActions.updateExerciseSuccess()));
+          return ExercisesActions.updateExerciseSuccess();
+          // return this.backend
+          //   .patchOne(action.exercise)
+          //   .pipe(mapTo(ExercisesActions.updateExerciseSuccess()));
         },
         undoAction: (action, error) => {
           console.error('Error', error);

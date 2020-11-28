@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { catchError, switchMap, tap, filter } from 'rxjs/operators';
 import { BoardCardData } from '../entities/component.models';
-import { uniqBy } from 'lodash-es';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Exercise, Workout } from '@bod/shared/models';
@@ -73,8 +72,12 @@ export class DraftProgramsDataService {
         });
       });
     });
-    const uniqueWorkouts: Workout[] = uniqBy(workouts, 'exerciseId');
-    this.storage.set('workouts', uniqueWorkouts).subscribe();
+    /**
+     * use only the week one workouts because the workout configuration grid
+     * is predicated on each week being the same
+     */
+    const weekOneWorkouts = workouts.filter((w) => w.week === 1);
+    this.storage.set('workouts', weekOneWorkouts).subscribe();
   }
 
   createProgram(data: Workout[], number: number): Observable<any> {

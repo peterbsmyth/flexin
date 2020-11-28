@@ -28,7 +28,6 @@
     <ng-container *ngFor="let column of board; let i = index">
       <section
         [id]="i.toString()"
-        [cdkDropListEnterPredicate]="uniquePredicate"
         cdkDropList
         [cdkDropListConnectedTo]="connectedTo(i)"
         [cdkDropListData]="column"
