@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { mockWorkouts, SetStatistic } from '@bod/shared/models';
+import { WindowRef } from '@bod/shared/utils';
 import {
+  ExercisesFacade,
   loadExercises,
   loadPrograms,
-  selectExerciseFromGuard,
-  ExercisesFacade,
   ProgramsFacade,
+  selectExerciseFromGuard,
 } from '@bod/training/domain';
-import { combineLatest, Observable, of, Subject } from 'rxjs';
-import { mockWorkouts, SetStatistic } from '@bod/shared/models';
-import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
-import { WindowRef } from '@bod/shared/utils';
-import { FormControl } from '@angular/forms';
 import { maxBy } from 'lodash-es';
+import { combineLatest, Observable, of, Subject } from 'rxjs';
+import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './exercise.page.html',

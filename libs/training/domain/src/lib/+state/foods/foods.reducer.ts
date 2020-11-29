@@ -1,8 +1,7 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
-import * as FoodsActions from './foods.actions';
 import { Food } from '@bod/shared/models';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import * as FoodsActions from './foods.actions';
 
 export const FOODS_FEATURE_KEY = 'foods';
 

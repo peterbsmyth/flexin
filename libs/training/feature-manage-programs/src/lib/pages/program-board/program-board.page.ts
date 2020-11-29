@@ -1,20 +1,20 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  ExercisesFacade,
-  ProgramsFacade,
-  BoardCardData,
-  loadExercises,
-  pushDraft,
-  popDraft,
-  resetDraft,
-  addIncompleteWorkouts,
-} from '@bod/training/domain';
-import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import Fuse from 'fuse.js';
 import { Exercise } from '@bod/shared/models';
+import {
+  addIncompleteWorkouts,
+  BoardCardData,
+  ExercisesFacade,
+  loadExercises,
+  popDraft,
+  ProgramsFacade,
+  pushDraft,
+  resetDraft,
+} from '@bod/training/domain';
+import Fuse from 'fuse.js';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './program-board.page.html',

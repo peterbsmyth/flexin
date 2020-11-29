@@ -1,21 +1,19 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import {
-  CdkDrag,
-  CdkDropList,
   CdkDragDrop,
-  moveItemInArray,
   copyArrayItem,
+  moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { remove, cloneDeep } from 'lodash-es';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { isBoardEmpty, OnChange } from '@bod/shared/utils';
 import { BoardCardData } from '@bod/training/domain';
-import { OnChange, isBoardEmpty } from '@bod/shared/utils';
+import { cloneDeep, remove } from 'lodash-es';
 
 @Component({
   selector: 'training-program-board',

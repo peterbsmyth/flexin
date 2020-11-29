@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-
-import { select, Store, Action } from '@ngrx/store';
-
-import { TrainingState } from '../+state/state';
+import { Action, select, Store } from '@ngrx/store';
 import * as SetStatisticsSelectors from '../+state/set-statistics/set-statistics.selectors';
+import { TrainingState } from '../+state/state';
 
 @Injectable({ providedIn: 'root' })
 export class SetStatisticsFacade {

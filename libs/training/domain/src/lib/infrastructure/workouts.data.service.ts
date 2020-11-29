@@ -1,8 +1,8 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@bod/shared/environments';
 import { Workout } from '@bod/shared/models';
 import { Observable } from 'rxjs';
-import { environment } from '@bod/shared/environments';
-import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',

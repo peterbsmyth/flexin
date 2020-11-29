@@ -1,14 +1,14 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
+  OnDestroy,
   OnInit,
   ViewChild,
-  AfterViewInit,
-  OnDestroy,
 } from '@angular/core';
 import { ProgramsFacade } from '@bod/training/domain';
 import { Subject } from 'rxjs';
-import { take, tap, filter } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './statistics.page.html',

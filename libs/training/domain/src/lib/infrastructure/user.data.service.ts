@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
-import { catchError, switchMap, tap, filter } from 'rxjs/operators';
-import { StorageMap } from '@ngx-pwa/local-storage';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from '@bod/shared/models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from '@bod/shared/environments';
+import { User } from '@bod/shared/models';
+import { StorageMap } from '@ngx-pwa/local-storage';
+import { Observable, ReplaySubject } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserDataService {

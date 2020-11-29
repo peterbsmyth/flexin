@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { MealsState, mealsAdapter } from './meals.reducer';
 import { trainingSelector } from '../selector';
+import { mealsAdapter, MealsState } from './meals.reducer';
 
 export const getMealsState = createSelector(
   trainingSelector,

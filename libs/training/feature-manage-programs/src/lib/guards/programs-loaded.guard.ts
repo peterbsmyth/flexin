@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { ProgramsFacade } from '@bod/training/domain';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import {
-  filter,
-  take,
-  switchMapTo,
-  map,
+  loadProgramsFromPage,
+  ProgramsFacade,
+  selectProgramFromGuard,
+} from '@bod/training/domain';
+import { Observable, of } from 'rxjs';
+import {
   catchError,
+  filter,
+  map,
+  switchMapTo,
+  take,
   tap,
 } from 'rxjs/operators';
-import {
-  selectProgramFromGuard,
-  loadProgramsFromPage,
-} from '@bod/training/domain';
 
 @Injectable({
   providedIn: 'root',

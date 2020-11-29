@@ -1,10 +1,10 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { map, withLatestFrom } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
 import { Exercise } from '@bod/shared/models';
 import { ExercisesFacade } from '@bod/training/domain';
+import { merge, Observable } from 'rxjs';
+import { map, withLatestFrom } from 'rxjs/operators';
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: Exercise[] = [];

@@ -1,23 +1,14 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch, optimisticUpdate } from '@nrwl/angular';
-
-import * as fromWorkouts from './workouts.reducer';
-import { getSelected as getSelectedProgram } from '../programs/programs.selectors';
-import * as WorkoutsActions from './workouts.actions';
 import { mockWorkouts } from '@bod/shared/models';
-import {
-  map,
-  mapTo,
-  concatMap,
-  withLatestFrom,
-  tap,
-  switchMap,
-} from 'rxjs/operators';
-import { WorkoutsDataService } from '../../infrastructure/workouts.data.service';
-import { TrainingState } from '../state';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
+import { concatMap, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { WorkoutsDataService } from '../../infrastructure/workouts.data.service';
+import { getSelected as getSelectedProgram } from '../programs/programs.selectors';
+import { TrainingState } from '../state';
+import * as WorkoutsActions from './workouts.actions';
 
 @Injectable()
 export class WorkoutsEffects {

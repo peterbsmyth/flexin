@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch, optimisticUpdate } from '@nrwl/angular';
-
-import * as fromExercises from './exercises.reducer';
-import * as ExercisesActions from './exercises.actions';
 import { mockExercises } from '@bod/shared/models';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { ExercisesDataService } from '../../infrastructure/exercises.data.service';
-import { mapTo } from 'rxjs/operators';
+import * as ExercisesActions from './exercises.actions';
 
 @Injectable()
 export class ExercisesEffects {

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { mockWorkouts, SetStatistic } from '@bod/shared/models';
-
-import { Observable, of, combineLatest } from 'rxjs';
-import { filter, map, withLatestFrom } from 'rxjs/operators';
-import { maxBy } from 'lodash-es';
 import { ProgramsFacade } from '@bod/training/domain';
+import { maxBy } from 'lodash-es';
+import { combineLatest, Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'training-statistics',

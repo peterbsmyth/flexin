@@ -1,10 +1,9 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
-import * as ProgramsActions from './programs.actions';
-import * as WorkoutsActions from '../workouts/workouts.actions';
-import * as SetStatisticsActions from '../set-statistics/set-statistics.actions';
 import { Program } from '@bod/shared/models';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import * as SetStatisticsActions from '../set-statistics/set-statistics.actions';
+import * as WorkoutsActions from '../workouts/workouts.actions';
+import * as ProgramsActions from './programs.actions';
 
 export const PROGRAMS_FEATURE_KEY = 'programs';
 

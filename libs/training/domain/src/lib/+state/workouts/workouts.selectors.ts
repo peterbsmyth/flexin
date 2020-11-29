@@ -1,11 +1,6 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  WORKOUTS_FEATURE_KEY,
-  WorkoutsState,
-  workoutsAdapter,
-} from './workouts.reducer';
-import { State } from '../state';
+import { createSelector } from '@ngrx/store';
 import { trainingSelector } from '../selector';
+import { workoutsAdapter, WorkoutsState } from './workouts.reducer';
 
 // Lookup the 'Workouts' feature state managed by NgRx
 export const getWorkoutsState = createSelector(

@@ -1,11 +1,10 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  OnInit,
-  Inject,
-  Output,
   EventEmitter,
   Input,
-  ChangeDetectionStrategy,
+  OnInit,
+  Output,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Exercise } from '@bod/shared/models';

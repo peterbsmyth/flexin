@@ -1,21 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Program } from '@bod/shared/models';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   ProgramsFacade,
-  selectWeek,
   selectDay,
-  selectWorkout,
   selectProgramFromPage,
+  selectWeek,
+  selectWorkout,
 } from '@bod/training/domain';
 import { Subject } from 'rxjs';
 import {
+  filter,
   map,
   take,
   takeUntil,
   tap,
-  filter,
   withLatestFrom,
 } from 'rxjs/operators';
 

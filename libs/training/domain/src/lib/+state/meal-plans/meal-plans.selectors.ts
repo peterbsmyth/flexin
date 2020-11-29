@@ -1,6 +1,6 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { MealPlansState, mealPlansAdapter } from './meal-plans.reducer';
+import { createSelector } from '@ngrx/store';
 import { trainingSelector } from '../selector';
+import { mealPlansAdapter, MealPlansState } from './meal-plans.reducer';
 
 export const getMealPlansState = createSelector(
   trainingSelector,

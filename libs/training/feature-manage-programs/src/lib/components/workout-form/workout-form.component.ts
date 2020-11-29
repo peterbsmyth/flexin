@@ -6,12 +6,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { WorkoutFormData } from '@bod/training/domain';
-import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { takeUntil, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Workout } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
+import { WorkoutFormData } from '@bod/training/domain';
+import { Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'training-workout-form',

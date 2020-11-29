@@ -1,8 +1,7 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
-import * as SetStatisticsActions from './set-statistics.actions';
 import { SetStatistic } from '@bod/shared/models';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import * as SetStatisticsActions from './set-statistics.actions';
 
 export const SETSTATISTICS_FEATURE_KEY = 'setStatistics';
 

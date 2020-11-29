@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { select, Store, Action } from '@ngrx/store';
-
+import { Action, select, Store } from '@ngrx/store';
 import { TrainingState } from '../+state/state';
 import * as WorkoutsSelectors from '../+state/workouts/workouts.selectors';
 

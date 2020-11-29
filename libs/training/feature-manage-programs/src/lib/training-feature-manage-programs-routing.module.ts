@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ProgramCreatePage } from './pages/program-create/program-create.page';
-import { ProgramPage } from './pages/program/program.page';
-import { WorkoutConfigurationBoardPage } from './pages/workout-configuration-board/workout-configuration-board.page';
-import { ProgramBoardPage } from './pages/program-board/program-board.page';
-import { StatisticsPage } from './pages/statistics/statistics.page';
+import { RouterModule, Routes } from '@angular/router';
 import { ProgramsLoadedGuard } from './guards/programs-loaded.guard';
 import { ExercisePage } from './pages/exercise/exercise.page';
+import { ProgramBoardPage } from './pages/program-board/program-board.page';
+import { ProgramCreatePage } from './pages/program-create/program-create.page';
+import { ProgramPage } from './pages/program/program.page';
+import { StatisticsPage } from './pages/statistics/statistics.page';
+import { WorkoutConfigurationBoardPage } from './pages/workout-configuration-board/workout-configuration-board.page';
 
 const routes: Routes = [
   {

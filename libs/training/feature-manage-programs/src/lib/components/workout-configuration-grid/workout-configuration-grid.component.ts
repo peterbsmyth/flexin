@@ -1,10 +1,10 @@
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
-  Input,
-  Output,
+  Component,
   EventEmitter,
+  Input,
+  OnInit,
+  Output,
 } from '@angular/core';
 import { Workout } from '@bod/shared/models';
 import { BehaviorSubject } from 'rxjs';

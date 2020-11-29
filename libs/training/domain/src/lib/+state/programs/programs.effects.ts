@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
-
-import * as fromPrograms from './programs.reducer';
-import * as ProgramsActions from './programs.actions';
-import * as ExercisesActions from '../exercises/exercises.actions';
-import { ProgramsDataService } from '../../infrastructure/programs.data.service';
-import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { mockExercises, mockPrograms } from '@bod/shared/models';
-import { ExercisesDataService } from '../../infrastructure/exercises.data.service';
-import { TrainingState } from '../state';
-import { Store } from '@ngrx/store';
-import { DraftProgramsDataService } from '../../infrastructure/draft-programs.data.service';
 import { Router } from '@angular/router';
+import { mockExercises, mockPrograms } from '@bod/shared/models';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { fetch } from '@nrwl/angular';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
+import { DraftProgramsDataService } from '../../infrastructure/draft-programs.data.service';
+import { ExercisesDataService } from '../../infrastructure/exercises.data.service';
+import { ProgramsDataService } from '../../infrastructure/programs.data.service';
+import * as ExercisesActions from '../exercises/exercises.actions';
 import { getAllExercises } from '../exercises/exercises.selectors';
-import { loadWorkoutsSuccess } from '../workouts/workouts.actions';
+import { TrainingState } from '../state';
+import * as ProgramsActions from './programs.actions';
 
 @Injectable()
 export class ProgramsEffects {

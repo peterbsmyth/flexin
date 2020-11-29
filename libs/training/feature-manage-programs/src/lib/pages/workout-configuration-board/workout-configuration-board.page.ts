@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Exercise, Workout } from '@bod/shared/models';
 import {
-  updateExercise,
   createProgram,
   ProgramsFacade,
+  updateExercise,
 } from '@bod/training/domain';
-import { Exercise, Workout } from '@bod/shared/models';
+import { ExerciseDialog } from '@bod/training/ui-components';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
-import { ExerciseDialog } from '@bod/training/ui-components';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './workout-configuration-board.page.html',

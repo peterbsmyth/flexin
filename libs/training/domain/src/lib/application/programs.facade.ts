@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { select, Store, Action } from '@ngrx/store';
-import { TrainingState } from '../+state/state';
+import { Action, select, Store } from '@ngrx/store';
 import * as ProgramsSelectors from '../+state/programs/programs.selectors';
+import { TrainingState } from '../+state/state';
 import { DraftProgramsDataService } from '../infrastructure/draft-programs.data.service';
 
 @Injectable({ providedIn: 'root' })

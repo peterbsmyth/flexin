@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
 import { trainingSelector } from '../selector';
 import {
-  SetStatisticsState,
   setStatisticsAdapter,
+  SetStatisticsState,
 } from './set-statistics.reducer';
 
 export const getSetStatisticsState = createSelector(

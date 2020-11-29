@@ -4,8 +4,8 @@ import { SetStatistic, Workout } from '@bod/shared/models';
 import {
   ProgramsFacade,
   selectWorkout,
-  updateWorkout,
   updateSetStatistic,
+  updateWorkout,
 } from '@bod/training/domain';
 
 @Component({

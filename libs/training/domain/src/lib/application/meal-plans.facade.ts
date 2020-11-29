@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-
-import { select, Store, Action } from '@ngrx/store';
-
-import { TrainingState } from '../+state/state';
+import { Action, select, Store } from '@ngrx/store';
 import * as MealPlansSelectors from '../+state/meal-plans/meal-plans.selectors';
+import { TrainingState } from '../+state/state';
 
 @Injectable({ providedIn: 'root' })
 export class MealPlansFacade {

@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { trainingSelector } from '../selector';
-import { CategoriesState, categoriesAdapter } from './categories.reducer';
+import { categoriesAdapter, CategoriesState } from './categories.reducer';
 
 // Lookup the 'Categories' feature state managed by NgRx
 export const getCategoriesState = createSelector(

@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { FoodsState, foodsAdapter } from './foods.reducer';
 import { trainingSelector } from '../selector';
+import { foodsAdapter, FoodsState } from './foods.reducer';
 
 export const getFoodsState = createSelector(
   trainingSelector,

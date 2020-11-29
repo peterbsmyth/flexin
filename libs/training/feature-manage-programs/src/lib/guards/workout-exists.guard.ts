@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import {
   loadWorkoutFromGuard,
   selectWorkoutFromGuard,
   WorkoutsFacade,
 } from '@bod/training/domain';
+import { Observable, of } from 'rxjs';
 import {
+  catchError,
   filter,
-  take,
+  map,
   switchMap,
   switchMapTo,
-  map,
-  catchError,
+  take,
 } from 'rxjs/operators';
 
 @Injectable({

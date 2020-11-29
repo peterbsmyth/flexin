@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Exercise } from '@bod/shared/models';
-import { loadExercises, ExercisesFacade } from '@bod/training/domain';
+import { ExercisesFacade, loadExercises } from '@bod/training/domain';
+import { Observable } from 'rxjs';
 
 @Component({
   templateUrl: './exercises.page.html',

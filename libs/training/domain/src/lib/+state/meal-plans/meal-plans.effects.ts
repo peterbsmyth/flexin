@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-
-import * as fromMealPlans from './meal-plans.reducer';
 import * as MealPlansActions from './meal-plans.actions';
 
 @Injectable()

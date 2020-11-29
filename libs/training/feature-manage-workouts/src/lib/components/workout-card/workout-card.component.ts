@@ -1,17 +1,17 @@
 import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  OnDestroy,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
 } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { merge, Subject } from 'rxjs';
-import { debounceTime, tap, takeUntil, filter } from 'rxjs/operators';
-import { OnChange } from '@bod/shared/utils';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { SetStatistic, Workout } from '@bod/shared/models';
+import { OnChange } from '@bod/shared/utils';
+import { merge, Subject } from 'rxjs';
+import { debounceTime, filter, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'training-workout-card',

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Food } from '@bod/shared/models';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from '@bod/shared/environments';
+import { Food } from '@bod/shared/models';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class FoodsDataService {

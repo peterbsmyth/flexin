@@ -1,8 +1,7 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
-import * as WorkoutsActions from './workouts.actions';
 import { Workout } from '@bod/shared/models';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import * as WorkoutsActions from './workouts.actions';
 
 export const WORKOUTS_FEATURE_KEY = 'workouts';
 

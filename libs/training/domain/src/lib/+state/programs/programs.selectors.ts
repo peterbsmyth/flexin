@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { trainingSelector } from '../selector';
-import { ProgramsState, programsAdapter } from './programs.reducer';
 import { getAllExercises } from '../exercises/exercises.selectors';
+import { trainingSelector } from '../selector';
+import { programsAdapter, ProgramsState } from './programs.reducer';
 
 export const getProgramsState = createSelector(
   trainingSelector,

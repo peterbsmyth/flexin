@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ExerciseExistsGuard } from './guards/exercise-exists.guard';
 import { ExerciseCreatePage } from './pages/exercise-create/exercise-create.page';
 import { ExercisePage } from './pages/exercise/exercise.page';

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TrainingDomainModule } from '@bod/training/domain';
+import { NgModule } from '@angular/core';
 import { BodComponentsModule } from '@bod/shared/components';
+import { TrainingDomainModule } from '@bod/training/domain';
 import { AuthPage } from './pages/auth.page';
 import { TrainingFeatureAuthRoutingModule } from './training-feature-auth-routing.module';
 

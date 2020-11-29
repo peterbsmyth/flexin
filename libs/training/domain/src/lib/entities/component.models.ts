@@ -1,4 +1,4 @@
-import { Workout, Exercise } from '@bod/shared/models';
+import { Exercise, Workout } from '@bod/shared/models';
 
 export interface WorkoutFormData {
   workout: Workout;

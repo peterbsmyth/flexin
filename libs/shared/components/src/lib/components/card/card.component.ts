@@ -1,10 +1,10 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  Directive,
+  HostBinding,
   OnInit,
   ViewEncapsulation,
-  ChangeDetectionStrategy,
-  HostBinding,
-  Directive,
 } from '@angular/core';
 
 @Component({

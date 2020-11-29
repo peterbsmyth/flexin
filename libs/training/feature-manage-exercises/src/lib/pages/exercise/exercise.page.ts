@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ExercisesFacade, updateExercise } from '@bod/training/domain';
 import { Exercise } from '@bod/shared/models';
+import { ExercisesFacade, updateExercise } from '@bod/training/domain';
 import { Observable } from 'rxjs';
 
 @Component({

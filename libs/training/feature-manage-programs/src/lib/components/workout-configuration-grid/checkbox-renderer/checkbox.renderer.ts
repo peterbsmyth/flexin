@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
-
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({

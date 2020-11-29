@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
-import { catchError, switchMap, tap, filter } from 'rxjs/operators';
-import { BoardCardData } from '../entities/component.models';
-import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Exercise, Workout } from '@bod/shared/models';
-import { WorkoutsDataService } from './workouts.data.service';
+import { StorageMap } from '@ngx-pwa/local-storage';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
+import { catchError, filter, switchMap, tap } from 'rxjs/operators';
+import { BoardCardData } from '../entities/component.models';
 import { ProgramsDataService } from './programs.data.service';
+import { WorkoutsDataService } from './workouts.data.service';
 
 @Injectable({
   providedIn: 'root',

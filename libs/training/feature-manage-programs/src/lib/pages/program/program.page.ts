@@ -4,24 +4,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   BoardCardData,
-  ProgramsFacade,
   loadDescendantsFromProgramPage,
-  selectWeek,
-  selectProgramFromPage,
   openWorkoutModal,
-  updateWorkoutFromWorkoutPage,
+  ProgramsFacade,
+  selectProgramFromPage,
+  selectWeek,
   updateWorkoutAndFutureWorkoutsFromWorkoutPage,
+  updateWorkoutFromWorkoutPage,
 } from '@bod/training/domain';
 import { Observable, Subject } from 'rxjs';
 import {
+  distinctUntilKeyChanged,
   filter,
   map,
+  switchMap,
+  take,
   takeUntil,
   tap,
   withLatestFrom,
-  take,
-  switchMap,
-  distinctUntilKeyChanged,
 } from 'rxjs/operators';
 import { WorkoutDialog } from '../../components/workout-dialog/workout.dialog';
 

@@ -1,37 +1,37 @@
 import { ActionReducerMap } from '@ngrx/store';
 import {
-  reducer as workoutsReducer,
-  WORKOUTS_FEATURE_KEY,
-} from './workouts/workouts.reducer';
-import {
-  reducer as categoriesReducer,
   CATEGORIES_FEATURE_KEY,
+  reducer as categoriesReducer,
 } from './categories/categories.reducer';
 import {
   EXERCISES_FEATURE_KEY,
   reducer as exercisesReducer,
 } from './exercises/exercises.reducer';
 import {
+  FOODS_FEATURE_KEY,
+  reducer as foodsReducer,
+} from './foods/foods.reducer';
+import {
+  MEALPLANS_FEATURE_KEY,
+  reducer as mealPlansReducer,
+} from './meal-plans/meal-plans.reducer';
+import {
+  MEALS_FEATURE_KEY,
+  reducer as mealsReducer,
+} from './meals/meals.reducer';
+import {
   PROGRAMS_FEATURE_KEY,
   reducer as programsReducer,
 } from './programs/programs.reducer';
 import {
-  SETSTATISTICS_FEATURE_KEY,
   reducer as setStatisticsReducer,
+  SETSTATISTICS_FEATURE_KEY,
 } from './set-statistics/set-statistics.reducer';
-import {
-  reducer as foodsReducer,
-  FOODS_FEATURE_KEY,
-} from './foods/foods.reducer';
-import {
-  reducer as mealsReducer,
-  MEALS_FEATURE_KEY,
-} from './meals/meals.reducer';
-import {
-  reducer as mealPlansReducer,
-  MEALPLANS_FEATURE_KEY,
-} from './meal-plans/meal-plans.reducer';
 import { State } from './state';
+import {
+  reducer as workoutsReducer,
+  WORKOUTS_FEATURE_KEY,
+} from './workouts/workouts.reducer';
 
 export const totalReducer: ActionReducerMap<State> = {
   [WORKOUTS_FEATURE_KEY]: workoutsReducer,
