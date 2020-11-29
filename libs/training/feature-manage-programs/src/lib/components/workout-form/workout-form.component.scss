@@ -11,11 +11,15 @@
 }
 
 mat-card-footer {
-  padding: 1rem;
+  padding: $space-m;
+}
+
+button {
+  margin-right: $space-m;
 }
 
 mat-card {
-  margin-bottom: 1rem;
+  margin-bottom: $space-m;
 }
 
 .exercise {

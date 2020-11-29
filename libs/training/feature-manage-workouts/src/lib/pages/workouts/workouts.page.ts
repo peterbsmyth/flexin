@@ -25,7 +25,6 @@ export class WorkoutsPage implements OnInit {
   }
 
   onSaveWorkout(workout: Partial<Workout>) {
-    console.log(workout);
     this.programsState.dispatch(
       updateWorkout({
         workout,

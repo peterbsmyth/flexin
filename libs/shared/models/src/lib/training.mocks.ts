@@ -209,8 +209,8 @@ export const mockWorkouts: Workout[] = [
   {
     id: 2,
     programId: 1,
-    exerciseId: 2,
-    exercise: mockExercises[1],
+    exerciseId: 1,
+    exercise: mockExercise,
     week: 2,
     day: 1,
     order: 1,

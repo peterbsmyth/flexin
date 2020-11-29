@@ -30,11 +30,11 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
   data: WorkoutFormData;
 
   @Output() save: EventEmitter<Partial<Workout>> = new EventEmitter();
+  @Output() savePlus: EventEmitter<Partial<Workout>> = new EventEmitter();
   form: FormGroup = this.fb.group({
     reps: 1,
     amrap: false,
-    leftRight: false,
-    sets: false,
+    sets: 0,
     weight: 0,
     weightUnit: 'lbs',
     intensity: this.fb.control('', Validators.required),
@@ -58,8 +58,7 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
     const form = this.fb.group({
       reps: this.fb.control(data.workout.reps),
       amrap: this.fb.control(data.workout.amrap),
-      leftRight: this.fb.control(false),
-      sets: this.fb.control(data.workout.sets),
+      sets: this.fb.control(data.workout.setCount),
       weight: this.fb.control(data.workout.weight),
       weightUnit: 'lbs',
       intensity: this.fb.control(data.workout.intensityId, Validators.required),
@@ -112,6 +111,12 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
       ...form,
       id: this.data.workout.id,
       order: this.data.workout.order,
+    });
+  }
+  onSubmitPlus(form) {
+    this.savePlus.emit({
+      ...this.data.workout,
+      ...form,
     });
   }
 

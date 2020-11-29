@@ -3,10 +3,21 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch, optimisticUpdate } from '@nrwl/angular';
 
 import * as fromWorkouts from './workouts.reducer';
+import { getSelected as getSelectedProgram } from '../programs/programs.selectors';
 import * as WorkoutsActions from './workouts.actions';
 import { mockWorkouts } from '@bod/shared/models';
-import { map, mapTo } from 'rxjs/operators';
+import {
+  map,
+  mapTo,
+  concatMap,
+  withLatestFrom,
+  tap,
+  switchMap,
+} from 'rxjs/operators';
 import { WorkoutsDataService } from '../../infrastructure/workouts.data.service';
+import { TrainingState } from '../state';
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
 
 @Injectable()
 export class WorkoutsEffects {
@@ -54,8 +65,48 @@ export class WorkoutsEffects {
     )
   );
 
+  updateWorkoutAndFutureWorkouts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WorkoutsActions.updateWorkoutAndFutureWorkoutsFromWorkoutPage),
+      concatMap((action) =>
+        of(action).pipe(withLatestFrom(this.store.select(getSelectedProgram)))
+      ),
+      switchMap(([{ workout }, program]) => {
+        const futureWorkouts = program.workouts.filter(
+          (w) =>
+            w.order === workout.order &&
+            w.day === workout.day &&
+            w.week > workout.week
+        );
+
+        return this.backend
+          .patchMany([workout, ...futureWorkouts])
+          .pipe(
+            map(() => WorkoutsActions.updateWorkoutAndFutureWorkoutsSuccess())
+          );
+      })
+      // fetch({
+      //   // provides an action
+      //   run: ({ id }) => {
+      //     return this.backend
+      //       .getOne(id)
+      //       .pipe(
+      //         map((workout) =>
+      //           ProgramsActions.loadWorkoutSuccess({ workout })
+      //         )
+      //       );
+      //   },
+      //   onError: (action, error: any) => {
+      //     // dispatch an undo action to undo the changes in the client state
+      //     return null;
+      //   },
+      // })
+    )
+  );
+
   constructor(
     private actions$: Actions,
-    private backend: WorkoutsDataService
+    private backend: WorkoutsDataService,
+    private store: Store<TrainingState>
   ) {}
 }

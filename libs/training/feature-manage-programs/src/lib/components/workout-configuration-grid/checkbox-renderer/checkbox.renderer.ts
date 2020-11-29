@@ -42,7 +42,6 @@ export class CheckboxRenderer
   }
 
   getValue() {
-    console.log(this.checkbox.value);
     return this.checkbox.value;
   }
 }

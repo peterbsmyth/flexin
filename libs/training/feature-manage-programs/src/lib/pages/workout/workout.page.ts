@@ -5,6 +5,7 @@ import {
   updateWorkoutFromWorkoutPage,
   loadExercises,
   ExercisesFacade,
+  updateWorkoutAndFutureWorkoutsFromWorkoutPage,
 } from '@bod/training/domain';
 import { Workout } from '@bod/shared/models';
 import { Observable, combineLatest } from 'rxjs';
@@ -36,6 +37,14 @@ export class WorkoutPage implements OnInit {
   onSave(workout: Workout) {
     this.workoutsState.dispatch(
       updateWorkoutFromWorkoutPage({
+        workout,
+      })
+    );
+  }
+
+  onSavePlus(workout: Workout) {
+    this.workoutsState.dispatch(
+      updateWorkoutAndFutureWorkoutsFromWorkoutPage({
         workout,
       })
     );

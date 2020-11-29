@@ -1,6 +1,10 @@
 <ng-container *ngrxLet="data$ as data">
   <bod-page-layout>
-    <training-workout-form [data]="data" (save)="onSave($event)">
+    <training-workout-form
+      [data]="data"
+      (save)="onSave($event)"
+      (savePlus)="onSavePlus($event)"
+    >
     </training-workout-form>
   </bod-page-layout>
 </ng-container>

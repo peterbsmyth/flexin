@@ -38,6 +38,15 @@ export const updateWorkoutFromWorkoutPage = createAction(
   props<{ workout: Workout }>()
 );
 
+export const updateWorkoutAndFutureWorkoutsFromWorkoutPage = createAction(
+  '[Workouts][Workout Page] Update Workout And Future Workouts',
+  props<{ workout: Workout }>()
+);
+
+export const updateWorkoutAndFutureWorkoutsSuccess = createAction(
+  '[Workouts] Update Workout And Future Workouts Success'
+);
+
 export const updateWorkout = createAction(
   '[Workouts] Update Workout',
   props<{ workout: Partial<Workout> }>()

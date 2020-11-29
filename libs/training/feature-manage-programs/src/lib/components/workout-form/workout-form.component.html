@@ -77,6 +77,14 @@
     >
       Save
     </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!form.valid"
+      (click)="onSubmitPlus(form.value)"
+    >
+      Save +
+    </button>
   </mat-card-footer>
 </mat-card>
 
