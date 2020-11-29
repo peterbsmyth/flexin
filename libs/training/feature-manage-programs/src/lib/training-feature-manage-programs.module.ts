@@ -13,7 +13,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { ProgramCreatePage } from './pages/program-create/program-create.page';
 import { BoardCardComponent } from './components/board-card/board-card.component';
-import { WorkoutComponent } from './components/workout/workout.component';
 import { ProgramPage } from './pages/program/program.page';
 import { ProgramBoardPage } from './pages/program-board/program-board.page';
 import { WorkoutConfigurationBoardPage } from './pages/workout-configuration-board/workout-configuration-board.page';
@@ -22,7 +21,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { NumericDirective } from './components/workout/numeric.directive';
 import { WorkoutPage } from './pages/workout/workout.page';
 import { WorkoutFormComponent } from './components/workout-form/workout-form.component';
 import { TrainingFeatureManageProgramsRoutingModule } from './training-feature-manage-programs-routing.module';
@@ -39,13 +37,11 @@ import { SelectEditor } from './components/workout-configuration-grid/select-edi
 @NgModule({
   declarations: [
     BoardCardComponent,
-    WorkoutComponent,
     ProgramCreatePage,
     ProgramPage,
     ProgramBoardPage,
     WorkoutConfigurationBoardPage,
     ProgramBoardComponent,
-    NumericDirective,
     WorkoutPage,
     WorkoutFormComponent,
     StatisticsPage,
