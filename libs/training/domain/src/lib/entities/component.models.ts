@@ -9,5 +9,4 @@ export interface BoardCardData {
   id?: number;
   name: string;
   category?: string;
-  routerLink?: string;
 }

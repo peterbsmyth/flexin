@@ -13,6 +13,7 @@ export interface ProgramsState extends EntityState<Program> {
   selectedWeek?: number;
   selectedDay?: number;
   selectedWorkoutId?: number;
+  openWorkoutModalId?: number;
   loaded: boolean; // has the Programs list been loaded
   error?: string | null; // last known error (if any)
 }
@@ -51,6 +52,10 @@ const programsReducer = createReducer(
       selectedId: id,
     })
   ),
+  on(ProgramsActions.openWorkoutModal, (state, { workoutId }) => ({
+    ...state,
+    openWorkoutModalId: workoutId,
+  })),
   on(ProgramsActions.selectWeek, (state, { week }) => ({
     ...state,
     selectedWeek: week,

@@ -102,3 +102,8 @@ export const addIncompleteWorkouts = createAction(
   '[Programs] Add IncompleteWorkouts',
   props<{ board: BoardCardData[][]; weekCount: number }>()
 );
+
+export const openWorkoutModal = createAction(
+  '[Programs] Open Workout Modal',
+  props<{ workoutId: number }>()
+);

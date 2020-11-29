@@ -32,7 +32,11 @@
   </div>
 </ng-container>
 <bod-page-layout>
-  <training-program-board [data]="board$ | async"></training-program-board>
+  <training-program-board
+    [clickable]="true"
+    [data]="programsState.board$ | async"
+    (cardClick)="onCardClick($event)"
+  ></training-program-board>
 </bod-page-layout>
 <ng-template #loading>
   Loading...

@@ -21,7 +21,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { WorkoutPage } from './pages/workout/workout.page';
 import { WorkoutFormComponent } from './components/workout-form/workout-form.component';
 import { TrainingFeatureManageProgramsRoutingModule } from './training-feature-manage-programs-routing.module';
 import { TrainingUiComponentsModule } from '@bod/training/ui-components';
@@ -33,6 +32,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { WorkoutConfigurationGridComponent } from './components/workout-configuration-grid/workout-configuration-grid.component';
 import { CheckboxRenderer } from './components/workout-configuration-grid/checkbox-renderer/checkbox.renderer';
 import { SelectEditor } from './components/workout-configuration-grid/select-editor/select.editor';
+import { WorkoutDialog } from './components/workout-dialog/workout.dialog';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,6 @@ import { SelectEditor } from './components/workout-configuration-grid/select-edi
     ProgramBoardPage,
     WorkoutConfigurationBoardPage,
     ProgramBoardComponent,
-    WorkoutPage,
     WorkoutFormComponent,
     StatisticsPage,
     WorkoutStatisticCardComponent,
@@ -50,6 +49,7 @@ import { SelectEditor } from './components/workout-configuration-grid/select-edi
     WorkoutConfigurationGridComponent,
     CheckboxRenderer,
     SelectEditor,
+    WorkoutDialog,
   ],
   imports: [
     CommonModule,

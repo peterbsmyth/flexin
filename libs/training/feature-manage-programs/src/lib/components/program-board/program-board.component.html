@@ -40,8 +40,7 @@
         <article *ngFor="let card of column; let j = index">
           <training-board-card
             class="board__card"
-            *ngIf="!!card.routerLink; else noRouterLink"
-            [routerLink]="[card.routerLink]"
+            (click)="onClick(card)"
             (remove)="onRemove(i, j)"
             [closeable]="!!sourceColumn"
             [name]="card.name"
@@ -49,17 +48,6 @@
             [cdkDragData]="card"
           >
           </training-board-card>
-          <ng-template #noRouterLink>
-            <training-board-card
-              class="board__card"
-              (remove)="onRemove(i, j)"
-              [name]="card.name"
-              cdkDrag
-              [closeable]="!!sourceColumn"
-              [cdkDragData]="card"
-            >
-            </training-board-card>
-          </ng-template>
         </article>
       </section>
     </ng-container>

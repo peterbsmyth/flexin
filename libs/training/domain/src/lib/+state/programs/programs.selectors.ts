@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { trainingSelector } from '../selector';
 import { ProgramsState, programsAdapter } from './programs.reducer';
+import { getAllExercises } from '../exercises/exercises.selectors';
 
 export const getProgramsState = createSelector(
   trainingSelector,
@@ -49,6 +50,11 @@ export const getSelectedWorkoutId = createSelector(
   (state: ProgramsState) => state.selectedWorkoutId
 );
 
+export const getOpenWorkoutModalId = createSelector(
+  getProgramsState,
+  (state: ProgramsState) => state.openWorkoutModalId
+);
+
 export const getSelected = createSelector(
   getProgramsEntities,
   getSelectedId,
@@ -86,4 +92,41 @@ export const selectedWorkout = createSelector(
   getSelectedWorkoutId,
   (program, workoutId) =>
     program.workouts.find((workout) => workout.id === workoutId)
+);
+
+export const getWorkoutFormData = createSelector(
+  getSelected,
+  getOpenWorkoutModalId,
+  getAllExercises,
+  (program, workoutId, exercises) => {
+    const workout = program.workouts.find((w) => w.id === workoutId);
+
+    return {
+      workout,
+      exercises,
+    };
+  }
+);
+
+export const getBoard = createSelector(
+  getSelected,
+  getAllExercises,
+  getSelectedWeek,
+  (program, exercises, week) => {
+    const workouts = program.workouts.filter(
+      (workout) => workout.week === week
+    );
+    const allDays = program.workouts.map((workout) => workout.day);
+    const sortedDays = [...new Set(allDays)].sort();
+    const board = sortedDays.map((dayNumber) => {
+      return workouts
+        .filter((workout) => workout.day === dayNumber)
+        .map((workout) => ({
+          name: exercises.find((exercise) => workout.exerciseId === exercise.id)
+            ?.name,
+          id: workout.id,
+        }));
+    });
+    return board;
+  }
 );

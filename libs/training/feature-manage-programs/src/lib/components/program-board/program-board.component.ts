@@ -39,6 +39,9 @@ export class ProgramBoardComponent {
   @Input()
   data: BoardCardData[][] = [[]];
   @Output() update: EventEmitter<BoardCardData[][]> = new EventEmitter();
+  @Output() cardClick: EventEmitter<any> = new EventEmitter();
+  @Input()
+  clickable = false;
   public allCategories = ['pull', 'push', 'other'];
   public categoriesLists: BoardCardData[][] = new Array(
     this.allCategories.length
@@ -124,6 +127,12 @@ export class ProgramBoardComponent {
       return allDayIndexStrings.filter(
         (currentDayIndex) => +currentDayIndex !== index
       );
+    }
+  }
+
+  onClick(card) {
+    if (this.clickable) {
+      this.cardClick.emit(card);
     }
   }
 }

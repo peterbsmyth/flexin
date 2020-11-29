@@ -17,6 +17,10 @@ export class ProgramsFacade {
   draftProgramBoard$ = this.draftProgramService.draftProgramBoard$;
   draftProgramConfiguration$ = this.draftProgramService
     .draftProgramConfiguration$;
+  workoutFormData$ = this.store.pipe(
+    select(ProgramsSelectors.getWorkoutFormData)
+  );
+  board$ = this.store.pipe(select(ProgramsSelectors.getBoard));
 
   dispatch(action: Action) {
     this.store.dispatch(action);

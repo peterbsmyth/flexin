@@ -1,16 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Program } from '@bod/shared/models';
 import {
   BoardCardData,
   ProgramsFacade,
-  ExercisesFacade,
   loadDescendantsFromProgramPage,
   selectWeek,
   selectProgramFromPage,
+  openWorkoutModal,
+  updateWorkoutFromWorkoutPage,
+  updateWorkoutAndFutureWorkoutsFromWorkoutPage,
 } from '@bod/training/domain';
-import { Observable, combineLatest, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {
   filter,
   map,
@@ -18,7 +20,10 @@ import {
   tap,
   withLatestFrom,
   take,
+  switchMap,
+  distinctUntilKeyChanged,
 } from 'rxjs/operators';
+import { WorkoutDialog } from '../../components/workout-dialog/workout.dialog';
 
 @Component({
   templateUrl: './program.page.html',
@@ -31,13 +36,15 @@ export class ProgramPage implements OnInit, OnDestroy {
   selectedWeek$: Observable<number> = this.route.queryParams.pipe(
     map((params) => +params['week'])
   );
-  board$: Observable<BoardCardData[][]>;
+  selectedWorkout$: Observable<number> = this.route.queryParams.pipe(
+    map((params) => +params['workoutId'])
+  );
 
   constructor(
     public programsState: ProgramsFacade,
-    private exerciseState: ExercisesFacade,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     route.queryParams
       .pipe(
@@ -49,11 +56,22 @@ export class ProgramPage implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+
     route.queryParams
       .pipe(
         takeUntil(this.unsubscribe$),
         map((params) => +params['week']),
         tap((week) => this.programsState.dispatch(selectWeek({ week })))
+      )
+      .subscribe();
+
+    route.queryParams
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map((params) => +params['workoutId']),
+        tap((workoutId) =>
+          this.programsState.dispatch(openWorkoutModal({ workoutId }))
+        )
       )
       .subscribe();
 
@@ -75,30 +93,45 @@ export class ProgramPage implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.board$ = combineLatest([
-      this.programsState.selectedPrograms$,
-      this.exerciseState.allExercises$,
-      this.programsState.selectedWeek$,
-    ]).pipe(
-      map(([program, exercises, week]) => {
-        const workouts = program.workouts.filter(
-          (workout) => workout.week === week
-        );
-        const allDays = program.workouts.map((workout) => workout.day);
-        const sortedDays = [...new Set(allDays)].sort();
-        const boardCardData = sortedDays.map((dayNumber) => {
-          return workouts
-            .filter((workout) => workout.day === dayNumber)
-            .map((workout) => ({
-              routerLink: `/programs/workouts/${workout.id}`,
-              name: exercises.find(
-                (exercise) => workout.exerciseId === exercise.id
-              )?.name,
-            }));
-        });
-        return boardCardData;
-      })
-    );
+    this.programsState.workoutFormData$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        distinctUntilKeyChanged('workout'),
+        filter((form) => !!form.workout),
+        switchMap((form) => {
+          const dialogRef = this.dialog.open(WorkoutDialog, {
+            width: '800px',
+            data: form,
+          });
+
+          return dialogRef.afterClosed();
+        }),
+        tap((data) => {
+          /**
+           * reset the query params to close the modal
+           */
+          this.setWorkoutIdParam(null);
+          /**
+           * respond with the correct action
+           */
+          if (data?.save) {
+            this.programsState.dispatch(
+              updateWorkoutFromWorkoutPage({
+                workout: data.save,
+              })
+            );
+          }
+
+          if (data?.savePlus) {
+            this.programsState.dispatch(
+              updateWorkoutAndFutureWorkoutsFromWorkoutPage({
+                workout: data.savePlus,
+              })
+            );
+          }
+        })
+      )
+      .subscribe();
   }
 
   ngOnInit(): void {
@@ -126,13 +159,28 @@ export class ProgramPage implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  setParams(programId: number, week: number) {
+  setParams(programId?: number, week?: number) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        programId,
-        week,
+        programId: programId ?? this.route.snapshot.params['programId'],
+        week: week ?? this.route.snapshot.params['week'],
       },
+      queryParamsHandling: 'merge',
     });
+  }
+
+  setWorkoutIdParam(workoutId: number) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        workoutId,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  onCardClick(card: BoardCardData) {
+    this.setWorkoutIdParam(card.id);
   }
 }
