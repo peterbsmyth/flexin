@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 import { Workout } from '@bod/shared/models';
@@ -17,12 +16,8 @@ import { SelectEditor } from './select-editor/select.editor';
   styleUrls: ['./workout-configuration-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkoutConfigurationGridComponent implements OnInit {
+export class WorkoutConfigurationGridComponent {
   private columnDefsSubject: BehaviorSubject<any[]> = new BehaviorSubject([
-    {
-      field: 'order',
-      editable: false,
-    },
     {
       field: 'exercise',
       editable: false,
@@ -33,14 +28,21 @@ export class WorkoutConfigurationGridComponent implements OnInit {
         this.updateExercise.emit(params.data);
       },
     },
-    { field: 'day', editable: false },
+    { field: 'day', editable: false, width: 80 },
+    {
+      field: 'order',
+      editable: false,
+      width: 80,
+    },
     {
       field: 'sets',
       editable: true,
+      width: 80,
     },
-    { field: 'reps' },
+    { field: 'reps', width: 80 },
     {
       field: 'amrap',
+      width: 80,
       cellRenderer: 'checkboxRenderer',
       cellEditor: 'checkboxRenderer',
       valueSetter: (params) => {
@@ -54,7 +56,7 @@ export class WorkoutConfigurationGridComponent implements OnInit {
         return true;
       },
     },
-    { field: 'weight' },
+    { field: 'weight', width: 100 },
     {
       field: 'intensity',
       cellEditor: 'selectEditor',
@@ -71,7 +73,7 @@ export class WorkoutConfigurationGridComponent implements OnInit {
         return displayIntensity;
       },
     },
-    { field: 'tempo' },
+    { field: 'tempo', flex: 1 },
   ]);
   columnDefs$ = this.columnDefsSubject.asObservable();
 
@@ -85,6 +87,7 @@ export class WorkoutConfigurationGridComponent implements OnInit {
 
   defaultColDef = {
     editable: true,
+    resizable: true,
     valueSetter: function (params) {
       const valueAsNumber = +params.newValue;
       const isInteger = Number.isInteger(valueAsNumber);
@@ -103,11 +106,6 @@ export class WorkoutConfigurationGridComponent implements OnInit {
   };
 
   onCellValueChanged(cell) {
-    const data = cell.data;
     this.update.emit(cell.data);
   }
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }
