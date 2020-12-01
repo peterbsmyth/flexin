@@ -1,4 +1,14 @@
 <bod-actions-bar>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="invalid$ | async"
+    (click)="onClickCreateProgram()"
+  >
+    Create Program
+  </button>
+</bod-actions-bar>
+<bod-actions-bar>
   <mat-form-field>
     <mat-label>
       Program Number
@@ -10,14 +20,6 @@
       inputmode="numeric"
     />
   </mat-form-field>
-  <button
-    mat-stroked-button
-    color="primary"
-    [disabled]="invalid$ | async"
-    (click)="onClickCreateProgram()"
-  >
-    Create Program
-  </button>
 </bod-actions-bar>
 <bod-page-layout>
   <training-workout-configuration-grid
