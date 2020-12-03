@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://bod-api-2.herokuapp.com'
+  API_URL: 'https://flexin-api.herokuapp.com'
 };
 
 /*
