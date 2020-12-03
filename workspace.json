@@ -200,8 +200,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/celebrity/src/environments/environment.ts",
-                  "with": "apps/celebrity/src/environments/environment.prod.ts"
+                  "replace": "libs/shared/environments/src/lib/environment.ts",
+                  "with": "libs/shared/environments/src/lib/environment.prod.ts"
                 }
               ],
               "optimization": true,

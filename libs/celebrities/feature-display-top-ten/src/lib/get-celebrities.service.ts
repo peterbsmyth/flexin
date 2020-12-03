@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Celebrity } from './celebrity';
-import { CELEBRITIES } from './mock-celebrities';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Celebrity } from '@bod/celebrities/domain';
+import { Observable, of } from 'rxjs';
+import { CELEBRITIES } from './mock-celebrities';
 
 @Injectable({
   providedIn: 'root'
