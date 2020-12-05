@@ -13,7 +13,8 @@ import { BodComponentsModule } from '@bod/shared/components';
 import { TrainingDomainModule } from '@bod/training/domain';
 import { TrainingUiComponentsModule } from '@bod/training/ui-components';
 import { ReactiveComponentModule } from '@ngrx/component';
-import { ExerciseTableComponent } from './containers/exercise-table/exercise-table.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { ExerciseGridComponent } from './components/exercise-grid/exercise-grid.component';
 import { ExerciseCreatePage } from './pages/exercise-create/exercise-create.page';
 import { ExercisePage } from './pages/exercise/exercise.page';
 import { ExercisesPage } from './pages/exercises/exercises.page';
@@ -36,9 +37,10 @@ import { TrainingFeatureManageExercisesRoutingModule } from './training-feature-
     MatTableModule,
     MatButtonModule,
     TrainingUiComponentsModule,
+    AgGridModule.withComponents([]),
   ],
   declarations: [
-    ExerciseTableComponent,
+    ExerciseGridComponent,
     ExercisePage,
     ExercisesPage,
     ExerciseCreatePage,

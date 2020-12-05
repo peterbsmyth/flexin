@@ -5,7 +5,10 @@
 </bod-actions-bar>
 <ng-container *ngIf="(exercisesState.loaded$ | async); else loading;">
   <bod-page-layout>
-    <training-exercise-table></training-exercise-table>
+    <training-exercise-grid
+      (updateExercise)="onUpdateExercise($event)"
+      [exercises]="exercisesState.allExercises$ | async"
+    ></training-exercise-grid>
   </bod-page-layout>
 </ng-container>
 
