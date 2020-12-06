@@ -1,4 +1,4 @@
-import { Exercise } from '@bod/shared/models';
+import { Category, Exercise, Intensity } from '@bod/shared/models';
 import { createAction, props } from '@ngrx/store';
 
 export const loadExercises = createAction('[Exercises] Load Exercises');
@@ -45,4 +45,42 @@ export const updateExerciseSuccess = createAction(
 export const updateExerciseFailure = createAction(
   '[Exercises] Update Exercise Failure',
   props<{ error: any }>()
+);
+
+export const saveCategory = createAction(
+  '[Exercises] Save Category',
+  props<{ exercise: Exercise; category: Partial<Category> }>()
+);
+
+export const saveCategorySuccess = createAction(
+  '[Exercises] Save Category Success',
+  props<{ exercise: Exercise; category: Category }>()
+);
+
+export const deleteCategory = createAction(
+  '[Exercises] Delete Category',
+  props<{ exercise: Exercise; categoryId: number }>()
+);
+
+export const deleteCategorySuccess = createAction(
+  '[Exercises] Delete Category Success'
+);
+
+export const saveIntensity = createAction(
+  '[Exercises] Save Intensity',
+  props<{ exercise: Exercise; intensity: Partial<Intensity> }>()
+);
+
+export const saveIntensitySuccess = createAction(
+  '[Exercises] Save Intensity Success',
+  props<{ exercise: Exercise; intensity: Intensity }>()
+);
+
+export const deleteIntensity = createAction(
+  '[Exercises] Delete Intensity',
+  props<{ exercise: Exercise; intensityId: number }>()
+);
+
+export const deleteIntensitySuccess = createAction(
+  '[Exercises] Delete Intensity Success'
 );

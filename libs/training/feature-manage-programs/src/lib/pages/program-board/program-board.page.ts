@@ -33,7 +33,10 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   board$: Observable<BoardCardData[][]>;
 
   setCategory(exercise: Exercise): string {
-    return exercise.categories[0].name.toLowerCase();
+    if (exercise?.categories?.length) {
+      return exercise.categories[0].name.toLowerCase();
+    }
+    return 'pull';
   }
   constructor(
     private router: Router,

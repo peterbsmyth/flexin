@@ -1,0 +1,61 @@
+<mat-card>
+  <mat-card-content>
+    <aside>
+      <h3>Intensities</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let intensity of exercise?.intensities">
+          <span>{{ intensity.name }}</span>
+          <button mat-icon-button>
+            <mat-icon (click)="onDelete(intensity.id)">close</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </aside>
+  </mat-card-content>
+  <ng-container *ngIf="addIntensity">
+    <form class="group" [formGroup]="intensityForm">
+      <aside>
+        <section>
+          <div class="intensities__controls">
+            <mat-form-field class="intensities__input">
+              <mat-label>
+                Intensity
+              </mat-label>
+              <input matInput type="text" formControlName="name" />
+            </mat-form-field>
+            <mat-form-field class="intensities__input">
+              <mat-label>
+                Order
+              </mat-label>
+              <input matInput type="number" formControlName="order" />
+            </mat-form-field>
+            <span>
+              <button
+                mat-stroked-button
+                (click)="onSave(intensityForm)"
+                [disabled]="!intensityForm.valid"
+              >
+                Save
+              </button>
+            </span>
+          </div>
+        </section>
+      </aside>
+    </form>
+  </ng-container>
+  <mat-card-footer>
+    <button
+      mat-stroked-button
+      color="primary"
+      *ngIf="!this.addIntensity; else cancel"
+      (click)="toggleIntensity()"
+    >
+      Add Intensity
+    </button>
+    <ng-template #cancel>
+      <button mat-stroked-button (click)="toggleIntensity()">
+        Cancel
+      </button>
+    </ng-template>
+  </mat-card-footer>
+</mat-card>

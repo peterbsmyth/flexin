@@ -29,6 +29,54 @@ const exercisesReducer = createReducer(
   on(ExercisesActions.updateExercise, (state, { exercise }) =>
     exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
   ),
+  on(ExercisesActions.saveCategorySuccess, (state, { exercise, category }) =>
+    exercisesAdapter.updateOne(
+      {
+        id: exercise.id,
+        changes: {
+          categories: [...state.entities[exercise.id].categories, category],
+        },
+      },
+      { ...state, loaded: true }
+    )
+  ),
+  on(ExercisesActions.deleteCategory, (state, { exercise, categoryId }) =>
+    exercisesAdapter.updateOne(
+      {
+        id: exercise.id,
+        changes: {
+          categories: state.entities[exercise.id].categories.filter(
+            (c) => c.id !== categoryId
+          ),
+        },
+      },
+      { ...state, loaded: true }
+    )
+  ),
+  on(ExercisesActions.saveIntensitySuccess, (state, { exercise, intensity }) =>
+    exercisesAdapter.updateOne(
+      {
+        id: exercise.id,
+        changes: {
+          intensities: [...state.entities[exercise.id].intensities, intensity],
+        },
+      },
+      { ...state, loaded: true }
+    )
+  ),
+  on(ExercisesActions.deleteIntensity, (state, { exercise, intensityId }) =>
+    exercisesAdapter.updateOne(
+      {
+        id: exercise.id,
+        changes: {
+          intensities: state.entities[exercise.id].intensities.filter(
+            (c) => c.id !== intensityId
+          ),
+        },
+      },
+      { ...state, loaded: true }
+    )
+  ),
   on(ExercisesActions.loadExercisesSuccess, (state, { exercises }) =>
     exercisesAdapter.setAll(exercises, { ...state, loaded: true })
   ),

@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { CategoryFormComponent } from './category-form/category-form.component';
 import { ExerciseDialog } from './exercise-dialog/exercise.dialog';
 import { ExerciseFormComponent } from './exercise-form/exercise-form.component';
 import { FiltersContainer } from './filters/filters.container';
+import { IntensityFormComponent } from './intensity-form/intensity-form.component';
 
 @NgModule({
   imports: [
@@ -21,8 +25,22 @@ import { FiltersContainer } from './filters/filters.container';
     MatCardModule,
     MatCheckboxModule,
     MatIconModule,
+    MatListModule,
+    MatButtonModule,
   ],
-  declarations: [FiltersContainer, ExerciseDialog, ExerciseFormComponent],
-  exports: [FiltersContainer, ExerciseDialog, ExerciseFormComponent],
+  declarations: [
+    FiltersContainer,
+    ExerciseDialog,
+    ExerciseFormComponent,
+    IntensityFormComponent,
+    CategoryFormComponent,
+  ],
+  exports: [
+    FiltersContainer,
+    ExerciseDialog,
+    ExerciseFormComponent,
+    IntensityFormComponent,
+    CategoryFormComponent,
+  ],
 })
 export class TrainingUiComponentsModule {}

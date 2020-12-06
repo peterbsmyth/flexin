@@ -16,6 +16,10 @@ export class CategoriesDataService {
     return this.http.get<Category>(`${this.API_URL}/categories/${id}`);
   }
 
+  deleteOne(id: number): Observable<any> {
+    return this.http.delete(`${this.API_URL}/categories/${id}`);
+  }
+
   saveOne(category: Category): Observable<Category> {
     return this.http.post<Category>(`${this.API_URL}/categories`, category);
   }

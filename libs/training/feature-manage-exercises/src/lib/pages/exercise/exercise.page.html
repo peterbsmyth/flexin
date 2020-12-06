@@ -2,5 +2,17 @@
   <bod-page-layout>
     <components-exercise-form [exercise]="exercise" (save)="onSave($event)">
     </components-exercise-form>
+    <components-category-form
+      [exercise]="exercise"
+      (save)="onSaveCategory($event)"
+      (delete)="onDeleteCategory($event)"
+    >
+    </components-category-form>
+    <components-intensity-form
+      [exercise]="exercise"
+      (save)="onSaveIntensity($event)"
+      (delete)="onDeleteIntensity($event)"
+    >
+    </components-intensity-form>
   </bod-page-layout>
 </ng-container>

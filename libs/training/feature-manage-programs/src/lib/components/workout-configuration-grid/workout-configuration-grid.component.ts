@@ -66,10 +66,10 @@ export class WorkoutConfigurationGridComponent {
       },
       valueGetter(params) {
         const intensityId = params.data.intensityId;
-        const intensities = params.data.exercise.intensities;
+        const intensities = params.data.exercise.intensities ?? [];
         const displayIntensity = intensityId
           ? intensities.find((i) => i.id === intensityId).name
-          : intensities[0].name;
+          : intensities?.[0]?.name ?? '';
         return displayIntensity;
       },
     },

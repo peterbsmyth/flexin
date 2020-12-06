@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-content>
+    <aside>
+      <h3>Categories</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let category of exercise?.categories">
+          <span>{{ category.name }}</span>
+          <button mat-icon-button>
+            <mat-icon (click)="onDeleteCategory(category.id)">close</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </aside>
+  </mat-card-content>
+  <ng-container *ngIf="addCategory">
+    <form class="group" [formGroup]="categoryForm">
+      <aside>
+        <section>
+          <div class="intensities__controls">
+            <mat-form-field class="intensities__input">
+              <mat-label>
+                Category
+              </mat-label>
+              <input matInput type="text" formControlName="name" />
+            </mat-form-field>
+            <span>
+              <button
+                mat-stroked-button
+                (click)="onSave(categoryForm)"
+                [disabled]="!categoryForm.valid"
+              >
+                Save
+              </button>
+            </span>
+          </div>
+        </section>
+      </aside>
+    </form>
+  </ng-container>
+  <mat-card-footer>
+    <button
+      mat-stroked-button
+      color="primary"
+      *ngIf="!this.addCategory; else cancel"
+      (click)="toggleCategory()"
+    >
+      Add Category
+    </button>
+    <ng-template #cancel>
+      <button mat-stroked-button (click)="toggleCategory()">
+        Cancel
+      </button>
+    </ng-template>
+  </mat-card-footer>
+</mat-card>

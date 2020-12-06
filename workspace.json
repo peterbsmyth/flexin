@@ -768,7 +768,14 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/training/ui-components/tsconfig.lib.json",
-            "project": "libs/training/ui-components/ng-package.json"
+            "project": "libs/training/ui-components/ng-package.json",
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "libs/shared/components/src/lib/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/shared/components/src/lib/scss"]
+            }
           },
           "configurations": {
             "production": {
