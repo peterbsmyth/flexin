@@ -1,0 +1,11 @@
+<bod-actions-bar>
+  <button mat-raised-button color="primary" routerLink="create">
+    Create
+  </button>
+</bod-actions-bar>
+<bod-page-layout>
+  <training-category-grid
+    [categories]="categoriesState.allCategories$ | async"
+    (update)="onUpdate($event)"
+  ></training-category-grid>
+</bod-page-layout>

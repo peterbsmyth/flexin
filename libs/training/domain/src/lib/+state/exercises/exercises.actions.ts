@@ -47,22 +47,22 @@ export const updateExerciseFailure = createAction(
   props<{ error: any }>()
 );
 
-export const saveCategory = createAction(
+export const saveExerciseCategory = createAction(
   '[Exercises] Save Category',
   props<{ exercise: Exercise; category: Partial<Category> }>()
 );
 
-export const saveCategorySuccess = createAction(
+export const saveExerciseCategorySuccess = createAction(
   '[Exercises] Save Category Success',
   props<{ exercise: Exercise; category: Category }>()
 );
 
-export const deleteCategory = createAction(
+export const deleteExerciseCategory = createAction(
   '[Exercises] Delete Category',
   props<{ exercise: Exercise; categoryId: number }>()
 );
 
-export const deleteCategorySuccess = createAction(
+export const deleteExerciseCategorySuccess = createAction(
   '[Exercises] Delete Category Success'
 );
 

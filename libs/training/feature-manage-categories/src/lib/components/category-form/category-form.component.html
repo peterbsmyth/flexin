@@ -1,20 +1,16 @@
 <mat-card>
   <mat-card-content>
-    <form [formGroup]="exerciseForm" class="form">
+    <form [formGroup]="form" class="form">
       <mat-form-field>
         <mat-label>
           Name
         </mat-label>
         <input matInput type="text" formControlName="name" />
       </mat-form-field>
-      <aside class="configuration">
-        <h3>Configuration</h3>
-        <mat-checkbox formControlName="leftRight">LeftRight</mat-checkbox>
-      </aside>
     </form>
   </mat-card-content>
   <mat-card-footer>
-    <button mat-stroked-button color="primary" (click)="onSave(exerciseForm)">
+    <button mat-stroked-button color="primary" (click)="onSave(form)">
       Save
     </button>
   </mat-card-footer>

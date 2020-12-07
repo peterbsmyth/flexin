@@ -72,11 +72,11 @@ export class ExercisesEffects {
 
   saveCategory$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ExercisesActions.saveCategory),
+      ofType(ExercisesActions.saveExerciseCategory),
       switchMap(({ exercise, category }) =>
         this.backend.saveCategory(exercise, category).pipe(
           map(({ exercise: e, category: c }) =>
-            ExercisesActions.saveCategorySuccess({
+            ExercisesActions.saveExerciseCategorySuccess({
               exercise: e,
               category: c,
             })
@@ -88,11 +88,11 @@ export class ExercisesEffects {
 
   deleteCategory$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ExercisesActions.deleteCategory),
+      ofType(ExercisesActions.deleteExerciseCategory),
       switchMap(({ exercise, categoryId }) =>
         this.categoryService
           .deleteOne(categoryId)
-          .pipe(map(() => ExercisesActions.deleteCategorySuccess()))
+          .pipe(map(() => ExercisesActions.deleteExerciseCategorySuccess()))
       )
     )
   );

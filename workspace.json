@@ -809,6 +809,51 @@
           "style": "scss"
         }
       }
+    },
+    "training-feature-manage-categories": {
+      "projectType": "library",
+      "root": "libs/training/feature-manage-categories",
+      "sourceRoot": "libs/training/feature-manage-categories/src",
+      "prefix": "training",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/training/feature-manage-categories/tsconfig.lib.json",
+            "project": "libs/training/feature-manage-categories/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/training/feature-manage-categories/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/training/feature-manage-categories/tsconfig.lib.json",
+              "libs/training/feature-manage-categories/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/training/feature-manage-categories/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/training/feature-manage-categories/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

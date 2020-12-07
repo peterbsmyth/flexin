@@ -20,6 +20,7 @@ import { TrainingFeatureManageProgramsModule } from '@bod/training/feature-manag
 import { TrainingFeatureManageExercisesModule } from '@bod/training/feature-manage-exercises';
 import { TrainingFeatureManageWorkoutsModule } from '@bod/training/feature-manage-workouts';
 import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-manage-meal-plans';
+import { TrainingFeatureManageCategoriesModule } from '@bod/training/feature-manage-categories';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-mana
     TrainingFeatureManageExercisesModule,
     TrainingFeatureManageWorkoutsModule,
     TrainingFeatureManageMealPlansModule,
+    TrainingFeatureManageCategoriesModule,
   ],
   bootstrap: [AppPage],
   exports: [],

@@ -22,13 +22,24 @@ export const initialState: CategoriesState = categoriesAdapter.getInitialState({
 
 const categoriesReducer = createReducer(
   initialState,
-  on(CategoriesActions.loadCategories, (state) => ({
+  on(
+    CategoriesActions.loadCategories,
+    CategoriesActions.loadCategory,
+    (state) => ({
+      ...state,
+      loaded: false,
+      error: null,
+    })
+  ),
+  on(CategoriesActions.selectCategory, (state, { id }) => ({
     ...state,
-    loaded: false,
-    error: null,
+    selectedId: id,
   })),
   on(CategoriesActions.loadCategoriesSuccess, (state, { categories }) =>
-    categoriesAdapter.setAll(categories, { ...state, loaded: true })
+    categoriesAdapter.upsertMany(categories, { ...state, loaded: true })
+  ),
+  on(CategoriesActions.loadCategorySuccess, (state, { category }) =>
+    categoriesAdapter.upsertOne(category, { ...state, loaded: true })
   ),
   on(CategoriesActions.loadCategoriesFailure, (state, { error }) => ({
     ...state,

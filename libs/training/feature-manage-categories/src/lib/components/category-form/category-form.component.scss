@@ -1,0 +1,18 @@
+@import 'utils';
+
+h3 {
+  @include subheadline;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-footer {
+  padding: $space-m;
+}
+
+mat-card {
+  margin-bottom: $space-m;
+}

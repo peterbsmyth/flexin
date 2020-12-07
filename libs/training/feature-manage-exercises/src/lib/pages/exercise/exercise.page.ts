@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Exercise } from '@bod/shared/models';
 import {
-  deleteCategory,
+  deleteExerciseCategory,
   deleteIntensity,
   ExercisesFacade,
-  saveCategory,
+  saveExerciseCategory,
   saveIntensity,
   updateExercise,
 } from '@bod/training/domain';
@@ -29,7 +29,7 @@ export class ExercisePage implements OnInit {
 
   onSaveCategory({ exercise, category }) {
     this.exercisesState.dispatch(
-      saveCategory({
+      saveExerciseCategory({
         exercise,
         category,
       })
@@ -38,7 +38,7 @@ export class ExercisePage implements OnInit {
 
   onDeleteCategory({ exercise, categoryId }) {
     this.exercisesState.dispatch(
-      deleteCategory({
+      deleteExerciseCategory({
         exercise,
         categoryId,
       })

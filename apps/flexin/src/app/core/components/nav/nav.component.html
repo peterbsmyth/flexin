@@ -20,6 +20,14 @@
       <a
         mat-list-item
         routerLinkActive
+        #categoryLink="routerLinkActive"
+        [disabled]="categoryLink.isActive"
+        routerLink="/categories"
+        >Categories</a
+      >
+      <a
+        mat-list-item
+        routerLinkActive
         #exerciseLink="routerLinkActive"
         [disabled]="exerciseLink.isActive"
         routerLink="/exercises"

@@ -1,11 +1,10 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, shareReplay, tap } from 'rxjs/operators';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NetworkStatusFacade } from '@bod/shared/domain';
 import { AuthFacade } from '@bod/training/domain';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'bod-nav',
@@ -25,19 +24,8 @@ export class NavComponent {
     private breakpointObserver: BreakpointObserver,
     public networkStatus: NetworkStatusFacade,
     private snackBar: MatSnackBar,
-    public auth: AuthFacade,
-    private router: Router,
-    private ref: ChangeDetectorRef
+    public auth: AuthFacade
   ) {
-    // this.router.events
-    //   .pipe(
-    //     filter((event) => event instanceof NavigationEnd),
-    //     map((event: NavigationEnd) => event.url.split('?')[0]),
-    //     tap((url) => {
-    //       this.currentUrlSubject.next(url);
-    //     })
-    //   )
-    //   .subscribe();
     this.networkStatus.errors$
       .pipe(
         tap((message) => {

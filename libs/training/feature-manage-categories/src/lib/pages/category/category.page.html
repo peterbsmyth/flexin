@@ -1,0 +1,6 @@
+<bod-page-layout>
+  <training-category-form
+    [category]="categoryState.selectedCategories$ | async"
+    (save)="onSave($event)"
+  ></training-category-form>
+</bod-page-layout>
