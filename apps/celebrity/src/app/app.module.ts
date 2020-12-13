@@ -12,7 +12,7 @@ import { BodComponentsModule } from '@bod/shared/components';
   imports: [
     BrowserModule,
     BodComponentsModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabled' }),
+    RouterModule.forRoot([], { initialNavigation: 'enabled', relativeLinkResolution: 'legacy' }),
     CelebritiesFeatureDisplayTopTenModule,
     HttpClientModule,
   ],

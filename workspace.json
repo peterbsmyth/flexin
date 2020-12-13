@@ -225,7 +225,8 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": ["{options.outputPath}"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -344,7 +345,8 @@
             "packageJson": "libs/shared/scripts/package.json",
             "main": "libs/shared/scripts/src/index.ts",
             "assets": ["libs/shared/scripts/*.md"]
-          }
+          },
+          "outputs": ["{options.outputPath}"]
         },
         "execute": {
           "builder": "@nrwl/workspace:run-commands",
@@ -846,7 +848,8 @@
           "options": {
             "jestConfig": "libs/training/feature-manage-categories/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/libs/training/feature-auth"]
         }
       },
       "schematics": {
