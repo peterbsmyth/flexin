@@ -2,14 +2,14 @@ import {
   CdkDragDrop,
   copyArrayItem,
   moveItemInArray,
-  transferArrayItem,
+  transferArrayItem
 } from '@angular/cdk/drag-drop';
 import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
-  Output,
+  Output
 } from '@angular/core';
 import { isBoardEmpty, OnChange } from '@bod/shared/utils';
 import { BoardCardData } from '@bod/training/domain';
@@ -40,7 +40,7 @@ export class ProgramBoardComponent {
   @Output() cardClick: EventEmitter<any> = new EventEmitter();
   @Input()
   clickable = false;
-  public allCategories = ['pull', 'push', 'other'];
+  public allCategories = [];
   public categoriesLists: BoardCardData[][] = new Array(
     this.allCategories.length
   ).fill([]);
@@ -102,6 +102,7 @@ export class ProgramBoardComponent {
   }
 
   buildSource(data: BoardCardData[]) {
+    this.allCategories = [...new Set(data.map(item => item.category))]
     this.allCategories.forEach((category, i) => {
       this.categoriesLists[i] = data
         .filter((item) => item.category === category)

@@ -1,10 +1,10 @@
+<bod-actions-bar>
+  <button mat-raised-button color="primary" routerLink="create">
+    Create
+  </button>
+</bod-actions-bar>
 <ng-container *ngIf="(programsState.loaded$ | async); else loading;">
   <div *ngIf="(programsState.selectedPrograms$ | async) as program">
-    <bod-actions-bar>
-      <button mat-raised-button color="primary" routerLink="create">
-        Create
-      </button>
-    </bod-actions-bar>
     <div class="controls">
       <mat-form-field>
         <mat-label>Program</mat-label>
@@ -30,14 +30,14 @@
       </mat-form-field>
     </div>
   </div>
+  <bod-page-layout>
+    <training-program-board
+      [clickable]="true"
+      [data]="programsState.board$ | async"
+      (cardClick)="onCardClick($event)"
+    ></training-program-board>
+  </bod-page-layout>
 </ng-container>
-<bod-page-layout>
-  <training-program-board
-    [clickable]="true"
-    [data]="programsState.board$ | async"
-    (cardClick)="onCardClick($event)"
-  ></training-program-board>
-</bod-page-layout>
 <ng-template #loading>
   Loading...
 </ng-template>

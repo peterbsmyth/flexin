@@ -10,7 +10,7 @@ import {
   popDraft,
   ProgramsFacade,
   pushDraft,
-  resetDraft,
+  resetDraft
 } from '@bod/training/domain';
 import Fuse from 'fuse.js';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';

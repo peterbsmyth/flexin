@@ -10,7 +10,7 @@ import {
   selectProgramFromPage,
   selectWeek,
   updateWorkoutAndFutureWorkoutsFromWorkoutPage,
-  updateWorkoutFromWorkoutPage,
+  updateWorkoutFromWorkoutPage
 } from '@bod/training/domain';
 import { Observable, Subject } from 'rxjs';
 import {
@@ -21,7 +21,7 @@ import {
   take,
   takeUntil,
   tap,
-  withLatestFrom,
+  withLatestFrom
 } from 'rxjs/operators';
 import { WorkoutDialog } from '../../components/workout-dialog/workout.dialog';
 
@@ -144,6 +144,7 @@ export class ProgramPage implements OnInit, OnDestroy {
     this.programsState.selectedPrograms$
       .pipe(
         take(1),
+        filter(program => !!program),
         tap((program) => {
           const week = this.route.snapshot.queryParams['week'] ?? 1;
           this.programSelect.setValue(program.id, { emitEvent: false });

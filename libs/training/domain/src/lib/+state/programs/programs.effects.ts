@@ -1,46 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { mockExercises, mockPrograms } from '@bod/shared/models';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { fetch } from '@nrwl/angular';
-import { map, tap, withLatestFrom } from 'rxjs/operators';
+import { tap, withLatestFrom } from 'rxjs/operators';
 import { DraftProgramsDataService } from '../../infrastructure/draft-programs.data.service';
 import { ExercisesDataService } from '../../infrastructure/exercises.data.service';
 import { ProgramsDataService } from '../../infrastructure/programs.data.service';
-import * as ExercisesActions from '../exercises/exercises.actions';
 import { getAllExercises } from '../exercises/exercises.selectors';
 import { TrainingState } from '../state';
 import * as ProgramsActions from './programs.actions';
 
 @Injectable()
 export class ProgramsEffects {
-  loadPrograms$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(
-        ProgramsActions.loadPrograms,
-        ProgramsActions.loadProgramsFromPage
-      ),
-      fetch({
-        run: (action) => {
-          return ProgramsActions.loadProgramsSuccess({
-            programs: mockPrograms,
-          });
-        },
-        onError: (action, error) => {
-          console.error('Error', error);
-          return ProgramsActions.loadProgramsFailure({ error });
-        },
-      })
-    )
-  );
+  // loadPrograms$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(
+  //       ProgramsActions.loadPrograms,
+  //       ProgramsActions.loadProgramsFromPage
+  //     ),
+  //     fetch({
+  //       run: (action) => {
+  //         return ProgramsActions.loadProgramsSuccess({
+  //           programs: mockPrograms,
+  //         });
+  //       },
+  //       onError: (action, error) => {
+  //         console.error('Error', error);
+  //         return ProgramsActions.loadProgramsFailure({ error });
+  //       },
+  //     })
+  //   )
+  // );
 
-  loadProgram$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProgramsActions.loadProgramFromGuard),
-      map(() =>
-        ProgramsActions.loadProgramSuccess({ program: mockPrograms[0] })
-      )
+  // loadProgram$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(ProgramsActions.loadProgramFromGuard),
+  //     map(() =>
+  //       ProgramsActions.loadProgramSuccess({ program: mockPrograms[0] })
+  //     )
       // fetch({
       //   // provides an action
       //   run: ({ id }) => {
@@ -57,17 +55,17 @@ export class ProgramsEffects {
       //     return null;
       //   },
       // })
-    )
-  );
+    // )
+  // );
 
-  loadDescendants$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProgramsActions.loadDescendantsFromProgramPage),
-      map(() =>
-        ExercisesActions.loadExercisesSuccess({
-          exercises: mockExercises,
-        })
-      )
+  // loadDescendants$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(ProgramsActions.loadDescendantsFromProgramPage),
+  //     map(() =>
+  //       ExercisesActions.loadExercisesSuccess({
+  //         exercises: mockExercises,
+  //       })
+  //     )
       // fetch({
       //   // provides an action
       //   run: ({ id }) => {
@@ -98,8 +96,8 @@ export class ProgramsEffects {
       //     return null;
       //   },
       // })
-    )
-  );
+  //   )
+  // );
 
   addIncompleteSessionItems$ = createEffect(
     () =>

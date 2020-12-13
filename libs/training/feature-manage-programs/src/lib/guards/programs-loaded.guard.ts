@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import {
   loadProgramsFromPage,
   ProgramsFacade,
-  selectProgramFromGuard,
+  selectProgramFromGuard
 } from '@bod/training/domain';
 import { Observable, of } from 'rxjs';
 import {
@@ -12,7 +12,7 @@ import {
   map,
   switchMapTo,
   take,
-  tap,
+  tap
 } from 'rxjs/operators';
 
 @Injectable({
