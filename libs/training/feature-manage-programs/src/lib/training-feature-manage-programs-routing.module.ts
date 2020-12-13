@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: 'programs',
     component: ProgramPage,
-    // canActivate: [ProgramsLoadedGuard],
+    canActivate: [ProgramsLoadedGuard],
   },
   {
     path: 'programs/create',

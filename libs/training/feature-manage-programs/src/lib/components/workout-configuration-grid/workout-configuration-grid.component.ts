@@ -35,7 +35,7 @@ export class WorkoutConfigurationGridComponent {
       width: 80,
     },
     {
-      field: 'sets',
+      field: 'setCount',
       editable: true,
       width: 80,
     },
@@ -73,7 +73,14 @@ export class WorkoutConfigurationGridComponent {
         return displayIntensity;
       },
     },
-    { field: 'tempo', flex: 1 },
+    {
+      field: 'tempo',
+      flex: 1,
+      valueSetter: (params) => {
+        params.data['tempo'] = params.newValue;
+        return true;
+      },
+    },
   ]);
   columnDefs$ = this.columnDefsSubject.asObservable();
 

@@ -55,15 +55,15 @@ export class DraftProgramsDataService {
             day: i + 1,
             order: j + 1,
             reps: null,
-            amrap: null,
+            amrap: false,
             setCount: null,
             intensityId: null,
-            weight: null,
-            weightUnit: '',
+            weight: 0,
+            weightUnit: 'lbs',
             exerciseId: card.id,
             exercise: exercises.find((e) => e.id === card.id),
             tempo: null,
-            notes: null,
+            notes: ' ',
             programId: null,
             setStatistics: [],
           };
@@ -105,6 +105,8 @@ export class DraftProgramsDataService {
             this.workoutService.saveOne({
               ...workout,
               id: undefined,
+              exercise: undefined,
+              setStatistics: undefined,
               programId: program.id,
             })
           )

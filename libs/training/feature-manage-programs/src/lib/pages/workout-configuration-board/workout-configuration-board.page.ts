@@ -54,7 +54,7 @@ export class WorkoutConfigurationBoardPage implements OnInit {
 
   valid(workout: Workout) {
     return (
-      !!workout.sets &&
+      !!workout.setCount &&
       (!!workout.reps || workout.amrap) &&
       workout.intensityId &&
       workout.tempo
