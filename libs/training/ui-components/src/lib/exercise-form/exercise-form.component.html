@@ -2,14 +2,19 @@
   <mat-card-content>
     <form [formGroup]="exerciseForm" class="form">
       <mat-form-field>
-        <mat-label>
-          Name
-        </mat-label>
+        <mat-label> Name </mat-label>
         <input matInput type="text" formControlName="name" />
       </mat-form-field>
       <aside class="configuration">
         <h3>Configuration</h3>
         <mat-checkbox formControlName="leftRight">LeftRight</mat-checkbox>
+        <mat-form-field>
+          <mat-label> Measured By </mat-label>
+          <mat-select formControlName="measuredBy">
+            <mat-option value="secs">secs</mat-option>
+            <mat-option value="reps">reps</mat-option>
+          </mat-select>
+        </mat-form-field>
       </aside>
     </form>
   </mat-card-content>

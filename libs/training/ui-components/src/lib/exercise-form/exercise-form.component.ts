@@ -26,6 +26,7 @@ export class ExerciseFormComponent implements OnInit {
   exerciseForm: FormGroup = this.fb.group({
     name: '',
     leftRight: false,
+    measuredBy: '',
   });
 
   constructor(private fb: FormBuilder) {}
@@ -37,6 +38,10 @@ export class ExerciseFormComponent implements OnInit {
     this.exerciseForm.setControl(
       'leftRight',
       this.fb.control(exercise.leftRight)
+    );
+    this.exerciseForm.setControl(
+      'measuredBy',
+      this.fb.control(exercise.measuredBy)
     );
   }
 

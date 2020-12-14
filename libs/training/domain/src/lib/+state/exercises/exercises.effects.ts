@@ -70,6 +70,21 @@ export class ExercisesEffects {
     )
   );
 
+  saveExercise$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ExercisesActions.saveExercise),
+      switchMap(({ exercise }) =>
+        this.backend.saveOne(exercise).pipe(
+          map((exercise) =>
+            ExercisesActions.saveExerciseSuccess({
+              exercise,
+            })
+          )
+        )
+      )
+    )
+  );
+
   saveCategory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ExercisesActions.saveExerciseCategory),

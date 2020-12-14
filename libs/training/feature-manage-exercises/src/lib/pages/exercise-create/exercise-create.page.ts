@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ExercisesFacade } from '@bod/training/domain';
+import { ExercisesFacade, saveExercise } from '@bod/training/domain';
 
 @Component({
   templateUrl: './exercise-create.page.html',
@@ -15,9 +15,7 @@ export class ExerciseCreatePage implements OnInit {
   ngOnInit(): void {}
 
   onSave(exercise) {
-    // this.exercisesState.dispatch(
-    //   saveExerciseFromPage({ exercise })
-    // );
+    this.exercisesState.dispatch(saveExercise({ exercise }));
     this.router.navigate(['exercises']);
   }
 }
