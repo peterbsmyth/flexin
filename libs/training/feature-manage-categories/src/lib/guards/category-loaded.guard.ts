@@ -6,14 +6,7 @@ import {
   selectCategory,
 } from '@bod/training/domain';
 import { Observable, of } from 'rxjs';
-import {
-  catchError,
-  filter,
-  map,
-  switchMapTo,
-  take,
-  tap,
-} from 'rxjs/operators';
+import { catchError, filter, map, switchMapTo, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +18,6 @@ export class CategoryLoadedGuard implements CanActivate {
     this.categoriesState.dispatch(selectCategory({ id }));
     return this.waitForCollectionToLoad().pipe(
       switchMapTo(this.categoriesState.selectedCategories$),
-      tap(console.log),
       map((category) => !!category),
       catchError((err) => {
         console.log(err);
