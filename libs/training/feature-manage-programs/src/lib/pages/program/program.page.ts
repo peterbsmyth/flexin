@@ -53,6 +53,11 @@ export class ProgramPage implements OnInit, OnDestroy {
         filter((id) => Number.isInteger(id)),
         tap((id) => {
           this.programsState.dispatch(selectProgramFromPage({ id }));
+          this.programsState.dispatch(
+            loadDescendantsFromProgramPage({
+              id,
+            })
+          );
         })
       )
       .subscribe();
