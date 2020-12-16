@@ -38,16 +38,16 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
   })
   @Input()
   data: WorkoutFormData;
-
   @Output() save: EventEmitter<Partial<Workout>> = new EventEmitter();
   @Output() savePlus: EventEmitter<Partial<Workout>> = new EventEmitter();
+  @Output() saveExercise: EventEmitter<Partial<Workout>> = new EventEmitter();
   form: FormGroup = this.fb.group({
     reps: 1,
     amrap: false,
     sets: 0,
     weight: 0,
     weightUnit: 'lbs',
-    intensity: this.fb.control('', Validators.required),
+    intensityId: this.fb.control('', Validators.required),
     tempo: '',
     order: null,
   });
@@ -71,7 +71,10 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
       sets: this.fb.control(data.workout.setCount),
       weight: this.fb.control(data.workout.weight),
       weightUnit: 'lbs',
-      intensity: this.fb.control(data.workout.intensityId, Validators.required),
+      intensityId: this.fb.control(
+        data.workout.intensityId,
+        Validators.required
+      ),
       tempo: this.fb.control(data.workout.tempo),
     });
 
@@ -121,22 +124,21 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
       ...form,
       id: this.data.workout.id,
       order: this.data.workout.order,
+      sets: undefined,
     });
   }
   onSubmitPlus(form) {
     this.savePlus.emit({
       ...this.data.workout,
       ...form,
+      sets: undefined,
     });
   }
 
   onSaveExercise(value) {
-    const defaultIntensity = this.data.exercises.find((e) => e.id === value.id)
-      .intensities[0];
-    this.save.emit({
+    this.saveExercise.emit({
       exerciseId: value.id,
       id: this.data.workout.id,
-      // intensity: defaultIntensity,
     });
     this.editingSubject.next(false);
     this.form.enable();

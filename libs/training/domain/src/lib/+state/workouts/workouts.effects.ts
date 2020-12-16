@@ -76,22 +76,17 @@ export class WorkoutsEffects {
             map(() => WorkoutsActions.updateWorkoutAndFutureWorkoutsSuccess())
           );
       })
-      // fetch({
-      //   // provides an action
-      //   run: ({ id }) => {
-      //     return this.backend
-      //       .getOne(id)
-      //       .pipe(
-      //         map((workout) =>
-      //           ProgramsActions.loadWorkoutSuccess({ workout })
-      //         )
-      //       );
-      //   },
-      //   onError: (action, error: any) => {
-      //     // dispatch an undo action to undo the changes in the client state
-      //     return null;
-      //   },
-      // })
+    )
+  );
+
+  updateWorkout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WorkoutsActions.updateWorkoutFromWorkoutPage),
+      switchMap(({ workout }) => {
+        return this.backend
+          .patchOne(workout)
+          .pipe(map(() => WorkoutsActions.updateWorkoutSuccess()));
+      })
     )
   );
 

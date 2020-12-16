@@ -73,23 +73,26 @@ const programsReducer = createReducer(
    * in the action matches the id of the iterated workout
    * update that workout, else use the iterated workout
    */
-  on(WorkoutsActions.updateWorkout, (state, { workout }) =>
-    programsAdapter.updateOne(
-      {
-        id: state.selectedId,
-        changes: {
-          workouts: state.entities[state.selectedId].workouts.map((w) =>
-            w.id === workout.id
-              ? {
-                  ...w,
-                  ...workout,
-                }
-              : w
-          ),
+  on(
+    WorkoutsActions.updateWorkout,
+    WorkoutsActions.updateWorkoutFromWorkoutPage,
+    (state, { workout }) =>
+      programsAdapter.updateOne(
+        {
+          id: state.selectedId,
+          changes: {
+            workouts: state.entities[state.selectedId].workouts.map((w) =>
+              w.id === workout.id
+                ? {
+                    ...w,
+                    ...workout,
+                  }
+                : w
+            ),
+          },
         },
-      },
-      { ...state, loaded: true }
-    )
+        { ...state, loaded: true }
+      )
   ),
   on(SetStatisticsActions.updateSetStatistic, (state, { setStatistic }) =>
     programsAdapter.updateOne(

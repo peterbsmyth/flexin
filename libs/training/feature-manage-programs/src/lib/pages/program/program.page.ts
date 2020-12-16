@@ -101,7 +101,7 @@ export class ProgramPage implements OnInit, OnDestroy {
     this.programsState.workoutFormData$
       .pipe(
         takeUntil(this.unsubscribe$),
-        distinctUntilKeyChanged('workout'),
+        distinctUntilKeyChanged('workoutId'),
         filter((form) => !!form.workout),
         switchMap((form) => {
           const dialogRef = this.dialog.open(WorkoutDialog, {
@@ -131,6 +131,14 @@ export class ProgramPage implements OnInit, OnDestroy {
             this.programsState.dispatch(
               updateWorkoutAndFutureWorkoutsFromWorkoutPage({
                 workout: data.savePlus,
+              })
+            );
+          }
+
+          if (data?.saveExercise) {
+            this.programsState.dispatch(
+              updateWorkoutFromWorkoutPage({
+                workout: data.saveExercise,
               })
             );
           }

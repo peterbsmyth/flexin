@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Workout } from '@bod/shared/models';
 import { WorkoutFormData } from '@bod/training/domain';
 
 @Component({
@@ -8,12 +9,17 @@ import { WorkoutFormData } from '@bod/training/domain';
   styleUrls: ['./workout.dialog.scss'],
 })
 export class WorkoutDialog implements OnInit {
+  @Output() saveExercise: EventEmitter<Workout> = new EventEmitter();
   constructor(
     public dialogRef: MatDialogRef<WorkoutDialog>,
     @Inject(MAT_DIALOG_DATA) public data: WorkoutFormData
   ) {}
 
   ngOnInit(): void {}
+
+  onSaveExercise(data) {
+    this.dialogRef.close({ saveExercise: data });
+  }
 
   onSave(data) {
     this.dialogRef.close({ save: data });

@@ -1,10 +1,9 @@
-<h1 mat-dialog-title>
-  Workout
-</h1>
+<h1 mat-dialog-title>Workout</h1>
 <div mat-dialog-content>
   <training-workout-form
     [data]="data"
     (save)="onSave($event)"
+    (saveExercise)="onSaveExercise($event)"
     (savePlus)="onSavePlus($event)"
   ></training-workout-form>
 </div>

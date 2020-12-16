@@ -102,6 +102,7 @@ export const getWorkoutFormData = createSelector(
     const workout = program?.workouts.find((w) => w.id === workoutId);
 
     return {
+      workoutId: workout?.id,
       workout,
       exercises,
     };
