@@ -1,8 +1,11 @@
 <mat-card>
   <mat-card-content>
-    <section class="exercise" *ngIf="!editing; else exerciseFormDisplay">
+    <section
+      class="exercise"
+      *ngIf="!(editing$ | async); else exerciseFormDisplay"
+    >
       <span class="exercise__header">
-        Exercise: {{ data.workout.exercise.name }}
+        Exercise: {{ (selectedExercise$ | async).name }}
       </span>
       <button mat-icon-button (click)="onEditExercise()">
         <mat-icon>edit</mat-icon>
@@ -10,9 +13,7 @@
     </section>
     <form [formGroup]="form" class="form">
       <mat-form-field>
-        <mat-label>
-          Reps
-        </mat-label>
+        <mat-label> Reps </mat-label>
         <input
           matInput
           type="number"
@@ -22,9 +23,7 @@
       </mat-form-field>
       <mat-checkbox formControlName="amrap">AMRAP</mat-checkbox>
       <mat-form-field>
-        <mat-label>
-          Sets
-        </mat-label>
+        <mat-label> Sets </mat-label>
         <input
           matInput
           type="number"
@@ -33,9 +32,7 @@
         />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>
-          Weight
-        </mat-label>
+        <mat-label> Weight </mat-label>
         <input
           matInput
           type="number"
@@ -46,24 +43,20 @@
         />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>
-          Intensity
-        </mat-label>
+        <mat-label> Intensity </mat-label>
         <mat-select
           formControlName="intensity"
           [value]="data.workout.intensityId"
         >
           <mat-option
-            *ngFor="let intensity of data.workout.exercise.intensities"
+            *ngFor="let intensity of (selectedExercise$ | async).intensities"
             [value]="intensity.id"
             >{{ intensity.name }}</mat-option
           >
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>
-          Tempo
-        </mat-label>
+        <mat-label> Tempo </mat-label>
         <input matInput type="text" formControlName="tempo" />
       </mat-form-field>
     </form>
@@ -92,9 +85,7 @@
   <section class="exercise">
     <form [formGroup]="exerciseForm" class="exercise__form">
       <mat-form-field class="exercise__field">
-        <mat-label>
-          Exercise
-        </mat-label>
+        <mat-label> Exercise </mat-label>
         <mat-select formControlName="id" [value]="data.workout.exerciseId">
           <mat-option
             *ngFor="let exercise of data.exercises"
@@ -106,14 +97,10 @@
     </form>
     <aside>
       <button mat-icon-button (click)="onCancelExercise()">
-        <mat-icon>
-          close
-        </mat-icon>
+        <mat-icon> close </mat-icon>
       </button>
       <button mat-icon-button (click)="onSaveExercise(exerciseForm.value)">
-        <mat-icon>
-          check
-        </mat-icon>
+        <mat-icon> check </mat-icon>
       </button>
     </aside>
   </section>

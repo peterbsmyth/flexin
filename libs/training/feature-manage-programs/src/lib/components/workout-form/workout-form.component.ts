@@ -10,8 +10,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Workout } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
 import { WorkoutFormData } from '@bod/training/domain';
-import { Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'training-workout-form',
@@ -20,11 +20,21 @@ import { takeUntil, tap } from 'rxjs/operators';
 })
 export class WorkoutFormComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<any> = new Subject();
-  editing = false;
+  private editingSubject = new BehaviorSubject(false);
+  editing$ = this.editingSubject.asObservable();
+  private exerciseIdSubject = new BehaviorSubject(null);
+  exerciseId$ = this.exerciseIdSubject.asObservable();
+  private exercisesSubject = new BehaviorSubject(null);
+  exercises$ = this.exercisesSubject.asObservable();
+  selectedExercise$ = combineLatest([this.exerciseId$, this.exercises$]).pipe(
+    map(([id, exercises]) => (id ? exercises.find((e) => e.id === id) : {}))
+  );
 
   @OnChange<WorkoutFormData>(function (data) {
     this.form = this.buildForm(data);
     this.exerciseForm = this.buildExerciseForm(data);
+    this.exerciseIdSubject.next(data.workout.exerciseId);
+    this.exercisesSubject.next(data.exercises);
   })
   @Input()
   data: WorkoutFormData;
@@ -128,18 +138,18 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
       id: this.data.workout.id,
       // intensity: defaultIntensity,
     });
-    this.editing = false;
+    this.editingSubject.next(false);
     this.form.enable();
   }
 
   onEditExercise() {
     this.exerciseForm = this.buildExerciseForm(this.data);
-    this.editing = true;
+    this.editingSubject.next(true);
     this.form.disable();
   }
 
   onCancelExercise() {
-    this.editing = false;
+    this.editingSubject.next(false);
     this.form.enable();
   }
 
