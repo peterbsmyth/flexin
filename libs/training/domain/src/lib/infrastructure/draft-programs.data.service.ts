@@ -21,6 +21,7 @@ export class DraftProgramsDataService {
   ]);
   public draftProgramBoard$ = this._draftProgramBoardSubject.asObservable();
   private _programConfigurationSubject = new BehaviorSubject<Workout[]>([]);
+  private allWorkoutsSubject = new BehaviorSubject<Workout[]>([]);
   public draftProgramConfiguration$ = this._programConfigurationSubject.asObservable();
   private _lastWorkoutLocalId = 0;
   public popDraftDay() {
@@ -42,7 +43,7 @@ export class DraftProgramsDataService {
     weekCount: number
   ) {
     this.storage.set('boardCardData', board).subscribe();
-    const weeks = [...Array(weekCount)].map((week, i) => ({
+    const weeks = new Array(weekCount).fill(null).map((week, i) => ({
       id: i + 1,
       number: i + 1,
     }));
@@ -77,12 +78,12 @@ export class DraftProgramsDataService {
      * use only the week one workouts because the workout configuration grid
      * is predicated on each week being the same
      */
-    const weekOneWorkouts = workouts.filter((w) => w.week === 1);
-    this.storage.set('workouts', weekOneWorkouts).subscribe();
+
+    this.storage.set('workouts', workouts).subscribe();
   }
 
   createProgram(data: Workout[], number: number): Observable<any> {
-    const oldWorkouts = this._programConfigurationSubject.getValue();
+    const oldWorkouts = this.allWorkoutsSubject.getValue();
     const draftWorkouts = oldWorkouts
       /**
        * for all of the workouts, find in the data the updates to the workout by matching
@@ -91,8 +92,9 @@ export class DraftProgramsDataService {
       .map((oldWorkout) => ({
         ...data.find((workout) => workout.exerciseId === oldWorkout.exerciseId),
         id: oldWorkout.id,
-        day: oldWorkout.day, // previous sessionId: oldworkout.sessionId
+        day: oldWorkout.day, // previous day: oldworkout.day
         order: oldWorkout.order,
+        week: oldWorkout.week,
       }));
 
     return this.programService.saveOne({ number }).pipe(
@@ -153,7 +155,9 @@ export class DraftProgramsDataService {
       .watch('workouts')
       .pipe(
         tap((data: Workout[]) => {
-          this._programConfigurationSubject.next(data);
+          const weekOneWorkouts = data?.filter((w) => w.week === 1);
+          this._programConfigurationSubject.next(weekOneWorkouts);
+          this.allWorkoutsSubject.next(data);
         })
       )
       .subscribe();
