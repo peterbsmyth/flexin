@@ -68,7 +68,7 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
     const form = this.fb.group({
       reps: this.fb.control(data.workout.reps),
       amrap: this.fb.control(data.workout.amrap),
-      sets: this.fb.control(data.workout.setCount),
+      setCount: this.fb.control(data.workout.setCount),
       weight: this.fb.control(data.workout.weight),
       weightUnit: 'lbs',
       intensityId: this.fb.control(
