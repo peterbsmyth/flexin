@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Exercise, Workout } from '@bod/shared/models';
+import { Exercise, SetStatistic, Workout } from '@bod/shared/models';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { catchError, filter, switchMap, tap } from 'rxjs/operators';
 import { BoardCardData } from '../entities/component.models';
 import { ProgramsDataService } from './programs.data.service';
+import { SetStatisticsDataService } from './set-statistics.data.service';
 import { WorkoutsDataService } from './workouts.data.service';
 
 @Injectable({
@@ -112,6 +113,23 @@ export class DraftProgramsDataService {
           )
         );
       }),
+      switchMap((workouts) => {
+        const setStatistics: SetStatistic[] = workouts
+          .map((workout) =>
+            new Array(workout.setCount).fill(null).map((stat, i) => ({
+              id: undefined,
+              workoutId: workout.id,
+              programId: workout.programId,
+              weight: workout.weight ? 0 : undefined,
+              reps: 0,
+              set: i + 1,
+            }))
+          )
+          .flat();
+        return forkJoin([
+          ...setStatistics.map((stat) => this.setStaisticService.postOne(stat)),
+        ]);
+      }),
       switchMap(() => this.storage.clear()),
       catchError(() => {
         this.snackbar.open(
@@ -127,6 +145,7 @@ export class DraftProgramsDataService {
   constructor(
     private programService: ProgramsDataService,
     private workoutService: WorkoutsDataService,
+    private setStaisticService: SetStatisticsDataService,
     private storage: StorageMap,
     private snackbar: MatSnackBar
   ) {
