@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@bod/shared/environments';
-import { Program } from '@bod/shared/models';
-import { Observable } from 'rxjs';
+import { Program, Workout } from '@bod/shared/models';
+import { forkJoin, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,50 @@ export class ProgramsDataService {
     });
     const params: HttpParams = new HttpParams().set('filter', filter);
 
-    return this.http.get<Program[]>(`${this.API_URL}/programs`, { params });
+    const storedPrograms: Program[] = [];
+    return this.http
+      .get<Program[]>(`${this.API_URL}/programs`, { params })
+      .pipe(
+        switchMap((programs) => {
+          storedPrograms.push(...programs);
+
+          const workouts = programs.reduce((acc, program) => {
+            acc.push(...program.workouts);
+
+            return acc;
+          }, []);
+
+          const filter = JSON.stringify({
+            include: [
+              {
+                relation: 'exercise',
+              },
+              {
+                relation: 'setStatistics',
+              },
+            ],
+          });
+          const params: HttpParams = new HttpParams().set('filter', filter);
+
+          return forkJoin([
+            ...workouts.map((workout) =>
+              this.http.get<Workout>(`${this.API_URL}/workouts/${workout.id}`, {
+                params,
+              })
+            ),
+          ]);
+        }),
+        switchMap((workouts) => {
+          const finalPrograms = storedPrograms.map((program) => ({
+            ...program,
+            workouts: program.workouts.map((workout) =>
+              workouts.find((w) => w.id === workout.id)
+            ),
+          }));
+
+          return of(finalPrograms);
+        })
+      );
   }
 
   getOne(id: number): Observable<Program> {

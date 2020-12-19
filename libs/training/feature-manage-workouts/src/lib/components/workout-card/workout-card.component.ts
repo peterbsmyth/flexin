@@ -52,7 +52,7 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
     const rpe = workout?.rpe ?? 0;
     const notes = workout?.athleteNotes ?? '';
     const sets = this.fb.array([]);
-    workout.setStatistics.forEach((setStatistic) => {
+    workout.setStatistics?.forEach((setStatistic) => {
       const setReps = setStatistic.reps ?? 0;
       const setWeight = setStatistic.weight ?? 0;
       const control = this.fb.group({
