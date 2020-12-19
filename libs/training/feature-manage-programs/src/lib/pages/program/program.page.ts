@@ -50,7 +50,8 @@ export class ProgramPage implements OnInit, OnDestroy {
     map((params) => +params['week'])
   );
   selectedWorkout$: Observable<number> = this.route.queryParams.pipe(
-    map((params) => +params['workoutId'])
+    takeUntil(this.unsubscribe$),
+    map((params) => (params['workoutId'] ? +params['workoutId'] : null))
   );
 
   constructor(
@@ -83,13 +84,11 @@ export class ProgramPage implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    route.queryParams
+    this.selectedWorkout$
       .pipe(
-        takeUntil(this.unsubscribe$),
-        map((params) => +params['workoutId']),
-        tap((workoutId) =>
-          this.programsState.dispatch(openWorkoutModal({ workoutId }))
-        )
+        tap((workoutId) => {
+          this.programsState.dispatch(openWorkoutModal({ workoutId }));
+        })
       )
       .subscribe();
 
@@ -114,8 +113,8 @@ export class ProgramPage implements OnInit, OnDestroy {
     this.programsState.workoutFormData$
       .pipe(
         takeUntil(this.unsubscribe$),
-        distinctUntilKeyChanged('workoutId'),
-        filter((form) => !!form.workout),
+        distinctUntilKeyChanged('dataReady'),
+        filter((form) => form.dataReady),
         tap((form) => {
           const dialogRef = this.dialog.open(WorkoutDialog, {
             width: '800px',
@@ -163,14 +162,12 @@ export class ProgramPage implements OnInit, OnDestroy {
     this.saveExercise$
       .pipe(
         takeUntil(this.unsubscribe$),
-        tap((data) => {
-          if (data?.saveExercise) {
-            this.programsState.dispatch(
-              updateWorkoutFromWorkoutPage({
-                workout: data.saveExercise,
-              })
-            );
-          }
+        tap((workout) => {
+          this.programsState.dispatch(
+            updateWorkoutFromWorkoutPage({
+              workout,
+            })
+          );
         })
       )
       .subscribe();

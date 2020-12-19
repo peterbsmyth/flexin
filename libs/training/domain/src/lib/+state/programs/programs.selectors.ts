@@ -100,9 +100,10 @@ export const getWorkoutFormData = createSelector(
   getAllExercises,
   (program, workoutId, exercises) => {
     const workout = program?.workouts.find((w) => w.id === workoutId);
+    const dataReady = !!workout && !!exercises.length;
 
     return {
-      workoutId: workout?.id,
+      dataReady,
       workout,
       exercises,
     };

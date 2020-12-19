@@ -20,8 +20,9 @@ export class ExerciseGridComponent {
       valueGetter(params) {
         return params.data.name;
       },
+      flex: 1,
     },
-    { field: 'measuredBy', flex: 1 },
+    { field: 'measuredBy' },
   ];
 
   @Input()

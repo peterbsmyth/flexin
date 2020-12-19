@@ -140,6 +140,7 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
       exerciseId: value.id,
       id: this.data.workout.id,
     });
+    this.exerciseIdSubject.next(value.id);
     this.editingSubject.next(false);
     this.form.enable();
   }
