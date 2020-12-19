@@ -18,7 +18,7 @@ export class WorkoutDialog implements OnInit {
   ngOnInit(): void {}
 
   onSaveExercise(data) {
-    this.dialogRef.close({ saveExercise: data });
+    this.saveExercise.emit(data);
   }
 
   onSave(data) {

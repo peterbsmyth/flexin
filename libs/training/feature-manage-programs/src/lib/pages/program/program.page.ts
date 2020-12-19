@@ -17,7 +17,7 @@ import {
   distinctUntilKeyChanged,
   filter,
   map,
-  switchMap,
+  switchAll,
   take,
   takeUntil,
   tap,
@@ -30,6 +30,18 @@ import { WorkoutDialog } from '../../components/workout-dialog/workout.dialog';
   styleUrls: ['./program.page.scss'],
 })
 export class ProgramPage implements OnInit, OnDestroy {
+  private afterClosedObservableSubject: Subject<
+    Observable<any>
+  > = new Subject();
+  afterClosed$: Observable<
+    any
+  > = this.afterClosedObservableSubject.asObservable().pipe(switchAll());
+  private saveExerciseObservableSubject: Subject<
+    Observable<any>
+  > = new Subject();
+  saveExercise$: Observable<
+    any
+  > = this.saveExerciseObservableSubject.asObservable().pipe(switchAll());
   programSelect = new FormControl(null);
   weekSelect = new FormControl(null);
   unsubscribe$: Subject<any> = new Subject();
@@ -103,14 +115,23 @@ export class ProgramPage implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$),
         distinctUntilKeyChanged('workoutId'),
         filter((form) => !!form.workout),
-        switchMap((form) => {
+        tap((form) => {
           const dialogRef = this.dialog.open(WorkoutDialog, {
             width: '800px',
             data: form,
           });
 
-          return dialogRef.afterClosed();
-        }),
+          this.saveExerciseObservableSubject.next(
+            dialogRef.componentInstance.saveExercise
+          );
+          this.afterClosedObservableSubject.next(dialogRef.afterClosed());
+        })
+      )
+      .subscribe();
+
+    this.afterClosed$
+      .pipe(
+        takeUntil(this.unsubscribe$),
         tap((data) => {
           /**
            * reset the query params to close the modal
@@ -134,7 +155,14 @@ export class ProgramPage implements OnInit, OnDestroy {
               })
             );
           }
+        })
+      )
+      .subscribe();
 
+    this.saveExercise$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap((data) => {
           if (data?.saveExercise) {
             this.programsState.dispatch(
               updateWorkoutFromWorkoutPage({
