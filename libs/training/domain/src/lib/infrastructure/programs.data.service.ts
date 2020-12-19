@@ -33,7 +33,7 @@ export class ProgramsDataService {
             acc.push(...program.workouts);
 
             return acc;
-          }, []);
+          }, [] as Workout[]);
 
           const filter = JSON.stringify({
             include: [
@@ -47,20 +47,36 @@ export class ProgramsDataService {
           });
           const params: HttpParams = new HttpParams().set('filter', filter);
 
-          return forkJoin([
-            ...workouts.map((workout) =>
-              this.http.get<Workout>(`${this.API_URL}/workouts/${workout.id}`, {
-                params,
-              })
-            ),
-          ]);
+          return workouts.length
+            ? forkJoin([
+                ...workouts.map((workout) =>
+                  this.http.get<Workout>(
+                    `${this.API_URL}/workouts/${workout.id}`,
+                    {
+                      params,
+                    }
+                  )
+                ),
+              ])
+            : of([] as Workout[]);
         }),
         switchMap((workouts) => {
           const finalPrograms = storedPrograms.map((program) => ({
             ...program,
-            workouts: program.workouts.map((workout) =>
-              workouts.find((w) => w.id === workout.id)
-            ),
+            workouts: program.workouts
+              .sort((a, b) => a.day - b.day)
+              .sort((a, b) => a.week - b.week)
+              .map((workout) => {
+                const selectedWorkout = workouts.find(
+                  (w) => w.id === workout.id
+                );
+                return {
+                  ...selectedWorkout,
+                  setStatistics: selectedWorkout.setStatistics.sort(
+                    (a, b) => a.set - b.set
+                  ),
+                };
+              }),
           }));
 
           return of(finalPrograms);
