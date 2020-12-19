@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   BoardCardData,
   loadDescendantsFromProgramPage,
+  loadExercises,
   openWorkoutModal,
   ProgramsFacade,
   selectProgramFromPage,
@@ -176,6 +177,7 @@ export class ProgramPage implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.programsState.dispatch(loadExercises());
     this.programsState.selectedPrograms$
       .pipe(
         take(1),

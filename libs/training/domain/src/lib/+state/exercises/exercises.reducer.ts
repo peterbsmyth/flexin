@@ -82,7 +82,7 @@ const exercisesReducer = createReducer(
     )
   ),
   on(ExercisesActions.loadExercisesSuccess, (state, { exercises }) =>
-    exercisesAdapter.setAll(exercises, { ...state, loaded: true })
+    exercisesAdapter.upsertMany(exercises, { ...state, loaded: true })
   ),
   on(ExercisesActions.loadExercisesFailure, (state, { error }) => ({
     ...state,
