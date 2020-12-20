@@ -24,13 +24,11 @@ export class ProgramsEffects {
       ),
       fetch({
         run: (action) => {
-          return this.backend
-            .getAll()
-            .pipe(
-              map((programs) =>
-                ProgramsActions.loadProgramsSuccess({ programs })
-              )
-            );
+          return this.backend.getAll().pipe(
+            map((programs) => {
+              return ProgramsActions.loadProgramsSuccess({ programs });
+            })
+          );
         },
         onError: (action, error) => {
           console.error('Error', error);

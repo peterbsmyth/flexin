@@ -7,12 +7,15 @@ import { ProgramCreatePage } from './pages/program-create/program-create.page';
 import { ProgramPage } from './pages/program/program.page';
 import { StatisticsPage } from './pages/statistics/statistics.page';
 import { WorkoutConfigurationBoardPage } from './pages/workout-configuration-board/workout-configuration-board.page';
+import { ProgramsLoadedResolver } from './resolvers/programs-loaded.resolver';
 
 const routes: Routes = [
   {
     path: 'programs',
     component: ProgramPage,
-    canActivate: [ProgramsLoadedGuard],
+    resolve: {
+      loaded: ProgramsLoadedResolver,
+    },
   },
   {
     path: 'programs/create',

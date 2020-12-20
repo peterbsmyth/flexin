@@ -28,11 +28,15 @@ export const initialState: ProgramsState = programsAdapter.getInitialState({
 
 const programsReducer = createReducer(
   initialState,
-  on(ProgramsActions.loadPrograms, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
+  on(
+    ProgramsActions.loadPrograms,
+    ProgramsActions.loadProgramsFromPage,
+    (state) => ({
+      ...state,
+      loaded: false,
+      error: null,
+    })
+  ),
   on(ProgramsActions.loadProgramsSuccess, (state, { programs }) =>
     programsAdapter.upsertMany(programs, { ...state, loaded: true })
   ),
