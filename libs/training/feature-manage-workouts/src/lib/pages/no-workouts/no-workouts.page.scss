@@ -1,0 +1,5 @@
+@import 'utils';
+
+h1 {
+  @include title;
+}

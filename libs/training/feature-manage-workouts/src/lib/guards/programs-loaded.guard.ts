@@ -24,13 +24,15 @@ export class ProgramsLoadedGuard implements CanActivate {
     return this.waitForCollectionToLoad().pipe(
       switchMapTo(this.programsState.allPrograms$),
       tap((programs) => {
-        const id = next.queryParams['programId'] ?? programs[0].id;
-        this.programsState.dispatch(selectProgramFromGuard({ id }));
+        const id = next.queryParams['programId'] ?? programs[0]?.id;
+        if (id) {
+          this.programsState.dispatch(selectProgramFromGuard({ id }));
+        }
       }),
       map((programs) => !!programs.length),
       catchError((err) => {
         console.log(err);
-        this.router.navigate(['/404']);
+        this.router.navigate(['/no-workouts']);
         return of(false);
       })
     );

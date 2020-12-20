@@ -18,6 +18,7 @@ import { WorkoutCardComponent } from './components/workout-card/workout-card.com
 import { StatisticsContainer } from './containers/statistics/statistics.container';
 import { WorkoutsPage } from './pages/workouts/workouts.page';
 import { TrainingFeatureManageWorkoutsRoutingModule } from './training-feature-manage-workouts-routing.module';
+import { NoWorkoutsPage } from './pages/no-workouts/no-workouts.page';
 
 @NgModule({
   imports: [
@@ -37,7 +38,7 @@ import { TrainingFeatureManageWorkoutsRoutingModule } from './training-feature-m
     BodComponentsModule,
     MatSnackBarModule,
   ],
-  declarations: [WorkoutCardComponent, WorkoutsPage, StatisticsContainer],
+  declarations: [WorkoutCardComponent, WorkoutsPage, StatisticsContainer, NoWorkoutsPage],
   providers: [WindowRef],
   exports: [],
 })
