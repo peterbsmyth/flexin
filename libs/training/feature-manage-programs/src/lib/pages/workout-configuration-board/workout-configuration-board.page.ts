@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Exercise, Workout } from '@bod/shared/models';
 import {
   createProgram,
@@ -10,7 +9,7 @@ import {
 } from '@bod/training/domain';
 import { ExerciseDialog } from '@bod/training/ui-components';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './workout-configuration-board.page.html',
@@ -22,14 +21,11 @@ export class WorkoutConfigurationBoardPage implements OnInit {
   private _invalidSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   invalid$: Observable<boolean> = this._invalidSubject.asObservable();
 
-  constructor(
-    private router: Router,
-    public programsState: ProgramsFacade,
-    public dialog: MatDialog
-  ) {
+  constructor(public programsState: ProgramsFacade, public dialog: MatDialog) {
     this.programsState.draftProgramConfiguration$
       .pipe(
         take(2),
+        filter((data) => !!data),
         tap((data) => {
           this._data = data.slice(0);
         })
