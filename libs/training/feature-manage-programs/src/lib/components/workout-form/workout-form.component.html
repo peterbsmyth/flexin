@@ -5,7 +5,7 @@
       *ngIf="!(editing$ | async); else exerciseFormDisplay"
     >
       <span class="exercise__header">
-        Exercise: {{ (selectedExercise$ | async).name }}
+        {{ (selectedExercise$ | async).name }}
       </span>
       <button mat-icon-button (click)="onEditExercise()">
         <mat-icon>edit</mat-icon>

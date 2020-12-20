@@ -44,6 +44,9 @@ export class ProgramsDataService {
                 relation: 'exercise',
               },
               {
+                relation: 'intensity',
+              },
+              {
                 relation: 'setStatistics',
               },
             ],
