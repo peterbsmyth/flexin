@@ -50,7 +50,7 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
   buildForm(workout: Workout): void {
     this._formSaveable = false;
     const rpe = workout?.rpe ?? 0;
-    const notes = workout?.athleteNotes ?? '';
+    const athleteNotes = workout?.athleteNotes ?? '';
     const sets = this.fb.array([]);
     workout.setStatistics?.forEach((setStatistic) => {
       const setReps = setStatistic.reps ?? 0;
@@ -66,7 +66,7 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
 
     this.form.setControl('sets', sets);
     this.form.setControl('rpe', this.fb.control(rpe));
-    this.form.setControl('notes', this.fb.control(notes));
+    this.form.setControl('athleteNotes', this.fb.control(athleteNotes));
 
     this._formSaveable = true;
 
@@ -74,15 +74,15 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
      * save for the Workout related properties
      */
     this.form
-      .get('notes')
+      .get('athleteNotes')
       .valueChanges.pipe(
         filter(() => this._formSaveable),
         debounceTime(300),
         takeUntil(this.unsubscribe$),
-        tap((value) => {
+        tap((athleteNotes) => {
           const output: Partial<Workout> = {
             id: this.workout.id,
-            athleteNotes: value,
+            athleteNotes,
           };
           this.saveWorkout.emit(output);
         })
@@ -153,7 +153,7 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
    * without clearing the previous number
    */
   onRpeFocus() {
-    this.form.get('rpe').setValue(null, { onlySelf: true });
+    this.form.get('rpe').setValue(null, { emitEvent: false });
   }
 
   /**

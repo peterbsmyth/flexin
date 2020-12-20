@@ -18,6 +18,9 @@ export class ProgramsDataService {
         {
           relation: 'workouts',
         },
+        {
+          relation: 'setStatistics',
+        },
       ],
     });
     const params: HttpParams = new HttpParams().set('filter', filter);

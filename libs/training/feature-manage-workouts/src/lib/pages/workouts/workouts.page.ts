@@ -21,7 +21,11 @@ export class WorkoutsPage implements OnInit {
   ngOnInit(): void {}
 
   onSaveSet(setStatistic: Partial<SetStatistic>) {
-    this.programsState.dispatch(updateSetStatistic({ setStatistic }));
+    this.programsState.dispatch(
+      updateSetStatistic({
+        setStatistic,
+      })
+    );
   }
 
   onSaveWorkout(workout: Partial<Workout>) {

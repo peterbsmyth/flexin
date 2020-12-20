@@ -19,3 +19,8 @@ export const updateSetStatistic = createAction(
   '[SetStatistics] Update SetStatistic',
   props<{ setStatistic: Partial<SetStatistic> }>()
 );
+
+export const updateSetStatisticSuccess = createAction(
+  '[SetStatistics] Update SetStatistic Success',
+  props<{ setStatistic: Partial<SetStatistic> }>()
+);

@@ -90,6 +90,17 @@ export class WorkoutsEffects {
     )
   );
 
+  updatePartialWorkout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WorkoutsActions.updateWorkout),
+      switchMap(({ workout }) => {
+        return this.backend
+          .patchOne(workout)
+          .pipe(map(() => WorkoutsActions.updateWorkoutSuccess()));
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private backend: WorkoutsDataService,

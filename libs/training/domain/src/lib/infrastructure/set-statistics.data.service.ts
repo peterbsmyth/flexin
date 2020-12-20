@@ -23,8 +23,8 @@ export class SetStatisticsDataService {
     );
   }
 
-  patchOne(setStatistic: SetStatistic): Observable<SetStatistic> {
-    return this.http.put<SetStatistic>(
+  patchOne(setStatistic: Partial<SetStatistic>): Observable<SetStatistic> {
+    return this.http.patch<SetStatistic>(
       `${this.API_URL}/set-statistics/${setStatistic.id}`,
       setStatistic
     );
