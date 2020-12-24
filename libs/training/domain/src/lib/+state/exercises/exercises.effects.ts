@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetch, optimisticUpdate } from '@nrwl/angular';
-import { map, mapTo, switchMap } from 'rxjs/operators';
+import { map, mapTo, switchMap, tap } from 'rxjs/operators';
 import { CategoriesDataService } from '../../infrastructure/categories.data.service';
 import { ExercisesDataService } from '../../infrastructure/exercises.data.service';
 import * as ExercisesActions from './exercises.actions';
@@ -75,6 +76,9 @@ export class ExercisesEffects {
       ofType(ExercisesActions.saveExercise),
       switchMap(({ exercise }) =>
         this.backend.saveOne(exercise).pipe(
+          tap((exercise) => {
+            this.router.navigate(['/exercises', exercise.id]);
+          }),
           map((exercise) =>
             ExercisesActions.saveExerciseSuccess({
               exercise,
@@ -142,6 +146,7 @@ export class ExercisesEffects {
   constructor(
     private actions$: Actions,
     private backend: ExercisesDataService,
-    private categoryService: CategoriesDataService
+    private categoryService: CategoriesDataService,
+    private router: Router
   ) {}
 }
