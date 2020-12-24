@@ -8,7 +8,6 @@ import {
 import { Workout } from '@bod/shared/models';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxRenderer } from './checkbox-renderer/checkbox.renderer';
-import { SelectEditor } from './select-editor/select.editor';
 
 @Component({
   selector: 'training-workout-configuration-grid',
@@ -59,7 +58,8 @@ export class WorkoutConfigurationGridComponent {
     { field: 'weight', width: 100 },
     {
       field: 'intensity',
-      cellEditor: 'selectEditor',
+      width: 100,
+      editable: true,
       valueSetter: (params) => {
         params.data['intensityId'] = params.newValue;
         return true;
@@ -67,11 +67,20 @@ export class WorkoutConfigurationGridComponent {
       valueGetter(params) {
         const intensityId = params.data.intensityId;
         const intensities = params.data.exercise.intensities ?? [];
-        const displayIntensity = intensityId
-          ? intensities.find((i) => i.id === intensityId).name
-          : intensities?.[0]?.name ?? '';
+        if (intensityId) {
+          return intensityId;
+        }
+        params.data.intensityId = intensities?.[0]?.id;
+        return intensities?.[0]?.id;
+      },
+      valueFormatter(params) {
+        const intensityId = params.value;
+        const intensities = params.data.exercise.intensities ?? [];
+        const displayIntensity = intensities.find((i) => i.id === intensityId)
+          .name;
         return displayIntensity;
       },
+      cellEditor: 'agSelectCellEditor',
     },
     {
       field: 'tempo',
@@ -109,7 +118,6 @@ export class WorkoutConfigurationGridComponent {
   };
   frameworkComponents = {
     checkboxRenderer: CheckboxRenderer,
-    selectEditor: SelectEditor,
   };
 
   onCellValueChanged(cell) {

@@ -1,5 +1,5 @@
 /**
- * isBoardEmpty
+ * is-board-empty
  * @param board
  */
 export const isBoardEmpty = (board: any[][]) => {

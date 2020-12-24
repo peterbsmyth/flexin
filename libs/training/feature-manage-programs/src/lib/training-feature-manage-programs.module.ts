@@ -21,7 +21,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { BoardCardComponent } from './components/board-card/board-card.component';
 import { ProgramBoardComponent } from './components/program-board/program-board.component';
 import { CheckboxRenderer } from './components/workout-configuration-grid/checkbox-renderer/checkbox.renderer';
-import { SelectEditor } from './components/workout-configuration-grid/select-editor/select.editor';
 import { WorkoutConfigurationGridComponent } from './components/workout-configuration-grid/workout-configuration-grid.component';
 import { WorkoutDialog } from './components/workout-dialog/workout.dialog';
 import { WorkoutFormComponent } from './components/workout-form/workout-form.component';
@@ -48,7 +47,6 @@ import { TrainingFeatureManageProgramsRoutingModule } from './training-feature-m
     ExercisePage,
     WorkoutConfigurationGridComponent,
     CheckboxRenderer,
-    SelectEditor,
     WorkoutDialog,
   ],
   imports: [
