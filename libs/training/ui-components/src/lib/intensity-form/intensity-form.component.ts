@@ -57,5 +57,6 @@ export class IntensityFormComponent implements OnInit {
     this.addIntensity = !this.addIntensity;
 
     this.intensityForm.get('name').setValue('');
+    this.intensityForm.reset();
   }
 }
