@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Exercise } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
 
@@ -24,9 +24,9 @@ export class ExerciseFormComponent implements OnInit {
   exercise: Exercise;
   @Output() save: EventEmitter<Exercise> = new EventEmitter();
   exerciseForm: FormGroup = this.fb.group({
-    name: '',
+    name: ['', Validators.required],
     leftRight: false,
-    measuredBy: '',
+    measuredBy: ['', Validators.required],
   });
 
   constructor(private fb: FormBuilder) {}
