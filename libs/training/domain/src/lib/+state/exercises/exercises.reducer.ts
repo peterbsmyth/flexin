@@ -61,14 +61,17 @@ const exercisesReducer = createReducer(
       )
   ),
   on(ExercisesActions.saveIntensitySuccess, (state, { exercise, intensity }) =>
-    exercisesAdapter.updateOne(
+    exercisesAdapter.setOne(
       {
-        id: exercise.id,
-        changes: {
-          intensities: [...state.entities[exercise.id].intensities, intensity],
-        },
+        ...exercise,
+        intensities: exercise.intensities
+          ? [...exercise.intensities, intensity]
+          : [intensity],
       },
-      { ...state, loaded: true }
+      {
+        ...state,
+        loaded: true,
+      }
     )
   ),
   on(ExercisesActions.deleteIntensity, (state, { exercise, intensityId }) =>
