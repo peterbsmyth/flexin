@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { NetworkStatusFacade } from '@bod/shared/domain';
 import { Exercise, Workout } from '@bod/shared/models';
 import {
   createProgram,
@@ -8,8 +9,8 @@ import {
   updateExercise,
 } from '@bod/training/domain';
 import { ExerciseDialog } from '@bod/training/ui-components';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, merge, Observable } from 'rxjs';
+import { filter, skip, startWith, take, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './workout-configuration-board.page.html',
@@ -19,9 +20,17 @@ export class WorkoutConfigurationBoardPage implements OnInit {
   programNumber: FormControl = new FormControl(1);
   private _data: Workout[];
   private _invalidSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  invalid$: Observable<boolean> = this._invalidSubject.asObservable();
+  invalid$: Observable<boolean> = this._invalidSubject.asObservable().pipe();
+  invalidOrLoading$ = merge(this.invalid$, this.networkStatus.loading$).pipe(
+    skip(2),
+    startWith(true)
+  );
 
-  constructor(public programsState: ProgramsFacade, public dialog: MatDialog) {
+  constructor(
+    public programsState: ProgramsFacade,
+    public dialog: MatDialog,
+    private networkStatus: NetworkStatusFacade
+  ) {
     this.programsState.draftProgramConfiguration$
       .pipe(
         take(2),

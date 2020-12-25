@@ -2,7 +2,7 @@
   <button
     mat-raised-button
     color="primary"
-    [disabled]="invalid$ | async"
+    [disabled]="invalidOrLoading$ | async"
     (click)="onClickCreateProgram()"
   >
     Create Program
@@ -10,9 +10,7 @@
 </bod-actions-bar>
 <bod-actions-bar>
   <mat-form-field>
-    <mat-label>
-      Program Number
-    </mat-label>
+    <mat-label> Program Number </mat-label>
     <input
       matInput
       [formControl]="programNumber"
