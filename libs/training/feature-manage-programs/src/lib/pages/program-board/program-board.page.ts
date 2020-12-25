@@ -14,7 +14,7 @@ import {
 } from '@bod/training/domain';
 import Fuse from 'fuse.js';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 @Component({
   templateUrl: './program-board.page.html',
@@ -31,6 +31,13 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   weekCount: FormControl = new FormControl(6);
   sourceColumn$: Observable<BoardCardData[]>;
   board$: Observable<BoardCardData[][]>;
+  private boardUpdatesSubject: BehaviorSubject<
+    BoardCardData[][]
+  > = new BehaviorSubject(null);
+  private boardUpdates$ = combineLatest([
+    this.boardUpdatesSubject.asObservable(),
+    this.weekCount.valueChanges,
+  ]);
 
   setCategory(exercise: Exercise): string {
     if (exercise?.categories?.length) {
@@ -54,21 +61,20 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
             name: exercise.name,
             category: this.setCategory(exercise),
           }));
-        } else {
-          const filteredExercises = new Fuse(exercises, {
-            keys: ['name'],
-            includeScore: true,
-          })
-            .search(term)
-            .filter((result) => result.score < 0.45)
-            .map((result) => result.item);
-
-          return filteredExercises.map((exercise) => ({
-            id: exercise.id,
-            name: exercise.name,
-            category: this.setCategory(exercise),
-          }));
         }
+        const filteredExercises = new Fuse(exercises, {
+          keys: ['name'],
+          includeScore: true,
+        })
+          .search(term)
+          .filter((result) => result.score < 0.45)
+          .map((result) => result.item);
+
+        return filteredExercises.map((exercise) => ({
+          id: exercise.id,
+          name: exercise.name,
+          category: this.setCategory(exercise),
+        }));
       })
     );
 
@@ -85,22 +91,35 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.exerciseState.dispatch(loadExercises());
+
+    this.boardUpdates$
+      .pipe(
+        filter(([board, weekCount]) => !!board),
+        tap(([board, weekCount]) => {
+          this.programState.dispatch(
+            addIncompleteWorkouts({
+              board,
+              weekCount,
+            })
+          );
+        })
+      )
+      .subscribe();
   }
 
   ngAfterViewInit() {
     /**
-     * set the value of search again to trigger the combineLatest observable
+     * set the value to trigger the combineLatest observables
      */
+    setTimeout(() => {
+      this.search.setValue('');
+      this.weekCount.setValue(6);
+    }, 0);
     setTimeout(() => this.search.setValue(''), 0);
   }
 
   onUpdate(board: BoardCardData[][]) {
-    this.programState.dispatch(
-      addIncompleteWorkouts({
-        board,
-        weekCount: this.weekCount.value,
-      })
-    );
+    this.boardUpdatesSubject.next(board);
   }
 
   onClickNext() {
