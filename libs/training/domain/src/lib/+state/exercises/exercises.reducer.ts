@@ -26,8 +26,11 @@ const exercisesReducer = createReducer(
     loaded: false,
     error: null,
   })),
-  on(ExercisesActions.updateExercise, (state, { exercise }) =>
-    exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
+  on(
+    ExercisesActions.updateExercise,
+    ExercisesActions.saveExerciseSuccess,
+    (state, { exercise }) =>
+      exercisesAdapter.upsertOne(exercise, { ...state, loaded: true })
   ),
   on(
     ExercisesActions.saveExerciseCategorySuccess,
