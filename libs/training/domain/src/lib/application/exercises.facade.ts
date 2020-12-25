@@ -7,6 +7,9 @@ import { TrainingState } from '../+state/state';
 export class ExercisesFacade {
   loaded$ = this.store.pipe(select(ExercisesSelectors.getExercisesLoaded));
   allExercises$ = this.store.pipe(select(ExercisesSelectors.getAllExercises));
+  allExercisesWithOneintensity$ = this.store.pipe(
+    select(ExercisesSelectors.getAllExercisesWithOneIntensity)
+  );
   selectedExercises$ = this.store.pipe(select(ExercisesSelectors.getSelected));
 
   constructor(private store: Store<TrainingState>) {}

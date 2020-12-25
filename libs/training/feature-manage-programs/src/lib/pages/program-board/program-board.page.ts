@@ -10,7 +10,7 @@ import {
   popDraft,
   ProgramsFacade,
   pushDraft,
-  resetDraft
+  resetDraft,
 } from '@bod/training/domain';
 import Fuse from 'fuse.js';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -45,7 +45,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
   ) {
     this.sourceColumn$ = combineLatest([
       this.search.valueChanges,
-      this.exerciseState.allExercises$,
+      this.exerciseState.allExercisesWithOneintensity$,
     ]).pipe(
       map(([term, exercises]) => {
         if (term === '') {

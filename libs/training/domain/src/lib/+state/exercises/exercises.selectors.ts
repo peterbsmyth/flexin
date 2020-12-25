@@ -24,6 +24,11 @@ export const getAllExercises = createSelector(
   (state: ExercisesState) => selectAll(state)
 );
 
+export const getAllExercisesWithOneIntensity = createSelector(
+  getExercisesState,
+  (state: ExercisesState) => selectAll(state).filter((e) => e.intensities)
+);
+
 export const getExercisesEntities = createSelector(
   getExercisesState,
   (state: ExercisesState) => selectEntities(state)
