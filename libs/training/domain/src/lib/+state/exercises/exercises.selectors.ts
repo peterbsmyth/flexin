@@ -49,7 +49,7 @@ export const getSelectedWithSortedIntensities = createSelector(
   getSelected,
   (exercise) => {
     const intensities = exercise?.intensities
-      .slice(0)
+      ?.slice(0)
       .sort((a, b) => a.name.localeCompare(b.name))
       .sort((a, b) => a.order - b.order);
 
