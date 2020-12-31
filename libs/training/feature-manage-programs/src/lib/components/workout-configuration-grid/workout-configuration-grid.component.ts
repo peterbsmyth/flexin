@@ -20,6 +20,7 @@ export class WorkoutConfigurationGridComponent {
     {
       field: 'exercise',
       editable: false,
+      flex: 2,
       valueGetter(params) {
         return params.data.exercise.name;
       },
@@ -27,21 +28,18 @@ export class WorkoutConfigurationGridComponent {
         this.updateExercise.emit(params.data);
       },
     },
-    { field: 'day', editable: false, width: 80 },
+    { field: 'day', editable: false },
     {
       field: 'order',
       editable: false,
-      width: 80,
     },
     {
       field: 'setCount',
       editable: true,
-      width: 80,
     },
-    { field: 'reps', width: 80 },
+    { field: 'reps' },
     {
       field: 'amrap',
-      width: 80,
       cellRenderer: 'checkboxRenderer',
       cellEditor: 'checkboxRenderer',
       valueSetter: (params) => {
@@ -55,10 +53,10 @@ export class WorkoutConfigurationGridComponent {
         return true;
       },
     },
-    { field: 'weight', width: 100 },
+    { field: 'weight' },
     {
       field: 'intensity',
-      width: 100,
+      flex: 2,
       editable: true,
       valueSetter: (params) => {
         params.data['intensityId'] = params.newValue;
@@ -85,7 +83,6 @@ export class WorkoutConfigurationGridComponent {
     },
     {
       field: 'tempo',
-      flex: 1,
       valueSetter: (params) => {
         params.data['tempo'] = params.newValue;
         return true;
@@ -104,6 +101,7 @@ export class WorkoutConfigurationGridComponent {
 
   defaultColDef = {
     editable: true,
+    flex: 1,
     resizable: true,
     valueSetter: function (params) {
       const valueAsNumber = +params.newValue;
