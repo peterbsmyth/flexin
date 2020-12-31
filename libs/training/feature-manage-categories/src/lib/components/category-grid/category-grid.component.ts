@@ -22,6 +22,7 @@ export class CategoryGridComponent implements OnInit {
   defaultColDef = {
     editable: false,
     flex: 1,
+    suppressMovable: true,
   };
 
   constructor() {}

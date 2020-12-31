@@ -13,6 +13,7 @@ export class ExerciseGridComponent {
     onCellClicked: (params) => {
       this.updateExercise.emit(params.data);
     },
+    suppressMovable: true,
   };
   columnDefs = [
     {
@@ -21,6 +22,7 @@ export class ExerciseGridComponent {
         return params.data.name;
       },
       flex: 1,
+      filter: true,
     },
     { field: 'measuredBy' },
   ];

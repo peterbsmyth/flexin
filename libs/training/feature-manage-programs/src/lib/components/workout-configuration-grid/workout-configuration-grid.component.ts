@@ -103,6 +103,7 @@ export class WorkoutConfigurationGridComponent {
     editable: true,
     flex: 1,
     resizable: true,
+    suppressMovable: true,
     valueSetter: function (params) {
       const valueAsNumber = +params.newValue;
       const isInteger = Number.isInteger(valueAsNumber);

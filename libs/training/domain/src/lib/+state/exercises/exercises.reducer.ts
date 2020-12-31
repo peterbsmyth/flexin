@@ -12,7 +12,9 @@ export interface ExercisesState extends EntityState<Exercise> {
 }
 export const exercisesAdapter: EntityAdapter<Exercise> = createEntityAdapter<
   Exercise
->();
+>({
+  sortComparer: (a, b) => a.name.localeCompare(b.name),
+});
 
 export const initialState: ExercisesState = exercisesAdapter.getInitialState({
   // set initial required properties
