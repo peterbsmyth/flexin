@@ -10,7 +10,7 @@ import {
   popDraft,
   ProgramsFacade,
   pushDraft,
-  resetDraft,
+  resetDraft
 } from '@bod/training/domain';
 import Fuse from 'fuse.js';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -43,7 +43,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
     if (exercise?.categories?.length) {
       return exercise.categories[0].name.toLowerCase();
     }
-    return 'pull';
+    return 'uncategorized';
   }
   constructor(
     private router: Router,
