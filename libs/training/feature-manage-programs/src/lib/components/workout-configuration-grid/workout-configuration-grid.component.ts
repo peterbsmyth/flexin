@@ -76,8 +76,9 @@ export class WorkoutConfigurationGridComponent {
       valueFormatter(params) {
         const intensityId = params.value;
         const intensities = params.data.exercise.intensities ?? [];
-        const displayIntensity = intensities.find((i) => i.id === intensityId)
-          .name;
+        const displayIntensity = intensities
+          .find((i) => i.id === intensityId)
+          .name.toLowerCase();
         return displayIntensity;
       },
       cellEditor: 'agSelectCellEditor',

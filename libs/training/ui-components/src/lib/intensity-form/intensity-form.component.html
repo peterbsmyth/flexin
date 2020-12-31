@@ -4,7 +4,7 @@
       <h3>Intensities</h3>
       <mat-list>
         <mat-list-item *ngFor="let intensity of exercise?.intensities">
-          <span>{{ intensity.order }}. {{ intensity.name }}</span>
+          <span>{{ intensity.order }}. {{ intensity.name | lowercase }}</span>
           <button mat-icon-button>
             <mat-icon (click)="onDelete(intensity.id)">close</mat-icon>
           </button>

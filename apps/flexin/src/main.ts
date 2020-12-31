@@ -20,7 +20,7 @@ SelectCellEditor.prototype.init = function (params): void {
   params.data.exercise.intensities.forEach((intensity: any) => {
     const option: any = { value: intensity.id };
 
-    const valueFormatted = intensity.name;
+    const valueFormatted = intensity.name.toLowerCase();
 
     const valueFormattedExits =
       valueFormatted !== null && valueFormatted !== undefined;
