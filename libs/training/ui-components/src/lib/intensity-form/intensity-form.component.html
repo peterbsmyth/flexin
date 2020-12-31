@@ -4,7 +4,7 @@
       <h3>Intensities</h3>
       <mat-list>
         <mat-list-item *ngFor="let intensity of exercise?.intensities">
-          <span>{{ intensity.name }}</span>
+          <span>{{ intensity.order }}. {{ intensity.name }}</span>
           <button mat-icon-button>
             <mat-icon (click)="onDelete(intensity.id)">close</mat-icon>
           </button>
@@ -18,15 +18,11 @@
         <section>
           <div class="intensities__controls">
             <mat-form-field class="intensities__input">
-              <mat-label>
-                Intensity
-              </mat-label>
+              <mat-label> Intensity </mat-label>
               <input matInput type="text" formControlName="name" />
             </mat-form-field>
             <mat-form-field class="intensities__input">
-              <mat-label>
-                Order
-              </mat-label>
+              <mat-label> Order </mat-label>
               <input matInput type="number" formControlName="order" />
             </mat-form-field>
             <span>
@@ -53,9 +49,7 @@
       Add Intensity
     </button>
     <ng-template #cancel>
-      <button mat-stroked-button (click)="toggleIntensity()">
-        Cancel
-      </button>
+      <button mat-stroked-button (click)="toggleIntensity()">Cancel</button>
     </ng-template>
   </mat-card-footer>
 </mat-card>

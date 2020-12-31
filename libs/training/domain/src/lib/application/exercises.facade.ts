@@ -10,7 +10,9 @@ export class ExercisesFacade {
   allExercisesWithOneintensity$ = this.store.pipe(
     select(ExercisesSelectors.getAllExercisesWithOneIntensity)
   );
-  selectedExercises$ = this.store.pipe(select(ExercisesSelectors.getSelected));
+  selectedExercises$ = this.store.pipe(
+    select(ExercisesSelectors.getSelectedWithSortedIntensities)
+  );
 
   constructor(private store: Store<TrainingState>) {}
 

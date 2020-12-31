@@ -44,3 +44,20 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
+
+export const getSelectedWithSortedIntensities = createSelector(
+  getSelected,
+  (exercise) => {
+    const intensities = exercise?.intensities
+      .slice(0)
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .sort((a, b) => a.order - b.order);
+
+    return intensities
+      ? {
+          ...exercise,
+          intensities,
+        }
+      : exercise;
+  }
+);
