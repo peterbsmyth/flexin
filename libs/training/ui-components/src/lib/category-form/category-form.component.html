@@ -17,12 +17,29 @@
       <aside>
         <section>
           <div class="intensities__controls">
-            <mat-form-field class="intensities__input">
-              <mat-label>
-                Category
-              </mat-label>
-              <input matInput type="text" formControlName="name" />
+            <mat-form-field class="example-full-width">
+              <input
+                type="text"
+                placeholder="Pick one"
+                aria-label="Number"
+                matInput
+                formControlName="id"
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete
+                autoActiveFirstOption
+                #auto="matAutocomplete"
+                [displayWith]="displayWith"
+              >
+                <mat-option
+                  *ngFor="let category of categories"
+                  [value]="category.id"
+                >
+                  {{ category.name }}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
+
             <span>
               <button
                 mat-stroked-button
@@ -47,9 +64,7 @@
       Add Category
     </button>
     <ng-template #cancel>
-      <button mat-stroked-button (click)="toggleCategory()">
-        Cancel
-      </button>
+      <button mat-stroked-button (click)="toggleCategory()">Cancel</button>
     </ng-template>
   </mat-card-footer>
 </mat-card>

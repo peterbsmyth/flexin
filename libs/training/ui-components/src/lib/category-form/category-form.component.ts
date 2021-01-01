@@ -19,16 +19,11 @@ export class CategoryFormComponent implements OnInit {
   addCategory = false;
   @Input()
   exercise: Exercise;
-  @Output() save: EventEmitter<{
-    exercise: Exercise;
-    category: Category;
-  }> = new EventEmitter();
-  @Output() delete: EventEmitter<{
-    exercise: Exercise;
-    categoryId: number;
-  }> = new EventEmitter();
+  @Input() categories: Category[];
+  @Output() save: EventEmitter<Category> = new EventEmitter();
+  @Output() delete: EventEmitter<Category> = new EventEmitter();
   categoryForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
+    id: [null, Validators.required],
   });
 
   constructor(private fb: FormBuilder) {}
@@ -36,23 +31,25 @@ export class CategoryFormComponent implements OnInit {
   ngOnInit(): void {}
 
   onSave(form) {
-    this.save.emit({
-      exercise: this.exercise,
-      category: form.value,
-    });
+    const category = this.categories.find(
+      (category) => category.id === form.value.id
+    );
+    this.save.emit(category);
     this.toggleCategory();
   }
 
   onDeleteCategory(id) {
-    this.delete.emit({
-      exercise: this.exercise,
-      categoryId: id,
-    });
+    const category = this.categories.find((category) => category.id === id);
+    this.delete.emit(category);
   }
 
   toggleCategory() {
     this.addCategory = !this.addCategory;
 
-    this.categoryForm.get('name').setValue('');
+    this.categoryForm.get('id').setValue('');
   }
+
+  displayWith = (id: number): string => {
+    return this.categories.find((category) => category.id === id)?.name ?? '';
+  };
 }

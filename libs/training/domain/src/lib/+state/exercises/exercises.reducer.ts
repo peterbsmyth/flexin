@@ -47,20 +47,18 @@ const exercisesReducer = createReducer(
         { ...state, loaded: true }
       )
   ),
-  on(
-    ExercisesActions.deleteExerciseCategory,
-    (state, { exercise, categoryId }) =>
-      exercisesAdapter.updateOne(
-        {
-          id: exercise.id,
-          changes: {
-            categories: state.entities[exercise.id].categories.filter(
-              (c) => c.id !== categoryId
-            ),
-          },
+  on(ExercisesActions.deleteExerciseCategory, (state, { exercise, category }) =>
+    exercisesAdapter.updateOne(
+      {
+        id: exercise.id,
+        changes: {
+          categories: state.entities[exercise.id].categories.filter(
+            (c) => c.id !== category.id
+          ),
         },
-        { ...state, loaded: true }
-      )
+      },
+      { ...state, loaded: true }
+    )
   ),
   on(ExercisesActions.saveIntensitySuccess, (state, { exercise, intensity }) =>
     exercisesAdapter.setOne(

@@ -4,8 +4,9 @@
     </components-exercise-form>
     <components-category-form
       [exercise]="exercise"
-      (save)="onSaveCategory($event)"
-      (delete)="onDeleteCategory($event)"
+      [categories]="categoriesState.allCategories$ | async"
+      (save)="onSaveCategory(exercise, $event)"
+      (delete)="onDeleteCategory(exercise, $event)"
     >
     </components-category-form>
     <components-intensity-form

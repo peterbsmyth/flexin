@@ -64,7 +64,7 @@ export const updateExerciseFailure = createAction(
 
 export const saveExerciseCategory = createAction(
   '[Exercises] Save Category',
-  props<{ exercise: Exercise; category: Partial<Category> }>()
+  props<{ exercise: Exercise; category: Category }>()
 );
 
 export const saveExerciseCategorySuccess = createAction(
@@ -74,7 +74,7 @@ export const saveExerciseCategorySuccess = createAction(
 
 export const deleteExerciseCategory = createAction(
   '[Exercises] Delete Category',
-  props<{ exercise: Exercise; categoryId: number }>()
+  props<{ exercise: Exercise; category: Category }>()
 );
 
 export const deleteExerciseCategorySuccess = createAction(

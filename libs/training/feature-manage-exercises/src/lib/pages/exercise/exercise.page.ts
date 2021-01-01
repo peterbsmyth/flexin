@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Exercise } from '@bod/shared/models';
+import { Category, Exercise } from '@bod/shared/models';
 import {
+  CategoriesFacade,
   deleteExerciseCategory,
   deleteIntensity,
   ExercisesFacade,
+  loadCategories,
   saveExerciseCategory,
   saveIntensity,
   updateExercise,
@@ -17,7 +19,10 @@ import { Observable } from 'rxjs';
 export class ExercisePage implements OnInit {
   exercise$: Observable<Exercise>;
 
-  constructor(public exercisesState: ExercisesFacade) {}
+  constructor(
+    public exercisesState: ExercisesFacade,
+    public categoriesState: CategoriesFacade
+  ) {}
 
   onSave(exercise) {
     this.exercisesState.dispatch(
@@ -27,7 +32,7 @@ export class ExercisePage implements OnInit {
     );
   }
 
-  onSaveCategory({ exercise, category }) {
+  onSaveCategory(exercise: Exercise, category: Category) {
     this.exercisesState.dispatch(
       saveExerciseCategory({
         exercise,
@@ -36,11 +41,11 @@ export class ExercisePage implements OnInit {
     );
   }
 
-  onDeleteCategory({ exercise, categoryId }) {
+  onDeleteCategory(exercise, category) {
     this.exercisesState.dispatch(
       deleteExerciseCategory({
         exercise,
-        categoryId,
+        category,
       })
     );
   }
@@ -63,5 +68,7 @@ export class ExercisePage implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.categoriesState.dispatch(loadCategories());
+  }
 }

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetch, optimisticUpdate } from '@nrwl/angular';
 import { map, mapTo, switchMap, tap } from 'rxjs/operators';
-import { CategoriesDataService } from '../../infrastructure/categories.data.service';
 import { ExercisesDataService } from '../../infrastructure/exercises.data.service';
 import * as ExercisesActions from './exercises.actions';
 
@@ -108,9 +107,9 @@ export class ExercisesEffects {
   deleteCategory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ExercisesActions.deleteExerciseCategory),
-      switchMap(({ exercise, categoryId }) =>
-        this.categoryService
-          .deleteOne(categoryId)
+      switchMap(({ exercise, category }) =>
+        this.backend
+          .deleteCategory(exercise, category)
           .pipe(map(() => ExercisesActions.deleteExerciseCategorySuccess()))
       )
     )
@@ -146,7 +145,6 @@ export class ExercisesEffects {
   constructor(
     private actions$: Actions,
     private backend: ExercisesDataService,
-    private categoryService: CategoriesDataService,
     private router: Router
   ) {}
 }

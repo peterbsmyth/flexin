@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@bod/shared/environments';
 import { Category, Exercise, Intensity } from '@bod/shared/models';
@@ -58,17 +58,41 @@ export class ExercisesDataService {
 
   saveCategory(
     exercise: Exercise,
-    category: Partial<Category>
+    category: Category
   ): Observable<{ exercise: Exercise; category: Category }> {
     return this.http
-      .post<Category>(
-        `${this.API_URL}/exercises/${exercise.id}/categories`,
-        category
-      )
+      .post<Category>(`${this.API_URL}/exercises-categories`, {
+        exerciseId: exercise.id,
+        categoryId: category.id,
+      })
       .pipe(
         map((response) => ({
           exercise,
-          category: response,
+          category,
+        }))
+      );
+  }
+
+  deleteCategory(
+    exercise: Exercise,
+    category: Category
+  ): Observable<{ exercise: Exercise; category: Category }> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        exerciseId: exercise.id,
+        categoryId: category.id,
+      },
+    };
+
+    return this.http
+      .delete<Category>(`${this.API_URL}/exercises-categories`, options)
+      .pipe(
+        map(() => ({
+          exercise,
+          category,
         }))
       );
   }
