@@ -37,9 +37,10 @@ export class WorkoutConfigurationGridComponent {
       field: 'setCount',
       editable: true,
     },
-    { field: 'reps' },
+    { field: 'reps', headerName: 'Reps / Secs' },
     {
       field: 'amrap',
+      headerName: 'AMRAP',
       cellRenderer: 'checkboxRenderer',
       cellEditor: 'checkboxRenderer',
       valueSetter: (params) => {
