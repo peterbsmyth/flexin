@@ -1,5 +1,5 @@
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -8,13 +8,12 @@ import { FormControl } from '@angular/forms';
     <mat-checkbox
       #checkboxEl
       type="checkbox"
-      (click)="checkedHandler($event)"
+      (click)="checkedHandler(!checkbox.value)"
       [formControl]="checkbox"
     ></mat-checkbox>
   `,
 })
-export class CheckboxRenderer
-  implements ICellRendererAngularComp, AfterViewInit {
+export class CheckboxRenderer implements ICellRendererAngularComp {
   checkbox = new FormControl(false);
   @ViewChild('checkboxEl') checkboxEl;
   params: any;
@@ -24,14 +23,7 @@ export class CheckboxRenderer
     this.checkbox.setValue(params.data.amrap);
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.checkboxEl.focus();
-    });
-  }
-
-  checkedHandler(event) {
-    const checked = event.target.checked;
+  checkedHandler(checked) {
     const colId = this.params.column.colId;
     this.params.node.setDataValue(colId, checked);
   }

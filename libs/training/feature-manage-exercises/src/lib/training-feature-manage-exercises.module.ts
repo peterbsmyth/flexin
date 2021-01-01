@@ -1,3 +1,4 @@
+import { AgGridModule } from '@ag-grid-community/angular';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +14,6 @@ import { BodComponentsModule } from '@bod/shared/components';
 import { TrainingDomainModule } from '@bod/training/domain';
 import { TrainingUiComponentsModule } from '@bod/training/ui-components';
 import { ReactiveComponentModule } from '@ngrx/component';
-import { AgGridModule } from 'ag-grid-angular';
 import { ExerciseGridComponent } from './components/exercise-grid/exercise-grid.component';
 import { ExerciseCreatePage } from './pages/exercise-create/exercise-create.page';
 import { ExercisePage } from './pages/exercise/exercise.page';

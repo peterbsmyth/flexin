@@ -1,3 +1,4 @@
+import { AgGridModule } from '@ag-grid-community/angular';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -8,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { BodComponentsModule } from '@bod/shared/components';
 import { TrainingDomainModule } from '@bod/training/domain';
 import { TrainingUiComponentsModule } from '@bod/training/ui-components';
-import { AgGridModule } from 'ag-grid-angular';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { CategoryGridComponent } from './components/category-grid/category-grid.component';
 import { CategoriesPage } from './pages/categories/categories.page';

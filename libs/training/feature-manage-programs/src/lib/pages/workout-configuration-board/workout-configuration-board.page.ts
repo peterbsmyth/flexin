@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NetworkStatusFacade } from '@bod/shared/domain';
 import { Exercise, Workout } from '@bod/shared/models';
 import {
@@ -29,7 +30,8 @@ export class WorkoutConfigurationBoardPage implements OnInit {
   constructor(
     public programsState: ProgramsFacade,
     public dialog: MatDialog,
-    private networkStatus: NetworkStatusFacade
+    private networkStatus: NetworkStatusFacade,
+    private snackbar: MatSnackBar
   ) {
     this.programsState.draftProgramConfiguration$
       .pipe(
@@ -86,5 +88,9 @@ export class WorkoutConfigurationBoardPage implements OnInit {
         number: this.programNumber.value,
       })
     );
+  }
+
+  onError(message) {
+    this.snackbar.open(message);
   }
 }

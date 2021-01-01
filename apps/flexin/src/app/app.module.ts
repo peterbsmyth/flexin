@@ -1,26 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
 import { LayoutModule } from '@angular/cdk/layout';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '@bod/shared/environments';
-import {
-  StoreRouterConnectingModule,
-  DefaultRouterStateSerializer,
-} from '@ngrx/router-store';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NetworkStatusModule } from '@bod/shared/domain';
-import { AppPage } from './core/pages/app/app.page';
-import { CoreModule } from './core/core.module';
+import { environment } from '@bod/shared/environments';
 import { TrainingFeatureAuthModule } from '@bod/training/feature-auth';
-import { TrainingFeatureManageProgramsModule } from '@bod/training/feature-manage-programs';
-import { TrainingFeatureManageExercisesModule } from '@bod/training/feature-manage-exercises';
-import { TrainingFeatureManageWorkoutsModule } from '@bod/training/feature-manage-workouts';
-import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-manage-meal-plans';
 import { TrainingFeatureManageCategoriesModule } from '@bod/training/feature-manage-categories';
+import { TrainingFeatureManageExercisesModule } from '@bod/training/feature-manage-exercises';
+import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-manage-meal-plans';
+import { TrainingFeatureManageProgramsModule } from '@bod/training/feature-manage-programs';
+import { TrainingFeatureManageWorkoutsModule } from '@bod/training/feature-manage-workouts';
+import { EffectsModule } from '@ngrx/effects';
+import {
+  DefaultRouterStateSerializer,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
+import { AppPage } from './core/pages/app/app.page';
 
 @NgModule({
   imports: [

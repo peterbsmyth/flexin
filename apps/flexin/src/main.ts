@@ -1,8 +1,8 @@
+import { SelectCellEditor } from '@ag-grid-enterprise/all-modules';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { environment } from '@bod/shared/environments';
 import { KeyCode, missing } from '@bod/shared/utils';
-import { SelectCellEditor } from 'ag-grid-community';
 import { AppModule } from './app/app.module';
 
 SelectCellEditor.prototype.init = function (params): void {

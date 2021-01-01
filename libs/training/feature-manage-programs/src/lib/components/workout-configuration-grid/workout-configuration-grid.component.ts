@@ -1,3 +1,4 @@
+import { AllModules } from '@ag-grid-enterprise/all-modules';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,6 +17,7 @@ import { CheckboxRenderer } from './checkbox-renderer/checkbox.renderer';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkoutConfigurationGridComponent {
+  modules = AllModules;
   private columnDefsSubject: BehaviorSubject<any[]> = new BehaviorSubject([
     {
       field: 'exercise',
@@ -44,24 +46,48 @@ export class WorkoutConfigurationGridComponent {
       cellRenderer: 'checkboxRenderer',
       cellEditor: 'checkboxRenderer',
       valueSetter: (params) => {
-        const columnDefs = this.columnDefsSubject.getValue().slice(0);
-        const repsColumn = columnDefs[4];
-        const amrap = params.newValue;
-        params.data.amrap = amrap;
-        params.data.reps = amrap ? 0 : params.data.reps;
-        repsColumn.editable = !amrap;
-        this.columnDefsSubject.next(columnDefs);
-        return true;
+        const isTrue = params.newValue === 'true' || params.newValue === true;
+        const isFalse =
+          params.newValue === 'false' || params.newValue === false;
+        const isValid = isTrue || isFalse;
+
+        if (isValid) {
+          const columnDefs = this.columnDefsSubject.getValue().slice(0);
+          const repsColumn = columnDefs[4];
+          const amrap = isTrue;
+          params.data.amrap = amrap;
+          params.data.reps = amrap ? 0 : params.data.reps;
+          repsColumn.editable = !amrap;
+          this.columnDefsSubject.next(columnDefs);
+          return true;
+        }
+
+        return false;
       },
     },
     { field: 'weight' },
     {
-      field: 'intensity',
+      field: 'intensityId',
+      headerName: 'Intensity',
       flex: 2,
       editable: true,
       valueSetter: (params) => {
-        params.data['intensityId'] = params.newValue;
-        return true;
+        const valueAsNumber = +params.newValue;
+        const intensities = params.data.exercise.intensities ?? [];
+        const hasIntensity = intensities.some(
+          (intensity) => intensity.id === valueAsNumber
+        );
+
+        if (hasIntensity) {
+          const property = params.colDef.field;
+          params.data[property] = valueAsNumber;
+          return true;
+        }
+
+        this.error.emit(
+          `Could not set intensity for ${params.data.exercise.name}.`
+        );
+        return false;
       },
       valueGetter(params) {
         const intensityId = params.data.intensityId;
@@ -99,6 +125,7 @@ export class WorkoutConfigurationGridComponent {
   update: EventEmitter<Workout> = new EventEmitter();
   @Output()
   updateExercise: EventEmitter<Workout> = new EventEmitter();
+  @Output() error: EventEmitter<string> = new EventEmitter();
 
   defaultColDef = {
     editable: true,

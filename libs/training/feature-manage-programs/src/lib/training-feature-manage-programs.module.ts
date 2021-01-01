@@ -1,3 +1,4 @@
+import { AgGridModule } from '@ag-grid-community/angular';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -17,7 +18,6 @@ import { TrainingDomainModule } from '@bod/training/domain';
 import { TrainingUiComponentsModule } from '@bod/training/ui-components';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { AgGridModule } from 'ag-grid-angular';
 import { BoardCardComponent } from './components/board-card/board-card.component';
 import { ProgramBoardComponent } from './components/program-board/program-board.component';
 import { CheckboxRenderer } from './components/workout-configuration-grid/checkbox-renderer/checkbox.renderer';
