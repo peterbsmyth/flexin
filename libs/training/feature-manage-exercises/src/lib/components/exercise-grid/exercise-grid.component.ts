@@ -1,3 +1,4 @@
+import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Exercise } from '@bod/shared/models';
 
@@ -7,6 +8,7 @@ import { Exercise } from '@bod/shared/models';
   styleUrls: ['./exercise-grid.component.scss'],
 })
 export class ExerciseGridComponent {
+  modules = AllModules;
   defaultColDef = {
     editable: false,
     resizable: true,
