@@ -41,7 +41,10 @@ const exercisesReducer = createReducer(
         {
           id: exercise.id,
           changes: {
-            categories: [...state.entities[exercise.id].categories, category],
+            categories: [
+              ...(state.entities[exercise.id].categories ?? []),
+              category,
+            ],
           },
         },
         { ...state, loaded: true }
