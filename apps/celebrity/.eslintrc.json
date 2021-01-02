@@ -1,11 +1,20 @@
 {
-  "extends": "../../../.eslintrc.json",
-  "ignorePatterns": ["!**/*"],
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["libs/shared/scripts/tsconfig.lib.json"]
+        "project": [
+          "apps/celebrity/tsconfig.app.json",
+          "apps/celebrity/tsconfig.spec.json",
+          "apps/celebrity/e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
       },
       "rules": {
         "@typescript-eslint/consistent-type-definitions": "error",
@@ -17,23 +26,20 @@
           }
         ],
         "@typescript-eslint/no-use-before-define": "error",
-        "brace-style": ["error", "1tbs"],
+        "brace-style": [
+          "error",
+          "1tbs"
+        ],
         "id-blacklist": "off",
         "id-match": "off",
         "no-underscore-dangle": "off"
-      },
-      "extends": [
-        "plugin:@nrwl/nx/angular",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ]
+      }
     },
     {
-      "files": ["*.html"],
-      "rules": {},
-      "extends": [
-        "plugin:@nrwl/nx/angular-template",
-        "plugin:@angular-eslint/template/recommended"
-      ]
+      "files": [
+        "*.html"
+      ],
+      "rules": {}
     }
   ]
 }

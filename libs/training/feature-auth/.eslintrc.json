@@ -5,9 +5,25 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
-        "project": ["libs/shared/scripts/tsconfig.lib.json"]
+        "project": ["libs/training/feature-auth/tsconfig.lib.json"]
       },
       "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "training",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "training",
+            "style": "camelCase"
+          }
+        ],
         "@typescript-eslint/consistent-type-definitions": "error",
         "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/explicit-member-accessibility": [

@@ -5,9 +5,27 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
-        "project": ["libs/shared/scripts/tsconfig.lib.json"]
+        "project": [
+          "libs/celebrities/feature-display-top-ten/tsconfig.lib.json"
+        ]
       },
       "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "celebrities",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "celebrities",
+            "style": "camelCase"
+          }
+        ],
         "@typescript-eslint/consistent-type-definitions": "error",
         "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/explicit-member-accessibility": [

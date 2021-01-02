@@ -5,9 +5,25 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
-        "project": ["libs/shared/scripts/tsconfig.lib.json"]
+        "project": ["libs/shared/utils/tsconfig.lib.json"]
       },
       "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "bod",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "bod",
+            "style": "camelCase"
+          }
+        ],
         "@typescript-eslint/consistent-type-definitions": "error",
         "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/explicit-member-accessibility": [

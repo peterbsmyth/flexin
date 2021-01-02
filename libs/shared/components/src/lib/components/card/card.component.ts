@@ -22,7 +22,7 @@ export class CardComponent implements OnInit {
 }
 
 @Directive({
-  // tslint:disable-next-line: directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'bod-card-header, [bod-card-header]',
 })
 export class CardHeader {
@@ -30,7 +30,7 @@ export class CardHeader {
 }
 
 @Directive({
-  // tslint:disable-next-line: directive-selector
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'bod-card-content, [bod-card-content]',
 })
 export class CardContent {

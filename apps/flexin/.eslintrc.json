@@ -1,13 +1,35 @@
 {
-  "extends": "../../../.eslintrc.json",
-  "ignorePatterns": ["!**/*"],
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["libs/shared/scripts/tsconfig.lib.json"]
+        "project": [
+          "apps/flexin/tsconfig.*?.json"
+        ]
       },
       "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "bod",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "bod",
+            "style": "camelCase"
+          }
+        ],
         "@typescript-eslint/consistent-type-definitions": "error",
         "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/explicit-member-accessibility": [
@@ -17,7 +39,10 @@
           }
         ],
         "@typescript-eslint/no-use-before-define": "error",
-        "brace-style": ["error", "1tbs"],
+        "brace-style": [
+          "error",
+          "1tbs"
+        ],
         "id-blacklist": "off",
         "id-match": "off",
         "no-underscore-dangle": "off"
@@ -28,7 +53,9 @@
       ]
     },
     {
-      "files": ["*.html"],
+      "files": [
+        "*.html"
+      ],
       "rules": {},
       "extends": [
         "plugin:@nrwl/nx/angular-template",
