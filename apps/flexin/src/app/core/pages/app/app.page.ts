@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { version } from '../../../../../package.json';
+import { environment } from '@bod/shared/environments';
 
 @Component({
   selector: 'bod-root',
@@ -7,5 +7,5 @@ import { version } from '../../../../../package.json';
   styleUrls: ['./app.page.scss'],
 })
 export class AppPage {
- version: string = version;
+  version: string = environment.version;
 }
