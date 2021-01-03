@@ -1,5 +1,5 @@
 /**
- * excerpted from https://github.com/ag-grid/ag-grid/blob/b98b0f5ee1512ffb4ba3280e0c33400e22d3a138/community-modules/core/src/ts/constants/keyCode.ts
+ * https://github.com/ag-grid/ag-grid/blob/b98b0f5ee1512ffb4ba3280e0c33400e22d3a138/community-modules/core/src/ts/constants/keyCode.ts
  */
 export class KeyCode {
   static BACKSPACE = 8;

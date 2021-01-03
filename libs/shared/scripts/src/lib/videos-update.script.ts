@@ -1,12 +1,12 @@
-import { google } from 'googleapis';
 import { authenticate } from '@google-cloud/local-auth';
+import { google } from 'googleapis';
 import * as path from 'path';
 
 // initialize the Youtube API library
 const youtube = google.youtube('v3');
 
 // very basic example of uploading a video to youtube
-async function uploadDirectory(dir) {
+async function uploadDirectory() {
   const auth = await authenticate({
     keyfilePath: path.join(__dirname, '../oauth2.keys.json'),
     scopes: [

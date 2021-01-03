@@ -1,19 +1,14 @@
 {
   "extends": "../../.eslintrc.json",
-  "ignorePatterns": [
-    "!**/*"
-  ],
+  "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "apps/flexin/tsconfig.*?.json"
-        ]
+        "project": ["apps/flexin/tsconfig.*?.json"]
       },
       "rules": {
+        "@angular-eslint/component-class-suffix": 0,
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -39,10 +34,7 @@
           }
         ],
         "@typescript-eslint/no-use-before-define": "error",
-        "brace-style": [
-          "error",
-          "1tbs"
-        ],
+        "brace-style": ["error", "1tbs"],
         "id-blacklist": "off",
         "id-match": "off",
         "no-underscore-dangle": "off"
@@ -53,9 +45,7 @@
       ]
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {},
       "extends": [
         "plugin:@nrwl/nx/angular-template",

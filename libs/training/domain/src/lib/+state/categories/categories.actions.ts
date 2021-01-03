@@ -10,7 +10,7 @@ export const loadCategoriesSuccess = createAction(
 
 export const loadCategoriesFailure = createAction(
   '[Categories] Load Categories Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const loadCategory = createAction(

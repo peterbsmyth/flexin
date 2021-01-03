@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Workout } from '@bod/shared/models';
 import {
   BoardCardData,
   loadDescendantsFromProgramPage,
@@ -13,6 +14,7 @@ import {
   updateWorkoutAndFutureWorkoutsFromWorkoutPage,
   updateWorkoutFromWorkoutPage,
 } from '@bod/training/domain';
+import { EventEmitter } from 'events';
 import { Observable, Subject } from 'rxjs';
 import {
   distinctUntilKeyChanged,
@@ -38,14 +40,14 @@ export class ProgramPage implements OnInit, OnDestroy {
     any
   > = this.afterClosedObservableSubject.asObservable().pipe(switchAll());
   private saveExerciseObservableSubject: Subject<
-    Observable<any>
+    EventEmitter<Workout>
   > = new Subject();
   saveExercise$: Observable<
-    any
+    Workout
   > = this.saveExerciseObservableSubject.asObservable().pipe(switchAll());
   programSelect = new FormControl(null);
   weekSelect = new FormControl(null);
-  unsubscribe$: Subject<any> = new Subject();
+  unsubscribe$: Subject<unknown> = new Subject();
   selectedWeek$: Observable<number> = this.route.queryParams.pipe(
     map((params) => +params['week'])
   );

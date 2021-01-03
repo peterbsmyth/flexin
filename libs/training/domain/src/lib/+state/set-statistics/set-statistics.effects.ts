@@ -11,7 +11,7 @@ export class SetStatisticsEffects {
     this.actions$.pipe(
       ofType(SetStatisticsActions.loadSetStatistics),
       fetch({
-        run: (action) => {
+        run: () => {
           // Your custom service 'load' logic goes here. For now just return a success action...
           return SetStatisticsActions.loadSetStatisticsSuccess({
             setStatistics: [],

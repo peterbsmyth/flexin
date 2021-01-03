@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +14,7 @@ import { Exercise, Intensity } from '@bod/shared/models';
   styleUrls: ['./intensity-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IntensityFormComponent implements OnInit {
+export class IntensityFormComponent {
   addIntensity = false;
 
   @Input()
@@ -35,8 +34,6 @@ export class IntensityFormComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {}
 
   onSave(form) {
     this.save.emit({

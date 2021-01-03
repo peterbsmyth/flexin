@@ -9,7 +9,7 @@ export class BoardCardComponent {
   @Input()
   name: string;
   @Input() closeable = true;
-  @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() remove: EventEmitter<unknown> = new EventEmitter();
 
   onRemove() {
     this.remove.emit();

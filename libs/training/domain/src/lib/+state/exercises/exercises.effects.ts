@@ -134,7 +134,7 @@ export class ExercisesEffects {
   deleteIntensity$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ExercisesActions.deleteIntensity),
-      switchMap(({ exercise, intensityId }) =>
+      switchMap(({ intensityId }) =>
         this.backend
           .deleteIntensity(intensityId)
           .pipe(map(() => ExercisesActions.deleteIntensitySuccess()))

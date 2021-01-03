@@ -8,10 +8,10 @@
         "project": [
           "libs/training/ui-components/tsconfig.lib.json",
           "libs/training/ui-components/tsconfig.spec.json"
-        ],
-        "createDefaultProgram": true
+        ]
       },
       "rules": {
+        "@angular-eslint/component-class-suffix": 0,
         "@angular-eslint/component-selector": [
           "error",
           {
@@ -41,11 +41,19 @@
         "id-blacklist": "off",
         "id-match": "off",
         "no-underscore-dangle": "off"
-      }
+      },
+      "extends": [
+        "plugin:@nrwl/nx/angular",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ]
     },
     {
       "files": ["*.html"],
-      "rules": {}
+      "rules": {},
+      "extends": [
+        "plugin:@nrwl/nx/angular-template",
+        "plugin:@angular-eslint/template/recommended"
+      ]
     }
   ]
 }

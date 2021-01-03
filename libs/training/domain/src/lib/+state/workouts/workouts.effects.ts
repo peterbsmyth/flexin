@@ -16,7 +16,7 @@ export class WorkoutsEffects {
     this.actions$.pipe(
       ofType(WorkoutsActions.loadWorkouts),
       fetch({
-        run: (action) => {
+        run: () => {
           // Your custom service 'load' logic goes here. For now just return a success action...
           return WorkoutsActions.loadWorkoutsSuccess({
             workouts: mockWorkouts,
@@ -48,7 +48,7 @@ export class WorkoutsEffects {
       //         )
       //       );
       //   },
-      //   onError: (action, error: any) => {
+      //   onError: () => {
       //     // dispatch an undo action to undo the changes in the client state
       //     return null;
       //   },

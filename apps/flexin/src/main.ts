@@ -2,6 +2,7 @@ import { SelectCellEditor } from '@ag-grid-enterprise/all-modules';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { environment } from '@bod/shared/environments';
+import { Intensity } from '@bod/shared/models';
 import { KeyCode, missing } from '@bod/shared/utils';
 import { AppModule } from './app/app.module';
 
@@ -17,8 +18,13 @@ SelectCellEditor.prototype.init = function (params): void {
 
   let hasValue = false;
 
-  params.data.exercise.intensities.forEach((intensity: any) => {
-    const option: any = { value: intensity.id };
+  params.data.exercise.intensities.forEach((intensity: Intensity) => {
+    const option: {
+      value: number;
+      text?: number | string;
+    } = {
+      value: intensity.id,
+    };
 
     const valueFormatted = intensity.name.toLowerCase();
 

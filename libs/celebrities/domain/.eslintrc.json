@@ -8,6 +8,7 @@
         "project": ["libs/celebrities/domain/tsconfig.lib.json"]
       },
       "rules": {
+        "@angular-eslint/component-class-suffix": 0,
         "@angular-eslint/component-selector": [
           "error",
           {

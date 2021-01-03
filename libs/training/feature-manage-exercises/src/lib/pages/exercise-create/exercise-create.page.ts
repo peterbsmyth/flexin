@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExercisesFacade, saveExercise } from '@bod/training/domain';
 
@@ -6,13 +6,11 @@ import { ExercisesFacade, saveExercise } from '@bod/training/domain';
   templateUrl: './exercise-create.page.html',
   styleUrls: ['./exercise-create.page.scss'],
 })
-export class ExerciseCreatePage implements OnInit {
+export class ExerciseCreatePage {
   constructor(
     private exercisesState: ExercisesFacade,
     private router: Router
   ) {}
-
-  ngOnInit(): void {}
 
   onSave(exercise) {
     this.exercisesState.dispatch(saveExercise({ exercise }));

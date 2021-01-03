@@ -66,7 +66,7 @@ export class ExercisesDataService {
         categoryId: category.id,
       })
       .pipe(
-        map((response) => ({
+        map(() => ({
           exercise,
           category,
         }))
@@ -114,7 +114,7 @@ export class ExercisesDataService {
       );
   }
 
-  deleteIntensity(id: number): Observable<any> {
+  deleteIntensity(id: number): Observable<unknown> {
     return this.http.delete(`${this.API_URL}/intensities/${id}`);
   }
 

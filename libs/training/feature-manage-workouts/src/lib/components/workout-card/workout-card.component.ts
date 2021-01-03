@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  OnInit,
   Output,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
@@ -19,9 +18,9 @@ import { debounceTime, filter, takeUntil, tap } from 'rxjs/operators';
   styleUrls: ['./workout-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkoutCardComponent implements OnInit, OnDestroy {
+export class WorkoutCardComponent implements OnDestroy {
   private _formSaveable = false;
-  private unsubscribe$: Subject<any> = new Subject();
+  private unsubscribe$: Subject<unknown> = new Subject();
 
   @OnChange<Workout>(function (workout) {
     this.buildForm(workout ?? {});
@@ -38,8 +37,6 @@ export class WorkoutCardComponent implements OnInit, OnDestroy {
   }
 
   constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {}
 
   /**
    * buildForm

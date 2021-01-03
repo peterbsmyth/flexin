@@ -9,7 +9,7 @@ export class MealPlansEffects {
     this.actions$.pipe(
       ofType(MealPlansActions.loadMealPlans),
       fetch({
-        run: (action) => {
+        run: () => {
           // Your custom service 'load' logic goes here. For now just return a success action...
           return MealPlansActions.loadMealPlansSuccess({ mealPlans: [] });
         },

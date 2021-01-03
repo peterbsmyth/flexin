@@ -16,7 +16,7 @@ export class CategoriesDataService {
     return this.http.get<Category>(`${this.API_URL}/categories/${id}`);
   }
 
-  deleteOne(id: number): Observable<any> {
+  deleteOne(id: number): Observable<unknown> {
     return this.http.delete(`${this.API_URL}/categories/${id}`);
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,7 +17,7 @@ import { filter, skip, startWith, take, tap } from 'rxjs/operators';
   templateUrl: './workout-configuration-board.page.html',
   styleUrls: ['./workout-configuration-board.page.scss'],
 })
-export class WorkoutConfigurationBoardPage implements OnInit {
+export class WorkoutConfigurationBoardPage {
   programNumber: FormControl = new FormControl(1);
   private _data: Workout[];
   private _invalidSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
@@ -43,8 +43,6 @@ export class WorkoutConfigurationBoardPage implements OnInit {
       )
       .subscribe();
   }
-
-  ngOnInit(): void {}
 
   onUpdate(workout: Workout) {
     this._data.forEach((d, i) => {
@@ -90,7 +88,7 @@ export class WorkoutConfigurationBoardPage implements OnInit {
     );
   }
 
-  onError(message) {
+  onErrorMessage(message) {
     this.snackbar.open(message);
   }
 }

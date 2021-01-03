@@ -23,7 +23,7 @@ export class ProgramsEffects {
         ProgramsActions.loadProgramsFromPage
       ),
       fetch({
-        run: (action) => {
+        run: () => {
           return this.backend.getAll().pipe(
             map((programs) => {
               return ProgramsActions.loadProgramsSuccess({ programs });
@@ -50,7 +50,7 @@ export class ProgramsEffects {
               map((program) => ProgramsActions.loadProgramSuccess({ program }))
             );
         },
-        onError: (action, error: any) => {
+        onError: () => {
           // dispatch an undo action to undo the changes in the client state
           return null;
         },
@@ -86,7 +86,7 @@ export class ProgramsEffects {
             })
           );
         },
-        onError: (action, error: any) => {
+        onError: () => {
           // dispatch an undo action to undo the changes in the client state
           return null;
         },
@@ -121,7 +121,7 @@ export class ProgramsEffects {
               .createProgram(data, number)
               .pipe(tap(() => this.router.navigateByUrl('/programs')));
           },
-          onError: (action, error: any) => {
+          onError: () => {
             // dispatch an undo action to undo the changes in the client state
             return null;
           },

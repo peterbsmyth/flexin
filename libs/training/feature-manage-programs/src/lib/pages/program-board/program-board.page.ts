@@ -10,7 +10,7 @@ import {
   popDraft,
   ProgramsFacade,
   pushDraft,
-  resetDraft
+  resetDraft,
 } from '@bod/training/domain';
 import Fuse from 'fuse.js';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -94,7 +94,7 @@ export class ProgramBoardPage implements OnInit, AfterViewInit {
 
     this.boardUpdates$
       .pipe(
-        filter(([board, weekCount]) => !!board),
+        filter(([board]) => !!board),
         tap(([board, weekCount]) => {
           this.programState.dispatch(
             addIncompleteWorkouts({

@@ -10,5 +10,5 @@ export const loadMealPlansSuccess = createAction(
 
 export const loadMealPlansFailure = createAction(
   '[MealPlans] Load MealPlans Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );

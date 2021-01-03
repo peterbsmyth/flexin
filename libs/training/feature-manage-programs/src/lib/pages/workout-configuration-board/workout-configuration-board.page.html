@@ -24,6 +24,6 @@
     [workouts]="programsState.draftProgramConfiguration$ | async"
     (update)="onUpdate($event)"
     (updateExercise)="onUpdateExercise($event)"
-    (error)="onError($event)"
+    (errorMessage)="onErrorMessage($event)"
   ></training-workout-configuration-grid>
 </bod-page-layout>

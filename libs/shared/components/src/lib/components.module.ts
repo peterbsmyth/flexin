@@ -1,16 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActionsBarComponent } from './components/actions-bar/actions-bar.component';
-
-import { MatIconModule } from '@angular/material/icon';
+import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { FooterComponent } from './components/footer/footer.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ActionsBarComponent } from './components/actions-bar/actions-bar.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import {
   CardComponent,
-  CardHeader,
-  CardContent,
+  CardContentDirective,
+  CardHeaderDirective,
 } from './components/card/card.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 
 @NgModule({
@@ -20,8 +19,8 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
     FooterComponent,
     BreadcrumbsComponent,
     CardComponent,
-    CardHeader,
-    CardContent,
+    CardHeaderDirective,
+    CardContentDirective,
     PageLayoutComponent,
   ],
   exports: [
@@ -29,8 +28,8 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
     FooterComponent,
     BreadcrumbsComponent,
     CardComponent,
-    CardHeader,
-    CardContent,
+    CardHeaderDirective,
+    CardContentDirective,
     PageLayoutComponent,
   ],
 })

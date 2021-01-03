@@ -16,9 +16,9 @@ import { FormControl } from '@angular/forms';
 export class CheckboxRenderer implements ICellRendererAngularComp {
   checkbox = new FormControl(false);
   @ViewChild('checkboxEl') checkboxEl;
-  params: any;
+  params;
 
-  agInit(params: any): void {
+  agInit(params): void {
     this.params = params;
     this.checkbox.setValue(params.data.amrap);
   }

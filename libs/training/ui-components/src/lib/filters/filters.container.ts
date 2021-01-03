@@ -27,7 +27,7 @@ export class FiltersContainer implements OnInit, OnDestroy {
   programSelect = new FormControl(null);
   weekSelect = new FormControl(null);
   daySelect = new FormControl(null);
-  unsubscribe$: Subject<any> = new Subject();
+  unsubscribe$: Subject<unknown> = new Subject();
   constructor(
     public programsState: ProgramsFacade,
     public route: ActivatedRoute,

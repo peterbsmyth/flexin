@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AirtableDataService {
@@ -12,8 +12,8 @@ export class AirtableDataService {
   /**
    * TODO: enable the getAll method to get the celebrities from airtable
    */
-  getAll(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.API_URL}/`);
+  getAll(): Observable<unknown[]> {
+    return this.http.get<unknown[]>(`${this.API_URL}/`);
   }
 
   constructor(private http: HttpClient) {}

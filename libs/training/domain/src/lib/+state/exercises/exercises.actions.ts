@@ -20,7 +20,7 @@ export const loadExerciseSuccess = createAction(
 
 export const loadExerciseFailure = createAction(
   '[Exercises] Load Exercise Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const loadExercisesSuccess = createAction(
@@ -30,7 +30,7 @@ export const loadExercisesSuccess = createAction(
 
 export const loadExercisesFailure = createAction(
   '[Exercises] Load Exercises Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const saveExercise = createAction(
@@ -45,7 +45,7 @@ export const saveExerciseSuccess = createAction(
 
 export const saveExerciseFailure = createAction(
   '[Exercises] Save Exercise Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const updateExercise = createAction(
@@ -59,7 +59,7 @@ export const updateExerciseSuccess = createAction(
 
 export const updateExerciseFailure = createAction(
   '[Exercises] Update Exercise Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const saveExerciseCategory = createAction(

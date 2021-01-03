@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +15,7 @@ import { OnChange } from '@bod/shared/utils';
   styleUrls: ['./exercise-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExerciseFormComponent implements OnInit {
+export class ExerciseFormComponent {
   @OnChange<Exercise>(function (exercise) {
     this.buildForm(exercise);
   })
@@ -30,8 +29,6 @@ export class ExerciseFormComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {}
 
   buildForm(exercise: Exercise): void {
     this.exerciseForm.setControl('name', this.fb.control(exercise.name));

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { mockWorkouts, SetStatistic } from '@bod/shared/models';
 import { ProgramsFacade } from '@bod/training/domain';
 import { maxBy } from 'lodash-es';
@@ -10,7 +10,7 @@ import { filter, map } from 'rxjs/operators';
   templateUrl: './statistics.container.html',
   styleUrls: ['./statistics.container.scss'],
 })
-export class StatisticsContainer implements OnInit {
+export class StatisticsContainer {
   loaded$: Observable<boolean>;
   setStatistics$: Observable<SetStatistic[]>;
   maxRepsOfAllTime$: Observable<number>;
@@ -64,6 +64,4 @@ export class StatisticsContainer implements OnInit {
       })
     );
   }
-
-  ngOnInit(): void {}
 }

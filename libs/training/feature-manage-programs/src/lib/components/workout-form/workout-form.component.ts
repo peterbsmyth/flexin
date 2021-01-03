@@ -3,7 +3,6 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  OnInit,
   Output,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -18,8 +17,8 @@ import { map, takeUntil, tap } from 'rxjs/operators';
   templateUrl: './workout-form.component.html',
   styleUrls: ['./workout-form.component.scss'],
 })
-export class WorkoutFormComponent implements OnInit, OnDestroy {
-  unsubscribe$: Subject<any> = new Subject();
+export class WorkoutFormComponent implements OnDestroy {
+  unsubscribe$: Subject<unknown> = new Subject();
   private editingSubject = new BehaviorSubject(false);
   editing$ = this.editingSubject.asObservable();
   private exerciseIdSubject = new BehaviorSubject(null);
@@ -61,8 +60,6 @@ export class WorkoutFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {}
 
   buildForm(data: WorkoutFormData) {
     const form = this.fb.group({

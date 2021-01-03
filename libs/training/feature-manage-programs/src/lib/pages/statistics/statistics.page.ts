@@ -3,7 +3,6 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { ProgramsFacade } from '@bod/training/domain';
@@ -14,13 +13,11 @@ import { filter, take, tap } from 'rxjs/operators';
   templateUrl: './statistics.page.html',
   styleUrls: ['./statistics.page.scss'],
 })
-export class StatisticsPage implements OnInit, AfterViewInit, OnDestroy {
-  unsubscribe$: Subject<any> = new Subject();
+export class StatisticsPage implements AfterViewInit, OnDestroy {
+  unsubscribe$: Subject<unknown> = new Subject();
 
   @ViewChild('player') player: ElementRef;
   constructor(public programsState: ProgramsFacade) {}
-
-  ngOnInit(): void {}
 
   /**
    * ngAfterViewInit

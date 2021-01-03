@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SetStatistic, Workout } from '@bod/shared/models';
 import {
@@ -12,13 +12,11 @@ import {
   templateUrl: './workouts.page.html',
   styleUrls: ['./workouts.page.scss'],
 })
-export class WorkoutsPage implements OnInit {
+export class WorkoutsPage {
   constructor(
     public programsState: ProgramsFacade,
     public route: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {}
 
   onSaveSet(setStatistic: Partial<SetStatistic>) {
     this.programsState.dispatch(

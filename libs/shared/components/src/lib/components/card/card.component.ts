@@ -3,7 +3,6 @@ import {
   Component,
   Directive,
   HostBinding,
-  OnInit,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -14,18 +13,15 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @HostBinding('class') class = 'bod-card';
-  constructor() {}
-
-  ngOnInit(): void {}
 }
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'bod-card-header, [bod-card-header]',
 })
-export class CardHeader {
+export class CardHeaderDirective {
   @HostBinding('class') class = 'bod-card-header';
 }
 
@@ -33,6 +29,6 @@ export class CardHeader {
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'bod-card-content, [bod-card-content]',
 })
-export class CardContent {
+export class CardContentDirective {
   @HostBinding('class') class = 'bod-card-content';
 }

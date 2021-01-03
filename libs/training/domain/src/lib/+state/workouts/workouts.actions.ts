@@ -10,7 +10,7 @@ export const loadWorkoutsSuccess = createAction(
 
 export const loadWorkoutsFailure = createAction(
   '[Workouts] Load Workouts Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const loadWorkoutFromGuard = createAction(
@@ -30,7 +30,7 @@ export const loadWorkoutSuccess = createAction(
 
 export const loadWorkoutFailure = createAction(
   '[Workouts] Load Workout Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const updateWorkoutFromWorkoutPage = createAction(
@@ -58,5 +58,5 @@ export const updateWorkoutSuccess = createAction(
 
 export const updateWorkoutFailure = createAction(
   '[Workouts] Update Workout Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );

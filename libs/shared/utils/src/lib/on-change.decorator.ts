@@ -15,7 +15,7 @@ export type CallBackFunction<T> = (value: T, change?: SimpleChange<T>) => void;
  * not only inputs, and can mimic the functionality of ngOnChanges
  * @param callback
  */
-export function OnChange<T = any>(callback: CallBackFunction<T> | string) {
+export function OnChange<T = unknown>(callback: CallBackFunction<T> | string) {
   const cachedValueKey = Symbol();
   const isFirstChangeKey = Symbol();
 

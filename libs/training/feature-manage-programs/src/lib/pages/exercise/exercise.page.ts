@@ -19,7 +19,7 @@ import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
   styleUrls: ['./exercise.page.scss'],
 })
 export class ExercisePage implements OnInit, OnDestroy {
-  unsubscribe: Subject<any> = new Subject();
+  unsubscribe: Subject<unknown> = new Subject();
   exerciseSelect = new FormControl(null);
   setStatistics$: Observable<SetStatistic[]>;
   maxRepsOfAllTime$: Observable<number>;
@@ -123,7 +123,7 @@ export class ExercisePage implements OnInit, OnDestroy {
       this.exerciseState.selectedExercises$,
       this.programsState.allPrograms$,
     ]).pipe(
-      map(([exercise, programs]) => {
+      map(([, programs]) => {
         const setStatistics = programs.reduce(
           (acc, program) => [...acc, ...program.setStatistics],
           [] as SetStatistic[]

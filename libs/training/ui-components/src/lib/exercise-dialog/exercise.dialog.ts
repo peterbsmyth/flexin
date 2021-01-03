@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Exercise } from '@bod/shared/models';
 
@@ -6,13 +6,11 @@ import { Exercise } from '@bod/shared/models';
   templateUrl: './exercise.dialog.html',
   styleUrls: ['./exercise.dialog.scss'],
 })
-export class ExerciseDialog implements OnInit {
+export class ExerciseDialog {
   constructor(
     public dialogRef: MatDialogRef<ExerciseDialog>,
     @Inject(MAT_DIALOG_DATA) public exercise: Exercise
   ) {}
-
-  ngOnInit(): void {}
 
   onSave(data) {
     this.dialogRef.close(data);

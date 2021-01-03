@@ -15,7 +15,7 @@ export const loadProgramsSuccess = createAction(
 
 export const loadProgramsFailure = createAction(
   '[Programs] Load Programs Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const loadProgramFromGuard = createAction(
@@ -60,7 +60,7 @@ export const loadProgramSuccess = createAction(
 
 export const loadProgramFailure = createAction(
   '[Programs] Load Program Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const createProgram = createAction(
@@ -89,7 +89,7 @@ export const loadDescendantsSuccess = createAction(
 
 export const loadDescendantsFailure = createAction(
   '[Programs] Load Descendants Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const popDraft = createAction('[Programs] Pop Draft');

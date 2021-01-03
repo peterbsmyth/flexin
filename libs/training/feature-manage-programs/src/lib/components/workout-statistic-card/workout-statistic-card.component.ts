@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SetStatistic, Workout } from '@bod/shared/models';
 
 @Component({
@@ -12,12 +7,8 @@ import { SetStatistic, Workout } from '@bod/shared/models';
   styleUrls: ['./workout-statistic-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkoutStatisticCardComponent implements OnInit {
+export class WorkoutStatisticCardComponent {
   @Input() workout: Workout;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   /**
    * hasStatistics

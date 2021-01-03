@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +14,7 @@ import { Category, Exercise } from '@bod/shared/models';
   styleUrls: ['./category-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent {
   addCategory = false;
   @Input()
   exercise: Exercise;
@@ -27,8 +26,6 @@ export class CategoryFormComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {}
 
   onSave(form) {
     const category = this.categories.find(

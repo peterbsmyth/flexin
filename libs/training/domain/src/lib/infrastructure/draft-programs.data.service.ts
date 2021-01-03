@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Exercise, SetStatistic, Workout } from '@bod/shared/models';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
+import { BehaviorSubject, EMPTY, forkJoin } from 'rxjs';
 import { catchError, filter, switchMap, tap } from 'rxjs/operators';
 import { BoardCardData } from '../entities/component.models';
 import { ProgramsDataService } from './programs.data.service';
@@ -82,7 +82,7 @@ export class DraftProgramsDataService {
     this.storage.set('workouts', workouts).subscribe();
   }
 
-  createProgram(data: Workout[], number: number): Observable<any> {
+  createProgram(data: Workout[], number: number) {
     const oldWorkouts = this.allWorkoutsSubject.getValue();
     const draftWorkouts = oldWorkouts
       /**
@@ -139,7 +139,7 @@ export class DraftProgramsDataService {
           '',
           { duration: 5000 }
         );
-        return of();
+        return EMPTY;
       })
     );
   }

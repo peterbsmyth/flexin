@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DisplayTopTenFacade } from '@bod/celebrities/domain';
-import { Observable } from 'rxjs';
 import { Celebrity } from '@bod/celebrities/domain';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { GetCelebritiesService } from './get-celebrities.service';
-import { HttpClientModule } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'celebrities-display-top-ten',

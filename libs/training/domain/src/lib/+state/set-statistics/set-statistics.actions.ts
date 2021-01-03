@@ -12,7 +12,7 @@ export const loadSetStatisticsSuccess = createAction(
 
 export const loadSetStatisticsFailure = createAction(
   '[SetStatistics] Load SetStatistics Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const updateSetStatistic = createAction(

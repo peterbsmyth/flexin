@@ -84,7 +84,7 @@ export class WorkoutConfigurationGridComponent {
           return true;
         }
 
-        this.error.emit(
+        this.errorMessage.emit(
           `Could not set intensity for ${params.data.exercise.name}.`
         );
         return false;
@@ -125,7 +125,7 @@ export class WorkoutConfigurationGridComponent {
   update: EventEmitter<Workout> = new EventEmitter();
   @Output()
   updateExercise: EventEmitter<Workout> = new EventEmitter();
-  @Output() error: EventEmitter<string> = new EventEmitter();
+  @Output() errorMessage: EventEmitter<string> = new EventEmitter();
 
   defaultColDef = {
     editable: true,

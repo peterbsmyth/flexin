@@ -1,5 +1,5 @@
 import { AllModules } from '@ag-grid-enterprise/all-modules';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Category } from '@bod/shared/models';
 
 @Component({
@@ -7,7 +7,7 @@ import { Category } from '@bod/shared/models';
   templateUrl: './category-grid.component.html',
   styleUrls: ['./category-grid.component.scss'],
 })
-export class CategoryGridComponent implements OnInit {
+export class CategoryGridComponent {
   modules = AllModules;
   @Input() categories: Category[];
   @Output() update: EventEmitter<Category> = new EventEmitter();
@@ -26,8 +26,4 @@ export class CategoryGridComponent implements OnInit {
     flex: 1,
     suppressMovable: true,
   };
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

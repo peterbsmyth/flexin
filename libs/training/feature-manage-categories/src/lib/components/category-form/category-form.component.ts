@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Category } from '@bod/shared/models';
 import { OnChange } from '@bod/shared/utils';
@@ -8,7 +8,7 @@ import { OnChange } from '@bod/shared/utils';
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.scss'],
 })
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent {
   @OnChange(function (category) {
     this.buildForm(category);
   })
@@ -27,6 +27,4 @@ export class CategoryFormComponent implements OnInit {
   onSave(form) {
     this.save.emit({ ...form.value, id: this.category?.id });
   }
-
-  ngOnInit(): void {}
 }

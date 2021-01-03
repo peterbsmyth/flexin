@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '@bod/shared/models';
 import { CategoriesFacade, patchCategory } from '@bod/training/domain';
@@ -7,10 +7,8 @@ import { CategoriesFacade, patchCategory } from '@bod/training/domain';
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
 })
-export class CategoryPage implements OnInit {
+export class CategoryPage {
   constructor(public categoryState: CategoriesFacade, private router: Router) {}
-
-  ngOnInit(): void {}
 
   onSave(category: Category) {
     this.categoryState.dispatch(patchCategory({ category }));

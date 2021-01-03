@@ -72,7 +72,9 @@
         >
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span *ngIf="!(networkStatus.loading$ | async); else loading">💪</span>
+        <span *ngIf="(networkStatus.loading$ | async) === false; else loading"
+          >💪</span
+        >
         <span class="toolbar__title">Flexin</span>
       </div>
       <ng-container *ngIf="auth.user$ | async as user; else login">
