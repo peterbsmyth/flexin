@@ -12,6 +12,28 @@ import * as WorkoutsActions from './workouts.actions';
 
 @Injectable()
 export class WorkoutsEffects {
+  getWorkoutWhereExerciseId$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WorkoutsActions.getWorkoutsWhereExerciseId),
+      fetch({
+        run: ({ exerciseId }) => {
+          return this.backend.getAllWhereExcerciseId(exerciseId).pipe(
+            map((workouts) =>
+              WorkoutsActions.loadWorkoutsSuccess({
+                workouts,
+              })
+            )
+          );
+        },
+
+        onError: (action, error) => {
+          console.error('Error', error);
+          return WorkoutsActions.loadWorkoutsFailure({ error });
+        },
+      })
+    )
+  );
+
   loadWorkouts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(WorkoutsActions.loadWorkouts),
@@ -28,31 +50,6 @@ export class WorkoutsEffects {
           return WorkoutsActions.loadWorkoutsFailure({ error });
         },
       })
-    )
-  );
-
-  loadWorkout$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(WorkoutsActions.loadWorkoutFromGuard),
-      map(() =>
-        WorkoutsActions.loadWorkoutSuccess({ workout: mockWorkouts[0] })
-      )
-      // fetch({
-      //   // provides an action
-      //   run: ({ id }) => {
-      //     return this.backend
-      //       .getOne(id)
-      //       .pipe(
-      //         map((workout) =>
-      //           ProgramsActions.loadWorkoutSuccess({ workout })
-      //         )
-      //       );
-      //   },
-      //   onError: () => {
-      //     // dispatch an undo action to undo the changes in the client state
-      //     return null;
-      //   },
-      // })
     )
   );
 

@@ -1,33 +1,44 @@
-import { Component } from '@angular/core';
-import { mockWorkouts, SetStatistic } from '@bod/shared/models';
-import { ProgramsFacade } from '@bod/training/domain';
+import { Component, OnDestroy } from '@angular/core';
+import { SetStatistic } from '@bod/shared/models';
+import {
+  getWorkoutsWhereExerciseId,
+  ProgramsFacade,
+  WorkoutsFacade,
+} from '@bod/training/domain';
 import { maxBy } from 'lodash-es';
-import { combineLatest, Observable, of } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'training-statistics',
   templateUrl: './statistics.container.html',
   styleUrls: ['./statistics.container.scss'],
 })
-export class StatisticsContainer {
+export class StatisticsContainer implements OnDestroy {
+  unsubscribe: Subject<unknown> = new Subject();
   loaded$: Observable<boolean>;
   setStatistics$: Observable<SetStatistic[]>;
   maxRepsOfAllTime$: Observable<number>;
   bestSet$: Observable<SetStatistic>;
-  constructor(private programState: ProgramsFacade) {
-    const workoutsO = of(mockWorkouts);
-    // this.loaded$ = this.setStatisticsState.ascendantsLoaded$;
-    // this.exercise$ = this.exerciseState.selectedExercises$;
-    this.maxRepsOfAllTime$ = combineLatest([
-      workoutsO,
-      this.programState.selectedWorkout$,
-    ]).pipe(
-      map(([workouts, workout]) =>
-        workouts.find((w) => w.exerciseId === workout?.exerciseId)
-      ),
+  constructor(
+    public programState: ProgramsFacade,
+    private workoutState: WorkoutsFacade
+  ) {
+    this.programState.selectedWorkout$
+      .pipe(
+        takeUntil(this.unsubscribe),
+        tap((workout) => {
+          this.programState.dispatch(
+            getWorkoutsWhereExerciseId({ exerciseId: workout.exerciseId })
+          );
+        })
+      )
+      .subscribe();
+
+    this.maxRepsOfAllTime$ = this.workoutState.allWorkouts$.pipe(
+      map((workouts) => workouts.flatMap((w) => w.setStatistics)),
       filter((w) => !!w),
-      map(({ setStatistics }) => {
+      map((setStatistics) => {
         const data = setStatistics
           .filter((stat) => !!stat.reps)
           .map((stat) => stat.reps);
@@ -38,15 +49,11 @@ export class StatisticsContainer {
         }
       })
     );
-    this.bestSet$ = combineLatest([
-      workoutsO,
-      this.programState.selectedWorkout$,
-    ]).pipe(
-      map(([workouts, workout]) =>
-        workouts.find((w) => w.exerciseId === workout?.exerciseId)
-      ),
+
+    this.bestSet$ = this.workoutState.allWorkouts$.pipe(
+      map((workouts) => workouts.flatMap((w) => w.setStatistics)),
       filter((w) => !!w),
-      map(({ setStatistics }) => {
+      map((setStatistics) => {
         const maxWeight = Math.max.apply(
           null,
           setStatistics.map((stat) => stat.weight)
@@ -63,5 +70,10 @@ export class StatisticsContainer {
         }
       })
     );
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

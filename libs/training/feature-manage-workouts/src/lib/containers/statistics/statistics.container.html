@@ -1,28 +1,24 @@
 <ng-container>
   <bod-card>
-    <!--     
-    <header *ngIf="(exercise$ | async) as exercise" bod-card-header>
-      {{ exercise.name }} Statistics
+    <header
+      *ngIf="(programState.selectedWorkout$ | async) as workout"
+      bod-card-header
+    >
+      {{ workout.exercise.name }} Statistics
     </header>
-    -->
+
     <mat-card-content class="card__body">
       <ng-container *ngIf="(maxRepsOfAllTime$ | async) as bestSet">
-        <span class="card__label">
-          Most reps in a set
-        </span>
+        <span class="card__label"> Most reps in a set </span>
         <span class="card__text">{{ bestSet }}</span>
       </ng-container>
       <ng-container *ngIf="(bestSet$ | async) as bestSet">
         <span class="card__label">
           Most Reps at {{ bestSet.weight }} lbs (max weight)
         </span>
-        <span class="card__text">
-          {{ bestSet.reps }}
-        </span>
+        <span class="card__text"> {{ bestSet.reps }} </span>
       </ng-container>
-      <span class="card__label">
-        More
-      </span>
+      <span class="card__label"> More </span>
       <span class="card__text">
         <button
           mat-stroked-button
@@ -44,8 +40,6 @@
 </ng-container>
 <ng-template #loading>
   <bod-card>
-    <header bod-card-header>
-      Loading Statistics
-    </header>
+    <header bod-card-header>Loading Statistics</header>
   </bod-card>
 </ng-template>

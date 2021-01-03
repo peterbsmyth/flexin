@@ -39,10 +39,6 @@ const workoutsReducer = createReducer(
   on(WorkoutsActions.loadWorkoutsFailure, (state, { error }) => ({
     ...state,
     error,
-  })),
-  on(WorkoutsActions.selectWorkoutFromGuard, (state, { id }) => ({
-    ...state,
-    selectedId: id,
   }))
 );
 

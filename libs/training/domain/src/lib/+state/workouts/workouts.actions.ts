@@ -13,14 +13,9 @@ export const loadWorkoutsFailure = createAction(
   props<{ error: string }>()
 );
 
-export const loadWorkoutFromGuard = createAction(
-  '[Workouts][Guard] Load Workout',
-  props<{ id: number }>()
-);
-
-export const selectWorkoutFromGuard = createAction(
-  '[Workouts][Guard] Select Workout',
-  props<{ id: number }>()
+export const getWorkoutsWhereExerciseId = createAction(
+  '[Workouts] Get Where ExerciseId',
+  props<{ exerciseId: number }>()
 );
 
 export const loadWorkoutSuccess = createAction(

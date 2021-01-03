@@ -18,6 +18,22 @@ export class WorkoutsDataService {
     return this.http.get<Workout[]>(`${this.API_URL}/workouts`);
   }
 
+  getAllWhereExcerciseId(id: number) {
+    const filter = JSON.stringify({
+      where: {
+        exerciseId: id,
+      },
+      include: [
+        {
+          relation: 'setStatistics',
+        },
+      ],
+    });
+    const params: HttpParams = new HttpParams().set('filter', filter);
+
+    return this.http.get<Workout[]>(`${this.API_URL}/workouts`, { params });
+  }
+
   getOne(id: number): Observable<Workout> {
     const filter = JSON.stringify({
       include: [
