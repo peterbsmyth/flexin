@@ -27,6 +27,7 @@ export class StatisticsContainer implements OnDestroy {
     this.programState.selectedWorkout$
       .pipe(
         takeUntil(this.unsubscribe),
+        filter((workout) => !!workout),
         tap((workout) => {
           this.programState.dispatch(
             getWorkoutsWhereExerciseId({ exerciseId: workout.exerciseId })
