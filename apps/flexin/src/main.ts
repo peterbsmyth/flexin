@@ -4,7 +4,15 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { environment } from '@bod/shared/environments';
 import { Intensity } from '@bod/shared/models';
 import { KeyCode, missing } from '@bod/shared/utils';
+import * as Sentry from '@sentry/angular';
 import { AppModule } from './app/app.module';
+
+Sentry.init({
+  dsn:
+    'https://a692572efe53447c848ec17a43dd8ddd@o499269.ingest.sentry.io/5577591',
+  autoSessionTracking: true,
+  release: environment.version,
+});
 
 SelectCellEditor.prototype.init = function (params): void {
   this.focusAfterAttached = params.cellStartedEdit;

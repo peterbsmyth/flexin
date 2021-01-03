@@ -114,13 +114,9 @@
           "options": {
             "tsConfig": "libs/shared/components/tsconfig.lib.json",
             "project": "libs/shared/components/ng-package.json",
-            "styles": [
-              "libs/shared/components/src/lib/styles.scss"
-            ],
+            "styles": ["libs/shared/components/src/lib/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/shared/components/src/lib/scss"
-              ]
+              "includePaths": ["libs/shared/components/src/lib/scss"]
             }
           },
           "configurations": {
@@ -203,13 +199,9 @@
               "apps/celebrity/src/favicon.ico",
               "apps/celebrity/src/assets"
             ],
-            "styles": [
-              "libs/shared/components/src/lib/styles.scss"
-            ],
+            "styles": ["libs/shared/components/src/lib/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/shared/components/src/lib/scss"
-              ]
+              "includePaths": ["libs/shared/components/src/lib/scss"]
             },
             "scripts": []
           },
@@ -243,9 +235,7 @@
               ]
             }
           },
-          "outputs": [
-            "{options.outputPath}"
-          ]
+          "outputs": ["{options.outputPath}"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -365,13 +355,9 @@
             "tsConfig": "libs/shared/scripts/tsconfig.lib.json",
             "packageJson": "libs/shared/scripts/package.json",
             "main": "libs/shared/scripts/src/index.ts",
-            "assets": [
-              "libs/shared/scripts/*.md"
-            ]
+            "assets": ["libs/shared/scripts/*.md"]
           },
-          "outputs": [
-            "{options.outputPath}"
-          ]
+          "outputs": ["{options.outputPath}"]
         },
         "execute": {
           "builder": "@nrwl/workspace:run-commands",
@@ -675,9 +661,7 @@
               "libs/shared/components/src/lib/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/shared/components/src/lib/scss"
-              ]
+              "includePaths": ["libs/shared/components/src/lib/scss"]
             },
             "scripts": []
           },
@@ -691,7 +675,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
@@ -763,10 +747,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/flexin/**/*.ts",
-              "apps/flexin/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/flexin/**/*.ts", "apps/flexin/**/*.html"]
           }
         }
       }
@@ -787,9 +768,7 @@
               "libs/shared/components/src/lib/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/shared/components/src/lib/scss"
-              ]
+              "includePaths": ["libs/shared/components/src/lib/scss"]
             }
           },
           "configurations": {
@@ -854,9 +833,7 @@
             "jestConfig": "libs/training/feature-manage-categories/jest.config.js",
             "passWithNoTests": true
           },
-          "outputs": [
-            "coverage/libs/training/feature-auth"
-          ]
+          "outputs": ["coverage/libs/training/feature-auth"]
         }
       },
       "schematics": {

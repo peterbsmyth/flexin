@@ -1,6 +1,6 @@
 {
   "name": "bod",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "license": "MIT",
   "scripts": {
     "ng": "nx",
@@ -27,9 +27,11 @@
     "help": "nx help",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js",
     "build:flexin": "ng build flexin --prod",
+    "postbuild:flexin": "npm run sentry:release && npm run sentry:sourcemap",
     "build:flexin:bb": "ng build flexin --configuration=bb",
     "workspace-generator": "nx workspace-generator",
-    "preinstall": "(npm uninstall codelyzer || echo ✅ Codelyzer is already removed.) && (npm uninstall tslint || echo ✅ TSLint is already removed.)"
+    "sentry:release": "sentry-cli releases -o flexin new -p flexin $npm_package_version",
+    "sentry:sourcemap": "sentry-cli releases -o flexin -p flexin files $npm_package_version upload-sourcemaps --url-prefix \"~/\" --rewrite --validate dist/apps/flexin"
   },
   "private": true,
   "dependencies": {
@@ -53,6 +55,7 @@
     "@ngrx/router-store": "10.0.0",
     "@ngrx/store": "10.0.0",
     "@ngx-pwa/local-storage": "10.1.0",
+    "@sentry/angular": "^5.29.2",
     "@swimlane/ngx-charts": "16.0.0",
     "commitizen": "4.2.1",
     "core-js": "2.5.4",
@@ -83,6 +86,7 @@
     "@nrwl/storybook": "11.0.2",
     "@nrwl/tao": "11.0.2",
     "@nrwl/workspace": "11.0.2",
+    "@sentry/cli": "^1.61.0",
     "@types/jest": "26.0.8",
     "@types/lodash": "4.14.154",
     "@types/lodash-es": "^4.17.3",
