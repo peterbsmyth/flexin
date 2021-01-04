@@ -61,7 +61,7 @@ export class ExercisesDataService {
     category: Category
   ): Observable<{ exercise: Exercise; category: Category }> {
     return this.http
-      .post<Category>(`${this.API_URL}/exercises-categories`, {
+      .patch<Category>(`${this.API_URL}/exercises-categories`, {
         exerciseId: exercise.id,
         categoryId: category.id,
       })
