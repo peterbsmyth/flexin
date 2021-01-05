@@ -9,13 +9,12 @@ import { environment } from '@bod/shared/environments';
 import { TrainingFeatureAuthModule } from '@bod/training/feature-auth';
 import { TrainingFeatureManageCategoriesModule } from '@bod/training/feature-manage-categories';
 import { TrainingFeatureManageExercisesModule } from '@bod/training/feature-manage-exercises';
-import { TrainingFeatureManageMealPlansModule } from '@bod/training/feature-manage-meal-plans';
 import { TrainingFeatureManageProgramsModule } from '@bod/training/feature-manage-programs';
 import { TrainingFeatureManageWorkoutsModule } from '@bod/training/feature-manage-workouts';
 import { EffectsModule } from '@ngrx/effects';
 import {
   DefaultRouterStateSerializer,
-  StoreRouterConnectingModule,
+  StoreRouterConnectingModule
 } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -54,7 +53,6 @@ import { AppPage } from './core/pages/app/app.page';
     TrainingFeatureManageProgramsModule,
     TrainingFeatureManageExercisesModule,
     TrainingFeatureManageWorkoutsModule,
-    TrainingFeatureManageMealPlansModule,
     TrainingFeatureManageCategoriesModule,
   ],
   bootstrap: [AppPage],

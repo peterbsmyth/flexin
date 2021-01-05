@@ -38,9 +38,6 @@
       "@bod/training/feature-manage-workouts": [
         "libs/training/feature-manage-workouts/src/index.ts"
       ],
-      "@bod/training/feature-manage-meal-plans": [
-        "libs/training/feature-manage-meal-plans/src/index.ts"
-      ],
       "@bod/training/ui-components": [
         "libs/training/ui-components/src/index.ts"
       ],

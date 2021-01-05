@@ -28,7 +28,6 @@
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points && node ./decorate-angular-cli.js",
     "build:flexin": "ng build flexin --prod",
     "postbuild:flexin": "npm run sentry:release && npm run sentry:sourcemap",
-    "build:flexin:bb": "ng build flexin --configuration=bb",
     "workspace-generator": "nx workspace-generator",
     "sentry:release": "sentry-cli releases -o flexin new -p flexin $npm_package_version",
     "sentry:sourcemap": "sentry-cli releases -o flexin -p flexin files $npm_package_version upload-sourcemaps --url-prefix \"~/\" --rewrite --validate dist/apps/flexin"
