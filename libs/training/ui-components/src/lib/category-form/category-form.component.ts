@@ -15,6 +15,11 @@ import { Category, Exercise } from '@bod/shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryFormComponent {
+  @Input()
+  selectable = true;
+  @Input()
+  removable = true;
+  
   addCategory = false;
   @Input()
   exercise: Exercise;
