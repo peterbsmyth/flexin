@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -20,6 +21,7 @@ import { IntensityFormComponent } from './intensity-form/intensity-form.componen
 @NgModule({
   imports: [
     CommonModule,
+    DragDropModule,
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
