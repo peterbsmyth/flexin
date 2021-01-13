@@ -3,14 +3,17 @@
     <aside>
       <h3>Intensities</h3>
       <mat-chip-list
-      class="intensityChipList"
-      cdkDropList 
-      cdkDropListOrientation="horizontal"
-      (cdkDropListDropped)="drop($event)">
-        <mat-chip *ngFor="let intensity of exercise?.intensities"
-          class="intensityChip"
+        class="intensity__chiplist"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <mat-chip
+          *ngFor="let intensity of exercise?.intensities"
+          class="intensity__chip"
           cdkDrag
-          (removed)="onDelete(intensity.id)">
+          (removed)="onDelete(intensity.id)"
+        >
           {{ intensity.order }}. {{ intensity.name | lowercase }}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>

@@ -1,4 +1,4 @@
-import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -59,6 +59,10 @@ export class IntensityFormComponent {
   }
 
   drop(event: CdkDragDrop<Intensity[]>) {
-    moveItemInArray(this.exercise?.intensities, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.exercise.intensities,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }

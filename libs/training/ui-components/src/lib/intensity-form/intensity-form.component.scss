@@ -40,11 +40,3 @@ mat-card {
     flex: 1;
   }
 }
-
-.intensityChip.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.intensityChipList .cdk-drop-list-dragging {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
