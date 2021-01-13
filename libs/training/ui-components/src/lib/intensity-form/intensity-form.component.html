@@ -3,7 +3,7 @@
     <aside>
       <h3>Intensities</h3>
       <mat-chip-list
-        class="intensity__chiplist"
+        class="intensity__chiplist mat-chip-list-stacked"
         cdkDropList
         cdkDropListOrientation="horizontal"
         (cdkDropListDropped)="drop($event)"
@@ -14,7 +14,7 @@
           cdkDrag
           (removed)="onDelete(intensity.id)"
         >
-          {{ intensity.order }}. {{ intensity.name | lowercase }}
+          <span>{{ intensity.order }}. {{ intensity.name | lowercase }}</span>
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
       </mat-chip-list>

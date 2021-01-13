@@ -40,3 +40,9 @@ mat-card {
     flex: 1;
   }
 }
+
+.intensity__chip {
+  display: flex;
+  justify-content: space-between;
+  max-width: 200px;
+}
