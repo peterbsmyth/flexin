@@ -3,7 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  Output,
+  Output
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category, Exercise } from '@bod/shared/models';
@@ -15,11 +15,6 @@ import { Category, Exercise } from '@bod/shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryFormComponent {
-  @Input()
-  selectable = true;
-  @Input()
-  removable = true;
-  
   addCategory = false;
   @Input()
   exercise: Exercise;

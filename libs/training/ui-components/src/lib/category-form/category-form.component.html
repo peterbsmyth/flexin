@@ -2,14 +2,13 @@
   <mat-card-content>
     <aside>
       <h3>Categories</h3>
-      <mat-chip-list #chipList aria-label="Categories">
+      <mat-chip-list>
           <mat-chip
             *ngFor="let category of exercise?.categories"
-            [selectable]="selectable"
-            [removable]="removable"
+            [removable]="true"
             (removed)="onDeleteCategory(category.id)">
             {{category.name}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
       </mat-chip-list>
     </aside>
