@@ -1,21 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
+  OnDestroy,
   Output,
-  ViewChild
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category, Exercise } from '@bod/shared/models';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import { Observable } from 'rxjs'; 
-
-
-
+import { Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'components-category-form',
@@ -23,8 +17,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./category-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CategoryFormComponent {
-  addCategory = false;
+export class CategoryFormComponent implements OnDestroy {
+  unsubscribe = new Subject();
   @Input()
   exercise: Exercise;
   @Input() categories: Category[];
@@ -33,18 +27,20 @@ export class CategoryFormComponent {
   categoryForm: FormGroup = this.fb.group({
     id: [null, Validators.required],
   });
-  //chip separators
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  constructor(private fb: FormBuilder) {}
 
-  onSave(form) {
-    const category = this.categories.find(
-      (category) => category.id === form.value.id
-    );
-    this.save.emit(category);
-    this.toggleCategory();
+  constructor(private fb: FormBuilder) {
+    this.categoryForm
+      .get('id')
+      .valueChanges.pipe(
+        takeUntil(this.unsubscribe),
+        tap((id) => {
+          const category = this.categories.find(
+            (category) => category.id === id
+          );
+          this.save.emit(category);
+        })
+      )
+      .subscribe();
   }
 
   onDeleteCategory(id) {
@@ -52,14 +48,12 @@ export class CategoryFormComponent {
     this.delete.emit(category);
   }
 
-  toggleCategory() {
-    this.addCategory = !this.addCategory;
-
-    this.categoryForm.get('id').setValue('');
-  }
-
   displayWith = (id: number): string => {
     return this.categories.find((category) => category.id === id)?.name ?? '';
   };
 
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
 }

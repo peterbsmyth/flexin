@@ -1,31 +1,28 @@
 <mat-card>
-  <mat-form-field class="category-chip-list" [formGroup]="categoryForm">
-    <aside>
+  <form [formGroup]="categoryForm">
+    <mat-form-field class="category-chip-list">
       <mat-label>Categories</mat-label>
-      <mat-chip-list mat-chip-list-stacked #chipList>
-          <mat-chip
-            *ngFor="let category of exercise?.categories"
-            [removable]="true"
-            (removed)="onDeleteCategory(category.id)">
-            {{category.name}}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-      </mat-chip-list>
-      <input
-      placeholder="New Category..."
-      #categoryInput
-      formControlName="id"
-      [matAutocomplete]="auto"
-      [matChipInputFor]="chipList"
-      (matChipInputTokenEnd)="onSave(categoryForm)">
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
-        <mat-option 
-          *ngFor="let category of categories"
-          [value]="category.id"
+      <mat-chip-list #chipList>
+        <mat-chip
+          *ngFor="let category of exercise?.categories"
+          [removable]="true"
+          (removed)="onDeleteCategory(category.id)"
         >
-          {{ category.name }} 
+          <span>{{ category.name }}</span>
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input
+          #categoryInput
+          formControlName="id"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+        />
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
         </mat-option>
       </mat-autocomplete>
-    </aside>
-  </mat-form-field>
+    </mat-form-field>
+  </form>
 </mat-card>

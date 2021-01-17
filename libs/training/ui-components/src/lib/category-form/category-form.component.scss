@@ -1,42 +1,9 @@
 @import 'utils';
 
-h3 {
-  @include subheadline;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.rows {
-  display: flex;
-}
-
-.configuration {
-  display: flex;
-  flex-direction: column;
-}
-
-.group {
-  width: 50%;
-}
-
-mat-card-footer {
-  padding: $space-m;
-}
-
 mat-card {
   margin-bottom: $space-m;
 }
 
-.intensities {
-  &__controls {
-    display: flex;
-    width: 100%;
-  }
-
-  &__input {
-    flex: 1;
-  }
+.category-chip-list {
+  width: 100%;
 }
