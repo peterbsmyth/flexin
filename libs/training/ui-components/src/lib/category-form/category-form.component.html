@@ -1,8 +1,8 @@
 <mat-card>
-  <mat-card-content>
+  <mat-form-field class="category-chip-list" [formGroup]="categoryForm">
     <aside>
-      <h3>Categories</h3>
-      <mat-chip-list>
+      <mat-label>Categories</mat-label>
+      <mat-chip-list mat-chip-list-stacked #chipList>
           <mat-chip
             *ngFor="let category of exercise?.categories"
             [removable]="true"
@@ -11,61 +11,21 @@
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
       </mat-chip-list>
+      <input
+      placeholder="New Category..."
+      #categoryInput
+      formControlName="id"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      (matChipInputTokenEnd)="onSave(categoryForm)">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
+        <mat-option 
+          *ngFor="let category of categories"
+          [value]="category.id"
+        >
+          {{ category.name }} 
+        </mat-option>
+      </mat-autocomplete>
     </aside>
-  </mat-card-content>
-  <ng-container *ngIf="addCategory">
-    <form class="group" [formGroup]="categoryForm">
-      <aside>
-        <section>
-          <div class="intensities__controls">
-            <mat-form-field class="example-full-width">
-              <input
-                type="text"
-                placeholder="Pick one"
-                aria-label="Number"
-                matInput
-                formControlName="id"
-                [matAutocomplete]="auto"
-              />
-              <mat-autocomplete
-                autoActiveFirstOption
-                #auto="matAutocomplete"
-                [displayWith]="displayWith"
-              >
-                <mat-option
-                  *ngFor="let category of categories"
-                  [value]="category.id"
-                >
-                  {{ category.name }}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-
-            <span>
-              <button
-                mat-stroked-button
-                (click)="onSave(categoryForm)"
-                [disabled]="!categoryForm.valid"
-              >
-                Save
-              </button>
-            </span>
-          </div>
-        </section>
-      </aside>
-    </form>
-  </ng-container>
-  <mat-card-footer>
-    <button
-      mat-stroked-button
-      color="primary"
-      *ngIf="!this.addCategory; else cancel"
-      (click)="toggleCategory()"
-    >
-      Add Category
-    </button>
-    <ng-template #cancel>
-      <button mat-stroked-button (click)="toggleCategory()">Cancel</button>
-    </ng-template>
-  </mat-card-footer>
+  </mat-form-field>
 </mat-card>

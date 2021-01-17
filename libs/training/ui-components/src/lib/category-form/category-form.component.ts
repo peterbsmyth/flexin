@@ -1,12 +1,21 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
-  Output
+  Output,
+  ViewChild
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category, Exercise } from '@bod/shared/models';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import { Observable } from 'rxjs'; 
+
+
+
 
 @Component({
   selector: 'components-category-form',
@@ -24,7 +33,10 @@ export class CategoryFormComponent {
   categoryForm: FormGroup = this.fb.group({
     id: [null, Validators.required],
   });
-
+  //chip separators
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
   constructor(private fb: FormBuilder) {}
 
   onSave(form) {
@@ -49,4 +61,5 @@ export class CategoryFormComponent {
   displayWith = (id: number): string => {
     return this.categories.find((category) => category.id === id)?.name ?? '';
   };
+
 }
